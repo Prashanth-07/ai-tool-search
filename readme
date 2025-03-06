@@ -1,0 +1,205 @@
+# AI Tool Search Application
+
+A comprehensive search system for AI tools using FastAPI, Streamlit, Ollama, and Pinecone.
+
+## System Requirements
+
+- Docker and Docker Compose
+- At least 8GB RAM
+- 20GB free disk space
+- Internet connection for pulling Docker images and models
+
+## Quick Start
+
+1. **Clone the Repository**
+```bash
+git clone https://github.com/YOUR_USERNAME/ai-tool-search.git
+cd ai-tool-search
+```
+
+2. **Environment Setup**
+
+Create `.env` file in the root directory:
+```bash
+# .env
+PINECONE_API_KEY=your_pinecone_api_key
+PINECONE_ENV=us-east-1
+INDEX_NAME=ai-tool-search
+OLLAMA_BASE_URL=http://ai_tool_search_ollama:11434
+ENVIRONMENT=DEV
+DEV_MODEL=deepseek-r1:1.5b
+PROD_MODEL=deepseek-r1:7b
+```
+
+Copy the same environment variables to backend:
+```bash
+cp .env backend/.env
+```
+
+3. **Start Services**
+```bash
+# Build and start all services
+docker-compose up -d --build
+
+# Wait for about 30 seconds for services to initialize
+```
+
+4. **Pull Required Models**
+```bash
+# Pull the LLM model
+docker-compose exec ollama ollama pull deepseek-r1:1.5b
+
+# Pull the embedding model
+docker-compose exec ollama ollama pull nomic-embed-text
+```
+
+5. **Access the Application**
+- Frontend UI: http://localhost:8501
+- Backend API Documentation: http://localhost:8000/docs
+- Health Check: http://localhost:8000/health
+
+## Directory Structure
+```
+ai-tool-search/
+├── .env                    # Global environment variables
+├── docker-compose.yml      # Docker services configuration
+├── backend/
+│   ├── tada.py            # FastAPI application
+│   ├── requirements.txt    # Backend dependencies
+│   ├── Dockerfile         # Backend container configuration
+│   └── .env              # Backend-specific environment
+└── frontend/
+    ├── app.py            # Streamlit interface
+    ├── requirements.txt  # Frontend dependencies
+    └── Dockerfile       # Frontend container configuration
+```
+
+## Useful Commands
+
+### Service Management
+```bash
+# View running services
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+
+# View specific service logs
+docker-compose logs -f backend
+docker-compose logs -f frontend
+docker-compose logs -f ollama
+
+# Restart services
+docker-compose restart
+
+# Stop all services
+docker-compose down
+
+# Remove everything (including volumes)
+docker-compose down -v
+```
+
+### Troubleshooting
+
+1. **If services fail to start:**
+```bash
+# Remove all containers and volumes
+docker-compose down -v
+
+# Clean Docker system
+docker system prune -f
+
+# Rebuild and start services
+docker-compose up -d --build
+```
+
+2. **If Ollama connection fails:**
+- Check if Ollama container is running: `docker-compose ps`
+- Check Ollama logs: `docker-compose logs ollama`
+- Verify models are installed: `docker-compose exec ollama ollama list`
+
+3. **If Pinecone connection fails:**
+- Verify PINECONE_API_KEY in .env files
+- Check backend logs: `docker-compose logs backend`
+
+## Features
+
+1. **Search Tools**
+- Natural language search
+- Relevance ranking
+- Category-based filtering
+
+2. **Add Tools**
+- Single tool addition
+- Bulk upload via JSON
+- Duplicate checking
+
+3. **Update Tools**
+- Modify existing tools
+- Batch updates
+
+4. **Delete Tools**
+- Remove individual tools
+- Clear entire index
+
+5. **Statistics**
+- Total tools count
+- Category distribution
+- Index statistics
+
+## Using the Application
+
+1. **Search for Tools**
+- Go to http://localhost:8501
+- Use the Search tab
+- Enter your query (e.g., "code generation tools")
+
+2. **Add a Tool**
+- Click on "Add Tools" tab
+- Fill in required information:
+  - Name
+  - Tool ID (unique identifier)
+  - Description
+  - Categories
+  - Pros/Cons
+  - Usage examples
+  - Pricing
+
+3. **View Statistics**
+- Go to Statistics tab
+- Click "Refresh Statistics"
+- View tool distribution and metrics
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| PINECONE_API_KEY | Your Pinecone API key | Yes |
+| PINECONE_ENV | Pinecone environment | Yes |
+| INDEX_NAME | Name of Pinecone index | Yes |
+| OLLAMA_BASE_URL | Ollama service URL | Yes |
+| ENVIRONMENT | DEV or PROD | Yes |
+| DEV_MODEL | Development model name | Yes |
+| PROD_MODEL | Production model name | Yes |
+
+## Models Used
+
+1. **LLM Model**
+- Name: deepseek-r1:1.5b
+- Use: Query processing and response generation
+
+2. **Embedding Model**
+- Name: nomic-embed-text
+- Use: Vector embeddings for search
+
+## Security Notes
+
+1. **API Keys**
+- Never commit .env files
+- Rotate Pinecone API keys regularly
+- Use different keys for dev/prod
+
+2. **Network Security**
+- Default ports: 8501 (frontend), 8000 (backend), 11434 (Ollama)
+- Configure firewalls appropriately
+- Use HTTPS in production

@@ -1,0 +1,60 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ai_tool_search_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - app_network
+    # Remove healthcheck and use restart policy
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai_tool_search_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_ENV=${PINECONE_ENV}
+      - INDEX_NAME=${INDEX_NAME}
+      - OLLAMA_BASE_URL=http://ai_tool_search_ollama:11434
+      - ENVIRONMENT=${ENVIRONMENT}
+      - DEV_MODEL=${DEV_MODEL}
+      - PROD_MODEL=${PROD_MODEL}
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - ollama
+    networks:
+      - app_network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ai_tool_search_frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://backend:8000
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+    networks:
+      - app_network
+    restart: unless-stopped
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  ollama_data:
+    name: ai_tool_search_ollama_data
