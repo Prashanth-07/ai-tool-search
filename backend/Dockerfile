@@ -22,6 +22,7 @@ RUN pip install --no-cache-dir fastapi==0.109.0 \
     && pip install --no-cache-dir langchain-core==0.1.17 \
     && pip install --no-cache-dir langchain-community==0.0.19 \
     && pip install --no-cache-dir langchain==0.1.4 \
+    && pip install --no-cache-dir langchain-ollama==0.2.3 \
     && pip install --no-cache-dir langchain-ollama==0.2.3
 
 # Copy application code
