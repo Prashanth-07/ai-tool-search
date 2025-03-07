@@ -234,13 +234,13 @@ def create_rag_chain(retriever, headers=None):
     current_model = get_current_model(headers)
     model = ChatOllama(
         model=current_model,
-        base_url=os.getenv("OLLAMA_BASE_URL", "http://ai_tool_search_ollama:11434"),
-        top_p=0.9,
-        temperature=0.3,
-        presence_penalty=0.2,
-        frequency_penalty=0.3,
-        stream=True,
-        max_tokens=500,
+        base_url=os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434"),
+        top_p=0.8,
+        temperature=0.2,
+        # presence_penalty=0.2,
+        # frequency_penalty=0.3,
+        stream=False,
+        max_tokens=300,
         system_prompt="""You are a retrieval AI assistant. 
         - Your goal is to find the most relevant tools for a given user query.
         - Extract key needs from {question}.
@@ -344,7 +344,7 @@ def get_vector_store():
     try:
         embeddings = OllamaEmbeddings(
             model='nomic-embed-text',
-            base_url=os.getenv("OLLAMA_BASE_URL", "http://ai_tool_search_ollama:11434")
+            base_url=os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434")
         )
         
         # Initialize the vector store using the new syntax
@@ -615,9 +615,9 @@ async def query_tools(request: QueryRequest, request_headers: Request):
         mmr_retriever = vector_store.as_retriever(
             search_type="mmr",
             search_kwargs={
-                'k': 10,  # Increased from 5
-                'fetch_k': 15,  # Increased from 8
-                'lambda_mult': 0.2
+                'k': 7,  # Increased from 5
+                'fetch_k': 10,  # Increased from 8
+                'lambda_mult': 0.3
             }
         )
         
