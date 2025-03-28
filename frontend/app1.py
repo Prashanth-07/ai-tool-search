@@ -10,6 +10,14 @@ import urllib3
 # Disable SSL warning messages in the UI
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+# Set page configuration - MUST BE FIRST STREAMLIT COMMAND
+st.set_page_config(
+    page_title="AI Tool Search Interface",
+    page_icon="🔍",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 def remove_html_tags(text):
     """Remove HTML tags from a string."""
     import re
@@ -66,19 +74,7 @@ def normalize_json_response(result_data):
     # If we can't normalize, return empty result
     return {"tools": []}
 
-# Set page configuration
-st.set_page_config(
-    page_title="AI Tool Search Interface",
-    page_icon="🔍",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# Replace your current CSS styling section with this updated version
-
-# Replace your current CSS styling with this version
-
-# Custom CSS for styling with dark theme to match the screenshots
+# Custom CSS for styling with dark theme
 st.markdown("""
 <style>
     /* Dark theme base styles */
@@ -145,7 +141,7 @@ st.markdown("""
         color: white;
     }
     
-    /* Tool styling (to match screenshot) */
+    /* Tool styling */
     hr {
         border-color: rgba(255, 255, 255, 0.1);
     }
@@ -153,6 +149,11 @@ st.markdown("""
     /* Fix sidebar */
     [data-testid="stSidebar"] {
         background-color: #1A1A1A;
+    }
+    
+    /* Hide checkbox used for tab tracking */
+    [data-testid="stCheckbox"] {
+        display: none;
     }
     
     /* Hide Streamlit branding */
@@ -178,283 +179,131 @@ if 'all_tools' not in st.session_state:
     st.session_state.all_tools = []
 if 'show_more_clicked' not in st.session_state:
     st.session_state.show_more_clicked = False
+if 'query_input' not in st.session_state:
+    st.session_state.query_input = ""
+if 'show_results' not in st.session_state:
+    st.session_state.show_results = False
+if 'is_searching' not in st.session_state:
+    st.session_state.is_searching = False
+if 'search_warning' not in st.session_state:
+    st.session_state.search_warning = None
+if 'search_error' not in st.session_state:
+    st.session_state.search_error = None
+if 'is_valid_json' not in st.session_state:
+    st.session_state.is_valid_json = False
+if 'active_tab' not in st.session_state:
+    st.session_state.active_tab = 0
+if 'search_query_pending' not in st.session_state:
+    st.session_state.search_query_pending = None
+if 'model_choice' not in st.session_state:
+    st.session_state.model_choice = "DEV_MODEL"
 
-# Sidebar for configuration
-with st.sidebar:
-    st.title("⚙️ Configuration")
-    st.session_state.api_url = st.text_input("Backend API URL", value=st.session_state.api_url)
-    st.session_state.api_key = st.text_input("Pinecone API Key (for admin functions)", 
-                                          value=st.session_state.api_key, 
-                                          type="password")
-
-    # Add Ollama URL input with default value
-    if 'ollama_url' not in st.session_state:
-        default_url = os.environ.get("DEFAULT_OLLAMA_URL", "http://host.docker.internal:11434")
-        st.session_state.ollama_url = default_url
-
-    st.session_state.ollama_url = st.text_input(
-        "Ollama Server URL",
-        value=st.session_state.ollama_url,
-        help="URL where Ollama is running"
-    )
-
-    # Add SSL verification toggle, default to false for HTTPS and true for HTTP
-    if 'verify_ssl' not in st.session_state:
-        st.session_state.verify_ssl = False
-        # Default to disabled for HTTPS, enabled for HTTP
-        # default_verify = not st.session_state.ollama_url.startswith("https://")
-        # st.session_state.verify_ssl = default_verify
+# Add the search functions
+def perform_search(query):
+    """Function to perform search and display results with caching for identical queries"""
+    # Check if query is empty
+    if not query or query.strip() == "":
+        st.session_state.search_warning = "Please provide your requirement for AI to do magic! ✨"
+        st.session_state.show_results = False
+        return
     
-    # st.session_state.verify_ssl = st.checkbox(
-    #     "Verify SSL Certificate", 
-    #     value=st.session_state.verify_ssl,
-    #     help="Disable this when using self-signed certificates (like with vast.ai)"
-    # )
+    # Clear any previous warnings and errors
+    st.session_state.search_warning = None
+    st.session_state.search_error = None
     
-    # # Add a note about SSL verification for HTTPS
-    # if st.session_state.ollama_url.startswith("https://") and not st.session_state.verify_ssl:
-    #     st.sidebar.markdown("""
-    #     <div style="background-color: rgba(255, 152, 0, 0.2); border-left: 4px solid #FF9800; padding: 10px; margin-top: 10px; border-radius: 4px;">
-    #         <strong>Note:</strong> SSL certificate verification is disabled for this HTTPS connection.
-    #     </div>
-    #     """, unsafe_allow_html=True)
-
-    # Add Ollama API Key input in the sidebar
-    if 'ollama_api_key' not in st.session_state:
-        st.session_state.ollama_api_key = ""
-    st.session_state.ollama_api_key = st.text_input(
-        "Ollama API Key",
-        value=st.session_state.ollama_api_key,
-        type="password",
-        help="API key/Bearer token for Ollama server authentication"
-    )
-
-    # Model selection in sidebar
-    st.divider()
-    st.subheader("Model Selection")
+    # Store the current query in session state
+    st.session_state.last_query = query
     
-    # Initialize model choice if not in session state
-    if 'model_choice' not in st.session_state:
-        st.session_state.model_choice = "DEV_MODEL"
+    # Check if this is the same query as last processed query (for caching)
+    if hasattr(st.session_state, 'last_processed_query') and query == st.session_state.last_processed_query and hasattr(st.session_state, 'last_result') and st.session_state.last_result is not None:
+        # Use cached result
+        result = st.session_state.last_result
+        process_search_results(result, query)
+        return
     
-    # Radio button for model selection
-    st.session_state.model_choice = st.radio(
-        "Select Model Environment:",
-        options=["DEV_MODEL", "PROD_MODEL"],
-        index=0 if st.session_state.model_choice == "DEV_MODEL" else 1,
-        horizontal=True
-    )
-
-    # Show current model dynamically
-    if st.session_state.model_choice:
-        try:
-            headers = {"MODEL_CHOICE": st.session_state.model_choice, "OLLAMA_URL": st.session_state.ollama_url, "OLLAMA_VERIFY_SSL": str(st.session_state.verify_ssl).lower(), "OLLAMA_API_KEY": st.session_state.ollama_api_key}
-            response = requests.get(
-                f"{st.session_state.api_url}/model-info",
-                headers=headers
-            )
-            if response.status_code == 200:
-                model_info = response.json()
-                st.info(f"Using {model_info.get('current_model')}")
-        except Exception as e:
-            st.info(f"Using {st.session_state.model_choice}")
+    # If not from session state already, set flag for next run
+    if not st.session_state.get('executing_search', False):
+        st.session_state.is_searching = True
+        st.session_state.search_query_pending = query
+        st.session_state.executing_search = True
+        return
     
-    st.divider()
-    if st.button("Check API Health"):
-        try:
-            response = requests.get(f"{st.session_state.api_url}/health")
-            if response.status_code == 200:
-                st.success("API is healthy! ✅")
-                st.json(response.json())
-            else:
-                st.error(f"API returned status code: {response.status_code}")
-        except Exception as e:
-            st.error(f"Error connecting to API: {str(e)}")
-
-# Add Test Connection button in main content
-if st.button("Test Ollama Connection"):
-    with st.spinner("Testing connection to Ollama server..."):
-        try:
-            # Prepare headers with all necessary settings
+    # This only executes if executing_search is True
+    try:
+        # Show the spinner directly in this function
+        with st.spinner("Searching..."):
+            # Reset the visible results counter
+            st.session_state.visible_results = 3
+            st.session_state.last_processed_query = query
+            st.session_state.show_more_clicked = False
+            
             headers = {
-                "OLLAMA_URL": st.session_state.ollama_url,
-                "OLLAMA_VERIFY_SSL": "false",
-                "OLLAMA_API_KEY": st.session_state.ollama_api_key
+                "MODEL_CHOICE": st.session_state.model_choice
             }
             
-            # Call the test-connection endpoint
-            response = requests.get(
-                f"{st.session_state.api_url}/test-connection",
+            # Introduce a slight delay to ensure spinner is visible
+            time.sleep(0.5)
+            
+            response = requests.post(
+                f"{st.session_state.api_url}/query",
+                json={"query": query},
                 headers=headers
             )
             
             if response.status_code == 200:
                 result = response.json()
-                
-                # Create a summary of endpoint tests
-                endpoint_summary = []
-                all_endpoints_ok = True
-                
-                for endpoint in result.get("endpoints_tested", []):
-                    endpoint_ok = endpoint.get("success", False)
-                    all_endpoints_ok = all_endpoints_ok and endpoint_ok
-                    
-                    status_emoji = "✅" if endpoint_ok else "❌"
-                    endpoint_name = endpoint.get("endpoint", "unknown")
-                    status_code = endpoint.get("status_code", "N/A")
-                    
-                    endpoint_summary.append(f"{status_emoji} {endpoint_name}: {status_code}")
-                
-                # Display overall status
-                if all_endpoints_ok:
-                    st.success("Successfully connected to all Ollama endpoints!")
-                elif result.get("status") == "partial":
-                    st.warning("Partial success: Some endpoints are working, others failed.")
-                    
-                    # Show specific error messages for common issues
-                    if "auth_error" in result:
-                        st.error(result["auth_error"])
-                    if "ssl_error" in result:
-                        st.error(result["ssl_error"])
-                else:
-                    st.error("Failed to connect to any Ollama endpoints.")
-                
-                # Show endpoint summary
-                st.write("Endpoint Status:")
-                for line in endpoint_summary:
-                    st.write(line)
-                
-                # Show details in expander
-                with st.expander("Connection Details"):
-                    st.json(result)
+                st.session_state.last_result = result
+                process_search_results(result, query)
             else:
-                st.error(f"Error: API returned status code {response.status_code}")
-                st.text(response.text)
-        except Exception as e:
-            st.error(f"Error testing connection: {str(e)}")
+                st.session_state.search_error = f"Error: API returned status code {response.status_code}"
+                st.session_state.search_error_details = response.text
+                st.session_state.show_results = True
+    except Exception as e:
+        st.session_state.search_error = f"Error connecting to API: {str(e)}"
+        st.session_state.show_results = True
+    finally:
+        # Clear the flags
+        st.session_state.is_searching = False
+        st.session_state.search_query_pending = None
+        st.session_state.executing_search = False
 
-# Main content
-st.markdown('<div class="main-header">AI Tool Search</div>', unsafe_allow_html=True)
-
-# Create tabs for different functionalities
-tabs = st.tabs(["🔍 Search", "➕ Add Tools", "🔄 Update Tools", "🗑️ Delete Tools", "📊 Statistics"])
-
-if 'visible_results' not in st.session_state:
-    st.session_state.visible_results = 3
-if 'all_tools' not in st.session_state:
-    st.session_state.all_tools = []
-if 'show_more_clicked' not in st.session_state:
-    st.session_state.show_more_clicked = False
-
-with tabs[0]:
-    st.markdown('<div class="subheader">Search AI Tools</div>', unsafe_allow_html=True)
+def process_search_results(result, query):
+    """Process search results and store them in session state"""
+    try:
+        result_data = json.loads(result["response"])
+        is_valid_json = True
+        result_data = normalize_json_response(result_data)
+        # Store all tools in session state
+        st.session_state.all_tools = result_data.get("tools", [])
+        st.session_state.is_valid_json = True
+        st.session_state.raw_result_data = result_data
+    except json.JSONDecodeError:
+        st.session_state.is_valid_json = False
+        st.session_state.raw_response = result["response"]
+        st.session_state.all_tools = []
     
-    query = st.text_input("Enter your search query:", 
-                          placeholder="e.g., list all the coding related tools",
-                          value=st.session_state.last_query)
-    
-    search_button = st.button("Search", type="primary", key="search_button")
-    
-    if search_button:
-        # Reset the visible results counter when a new search is performed
-        st.session_state.visible_results = 3
-        st.session_state.last_query = query
-        st.session_state.show_more_clicked = False
+    st.session_state.show_results = True
+
+def display_search_results():
+    """Display search results from session state"""
+    if not st.session_state.show_results:
+        return
         
-        with st.spinner("Searching..."):
-            try:
-                headers = {
-                    "MODEL_CHOICE": st.session_state.model_choice,
-                    "OLLAMA_URL": st.session_state.ollama_url,
-                    "OLLAMA_VERIFY_SSL": "false",
-                    "OLLAMA_API_KEY": st.session_state.ollama_api_key
-                }
-                response = requests.post(
-                    f"{st.session_state.api_url}/query",
-                    json={"query": query},
-                    headers=headers
-                )
-                
-                if response.status_code == 200:
-                    result = response.json()
-                    st.session_state.last_result = result
-                    
-                    try:
-                        result_data = json.loads(result["response"])
-                        is_valid_json = True
-                        result_data = normalize_json_response(result_data)
-                        # Store all tools in session state
-                        st.session_state.all_tools = result_data.get("tools", [])
-                    except json.JSONDecodeError:
-                        is_valid_json = False
-                    
-                    st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
-                    
-                    if is_valid_json and "tools" in result_data and len(result_data["tools"]) > 0:
-                        tools = result_data["tools"]
-                        total_tools = len(tools)
-                        
-                        # Display the number of tools found
-                        st.markdown(f"Found {total_tools} tools related to your query, ranked by relevance:")
-                        
-                        # Define how many tools to show
-                        visible_count = st.session_state.visible_results
-                        if visible_count > total_tools:
-                            visible_count = total_tools
-                        
-                        # Display visible tools
-                        for i, tool in enumerate(tools[:visible_count], start=1):
-                            st.markdown(f"""
-                            <div style="margin-bottom: 1rem;">
-                                <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
-                                    {i}. {tool.get('name', 'No Name')}
-                                </div>
-                                <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
-                                    padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
-                                    ID: {tool.get('id', 'No ID')}
-                                </div>
-                                <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
-                                    {tool.get('description', 'No description available.')}
-                                </div>
-                                <div style="margin-top: 0.5rem;">
-                                    <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
-                                    <span style="color: #E0E0E0;">{tool.get('relevance', '')}</span>
-                                </div>
-                            </div>
-                            <hr style="margin: 1rem 0; opacity: 0.2;">
-                            """, unsafe_allow_html=True)
-                        
-                        # Show "Show More" button if there are more tools to display
-                        if visible_count < total_tools:
-                            show_more = st.button("Show More", type="primary", key="show_more_button")
-                            st.markdown(f"Showing {visible_count} of {total_tools} tools")
-                            
-                            if show_more:
-                                # Show all tools
-                                st.session_state.visible_results = total_tools
-                                st.experimental_rerun()
-                    
-                    elif not is_valid_json:
-                        st.markdown("### Response from the model")
-                        st.info(result["response"])
-                    else:
-                        st.info("No matching tools found. Try a different search query.")
-                    
-                    with st.expander("View Raw Response"):
-                        if is_valid_json:
-                            st.json(result_data)
-                        else:
-                            st.text(result["response"])
-                else:
-                    st.error(f"Error: API returned status code {response.status_code}")
-                    st.text(response.text)
-            except Exception as e:
-                st.error(f"Error connecting to API: {str(e)}")
-    
-    # If we have results in the session state but no search was just performed, display them
-    elif hasattr(st.session_state, 'all_tools') and st.session_state.all_tools:
-        st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
+    # Check if there's a warning to display
+    if hasattr(st.session_state, 'search_warning') and st.session_state.search_warning:
+        st.warning(st.session_state.search_warning)
+        return
         
+    # Check if there's an error to display
+    if hasattr(st.session_state, 'search_error') and st.session_state.search_error:
+        st.error(st.session_state.search_error)
+        if hasattr(st.session_state, 'search_error_details') and st.session_state.search_error_details:
+            st.text(st.session_state.search_error_details)
+        return
+    
+    st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
+    
+    if st.session_state.is_valid_json and st.session_state.all_tools:
         tools = st.session_state.all_tools
         total_tools = len(tools)
         
@@ -497,10 +346,175 @@ with tabs[0]:
                 # Show all tools
                 st.session_state.visible_results = total_tools
                 st.experimental_rerun()
+    
+    elif not st.session_state.is_valid_json:
+        st.markdown("### Response from the model")
+        st.info(st.session_state.raw_response)
+    else:
+        st.info("No matching tools found. Try a different search query.")
+    
+    with st.expander("View Raw Response"):
+        if st.session_state.is_valid_json:
+            st.json(st.session_state.raw_result_data)
+        else:
+            st.text(st.session_state.raw_response)
+
+# Function to handle search form submission
+def handle_form_submit():
+    # This ensures the current input value is used, not the last_query from session state
+    current_query = st.session_state.query_input
+    
+    # Reset any previous execution state
+    st.session_state.executing_search = False
+    
+    # Start the search process
+    perform_search(current_query)
+
+# Sidebar for configuration
+with st.sidebar:
+    st.title("⚙️ Configuration")
+    st.session_state.api_url = st.text_input("Backend API URL", value=st.session_state.api_url)
+    st.session_state.api_key = st.text_input("Pinecone API Key (for admin functions)",
+                                          value=st.session_state.api_key, 
+                                          type="password")
+
+    # Add info about Nomic Atlas
+    st.info("This application uses Groq API for fast LLM inference and Nomic Atlas for embeddings.")
+
+    # Model selection in sidebar
+    st.divider()
+    st.subheader("Model Selection")
+    
+    # Radio button for model selection
+    st.session_state.model_choice = st.radio(
+        "Select Model Environment:",
+        options=["DEV_MODEL", "PROD_MODEL"],
+        index=0 if st.session_state.model_choice == "DEV_MODEL" else 1,
+        horizontal=True
+    )
+
+    # Show current model dynamically
+    if st.session_state.model_choice:
+        try:
+            headers = {"MODEL_CHOICE": st.session_state.model_choice}
+            response = requests.get(
+                f"{st.session_state.api_url}/model-info",
+                headers=headers
+            )
+            if response.status_code == 200:
+                model_info = response.json()
+                st.info(f"Using {model_info.get('current_model')} from {model_info.get('provider', 'Groq')}")
+        except Exception as e:
+            st.info(f"Using {st.session_state.model_choice}")
+    
+    st.divider()
+    if st.button("Check API Health"):
+        try:
+            response = requests.get(f"{st.session_state.api_url}/health")
+            if response.status_code == 200:
+                st.success("API is healthy! ✅")
+                st.json(response.json())
+            else:
+                st.error(f"API returned status code: {response.status_code}")
+        except Exception as e:
+            st.error(f"Error connecting to API: {str(e)}")
+
+# Add Test Connection button in main content
+if st.button("Test Connection"):
+    with st.spinner("Testing connection to backend services..."):
+        try:
+            # Prepare headers with only the model choice
+            headers = {
+                "MODEL_CHOICE": st.session_state.model_choice
+            }
+            
+            # Call the test-connection endpoint
+            response = requests.get(
+                f"{st.session_state.api_url}/test-connection",
+                headers=headers
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                
+                # Create a summary of endpoint tests
+                endpoint_summary = []
+                all_endpoints_ok = True
+                
+                for endpoint in result.get("endpoints_tested", []):
+                    endpoint_ok = endpoint.get("success", False)
+                    all_endpoints_ok = all_endpoints_ok and endpoint_ok
+                    
+                    status_emoji = "✅" if endpoint_ok else "❌"
+                    endpoint_name = endpoint.get("endpoint", "unknown")
+                    status_code = endpoint.get("status_code", "N/A")
+                    
+                    endpoint_summary.append(f"{status_emoji} {endpoint_name}: {status_code}")
+                
+                # Display overall status
+                if all_endpoints_ok:
+                    st.success("Successfully connected to all endpoints!")
+                elif result.get("status") == "partial":
+                    st.warning("Partial success: Some endpoints are working, others failed.")
+                else:
+                    st.error("Failed to connect to endpoints.")
+                
+                # Show endpoint summary
+                st.write("Endpoint Status:")
+                for line in endpoint_summary:
+                    st.write(line)
+                
+                # Show details in expander
+                with st.expander("Connection Details"):
+                    st.json(result)
+            else:
+                st.error(f"Error: API returned status code {response.status_code}")
+                st.text(response.text)
+        except Exception as e:
+            st.error(f"Error testing connection: {str(e)}")
+
+# Main content
+st.markdown('<div class="main-header">AI Tool Search</div>', unsafe_allow_html=True)
+
+# Create tabs directly without visible tracking widgets
+tabs = st.tabs(["🔍 Search", "➕ Add Tools", "🔄 Update Tools", "🗑️ Delete Tools", "📊 Statistics"])
+
+# Search tab
+with tabs[0]:
+    st.markdown('<div class="subheader">Search AI Tools</div>', unsafe_allow_html=True)
+    
+    # Create a form to capture Enter key presses
+    with st.form(key="search_form"):
+        # Use session state key to track input value properly
+        query = st.text_input(
+            "Enter your search query:", 
+            placeholder="e.g., list all the coding related tools",
+            key="query_input"
+        )
+        
+        # Form submit button (triggered by Enter key or click)
+        form_submit = st.form_submit_button("Search", type="primary", on_click=handle_form_submit)
+    
+    # Dedicated search container for the spinner and processing
+    search_container = st.container()
+    
+    # If executing a search from a previous submission, continue the process
+    if st.session_state.get('executing_search', False):
+        with search_container:
+            # Execute the pending search with the same query
+            perform_search(st.session_state.search_query_pending)
+    
+    # Display search results below the search box
+    display_search_results()
 
 # 2. ADD TOOLS TAB
 with tabs[1]:
     st.markdown('<div class="subheader">Add New AI Tools</div>', unsafe_allow_html=True)
+    
+    # When we enter this tab, hide any search results
+    if st.session_state.active_tab != 1:
+        st.session_state.active_tab = 1
+        st.session_state.show_results = False
     
     add_option = st.radio("Choose an option:", ["Add Single Tool", "Bulk Upload"])
     
@@ -555,9 +569,10 @@ with tabs[1]:
                     
                     try:
                         with st.spinner("Adding tool..."):
-                            # Prepare headers with model choice
-                            headers = {}
-                            headers["MODEL_CHOICE"] = st.session_state.model_choice
+                            # Prepare headers with all settings
+                            headers = {
+                                "MODEL_CHOICE": st.session_state.model_choice
+                            }
                             
                             response = requests.post(
                                 f"{st.session_state.api_url}/add-tools",
@@ -617,9 +632,10 @@ with tabs[1]:
                 if st.button("Process Bulk Upload", type="primary"):
                     with st.spinner("Uploading tools..."):
                         try:
-                            # Prepare headers with model choice
-                            headers = {}
-                            headers["MODEL_CHOICE"] = st.session_state.model_choice
+                            # Prepare headers with all settings
+                            headers = {
+                                "MODEL_CHOICE": st.session_state.model_choice
+                            }
                             
                             response = requests.post(
                                 f"{st.session_state.api_url}/add-tools",
@@ -660,6 +676,11 @@ with tabs[1]:
 with tabs[2]:
     st.markdown('<div class="subheader">Update Existing Tools</div>', unsafe_allow_html=True)
     
+    # When we enter this tab, hide any search results
+    if st.session_state.active_tab != 2:
+        st.session_state.active_tab = 2
+        st.session_state.show_results = False
+    
     # Step 1: Input tool ID
     tool_id_to_update = st.text_input("Enter Tool ID to update:", 
                                       key="update_tool_id_input",
@@ -671,12 +692,11 @@ with tabs[2]:
     
     if fetch_button and tool_id_to_update:
         with st.spinner("Fetching tool data..."):
-            # In a real implementation, you would have an endpoint to fetch a single tool
-            # For now, we'll simulate fetching by querying with the tool ID
             try:
-                # Prepare headers with model choice
-                headers = {}
-                headers["MODEL_CHOICE"] = st.session_state.model_choice
+                # Prepare headers with all settings
+                headers = {
+                    "MODEL_CHOICE": st.session_state.model_choice
+                }
                 
                 response = requests.post(
                     f"{st.session_state.api_url}/query",
@@ -793,9 +813,10 @@ with tabs[2]:
                     
                     try:
                         with st.spinner("Updating tool..."):
-                            # Prepare headers with model choice
-                            headers = {}
-                            headers["MODEL_CHOICE"] = st.session_state.model_choice
+                            # Prepare headers with all settings
+                            headers = {
+                                "MODEL_CHOICE": st.session_state.model_choice
+                            }
                             
                             response = requests.put(
                                 f"{st.session_state.api_url}/update-tools",
@@ -823,6 +844,11 @@ with tabs[2]:
 with tabs[3]:
     st.markdown('<div class="subheader">Delete Tools</div>', unsafe_allow_html=True)
     
+    # When we enter this tab, hide any search results
+    if st.session_state.active_tab != 3:
+        st.session_state.active_tab = 3
+        st.session_state.show_results = False
+    
     st.warning("⚠️ Warning: Deletion is permanent and cannot be undone.")
     
     tool_id_to_delete = st.text_input("Enter Tool ID to delete:", 
@@ -834,9 +860,10 @@ with tabs[3]:
     if st.button("Delete Tool", type="primary", disabled=not confirm_delete or not tool_id_to_delete):
         with st.spinner("Deleting tool..."):
             try:
-                # Prepare headers with model choice
-                headers = {}
-                headers["MODEL_CHOICE"] = st.session_state.model_choice
+                # Prepare headers with all settings
+                headers = {
+                    "MODEL_CHOICE": st.session_state.model_choice
+                }
                 
                 response = requests.delete(
                     f"{st.session_state.api_url}/delete-tool/{tool_id_to_delete}",
@@ -870,9 +897,10 @@ with tabs[3]:
     if st.button("Clear Index", type="primary", disabled=not confirm_clear or not st.session_state.api_key):
         with st.spinner("Clearing index..."):
             try:
-                # Prepare headers with model choice
-                headers = {}
-                headers["MODEL_CHOICE"] = st.session_state.model_choice
+                # Prepare headers with all settings
+                headers = {
+                    "MODEL_CHOICE": st.session_state.model_choice
+                }
                 
                 response = requests.delete(
                     f"{st.session_state.api_url}/clear-index",
@@ -898,16 +926,32 @@ with tabs[3]:
 with tabs[4]:
     st.markdown('<div class="subheader">Index Statistics</div>', unsafe_allow_html=True)
     
-    if st.button("Refresh Statistics", key="refresh_stats"):
+    # When we enter this tab, hide any search results
+    if st.session_state.active_tab != 4:
+        st.session_state.active_tab = 4
+        st.session_state.show_results = False
+    
+    # Add option to show all tools
+    show_all = st.checkbox("Show All Tools", value=False, 
+                         help="Show all tools in the index (may be slow if you have many tools)")
+    
+    refresh_button = st.button("Refresh Statistics", key="refresh_stats")
+    
+    if refresh_button:
         with st.spinner("Fetching statistics..."):
             try:
-                # Prepare headers with model choice
-                headers = {}
-                headers["MODEL_CHOICE"] = st.session_state.model_choice
+                # Prepare headers with all settings
+                headers = {
+                    "MODEL_CHOICE": st.session_state.model_choice
+                }
+                
+                # Add show_all parameter
+                params = {"show_all": str(show_all).lower()}
                 
                 response = requests.get(
                     f"{st.session_state.api_url}/stats",
-                    headers=headers
+                    headers=headers,
+                    params=params
                 )
                 
                 if response.status_code == 200:
@@ -920,7 +964,11 @@ with tabs[4]:
                     with col2:
                         st.metric("Vector Dimension", stats.get("dimension", "-"))
                     with col3:
-                        st.metric("Index Fullness", f"{stats.get('index_fullness', 0):.2%}")
+                        st.metric("Index Fullness", f"{stats.get('index_fullness', 0) * 100:.2f}%")
+                    
+                    # Display information about showing limited results
+                    if not show_all and stats.get("total_vectors", 0) > stats.get("vectors_shown", 0):
+                        st.info(f"Showing {stats.get('vectors_shown', 0)} of {stats.get('total_vectors', 0)} tools. Check 'Show All Tools' to see all.")
                     
                     # Display vector information
                     st.markdown("### Tools in Index")
@@ -967,6 +1015,124 @@ with tabs[4]:
 
 # # Disable SSL warning messages in the UI
 # urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+# # Set page configuration - MUST BE FIRST STREAMLIT COMMAND
+# st.set_page_config(
+#     page_title="AI Tool Search Interface",
+#     page_icon="🔍",
+#     layout="wide",
+#     initial_sidebar_state="expanded"
+# )
+
+# # def perform_search(query):
+# #     """Function to perform search and display results with caching for identical queries"""
+# #     # Check if query is empty
+# #     if not query or query.strip() == "":
+# #         st.warning("Please provide your requirement for AI to do magic! ✨")
+# #         return
+    
+# #     # Check if this is the same query as last time (for caching)
+# #     if query == st.session_state.last_query and hasattr(st.session_state, 'last_result') and st.session_state.last_result is not None:
+# #         # Use cached result
+# #         result = st.session_state.last_result
+# #         display_search_results(result, query)
+# #         return
+    
+# #     # New query - make API call
+# #     with st.spinner("Searching..."):
+# #         try:
+# #             # Reset the visible results counter when a new search is performed
+# #             st.session_state.visible_results = 3
+# #             st.session_state.last_query = query
+# #             st.session_state.show_more_clicked = False
+            
+# #             headers = {
+# #                 "MODEL_CHOICE": st.session_state.model_choice
+# #             }
+# #             response = requests.post(
+# #                 f"{st.session_state.api_url}/query",
+# #                 json={"query": query},
+# #                 headers=headers
+# #             )
+            
+# #             if response.status_code == 200:
+# #                 result = response.json()
+# #                 st.session_state.last_result = result
+# #                 display_search_results(result, query)
+# #             else:
+# #                 st.error(f"Error: API returned status code {response.status_code}")
+# #                 st.text(response.text)
+# #         except Exception as e:
+# #             st.error(f"Error connecting to API: {str(e)}")
+
+# # def display_search_results(result, query):
+# #     """Display search results from the API response"""
+# #     try:
+# #         result_data = json.loads(result["response"])
+# #         is_valid_json = True
+# #         result_data = normalize_json_response(result_data)
+# #         # Store all tools in session state
+# #         st.session_state.all_tools = result_data.get("tools", [])
+# #     except json.JSONDecodeError:
+# #         is_valid_json = False
+    
+# #     st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
+    
+# #     if is_valid_json and "tools" in result_data and len(result_data["tools"]) > 0:
+# #         tools = result_data["tools"]
+# #         total_tools = len(tools)
+        
+# #         # Display the number of tools found
+# #         st.markdown(f"Found {total_tools} tools related to your query, ranked by relevance:")
+        
+# #         # Define how many tools to show
+# #         visible_count = st.session_state.visible_results
+# #         if visible_count > total_tools:
+# #             visible_count = total_tools
+        
+# #         # Display visible tools
+# #         for i, tool in enumerate(tools[:visible_count], start=1):
+# #             st.markdown(f"""
+# #             <div style="margin-bottom: 1rem;">
+# #                 <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
+# #                     {i}. {tool.get('name', 'No Name')}
+# #                 </div>
+# #                 <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
+# #                     padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
+# #                     ID: {tool.get('id', 'No ID')}
+# #                 </div>
+# #                 <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
+# #                     {tool.get('description', 'No description available.')}
+# #                 </div>
+# #                 <div style="margin-top: 0.5rem;">
+# #                     <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
+# #                     <span style="color: #E0E0E0;">{tool.get('relevance', '')}</span>
+# #                 </div>
+# #             </div>
+# #             <hr style="margin: 1rem 0; opacity: 0.2;">
+# #             """, unsafe_allow_html=True)
+        
+# #         # Show "Show More" button if there are more tools to display
+# #         if visible_count < total_tools:
+# #             show_more = st.button("Show More", type="primary", key="show_more_button")
+# #             st.markdown(f"Showing {visible_count} of {total_tools} tools")
+            
+# #             if show_more:
+# #                 # Show all tools
+# #                 st.session_state.visible_results = total_tools
+# #                 st.experimental_rerun()
+    
+# #     elif not is_valid_json:
+# #         st.markdown("### Response from the model")
+# #         st.info(result["response"])
+# #     else:
+# #         st.info("No matching tools found. Try a different search query.")
+    
+# #     with st.expander("View Raw Response"):
+# #         if is_valid_json:
+# #             st.json(result_data)
+# #         else:
+# #             st.text(result["response"])
 
 # def remove_html_tags(text):
 #     """Remove HTML tags from a string."""
@@ -1023,18 +1189,6 @@ with tabs[4]:
     
 #     # If we can't normalize, return empty result
 #     return {"tools": []}
-
-# # Set page configuration
-# st.set_page_config(
-#     page_title="AI Tool Search Interface",
-#     page_icon="🔍",
-#     layout="wide",
-#     initial_sidebar_state="expanded"
-# )
-
-# # Replace your current CSS styling section with this updated version
-
-# # Replace your current CSS styling with this version
 
 # # Custom CSS for styling with dark theme to match the screenshots
 # st.markdown("""
@@ -1136,282 +1290,126 @@ with tabs[4]:
 #     st.session_state.all_tools = []
 # if 'show_more_clicked' not in st.session_state:
 #     st.session_state.show_more_clicked = False
+# if 'query_input' not in st.session_state:
+#     st.session_state.query_input = ""
+# # Initialize additional session state variables
+# if 'show_results' not in st.session_state:
+#     st.session_state.show_results = False
+# if 'is_searching' not in st.session_state:
+#     st.session_state.is_searching = False
+# if 'search_warning' not in st.session_state:
+#     st.session_state.search_warning = None
+# if 'search_error' not in st.session_state:
+#     st.session_state.search_error = None
+# if 'is_valid_json' not in st.session_state:
+#     st.session_state.is_valid_json = False
+# if 'active_tab' not in st.session_state:
+#     st.session_state.active_tab = 0
+# if 'search_query_pending' not in st.session_state:
+#     st.session_state.search_query_pending = None
 
-# # Sidebar for configuration
-# with st.sidebar:
-#     st.title("⚙️ Configuration")
-#     st.session_state.api_url = st.text_input("Backend API URL", value=st.session_state.api_url)
-#     st.session_state.api_key = st.text_input("Pinecone API Key (for admin functions)", 
-#                                           value=st.session_state.api_key, 
-#                                           type="password")
-
-#     # Add Ollama URL input with default value
-#     if 'ollama_url' not in st.session_state:
-#         default_url = os.environ.get("DEFAULT_OLLAMA_URL", "http://host.docker.internal:11434")
-#         st.session_state.ollama_url = default_url
-
-#     st.session_state.ollama_url = st.text_input(
-#         "Ollama Server URL",
-#         value=st.session_state.ollama_url,
-#         help="URL where Ollama is running"
-#     )
-
-#     # Add SSL verification toggle, default to false for HTTPS and true for HTTP
-#     if 'verify_ssl' not in st.session_state:
-#         st.session_state.verify_ssl = False
-#         # Default to disabled for HTTPS, enabled for HTTP
-#         # default_verify = not st.session_state.ollama_url.startswith("https://")
-#         # st.session_state.verify_ssl = default_verify
+# # Add the search functions
+# def perform_search(query):
+#     """Function to perform search and display results with caching for identical queries"""
+#     # Check if query is empty
+#     if not query or query.strip() == "":
+#         st.session_state.search_warning = "Please provide your requirement for AI to do magic! ✨"
+#         st.session_state.show_results = False
+#         return
     
-#     # st.session_state.verify_ssl = st.checkbox(
-#     #     "Verify SSL Certificate", 
-#     #     value=st.session_state.verify_ssl,
-#     #     help="Disable this when using self-signed certificates (like with vast.ai)"
-#     # )
+#     # Clear any previous warnings and errors
+#     st.session_state.search_warning = None
+#     st.session_state.search_error = None
     
-#     # # Add a note about SSL verification for HTTPS
-#     # if st.session_state.ollama_url.startswith("https://") and not st.session_state.verify_ssl:
-#     #     st.sidebar.markdown("""
-#     #     <div style="background-color: rgba(255, 152, 0, 0.2); border-left: 4px solid #FF9800; padding: 10px; margin-top: 10px; border-radius: 4px;">
-#     #         <strong>Note:</strong> SSL certificate verification is disabled for this HTTPS connection.
-#     #     </div>
-#     #     """, unsafe_allow_html=True)
-
-#     # Add Ollama API Key input in the sidebar
-#     if 'ollama_api_key' not in st.session_state:
-#         st.session_state.ollama_api_key = ""
-#     st.session_state.ollama_api_key = st.text_input(
-#         "Ollama API Key",
-#         value=st.session_state.ollama_api_key,
-#         type="password",
-#         help="API key/Bearer token for Ollama server authentication"
-#     )
-# # Add Test Connection button
-# if st.button("Test Ollama Connection"):
-#     with st.spinner("Testing connection to Ollama server..."):
-#         try:
-#             # Prepare headers with all necessary settings
-#             headers = {
-#                 "OLLAMA_URL": st.session_state.ollama_url,
-#                 "OLLAMA_VERIFY_SSL": "false",
-#                 "OLLAMA_API_KEY": st.session_state.ollama_api_key
-#             }
-            
-#             # Call the test-connection endpoint
-#             response = requests.get(
-#                 f"{st.session_state.api_url}/test-connection",
-#                 headers=headers
-#             )
-            
-#             if response.status_code == 200:
-#                 result = response.json()
-                
-#                 # Create a summary of endpoint tests
-#                 endpoint_summary = []
-#                 all_endpoints_ok = True
-                
-#                 for endpoint in result.get("endpoints_tested", []):
-#                     endpoint_ok = endpoint.get("success", False)
-#                     all_endpoints_ok = all_endpoints_ok and endpoint_ok
-                    
-#                     status_emoji = "✅" if endpoint_ok else "❌"
-#                     endpoint_name = endpoint.get("endpoint", "unknown")
-#                     status_code = endpoint.get("status_code", "N/A")
-                    
-#                     endpoint_summary.append(f"{status_emoji} {endpoint_name}: {status_code}")
-                
-#                 # Display overall status
-#                 if all_endpoints_ok:
-#                     st.success("Successfully connected to all Ollama endpoints!")
-#                 elif result.get("status") == "partial":
-#                     st.warning("Partial success: Some endpoints are working, others failed.")
-                    
-#                     # Show specific error messages for common issues
-#                     if "auth_error" in result:
-#                         st.error(result["auth_error"])
-#                     if "ssl_error" in result:
-#                         st.error(result["ssl_error"])
-#                 else:
-#                     st.error("Failed to connect to any Ollama endpoints.")
-                
-#                 # Show endpoint summary
-#                 st.write("Endpoint Status:")
-#                 for line in endpoint_summary:
-#                     st.write(line)
-                
-#                 # Show details in expander
-#                 with st.expander("Connection Details"):
-#                     st.json(result)
-#             else:
-#                 st.error(f"Error: API returned status code {response.status_code}")
-#                 st.text(response.text)
-#         except Exception as e:
-#             st.error(f"Error testing connection: {str(e)}")
-
-#     # Model selection
-#     st.divider()
-#     st.subheader("Model Selection")
+#     # Store the current query in session state
+#     st.session_state.last_query = query
     
-#     # Initialize model choice if not in session state
-#     if 'model_choice' not in st.session_state:
-#         st.session_state.model_choice = "DEV_MODEL"
+#     # Check if this is the same query as last processed query (for caching)
+#     if hasattr(st.session_state, 'last_processed_query') and query == st.session_state.last_processed_query and hasattr(st.session_state, 'last_result') and st.session_state.last_result is not None:
+#         # Use cached result
+#         result = st.session_state.last_result
+#         process_search_results(result, query)
+#         return
     
-#     # Radio button for model selection
-#     st.session_state.model_choice = st.radio(
-#         "Select Model Environment:",
-#         options=["DEV_MODEL", "PROD_MODEL"],
-#         index=0 if st.session_state.model_choice == "DEV_MODEL" else 1,
-#         horizontal=True
-#     )
-
-#     # Show current model dynamically
-#     if st.session_state.model_choice:
-#         try:
-#             headers = {"MODEL_CHOICE": st.session_state.model_choice, "OLLAMA_URL": st.session_state.ollama_url, "OLLAMA_VERIFY_SSL": str(st.session_state.verify_ssl).lower(), "OLLAMA_API_KEY": st.session_state.ollama_api_key}
-#             response = requests.get(
-#                 f"{st.session_state.api_url}/model-info",
-#                 headers=headers
-#             )
-#             if response.status_code == 200:
-#                 model_info = response.json()
-#                 st.info(f"Using {model_info.get('current_model')}")
-#         except Exception as e:
-#             st.info(f"Using {st.session_state.model_choice}")
+#     # Set the searching flag and rerun to show the spinner
+#     # This is the key change - we set the flag and exit to let Streamlit refresh the UI
+#     if not st.session_state.is_searching:
+#         st.session_state.is_searching = True
+#         st.session_state.search_query_pending = query
+#         st.rerun()
     
-#     st.divider()
-#     if st.button("Check API Health"):
-#         try:
-#             response = requests.get(f"{st.session_state.api_url}/health")
-#             if response.status_code == 200:
-#                 st.success("API is healthy! ✅")
-#                 st.json(response.json())
-#             else:
-#                 st.error(f"API returned status code: {response.status_code}")
-#         except Exception as e:
-#             st.error(f"Error connecting to API: {str(e)}")
-
-# # Main content
-# st.markdown('<div class="main-header">AI Tool Search</div>', unsafe_allow_html=True)
-
-# # Create tabs for different functionalities
-# tabs = st.tabs(["🔍 Search", "➕ Add Tools", "🔄 Update Tools", "🗑️ Delete Tools", "📊 Statistics"])
-
-# if 'visible_results' not in st.session_state:
-#     st.session_state.visible_results = 3
-# if 'all_tools' not in st.session_state:
-#     st.session_state.all_tools = []
-# if 'show_more_clicked' not in st.session_state:
-#     st.session_state.show_more_clicked = False
-
-# with tabs[0]:
-#     st.markdown('<div class="subheader">Search AI Tools</div>', unsafe_allow_html=True)
-    
-#     query = st.text_input("Enter your search query:", 
-#                           placeholder="e.g., list all the coding related tools",
-#                           value=st.session_state.last_query)
-    
-#     search_button = st.button("Search", type="primary", key="search_button")
-    
-#     if search_button:
-#         # Reset the visible results counter when a new search is performed
+#     # This code only runs after the rerun when the spinner is visible
+#     try:
+#         # Get the pending query from session state
+#         query = st.session_state.search_query_pending
+        
+#         # Reset the visible results counter
 #         st.session_state.visible_results = 3
-#         st.session_state.last_query = query
+#         st.session_state.last_processed_query = query
 #         st.session_state.show_more_clicked = False
         
-#         with st.spinner("Searching..."):
-#             try:
-#                 headers = {
-#                     "MODEL_CHOICE": st.session_state.model_choice,
-#                     "OLLAMA_URL": st.session_state.ollama_url,
-#                     "OLLAMA_VERIFY_SSL": "false",
-#                     "OLLAMA_API_KEY": st.session_state.ollama_api_key
-#                 }
-#                 response = requests.post(
-#                     f"{st.session_state.api_url}/query",
-#                     json={"query": query},
-#                     headers=headers
-#                 )
-                
-#                 if response.status_code == 200:
-#                     result = response.json()
-#                     st.session_state.last_result = result
-                    
-#                     try:
-#                         result_data = json.loads(result["response"])
-#                         is_valid_json = True
-#                         result_data = normalize_json_response(result_data)
-#                         # Store all tools in session state
-#                         st.session_state.all_tools = result_data.get("tools", [])
-#                     except json.JSONDecodeError:
-#                         is_valid_json = False
-                    
-#                     st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
-                    
-#                     if is_valid_json and "tools" in result_data and len(result_data["tools"]) > 0:
-#                         tools = result_data["tools"]
-#                         total_tools = len(tools)
-                        
-#                         # Display the number of tools found
-#                         st.markdown(f"Found {total_tools} tools related to your query, ranked by relevance:")
-                        
-#                         # Define how many tools to show
-#                         visible_count = st.session_state.visible_results
-#                         if visible_count > total_tools:
-#                             visible_count = total_tools
-                        
-#                         # Display visible tools
-#                         for i, tool in enumerate(tools[:visible_count], start=1):
-#                             st.markdown(f"""
-#                             <div style="margin-bottom: 1rem;">
-#                                 <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
-#                                     {i}. {tool.get('name', 'No Name')}
-#                                 </div>
-#                                 <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
-#                                     padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
-#                                     ID: {tool.get('id', 'No ID')}
-#                                 </div>
-#                                 <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
-#                                     {tool.get('description', 'No description available.')}
-#                                 </div>
-#                                 <div style="margin-top: 0.5rem;">
-#                                     <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
-#                                     <span style="color: #E0E0E0;">{tool.get('relevance', '')}</span>
-#                                 </div>
-#                             </div>
-#                             <hr style="margin: 1rem 0; opacity: 0.2;">
-#                             """, unsafe_allow_html=True)
-                        
-#                         # Show "Show More" button if there are more tools to display
-#                         if visible_count < total_tools:
-#                             show_more = st.button("Show More", type="primary", key="show_more_button")
-#                             st.markdown(f"Showing {visible_count} of {total_tools} tools")
-                            
-#                             if show_more:
-#                                 # Show all tools
-#                                 st.session_state.visible_results = total_tools
-#                                 st.experimental_rerun()
-                    
-#                     elif not is_valid_json:
-#                         st.markdown("### Response from the model")
-#                         st.info(result["response"])
-#                     else:
-#                         st.info("No matching tools found. Try a different search query.")
-                    
-#                     with st.expander("View Raw Response"):
-#                         if is_valid_json:
-#                             st.json(result_data)
-#                         else:
-#                             st.text(result["response"])
-#                 else:
-#                     st.error(f"Error: API returned status code {response.status_code}")
-#                     st.text(response.text)
-#             except Exception as e:
-#                 st.error(f"Error connecting to API: {str(e)}")
-    
-#     # If we have results in the session state but no search was just performed, display them
-#     elif hasattr(st.session_state, 'all_tools') and st.session_state.all_tools:
-#         st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
+#         headers = {
+#             "MODEL_CHOICE": st.session_state.model_choice
+#         }
+#         response = requests.post(
+#             f"{st.session_state.api_url}/query",
+#             json={"query": query},
+#             headers=headers
+#         )
         
+#         if response.status_code == 200:
+#             result = response.json()
+#             st.session_state.last_result = result
+#             process_search_results(result, query)
+#         else:
+#             st.session_state.search_error = f"Error: API returned status code {response.status_code}"
+#             st.session_state.search_error_details = response.text
+#             st.session_state.show_results = True
+#     except Exception as e:
+#         st.session_state.search_error = f"Error connecting to API: {str(e)}"
+#         st.session_state.show_results = True
+#     finally:
+#         # Clear the searching flags
+#         st.session_state.is_searching = False
+#         st.session_state.search_query_pending = None
+
+# def process_search_results(result, query):
+#     """Process search results and store them in session state"""
+#     try:
+#         result_data = json.loads(result["response"])
+#         is_valid_json = True
+#         result_data = normalize_json_response(result_data)
+#         # Store all tools in session state
+#         st.session_state.all_tools = result_data.get("tools", [])
+#         st.session_state.is_valid_json = True
+#         st.session_state.raw_result_data = result_data
+#     except json.JSONDecodeError:
+#         st.session_state.is_valid_json = False
+#         st.session_state.raw_response = result["response"]
+#         st.session_state.all_tools = []
+    
+#     st.session_state.show_results = True
+
+# def display_search_results():
+#     """Display search results from session state"""
+#     if not st.session_state.show_results:
+#         return
+        
+#     # Check if there's a warning to display
+#     if hasattr(st.session_state, 'search_warning') and st.session_state.search_warning:
+#         st.warning(st.session_state.search_warning)
+#         return
+        
+#     # Check if there's an error to display
+#     if hasattr(st.session_state, 'search_error') and st.session_state.search_error:
+#         st.error(st.session_state.search_error)
+#         if hasattr(st.session_state, 'search_error_details') and st.session_state.search_error_details:
+#             st.text(st.session_state.search_error_details)
+#         return
+    
+#     st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
+    
+#     if st.session_state.is_valid_json and st.session_state.all_tools:
 #         tools = st.session_state.all_tools
 #         total_tools = len(tools)
         
@@ -1454,19 +1452,220 @@ with tabs[4]:
 #                 # Show all tools
 #                 st.session_state.visible_results = total_tools
 #                 st.experimental_rerun()
-# # # 1. SEARCH TAB
+    
+#     elif not st.session_state.is_valid_json:
+#         st.markdown("### Response from the model")
+#         st.info(st.session_state.raw_response)
+#     else:
+#         st.info("No matching tools found. Try a different search query.")
+    
+#     with st.expander("View Raw Response"):
+#         if st.session_state.is_valid_json:
+#             st.json(st.session_state.raw_result_data)
+#         else:
+#             st.text(st.session_state.raw_response)
+
+# # Function to handle search form submission
+# def handle_form_submit():
+#     # This ensures the current input value is used, not the last_query from session state
+#     current_query = st.session_state.query_input
+#     perform_search(current_query)
+
+# # Function to handle tab changes
+# def handle_tab_change(tab_index):
+#     st.session_state.active_tab = tab_index
+#     # Hide search results when switching away from search tab
+#     if tab_index != 0:
+#         st.session_state.show_results = False
+
+# # Sidebar for configuration
+# with st.sidebar:
+#     st.title("⚙️ Configuration")
+#     st.session_state.api_url = st.text_input("Backend API URL", value=st.session_state.api_url)
+#     st.session_state.api_key = st.text_input("Pinecone API Key (for admin functions)",
+#                                           value=st.session_state.api_key, 
+#                                           type="password")
+
+#     # Add Ollama URL input with default value
+#     # Add info about Nomic Atlas
+#     st.info("This application uses Groq API for fast LLM inference and Nomic Atlas for embeddings.")
+
+
+#     # Model selection in sidebar
+#     st.divider()
+#     st.subheader("Model Selection")
+    
+#     # Initialize model choice if not in session state
+#     if 'model_choice' not in st.session_state:
+#         st.session_state.model_choice = "DEV_MODEL"
+    
+#     # Radio button for model selection
+#     st.session_state.model_choice = st.radio(
+#         "Select Model Environment:",
+#         options=["DEV_MODEL", "PROD_MODEL"],
+#         index=0 if st.session_state.model_choice == "DEV_MODEL" else 1,
+#         horizontal=True
+#     )
+
+#     # Show current model dynamically
+#     if st.session_state.model_choice:
+#         try:
+#             headers = {"MODEL_CHOICE": st.session_state.model_choice}
+#             response = requests.get(
+#                 f"{st.session_state.api_url}/model-info",
+#                 headers=headers
+#             )
+#             if response.status_code == 200:
+#                 model_info = response.json()
+#                 st.info(f"Using {model_info.get('current_model')} from {model_info.get('provider', 'Groq')}")
+#         except Exception as e:
+#             st.info(f"Using {st.session_state.model_choice}")
+    
+#     st.divider()
+#     if st.button("Check API Health"):
+#         try:
+#             response = requests.get(f"{st.session_state.api_url}/health")
+#             if response.status_code == 200:
+#                 st.success("API is healthy! ✅")
+#                 st.json(response.json())
+#             else:
+#                 st.error(f"API returned status code: {response.status_code}")
+#         except Exception as e:
+#             st.error(f"Error connecting to API: {str(e)}")
+
+# # Add Test Connection button in main content
+# # Add Test Connection button in main content
+# if st.button("Test Connection"):
+#     with st.spinner("Testing connection to backend services..."):
+#         try:
+#             # Prepare headers with only the model choice
+#             headers = {
+#                 "MODEL_CHOICE": st.session_state.model_choice
+#             }
+            
+#             # Call the test-connection endpoint
+#             response = requests.get(
+#                 f"{st.session_state.api_url}/test-connection",
+#                 headers=headers
+#             )
+            
+#             if response.status_code == 200:
+#                 result = response.json()
+                
+#                 # Create a summary of endpoint tests
+#                 endpoint_summary = []
+#                 all_endpoints_ok = True
+                
+#                 for endpoint in result.get("endpoints_tested", []):
+#                     endpoint_ok = endpoint.get("success", False)
+#                     all_endpoints_ok = all_endpoints_ok and endpoint_ok
+                    
+#                     status_emoji = "✅" if endpoint_ok else "❌"
+#                     endpoint_name = endpoint.get("endpoint", "unknown")
+#                     status_code = endpoint.get("status_code", "N/A")
+                    
+#                     endpoint_summary.append(f"{status_emoji} {endpoint_name}: {status_code}")
+                
+#                 # Display overall status
+#                 if all_endpoints_ok:
+#                     st.success("Successfully connected to all endpoints!")
+#                 elif result.get("status") == "partial":
+#                     st.warning("Partial success: Some endpoints are working, others failed.")
+#                 else:
+#                     st.error("Failed to connect to endpoints.")
+                
+#                 # Show endpoint summary
+#                 st.write("Endpoint Status:")
+#                 for line in endpoint_summary:
+#                     st.write(line)
+                
+#                 # Show details in expander
+#                 with st.expander("Connection Details"):
+#                     st.json(result)
+#             else:
+#                 st.error(f"Error: API returned status code {response.status_code}")
+#                 st.text(response.text)
+#         except Exception as e:
+#             st.error(f"Error testing connection: {str(e)}")
+
+# # Main content
+# st.markdown('<div class="main-header">AI Tool Search</div>', unsafe_allow_html=True)
+# tab_labels = ["🔍 Search", "➕ Add Tools", "🔄 Update Tools", "🗑️ Delete Tools", "📊 Statistics"]
+# tabs = st.tabs(tab_labels)
+
+# # Tab change detector - use a dummy widget in a hidden container
+# with st.container():
+#     # Add a small invisible element to detect which tab is active
+#     # This uses the fact that widget state is preserved across reruns
+#     st.write("")  # Empty space
+#     for i, _ in enumerate(tab_labels):
+#         # Create a small unique widget for each tab
+#         if i == 0:  # First tab (Search)
+#             if tabs[i].checkbox(f"tab_{i}_active", value=True, key=f"tab_{i}_state", label_visibility="collapsed"):
+#                 if st.session_state.active_tab != i:
+#                     handle_tab_change(i)
+#         else:
+#             if tabs[i].checkbox(f"tab_{i}_active", value=False, key=f"tab_{i}_state", label_visibility="collapsed"):
+#                 if st.session_state.active_tab != i:
+#                     handle_tab_change(i)
+
+# # Create tabs for different functionalities
+# # tabs = st.tabs(["🔍 Search", "➕ Add Tools", "🔄 Update Tools", "🗑️ Delete Tools", "📊 Statistics"])
+
+# # if 'visible_results' not in st.session_state:
+# #     st.session_state.visible_results = 3
+# # if 'all_tools' not in st.session_state:
+# #     st.session_state.all_tools = []
+# # if 'show_more_clicked' not in st.session_state:
+# #     st.session_state.show_more_clicked = False
+
+# with tabs[0]:
+#     st.markdown('<div class="subheader">Search AI Tools</div>', unsafe_allow_html=True)
+    
+#     # Create a form to capture Enter key presses
+#     with st.form(key="search_form"):
+#         # Use session state key to track input value properly
+#         query = st.text_input(
+#             "Enter your search query:", 
+#             placeholder="e.g., list all the coding related tools",
+#             key="query_input"
+#         )
+        
+#         # Form submit button (triggered by Enter key or click)
+#         form_submit = st.form_submit_button("Search", type="primary", on_click=handle_form_submit)
+    
+#     # Show spinner during search - creating dedicated area for spinner
+#     if st.session_state.is_searching:
+#         search_container = st.container()
+#         with search_container:
+#             with st.spinner("Searching..."):
+#                 # Process the pending search
+#                 perform_search(st.session_state.search_query_pending)
+    
+#     # Display search results below the search box
+#     if st.session_state.active_tab == 0:  # Only show results in search tab
+#         display_search_results()
+
 # # with tabs[0]:
 # #     st.markdown('<div class="subheader">Search AI Tools</div>', unsafe_allow_html=True)
     
 # #     query = st.text_input("Enter your search query:", 
-# #                           placeholder="e.g., code generation tools for JavaScript",
+# #                           placeholder="e.g., list all the coding related tools",
 # #                           value=st.session_state.last_query)
     
-# #     if st.button("Search", type="primary", key="search_button"):
+# #     search_button = st.button("Search", type="primary", key="search_button")
+    
+# #     if search_button:
+# #         # Reset the visible results counter when a new search is performed
+# #         st.session_state.visible_results = 3
 # #         st.session_state.last_query = query
+# #         st.session_state.show_more_clicked = False
+        
 # #         with st.spinner("Searching..."):
 # #             try:
-# #                 headers = {"MODEL_CHOICE": st.session_state.model_choice, "OLLAMA_URL": st.session_state.ollama_url}
+# #                 headers = {
+# #                     "MODEL_CHOICE": st.session_state.model_choice
+# #                 }
 # #                 response = requests.post(
 # #                     f"{st.session_state.api_url}/query",
 # #                     json={"query": query},
@@ -1481,90 +1680,62 @@ with tabs[4]:
 # #                         result_data = json.loads(result["response"])
 # #                         is_valid_json = True
 # #                         result_data = normalize_json_response(result_data)
+# #                         # Store all tools in session state
+# #                         st.session_state.all_tools = result_data.get("tools", [])
 # #                     except json.JSONDecodeError:
 # #                         is_valid_json = False
                     
 # #                     st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
                     
 # #                     if is_valid_json and "tools" in result_data and len(result_data["tools"]) > 0:
-# #                         tool_count = len(result_data["tools"])
-# #                         if tool_count > 1:
-# #                             st.markdown(f"Found {tool_count} tools related to your query, ranked by relevance:")
-# #                         else:
-# #                             st.markdown("Found 1 tool matching your query:")
+# #                         tools = result_data["tools"]
+# #                         total_tools = len(tools)
                         
-# #                         results_container = st.container()
+# #                         # Display the number of tools found
+# #                         st.markdown(f"Found {total_tools} tools related to your query, ranked by relevance:")
                         
-# #                         for i, tool in enumerate(result_data["tools"]):
-# #                             with results_container:
-# #                                 with st.container():
-# #                                     st.markdown(f"""
-# #                                     <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
-# #                                         {i+1}. {tool.get('name', 'No Name')}
-# #                                     </div>
-# #                                     """, unsafe_allow_html=True)
-                                    
-# #                                     st.markdown(f"""
-# #                                     <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
-# #                                         padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
-# #                                         ID: {tool.get('id', 'No ID')}
-# #                                     </div>
-# #                                     """, unsafe_allow_html=True)
-                                    
-# #                                     st.markdown(f"""
-# #                                     <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
-# #                                         {tool.get('description', 'No description available.')}
-# #                                     </div>
-# #                                     """, unsafe_allow_html=True)
-                                    
-# #                                     st.markdown("<hr style='margin: 0.8rem 0; opacity: 0.2;'>", unsafe_allow_html=True)
-                                    
-# #                                     if "relevance" in tool and tool["relevance"]:
-# #                                         st.markdown(f"""
-# #                                         <div style="margin-top: 0.5rem;">
-# #                                             <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
-# #                                             <span style="color: #E0E0E0;">{tool.get('relevance', 'This tool matches your search criteria.')}</span>
-# #                                         </div>
-# #                                         """, unsafe_allow_html=True)
-                                
-# #                                 if i < len(result_data["tools"]) - 1:
-# #                                     st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
+# #                         # Define how many tools to show
+# #                         visible_count = st.session_state.visible_results
+# #                         if visible_count > total_tools:
+# #                             visible_count = total_tools
                         
-# #                         if tool_count > 1:
-# #                             st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
-# #                             st.markdown("<hr style='border-top: 1px solid rgba(255,255,255,0.1); margin: 0;'>", unsafe_allow_html=True)
-# #                             st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-                            
-# #                             st.markdown("""
-# #                             <div style="font-size: 1.5rem; font-weight: 600; color: #4FC3F7; margin-bottom: 1rem;">
-# #                                 How These Tools Compare
-# #                             </div>
-# #                             """, unsafe_allow_html=True)
-                            
-# #                             comparison_text = "These tools offer different approaches to "
-                            
-# #                             if "code" in query.lower() or "programming" in query.lower():
-# #                                 comparison_text += "code generation and development assistance. "
-# #                             elif "ai" in query.lower() or "assistant" in query.lower():
-# #                                 comparison_text += "AI assistance and automation. "
-# #                             else:
-# #                                 comparison_text += f"addressing your needs for '{query}'. "
-                                
-# #                             comparison_text += "Consider your specific requirements and use case when choosing between them."
-                            
+# #                         # Display visible tools
+# #                         for i, tool in enumerate(tools[:visible_count], start=1):
 # #                             st.markdown(f"""
-# #                             <div style="background-color: rgba(13, 71, 161, 0.3); color: #E0E0E0; padding: 1rem; 
-# #                                 border-radius: 0.5rem; border-left: 4px solid #1976D2; margin-top: 0.5rem;">
-# #                                 {comparison_text}
+# #                             <div style="margin-bottom: 1rem;">
+# #                                 <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
+# #                                     {i}. {tool.get('name', 'No Name')}
+# #                                 </div>
+# #                                 <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
+# #                                     padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
+# #                                     ID: {tool.get('id', 'No ID')}
+# #                                 </div>
+# #                                 <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
+# #                                     {tool.get('description', 'No description available.')}
+# #                                 </div>
+# #                                 <div style="margin-top: 0.5rem;">
+# #                                     <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
+# #                                     <span style="color: #E0E0E0;">{tool.get('relevance', '')}</span>
+# #                                 </div>
 # #                             </div>
+# #                             <hr style="margin: 1rem 0; opacity: 0.2;">
 # #                             """, unsafe_allow_html=True)
+                        
+# #                         # Show "Show More" button if there are more tools to display
+# #                         if visible_count < total_tools:
+# #                             show_more = st.button("Show More", type="primary", key="show_more_button")
+# #                             st.markdown(f"Showing {visible_count} of {total_tools} tools")
                             
+# #                             if show_more:
+# #                                 # Show all tools
+# #                                 st.session_state.visible_results = total_tools
+# #                                 st.experimental_rerun()
+                    
 # #                     elif not is_valid_json:
 # #                         st.markdown("### Response from the model")
-# #                         st.markdown("The model provided a text response instead of structured tool recommendations:")
 # #                         st.info(result["response"])
 # #                     else:
-# #                         st.info("No matching tools found. Try a different search query or add more tools to the database.")
+# #                         st.info("No matching tools found. Try a different search query.")
                     
 # #                     with st.expander("View Raw Response"):
 # #                         if is_valid_json:
@@ -1576,6 +1747,53 @@ with tabs[4]:
 # #                     st.text(response.text)
 # #             except Exception as e:
 # #                 st.error(f"Error connecting to API: {str(e)}")
+    
+# #     # If we have results in the session state but no search was just performed, display them
+# #     elif hasattr(st.session_state, 'all_tools') and st.session_state.all_tools:
+# #         st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
+        
+# #         tools = st.session_state.all_tools
+# #         total_tools = len(tools)
+        
+# #         # Display the number of tools found
+# #         st.markdown(f"Found {total_tools} tools related to your query, ranked by relevance:")
+        
+# #         # Define how many tools to show
+# #         visible_count = st.session_state.visible_results
+# #         if visible_count > total_tools:
+# #             visible_count = total_tools
+        
+# #         # Display visible tools
+# #         for i, tool in enumerate(tools[:visible_count], start=1):
+# #             st.markdown(f"""
+# #             <div style="margin-bottom: 1rem;">
+# #                 <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
+# #                     {i}. {tool.get('name', 'No Name')}
+# #                 </div>
+# #                 <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
+# #                     padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
+# #                     ID: {tool.get('id', 'No ID')}
+# #                 </div>
+# #                 <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
+# #                     {tool.get('description', 'No description available.')}
+# #                 </div>
+# #                 <div style="margin-top: 0.5rem;">
+# #                     <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
+# #                     <span style="color: #E0E0E0;">{tool.get('relevance', '')}</span>
+# #                 </div>
+# #             </div>
+# #             <hr style="margin: 1rem 0; opacity: 0.2;">
+# #             """, unsafe_allow_html=True)
+        
+# #         # Show "Show More" button if there are more tools to display
+# #         if visible_count < total_tools:
+# #             show_more = st.button("Show More", type="primary", key="show_more_button")
+# #             st.markdown(f"Showing {visible_count} of {total_tools} tools")
+            
+# #             if show_more:
+# #                 # Show all tools
+# #                 st.session_state.visible_results = total_tools
+# #                 st.experimental_rerun()
 
 # # 2. ADD TOOLS TAB
 # with tabs[1]:
@@ -1634,9 +1852,10 @@ with tabs[4]:
                     
 #                     try:
 #                         with st.spinner("Adding tool..."):
-#                             # Prepare headers with model choice
-#                             headers = {}
-#                             headers["MODEL_CHOICE"] = st.session_state.model_choice
+#                             # Prepare headers with all settings
+#                             headers = {
+#                                 "MODEL_CHOICE": st.session_state.model_choice
+#                             }
                             
 #                             response = requests.post(
 #                                 f"{st.session_state.api_url}/add-tools",
@@ -1696,9 +1915,10 @@ with tabs[4]:
 #                 if st.button("Process Bulk Upload", type="primary"):
 #                     with st.spinner("Uploading tools..."):
 #                         try:
-#                             # Prepare headers with model choice
-#                             headers = {}
-#                             headers["MODEL_CHOICE"] = st.session_state.model_choice
+#                             # Prepare headers with all settings
+#                             headers = {
+#                                 "MODEL_CHOICE": st.session_state.model_choice
+#                             }
                             
 #                             response = requests.post(
 #                                 f"{st.session_state.api_url}/add-tools",
@@ -1753,9 +1973,10 @@ with tabs[4]:
 #             # In a real implementation, you would have an endpoint to fetch a single tool
 #             # For now, we'll simulate fetching by querying with the tool ID
 #             try:
-#                 # Prepare headers with model choice
-#                 headers = {}
-#                 headers["MODEL_CHOICE"] = st.session_state.model_choice
+#                 # Prepare headers with all settings
+#                 headers = {
+#                     "MODEL_CHOICE": st.session_state.model_choice
+#                 }
                 
 #                 response = requests.post(
 #                     f"{st.session_state.api_url}/query",
@@ -1872,9 +2093,10 @@ with tabs[4]:
                     
 #                     try:
 #                         with st.spinner("Updating tool..."):
-#                             # Prepare headers with model choice
-#                             headers = {}
-#                             headers["MODEL_CHOICE"] = st.session_state.model_choice
+#                             # Prepare headers with all settings
+#                             headers = {
+#                                 "MODEL_CHOICE": st.session_state.model_choice
+#                             }
                             
 #                             response = requests.put(
 #                                 f"{st.session_state.api_url}/update-tools",
@@ -1913,9 +2135,10 @@ with tabs[4]:
 #     if st.button("Delete Tool", type="primary", disabled=not confirm_delete or not tool_id_to_delete):
 #         with st.spinner("Deleting tool..."):
 #             try:
-#                 # Prepare headers with model choice
-#                 headers = {}
-#                 headers["MODEL_CHOICE"] = st.session_state.model_choice
+#                 # Prepare headers with all settings
+#                 headers = {
+#                     "MODEL_CHOICE": st.session_state.model_choice
+#                 }
                 
 #                 response = requests.delete(
 #                     f"{st.session_state.api_url}/delete-tool/{tool_id_to_delete}",
@@ -1949,9 +2172,10 @@ with tabs[4]:
 #     if st.button("Clear Index", type="primary", disabled=not confirm_clear or not st.session_state.api_key):
 #         with st.spinner("Clearing index..."):
 #             try:
-#                 # Prepare headers with model choice
-#                 headers = {}
-#                 headers["MODEL_CHOICE"] = st.session_state.model_choice
+#                 # Prepare headers with all settings
+#                 headers = {
+#                     "MODEL_CHOICE": st.session_state.model_choice
+#                 }
                 
 #                 response = requests.delete(
 #                     f"{st.session_state.api_url}/clear-index",
@@ -1973,20 +2197,32 @@ with tabs[4]:
 #             except Exception as e:
 #                 st.error(f"Error connecting to API: {str(e)}")
 
+
 # # 5. STATISTICS TAB
 # with tabs[4]:
 #     st.markdown('<div class="subheader">Index Statistics</div>', unsafe_allow_html=True)
     
-#     if st.button("Refresh Statistics", key="refresh_stats"):
+#     # Add option to show all tools
+#     show_all = st.checkbox("Show All Tools", value=False, 
+#                          help="Show all tools in the index (may be slow if you have many tools)")
+    
+#     refresh_button = st.button("Refresh Statistics", key="refresh_stats")
+    
+#     if refresh_button:
 #         with st.spinner("Fetching statistics..."):
 #             try:
-#                 # Prepare headers with model choice
-#                 headers = {}
-#                 headers["MODEL_CHOICE"] = st.session_state.model_choice
+#                 # Prepare headers with all settings
+#                 headers = {
+#                     "MODEL_CHOICE": st.session_state.model_choice
+#                 }
+                
+#                 # Add show_all parameter
+#                 params = {"show_all": str(show_all).lower()}
                 
 #                 response = requests.get(
 #                     f"{st.session_state.api_url}/stats",
-#                     headers=headers
+#                     headers=headers,
+#                     params=params
 #                 )
                 
 #                 if response.status_code == 200:
@@ -1999,7 +2235,11 @@ with tabs[4]:
 #                     with col2:
 #                         st.metric("Vector Dimension", stats.get("dimension", "-"))
 #                     with col3:
-#                         st.metric("Index Fullness", f"{stats.get('index_fullness', 0):.2%}")
+#                         st.metric("Index Fullness", f"{stats.get('index_fullness', 0) * 100:.2f}%")
+                    
+#                     # Display information about showing limited results
+#                     if not show_all and stats.get("total_vectors", 0) > stats.get("vectors_shown", 0):
+#                         st.info(f"Showing {stats.get('vectors_shown', 0)} of {stats.get('total_vectors', 0)} tools. Check 'Show All Tools' to see all.")
                     
 #                     # Display vector information
 #                     st.markdown("### Tools in Index")
@@ -2035,3 +2275,66 @@ with tabs[4]:
 #                     st.text(response.text)
 #             except Exception as e:
 #                 st.error(f"Error connecting to API: {str(e)}")
+# # # 5. STATISTICS TAB
+# # with tabs[4]:
+# #     st.markdown('<div class="subheader">Index Statistics</div>', unsafe_allow_html=True)
+    
+# #     if st.button("Refresh Statistics", key="refresh_stats"):
+# #         with st.spinner("Fetching statistics..."):
+# #             try:
+# #                 # Prepare headers with all settings
+# #                 headers = {
+# #                     "MODEL_CHOICE": st.session_state.model_choice
+# #                 }
+                
+# #                 response = requests.get(
+# #                     f"{st.session_state.api_url}/stats",
+# #                     headers=headers
+# #                 )
+                
+# #                 if response.status_code == 200:
+# #                     stats = response.json()
+                    
+# #                     # Display metrics
+# #                     col1, col2, col3 = st.columns(3)
+# #                     with col1:
+# #                         st.metric("Total Tools", stats.get("total_vectors", 0))
+# #                     with col2:
+# #                         st.metric("Vector Dimension", stats.get("dimension", "-"))
+# #                     with col3:
+# #                         st.metric("Index Fullness", f"{stats.get('index_fullness', 0):.2%}")
+                    
+# #                     # Display vector information
+# #                     st.markdown("### Tools in Index")
+# #                     if "vectors" in stats and len(stats["vectors"]) > 0:
+# #                         # Convert to DataFrame for better display
+# #                         vectors_df = pd.DataFrame(stats["vectors"])
+                        
+# #                         # Add category counts
+# #                         if "categories" in vectors_df.columns:
+# #                             # Extract categories and count occurrences
+# #                             all_categories = []
+# #                             for cats in vectors_df["categories"]:
+# #                                 if cats and cats != "N/A":
+# #                                     categories_list = [c.strip() for c in cats.split(",")]
+# #                                     all_categories.extend(categories_list)
+                            
+# #                             category_counts = pd.Series(all_categories).value_counts()
+                            
+# #                             # Show category distribution
+# #                             st.markdown("### Category Distribution")
+# #                             st.bar_chart(category_counts)
+                        
+# #                         # Show the main table
+# #                         st.dataframe(vectors_df, use_container_width=True)
+# #                     else:
+# #                         st.info("No tools found in the index.")
+                    
+# #                     # Show raw JSON for detailed inspection
+# #                     with st.expander("View Raw Statistics"):
+# #                         st.json(stats)
+# #                 else:
+# #                     st.error(f"Error: API returned status code {response.status_code}")
+# #                     st.text(response.text)
+# #             except Exception as e:
+# #                 st.error(f"Error connecting to API: {str(e)}")
