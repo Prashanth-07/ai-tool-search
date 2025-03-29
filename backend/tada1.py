@@ -999,7 +999,8 @@ async def get_stats(show_all: bool = True):
                 "name": doc.metadata.get("name", "N/A"),
                 "tool_id": doc.metadata.get("tool_id", "N/A"),
                 "rid": doc.metadata.get("rid", "N/A"),
-                "description": doc.metadata.get("description", "N/A")[:100] + "...",  # Truncate long descriptions
+                # "description": doc.metadata.get("description", "N/A")[:100] + "...",
+                "description": doc.metadata.get("description", "N/A"),  # Truncate long descriptions
                 "categories": doc.metadata.get("categories", "N/A"),
                 "pricing": doc.metadata.get("pricing", "N/A")
             })
