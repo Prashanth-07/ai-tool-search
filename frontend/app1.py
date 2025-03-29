@@ -923,17 +923,13 @@ with tabs[3]:
                 st.error(f"Error connecting to API: {str(e)}")
 
 # 5. STATISTICS TAB
+# In the statistics tab section of the Streamlit app
 with tabs[4]:
     st.markdown('<div class="subheader">Index Statistics</div>', unsafe_allow_html=True)
     
-    # When we enter this tab, hide any search results
-    if st.session_state.active_tab != 4:
-        st.session_state.active_tab = 4
-        st.session_state.show_results = False
-    
-    # Add option to show all tools
-    show_all = st.checkbox("Show All Tools", value=False, 
-                         help="Show all tools in the index (may be slow if you have many tools)")
+    # Remove the show_all checkbox as it's now always true
+    # show_all = st.checkbox("Show All Tools", value=False, 
+    #                      help="Show all tools in the index (may be slow if you have many tools)")
     
     refresh_button = st.button("Refresh Statistics", key="refresh_stats")
     
@@ -945,8 +941,8 @@ with tabs[4]:
                     "MODEL_CHOICE": st.session_state.model_choice
                 }
                 
-                # Add show_all parameter
-                params = {"show_all": str(show_all).lower()}
+                # Always set show_all to true
+                params = {"show_all": "true"}
                 
                 response = requests.get(
                     f"{st.session_state.api_url}/stats",
@@ -966,9 +962,9 @@ with tabs[4]:
                     with col3:
                         st.metric("Index Fullness", f"{stats.get('index_fullness', 0) * 100:.2f}%")
                     
-                    # Display information about showing limited results
-                    if not show_all and stats.get("total_vectors", 0) > stats.get("vectors_shown", 0):
-                        st.info(f"Showing {stats.get('vectors_shown', 0)} of {stats.get('total_vectors', 0)} tools. Check 'Show All Tools' to see all.")
+                    # Remove the conditional info message about limited results
+                    # if not show_all and stats.get("total_vectors", 0) > stats.get("vectors_shown", 0):
+                    #     st.info(f"Showing {stats.get('vectors_shown', 0)} of {stats.get('total_vectors', 0)} tools. Check 'Show All Tools' to see all.")
                     
                     # Display vector information
                     st.markdown("### Tools in Index")

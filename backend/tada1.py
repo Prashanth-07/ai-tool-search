@@ -972,7 +972,7 @@ async def get_model_info(request: Request):
         )
 
 @app.get("/stats")
-async def get_stats(show_all: bool = False):
+async def get_stats(show_all: bool = True):
     """Get vector store statistics and vector metadata"""
     try:
         # Get basic stats
