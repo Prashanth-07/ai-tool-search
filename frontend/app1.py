@@ -26,23 +26,29 @@ def remove_html_tags(text):
     clean = re.compile('<.*?>')
     return re.sub(clean, '', text)
 
-# Function to normalize JSON response formats
 def normalize_json_response(result_data):
     """
     Normalize different JSON response formats to a consistent structure
-    with a "tools" array containing objects
+    with a "tools" array containing objects including names, descriptions, and bullets.
     """
-    # If the response already has the expected "tools" array format, return as is
+    # If the response already has the expected "tools" array format with all required fields, return as is
     if "tools" in result_data and isinstance(result_data["tools"], list):
-        return result_data
+        # Check if tools have the required fields
+        if all(["id" in tool and "name" in tool and "description" in tool for tool in result_data["tools"]]):
+            # Make sure bullets exist (add empty array if not)
+            for tool in result_data["tools"]:
+                if "bullets" not in tool:
+                    tool["bullets"] = []
+            return result_data
         
-    # Handle parallel arrays format
+    # Handle parallel arrays format (old format)
     if "tool_id" in result_data and isinstance(result_data["tool_id"], list):
         # Create a normalized structure
         normalized = {"tools": []}
         
         # Get all arrays
         tool_ids = result_data.get("tool_id", [])
+        names = result_data.get("tools", [])  # Sometimes the names are in a "tools" array
         descriptions = result_data.get("description", [])
         relevances = result_data.get("relevance", [])
         
@@ -56,16 +62,24 @@ def normalize_json_response(result_data):
                 "id": tool_ids[i] if i < len(tool_ids) else f"unknown-{i}"
             }
             
-            # Set name to id if no separate name field exists
-            tool["name"] = tool_ids[i] if i < len(tool_ids) else f"Tool {i+1}"
+            # Set name - try to use the name from "tools" array if available
+            if i < len(names) and isinstance(names[i], dict) and "name" in names[i]:
+                tool["name"] = names[i]["name"]
+            else:
+                tool["name"] = tool_ids[i] if i < len(tool_ids) else f"Tool {i+1}"
             
             # Add description if available
             if i < len(descriptions):
                 tool["description"] = descriptions[i]
+            else:
+                tool["description"] = "No description available."
                 
             # Add relevance if available
             if i < len(relevances):
                 tool["relevance"] = relevances[i]
+            
+            # Add empty bullets array
+            tool["bullets"] = []
                 
             normalized["tools"].append(tool)
             
@@ -73,6 +87,66 @@ def normalize_json_response(result_data):
     
     # If we can't normalize, return empty result
     return {"tools": []}
+
+# Function to normalize JSON response formats
+# def normalize_json_response(result_data):
+#     """
+#     Normalize different JSON response formats to a consistent structure
+#     with a "tools" array containing objects
+#     """
+#     # If the response already has the expected "tools" array format, return as is
+#     if "tools" in result_data and isinstance(result_data["tools"], list):
+#         return result_data
+        
+#     # Handle parallel arrays format
+#     if "tool_id" in result_data and isinstance(result_data["tool_id"], list):
+#         # Create a normalized structure
+#         normalized = {"tools": []}
+        
+#         # Get all arrays
+#         tool_ids = result_data.get("tool_id", [])
+#         descriptions = result_data.get("description", [])
+#         relevances = result_data.get("relevance", [])
+        
+#         # Determine how many tools we have
+#         num_tools = len(tool_ids)
+        
+#         # Build the tools array
+#         for i in range(num_tools):
+#             # Create tool object with all available properties
+#             tool = {
+#                 "id": tool_ids[i] if i < len(tool_ids) else f"unknown-{i}"
+#             }
+            
+#             # Set name to id if no separate name field exists
+#             tool["name"] = tool_ids[i] if i < len(tool_ids) else f"Tool {i+1}"
+            
+#             # Add description if available
+#             if i < len(descriptions):
+#                 tool["description"] = descriptions[i]
+                
+#             # Add relevance if available
+#             if i < len(relevances):
+#                 tool["relevance"] = relevances[i]
+                
+#             normalized["tools"].append(tool)
+            
+#         return normalized
+    
+#     # If we can't normalize, return empty result
+#     return {"tools": []}
+
+# Add after normalize_json_response function
+def check_initialization_status():
+    """Check if backend has completed initialization"""
+    try:
+        response = requests.get(f"{st.session_state.api_url}/initialization-status")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {"initialized": False, "error": f"Status code: {response.status_code}"}
+    except Exception as e:
+        return {"initialized": False, "error": str(e)}
 
 # Custom CSS for styling with dark theme
 st.markdown("""
@@ -213,6 +287,15 @@ def perform_search(query):
     
     # Store the current query in session state
     st.session_state.last_query = query
+
+    # Check initialization status first
+    status = check_initialization_status()
+    if not status.get("initialized", False):
+        # System is still initializing
+        progress = status.get("loading_percentage", 0)
+        st.session_state.search_warning = f"The system is still initializing. Currently loaded {status.get('vectors_loaded', 0)} of {status.get('total_vectors', 0)} tools ({progress:.1f}%). Please try again in a moment."
+        st.session_state.show_results = True
+        return
     
     # Check if this is the same query as last processed query (for caching)
     if hasattr(st.session_state, 'last_processed_query') and query == st.session_state.last_processed_query and hasattr(st.session_state, 'last_result') and st.session_state.last_result is not None:
@@ -271,11 +354,37 @@ def process_search_results(result, query):
     """Process search results and store them in session state"""
     try:
         result_data = json.loads(result["response"])
-        is_valid_json = True
-        result_data = normalize_json_response(result_data)
-        # Store all tools in session state
-        st.session_state.all_tools = result_data.get("tools", [])
         st.session_state.is_valid_json = True
+        
+        # Normalize the result data format
+        if "tools" in result_data and isinstance(result_data["tools"], list):
+            # The new format already has a "tools" array
+            st.session_state.all_tools = result_data.get("tools", [])
+        elif "tool_id" in result_data and isinstance(result_data["tool_id"], list):
+            # Convert the old format to the new format
+            tools = []
+            tool_ids = result_data.get("tool_id", [])
+            
+            for i, tool_id in enumerate(tool_ids):
+                # Try to find corresponding data in other arrays
+                if i < len(result_data.get("tools", [])):
+                    # Use existing tool object
+                    tools.append(result_data["tools"][i])
+                else:
+                    # Create a basic tool object
+                    tool = {
+                        "id": tool_id,
+                        "name": tool_id,
+                        "description": "No description available.",
+                        "bullets": []
+                    }
+                    tools.append(tool)
+            
+            st.session_state.all_tools = tools
+        else:
+            # Fallback for unexpected format
+            st.session_state.all_tools = []
+        
         st.session_state.raw_result_data = result_data
     except json.JSONDecodeError:
         st.session_state.is_valid_json = False
@@ -284,12 +393,33 @@ def process_search_results(result, query):
     
     st.session_state.show_results = True
 
+# def process_search_results(result, query):
+#     """Process search results and store them in session state"""
+#     try:
+#         result_data = json.loads(result["response"])
+#         is_valid_json = True
+#         result_data = normalize_json_response(result_data)
+#         # Store all tools in session state
+#         st.session_state.all_tools = result_data.get("tools", [])
+#         st.session_state.is_valid_json = True
+#         st.session_state.raw_result_data = result_data
+#     except json.JSONDecodeError:
+#         st.session_state.is_valid_json = False
+#         st.session_state.raw_response = result["response"]
+#         st.session_state.all_tools = []
+    
+#     st.session_state.show_results = True
+
 def display_search_results():
     """Display search results from session state"""
+    # Initialize raw_response if it doesn't exist
+    if "raw_response" not in st.session_state:
+        st.session_state.raw_response = ""
+    
     if not st.session_state.show_results:
         return
         
-    # Check if there's a warning to display
+    # Check for warnings or errors
     if hasattr(st.session_state, 'search_warning') and st.session_state.search_warning:
         st.warning(st.session_state.search_warning)
         return
@@ -315,37 +445,54 @@ def display_search_results():
         if visible_count > total_tools:
             visible_count = total_tools
         
-        # Display visible tools
+        # Display visible tools in the new format
         for i, tool in enumerate(tools[:visible_count], start=1):
-            st.markdown(f"""
-            <div style="margin-bottom: 1rem;">
-                <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
-                    {i}. {tool.get('name', 'No Name')}
+            # Create a container for each tool
+            tool_container = st.container()
+            
+            with tool_container:
+                # Tool name and ID
+                st.markdown(f"""
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
+                        {i}. {tool.get('name', 'No Name')}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
+                        padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
+                        ID: {tool.get('id', 'No ID')}
+                    </div>
                 </div>
-                <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
-                    padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
-                    ID: {tool.get('id', 'No ID')}
-                </div>
+                """, unsafe_allow_html=True)
+                
+                # Description
+                st.markdown(f"""
                 <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
                     {tool.get('description', 'No description available.')}
                 </div>
-                <div style="margin-top: 0.5rem;">
-                    <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
-                    <span style="color: #E0E0E0;">{tool.get('relevance', '')}</span>
-                </div>
-            </div>
-            <hr style="margin: 1rem 0; opacity: 0.2;">
-            """, unsafe_allow_html=True)
-        
-        # Show "Show More" button if there are more tools to display
-        if visible_count < total_tools:
-            show_more = st.button("Show More", type="primary", key="show_more_button")
-            st.markdown(f"Showing {visible_count} of {total_tools} tools")
+                """, unsafe_allow_html=True)
+                
+                # Key features/bullets (new)
+                if 'bullets' in tool and tool['bullets']:
+                    st.markdown("<div style='color: #FF9800; font-weight: 500; margin-top: 0.5rem;'>Key Features:</div>", unsafe_allow_html=True)
+                    for bullet in tool['bullets']:
+                        st.markdown(f"""
+                        <div style="margin-left: 1rem; color: #E0E0E0;">
+                            • {bullet}
+                        </div>
+                        """, unsafe_allow_html=True)
             
-            if show_more:
-                # Show all tools
-                st.session_state.visible_results = total_tools
-                st.experimental_rerun()
+            # Add separator between tools
+            st.markdown("<hr style='margin: 1rem 0; opacity: 0.2;'>", unsafe_allow_html=True)
+        
+        # Show More button block using an on_click callback
+        if visible_count < total_tools:
+            def show_more_callback():
+                # Set visible_results to total tools and force show_results to remain True
+                st.session_state.visible_results = len(st.session_state.all_tools)
+                st.session_state.show_results = True
+
+            st.button("Show More", type="primary", key="show_more_button", on_click=show_more_callback)
+            st.markdown(f"Showing {visible_count} of {total_tools} tools")
     
     elif not st.session_state.is_valid_json:
         st.markdown("### Response from the model")
@@ -358,6 +505,85 @@ def display_search_results():
             st.json(st.session_state.raw_result_data)
         else:
             st.text(st.session_state.raw_response)
+
+# def display_search_results():
+#     """Display search results from session state"""
+#     # Initialize raw_response if it doesn't exist
+#     if "raw_response" not in st.session_state:
+#         st.session_state.raw_response = ""
+    
+#     if not st.session_state.show_results:
+#         return
+        
+#     # Check for warnings or errors
+#     if hasattr(st.session_state, 'search_warning') and st.session_state.search_warning:
+#         st.warning(st.session_state.search_warning)
+#         return
+        
+#     # Check if there's an error to display
+#     if hasattr(st.session_state, 'search_error') and st.session_state.search_error:
+#         st.error(st.session_state.search_error)
+#         if hasattr(st.session_state, 'search_error_details') and st.session_state.search_error_details:
+#             st.text(st.session_state.search_error_details)
+#         return
+    
+#     st.markdown('<div class="search-results">Search Results</div>', unsafe_allow_html=True)
+    
+#     if st.session_state.is_valid_json and st.session_state.all_tools:
+#         tools = st.session_state.all_tools
+#         total_tools = len(tools)
+        
+#         # Display the number of tools found
+#         st.markdown(f"Found {total_tools} tools related to your query, ranked by relevance:")
+        
+#         # Define how many tools to show
+#         visible_count = st.session_state.visible_results
+#         if visible_count > total_tools:
+#             visible_count = total_tools
+        
+#         # Display visible tools
+#         for i, tool in enumerate(tools[:visible_count], start=1):
+#             st.markdown(f"""
+#             <div style="margin-bottom: 1rem;">
+#                 <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
+#                     {i}. {tool.get('name', 'No Name')}
+#                 </div>
+#                 <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
+#                     padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
+#                     ID: {tool.get('id', 'No ID')}
+#                 </div>
+#                 <div style="color: #E0E0E0; font-size: 1rem; margin-bottom: 0.8rem;">
+#                     {tool.get('description', 'No description available.')}
+#                 </div>
+#                 <div style="margin-top: 0.5rem;">
+#                     <span style="color: #FF9800; font-weight: 500;">Relevance:</span> 
+#                     <span style="color: #E0E0E0;">{tool.get('relevance', '')}</span>
+#                 </div>
+#             </div>
+#             <hr style="margin: 1rem 0; opacity: 0.2;">
+#             """, unsafe_allow_html=True)
+        
+#         # Show More button block using an on_click callback
+#         if visible_count < total_tools:
+#             def show_more_callback():
+#                 # Set visible_results to total tools and force show_results to remain True
+#                 st.session_state.visible_results = len(st.session_state.all_tools)
+#                 st.session_state.show_results = True
+
+#             st.button("Show More", type="primary", key="show_more_button", on_click=show_more_callback)
+#             st.markdown(f"Showing {visible_count} of {total_tools} tools")
+    
+#     elif not st.session_state.is_valid_json:
+#         st.markdown("### Response from the model")
+#         st.info(st.session_state.raw_response)
+#     else:
+#         st.info("No matching tools found. Try a different search query.")
+    
+#     with st.expander("View Raw Response"):
+#         if st.session_state.is_valid_json:
+#             st.json(st.session_state.raw_result_data)
+#         else:
+#             st.text(st.session_state.raw_response)
 
 # Function to handle search form submission
 def handle_form_submit():

@@ -18,6 +18,16 @@ from dotenv import load_dotenv
 import requests
 from langchain_groq import ChatGroq
 from langchain.embeddings.base import Embeddings
+import numpy as np
+from rank_bm25 import BM25Okapi
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+import asyncio
+import sys
+# Check Python version for asyncio support
+if sys.version_info < (3, 7):
+    raise RuntimeError("Python 3.7 or higher is required for async functionality")
 
 # Force NumPy implementation to avoid SimSIMD issues
 os.environ["USE_NUMPY"] = "1"
@@ -67,6 +77,137 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# Global state tracking
+app_state = {
+    "index_ready": False,
+    "initialization_started": False,
+    "vectors_loaded": 0,
+    "total_vectors": 0,
+    "bm25_ready": False
+}
+
+async def load_vectors_for_bm25():
+    """Load vectors in batches for BM25 indexing"""
+    fetch_size = 20  # Smaller batch size
+    total_vectors = app_state["total_vectors"]
+    
+    for i in range(0, total_vectors, fetch_size):
+        batch_size = min(fetch_size, total_vectors - i)
+        logger.info(f"Loading vector batch {i//fetch_size + 1}/{(total_vectors-1)//fetch_size + 1} ({batch_size} vectors)")
+        
+        try:
+            # Load batch of vectors
+            vector_store = get_vector_store()
+            results = vector_store.similarity_search(
+                "",
+                k=batch_size
+            )
+            
+            # Add each document to the BM25 index
+            for doc in results:
+                metadata = doc.metadata
+                if "tool_id" in metadata and "rid" in metadata:
+                    tool = Tool(
+                        name=metadata.get("name", "Unknown"),
+                        tool_id=metadata.get("tool_id", ""),
+                        description=metadata.get("description", ""),
+                        pros=metadata.get("pros", []),
+                        cons=metadata.get("cons", []),
+                        categories=metadata.get("categories", ""),
+                        usage=metadata.get("usage", ""),
+                        unique_features=metadata.get("unique_features", ""),
+                        pricing=metadata.get("pricing", "")
+                    )
+                    bm25_index.add_tool(tool, metadata.get("rid"))
+            
+            # Update progress
+            app_state["vectors_loaded"] = min(i + batch_size, total_vectors)
+            logger.info(f"Progress: {app_state['vectors_loaded']}/{total_vectors} vectors loaded")
+            
+            # Give other tasks a chance to run
+            await asyncio.sleep(0.01)
+            
+        except Exception as e:
+            logger.error(f"Error loading vector batch: {str(e)}")
+    
+    # Build the BM25 index after adding all documents
+    logger.info("Building BM25 index")
+    bm25_index.rebuild_index()
+    app_state["bm25_ready"] = True
+    logger.info("BM25 index built successfully")
+
+async def initialize_indexes():
+    """Load indexes in background with progress tracking"""
+    try:
+        logger.info("Starting background initialization of vector store and BM25 index")
+        
+        # Get total vector count first
+        try:
+            index = pc.Index(INDEX_NAME)
+            stats = index.describe_index_stats()
+            total_vectors = stats.total_vector_count
+            app_state["total_vectors"] = total_vectors
+            logger.info(f"Found {total_vectors} vectors to load")
+        except Exception as e:
+            logger.error(f"Error getting vector count: {str(e)}")
+            app_state["total_vectors"] = 0
+        
+        # Initialize Pinecone client and start loading vectors in batches
+        _ = get_or_create_index()
+        
+        # Initialize BM25 index if needed
+        if app_state["total_vectors"] > 0:
+            logger.info("Initializing BM25 index from existing vectors")
+            
+            # Load vectors in batches for BM25 indexing
+            await load_vectors_for_bm25()
+            
+            # Mark initialization as complete
+            app_state["index_ready"] = True
+            logger.info("Background initialization complete - all indexes ready")
+        else:
+            # No vectors to load
+            app_state["index_ready"] = True
+            logger.info("No vectors to load, initialization complete")
+    except Exception as e:
+        logger.error(f"Error during background initialization: {str(e)}")
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize basic services first, then start background tasks"""
+    try:
+        logger.info("Application starting up - initializing basic services")
+        
+        # Verify required environment variables
+        if not PINECONE_API_KEY:
+            raise ValueError("PINECONE_API_KEY environment variable is not set")
+        if not GROQ_API_KEY:
+            raise ValueError("GROQ_API_KEY environment variable is not set")
+        
+        # Start background tasks for heavier initialization
+        app_state["initialization_started"] = True
+        asyncio.create_task(initialize_indexes())
+        
+        logger.info("Basic startup complete - API ready for requests")
+    except Exception as e:
+        logger.error(f"Error during startup initialization: {str(e)}")
+
+# @app.on_event("startup")
+# async def startup_event():
+#     """Initialize BM25 index on startup"""
+#     try:
+#         # Force initialization of the vector store and BM25 index
+#         logger.info("Application starting up - initializing vector store and BM25 index")
+#         _ = get_or_create_index()
+        
+#         # Check if BM25 index is initialized
+#         if not bm25_index.is_initialized:
+#             logger.warning("BM25 index not initialized during startup - forcing rebuild")
+#             bm25_index.rebuild_index()
+            
+#         logger.info("Startup initialization complete")
+#     except Exception as e:
+#         logger.error(f"Error during startup initialization: {str(e)}")
 
 # Helper function to check if URL is HTTPS
 def is_https_url(url):
@@ -165,6 +306,146 @@ class ToolSearchCache:
 # Initialize cache
 tool_search_cache = ToolSearchCache(max_size=1000, expiry_minutes=60)
 
+# Initialize BM25 index
+class BM25IndexManager:
+    def __init__(self):
+        self.bm25 = None
+        self.doc_ids = []
+        self.tokenized_corpus = []
+        self.tool_data = {}
+        self.is_initialized = False
+        
+        # Download NLTK resources if needed
+        try:
+            nltk.data.find('tokenizers/punkt')
+            nltk.data.find('corpora/stopwords')
+        except LookupError:
+            nltk.download('punkt')
+            nltk.download('stopwords')
+        
+        self.stop_words = set(stopwords.words('english'))
+    
+    def preprocess_text(self, text):
+        """Tokenize and remove stopwords from text"""
+        if not text:
+            return []
+        tokens = word_tokenize(str(text).lower())
+        return [token for token in tokens if token.isalnum() and token not in self.stop_words]
+    
+    def create_document_text(self, tool):
+        """Create a searchable text representation of a tool"""
+        # Combine relevant fields with appropriate weighting (repeating important fields)
+        doc_text = (
+            f"{tool.name} {tool.name} {tool.name} "  # Name is most important (repeated)
+            f"{tool.description} {tool.description} "
+            f"{tool.categories} {tool.categories} {tool.categories}"
+            f"{tool.usage} "
+            f"{tool.unique_features} "
+            f"{' '.join(tool.pros)} "
+            f"{' '.join(tool.cons)} "
+            f"{tool.pricing}"
+        )
+        return doc_text
+    
+    def add_tool(self, tool, rid):
+        """Add a single tool to the BM25 index"""
+        doc_text = self.create_document_text(tool)
+        tokenized_doc = self.preprocess_text(doc_text)
+        
+        # Store the tool and its tokenized representation
+        self.tool_data[rid] = {
+            "tool": tool,
+            "tokenized_doc": tokenized_doc
+        }
+        
+        # Flag that we need to rebuild the index
+        self.is_initialized = False
+    
+    def rebuild_index(self, batch_size=20):
+        """Rebuild the BM25 index with all current documents in batches"""
+        self.doc_ids = list(self.tool_data.keys())
+        self.tokenized_corpus = []
+        
+        if not self.doc_ids:
+            logger.warning("No documents to index for BM25")
+            self.is_initialized = False
+            return
+        
+        # Process in batches
+        total_batches = (len(self.doc_ids) - 1) // batch_size + 1
+        logger.info(f"Rebuilding BM25 index with {len(self.doc_ids)} documents in {total_batches} batches")
+        
+        for i in range(0, len(self.doc_ids), batch_size):
+            batch_end = min(i + batch_size, len(self.doc_ids))
+            batch_ids = self.doc_ids[i:batch_end]
+            
+            # Process this batch
+            batch_docs = [self.tool_data[doc_id]["tokenized_doc"] for doc_id in batch_ids]
+            self.tokenized_corpus.extend(batch_docs)
+            
+            # Log progress
+            logger.info(f"Processed batch {i//batch_size + 1}/{total_batches} for BM25 index")
+        
+        # Create BM25 index after all batches are processed
+        self.bm25 = BM25Okapi(self.tokenized_corpus)
+        self.is_initialized = True
+        logger.info(f"BM25 index successfully built with {len(self.doc_ids)} documents")
+    
+    def search(self, query, top_k=20):
+        """Search the BM25 index for the query"""
+        if not self.is_initialized:
+            self.rebuild_index()
+            
+        if not self.is_initialized or not self.bm25:
+            logger.warning("BM25 index not initialized, returning empty results")
+            return []
+            
+        # Tokenize and preprocess the query
+        tokenized_query = self.preprocess_text(query)
+        logger.info(f"BM25 search query: '{query}' tokenized as {tokenized_query}")
+        
+        if not tokenized_query:
+            logger.warning("Empty query after preprocessing, returning empty results")
+            return []
+        
+        # Get BM25 scores for all documents
+        scores = self.bm25.get_scores(tokenized_query)
+        
+        # Log scores for specific tools if needed for debugging
+        for idx, doc_id in enumerate(self.doc_ids):
+            tool = self.tool_data[doc_id]["tool"]
+            if hasattr(tool, 'tool_id') and tool.tool_id in ['iconme-023', 'contentgoblinai-002']:
+                logger.info(f"Tool ID: {tool.tool_id}, Score: {scores[idx]}")
+        
+        # Get top-k results
+        top_k = min(top_k, len(self.doc_ids))
+        top_indices = np.argsort(scores)[-top_k:][::-1]
+        
+        # Prepare results
+        results = []
+        for idx in top_indices:
+            if scores[idx] > 0:  # Only include results with positive scores
+                doc_id = self.doc_ids[idx]
+                tool = self.tool_data[doc_id]["tool"]
+                results.append({
+                    "rid": doc_id,
+                    "tool_id": tool.tool_id,
+                    "name": tool.name,
+                    "description": tool.description,
+                    "categories": tool.categories,
+                    "usage": tool.usage,
+                    "unique_features": tool.unique_features,
+                    "pros": tool.pros,
+                    "cons": tool.cons,
+                    "pricing": tool.pricing,
+                    "score": float(scores[idx])
+                })
+        
+        logger.info(f"BM25 search returned {len(results)} results")
+        return results
+
+bm25_index = BM25IndexManager()
+
 # Pydantic models
 class Tool(BaseModel):
     name: str
@@ -237,6 +518,51 @@ def get_or_create_index():
             )
             print(f"Index {INDEX_NAME} created successfully")
         
+        # Initialize BM25 index if needed - we're changing this condition
+        # from: if get_total_vectors() > 0 and not bm25_index.is_initialized:
+        # to:   if get_total_vectors() > 0: (Always populate if vectors exist)
+        if get_total_vectors() > 0:
+            logger.info("Initializing BM25 index from existing vectors")
+            index = pc.Index(INDEX_NAME)
+            
+            # Get all vectors (in batches if there are many)
+            fetch_size = 1000
+            total_vectors = get_total_vectors()
+            
+            for i in range(0, total_vectors, fetch_size):
+                # Use vector_store to get batches of documents
+                vector_store = get_vector_store()
+                results = vector_store.similarity_search(
+                    "",
+                    k=min(fetch_size, total_vectors - i)
+                )
+                
+                # Add each document to the BM25 index
+                for doc in results:
+                    metadata = doc.metadata
+                    if "tool_id" in metadata and "rid" in metadata:
+                        # Reconstruct the Tool object from metadata
+                        tool = Tool(
+                            name=metadata.get("name", "Unknown"),
+                            tool_id=metadata.get("tool_id", ""),
+                            description=metadata.get("description", ""),
+                            pros=metadata.get("pros", []),
+                            cons=metadata.get("cons", []),
+                            categories=metadata.get("categories", ""),
+                            usage=metadata.get("usage", ""),
+                            unique_features=metadata.get("unique_features", ""),
+                            pricing=metadata.get("pricing", "")
+                        )
+                        bm25_index.add_tool(tool, metadata.get("rid"))
+                
+                logger.info(f"Added batch of {len(results)} documents to BM25 index")
+            
+            # Build the index after adding all documents
+            bm25_index.rebuild_index()
+            print(f"===== BM25 INDEX CONTENTS =====")
+            print(f"Total tools indexed in BM25: {len(bm25_index.tool_data)}")
+            print(f"Is 'iconme-023' in BM25 index: {'iconme-023' in [tool.tool_id for rid, data in bm25_index.tool_data.items() for tool in [data['tool']]]}")
+            print(f"Is 'contentgoblinai-002' in BM25 index: {'contentgoblinai-002' in [tool.tool_id for rid, data in bm25_index.tool_data.items() for tool in [data['tool']]]}")
         return pc.Index(INDEX_NAME)
     except Exception as e:
         print(f"Error in get_or_create_index: {str(e)}")
@@ -273,6 +599,8 @@ class NomicAtlasEmbeddings(Embeddings):
     
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Embed a list of texts using the Nomic Atlas API."""
+        max_retires=3
+        retry_delay=1
         try:
             payload = {
                 "texts": texts,
@@ -284,22 +612,41 @@ class NomicAtlasEmbeddings(Embeddings):
             response = requests.post(
                 self.api_url,
                 headers=self._get_headers(),
-                json=payload
+                json=payload,
+                timeout=10
             )
             response.raise_for_status()
             
             result = response.json()
             return result["embeddings"]
         except Exception as e:
-            raise ValueError(f"Error calling Nomic Atlas API: {str(e)}")
+            logger.warning(f"Error calling Nomic Atlas API (attempt {attempt+1}/{max_retries}): {str(e)}")
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
+                retry_delay *= 2
+            else:
+                raise ValueError(f"Error calling Nomic Atlas API: {str(e)}")
     
     def embed_query(self, text: str) -> List[float]:
         """Embed a single text using the Nomic Atlas API."""
         embeddings = self.embed_documents([text])
         return embeddings[0]
     
+# Global cache for vector store instance
+_vector_store_cache = None
+_vector_store_timestamp = None
+_cache_lifetime = 3600 
 def get_vector_store(headers=None):
     """Initialize or return existing vector store using Nomic Atlas API."""
+    global _vector_store_cache, _vector_store_timestamp
+    # Check if cache is valid
+    current_time = time.time()
+    if (_vector_store_cache is not None and 
+        _vector_store_timestamp is not None and 
+        current_time - _vector_store_timestamp < _cache_lifetime):
+        logger.info("Using cached vector store instance")
+        return _vector_store_cache
+
     try:
         # Get the API key from environment variables
         nomic_api_key = os.getenv("NOMIC_API_KEY")
@@ -321,7 +668,8 @@ def get_vector_store(headers=None):
             embedding=embeddings,
             text_key="text"
         )
-        
+        _vector_store_cache = vector_store
+        _vector_store_timestamp = current_time
         return vector_store
     except Exception as e:
         logger.error(f"Error in get_vector_store: {str(e)}")
@@ -433,6 +781,74 @@ async def check_duplicate_tool(vector_store, tool: Tool) -> bool:
         logger.error(f"Error checking for duplicate: {str(e)}")
         return False  # Assume no duplicate in case of error, safer to check manually
 
+def fuse_search_results(vector_results, bm25_results, alpha=0.7):
+    """
+    Fuse vector search and BM25 search results using a weighted approach.
+    
+    Args:
+        vector_results: List of results from vector search with scores
+        bm25_results: List of results from BM25 search with scores
+        alpha: Weight for vector search (1-alpha will be the weight for BM25)
+        
+    Returns:
+        List of fused results ordered by combined score
+    """
+    # Collect all unique document IDs
+    all_ids = set()
+    for result in vector_results:
+        all_ids.add(result.get("rid", ""))
+    for result in bm25_results:
+        all_ids.add(result.get("rid", ""))
+    
+    # Remove empty IDs
+    if "" in all_ids:
+        all_ids.remove("")
+    
+    # Create score maps
+    vector_scores = {result.get("rid", ""): result.get("score", 0) for result in vector_results}
+    bm25_scores = {result.get("rid", ""): result.get("score", 0) for result in bm25_results}
+    
+    # Normalize scores within each method
+    if vector_scores:
+        max_vector_score = max(vector_scores.values()) if vector_scores.values() else 1
+        vector_scores = {k: v/max_vector_score for k, v in vector_scores.items()}
+    
+    if bm25_scores:
+        max_bm25_score = max(bm25_scores.values()) if bm25_scores.values() else 1
+        bm25_scores = {k: v/max_bm25_score for k, v in bm25_scores.items()}
+    
+    # Combine scores
+    combined_results = []
+    for doc_id in all_ids:
+        v_score = vector_scores.get(doc_id, 0)
+        b_score = bm25_scores.get(doc_id, 0)
+        combined_score = alpha * v_score + (1 - alpha) * b_score
+        
+        # Find the full result object
+        result_obj = None
+        for result in vector_results:
+            if result.get("rid", "") == doc_id:
+                result_obj = result
+                break
+        
+        if not result_obj:
+            for result in bm25_results:
+                if result.get("rid", "") == doc_id:
+                    result_obj = result
+                    break
+        
+        if result_obj:
+            # Create a new result with combined score
+            combined_result = dict(result_obj)
+            combined_result["score"] = combined_score
+            combined_result["vector_score"] = v_score
+            combined_result["bm25_score"] = b_score
+            combined_results.append(combined_result)
+    
+    # Sort by combined score
+    combined_results.sort(key=lambda x: x.get("score", 0), reverse=True)
+    return combined_results
+
 # API endpoints
 @app.get("/")
 async def root():
@@ -496,9 +912,22 @@ async def basic_health_check():
             detail=f"Service unhealthy: {str(e)}"
         )
 
+@app.get("/initialization-status")
+async def get_initialization_status():
+    """Get the current initialization status"""
+    return {
+        "initialized": app_state["index_ready"],
+        "initialization_started": app_state["initialization_started"],
+        "vectors_loaded": app_state["vectors_loaded"],
+        "total_vectors": app_state["total_vectors"],
+        "loading_percentage": (app_state["vectors_loaded"] / max(app_state["total_vectors"], 1)) * 100,
+        "bm25_index_ready": app_state["bm25_ready"],
+        "timestamp": datetime.now().isoformat()
+    }
+
 @app.post("/query", response_model=QueryResponse)
 async def query_tools(request: QueryRequest, request_headers: Request):
-    """Query tools based on user input using efficient direct retrieval."""
+    """Query tools based on user input using hybrid search (vector + keyword)."""
     start_time = time.time()
     try:
         logger.info(f"Processing query: {request.query}")
@@ -510,6 +939,30 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             logger.info("Returning cached response")
             return QueryResponse(response=cached_response)
         
+        # Check if indexes are ready
+        if not app_state["initialization_started"]:
+            logger.warning("Query received before initialization started")
+            error_response = json.dumps({
+                "error": "system_not_initialized",
+                "message": "The system has not started initialization yet. Please try again later.",
+                "tools": [],
+                "timestamp": datetime.now().isoformat()
+            })
+            return QueryResponse(response=error_response)
+        
+        if not app_state["index_ready"]:
+            # System is still initializing - provide status and limited functionality
+            progress = (app_state["vectors_loaded"] / max(app_state["total_vectors"], 1)) * 100
+            logger.info(f"Query received during initialization. Progress: {progress:.1f}%")
+            initializing_response = json.dumps({
+                "status": "initializing",
+                "message": f"The system is still initializing. Currently loaded {app_state['vectors_loaded']} of {app_state['total_vectors']} tools ({progress:.1f}%).",
+                "progress_percentage": progress,
+                "tools": [],
+                "timestamp": datetime.now().isoformat()
+            })
+            return QueryResponse(response=initializing_response)
+        
         # Get the vector store
         vector_store = get_vector_store(headers)
 
@@ -517,140 +970,204 @@ async def query_tools(request: QueryRequest, request_headers: Request):
         total_vectors = get_total_vectors()
         logger.info(f"Total vectors in store: {total_vectors}")
         
-        # Direct vector search - simpler and faster approach
+        # Hybrid search implementation
         try:
-            # prefixed_query = f"query: {request.query}"
-            # Simple similarity search
-            results = vector_store.similarity_search(
+            # Step 1: Perform vector search with scores
+            vector_k = 15  # Increase to get more candidates
+            vector_results_with_scores = vector_store.similarity_search_with_score(
                 request.query,
-                k=5 # Limit to top 5 results
+                k=vector_k
             )
             
-            # Format the documents
-            formatted_docs = []
-            for doc in results[:5]:  # Only use top 3 for faster processing
+            # Convert to a list of result dictionaries
+            processed_vector_results = []
+            for doc, score in vector_results_with_scores:
                 metadata = doc.metadata
+                processed_vector_results.append({
+                    "rid": metadata.get("rid", ""),
+                    "tool_id": metadata.get("tool_id", ""),
+                    "name": metadata.get("name", ""),
+                    "description": metadata.get("description", ""),
+                    "categories": metadata.get("categories", ""),
+                    "usage": metadata.get("usage", ""),
+                    "unique_features": metadata.get("unique_features", ""),
+                    "pros": metadata.get("pros", []),
+                    "cons": metadata.get("cons", []),
+                    "pricing": metadata.get("pricing", ""),
+                    "score": float(1.0 - score)  # Convert distance to similarity score
+                })
+            
+            logger.info(f"Vector search returned {len(processed_vector_results)} results")
+            
+            # Step 2: Perform BM25 search
+            bm25_k = 30  # Get similar number of results
+            bm25_results = bm25_index.search(request.query, top_k=bm25_k)
+            logger.info(f"BM25 search returned {len(bm25_results)} results")
+            
+            # Step 3: Fuse the results (using 0.5 weight for vector search, 0.5 for BM25)
+            hybrid_results = fuse_search_results(
+                processed_vector_results, 
+                bm25_results,
+                alpha=0.5  # Equal weight for vector and keyword search
+            )
+            logger.info(f"Hybrid search returned {len(hybrid_results)} results")
+            
+            # Log details of specific tools if needed
+            tool_ids = [result.get('tool_id', 'N/A') for result in hybrid_results]
+            logger.debug(f"Tools in hybrid results: {tool_ids}")
+            
+            # Step 4: Take top results (up to 10) for LLM processing
+            top_results = hybrid_results[:10]
+            
+            # Format the documents for LLM
+            formatted_docs = []
+            for result in top_results:
                 formatted_doc = (
-                    f"Tool ID: {metadata.get('tool_id', 'N/A')}\n"
-                    f"Name: {metadata.get('name', 'N/A')}\n"
-                    f"Description: {metadata.get('description', 'N/A')}\n"
-                    f"Categories: {metadata.get('categories', 'N/A')}\n"
-                    f"Usage: {metadata.get('usage', 'N/A')}\n"
-                    f"Unique Features: {metadata.get('unique_features', 'N/A')}\n"
-                    f"Pros: {', '.join(metadata.get('pros', []))}\n"
-                    f"Cons: {', '.join(metadata.get('cons', []))}\n"
-                    f"Pricing: {metadata.get('pricing', 'N/A')}"
+                    f"Tool ID: {result.get('tool_id', 'N/A')}\n"
+                    f"Name: {result.get('name', 'N/A')}\n"
+                    f"Description: {result.get('description', 'N/A')}\n"
+                    f"Categories: {result.get('categories', 'N/A')}\n"
+                    f"Usage: {result.get('usage', 'N/A')}\n"
+                    f"Unique Features: {result.get('unique_features', 'N/A')}\n"
+                    f"Pros: {', '.join(result.get('pros', []))}\n"
+                    f"Cons: {', '.join(result.get('cons', []))}\n"
+                    f"Pricing: {result.get('pricing', 'N/A')}"
                 )
                 formatted_docs.append(formatted_doc)
-                logger.info(f"=== Document {len(formatted_docs)} ===")
-                logger.info(f"Tool ID: {metadata.get('tool_id', 'N/A')}")
-                logger.info(f"Formatted doc: {formatted_doc}")
-                logger.info("=====================")
+                # Log details for debugging if needed
+                logger.debug(f"Tool: {result.get('tool_id', 'N/A')}, Score: V={result.get('vector_score', 0):.4f}, BM25={result.get('bm25_score', 0):.4f}, Combined={result.get('score', 0):.4f}")
             
             # Join the formatted documents with separators
             context = "\n\n---\n\n".join(formatted_docs)
-            logger.info("=== Complete Context ===")
-            logger.info(context)
-            logger.info("=====================")
             
             # Get the model based on headers
             current_model = get_current_model(headers)
             logger.info(f"Using model: {current_model} with Groq API")
-            
-            # Log the input for debugging
-            logger.info("=== LLM Input ===")
-            logger.info(f"Question: {request.query}")
-            logger.info(f"Context: {context}")
-            logger.info("================")
 
-            system_text= f"""You are a tool retrieval assistant tasked with extracting relevant tools from a provided context based on a user query.
-            Guidelines:
-            1. JSON-only output: Provide the answer as a JSON object with no additional text, markdown, or formatting.
-            2. Context-only reasoning: Rely ONLY on the provided context for information. Do not use any outside knowledge.
-            3. No hallucinations: Do not invent any tool details or IDs. Use only what is present in the context.
-            4. Extract and include the tools even if it is partially related but sort by relevance.
-            4. JSON schema adherence: The output JSON must strictly follow this format:
-            {{
-    "tool_id": ["tool1_id", "tool2_id"],
-    "tools": [
-        {{
-            "id": "tool1_id",
-            "name": "Tool Name 1",
-            "description": "brief description",
-            "relevance": "explanation of relevance to query"
-        }}
-    ]
+            system_text= f"""
+You are a tool retrieval assistant tasked with finding, picking and ranking all relevant tools from a provided Tool Data based on a User Query.
+Instructions:
+- Analyze the User Query to understand their needs.
+- Find all relevant tools that could help with this specific task.
+- Carefully evaluate each tool's relevance to the query.
+- Rank them from most to least relevant.
+- For each tool, generate:
+  - A short summary (1–2 lines) explaining how it helps with the query.
+  - 2–3 bullet points showing key features that make it useful for this task.
+- Format your response as a JSON object with the following schema:
+{{
+  "tool_id": ["most_relevant_id", "next_most_relevant_id", ...],
+  "tools": [
+    {{
+      "id": "tool_id",
+      "name": "Tool Name",
+      "description": "How this tool helps the user based on their query",
+      "bullets": [
+        "Feature or benefit 1",
+        "Feature or benefit 2",
+        "Optional feature or benefit 3"
+      ]
+    }},
+    ...
+  ]
 }}
-Ensure the JSON is valid and includes the tools from the given context only."""
+
+Guidelines:
+- Strict ordering: The most relevant tool MUST be listed first, followed by decreasing relevance.
+- Include all the relevant tools that matches the User Query.
+- Only include tools that are relevant to the User Query.
+- Match the tool description to the user's specific query.
+- Output ONLY the JSON. No preamble No extra note..
+"""
             
             # Create prompt for LangChain
-            prompt_text = f"""Identify the all relevant tools from the context below that answer the user's query.
-
+            prompt_text = f"""
 User Query: {request.query}
 
 Tool Data: {context}
-
-Provide the relevant tools as a JSON object following the above schema."""
+"""
 
             # Initialize LangChain's ChatGroq
             llm = ChatGroq(
                 groq_api_key=GROQ_API_KEY,
                 model_name=current_model,
-                temperature=0.1,
-                max_tokens=800
+                temperature=0.1
             )
+            # print(f"\n===== TOOLS SENT TO LLM (Tool Data) =====")
+            # print(context)
+            # print("============================\n")
+            # print(f"\n===== TOOLS SENT TO LLM =====")
+            # for idx, doc in enumerate(formatted_docs):
+            #     print(f"Tool {idx+1}:\n{doc}\n")
+            # print("============================\n")
             
-            # Get response from Groq LLM
-            response = llm.invoke([
-                {"role": "system", "content": system_text},
-                {"role": "user", "content": prompt_text}
-            ])
-            
-            # Extract content from response
-            llm_response = response.content
-            
-            # Post-process the response
-            processed_response = post_process_llm_response(llm_response)
-            
-            # Try to parse as JSON but don't fail if it's not valid
+            # Get response from Groq LLM with timeout handling
             try:
-                # Parse and validate response
-                response_data = json.loads(processed_response)
+                response = llm.invoke([
+                    {"role": "system", "content": system_text},
+                    {"role": "user", "content": prompt_text}
+                ])
+
                 
-                # Clean response
-                clean_response = json.dumps(response_data, indent=2)
-                logger.info("Processed valid JSON response")
-            except json.JSONDecodeError:
-                # If not valid JSON, just return the processed response as-is
-                clean_response = processed_response
-                logger.warning("Response is not valid JSON, returning as-is")
+                # Extract content from response
+                # llm_response = response.content
+                # print(f"\n===== LLM RESPONSE =====")
+                # print(llm_response)
+                # print("============================\n")
                 
-                # Try to construct a minimal valid JSON if parsing failed
-                if not processed_response or processed_response.strip() == "":
-                    clean_response = json.dumps({
-                        "tool_id": [],
-                        "tools": [],
-                        "error": "No valid response generated"
-                    })
-            
-            # Cache the processed response
-            tool_search_cache.set(request.query, clean_response)
-            
-            # Log total processing time
-            elapsed_time = time.time() - start_time
-            logger.info(f"Total processing time: {elapsed_time:.2f}s")
-            
-            return QueryResponse(response=clean_response)
-            
+                # Post-process the response
+                processed_response = post_process_llm_response(llm_response)
+                
+                # Try to parse as JSON but don't fail if it's not valid
+                try:
+                    # Parse and validate response
+                    response_data = json.loads(processed_response)
+                    
+                    # Clean response
+                    clean_response = json.dumps(response_data, indent=2)
+                    logger.info("Processed valid JSON response")
+                except json.JSONDecodeError:
+                    # If not valid JSON, just return the processed response as-is
+                    clean_response = processed_response
+                    logger.warning("Response is not valid JSON, returning as-is")
+                    
+                    # Try to construct a minimal valid JSON if parsing failed
+                    if not processed_response or processed_response.strip() == "":
+                        clean_response = json.dumps({
+                            "tool_id": [],
+                            "tools": [],
+                            "error": "No valid response generated"
+                        })
+                
+                # Cache the processed response
+                tool_search_cache.set(request.query, clean_response)
+                
+                # Log total processing time
+                elapsed_time = time.time() - start_time
+                logger.info(f"Total processing time: {elapsed_time:.2f}s")
+                
+                return QueryResponse(response=clean_response)
+            except Exception as e:
+                # Handle LLM-specific errors
+                logger.error(f"Error in LLM call: {str(e)}")
+                error_response = json.dumps({
+                    "error": "llm_error",
+                    "message": f"Error processing query with language model: {str(e)}",
+                    "tools": [],
+                    "timestamp": datetime.now().isoformat()
+                })
+                return QueryResponse(response=error_response)
+                
         except Exception as e:
             error_msg = str(e)
-            logger.error(f"Error in retrieval or LLM call: {error_msg}")
+            logger.error(f"Error in hybrid search: {error_msg}")
             
-            # Create a fallback JSON response
+            # Create a detailed error response
             fallback_response = json.dumps({
-                "error": "processing_error",
-                "message": f"Failed to process query: {error_msg}",
-                "tools": []
+                "error": "search_error",
+                "message": f"Failed to process search: {error_msg}",
+                "tools": [],
+                "timestamp": datetime.now().isoformat()
             })
             
             return QueryResponse(response=fallback_response)
@@ -660,13 +1177,14 @@ Provide the relevant tools as a JSON object following the above schema."""
         
         # Log total processing time even on error
         elapsed_time = time.time() - start_time
-        logger.info(f"Query processing completed in {elapsed_time:.2f}s")
+        logger.info(f"Query processing completed with error in {elapsed_time:.2f}s")
         
-        # Return a minimal valid response in case of error
+        # Return a detailed error response
         error_response = json.dumps({
             "error": "api_error",
-            "message": str(e),
-            "tools": []
+            "message": f"An unexpected error occurred: {str(e)}",
+            "tools": [],
+            "timestamp": datetime.now().isoformat()
         })
         return QueryResponse(response=error_response)
 
@@ -713,8 +1231,15 @@ async def add_tools(bulk_request: BulkToolRequest):
                 ids=[rid]
             )
             
+            # Also add to BM25 index
+            bm25_index.add_tool(tool, rid)
+            
             logger.info(f"Added tool: {tool.name} (Tool ID: {tool.tool_id})")
             results.append(ToolResponse(id=rid, tool=tool, status="added"))
+        
+        # Rebuild BM25 index if any tools were added
+        if added_tools:
+            bm25_index.rebuild_index()
         
         new_count = get_total_vectors()
         logger.info(f"Vector count after addition: {new_count}")
@@ -762,6 +1287,13 @@ async def delete_tool(tool_id: str):
         index = get_or_create_index()
         index.delete(ids=[rid])
         
+        # Also remove from BM25 index if it exists
+        if rid in bm25_index.tool_data:
+            del bm25_index.tool_data[rid]
+            # Mark that the index needs rebuilding
+            bm25_index.is_initialized = False
+            logger.info(f"Removed tool from BM25 index: {tool_name} (RID: {rid})")
+        
         # Log new vector count
         new_count = get_total_vectors()
         logger.info(f"Vector count after deletion: {new_count}")
@@ -787,6 +1319,7 @@ async def update_tools(request: BulkUpdateRequest):
     try:
         vector_store = get_vector_store()
         results = []
+        updated_rids = []
         
         for tool in request.tools:
             try:
@@ -825,12 +1358,20 @@ async def update_tools(request: BulkUpdateRequest):
                     ids=[existing_rid]
                 )
                 
+                # Update BM25 index
+                bm25_index.add_tool(tool, existing_rid)
+                updated_rids.append(existing_rid)
+                
                 logger.info(f"Updated tool: {tool.name} (Tool ID: {tool.tool_id}, RID: {existing_rid})")
                 results.append(ToolResponse(id=existing_rid, tool=tool, status="updated"))
                 
             except Exception as e:
                 logger.error(f"Error updating tool {tool.tool_id}: {str(e)}")
                 continue
+        
+        # Rebuild BM25 index if any tools were updated
+        if updated_rids:
+            bm25_index.rebuild_index()
         
         if not results:
             raise HTTPException(
@@ -1120,6 +1661,11 @@ async def clear_index(request: ClearIndexRequest):
         
         # Delete all vectors
         index.delete(delete_all=True)
+        
+        # Clear BM25 index as well
+        bm25_index.tool_data = {}
+        bm25_index.is_initialized = False
+        logger.info("Cleared BM25 index")
         
         # Verify deletion
         new_count = get_total_vectors()

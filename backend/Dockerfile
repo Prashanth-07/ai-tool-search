@@ -27,13 +27,21 @@ RUN pip install --no-cache-dir fastapi==0.109.0 \
     && pip install --no-cache-dir simsimd \
     && pip install --no-cache-dir nomic 
 
+# Install NLTK and pre-download data packages to avoid runtime downloads
+RUN pip install --no-cache-dir nltk==3.8.1 \
+    && pip install --no-cache-dir rank_bm25==0.2.2 \
+    && python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+
 # Copy application code
-# COPY tada.py .
 COPY tada1.py .
 COPY .env .
 
 # Expose the port the app runs on
 EXPOSE 8000
+
+# Add health check to verify application availability
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:8000/basic-health || exit 1
 
 # Command to run the application
 CMD ["uvicorn", "tada1:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
@@ -62,17 +70,20 @@ CMD ["uvicorn", "tada1:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 #     && pip install --no-cache-dir langchain-community==0.0.19 \
 #     && pip install --no-cache-dir langchain==0.1.4 \
 #     && pip install --no-cache-dir langchain-ollama==0.2.3 \
-#     && pip install --no-cache-dir langchain-ollama==0.2.3 
+#     && pip install --no-cache-dir langchain-groq \
+#     && pip install --no-cache-dir simsimd \
+#     && pip install --no-cache-dir nomic 
 
-# RUN pip install --no-cache-dir simsimd
-
+# RUN pip install --no-cache-dir nltk==3.8.1 \
+#     && pip install --no-cache-dir rank_bm25==0.2.2
 
 # # Copy application code
-# COPY tada.py .
+# # COPY tada.py .
+# COPY tada1.py .
 # COPY .env .
 
 # # Expose the port the app runs on
 # EXPOSE 8000
 
 # # Command to run the application
-# CMD ["uvicorn", "tada:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# CMD ["uvicorn", "tada1:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
