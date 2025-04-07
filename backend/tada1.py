@@ -1110,7 +1110,7 @@ Tool Data: {context}
 
                 
                 # Extract content from response
-                # llm_response = response.content
+                llm_response = response.content
                 # print(f"\n===== LLM RESPONSE =====")
                 # print(llm_response)
                 # print("============================\n")
