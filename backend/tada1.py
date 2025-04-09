@@ -1045,11 +1045,10 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             logger.info(f"Using model: {current_model} with Groq API")
 
             system_text= f"""
-You are a tool retrieval assistant tasked with finding, picking and ranking all relevant tools from a provided Tool Data based on a User Query.
+You are a tool retrieval assistant tasked with finding, picking and ranking all relevant tools from a provided Tool Data that closely relate to the User Query.
 Instructions:
-- Analyze the User Query to understand their needs.
-- Find all relevant tools that could help with this specific task.
-- Carefully evaluate each tool's relevance to the query.
+- Analyze the User Query and understand their needs.
+- Analyze each tool in the given 10 tools in the Tool Data and include all the relevant tools based on the analysis of User Query and needs. 
 - Rank them from most to least relevant.
 - For each tool, generate:
   - A short summary (1–2 lines) explaining how it helps with the query.
@@ -1073,11 +1072,11 @@ Instructions:
 }}
 
 Guidelines:
+- Carefully evaluate each included tool's relevance to the User Query and include relevant tools excluding irrelevant tools in the output JSON.
 - Strict ordering: The most relevant tool MUST be listed first, followed by decreasing relevance.
-- Include all the relevant tools that matches the User Query.
-- Only include tools that are relevant to the User Query.
+- Strict Warning: Do not include tools that are irrelevant to the User Query in the output JSON.
 - Match the tool description to the user's specific query.
-- Output ONLY the JSON. No preamble No extra note..
+- Output ONLY the JSON. No preamble No extra note.
 """
             
             # Create prompt for LangChain
@@ -1096,10 +1095,10 @@ Tool Data: {context}
             # print(f"\n===== TOOLS SENT TO LLM (Tool Data) =====")
             # print(context)
             # print("============================\n")
-            # print(f"\n===== TOOLS SENT TO LLM =====")
-            # for idx, doc in enumerate(formatted_docs):
-            #     print(f"Tool {idx+1}:\n{doc}\n")
-            # print("============================\n")
+            print(f"\n===== TOOLS SENT TO LLM =====")
+            for idx, doc in enumerate(formatted_docs):
+                print(f"Tool {idx+1}:\n{doc}\n")
+            print("============================\n")
             
             # Get response from Groq LLM with timeout handling
             try:
