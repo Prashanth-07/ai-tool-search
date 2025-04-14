@@ -4,6 +4,7 @@ import re
 import json
 import logging
 import urllib3
+import tiktoken
 from uuid import uuid4
 from typing import List, Dict, Any
 from datetime import datetime, timedelta
@@ -25,6 +26,8 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import asyncio
 import sys
+from pydantic import BaseModel, Field, HttpUrl
+from typing import Optional, Union
 # Check Python version for asyncio support
 if sys.version_info < (3, 7):
     raise RuntimeError("Python 3.7 or higher is required for async functionality")
@@ -86,6 +89,23 @@ app_state = {
     "bm25_ready": False
 }
 
+def clean_text(text: str) -> str:
+    # strip emojis (broad unicode ranges)…
+    emoji_pattern = re.compile("["
+        u"\U0001F600-\U0001F64F"
+        u"\U0001F300-\U0001F5FF"
+        u"\U0001F680-\U0001F6FF"
+        u"\U0001F1E0-\U0001F1FF"
+        u"\U00002702-\U000027B0"
+        u"\U000024C2-\U0001F251"
+    "]+", flags=re.UNICODE)
+    no_emoji = emoji_pattern.sub("", text)
+    # collapse multiple blank lines
+    no_blank = re.sub(r'\n\s*\n+', '\n', no_emoji)
+    # collapse tabs/spaces
+    single_space = re.sub(r'[ \t]+', ' ', no_blank)
+    return single_space.strip()
+
 async def load_vectors_for_bm25():
     """Load vectors in batches for BM25 indexing"""
     fetch_size = 20  # Smaller batch size
@@ -108,15 +128,14 @@ async def load_vectors_for_bm25():
                 metadata = doc.metadata
                 if "tool_id" in metadata and "rid" in metadata:
                     tool = Tool(
-                        name=metadata.get("name", "Unknown"),
                         tool_id=metadata.get("tool_id", ""),
+                        name=metadata.get("name", "Unknown"),
+                        category_subcat=metadata.get("category_subcat", ""),
+                        url=metadata.get("url", "https://example.com"),  # Default URL required
                         description=metadata.get("description", ""),
-                        pros=metadata.get("pros", []),
-                        cons=metadata.get("cons", []),
-                        categories=metadata.get("categories", ""),
-                        usage=metadata.get("usage", ""),
-                        unique_features=metadata.get("unique_features", ""),
-                        pricing=metadata.get("pricing", "")
+                        image_url=metadata.get("image_url", None),
+                        owner=metadata.get("owner", None),
+                        status=metadata.get("status", None)
                     )
                     bm25_index.add_tool(tool, metadata.get("rid"))
             
@@ -191,23 +210,6 @@ async def startup_event():
         logger.info("Basic startup complete - API ready for requests")
     except Exception as e:
         logger.error(f"Error during startup initialization: {str(e)}")
-
-# @app.on_event("startup")
-# async def startup_event():
-#     """Initialize BM25 index on startup"""
-#     try:
-#         # Force initialization of the vector store and BM25 index
-#         logger.info("Application starting up - initializing vector store and BM25 index")
-#         _ = get_or_create_index()
-        
-#         # Check if BM25 index is initialized
-#         if not bm25_index.is_initialized:
-#             logger.warning("BM25 index not initialized during startup - forcing rebuild")
-#             bm25_index.rebuild_index()
-            
-#         logger.info("Startup initialization complete")
-#     except Exception as e:
-#         logger.error(f"Error during startup initialization: {str(e)}")
 
 # Helper function to check if URL is HTTPS
 def is_https_url(url):
@@ -306,6 +308,21 @@ class ToolSearchCache:
 # Initialize cache
 tool_search_cache = ToolSearchCache(max_size=1000, expiry_minutes=60)
 
+class Tool(BaseModel):
+    tool_id: str
+    name: str
+    category_subcat: str
+    url: Union[HttpUrl, str]
+    description: str
+    image_url: Optional[Union[HttpUrl, str]] = None
+    owner: Optional[str] = None
+    status: Optional[str] = None
+
+class ToolResponse(BaseModel):
+    id: str
+    tool: Tool
+    status: str = "added"
+
 # Initialize BM25 index
 class BM25IndexManager:
     def __init__(self):
@@ -331,21 +348,17 @@ class BM25IndexManager:
             return []
         tokens = word_tokenize(str(text).lower())
         return [token for token in tokens if token.isalnum() and token not in self.stop_words]
-    
-    def create_document_text(self, tool):
-        """Create a searchable text representation of a tool"""
-        # Combine relevant fields with appropriate weighting (repeating important fields)
-        doc_text = (
-            f"{tool.name} {tool.name} {tool.name} "  # Name is most important (repeated)
-            f"{tool.description} {tool.description} "
-            f"{tool.categories} {tool.categories} {tool.categories}"
-            f"{tool.usage} "
-            f"{tool.unique_features} "
-            f"{' '.join(tool.pros)} "
-            f"{' '.join(tool.cons)} "
-            f"{tool.pricing}"
-        )
-        return doc_text
+
+    def create_document_text(self, tool: Tool):
+        parts = [
+            tool.name, tool.name,
+            tool.category_subcat,
+            tool.description,
+            tool.owner or "",
+            tool.status or ""
+            ]
+        return " ".join(parts)
+
     
     def add_tool(self, tool, rid):
         """Add a single tool to the BM25 index"""
@@ -412,10 +425,10 @@ class BM25IndexManager:
         scores = self.bm25.get_scores(tokenized_query)
         
         # Log scores for specific tools if needed for debugging
-        for idx, doc_id in enumerate(self.doc_ids):
-            tool = self.tool_data[doc_id]["tool"]
-            if hasattr(tool, 'tool_id') and tool.tool_id in ['iconme-023', 'contentgoblinai-002']:
-                logger.info(f"Tool ID: {tool.tool_id}, Score: {scores[idx]}")
+        # for idx, doc_id in enumerate(self.doc_ids):
+        #     tool = self.tool_data[doc_id]["tool"]
+        #     if hasattr(tool, 'tool_id') and tool.tool_id in ['iconme-023', 'contentgoblinai-002']:
+        #         logger.info(f"Tool ID: {tool.tool_id}, Score: {scores[idx]}")
         
         # Get top-k results
         top_k = min(top_k, len(self.doc_ids))
@@ -432,12 +445,11 @@ class BM25IndexManager:
                     "tool_id": tool.tool_id,
                     "name": tool.name,
                     "description": tool.description,
-                    "categories": tool.categories,
-                    "usage": tool.usage,
-                    "unique_features": tool.unique_features,
-                    "pros": tool.pros,
-                    "cons": tool.cons,
-                    "pricing": tool.pricing,
+                    "category_subcat": tool.category_subcat,  # updated field
+                    "url": str(tool.url),
+                    "image_url": tool.image_url or "",
+                    "owner": tool.owner or "",
+                    "status": tool.status or "",
                     "score": float(scores[idx])
                 })
         
@@ -447,21 +459,6 @@ class BM25IndexManager:
 bm25_index = BM25IndexManager()
 
 # Pydantic models
-class Tool(BaseModel):
-    name: str
-    tool_id: str
-    description: str
-    pros: List[str]
-    cons: List[str]
-    categories: str
-    usage: str
-    unique_features: str
-    pricing: str
-
-class ToolResponse(BaseModel):
-    id: str
-    tool: Tool
-    status: str = "added"
 
 class QueryRequest(BaseModel):
     query: str
@@ -487,6 +484,78 @@ class BulkUpdateResponse(BaseModel):
 
 class ClearIndexRequest(BaseModel):
     api_key: str = Field(..., description="API key for authorization to clear the index")
+
+def clean_tool_data(tool: Tool) -> Tool:
+    """
+    Clean tool data before adding to vector database.
+    Removes emojis, normalizes whitespace, and cleans fields.
+    
+    Args:
+        tool: The tool object to clean
+        
+    Returns:
+        Cleaned tool object
+    """
+    import re
+    from urllib.parse import urlparse
+    
+    # Create a copy of the tool
+    cleaned_tool = tool.model_copy() if hasattr(tool, 'model_copy') else Tool(**tool.dict())
+    
+    # 1. Clean name field - if it's a URL, extract domain name
+    if cleaned_tool.name and cleaned_tool.name.startswith('http'):
+        try:
+            parsed_url = urlparse(cleaned_tool.name)
+            # Extract domain name without protocol and www
+            cleaned_tool.name = parsed_url.netloc.replace('www.', '')
+        except Exception as e:
+            logger.warning(f"Failed to parse URL in name: {cleaned_tool.name}")
+    
+    # 2. Remove emojis and special characters
+    emoji_pattern = re.compile(
+        "["
+        "\U0001F600-\U0001F64F"  # emoticons
+        "\U0001F300-\U0001F5FF"  # symbols & pictographs
+        "\U0001F680-\U0001F6FF"  # transport & map symbols
+        "\U0001F700-\U0001F77F"  # alchemical symbols
+        "\U0001F780-\U0001F7FF"  # geometric shapes
+        "\U0001F800-\U0001F8FF"  # supplemental arrows
+        "\U0001F900-\U0001F9FF"  # supplemental symbols
+        "\U0001FA00-\U0001FA6F"  # chess symbols
+        "\U0001FA70-\U0001FAFF"  # symbols and pictographs extended-A
+        "\U00002600-\U000026FF"  # miscellaneous symbols
+        "\U00002700-\U000027BF"  # dingbats
+        "]+", 
+        flags=re.UNICODE
+    )
+    
+    # Special characters pattern (checkmarks, etc.)
+    special_chars_pattern = re.compile(r'[✅❌⚠️⚙️🔧🤔📝🌱🏗️📅]')
+    
+    if cleaned_tool.description:
+        # Remove emojis and special characters
+        cleaned_tool.description = emoji_pattern.sub('', cleaned_tool.description)
+        cleaned_tool.description = special_chars_pattern.sub('', cleaned_tool.description)
+        
+        # Normalize whitespace
+        cleaned_tool.description = re.sub(r'[ \t]+', ' ', cleaned_tool.description)  # collapse spaces
+        cleaned_tool.description = re.sub(r'\n{3,}', '\n\n', cleaned_tool.description)  # limit newlines
+        cleaned_tool.description = cleaned_tool.description.strip()  # trim edges
+    
+    # 3. Clean category_subcat field
+    if cleaned_tool.category_subcat:
+        cleaned_tool.category_subcat = re.sub(r'[ \t]+', ' ', cleaned_tool.category_subcat)
+        cleaned_tool.category_subcat = re.sub(r'\n{3,}', '\n\n', cleaned_tool.category_subcat)
+        cleaned_tool.category_subcat = cleaned_tool.category_subcat.strip()
+    
+    # 4. Clean status and image_url fields
+    if cleaned_tool.status == "Not Added":
+        cleaned_tool.status = ""
+    
+    if cleaned_tool.image_url == "Added":
+        cleaned_tool.image_url = ""
+    
+    return cleaned_tool
 
 # Get total vectors in the index
 def get_total_vectors() -> int:
@@ -543,15 +612,14 @@ def get_or_create_index():
                     if "tool_id" in metadata and "rid" in metadata:
                         # Reconstruct the Tool object from metadata
                         tool = Tool(
-                            name=metadata.get("name", "Unknown"),
-                            tool_id=metadata.get("tool_id", ""),
-                            description=metadata.get("description", ""),
-                            pros=metadata.get("pros", []),
-                            cons=metadata.get("cons", []),
-                            categories=metadata.get("categories", ""),
-                            usage=metadata.get("usage", ""),
-                            unique_features=metadata.get("unique_features", ""),
-                            pricing=metadata.get("pricing", "")
+                                tool_id=metadata.get("tool_id", ""),
+                                name=metadata.get("name", "Unknown"),
+                                category_subcat=metadata.get("category_subcat", ""),
+                                url=metadata.get("url", "https://example.com"),  # Default URL required
+                                description=metadata.get("description", ""),
+                                image_url=metadata.get("image_url", None),
+                                owner=metadata.get("owner", None),
+                                status=metadata.get("status", None)
                         )
                         bm25_index.add_tool(tool, metadata.get("rid"))
                 
@@ -561,8 +629,8 @@ def get_or_create_index():
             bm25_index.rebuild_index()
             print(f"===== BM25 INDEX CONTENTS =====")
             print(f"Total tools indexed in BM25: {len(bm25_index.tool_data)}")
-            print(f"Is 'iconme-023' in BM25 index: {'iconme-023' in [tool.tool_id for rid, data in bm25_index.tool_data.items() for tool in [data['tool']]]}")
-            print(f"Is 'contentgoblinai-002' in BM25 index: {'contentgoblinai-002' in [tool.tool_id for rid, data in bm25_index.tool_data.items() for tool in [data['tool']]]}")
+            # print(f"Is 'iconme-023' in BM25 index: {'iconme-023' in [tool.tool_id for rid, data in bm25_index.tool_data.items() for tool in [data['tool']]]}")
+            # print(f"Is 'contentgoblinai-002' in BM25 index: {'contentgoblinai-002' in [tool.tool_id for rid, data in bm25_index.tool_data.items() for tool in [data['tool']]]}")
         return pc.Index(INDEX_NAME)
     except Exception as e:
         print(f"Error in get_or_create_index: {str(e)}")
@@ -572,20 +640,22 @@ def get_or_create_index():
         )
     
 class NomicAtlasEmbeddings(Embeddings):
-    """Wrapper for Nomic Atlas embedding API."""
+    """Wrapper for Nomic Atlas embedding API with task-specific embedding support."""
     
     def __init__(
         self,
         api_key: str,
         api_url: str = "https://api-atlas.nomic.ai/v1/embedding/text",
-        task_type: str = "search_document",
+        document_task_type: str = "search_document",
+        query_task_type: str = "search_query",
         max_tokens_per_text: int = 8192,
         dimensionality: int = 768,
     ):
-        """Initialize the Nomic Atlas embeddings wrapper."""
+        """Initialize the Nomic Atlas embeddings wrapper with task-specific types."""
         self.api_key = api_key
         self.api_url = api_url
-        self.task_type = task_type
+        self.document_task_type = document_task_type
+        self.query_task_type = query_task_type
         self.max_tokens_per_text = max_tokens_per_text
         self.dimensionality = dimensionality
         
@@ -597,55 +667,92 @@ class NomicAtlasEmbeddings(Embeddings):
             "Authorization": f"Bearer {self.api_key}"
         }
     
+    def _embed_with_task_type(self, texts: List[str], task_type: str) -> List[List[float]]:
+        """Internal method to embed texts with a specific task type."""
+        max_retries = 3
+        retry_delay = 1
+        
+        for attempt in range(max_retries):
+            try:
+                payload = {
+                    "texts": texts,
+                    "task_type": task_type,
+                    "max_tokens_per_text": self.max_tokens_per_text,
+                    "dimensionality": self.dimensionality
+                }
+                
+                logger.info(f"Embedding {len(texts)} texts with task_type: {task_type}")
+                
+                response = requests.post(
+                    self.api_url,
+                    headers=self._get_headers(),
+                    json=payload,
+                    timeout=10
+                )
+                response.raise_for_status()
+                
+                result = response.json()
+                return result["embeddings"]
+            except Exception as e:
+                logger.warning(f"Error calling Nomic Atlas API (attempt {attempt+1}/{max_retries}): {str(e)}")
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+                    retry_delay *= 2
+                else:
+                    raise ValueError(f"Error calling Nomic Atlas API: {str(e)}")
+    
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        """Embed a list of texts using the Nomic Atlas API."""
-        max_retires=3
-        retry_delay=1
-        try:
-            payload = {
-                "texts": texts,
-                "task_type": self.task_type,
-                "max_tokens_per_text": self.max_tokens_per_text,
-                "dimensionality": self.dimensionality
-            }
-            
-            response = requests.post(
-                self.api_url,
-                headers=self._get_headers(),
-                json=payload,
-                timeout=10
-            )
-            response.raise_for_status()
-            
-            result = response.json()
-            return result["embeddings"]
-        except Exception as e:
-            logger.warning(f"Error calling Nomic Atlas API (attempt {attempt+1}/{max_retries}): {str(e)}")
-            if attempt < max_retries - 1:
-                time.sleep(retry_delay)
-                retry_delay *= 2
-            else:
-                raise ValueError(f"Error calling Nomic Atlas API: {str(e)}")
+        """Embed a list of document texts using the Nomic Atlas API with document task type."""
+        return self._embed_with_task_type(texts, self.document_task_type)
     
     def embed_query(self, text: str) -> List[float]:
-        """Embed a single text using the Nomic Atlas API."""
-        embeddings = self.embed_documents([text])
+        """Embed a query text using the Nomic Atlas API with query task type."""
+        embeddings = self._embed_with_task_type([text], self.query_task_type)
         return embeddings[0]
     
 # Global cache for vector store instance
+# Global cache for document‑optimized vector store
 _vector_store_cache = None
 _vector_store_timestamp = None
-_cache_lifetime = 3600 
-def get_vector_store(headers=None):
-    """Initialize or return existing vector store using Nomic Atlas API."""
-    global _vector_store_cache, _vector_store_timestamp
-    # Check if cache is valid
-    current_time = time.time()
-    if (_vector_store_cache is not None and 
-        _vector_store_timestamp is not None and 
-        current_time - _vector_store_timestamp < _cache_lifetime):
-        logger.info("Using cached vector store instance")
-        return _vector_store_cache
+
+# Global cache for query‑optimized vector store
+_query_vector_store_cache = None
+_query_vector_store_timestamp = None
+
+# How long (in seconds) to keep any cache entry
+_cache_lifetime = 3600
+
+def get_vector_store(headers=None, for_query=False):
+    """
+    Initialize or return existing vector store using Nomic Atlas API.
+    
+    Args:
+        headers: Optional HTTP headers
+        for_query: If True, creates an embeddings instance optimized for queries
+                   If False, creates an embeddings instance optimized for documents
+    
+    Returns:
+        LangchainPinecone vector store instance
+    """
+    global _vector_store_cache, _vector_store_timestamp, _query_vector_store_cache, _query_vector_store_timestamp
+    
+    # Use different caches for document vs query vector stores
+    if for_query:
+        # Check if query cache is valid
+        current_time = time.time()
+        if (_query_vector_store_cache is not None and 
+            _query_vector_store_timestamp is not None and 
+            current_time - _query_vector_store_timestamp < _cache_lifetime):
+            logger.info("Using cached query vector store instance")
+            return _query_vector_store_cache
+    else:
+        # Check if document cache is valid
+        current_time = time.time()
+        if (_vector_store_cache is not None and 
+            _vector_store_timestamp is not None and 
+            current_time - _vector_store_timestamp < _cache_lifetime):
+            logger.info("Using cached document vector store instance")
+            return _vector_store_cache
 
     try:
         # Get the API key from environment variables
@@ -657,7 +764,8 @@ def get_vector_store(headers=None):
         embeddings = NomicAtlasEmbeddings(
             api_key=nomic_api_key,
             api_url="https://api-atlas.nomic.ai/v1/embedding/text",
-            task_type="search_document",
+            document_task_type="search_document",
+            query_task_type="search_query",
             max_tokens_per_text=8192,
             dimensionality=DIMENSION  # This uses the global DIMENSION variable (768)
         )
@@ -668,8 +776,17 @@ def get_vector_store(headers=None):
             embedding=embeddings,
             text_key="text"
         )
-        _vector_store_cache = vector_store
-        _vector_store_timestamp = current_time
+        
+        # Cache the appropriate vector store
+        if for_query:
+            _query_vector_store_cache = vector_store
+            _query_vector_store_timestamp = current_time
+            logger.info("Created and cached new query vector store instance")
+        else:
+            _vector_store_cache = vector_store
+            _vector_store_timestamp = current_time
+            logger.info("Created and cached new document vector store instance")
+            
         return vector_store
     except Exception as e:
         logger.error(f"Error in get_vector_store: {str(e)}")
@@ -677,61 +794,20 @@ def get_vector_store(headers=None):
             status_code=500,
             detail=f"Failed to initialize vector store: {str(e)}"
         )
-
-
-# Get vector store - keep using Ollama for embeddings
-
-# def get_vector_store(headers=None):
-#     """Initialize or return existing vector store"""
-#     try:
-#         # Get URL and SSL verification setting
-#         ollama_url = get_ollama_url(headers)
-#         verify_ssl = should_verify_ssl(headers)
-#         api_key = get_ollama_api_key(headers)
-        
-#         if is_https_url(ollama_url):
-#             logger.info(f"Using HTTPS for Ollama embeddings with SSL verification: {verify_ssl}")
-
-#         # Create client_kwargs with authentication if available
-#         client_kwargs = {"verify": verify_ssl}
-#         if api_key:
-#             client_kwargs["headers"] = {"Authorization": f"Bearer {api_key}"}
-#             logger.info("Added authorization header for embeddings")
-            
-#         embeddings = OllamaEmbeddings(
-#             model='nomic-embed-text',
-#             base_url=ollama_url,
-#             client_kwargs=client_kwargs
-#         )
-        
-#         # Initialize the vector store using the new syntax
-#         vector_store = LangchainPinecone.from_existing_index(
-#             index_name=INDEX_NAME,
-#             embedding=embeddings,
-#             text_key="text"
-#         )
-        
-#         return vector_store
-#     except Exception as e:
-#         print(f"Error in get_vector_store: {str(e)}")
-#         raise HTTPException(
-#             status_code=500,
-#             detail=f"Failed to initialize vector store: {str(e)}"
-#         )
     
 def format_tool_for_indexing(tool: Tool, rid: str) -> str:
     """Format tool data for embedding"""
     return (
         # f"document: " 
         f"RID: {rid}\n"
-        f"Name: {tool.name}\n"
-        f"Description: {tool.description}\n"
-        f"Pros: {', '.join(tool.pros)}\n"
-        f"Cons: {', '.join(tool.cons)}\n"
-        f"Categories: {tool.categories}\n"
-        f"Usage: {tool.usage}\n"
-        f"Unique Features: {tool.unique_features}\n"
-        f"Pricing: {tool.pricing}"
+        f"Tool ID: {tool.tool_id}\n"
+        f"Name: {tool.name}\n\n"
+        f"Category/Sub‑cat: {tool.category_subcat}\n\n"
+        f"URL: {tool.url}\n\n"
+        f"Description:\n{tool.description}\n\n"
+        f"Image URL: {tool.image_url or 'N/A'}\n"
+        f"Owner: {tool.owner or 'Unassigned'}\n"
+        f"Status: {tool.status or 'Unknown'}"
     )
 
 def post_process_llm_response(response_text):
@@ -925,6 +1001,122 @@ async def get_initialization_status():
         "timestamp": datetime.now().isoformat()
     }
 
+@app.post("/reindex-tools")
+async def reindex_tools():
+    """
+    Re-index all existing tools with task-specific embeddings.
+    This doesn't delete any tools but updates their vector representations.
+    """
+    try:
+        # Initialize document-optimized vector store
+        document_vector_store = get_vector_store(for_query=False)
+        
+        # Get total vectors for reference
+        total_vectors = get_total_vectors()
+        logger.info(f"Starting re-indexing of {total_vectors} tools")
+        
+        if total_vectors == 0:
+            return {
+                "success": True,
+                "message": "No tools to re-index",
+                "count": 0
+            }
+        
+        # Get the Pinecone index
+        index = get_or_create_index()
+        
+        # Track progress
+        updated_count = 0
+        failed_count = 0
+        
+        # Process in batches for large collections
+        batch_size = 20
+        total_batches = (total_vectors - 1) // batch_size + 1
+        
+        # Get the raw Pinecone index for faster updates
+        pinecone_index = pc.Index(INDEX_NAME)
+        
+        for batch_num in range(total_batches):
+            # Calculate current batch range
+            start_idx = batch_num * batch_size
+            end_idx = min((batch_num + 1) * batch_size, total_vectors)
+            current_batch_size = end_idx - start_idx
+            
+            logger.info(f"Processing batch {batch_num+1}/{total_batches} (tools {start_idx+1}-{end_idx})")
+            
+            # Retrieve current batch of tools using old embeddings
+            results = document_vector_store.similarity_search(
+                "",  # Empty query to get all vectors
+                k=current_batch_size,
+                filter={}  # No filtering
+            )
+            
+            # Re-index each tool with task-specific embeddings
+            for doc in results:
+                try:
+                    metadata = doc.metadata
+                    rid = metadata.get("rid")
+                    
+                    if not rid:
+                        logger.warning(f"Skipping tool with missing RID")
+                        failed_count += 1
+                        continue
+                    
+                    # Reconstruct the tool object
+                    if "tool_id" in metadata:
+                        tool = Tool(
+                            tool_id=metadata.get("tool_id", ""),
+                            name=metadata.get("name", "Unknown"),
+                            category_subcat=metadata.get("category_subcat", ""),
+                            url=metadata.get("url", "https://example.com"),  # Default URL required
+                            description=metadata.get("description", ""),
+                            image_url=metadata.get("image_url", None),
+                            owner=metadata.get("owner", None),
+                            status=metadata.get("status", None)
+                        )
+                        
+                        # Format tool data for embedding using the document task type
+                        tool_text = format_tool_for_indexing(tool, rid)
+                        
+                        # Update the vector in Pinecone
+                        document_vector_store.add_texts(
+                            texts=[tool_text],
+                            metadatas=[metadata],
+                            ids=[rid]
+                        )
+                        
+                        updated_count += 1
+                    else:
+                        logger.warning(f"Skipping document with missing tool_id")
+                        failed_count += 1
+                
+                except Exception as e:
+                    logger.error(f"Error re-indexing tool: {str(e)}")
+                    failed_count += 1
+            
+            # Log progress
+            logger.info(f"Re-indexed batch {batch_num+1}/{total_batches} - {updated_count} tools updated so far")
+        
+        # Refresh BM25 index - no need to rebuild as metadata hasn't changed
+        if updated_count > 0 and not bm25_index.is_initialized:
+            bm25_index.rebuild_index()
+            logger.info("Rebuilt BM25 index")
+        
+        return {
+            "success": True,
+            "message": f"Successfully re-indexed {updated_count} tools with task-specific embeddings",
+            "total_vectors": total_vectors,
+            "updated_count": updated_count,
+            "failed_count": failed_count
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in reindex_tools: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to re-index tools: {str(e)}"
+        )
+
 @app.post("/query", response_model=QueryResponse)
 async def query_tools(request: QueryRequest, request_headers: Request):
     """Query tools based on user input using hybrid search (vector + keyword)."""
@@ -964,7 +1156,7 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             return QueryResponse(response=initializing_response)
         
         # Get the vector store
-        vector_store = get_vector_store(headers)
+        vector_store = get_vector_store(headers, for_query=True)
 
         # Log total vectors for reference
         total_vectors = get_total_vectors()
@@ -984,18 +1176,18 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             for doc, score in vector_results_with_scores:
                 metadata = doc.metadata
                 processed_vector_results.append({
-                    "rid": metadata.get("rid", ""),
-                    "tool_id": metadata.get("tool_id", ""),
-                    "name": metadata.get("name", ""),
-                    "description": metadata.get("description", ""),
-                    "categories": metadata.get("categories", ""),
-                    "usage": metadata.get("usage", ""),
-                    "unique_features": metadata.get("unique_features", ""),
-                    "pros": metadata.get("pros", []),
-                    "cons": metadata.get("cons", []),
-                    "pricing": metadata.get("pricing", ""),
-                    "score": float(1.0 - score)  # Convert distance to similarity score
+                    "rid": metadata["rid"],
+                    "tool_id": metadata["tool_id"],
+                    "name": metadata["name"],
+                    "category_subcat": metadata.get("category_subcat",""),
+                    "url": metadata.get("url",""),
+                    "description": metadata.get("description",""),
+                    "image_url": metadata.get("image_url",""),
+                    "owner": metadata.get("owner",""),
+                    "status": metadata.get("status",""),
+                    "score": float(1.0 - score)
                 })
+
             
             logger.info(f"Vector search returned {len(processed_vector_results)} results")
             
@@ -1017,7 +1209,12 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             logger.debug(f"Tools in hybrid results: {tool_ids}")
             
             # Step 4: Take top results (up to 10) for LLM processing
-            top_results = hybrid_results[:10]
+            top_results = hybrid_results[:5]
+
+            print("\n===== TOOL NAMES BEING SENT TO LLM =====")
+            for result in top_results:
+                print(f"- {result.get('name', 'N/A')}")
+            print("============================\n")
             
             # Format the documents for LLM
             formatted_docs = []
@@ -1025,34 +1222,49 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 formatted_doc = (
                     f"Tool ID: {result.get('tool_id', 'N/A')}\n"
                     f"Name: {result.get('name', 'N/A')}\n"
+                    f"Category/Sub‑cat: {result.get('category_subcat', 'N/A')}\n"
+                    f"URL: {result.get('url', 'N/A')}\n"
                     f"Description: {result.get('description', 'N/A')}\n"
-                    f"Categories: {result.get('categories', 'N/A')}\n"
-                    f"Usage: {result.get('usage', 'N/A')}\n"
-                    f"Unique Features: {result.get('unique_features', 'N/A')}\n"
-                    f"Pros: {', '.join(result.get('pros', []))}\n"
-                    f"Cons: {', '.join(result.get('cons', []))}\n"
-                    f"Pricing: {result.get('pricing', 'N/A')}"
+                    f"Image URL: {result.get('image_url', 'N/A')}\n"
+                    f"Owner: {result.get('owner', 'N/A')}\n"
+                    f"Status: {result.get('status', 'N/A')}"
                 )
                 formatted_docs.append(formatted_doc)
                 # Log details for debugging if needed
                 logger.debug(f"Tool: {result.get('tool_id', 'N/A')}, Score: V={result.get('vector_score', 0):.4f}, BM25={result.get('bm25_score', 0):.4f}, Combined={result.get('score', 0):.4f}")
             
-            # Join the formatted documents with separators
-            context = "\n\n---\n\n".join(formatted_docs)
-            
-            # Get the model based on headers
+                        # 2) Determine model early
             current_model = get_current_model(headers)
             logger.info(f"Using model: {current_model} with Groq API")
+            try:
+                encoder = tiktoken.encoding_for_model(current_model)
+                logger.info(f"Using tiktoken encoding_for_model for {current_model}")
+            except Exception:
+                encoder = tiktoken.get_encoding("cl100k_base")
+                logger.info("Falling back to cl100k_base encoding")
+            context = "\n\n---\n\n".join(formatted_docs)
+
+            # 3) Pick up the right encoder
+            # encoder = tiktoken.encoding_for_model(current_model)
+
+            # 4) Count tokens before cleaning
+            raw_tokens = len(encoder.encode(context))
+            print(f"DEBUG: tokens before cleaning: {raw_tokens}")
+
+            # 5) Clean and count again
+            cleaned_context = clean_text(context)
+            clean_tokens = len(encoder.encode(cleaned_context))
+            print(f"DEBUG: tokens after cleaning:  {clean_tokens}")
 
             system_text= f"""
-You are a tool retrieval assistant tasked with finding, picking and ranking all relevant tools from a provided Tool Data that closely relate to the User Query.
+You are a tool retrieval assistant tasked with finding, picking and ranking relevant tools from a provided Tool Data that closely relate to the User Query.
 Instructions:
 - Analyze the User Query and understand their needs.
-- Analyze each tool in the given 10 tools in the Tool Data and include all the relevant tools based on the analysis of User Query and needs. 
+- Analyze each tool in the given 5 tools in the Tool Data and include the relevant tools based on the analysis of User Query and needs. 
 - Rank them from most to least relevant.
 - For each tool, generate:
-  - A short summary (1–2 lines) explaining how it helps with the query.
-  - 2–3 bullet points showing key features that make it useful for this task.
+  - A short summary (1–2 lines) explaining how that particular tool helps with the User Query.
+  - 2–3 bullet points showing key features that make it useful for the User Query.
 - Format your response as a JSON object with the following schema:
 {{
   "tool_id": ["most_relevant_id", "next_most_relevant_id", ...],
@@ -1060,9 +1272,9 @@ Instructions:
     {{
       "id": "tool_id",
       "name": "Tool Name",
-      "description": "How this tool helps the user based on their query",
+      "description": "How this tool helps User Query",
       "bullets": [
-        "Feature or benefit 1",
+        "Feature or benefit 1 which helps User Query",
         "Feature or benefit 2",
         "Optional feature or benefit 3"
       ]
@@ -1072,10 +1284,10 @@ Instructions:
 }}
 
 Guidelines:
-- Carefully evaluate each included tool's relevance to the User Query and include relevant tools excluding irrelevant tools in the output JSON.
+- Carefully evaluate each included tool's semantic relevance to the User Query and include relevant tools excluding irrelevant tools in the output JSON.
 - Strict ordering: The most relevant tool MUST be listed first, followed by decreasing relevance.
 - Strict Warning: Do not include tools that are irrelevant to the User Query in the output JSON.
-- Match the tool description to the user's specific query.
+- Match the tool description to the User Query.
 - Output ONLY the JSON. No preamble No extra note.
 """
             
@@ -1085,7 +1297,9 @@ User Query: {request.query}
 
 Tool Data: {context}
 """
-
+            full_prompt = system_text + "\n\n" + prompt_text
+            token_count = len(encoder.encode(full_prompt))
+            print(f"DEBUG: total tokens in prompt = {token_count}")
             # Initialize LangChain's ChatGroq
             llm = ChatGroq(
                 groq_api_key=GROQ_API_KEY,
@@ -1095,10 +1309,29 @@ Tool Data: {context}
             # print(f"\n===== TOOLS SENT TO LLM (Tool Data) =====")
             # print(context)
             # print("============================\n")
-            print(f"\n===== TOOLS SENT TO LLM =====")
-            for idx, doc in enumerate(formatted_docs):
-                print(f"Tool {idx+1}:\n{doc}\n")
-            print("============================\n")
+            # print(f"\n===== TOOLS SENT TO LLM =====")
+            # for idx, doc in enumerate(formatted_docs):
+            #     print(f"Tool {idx+1}:\n{doc}\n")
+            # print("============================\n")
+            # print(f"\n===== TOOLS SENT TO LLM =====")
+            # print(cleaned_context)
+            # print("============================\n")
+
+            # ── DEBUG: count tokens in the outgoing prompt ──
+            # full_prompt = system_text + "\n\n" + prompt_text
+            # token_count = len(encoder.encode(full_prompt))
+            # print(f"DEBUG: total tokens in prompt = {token_count}")
+            # try:
+            #     # pick up the right encoding for your model
+            #     encoder = tiktoken.encoding_for_model(model_name)
+            #     # combine system+user text exactly as you send it
+            #     # full_prompt = system_text + "\n" + prompt_text
+            #     # token_count = len(encoder.encode(full_prompt))
+            #     logger.info(f"DEBUG: total tokens in prompt = {token_count}")
+            # except Exception as e:
+            #     encoder = tiktoken.get_encoding("cl100k_base")
+            # token_count = len(encoder.encode(full_prompt))
+            # print(f"DEBUG: total tokens in prompt = {token_count}")
             
             # Get response from Groq LLM with timeout handling
             try:
@@ -1110,9 +1343,9 @@ Tool Data: {context}
                 
                 # Extract content from response
                 llm_response = response.content
-                # print(f"\n===== LLM RESPONSE =====")
-                # print(llm_response)
-                # print("============================\n")
+                print(f"\n===== LLM RESPONSE =====")
+                print(llm_response)
+                print("============================\n")
                 
                 # Post-process the response
                 processed_response = post_process_llm_response(llm_response)
@@ -1191,13 +1424,16 @@ Tool Data: {context}
 async def add_tools(bulk_request: BulkToolRequest):
     """Add multiple tools to the vector store with duplicate checking."""
     try:
-        vector_store = get_vector_store()
+        vector_store = get_vector_store(for_query=False)
         results = []
         skipped_tools = []
         added_tools = []
-        
+
+        # First clean all tools
+        cleaned_tools = [clean_tool_data(tool) for tool in bulk_request.tools]
+
         # First check for duplicates for all tools
-        for tool in bulk_request.tools:
+        for tool in cleaned_tools:
             is_duplicate = await check_duplicate_tool(vector_store, tool)
             if is_duplicate:
                 skipped_tools.append(tool.tool_id)
@@ -1221,7 +1457,12 @@ async def add_tools(bulk_request: BulkToolRequest):
                 "rid": rid,
                 "tool_id": tool.tool_id,
                 "name": tool.name,
-                **tool.model_dump()
+                "category_subcat": tool.category_subcat,
+                "url": str(tool.url),
+                "description": tool.description,
+                "image_url": tool.image_url or "",
+                "owner": tool.owner or "",
+                "status": tool.status or ""
             }
             # Add document to vector store
             vector_store.add_texts(
@@ -1316,11 +1557,13 @@ async def delete_tool(tool_id: str):
 async def update_tools(request: BulkUpdateRequest):
     """Update multiple tools in bulk using their tool_ids."""
     try:
-        vector_store = get_vector_store()
+        vector_store = get_vector_store(for_query=False)
         results = []
         updated_rids = []
+
+        cleaned_tools = [clean_tool_data(tool) for tool in request.tools]
         
-        for tool in request.tools:
+        for tool in cleaned_tools:
             try:
                 # Search for the existing record using tool_id
                 search_results = vector_store.similarity_search(
@@ -1571,66 +1814,6 @@ async def get_stats(show_all: bool = True):
             status_code=500,
             detail=f"Failed to get stats: {str(e)}"
         )
-
-# @app.get("/stats")
-# async def get_stats():
-#     """Get vector store statistics and vector metadata"""
-#     try:
-#         # Get basic stats
-#         total_vectors = get_total_vectors()
-#         index = get_or_create_index()
-#         stats = index.describe_index_stats()
-        
-#         # Get vector store to fetch metadata
-#         vector_store = get_vector_store()
-        
-#         # Limit results for large indices to avoid slow response
-#         max_vectors_to_fetch = min(total_vectors, 50)  # Only show up to 50 vectors
-        
-#         # Query vectors with limit
-#         results = vector_store.similarity_search(
-#             "",
-#             k=max_vectors_to_fetch
-#         )
-        
-#         # Extract vector details
-#         vectors_info = []
-#         for doc in results:
-#             vectors_info.append({
-#                 "name": doc.metadata.get("name", "N/A"),
-#                 "tool_id": doc.metadata.get("tool_id", "N/A"),
-#                 "rid": doc.metadata.get("rid", "N/A"),
-#                 "description": doc.metadata.get("description", "N/A")[:100] + "...",  # Truncate long descriptions
-#                 "categories": doc.metadata.get("categories", "N/A"),
-#                 "pricing": doc.metadata.get("pricing", "N/A")
-#             })
-        
-#         # Create complete stats dictionary
-#         stats_dict = {
-#             "total_vectors": total_vectors,
-#             "vectors_shown": len(vectors_info),
-#             "dimension": DIMENSION,
-#             "index_fullness": float(stats.index_fullness) if hasattr(stats, 'index_fullness') else 0.0,
-#             "namespaces": {},
-#             "vectors": vectors_info
-#         }
-        
-#         # Add namespace information if available
-#         if hasattr(stats, 'namespaces'):
-#             for namespace, ns_stats in stats.namespaces.items():
-#                 stats_dict["namespaces"][namespace] = {
-#                     "vector_count": getattr(ns_stats, 'vector_count', 0),
-#                     "metadata": {}
-#                 }
-        
-#         return stats_dict
-        
-#     except Exception as e:
-#         logger.error(f"Error getting stats: {str(e)}")
-#         raise HTTPException(
-#             status_code=500,
-#             detail=f"Failed to get stats: {str(e)}"
-#         )
 
 @app.delete("/clear-index", response_model=Dict[str, Any])
 async def clear_index(request: ClearIndexRequest):

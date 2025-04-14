@@ -25,7 +25,8 @@ RUN pip install --no-cache-dir fastapi==0.109.0 \
     && pip install --no-cache-dir langchain-ollama==0.2.3 \
     && pip install --no-cache-dir langchain-groq \
     && pip install --no-cache-dir simsimd \
-    && pip install --no-cache-dir nomic 
+    && pip install --no-cache-dir nomic \
+    && pip install --no-cache-dir tiktoken
 
 # Install NLTK and pre-download data packages to avoid runtime downloads
 RUN pip install --no-cache-dir nltk==3.8.1 \
