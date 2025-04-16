@@ -1259,8 +1259,9 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             system_text= f"""
 You are a tool retrieval assistant tasked with finding, picking and ranking relevant tools from a provided Tool Data that closely relate to the User Query.
 Instructions:
-- Analyze the User Query and understand their needs.
-- Analyze each tool in the given 5 tools in the Tool Data and include the relevant tools based on the analysis of User Query and needs. 
+- Analyze the User Query and understand their needs, including any quantity specifications (e.g., "top 1", "best 3", etc.).
+- If the User Query specifies a number of tools (e.g., "top 1", "best 3", "show me 2"), return EXACTLY that number of tools.
+- If no quantity is specified, analyze each tool in the given tools in the Tool Data and include the relevant tools based on the analysis of User Query and needs.
 - Rank them from most to least relevant.
 - For each tool, generate:
   - A short summary (1–2 lines) explaining how that particular tool helps with the User Query.
@@ -1284,6 +1285,7 @@ Instructions:
 }}
 
 Guidelines:
+- Pay special attention to any quantity specifications in the query (e.g., "top 1", "best 3") and strictly adhere to them.
 - Carefully evaluate each included tool's semantic relevance to the User Query and include relevant tools excluding irrelevant tools in the output JSON.
 - Strict ordering: The most relevant tool MUST be listed first, followed by decreasing relevance.
 - Strict Warning: Do not include tools that are irrelevant to the User Query in the output JSON.
@@ -1354,6 +1356,8 @@ Tool Data: {context}
                 try:
                     # Parse and validate response
                     response_data = json.loads(processed_response)
+
+                    response_data["tools_sent_to_llm"] = top_results  # This is where we add the tools sent to LLM
                     
                     # Clean response
                     clean_response = json.dumps(response_data, indent=2)

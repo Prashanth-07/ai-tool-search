@@ -185,8 +185,82 @@ st.markdown("""
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    
+    /* Additional styles for clickable titles */
+    .stButton > button[data-testid="baseButton-secondary"] {
+        background-color: transparent !important;
+        border: none !important;
+        color: #4FC3F7 !important;
+        font-size: 1.3rem !important;
+        font-weight: bold !important;
+        padding: 0 !important;
+        text-align: left !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .stButton > button[data-testid="baseButton-secondary"]:hover {
+        color: #81D4FA !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Improve detail view section headers */
+    .detail-section-header {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #64B5F6;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 1px solid rgba(100, 181, 246, 0.3);
+    }
+    
+    /* Styles for related tools section */
+    .related-tools-header {
+        color: #FF5252;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 82, 82, 0.3);
+        padding-bottom: 0.5rem;
+    }
+    
+    /* Make related tool buttons more compact */
+    .stButton[data-testid^="related_btn_"] > button {
+        font-size: 1.1rem !important;
+        padding: 0.3rem 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Style for the "More Related Tools" section */
+    .more-related-tools {
+        background-color: #1A1A1A;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        border-left: 3px solid #FF5252;
+    }
+    
+    /* Make the related tool buttons stand out */
+    .stButton[data-testid^="related_btn_"] > button[data-testid="baseButton-secondary"] {
+        color: #64B5F6 !important;
+        background-color: #263238 !important;
+        border-radius: 4px !important;
+        padding: 0.5rem 0.8rem !important;
+        text-align: center !important;
+        margin: 0.3rem !important;
+        font-size: 1rem !important;
+        transition: all 0.2s ease;
+    }
+    
+    .stButton[data-testid^="related_btn_"] > button[data-testid="baseButton-secondary"]:hover {
+        background-color: #37474F !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 </style>
 """, unsafe_allow_html=True)
+
 
 # Initialize session state variables
 if 'api_url' not in st.session_state:
@@ -223,6 +297,15 @@ if 'search_query_pending' not in st.session_state:
     st.session_state.search_query_pending = None
 if 'model_choice' not in st.session_state:
     st.session_state.model_choice = "DEV_MODEL"
+# Add this to the initialization block where other session state variables are defined (around line 170)
+if 'selected_tool' not in st.session_state:
+    st.session_state.selected_tool = None
+if 'view_mode' not in st.session_state:
+    st.session_state.view_mode = "search"  # Modes: "search" or "detail"
+if 'tool_details_cache' not in st.session_state:
+    st.session_state.tool_details_cache = {}  # Cache tool details by ID
+if 'related_tools' not in st.session_state:
+    st.session_state.related_tools = []  # All tools sent to LLM
 
 # Add the search functions
 def perform_search(query):
@@ -308,7 +391,10 @@ def process_search_results(result, query):
         result_data = json.loads(result["response"])
         st.session_state.is_valid_json = True
         
-        # Normalize the result data format
+        # Store the raw response data
+        st.session_state.raw_result_data = result_data
+        
+        # Extract and store tools from the LLM response
         if "tools" in result_data and isinstance(result_data["tools"], list):
             # The new format already has a "tools" array
             st.session_state.all_tools = result_data.get("tools", [])
@@ -337,20 +423,305 @@ def process_search_results(result, query):
             # Fallback for unexpected format
             st.session_state.all_tools = []
         
-        st.session_state.raw_result_data = result_data
+        # Check for tools_sent_to_llm in the response
+        if "tools_sent_to_llm" in result_data and isinstance(result_data["tools_sent_to_llm"], list):
+            # Use the tools_sent_to_llm from the response
+            st.session_state.related_tools = result_data.get("tools_sent_to_llm", [])
+        else:
+            # No tools_sent_to_llm in response, fallback to using all_tools
+            st.session_state.related_tools = st.session_state.all_tools.copy()
+        
+        # Cache all tools from search results for future use
+        for tool in st.session_state.all_tools:
+            if 'id' in tool:
+                st.session_state.tool_details_cache[tool['id']] = tool
+
+        for tool in st.session_state.related_tools:
+            if 'id' in tool:
+                # Only add to cache if not already there or if this has more info
+                if (tool['id'] not in st.session_state.tool_details_cache or 
+                    len(tool) > len(st.session_state.tool_details_cache[tool['id']])):
+                    st.session_state.tool_details_cache[tool['id']] = tool
+        
     except json.JSONDecodeError:
         st.session_state.is_valid_json = False
         st.session_state.raw_response = result["response"]
         st.session_state.all_tools = []
+        st.session_state.related_tools = []
     
     st.session_state.show_results = True
 
+def display_tool_detail():
+    """Display detailed view of a selected tool with related tools section"""
+    if st.session_state.view_mode != "detail" or st.session_state.selected_tool is None:
+        return
+    
+    tool = st.session_state.selected_tool
+    tool_id = tool.get('id', '')
+    
+    # Add back button at the top
+    if st.button("← Back to Search Results"):
+        st.session_state.view_mode = "search"
+        # Ensure we maintain the show_results state to keep search results visible
+        st.session_state.show_results = True
+        st.rerun()
+    
+    # Display header and available information immediately
+    st.markdown(f"""
+    <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 2.2rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
+            {tool.get('name', 'Tool Details')}
+        </div>
+        <div style="font-size: 1rem; color: #B0BEC5; background-color: #263238; 
+            padding: 0.3rem 0.6rem; border-radius: 0.3rem; display: inline-block; margin-bottom: 1rem;">
+            ID: {tool.get('id', 'No ID')}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Check if we need more information for this tool
+    # We'll consider a tool to have complete info if it has description and bullets
+    has_complete_info = all(key in tool and tool[key] for key in ['description', 'bullets'])
+    
+    # If not complete, try to find more info from our various data sources
+    if not has_complete_info:
+        # 1. First check in all_tools
+        complete_tool = None
+        
+        # Check all_tools
+        matching_tool = next((t for t in st.session_state.all_tools if t.get('id') == tool_id), None)
+        if matching_tool and all(key in matching_tool for key in ['description', 'bullets']):
+            complete_tool = matching_tool
+        
+        # If not found, check related_tools
+        if not complete_tool:
+            matching_tool = next((t for t in st.session_state.related_tools if t.get('id') == tool_id), None)
+            if matching_tool and all(key in matching_tool for key in ['description', 'bullets']):
+                complete_tool = matching_tool
+        
+        # If not found, check cache
+        if not complete_tool and tool_id in st.session_state.tool_details_cache:
+            cached_tool = st.session_state.tool_details_cache[tool_id]
+            if all(key in cached_tool for key in ['description', 'bullets']):
+                complete_tool = cached_tool
+        
+        # If we found a complete version of this tool, use it
+        if complete_tool:
+            # Update with any additional fields
+            for key, value in complete_tool.items():
+                if key not in tool or not tool[key]:
+                    tool[key] = value
+            
+            # Cache it for future use
+            st.session_state.tool_details_cache[tool_id] = complete_tool
+            
+            # Update has_complete_info flag
+            has_complete_info = True
+    
+    # Only fetch additional details if we STILL don't have complete information AND we have a valid tool_id
+    if not has_complete_info and tool_id:
+        with st.spinner("Fetching additional details..."):
+            try:
+                # Prepare headers with all settings
+                headers = {
+                    "MODEL_CHOICE": st.session_state.model_choice
+                }
+                
+                # Make API call only if needed - ensure the tool_id is properly included
+                response = requests.post(
+                    f"{st.session_state.api_url}/query",
+                    json={"query": f"tool_id:{tool_id}"},  # Make sure tool_id is properly included
+                    headers=headers
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    try:
+                        result_data = json.loads(result["response"])
+                        
+                        # Check if we got additional details
+                        if "tools" in result_data and len(result_data["tools"]) > 0:
+                            # Find the matching tool
+                            matching_tool = None
+                            for t in result_data["tools"]:
+                                if t.get("id") == tool_id:
+                                    matching_tool = t
+                                    break
+                            
+                            if matching_tool:
+                                # Update with any additional fields
+                                for key, value in matching_tool.items():
+                                    if key not in tool or not tool[key]:
+                                        tool[key] = value
+                                
+                                # Cache the enhanced tool data
+                                st.session_state.tool_details_cache[tool_id] = matching_tool
+                                
+                                # Update the stored tool with complete info
+                                st.session_state.selected_tool = tool
+                    except json.JSONDecodeError:
+                        pass  # Just use what we have
+            except Exception as e:
+                st.info(f"Using available tool information. ({str(e)})")
+    
+    # Description section
+    st.markdown("### Description")
+    st.markdown(f"""
+    <div style="color: #E0E0E0; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">
+        {tool.get('description', 'No description available.')}
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Key Features section
+    st.markdown("### Key Features")
+    if 'bullets' in tool and tool['bullets']:
+        for i, bullet in enumerate(tool['bullets'], 1):
+            st.markdown(f"""
+            <div style="margin-bottom: 0.8rem; color: #E0E0E0;">
+                <span style="color: #FF9800; font-weight: 600;">{i}.</span> {bullet}
+            </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.info("No feature information available for this tool.")
+    
+    # Pros and Cons section
+    st.markdown("### Pros and Cons")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("#### Pros")
+        if 'pros' in tool and tool['pros']:
+            for pro in tool['pros']:
+                st.markdown(f"✅ {pro}")
+        else:
+            st.info("No pros listed.")
+            
+    with col2:
+        st.markdown("#### Cons")
+        if 'cons' in tool and tool['cons']:
+            for con in tool['cons']:
+                st.markdown(f"⚠️ {con}")
+        else:
+            st.info("No cons listed.")
+    
+    # Usage Examples section
+    st.markdown("### Usage Examples")
+    if 'usage' in tool and tool['usage']:
+        st.markdown(tool['usage'])
+    else:
+        st.info("No usage examples available.")
+        
+    # Unique Features section
+    st.markdown("### Unique Features")
+    if 'unique_features' in tool and tool['unique_features']:
+        st.markdown(tool['unique_features'])
+    else:
+        st.info("No unique features listed.")
+        
+    # Pricing section
+    st.markdown("### Pricing")
+    if 'pricing' in tool and tool['pricing']:
+        st.markdown(f"""
+        <div style="background-color: #1E3A5F; padding: 1rem; border-radius: 0.5rem; margin-top: 0.5rem;">
+            <div style="font-weight: 600; color: #64B5F6; margin-bottom: 0.5rem;">Pricing Information</div>
+            <div style="color: #E0E0E0;">{tool['pricing']}</div>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.info("No pricing information available.")
+    
+    # Tool Metadata section
+    st.markdown("### Tool Metadata")
+    
+    metadata = {
+        "Tool ID": tool.get('id', 'N/A'),
+        "Name": tool.get('name', 'N/A'),
+        "Categories": tool.get('categories', 'N/A'),
+        "Owner": tool.get('owner', 'N/A'),
+        "Status": tool.get('status', 'N/A')
+    }
+    
+    # Filter out empty or N/A values
+    metadata = {k: v for k, v in metadata.items() if v != 'N/A' and v}
+    
+    if metadata:
+        metadata_df = pd.DataFrame.from_dict(metadata, orient='index', columns=['Value'])
+        st.dataframe(metadata_df, use_container_width=True)
+    else:
+        st.info("No metadata available for this tool.")
+    
+    # URL if available
+    if 'url' in tool and tool['url']:
+        st.markdown("### Tool URL")
+        st.markdown(f"[{tool['url']}]({tool['url']})")
+        
+    # Image URL if available
+    if 'image_url' in tool and tool['image_url']:
+        st.markdown("### Tool Image")
+        st.image(tool['image_url'], caption=tool.get('name', 'Tool Image'))
+    
+    # More Related Tools section
+    st.markdown("### More Related Tools")
+    
+    # Get all tools
+    all_related_tools = st.session_state.related_tools
+    
+    # Skip the current tool
+    related_tools = [t for t in all_related_tools if t.get('id') != tool_id]
+    
+    # Get list of tool IDs in LLM response for prioritization
+    llm_tool_ids = [t.get('id') for t in st.session_state.all_tools]
+    
+    # Prioritize tools - first those in LLM response, then others
+    prioritized_tools = []
+    
+    # First add tools that were in LLM response
+    for t in related_tools:
+        if t.get('id') in llm_tool_ids:
+            prioritized_tools.append(t)
+    
+    # Then add remaining tools
+    for t in related_tools:
+        if t.get('id') not in llm_tool_ids and t not in prioritized_tools:
+            prioritized_tools.append(t)
+    
+    if not prioritized_tools:
+        st.info("No related tools available.")
+    else:
+        # Create a 2-column layout for related tools
+        cols = st.columns(2)
+        
+        for i, related_tool in enumerate(prioritized_tools):
+            with cols[i % 2]:
+                # Create a callback for this related tool
+                def view_related_tool(selected_tool=related_tool):
+                    st.session_state.selected_tool = selected_tool
+                    st.session_state.view_mode = "detail"
+                
+                # Make the title clickable
+                st.button(
+                    f"{related_tool.get('name', 'Unnamed Tool')}",
+                    key=f"related_btn_{related_tool.get('id', i)}",
+                    on_click=view_related_tool,
+                    type="secondary"
+                )
+    
+    # Add back button at the bottom too
+    if st.button("← Back to Search Results", key="back_button_bottom"):
+        st.session_state.view_mode = "search"
+        # Ensure we maintain the show_results state to keep search results visible
+        st.session_state.show_results = True
+        st.rerun()
 
 def display_search_results():
     """Display search results from session state"""
     # Initialize raw_response if it doesn't exist
     if "raw_response" not in st.session_state:
         st.session_state.raw_response = ""
+    
+    # If in detail view mode, don't show search results
+    if st.session_state.view_mode == "detail":
+        return
     
     if not st.session_state.show_results:
         return
@@ -387,16 +758,27 @@ def display_search_results():
             tool_container = st.container()
             
             with tool_container:
-                # Tool name and ID
+                # Create a clickable title - using a button that looks like text
+                def view_details_callback(selected_tool=tool):
+                    st.session_state.selected_tool = selected_tool
+                    st.session_state.view_mode = "detail"
+                
+                # Use a button styled as a title
+                st.button(
+                    f"{i}. {tool.get('name', 'No Name')}",
+                    key=f"title_btn_{tool.get('id', i)}",
+                    on_click=view_details_callback,
+                    type="secondary",
+                    use_container_width=True
+                )
+                
+                # Tool ID badge - placed under the clickable title
+                
+                # Tool ID
                 st.markdown(f"""
-                <div style="margin-bottom: 0.5rem;">
-                    <div style="font-size: 1.3rem; font-weight: bold; color: #4FC3F7; margin-bottom: 0.5rem;">
-                        {i}. {tool.get('name', 'No Name')}
-                    </div>
-                    <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
-                        padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
-                        ID: {tool.get('id', 'No ID')}
-                    </div>
+                <div style="font-size: 0.9rem; color: #B0BEC5; background-color: #263238; 
+                    padding: 0.2rem 0.5rem; border-radius: 0.2rem; display: inline-block; margin-bottom: 0.5rem;">
+                    ID: {tool.get('id', 'No ID')}
                 </div>
                 """, unsafe_allow_html=True)
                 
@@ -564,31 +946,35 @@ tabs = st.tabs(["🔍 Search", "➕ Add Tools", "🔄 Update Tools", "🗑️ De
 
 # Search tab
 with tabs[0]:
-    st.markdown('<div class="subheader">Search AI Tools</div>', unsafe_allow_html=True)
-    
-    # Create a form to capture Enter key presses
-    with st.form(key="search_form"):
-        # Use session state key to track input value properly
-        query = st.text_input(
-            "Enter your search query:", 
-            placeholder="e.g., list all the coding related tools",
-            key="query_input"
-        )
+    if st.session_state.view_mode == "search":
+        st.markdown('<div class="subheader">Search AI Tools</div>', unsafe_allow_html=True)
         
-        # Form submit button (triggered by Enter key or click)
-        form_submit = st.form_submit_button("Search", type="primary", on_click=handle_form_submit)
-    
-    # Dedicated search container for the spinner and processing
-    search_container = st.container()
-    
-    # If executing a search from a previous submission, continue the process
-    if st.session_state.get('executing_search', False):
-        with search_container:
-            # Execute the pending search with the same query
-            perform_search(st.session_state.search_query_pending)
-    
-    # Display search results below the search box
-    display_search_results()
+        # Create a form to capture Enter key presses
+        with st.form(key="search_form"):
+            # Use session state key to track input value properly
+            query = st.text_input(
+                "Enter your search query:", 
+                placeholder="e.g., list all the coding related tools",
+                key="query_input"
+            )
+            
+            # Form submit button (triggered by Enter key or click)
+            form_submit = st.form_submit_button("Search", type="primary", on_click=handle_form_submit)
+        
+        # Dedicated search container for the spinner and processing
+        search_container = st.container()
+        
+        # If executing a search from a previous submission, continue the process
+        if st.session_state.get('executing_search', False):
+            with search_container:
+                # Execute the pending search with the same query
+                perform_search(st.session_state.search_query_pending)
+        
+        # Display search results below the search box
+        display_search_results()
+    else:
+        # Display the detailed view of the selected tool
+        display_tool_detail()
 
 # 2. ADD TOOLS TAB
 with tabs[1]:
