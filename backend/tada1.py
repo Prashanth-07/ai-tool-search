@@ -308,21 +308,86 @@ class ToolSearchCache:
 # Initialize cache
 tool_search_cache = ToolSearchCache(max_size=1000, expiry_minutes=60)
 
+class ToolDetails(BaseModel):
+    introduction: Optional[str] = None
+    usage: Optional[str] = None
+    speciality: Optional[str] = None
+
+class ToolFeaturesPros(BaseModel):
+    pros: List[str] = []
+    cons: List[str] = []
+
+class ToolMetrics(BaseModel):
+    functionality: float = 0
+    innovation: float = 0
+    performance: float = 0
+    overall: float = 0
+    easeOfUse: float = 0
+    valueForMoney: float = 0
+
+class Category(BaseModel):
+    Category: str
+
+class PricingPlan(BaseModel):
+    planName: str
+    price: str
+    features: List[str] = []
+    isPopular: bool = False
+    _id: Optional[str] = None
+
+class QAItem(BaseModel):
+    question: str
+    answer: str
+
 class Tool(BaseModel):
     tool_id: str
     name: str
-    category_subcat: str
     url: Union[HttpUrl, str]
-    description: str
+    description: Optional[str] = None
+    category_subcat: Optional[str] = None
     image_url: Optional[Union[HttpUrl, str]] = None
     owner: Optional[str] = None
     status: Optional[str] = None
+    
+    # New fields for the updated schema
+    pricingType: Optional[str] = None
+    details: Optional[ToolDetails] = None
+    features: Optional[ToolFeaturesPros] = None
+    metrics: Optional[ToolMetrics] = None
+    categories: List[Category] = []
+    pricing: List[PricingPlan] = []
+    qaSection: List[QAItem] = []
+    
+    class Config:
+        # Allow additional fields
+        extra = "allow"
+        
+    def generate_category_subcat(self) -> str:
+        """Generate category_subcat field from categories for backward compatibility"""
+        if self.categories:
+            return ", ".join([cat.Category for cat in self.categories])
+        return self.category_subcat or ""
+    
+    def generate_description(self) -> str:
+        """Generate description from details for backward compatibility"""
+        if not self.description and self.details:
+            parts = []
+            if self.details.introduction:
+                parts.append(self.details.introduction)
+            if self.details.usage:
+                parts.append(f"Usage: {self.details.usage}")
+            if self.details.speciality:
+                parts.append(f"Specialty: {self.details.speciality}")
+            if parts:
+                return "\n\n".join(parts)
+        return self.description or ""
 
 class ToolResponse(BaseModel):
     id: str
     tool: Tool
     status: str = "added"
 
+# Initialize BM25 index
 # Initialize BM25 index
 class BM25IndexManager:
     def __init__(self):
@@ -357,8 +422,39 @@ class BM25IndexManager:
             tool.owner or "",
             tool.status or ""
             ]
+        
+        # Add categories if available
+        if hasattr(tool, 'categories') and tool.categories:
+            for cat in tool.categories:
+                parts.append(cat.Category)
+        
+        # Add details if available
+        if hasattr(tool, 'details') and tool.details:
+            if tool.details.introduction:
+                parts.append(tool.details.introduction)
+            if tool.details.usage:
+                parts.append(tool.details.usage)
+            if tool.details.speciality:
+                parts.append(tool.details.speciality)
+        
+        # Add features if available
+        if hasattr(tool, 'features') and tool.features:
+            if tool.features.pros:
+                parts.extend(tool.features.pros)
+            if tool.features.cons:
+                parts.extend(tool.features.cons)
+        
+        # Add pricing type
+        if hasattr(tool, 'pricingType') and tool.pricingType:
+            parts.append(tool.pricingType)
+        
+        # Add Q&A content for better search
+        if hasattr(tool, 'qaSection') and tool.qaSection:
+            for qa in tool.qaSection:
+                parts.append(qa.question)
+                parts.append(qa.answer)
+                
         return " ".join(parts)
-
     
     def add_tool(self, tool, rid):
         """Add a single tool to the BM25 index"""
@@ -424,12 +520,6 @@ class BM25IndexManager:
         # Get BM25 scores for all documents
         scores = self.bm25.get_scores(tokenized_query)
         
-        # Log scores for specific tools if needed for debugging
-        # for idx, doc_id in enumerate(self.doc_ids):
-        #     tool = self.tool_data[doc_id]["tool"]
-        #     if hasattr(tool, 'tool_id') and tool.tool_id in ['iconme-023', 'contentgoblinai-002']:
-        #         logger.info(f"Tool ID: {tool.tool_id}, Score: {scores[idx]}")
-        
         # Get top-k results
         top_k = min(top_k, len(self.doc_ids))
         top_indices = np.argsort(scores)[-top_k:][::-1]
@@ -445,7 +535,7 @@ class BM25IndexManager:
                     "tool_id": tool.tool_id,
                     "name": tool.name,
                     "description": tool.description,
-                    "category_subcat": tool.category_subcat,  # updated field
+                    "category_subcat": tool.category_subcat,
                     "url": str(tool.url),
                     "image_url": tool.image_url or "",
                     "owner": tool.owner or "",
@@ -462,6 +552,7 @@ bm25_index = BM25IndexManager()
 
 class QueryRequest(BaseModel):
     query: str
+    searchFrom: Optional[List[str]] = None
 
 class QueryResponse(BaseModel):
     response: str
@@ -501,6 +592,14 @@ def clean_tool_data(tool: Tool) -> Tool:
     
     # Create a copy of the tool
     cleaned_tool = tool.model_copy() if hasattr(tool, 'model_copy') else Tool(**tool.dict())
+    
+    # Ensure category_subcat is present
+    if not cleaned_tool.category_subcat:
+        cleaned_tool.category_subcat = cleaned_tool.generate_category_subcat()
+    
+    # Ensure description is present
+    if not cleaned_tool.description:
+        cleaned_tool.description = cleaned_tool.generate_description()
     
     # 1. Clean name field - if it's a URL, extract domain name
     if cleaned_tool.name and cleaned_tool.name.startswith('http'):
@@ -797,18 +896,82 @@ def get_vector_store(headers=None, for_query=False):
     
 def format_tool_for_indexing(tool: Tool, rid: str) -> str:
     """Format tool data for embedding"""
-    return (
-        # f"document: " 
+    # Start with basic info
+    formatted_text = (
         f"RID: {rid}\n"
         f"Tool ID: {tool.tool_id}\n"
         f"Name: {tool.name}\n\n"
-        f"Category/Sub‑cat: {tool.category_subcat}\n\n"
-        f"URL: {tool.url}\n\n"
-        f"Description:\n{tool.description}\n\n"
+    )
+    
+    # Add categories
+    if tool.categories:
+        categories_text = ", ".join([cat.Category for cat in tool.categories])
+        formatted_text += f"Categories: {categories_text}\n\n"
+    elif tool.category_subcat:
+        formatted_text += f"Category/Sub‑cat: {tool.category_subcat}\n\n"
+    
+    # Add URL
+    formatted_text += f"URL: {tool.url}\n\n"
+    
+    # Add pricing type
+    if tool.pricingType:
+        formatted_text += f"Pricing Type: {tool.pricingType}\n\n"
+    
+    # Add details section
+    if tool.details:
+        formatted_text += "Details:\n"
+        if tool.details.introduction:
+            formatted_text += f"Introduction: {tool.details.introduction}\n"
+        if tool.details.usage:
+            formatted_text += f"Usage: {tool.details.usage}\n"
+        if tool.details.speciality:
+            formatted_text += f"Specialty: {tool.details.speciality}\n"
+        formatted_text += "\n"
+    
+    # Add features
+    if tool.features and (tool.features.pros or tool.features.cons):
+        formatted_text += "Features:\n"
+        if tool.features.pros:
+            formatted_text += "Pros:\n" + "\n".join([f"- {pro}" for pro in tool.features.pros]) + "\n"
+        if tool.features.cons:
+            formatted_text += "Cons:\n" + "\n".join([f"- {con}" for con in tool.features.cons]) + "\n"
+        formatted_text += "\n"
+    
+    # Add description (for backward compatibility)
+    if tool.description:
+        formatted_text += f"Description:\n{tool.description}\n\n"
+    
+    # Add metrics if available
+    if tool.metrics:
+        formatted_text += "Metrics:\n"
+        metrics_dict = tool.metrics.dict()
+        for key, value in metrics_dict.items():
+            formatted_text += f"{key}: {value}\n"
+        formatted_text += "\n"
+    
+    # Add pricing plans
+    if tool.pricing:
+        formatted_text += "Pricing Plans:\n"
+        for plan in tool.pricing:
+            formatted_text += f"- {plan.planName}: {plan.price}\n"
+            if plan.features:
+                formatted_text += "  Features: " + ", ".join(plan.features) + "\n"
+        formatted_text += "\n"
+    
+    # Add Q&A section
+    if tool.qaSection:
+        formatted_text += "FAQ:\n"
+        for qa in tool.qaSection:
+            formatted_text += f"Q: {qa.question}\nA: {qa.answer}\n\n"
+    
+    # Add remaining metadata fields for backward compatibility
+    formatted_text += (
         f"Image URL: {tool.image_url or 'N/A'}\n"
         f"Owner: {tool.owner or 'Unassigned'}\n"
         f"Status: {tool.status or 'Unknown'}"
     )
+    
+    return formatted_text
 
 def post_process_llm_response(response_text):
     """
@@ -1125,11 +1288,17 @@ async def query_tools(request: QueryRequest, request_headers: Request):
         logger.info(f"Processing query: {request.query}")
         headers = request_headers.headers
 
-        # Try to get cached response
-        cached_response = tool_search_cache.get(request.query)
-        if cached_response:
-            logger.info("Returning cached response")
-            return QueryResponse(response=cached_response)
+        # Log if searching from specific tools
+        if request.searchFrom:
+            logger.info(f"Searching only within {len(request.searchFrom)} specified tools: {request.searchFrom[:3]}...")
+
+        # Try to get cached response - only use cache if not doing filtered search
+        cached_response = None
+        if not request.searchFrom:
+            cached_response = tool_search_cache.get(request.query)
+            if cached_response:
+                logger.info("Returning cached response")
+                return QueryResponse(response=cached_response)
         
         # Check if indexes are ready
         if not app_state["initialization_started"]:
@@ -1164,12 +1333,25 @@ async def query_tools(request: QueryRequest, request_headers: Request):
         
         # Hybrid search implementation
         try:
-            # Step 1: Perform vector search with scores
+            # Create a filter if searchFrom is provided
+            search_filter = None
+            if request.searchFrom and len(request.searchFrom) > 0:
+                # Filter to only include specified tool_ids
+                search_filter = {"tool_id": {"$in": request.searchFrom}}
+                logger.info(f"Applied filter to search only within specified tools: {search_filter}")
+            
+            # Step 1: Perform vector search with scores, applying filter if provided
             vector_k = 15  # Increase to get more candidates
-            vector_results_with_scores = vector_store.similarity_search_with_score(
-                request.query,
-                k=vector_k
-            )
+            
+            try:
+                vector_results_with_scores = vector_store.similarity_search_with_score(
+                    request.query,
+                    k=vector_k,
+                    filter=search_filter  # Apply the filter here
+                )
+            except Exception as e:
+                logger.error(f"Error in vector search: {str(e)}")
+                vector_results_with_scores = []
             
             # Convert to a list of result dictionaries
             processed_vector_results = []
@@ -1188,13 +1370,26 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                     "score": float(1.0 - score)
                 })
 
-            
             logger.info(f"Vector search returned {len(processed_vector_results)} results")
             
-            # Step 2: Perform BM25 search
+            # Step 2: Perform BM25 search - we need to filter these results manually
             bm25_k = 30  # Get similar number of results
-            bm25_results = bm25_index.search(request.query, top_k=bm25_k)
-            logger.info(f"BM25 search returned {len(bm25_results)} results")
+            
+            try:
+                bm25_results = bm25_index.search(request.query, top_k=bm25_k)
+                logger.info(f"BM25 search returned {len(bm25_results)} results")
+                
+                # Filter BM25 results if searchFrom is provided
+                if request.searchFrom and len(request.searchFrom) > 0:
+                    filtered_bm25_results = [
+                        result for result in bm25_results 
+                        if result.get("tool_id") in request.searchFrom
+                    ]
+                    logger.info(f"Filtered BM25 results from {len(bm25_results)} to {len(filtered_bm25_results)}")
+                    bm25_results = filtered_bm25_results
+            except Exception as e:
+                logger.error(f"Error in BM25 search: {str(e)}")
+                bm25_results = []
             
             # Step 3: Fuse the results (using 0.5 weight for vector search, 0.5 for BM25)
             hybrid_results = fuse_search_results(
@@ -1204,11 +1399,21 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             )
             logger.info(f"Hybrid search returned {len(hybrid_results)} results")
             
-            # Log details of specific tools if needed
-            tool_ids = [result.get('tool_id', 'N/A') for result in hybrid_results]
-            logger.debug(f"Tools in hybrid results: {tool_ids}")
+            # If there are no results and we have a filter, it might be too restrictive
+            if not hybrid_results and request.searchFrom:
+                logger.warning(f"No results found with the provided filter. Check if tool IDs are valid.")
+                # Return a helpful message
+                filter_response = json.dumps({
+                    "tool_id": [],
+                    "tools": [],
+                    "message": "No tools found matching your search within the specified tools.",
+                    "search_filter_applied": True,
+                    "searched_within_tool_ids": request.searchFrom,
+                    "timestamp": datetime.now().isoformat()
+                })
+                return QueryResponse(response=filter_response)
             
-            # Step 4: Take top results (up to 10) for LLM processing
+            # Step 4: Take top results (up to 5) for LLM processing
             top_results = hybrid_results[:5]
 
             print("\n===== TOOL NAMES BEING SENT TO LLM =====")
@@ -1230,10 +1435,20 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                     f"Status: {result.get('status', 'N/A')}"
                 )
                 formatted_docs.append(formatted_doc)
-                # Log details for debugging if needed
-                logger.debug(f"Tool: {result.get('tool_id', 'N/A')}, Score: V={result.get('vector_score', 0):.4f}, BM25={result.get('bm25_score', 0):.4f}, Combined={result.get('score', 0):.4f}")
             
-                        # 2) Determine model early
+            # If we have no tools to process, return early
+            if not formatted_docs:
+                empty_response = json.dumps({
+                    "tool_id": [],
+                    "tools": [],
+                    "message": "No tools found matching your search criteria.",
+                    "search_filter_applied": request.searchFrom is not None,
+                    "searched_within_tool_ids": request.searchFrom,
+                    "timestamp": datetime.now().isoformat()
+                })
+                return QueryResponse(response=empty_response)
+            
+            # 2) Determine model early
             current_model = get_current_model(headers)
             logger.info(f"Using model: {current_model} with Groq API")
             try:
@@ -1243,9 +1458,6 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 encoder = tiktoken.get_encoding("cl100k_base")
                 logger.info("Falling back to cl100k_base encoding")
             context = "\n\n---\n\n".join(formatted_docs)
-
-            # 3) Pick up the right encoder
-            # encoder = tiktoken.encoding_for_model(current_model)
 
             # 4) Count tokens before cleaning
             raw_tokens = len(encoder.encode(context))
@@ -1308,32 +1520,6 @@ Tool Data: {context}
                 model_name=current_model,
                 temperature=0.1
             )
-            # print(f"\n===== TOOLS SENT TO LLM (Tool Data) =====")
-            # print(context)
-            # print("============================\n")
-            # print(f"\n===== TOOLS SENT TO LLM =====")
-            # for idx, doc in enumerate(formatted_docs):
-            #     print(f"Tool {idx+1}:\n{doc}\n")
-            # print("============================\n")
-            # print(f"\n===== TOOLS SENT TO LLM =====")
-            # print(cleaned_context)
-            # print("============================\n")
-
-            # ── DEBUG: count tokens in the outgoing prompt ──
-            # full_prompt = system_text + "\n\n" + prompt_text
-            # token_count = len(encoder.encode(full_prompt))
-            # print(f"DEBUG: total tokens in prompt = {token_count}")
-            # try:
-            #     # pick up the right encoding for your model
-            #     encoder = tiktoken.encoding_for_model(model_name)
-            #     # combine system+user text exactly as you send it
-            #     # full_prompt = system_text + "\n" + prompt_text
-            #     # token_count = len(encoder.encode(full_prompt))
-            #     logger.info(f"DEBUG: total tokens in prompt = {token_count}")
-            # except Exception as e:
-            #     encoder = tiktoken.get_encoding("cl100k_base")
-            # token_count = len(encoder.encode(full_prompt))
-            # print(f"DEBUG: total tokens in prompt = {token_count}")
             
             # Get response from Groq LLM with timeout handling
             try:
@@ -1356,27 +1542,69 @@ Tool Data: {context}
                 try:
                     # Parse and validate response
                     response_data = json.loads(processed_response)
+                    
+                    # Add search filter info if applied
+                    if request.searchFrom:
+                        response_data["search_filter_applied"] = True
+                        response_data["searched_within_tool_ids"] = request.searchFrom
 
-                    response_data["tools_sent_to_llm"] = top_results  # This is where we add the tools sent to LLM
+                    # Ensure proper tool data is included - create a fallback if needed
+                    if "tools" not in response_data or not response_data["tools"]:
+                        # Include the original tools if the LLM didn't format them correctly
+                        response_data["tools"] = []
+                        response_data["tool_id"] = []
+                        
+                        for result in top_results:
+                            tool_data = {
+                                "id": result.get("tool_id", ""),
+                                "name": result.get("name", ""),
+                                "description": result.get("description", ""),
+                                "bullets": [
+                                    "This tool was found in your search",
+                                    "Check the description for more details"
+                                ]
+                            }
+                            response_data["tools"].append(tool_data)
+                            response_data["tool_id"].append(result.get("tool_id", ""))
+                            
+                        response_data["message"] = "Structured response incomplete, showing raw search results instead."
                     
                     # Clean response
                     clean_response = json.dumps(response_data, indent=2)
                     logger.info("Processed valid JSON response")
                 except json.JSONDecodeError:
-                    # If not valid JSON, just return the processed response as-is
-                    clean_response = processed_response
-                    logger.warning("Response is not valid JSON, returning as-is")
+                    # If not valid JSON, construct a valid JSON with the tools
+                    fallback_data = {
+                        "tool_id": [result.get("tool_id", "") for result in top_results],
+                        "tools": [],
+                        "message": "Failed to parse LLM response into JSON, showing raw search results",
+                        "timestamp": datetime.now().isoformat()
+                    }
                     
-                    # Try to construct a minimal valid JSON if parsing failed
-                    if not processed_response or processed_response.strip() == "":
-                        clean_response = json.dumps({
-                            "tool_id": [],
-                            "tools": [],
-                            "error": "No valid response generated"
-                        })
+                    # Include basic info about the tools
+                    for result in top_results:
+                        tool_data = {
+                            "id": result.get("tool_id", ""),
+                            "name": result.get("name", ""),
+                            "description": result.get("description", ""),
+                            "bullets": [
+                                "This tool was found in your search",
+                                "Check the description for more details"
+                            ]
+                        }
+                        fallback_data["tools"].append(tool_data)
+                    
+                    # Add search filter info if applied
+                    if request.searchFrom:
+                        fallback_data["search_filter_applied"] = True
+                        fallback_data["searched_within_tool_ids"] = request.searchFrom
+                    
+                    clean_response = json.dumps(fallback_data, indent=2)
+                    logger.warning("Created fallback JSON response")
                 
-                # Cache the processed response
-                tool_search_cache.set(request.query, clean_response)
+                # Only cache the result if this wasn't a filtered search
+                if not request.searchFrom:
+                    tool_search_cache.set(request.query, clean_response)
                 
                 # Log total processing time
                 elapsed_time = time.time() - start_time
@@ -1433,10 +1661,25 @@ async def add_tools(bulk_request: BulkToolRequest):
         skipped_tools = []
         added_tools = []
 
-        # First clean all tools
-        cleaned_tools = [clean_tool_data(tool) for tool in bulk_request.tools]
+        # First clean all tools and ensure backward compatibility fields
+        cleaned_tools = []
+        for tool in bulk_request.tools:
+            # Map tool_id from _id if needed
+            if hasattr(tool, '_id') and tool._id and not tool.tool_id:
+                tool.tool_id = tool._id
+                
+            # Ensure backward compatibility fields
+            if not tool.category_subcat:
+                tool.category_subcat = tool.generate_category_subcat()
+                
+            if not tool.description:
+                tool.description = tool.generate_description()
+                
+            # Now clean the tool data
+            cleaned_tool = clean_tool_data(tool)
+            cleaned_tools.append(cleaned_tool)
 
-        # First check for duplicates for all tools
+        # Check for duplicates
         for tool in cleaned_tools:
             is_duplicate = await check_duplicate_tool(vector_store, tool)
             if is_duplicate:
@@ -1450,13 +1693,15 @@ async def add_tools(bulk_request: BulkToolRequest):
             else:
                 added_tools.append(tool)
         
-        # Now add only the non-duplicate tools
+        # Add non-duplicate tools
         for tool in added_tools:
             # Generate unique RID for each tool
             rid = str(uuid4())
-            # Format tool data
+            
+            # Format tool data for indexing
             tool_text = format_tool_for_indexing(tool, rid)
-            # Prepare metadata
+            
+            # Prepare metadata - convert complex objects to simple types for Pinecone
             metadata = {
                 "rid": rid,
                 "tool_id": tool.tool_id,
@@ -1468,6 +1713,41 @@ async def add_tools(bulk_request: BulkToolRequest):
                 "owner": tool.owner or "",
                 "status": tool.status or ""
             }
+            
+            # Add new fields with properly serialized data
+            if tool.pricingType:
+                metadata["pricingType"] = tool.pricingType
+            
+            # Convert complex nested objects to strings for metadata
+            if tool.details:
+                metadata["details_introduction"] = tool.details.introduction or ""
+                metadata["details_usage"] = tool.details.usage or ""
+                metadata["details_speciality"] = tool.details.speciality or ""
+            
+            if tool.features:
+                if tool.features.pros:
+                    metadata["features_pros"] = ",".join(tool.features.pros)
+                if tool.features.cons:
+                    metadata["features_cons"] = ",".join(tool.features.cons)
+                
+            if tool.metrics:
+                for key, value in tool.metrics.dict().items():
+                    metadata[f"metrics_{key}"] = value
+                
+            if tool.categories:
+                # For categories, extract just the category values as a list of strings
+                metadata["categories_list"] = [cat.Category for cat in tool.categories]
+                
+            if tool.pricing:
+                # For pricing, extract key information as simple strings
+                metadata["pricing_plans"] = ",".join([plan.planName for plan in tool.pricing])
+                metadata["pricing_prices"] = ",".join([plan.price for plan in tool.pricing])
+                
+            if tool.qaSection:
+                # For QA, store as concatenated strings
+                metadata["qa_questions"] = ",".join([qa.question for qa in tool.qaSection])
+                metadata["qa_answers"] = ",".join([qa.answer for qa in tool.qaSection])
+            
             # Add document to vector store
             vector_store.add_texts(
                 texts=[tool_text],
