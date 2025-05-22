@@ -1869,13 +1869,52 @@ async def update_tools(request: BulkUpdateRequest):
                 # Format tool data for update
                 tool_text = format_tool_for_indexing(tool, existing_rid)
                 
-                # Prepare metadata
+                # Prepare metadata - convert complex objects to simple types for Pinecone (same as add_tools)
                 metadata = {
                     "rid": existing_rid,
                     "tool_id": tool.tool_id,
                     "name": tool.name,
-                    **tool.model_dump()
+                    "category_subcat": tool.category_subcat,
+                    "url": str(tool.url),
+                    "description": tool.description,
+                    "image_url": tool.image_url or "",
+                    "owner": tool.owner or "",
+                    "status": tool.status or ""
                 }
+                
+                # Add new fields with properly serialized data (same as add_tools)
+                if tool.pricingType:
+                    metadata["pricingType"] = tool.pricingType
+                
+                # Convert complex nested objects to strings for metadata
+                if tool.details:
+                    metadata["details_introduction"] = tool.details.introduction or ""
+                    metadata["details_usage"] = tool.details.usage or ""
+                    metadata["details_speciality"] = tool.details.speciality or ""
+                
+                if tool.features:
+                    if tool.features.pros:
+                        metadata["features_pros"] = ",".join(tool.features.pros)
+                    if tool.features.cons:
+                        metadata["features_cons"] = ",".join(tool.features.cons)
+                    
+                if tool.metrics:
+                    for key, value in tool.metrics.dict().items():
+                        metadata[f"metrics_{key}"] = value
+                    
+                if tool.categories:
+                    # For categories, extract just the category values as a list of strings
+                    metadata["categories_list"] = [cat.Category for cat in tool.categories]
+                    
+                if tool.pricing:
+                    # For pricing, extract key information as simple strings
+                    metadata["pricing_plans"] = ",".join([plan.planName for plan in tool.pricing])
+                    metadata["pricing_prices"] = ",".join([plan.price for plan in tool.pricing])
+                    
+                if tool.qaSection:
+                    # For QA, store as concatenated strings
+                    metadata["qa_questions"] = ",".join([qa.question for qa in tool.qaSection])
+                    metadata["qa_answers"] = ",".join([qa.answer for qa in tool.qaSection])
                 
                 # Update the vector
                 vector_store.add_texts(
