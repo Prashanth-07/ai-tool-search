@@ -357,7 +357,14 @@ class Tool(BaseModel):
     categories: List[Category] = []
     pricing: List[PricingPlan] = []
     qaSection: List[QAItem] = []
-    
+
+class QuerySuggestionsRequest(BaseModel):
+    query: str
+
+class QuerySuggestionsResponse(BaseModel):
+    original_query: str
+    suggestions: List[str]
+
     class Config:
         # Allow additional fields
         extra = "allow"
@@ -2137,6 +2144,150 @@ async def get_stats(show_all: bool = True):
             status_code=500,
             detail=f"Failed to get stats: {str(e)}"
         )
+
+@app.post("/query-suggestions", response_model=QuerySuggestionsResponse)
+async def get_query_suggestions(request: QuerySuggestionsRequest, request_headers: Request):
+    """Generate 5 similar/related queries based on the user's input query."""
+    try:
+        logger.info(f"Generating query suggestions for: {request.query}")
+        headers = request_headers.headers
+        
+        # Get current model
+        current_model = get_current_model(headers)
+        logger.info(f"Using model: {current_model} with Groq API for query suggestions")
+        
+        # System prompt for generating query suggestions
+        system_text = """You are a query suggestion assistant for an AI tool search platform. Your task is to generate exactly 5 similar, related, or refined queries based on the user's original query.
+
+Guidelines:
+- Generate exactly 5 alternative queries that are related to the original query
+- Make suggestions more specific, broader, or explore different angles of the same need
+- Focus on tool-finding scenarios (users looking for AI tools, software, applications)
+- Keep suggestions practical and actionable
+- Vary the suggestions to cover different aspects: pricing (free/paid), features, use cases, industries
+- Each suggestion should be a complete, natural query that a user might actually search for
+- Avoid repeating the exact same query
+- Format as a simple JSON array of strings
+
+Examples of good suggestion patterns:
+- Original: "video editing tool" → Suggestions: ["free video editing software", "AI video editor for beginners", "professional video editing suite", "online video editor no download", "video editing tool for social media"]
+- Original: "project management" → Suggestions: ["free project management software", "project management for small teams", "agile project management tool", "project management with time tracking", "collaborative project management platform"]
+
+Output only a JSON array of 5 strings, nothing else."""
+
+        # Create the prompt
+        prompt_text = f"""Generate 5 query suggestions for: "{request.query}"
+
+Return only a JSON array of 5 strings."""
+
+        # Initialize LangChain's ChatGroq
+        llm = ChatGroq(
+            groq_api_key=GROQ_API_KEY,
+            model_name=current_model,
+            temperature=0.7,  # Slightly higher temperature for more creative suggestions
+            max_tokens=200    # Limit tokens for suggestions
+        )
+        
+        # Get response from Groq LLM
+        try:
+            response = llm.invoke([
+                {"role": "system", "content": system_text},
+                {"role": "user", "content": prompt_text}
+            ])
+            
+            # Extract content from response
+            llm_response = response.content.strip()
+            logger.info(f"LLM suggestions response: {llm_response}")
+            
+            # Try to parse as JSON
+            try:
+                suggestions = json.loads(llm_response)
+                
+                # Validate that we got a list of strings
+                if isinstance(suggestions, list) and len(suggestions) >= 5:
+                    # Take exactly 5 suggestions
+                    suggestions = suggestions[:5]
+                    
+                    # Ensure all items are strings
+                    suggestions = [str(s).strip() for s in suggestions if str(s).strip()]
+                    
+                    # If we don't have enough valid suggestions, pad with fallback
+                    if len(suggestions) < 5:
+                        fallback_suggestions = generate_fallback_suggestions(request.query)
+                        suggestions.extend(fallback_suggestions[len(suggestions):])
+                    
+                    return QuerySuggestionsResponse(
+                        original_query=request.query,
+                        suggestions=suggestions[:5]
+                    )
+                else:
+                    raise ValueError("Invalid suggestions format")
+                    
+            except (json.JSONDecodeError, ValueError) as e:
+                logger.warning(f"Failed to parse LLM suggestions: {str(e)}")
+                # Fall back to template-based suggestions
+                fallback_suggestions = generate_fallback_suggestions(request.query)
+                return QuerySuggestionsResponse(
+                    original_query=request.query,
+                    suggestions=fallback_suggestions
+                )
+        
+        except Exception as e:
+            logger.error(f"Error in LLM call for suggestions: {str(e)}")
+            # Fall back to template-based suggestions
+            fallback_suggestions = generate_fallback_suggestions(request.query)
+            return QuerySuggestionsResponse(
+                original_query=request.query,
+                suggestions=fallback_suggestions
+            )
+            
+    except Exception as e:
+        logger.error(f"Error in get_query_suggestions: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to generate query suggestions: {str(e)}"
+        )
+
+def generate_fallback_suggestions(query: str) -> List[str]:
+    """Generate fallback suggestions using templates when LLM fails"""
+    query_lower = query.lower()
+    
+    # Template-based suggestions
+    templates = [
+        f"free {query}",
+        f"{query} for beginners",
+        f"best {query}",
+        f"{query} online",
+        f"AI-powered {query}"
+    ]
+    
+    # If query contains certain keywords, provide more specific templates
+    if any(word in query_lower for word in ['tool', 'software', 'app', 'platform']):
+        templates = [
+            f"free {query}",
+            f"{query} for small business",
+            f"online {query}",
+            f"{query} with collaboration features",
+            f"enterprise {query}"
+        ]
+    elif any(word in query_lower for word in ['editing', 'editor', 'create', 'design']):
+        templates = [
+            f"{query} for beginners",
+            f"professional {query}",
+            f"{query} with AI features",
+            f"online {query}",
+            f"{query} for teams"
+        ]
+    elif any(word in query_lower for word in ['management', 'organize', 'track']):
+        templates = [
+            f"{query} software",
+            f"{query} for teams",
+            f"simple {query} tool",
+            f"{query} with reporting",
+            f"cloud-based {query}"
+        ]
+    
+    return templates[:5]
 
 @app.delete("/clear-index", response_model=Dict[str, Any])
 async def clear_index(request: ClearIndexRequest):
