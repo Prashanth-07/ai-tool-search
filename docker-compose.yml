@@ -1,3 +1,130 @@
+# version: '3.8'
+
+# services:
+#   backend:
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile
+#       target: production
+#     container_name: ai_tool_search_backend
+#     restart: unless-stopped
+#     ports:
+#       - "8000:8000"
+#     environment:
+#       # Core Configuration
+#       - USE_NUMPY=1
+#       - PYTHONUNBUFFERED=1
+#       - PYTHONDONTWRITEBYTECODE=1
+      
+#       # API Keys (from .env file)
+#       - PINECONE_API_KEY=${PINECONE_API_KEY}
+#       - GROQ_API_KEY=${GROQ_API_KEY}
+#       - NOMIC_API_KEY=${NOMIC_API_KEY}
+      
+#       # Pinecone Configuration
+#       - PINECONE_ENV=${PINECONE_ENV:-us-west1-gcp}
+#       - INDEX_NAME=${INDEX_NAME:-ai-tool-search}
+      
+#       # SSL Configuration
+#       - OLLAMA_VERIFY_SSL=${OLLAMA_VERIFY_SSL:-false}
+      
+#       # Model Configuration
+#       - ENVIRONMENT=${ENVIRONMENT:-DEV}
+#       - DEV_MODEL=${DEV_MODEL:-mistral-7b-instruct}
+#       - PROD_MODEL=${PROD_MODEL:-llama3-8b-8192}
+      
+#       # Optional Ollama Configuration
+#       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      
+#     volumes:
+#       # Mount only necessary files for development
+#       - ./backend/tada1.py:/app/tada1.py:ro
+#       - ./backend/.env:/app/.env:ro
+#       # Volume for logs
+#       - backend_logs:/app/logs
+    
+#     extra_hosts:
+#       - "host.docker.internal:host-gateway"
+    
+#     # Resource limits for production
+#     deploy:
+#       resources:
+#         limits:
+#           cpus: '2.0'
+#           memory: 2G
+#         reservations:
+#           cpus: '0.5'
+#           memory: 512M
+    
+#     # Health check
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:8000/basic-health"]
+#       interval: 30s
+#       timeout: 10s
+#       retries: 3
+#       start_period: 30s
+    
+#     # Logging configuration
+#     logging:
+#       driver: "json-file"
+#       options:
+#         max-size: "10m"
+#         max-file: "3"
+
+#   frontend:
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     container_name: ai_tool_search_frontend
+#     restart: unless-stopped
+#     ports:
+#       - "8501:8501"
+#     environment:
+#       - API_URL=http://backend:8000
+#       - DEFAULT_OLLAMA_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+#     volumes:
+#       - ./frontend:/app:ro
+#     depends_on:
+#       backend:
+#         condition: service_healthy
+    
+#     # Resource limits
+#     deploy:
+#       resources:
+#         limits:
+#           cpus: '1.0'
+#           memory: 1G
+#         reservations:
+#           cpus: '0.25'
+#           memory: 256M
+    
+#     # Health check
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:8501"]
+#       interval: 30s
+#       timeout: 10s
+#       retries: 3
+#       start_period: 30s
+    
+#     # Logging configuration
+#     logging:
+#       driver: "json-file"
+#       options:
+#         max-size: "10m"
+#         max-file: "3"
+
+# # Named volumes for data persistence
+# volumes:
+#   backend_logs:
+#     driver: local
+
+# # Networks for service isolation
+# networks:
+#   default:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 172.20.0.0/16
 services:
   backend:
     build:
@@ -37,63 +164,3 @@ services:
       - ./frontend:/app
     depends_on:
       - backend
-# services:
-#   ollama:
-#     image: ollama/ollama:latest
-#     container_name: ai_tool_search_ollama
-#     ports:
-#       - "11434:11434"
-#     volumes:
-#       - ollama_data:/root/.ollama
-#     networks:
-#       - app_network
-#     # Remove healthcheck and use restart policy
-#     restart: unless-stopped
-
-#   backend:
-#     build:
-#       context: ./backend
-#       dockerfile: Dockerfile
-#     container_name: ai_tool_search_backend
-#     ports:
-#       - "8000:8000"
-#     environment:
-#       - PINECONE_API_KEY=${PINECONE_API_KEY}
-#       - PINECONE_ENV=${PINECONE_ENV}
-#       - INDEX_NAME=${INDEX_NAME}
-#       - OLLAMA_BASE_URL=http://ai_tool_search_ollama:11434
-#       - ENVIRONMENT=${ENVIRONMENT}
-#       - DEV_MODEL=${DEV_MODEL}
-#       - PROD_MODEL=${PROD_MODEL}
-#     volumes:
-#       - ./backend:/app
-#     depends_on:
-#       - ollama
-#     networks:
-#       - app_network
-#     restart: unless-stopped
-
-#   frontend:
-#     build:
-#       context: ./frontend
-#       dockerfile: Dockerfile
-#     container_name: ai_tool_search_frontend
-#     ports:
-#       - "8501:8501"
-#     environment:
-#       - API_URL=http://backend:8000
-#     volumes:
-#       - ./frontend:/app
-#     depends_on:
-#       - backend
-#     networks:
-#       - app_network
-#     restart: unless-stopped
-
-# networks:
-#   app_network:
-#     driver: bridge
-
-# volumes:
-#   ollama_data:
-#     name: ai_tool_search_ollama_data
