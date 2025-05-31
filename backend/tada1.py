@@ -1943,11 +1943,12 @@ Instructions:
     {{
       "id": "tool_id",
       "name": "Tool Name",
-      "description": "How this tool helps User Query",
+      "description": "How this tool helps User Query (3-4 lines)",
       "bullets": [
         "Feature or benefit 1 which helps User Query",
         "Feature or benefit 2",
-        "Optional feature or benefit 3"
+        "Feature or benefit 3",
+        "Optional feature or benefit 4"
       ]
     }},
     ...
