@@ -1,5 +1,5 @@
 """
-AI Tool Search API - Production-Ready Implementation
+AI Tool Search API 
 
 This module provides a comprehensive FastAPI-based search API for AI tools
 using vector similarity search (Nomic Atlas) and keyword-based search (BM25)
@@ -1141,6 +1141,65 @@ Select and refine the best {target_count} keywords from the candidates above."""
             ))
         
         return result
+
+
+
+class RelatedToolsUtils:
+    """Utilities for finding related tools using hybrid search."""
+    
+    @staticmethod
+    def create_search_query_from_tool(tool_metadata: Dict[str, Any]) -> str:
+        """Create a search query from tool metadata."""
+        query_parts = []
+        
+        # Add tool name (most important)
+        name = tool_metadata.get("name", "")
+        if name:
+            query_parts.append(name)
+        
+        # Add categories
+        category_subcat = tool_metadata.get("category_subcat", "")
+        if category_subcat:
+            query_parts.append(category_subcat)
+        
+        # Add description (truncated to avoid too long queries)
+        description = tool_metadata.get("description", "")
+        if description:
+            # Take first 100 characters to keep query manageable
+            desc_short = description[:100].strip()
+            query_parts.append(desc_short)
+        
+        # Add pricing type if available
+        pricing_type = tool_metadata.get("pricingType", "")
+        if pricing_type:
+            query_parts.append(pricing_type)
+        
+        # Join with spaces and clean
+        search_query = " ".join(query_parts)
+        return TextCleaner.clean_text(search_query)
+    
+    @staticmethod
+    def filter_and_rank_results(hybrid_results: List[Dict], 
+                               original_tool_id: str, 
+                               min_score: float = 0.4,
+                               max_results: int = 6) -> List[str]:
+        """Filter hybrid search results and return tool IDs."""
+        
+        # Filter out original tool and low-quality results
+        filtered_results = [
+            result for result in hybrid_results
+            if (result.get("tool_id") != original_tool_id and 
+                result.get("score", 0) >= min_score)
+        ]
+        
+        # Sort by score (highest first)
+        filtered_results.sort(key=lambda x: x.get("score", 0), reverse=True)
+        
+        # Take top results and extract tool IDs
+        top_results = filtered_results[:max_results]
+        tool_ids = [result.get("tool_id") for result in top_results if result.get("tool_id")]
+        
+        return tool_ids
 
 # ============================================================================
 # QUERY PROCESSING UTILITIES
@@ -2779,6 +2838,129 @@ async def extract_keywords(request: ExtractKeywordsRequest):
         raise HTTPException(
             status_code=500,
             detail=f"Failed to extract keywords: {str(e)}"
+        )
+
+# Add this in the API ENDPOINTS section (around line 2000, before if __name__ == "__main__")
+
+@app.get("/related-tools/{tool_id}", response_model=List[str])
+async def get_related_tools(tool_id: str):
+    """Get related tools for a given tool_id using hybrid search."""
+    try:
+        logger.info(f"Finding related tools for tool_id: {tool_id}")
+        
+        # Check if system is ready
+        if not app_state.index_ready:
+            raise HTTPException(
+                status_code=503,
+                detail="System is still initializing. Please try again later."
+            )
+        
+        # Get vector store
+        vector_store = vector_store_manager.get_vector_store(for_query=True)
+        
+        # Step 1: Find the source tool
+        try:
+            source_results = vector_store.similarity_search(
+                "",
+                k=1,
+                filter={"tool_id": tool_id}
+            )
+            
+            if not source_results:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Tool with ID '{tool_id}' not found"
+                )
+            
+            source_tool_metadata = source_results[0].metadata
+            logger.info(f"Found source tool: {source_tool_metadata.get('name', 'Unknown')}")
+            
+        except HTTPException:
+            raise
+        except Exception as e:
+            logger.error(f"Error finding source tool: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Error retrieving source tool: {str(e)}"
+            )
+        
+        # Step 2: Create search query from tool metadata
+        search_query = RelatedToolsUtils.create_search_query_from_tool(source_tool_metadata)
+        logger.info(f"Created search query: {search_query[:100]}...")
+        
+        if not search_query.strip():
+            logger.warning("Empty search query generated")
+            return []
+        
+        # Step 3: Perform hybrid search (reuse existing logic)
+        try:
+            # Vector search
+            vector_results_with_scores = vector_store.similarity_search_with_score(
+                search_query,
+                k=Config.VECTOR_SEARCH_K  # 15
+            )
+            
+            # Process vector results
+            processed_vector_results = []
+            for doc, score in vector_results_with_scores:
+                metadata = doc.metadata
+                processed_vector_results.append({
+                    "rid": metadata.get("rid", ""),
+                    "tool_id": metadata.get("tool_id", ""),
+                    "name": metadata.get("name", ""),
+                    "category_subcat": metadata.get("category_subcat", ""),
+                    "url": metadata.get("url", ""),
+                    "description": metadata.get("description", ""),
+                    "image_url": metadata.get("image_url", ""),
+                    "owner": metadata.get("owner", ""),
+                    "status": metadata.get("status", ""),
+                    "score": float(1.0 - score)  # Convert distance to similarity
+                })
+            
+            logger.info(f"Vector search returned {len(processed_vector_results)} results")
+            
+            # BM25 search
+            bm25_results = []
+            try:
+                bm25_results = bm25_index.search(search_query, top_k=Config.BM25_SEARCH_K)
+                logger.info(f"BM25 search returned {len(bm25_results)} results")
+            except Exception as e:
+                logger.warning(f"BM25 search failed: {str(e)}, continuing with vector results only")
+            
+            # Fuse results using existing fusion algorithm
+            hybrid_results = SearchUtils.fuse_search_results(
+                processed_vector_results,
+                bm25_results,
+                alpha=Config.HYBRID_ALPHA  # 0.5
+            )
+            
+            logger.info(f"Hybrid search returned {len(hybrid_results)} fused results")
+            
+        except Exception as e:
+            logger.error(f"Error in hybrid search: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Error performing search: {str(e)}"
+            )
+        
+        # Step 4: Filter and rank results
+        related_tool_ids = RelatedToolsUtils.filter_and_rank_results(
+            hybrid_results=hybrid_results,
+            original_tool_id=tool_id,
+            min_score=0.5,  # Adjustable quality threshold
+            max_results=6   # Maximum 6 tools
+        )
+        
+        logger.info(f"Returning {len(related_tool_ids)} related tools for {tool_id}")
+        return related_tool_ids
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error in get_related_tools: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
         )
 
 # ============================================================================

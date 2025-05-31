@@ -1,0 +1,142 @@
+{
+  "test_session": {
+    "timestamp": "2025-05-31T11:29:26.697488",
+    "base_url": "http://localhost:8000",
+    "endpoint": "http://localhost:8000/related-tools"
+  },
+  "tests": [
+    {
+      "test_name": "Sample tool 1",
+      "timestamp": "2025-05-31T11:29:37.425875",
+      "input": {
+        "tool_id": "6812e31a244b40a3d9ce6e91",
+        "endpoint": "http://localhost:8000/related-tools/6812e31a244b40a3d9ce6e91",
+        "method": "GET",
+        "timeout": 15
+      },
+      "output": {
+        "status_code": 200,
+        "response_time_seconds": 2.4,
+        "related_tools": [
+          "6812c348db54bd097bc9a560",
+          "681398f8871df282850c5fd8",
+          "680925835a7e2b8657209de3",
+          "680d4db8a9568940b136f31d",
+          "680a75b620491b3175fa6360",
+          "68090dd859f546544a985d76"
+        ],
+        "related_tools_count": 6,
+        "response_format_valid": true,
+        "original_tool_excluded": true,
+        "within_limit": true
+      },
+      "error": null
+    },
+    {
+      "test_name": "Sample tool 2",
+      "timestamp": "2025-05-31T11:29:39.505962",
+      "input": {
+        "tool_id": "681398f8871df282850c5fd8",
+        "endpoint": "http://localhost:8000/related-tools/681398f8871df282850c5fd8",
+        "method": "GET",
+        "timeout": 15
+      },
+      "output": {
+        "status_code": 200,
+        "response_time_seconds": 1.08,
+        "related_tools": [
+          "6812e31a244b40a3d9ce6e91",
+          "6813ad9895ab69e136d28ab4",
+          "680d4db8a9568940b136f31d",
+          "6809a06c86a2781b263831b0",
+          "6813958f871df282850c5edd",
+          "680a75b620491b3175fa6360"
+        ],
+        "related_tools_count": 6,
+        "response_format_valid": true,
+        "original_tool_excluded": true,
+        "within_limit": true
+      },
+      "error": null
+    },
+    {
+      "test_name": "Sample tool 3",
+      "timestamp": "2025-05-31T11:29:41.599787",
+      "input": {
+        "tool_id": "6812c1d5db54bd097bc9a2c2",
+        "endpoint": "http://localhost:8000/related-tools/6812c1d5db54bd097bc9a2c2",
+        "method": "GET",
+        "timeout": 15
+      },
+      "output": {
+        "status_code": 200,
+        "response_time_seconds": 1.09,
+        "related_tools": [
+          "68138ff6871df282850c597d",
+          "681390c2871df282850c5a5d",
+          "680d2e99394cd64f5270abd1",
+          "6809a06c86a2781b263831b0",
+          "681cc644cedff7acf54fd144",
+          "68090dd859f546544a985d76"
+        ],
+        "related_tools_count": 6,
+        "response_format_valid": true,
+        "original_tool_excluded": true,
+        "within_limit": true
+      },
+      "error": null
+    },
+    {
+      "test_name": "Non-existent tool",
+      "timestamp": "2025-05-31T11:29:43.154149",
+      "input": {
+        "tool_id": "non-existent-tool-123",
+        "endpoint": "http://localhost:8000/related-tools/non-existent-tool-123",
+        "method": "GET",
+        "timeout": 15
+      },
+      "output": {
+        "status_code": 404,
+        "response_time_seconds": 0.55,
+        "related_tools": null,
+        "related_tools_count": 0,
+        "response_format_valid": false,
+        "original_tool_excluded": false,
+        "within_limit": false,
+        "error_detail": {
+          "detail": "Tool with ID 'non-existent-tool-123' not found"
+        }
+      },
+      "error": null
+    },
+    {
+      "test_name": "Special characters",
+      "timestamp": "2025-05-31T11:29:43.702892",
+      "input": {
+        "tool_id": "tool@#$%",
+        "endpoint": "http://localhost:8000/related-tools/tool@#$%",
+        "method": "GET",
+        "timeout": 15
+      },
+      "output": {
+        "status_code": 404,
+        "response_time_seconds": 0.53,
+        "related_tools": null,
+        "related_tools_count": 0,
+        "response_format_valid": false,
+        "original_tool_excluded": false,
+        "within_limit": false,
+        "error_detail": {
+          "detail": "Tool with ID 'tool@' not found"
+        }
+      },
+      "error": null
+    }
+  ],
+  "summary": {
+    "total_tests": 5,
+    "successful_tests": 3,
+    "total_tools_found": 18,
+    "average_tools_per_request": 6.0
+  }
+}
