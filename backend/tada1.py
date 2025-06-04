@@ -64,8 +64,12 @@ class Config:
     VECTOR_SEARCH_K = 15
     BM25_SEARCH_K = 30
     HYBRID_ALPHA = 0.5  # Weight for vector vs BM25 search
-    MAX_RESULTS_FOR_LLM = 5
     POPULAR_TOOLS_LIMIT = 4
+    
+    # Score-based selection settings
+    HYBRID_MIN_SCORE = 0.6    # Minimum relevance threshold
+    HYBRID_MAX_TOOLS = 10       # Maximum tools to send to LLM
+    HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
     # Processing settings
     DEFAULT_BATCH_SIZE = 20
@@ -151,7 +155,7 @@ class Environment:
     
     @property
     def prod_model(self) -> str:
-        return os.getenv("PROD_MODEL", "llama3-8b-8192")
+        return os.getenv("PROD_MODEL", "llama-3.1-8b-instant")
     
     @property
     def environment(self) -> str:
@@ -375,12 +379,33 @@ class ModelUtils:
     @staticmethod
     def get_current_model(headers=None) -> str:
         """Get current model based on headers or environment."""
-        if not headers:
-            return env.dev_model if env.environment == "DEV" else env.prod_model
+        current_env = env.environment
+        dev_model = env.dev_model
+        prod_model = env.prod_model
         
-        model_choice = headers.get("MODEL_CHOICE", "DEV_MODEL")
-        return env.prod_model if model_choice == "PROD_MODEL" else env.dev_model
-
+        logger.info(f"DEBUG: get_current_model called - env={current_env}, dev={dev_model}, prod={prod_model}")
+        logger.info(f"DEBUG: headers type: {type(headers)}, headers present: {headers is not None}")
+        
+        if not headers:
+            result = dev_model if current_env == "DEV" else prod_model
+            logger.info(f"DEBUG: No headers - env={current_env}, returning {result}")
+            return result
+        
+        # Check if MODEL_CHOICE is explicitly set in headers
+        model_choice = headers.get("MODEL_CHOICE")  # No default!
+        logger.info(f"DEBUG: MODEL_CHOICE from headers: {model_choice}")
+        
+        if model_choice == "PROD_MODEL":
+            logger.info(f"DEBUG: Explicit PROD_MODEL requested, returning {prod_model}")
+            return prod_model
+        elif model_choice == "DEV_MODEL":
+            logger.info(f"DEBUG: Explicit DEV_MODEL requested, returning {dev_model}")
+            return dev_model
+        else:
+            # No MODEL_CHOICE specified, use environment setting
+            result = dev_model if current_env == "DEV" else prod_model
+            logger.info(f"DEBUG: No MODEL_CHOICE specified, using environment {current_env}, returning {result}")
+            return result
 # ============================================================================
 # CACHE MANAGEMENT
 # ============================================================================
@@ -950,6 +975,40 @@ class SearchUtils:
             indicators.append("Identified as relevant tool for the use case")
         
         return indicators[:3]
+    
+    @staticmethod
+    def select_tools_by_score(hybrid_results: List[Dict], 
+                             min_score: float = Config.HYBRID_MIN_SCORE, 
+                             max_tools: int = Config.HYBRID_MAX_TOOLS,
+                             fallback_count: int = Config.HYBRID_FALLBACK_COUNT) -> List[Dict]:
+        """Select tools based on score thresholds rather than fixed count."""
+        qualified_tools = []
+        
+        logger.info(f"Score-based selection: min_score={min_score}, max_tools={max_tools}")
+        
+        for i, result in enumerate(hybrid_results):
+            score = result.get("score", 0)
+            tool_name = result.get("name", "Unknown")
+            
+            # Only include tools that meet minimum relevance threshold
+            if score >= min_score:
+                qualified_tools.append(result)
+                logger.info(f"Tool {i+1}: '{tool_name}' qualified with score {score:.3f}")
+            else:
+                logger.info(f"Tool {i+1}: '{tool_name}' rejected with score {score:.3f} (below {min_score})")
+            
+            # Don't exceed maximum to avoid token limits
+            if len(qualified_tools) >= max_tools:
+                logger.info(f"Reached maximum {max_tools} tools, stopping selection")
+                break
+        
+        # Ensure we send at least fallback_count tools even if scores are low
+        if len(qualified_tools) == 0 and len(hybrid_results) > 0:
+            qualified_tools = hybrid_results[:fallback_count]
+            logger.warning(f"No tools met score threshold, using fallback: top {fallback_count} tools")
+        
+        logger.info(f"Selected {len(qualified_tools)} tools for LLM processing")
+        return qualified_tools
 
 # ============================================================================
 # KEYWORD EXTRACTION UTILITIES
@@ -1397,45 +1456,173 @@ app.add_middleware(
 # ============================================================================
 
 async def load_vectors_for_bm25():
-    """Load vectors in batches for BM25 indexing."""
-    fetch_size = Config.DEFAULT_BATCH_SIZE
-    total_vectors = app_state.total_vectors
-    
-    for i in range(0, total_vectors, fetch_size):
-        batch_size = min(fetch_size, total_vectors - i)
-        logger.info(f"Loading vector batch {i//fetch_size + 1}/{(total_vectors-1)//fetch_size + 1} ({batch_size} vectors)")
+    """Load vectors efficiently using direct Pinecone access."""
+    try:
+        total_vectors = app_state.total_vectors
+        logger.info(f"Starting BM25 loading for {total_vectors} vectors")
         
-        try:
-            vector_store = vector_store_manager.get_vector_store()
-            results = vector_store.similarity_search("", k=batch_size)
+        if total_vectors == 0:
+            logger.warning("No vectors to load for BM25")
+            return
+        
+        # Get direct Pinecone index access
+        index = vector_store_manager.pc.Index(env.index_name)
+        
+        # Use scan operation to get ALL vectors systematically
+        batch_size = 100
+        total_loaded = 0
+        processed_ids = set()
+        
+        # Create dummy vector for querying
+        dummy_vector = [0.0] * Config.DIMENSION
+        
+        # Make multiple queries to get different sets of vectors
+        for offset in range(0, total_vectors, batch_size):
+            try:
+                current_batch_size = min(batch_size, total_vectors - offset)
+                logger.info(f"Loading batch {offset//batch_size + 1} (requesting {current_batch_size} vectors)")
+                
+                # Query with different approaches to get full coverage
+                response = index.query(
+                    vector=dummy_vector,
+                    top_k=current_batch_size * 2,  # Request more to account for duplicates
+                    include_metadata=True,
+                    include_values=False
+                )
+                
+                batch_loaded = 0
+                for match in response.matches:
+                    rid = match.id
+                    
+                    if rid in processed_ids:
+                        continue
+                        
+                    processed_ids.add(rid)
+                    metadata = match.metadata
+                    
+                    if not metadata or "tool_id" not in metadata:
+                        continue
+                    
+                    try:
+                        tool = Tool(
+                            tool_id=metadata.get("tool_id", ""),
+                            name=metadata.get("name", "Unknown"),
+                            category_subcat=metadata.get("category_subcat", ""),
+                            url=metadata.get("url", "https://example.com"),
+                            description=metadata.get("description", ""),
+                            image_url=metadata.get("image_url", None),
+                            owner=metadata.get("owner", None),
+                            status=metadata.get("status", None)
+                        )
+                        
+                        bm25_index.add_tool(tool, rid)
+                        batch_loaded += 1
+                        total_loaded += 1
+                        
+                    except Exception as e:
+                        logger.warning(f"Error processing tool {rid}: {str(e)}")
+                        continue
+                
+                logger.info(f"Batch loaded {batch_loaded} new tools (total: {total_loaded})")
+                
+                # If we're not getting new tools, try vector store fallback
+                if batch_loaded == 0 and total_loaded < total_vectors:
+                    logger.info("Switching to vector store method for remaining tools")
+                    break
+                    
+                await asyncio.sleep(0.1)
+                
+            except Exception as e:
+                logger.error(f"Error in batch: {str(e)}")
+                break
+        
+        # Fallback to vector store if we didn't get all tools
+        if total_loaded < total_vectors:
+            logger.info(f"Using vector store fallback for remaining {total_vectors - total_loaded} tools")
             
-            for doc in results:
-                metadata = doc.metadata
-                if "tool_id" in metadata and "rid" in metadata:
-                    tool = Tool(
-                        tool_id=metadata.get("tool_id", ""),
-                        name=metadata.get("name", "Unknown"),
-                        category_subcat=metadata.get("category_subcat", ""),
-                        url=metadata.get("url", "https://example.com"),
-                        description=metadata.get("description", ""),
-                        image_url=metadata.get("image_url", None),
-                        owner=metadata.get("owner", None),
-                        status=metadata.get("status", None)
-                    )
-                    bm25_index.add_tool(tool, metadata.get("rid"))
-            
-            app_state.vectors_loaded = min(i + batch_size, total_vectors)
-            logger.info(f"Progress: {app_state.vectors_loaded}/{total_vectors} vectors loaded")
-            
-            await asyncio.sleep(0.01)
-            
-        except Exception as e:
-            logger.error(f"Error loading vector batch: {str(e)}")
-    
-    logger.info("Building BM25 index")
-    bm25_index.rebuild_index()
-    app_state.bm25_ready = True
-    logger.info("BM25 index built successfully")
+            try:
+                vector_store = vector_store_manager.get_vector_store()
+                
+                # Try multiple searches to get different results
+                search_terms = ["", "tool", "ai", "software", "app"]
+                
+                for search_term in search_terms:
+                    if total_loaded >= total_vectors:
+                        break
+                        
+                    results = vector_store.similarity_search(search_term, k=50)
+                    
+                    for doc in results:
+                        metadata = doc.metadata
+                        rid = metadata.get("rid")
+                        
+                        if rid and rid not in processed_ids and "tool_id" in metadata:
+                            processed_ids.add(rid)
+                            
+                            tool = Tool(
+                                tool_id=metadata.get("tool_id", ""),
+                                name=metadata.get("name", "Unknown"),
+                                category_subcat=metadata.get("category_subcat", ""),
+                                url=metadata.get("url", "https://example.com"),
+                                description=metadata.get("description", ""),
+                                image_url=metadata.get("image_url", None),
+                                owner=metadata.get("owner", None),
+                                status=metadata.get("status", None)
+                            )
+                            
+                            bm25_index.add_tool(tool, rid)
+                            total_loaded += 1
+                            
+                            if total_loaded >= total_vectors:
+                                break
+                    
+                    await asyncio.sleep(0.05)
+                    
+            except Exception as e:
+                logger.error(f"Error in vector store fallback: {str(e)}")
+        
+        logger.info(f"Finished loading. BM25 index now has {len(bm25_index.tool_data)} tools")
+        
+        # Build the BM25 index
+        logger.info("Building BM25 index")
+        bm25_index.rebuild_index()
+        app_state.bm25_ready = True
+        logger.info("BM25 index built successfully")
+        
+    except Exception as e:
+        logger.error(f"Error during BM25 loading: {str(e)}")
+        # Final fallback - keep existing behavior
+        fetch_size = Config.DEFAULT_BATCH_SIZE
+        total_vectors = app_state.total_vectors
+        
+        for i in range(0, total_vectors, fetch_size):
+            batch_size = min(fetch_size, total_vectors - i)
+            try:
+                vector_store = vector_store_manager.get_vector_store()
+                results = vector_store.similarity_search("", k=batch_size)
+                
+                for doc in results:
+                    metadata = doc.metadata
+                    if "tool_id" in metadata and "rid" in metadata:
+                        tool = Tool(
+                            tool_id=metadata.get("tool_id", ""),
+                            name=metadata.get("name", "Unknown"),
+                            category_subcat=metadata.get("category_subcat", ""),
+                            url=metadata.get("url", "https://example.com"),
+                            description=metadata.get("description", ""),
+                            image_url=metadata.get("image_url", None),
+                            owner=metadata.get("owner", None),
+                            status=metadata.get("status", None)
+                        )
+                        bm25_index.add_tool(tool, metadata.get("rid"))
+                
+                await asyncio.sleep(0.01)
+                
+            except Exception as e:
+                logger.error(f"Error loading vector batch: {str(e)}")
+        
+        bm25_index.rebuild_index()
+        app_state.bm25_ready = True
 
 async def initialize_indexes():
     """Initialize indexes in background with progress tracking."""
@@ -1623,7 +1810,9 @@ async def get_model_info(request: Request):
     """Get current model information."""
     try:
         headers = request.headers
+        logger.info(f"DEBUG: /model-info called with headers: {dict(headers)}")
         current_model = ModelUtils.get_current_model(headers)
+        logger.info(f"DEBUG: /model-info returning model: {current_model}")
         return {
             "current_model": current_model,
             "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
@@ -1750,6 +1939,7 @@ async def test_connection(request: Request):
         # Test Groq chat endpoint
         try:
             model = ModelUtils.get_current_model(original_headers)
+            logger.info(f"DEBUG: /test-connection using model: {model}")
             logger.info(f"Testing Groq with model: {model}")
             
             llm = ChatGroq(
@@ -1906,6 +2096,8 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             # BM25 search
             try:
                 bm25_results = bm25_index.search(request.query, top_k=Config.BM25_SEARCH_K)
+                logger.info(f"DEBUG: BM25 index status - initialized: {bm25_index.is_initialized}, doc_count: {len(bm25_index.tool_data)}")
+                logger.info(f"DEBUG: BM25 tokenized query: {bm25_index.preprocess_text(request.query)}")
                 logger.info(f"BM25 search returned {len(bm25_results)} results")
                 
                 # Filter BM25 results if searchFrom is provided
@@ -1928,6 +2120,21 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             )
             logger.info(f"Hybrid search returned {len(hybrid_results)} results")
             
+            # LOG ALL HYBRID RESULTS WITH SCORES
+            logger.info("=== HYBRID SEARCH RESULTS (ALL TOOLS) ===")
+            for i, result in enumerate(hybrid_results[:20]):  # Log top 20 to see the full picture
+                tool_name = result.get("name", "Unknown")
+                tool_id = result.get("tool_id", "Unknown")
+                score = result.get("score", 0)
+                vector_score = result.get("vector_score", 0)
+                bm25_score = result.get("bm25_score", 0)
+                description = result.get("description", "")[:100]  # First 100 chars
+                
+                logger.info(f"Rank {i+1:2d}: '{tool_name}' (ID: {tool_id})")
+                logger.info(f"         Score: {score:.3f} (V:{vector_score:.3f} + B:{bm25_score:.3f})")
+                logger.info(f"         Desc: {description}...")
+                logger.info("-" * 50)
+            
             # Handle no results with filter
             if not hybrid_results and request.searchFrom:
                 filter_response = json.dumps({
@@ -1940,14 +2147,31 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 })
                 return QueryResponse(response=filter_response)
             
-            # Take top results for LLM processing
-            top_results = hybrid_results[:Config.MAX_RESULTS_FOR_LLM]
+            # Use score-based selection instead of fixed count
+            selected_results = SearchUtils.select_tools_by_score(
+                hybrid_results, 
+                min_score=Config.HYBRID_MIN_SCORE,
+                max_tools=Config.HYBRID_MAX_TOOLS,
+                fallback_count=Config.HYBRID_FALLBACK_COUNT
+            )
 
-            logger.info(f"Sending {len(top_results)} tools to LLM for processing")
+            # LOG TOOLS SENT TO LLM
+            logger.info("=== TOOLS SENT TO LLM ===")
+            for i, result in enumerate(selected_results):
+                tool_name = result.get("name", "Unknown")
+                tool_id = result.get("tool_id", "Unknown")
+                score = result.get("score", 0)
+                description = result.get("description", "")
+                
+                logger.info(f"LLM Tool {i+1}: '{tool_name}' (ID: {tool_id}) - Score: {score:.3f}")
+                logger.info(f"            Description: {description}")
+                logger.info("-" * 40)
+
+            logger.info(f"Sending {len(selected_results)} tools to LLM for processing (score-based selection)")
             
             # Format documents for LLM
             formatted_docs = []
-            for result in top_results:
+            for result in selected_results:
                 formatted_doc = (
                     f"Tool ID: {result.get('tool_id', 'N/A')}\n"
                     f"Name: {result.get('name', 'N/A')}\n"
@@ -1973,8 +2197,10 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 return QueryResponse(response=empty_response)
             
             # Prepare LLM processing
+            headers = request_headers.headers
+            logger.info(f"DEBUG: /query called with headers: {dict(headers)}")
             current_model = ModelUtils.get_current_model(headers)
-            logger.info(f"Using model: {current_model} with Groq API")
+            logger.info(f"DEBUG: /query using model: {current_model}")
             
             try:
                 encoder = tiktoken.encoding_for_model(current_model)
@@ -1985,16 +2211,20 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             cleaned_context = TextCleaner.clean_text(context)
             
             system_text = f"""
-You are a tool retrieval assistant tasked with finding, picking and ranking relevant tools from provided Tool Data that closely relate to the User Query.
+You are a tool retrieval assistant tasked with finding, picking and ranking ALLrelevant tools from provided Tool Data that closely relate to the User Query.
+
+CORE RULE: If a tool doesn't directly address the query, EXCLUDE it completely.
 
 Instructions:
 - Analyze the User Query and understand their needs, including any quantity specifications (e.g., "top 1", "best 3", etc.).
 - If the User Query specifies a number of tools (e.g., "top 1", "best 3", "show me 2"), return EXACTLY that number of tools.
-- If no quantity is specified, analyze each tool in the Tool Data and include relevant tools based on the User Query analysis.
+- If no quantity is specified, analyze each tool in the Tool Data and include all the relevant tools based on the User Query analysis.
+- Don't include any tools that are not relevant to the User Query.
 - Rank them from most to least relevant.
+Quality check: Can you write specific, non-generic descriptions? If no, exclude the tool.
 - For each tool, generate:
-  - A short summary (1–2 lines) explaining how that particular tool helps with the User Query.
-  - 2–3 bullet points showing key features that make it useful for the User Query.
+  - A short summary (1–2 lines) Specificing way this tool solves the user's exact need.
+  - 2–3 bullet points Specific feature addressing the query.
 - Format your response as a JSON object with the following schema:
 {{
   "tool_id": ["most_relevant_id", "next_most_relevant_id", ...],
@@ -2002,10 +2232,10 @@ Instructions:
     {{
       "id": "tool_id",
       "name": "Tool Name",
-      "description": "How this tool helps User Query (3-4 lines)",
+      "description": "Describe how this tool helps with the User Query (3-4 lines)",
       "bullets": [
-        "Feature or benefit 1 which helps User Query",
-        "Feature or benefit 2",
+        "Feature or benefit 1 that addresses the user query",
+        "Feature or benefit 2 that addresses the user query",
         "Feature or benefit 3",
         "Optional feature or benefit 4"
       ]
@@ -2062,7 +2292,7 @@ Tool Data: {cleaned_context}
                         response_data["tools"] = []
                         response_data["tool_id"] = []
                         
-                        for result in top_results:
+                        for result in selected_results:
                             tool_data = {
                                 "id": result.get("tool_id", ""),
                                 "name": result.get("name", ""),
@@ -2083,13 +2313,13 @@ Tool Data: {cleaned_context}
                 except json.JSONDecodeError:
                     # Fallback JSON response
                     fallback_data = {
-                        "tool_id": [result.get("tool_id", "") for result in top_results],
+                        "tool_id": [result.get("tool_id", "") for result in selected_results],
                         "tools": [],
                         "message": "Failed to parse LLM response, showing raw search results",
                         "timestamp": datetime.now().isoformat()
                     }
                     
-                    for result in top_results:
+                    for result in selected_results:
                         tool_data = {
                             "id": result.get("tool_id", ""),
                             "name": result.get("name", ""),
@@ -2962,6 +3192,19 @@ async def get_related_tools(tool_id: str):
             status_code=500,
             detail=f"Internal server error: {str(e)}"
         )
+
+@app.get("/debug-env")
+async def debug_env():
+    """Debug endpoint to check environment variables"""
+    return {
+        "environment": env.environment,
+        "dev_model": env.dev_model,
+        "prod_model": env.prod_model,
+        "raw_environment": os.getenv("ENVIRONMENT"),
+        "raw_dev_model": os.getenv("DEV_MODEL"),
+        "raw_prod_model": os.getenv("PROD_MODEL"),
+        "current_model_logic": env.dev_model if env.environment == "DEV" else env.prod_model
+    }
 
 # ============================================================================
 # APPLICATION ENTRY POINT

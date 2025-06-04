@@ -1,0 +1,570 @@
+{
+  "total_vectors": 69,
+  "vectors_shown": 69,
+  "dimension": 768,
+  "index_fullness": 0.0,
+  "namespaces": {
+    "": {
+      "vector_count": 69,
+      "metadata": {}
+    }
+  },
+  "vectors": [
+    {
+      "name": "testing",
+      "tool_id": "6812e31a244b40a3d9ce6e91",
+      "rid": "a5e27dfd-8d01-4980-a44e-30a52206c1dd",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "this is testing",
+      "tool_id": "681398f8871df282850c5fd8",
+      "rid": "6b4f6d7d-506f-4b5f-bacd-6c282ceb358b",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Abc testing new",
+      "tool_id": "6812c1d5db54bd097bc9a2c2",
+      "rid": "44b8e91b-8b1f-47f9-b8c5-674d82326a7b",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "true warriors",
+      "tool_id": "6813ae0695ab69e136d28abf",
+      "rid": "eb68cb33-898f-4352-97e5-f9c0f09f191a",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Testing asdf",
+      "tool_id": "6814e5cad640bb29cb10f698",
+      "rid": "613d0001-6bd3-4e48-a311-7f39fc0042a1",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "new test aga",
+      "tool_id": "6815ab77a043418995750b6a",
+      "rid": "48e15c1f-4b3f-45bf-bfff-baa487cfd6e6",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "tool nAME",
+      "tool_id": "6822338bb741b93fc2f7b497",
+      "rid": "ec0af33c-d68b-48b2-a214-91c13df3d55e",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "new healthy tool",
+      "tool_id": "68171e23604b41bd606cbe7d",
+      "rid": "b2e9d6ac-f99e-4361-a2b0-96501263b7e3",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Abc tool for testing",
+      "tool_id": "68138ff6871df282850c597d",
+      "rid": "c28e7641-b672-4f2f-ab19-dfe10c555e8d",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing one two o",
+      "tool_id": "6812bd68db54bd097bc9a28a",
+      "rid": "76fbc163-f2e5-4409-a0dc-61afacd5eb72",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Abc tool for testing 1",
+      "tool_id": "681390c2871df282850c5a5d",
+      "rid": "17b2abb3-3388-4d4f-b0e6-f9edebb56a1a",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing one two",
+      "tool_id": "68123d8b14d4a3b77f50f6d2",
+      "rid": "e14bcf09-af27-4d66-a902-06f5ead7ed79",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "one 2 3",
+      "tool_id": "6812d2bddb54bd097bc9b03d",
+      "rid": "77a8e372-1573-4615-8a13-3f06400d3346",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Testing new again",
+      "tool_id": "6814d99ed640bb29cb10f1da",
+      "rid": "d21a3574-f793-4fee-aedc-afd436ec383f",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Testing one more",
+      "tool_id": "68067264b2c2919fa9d551eb",
+      "rid": "aa28cdfe-59b5-406a-9f03-cddbe9c0b0fc",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Abc Abc",
+      "tool_id": "6812c1fcdb54bd097bc9a39a",
+      "rid": "c51f3680-f93e-4308-af32-e3db0d7b101a",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "home sweet home",
+      "tool_id": "682231985993c135e558f29c",
+      "rid": "d84a48ef-c7c4-4ac4-82d6-a2eb545fa80d",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "New testing again",
+      "tool_id": "6814e9b9d640bb29cb10fcbb",
+      "rid": "831d1823-ad3f-4c09-b12f-48857205db5b",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "ABC",
+      "tool_id": "680676f0b2c2919fa9d554f7",
+      "rid": "74e9ef9a-b260-4812-aea7-f9ddaaa1165c",
+      "description": "ABC defining..",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "new test tool",
+      "tool_id": "6820c9b829501c76c3aba1a7",
+      "rid": "e9a2694c-6e1e-4113-a3f7-f3f4284a28c2",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing one two one",
+      "tool_id": "681241cb14d4a3b77f50f7af",
+      "rid": "2eaa5c56-4ee7-4ca8-9c6e-377a8d3c8584",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "test again 1",
+      "tool_id": "6809a06c86a2781b263831b0",
+      "rid": "6daac589-ff71-4763-837b-caf405ff01e9",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing on the go",
+      "tool_id": "680a75b620491b3175fa6360",
+      "rid": "7e76bb4f-7a04-46d7-bc2c-8571b89717a0",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "SOme name",
+      "tool_id": "68067745b2c2919fa9d554fc",
+      "rid": "5cbe13d2-b5a7-4078-aa2e-113f53905a3a",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "test",
+      "tool_id": "6809278a761cbfad58734507",
+      "rid": "a924b1d4-714a-402a-b31e-1428841ce6db",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "any",
+      "tool_id": "68171e5e604b41bd606cbe89",
+      "rid": "47161197-637e-40f7-90a2-44285c7283f1",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Invalid URL Tool",
+      "tool_id": "invalid-url-test",
+      "rid": "f494d8e8-b111-44f3-8e09-8c0fbf90516f",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "tool simple",
+      "tool_id": "6812c313db54bd097bc9a544",
+      "rid": "c9e88ea0-77cd-4008-a48e-297c32f1ccf8",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "a test tool",
+      "tool_id": "680d4db8a9568940b136f31d",
+      "rid": "fca09fab-48b7-4efc-9022-e3c0b965fbf0",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "same tool again",
+      "tool_id": "680d2d42394cd64f5270abc6",
+      "rid": "137ea741-46c4-42e9-9deb-c15bc5265e3d",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "upload test one",
+      "tool_id": "6814e3d1d640bb29cb10f406",
+      "rid": "5ea08efc-07cc-435d-8282-94955959ef33",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "tool name again",
+      "tool_id": "6806fe90ca8b349fa3a395b3",
+      "rid": "7e01b687-5e50-444b-9bf9-5d5a38c1db0d",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "new example tool",
+      "tool_id": "680d268dd90c50ee8c907620",
+      "rid": "3b32a722-2633-41a4-a0c7-afb07c4dbf5d",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Abc Abc",
+      "tool_id": "6812c348db54bd097bc9a560",
+      "rid": "6351bfc1-e795-400e-ade7-7ba996a93f59",
+      "description": "This is for testing\nThis is for testing\nThis is for testing",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "tool again",
+      "tool_id": "6812cd68db54bd097bc9ae8c",
+      "rid": "8da5fae3-c040-4e9b-aeeb-c1f1b05d120b",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "new test name",
+      "tool_id": "682171b4c2f97789bb798331",
+      "rid": "a1dbb57a-aa74-4185-9094-d99818571e39",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "test tool name one",
+      "tool_id": "6815a73fa043418995750b64",
+      "rid": "e57b06b2-c799-42bd-a871-d30eeed21a8e",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "new tool",
+      "tool_id": "6806785db2c2919fa9d55504",
+      "rid": "3d4843ea-6d78-4fb5-b567-fdb76249e333",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing again for new",
+      "tool_id": "6812ea5b244b40a3d9ce7944",
+      "rid": "557aaeb6-802f-42a4-a51d-9b92b301122f",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "uploa",
+      "tool_id": "6814e8e0d640bb29cb10fc97",
+      "rid": "da0781df-479b-46d7-8585-f58ab673738a",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "upload testing",
+      "tool_id": "6814d97cd640bb29cb10f1d4",
+      "rid": "ee50ae22-77bd-4165-a631-634725012792",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "tool name",
+      "tool_id": "682233e71ccc36627c79a7fa",
+      "rid": "1a8f844d-2932-4116-bd42-7864638d6dd2",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing purpose again",
+      "tool_id": "680e11dd52add9e66dac1844",
+      "rid": "c92f27a7-e9a6-4c4b-8daa-be21b0b81f5c",
+      "description": "This is test introduction",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "upload test one more",
+      "tool_id": "6814e3fbd640bb29cb10f40c",
+      "rid": "352789e6-0c2f-4662-b9f8-371c001f18ae",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "asflasdbfaiskbdg;kasjbgk;ajsbdg;kjabsd;kgjabsdg;kj",
+      "tool_id": "6820c5d329501c76c3aba03a",
+      "rid": "da1c7749-62c8-4933-8b97-23cca84f54b9",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "whole test",
+      "tool_id": "6813958f871df282850c5edd",
+      "rid": "78ab740b-de1d-4b3e-b6de-d544c73bcf19",
+      "description": "*Bold text*\n* Item 1\n* Item 2\n- Item 3\nOk, new list\n1. Option 1\n2. Option 2",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Testing the name",
+      "tool_id": "68203ba9d35592eeac79fbb1",
+      "rid": "e3d1a600-14d9-442b-8573-5fa069f8a4fe",
+      "description": "This is the test introduction",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "my new tool",
+      "tool_id": "6817069a0cb85f3ad7dc4eb7",
+      "rid": "886b2ad3-7258-4a3f-84ae-351118ec313c",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Home away",
+      "tool_id": "6813ca5c5d13055b66cfbc77",
+      "rid": "8403027a-bb2b-4596-ad00-31d09e5d43f4",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "one tool one",
+      "tool_id": "680d2e99394cd64f5270abd1",
+      "rid": "6681a745-ec2f-459c-9989-c615b139fa17",
+      "description": "Testing what is this AI",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing one",
+      "tool_id": "6812e9e6244b40a3d9ce7855",
+      "rid": "e3325ec0-c550-49a6-a0e5-494cdc3f6abf",
+      "description": "This is testing\nThis is testing\nThis is testing\nThis is testing",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "test tool",
+      "tool_id": "68090dd859f546544a985d76",
+      "rid": "e8058ad7-994e-430e-82ce-b38d2dbf2b0c",
+      "description": "testing purpose",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing this one for last",
+      "tool_id": "6810376d8f5250909926060c",
+      "rid": "71817775-303e-410b-b4d4-436b2b4f7e69",
+      "description": "This is testing",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "One more",
+      "tool_id": "6817b0ad8b9dc2650bf6ddde",
+      "rid": "8a83d864-ba13-4e60-8aff-a9b96eb977bb",
+      "description": "This is test introduction for the tool",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing tool 1",
+      "tool_id": "6813ad9895ab69e136d28ab4",
+      "rid": "fa2cd669-0127-4053-803b-9c33900dfd06",
+      "description": "",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "whole test again",
+      "tool_id": "68139135871df282850c5b3d",
+      "rid": "b13da693-b4bd-4113-8e2c-6463e164d8a9",
+      "description": "This is testing only\nThis is testing only\nThis is testing only",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing tool",
+      "tool_id": "680925835a7e2b8657209de3",
+      "rid": "e7da8962-0cfd-4002-800f-dc2f79f7ea7f",
+      "description": "Learning through games enhances understanding by making concepts interactive, engaging, and memorable, helping students grasp difficult ideas more easily.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Temp Edited",
+      "tool_id": "682ff459cbc19596ffcda4fe",
+      "rid": "33ba0da6-ee57-483b-a9b4-b2f5e01384db",
+      "description": "This is for testing purpose, this is for testing purpose, This is for testing purpose, this is for testing purpose, This is for testing purpose, this is for testing purpose, This is for testing purpose, this is for testing purpose",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "testing new tool",
+      "tool_id": "68123b6c14d4a3b77f50f6bd",
+      "rid": "a8990fab-9ad2-4dd1-bbc2-53ee2f9943c3",
+      "description": "Testing purpose",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "I'm testing",
+      "tool_id": "682214d888fdc5e7ae6a1e8c",
+      "rid": "7ece5b55-880c-426b-abf2-8b2610a346d5",
+      "description": "This is testing the main thing",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "DataSage",
+      "tool_id": "67f0f3744d7690c0a41fd273",
+      "rid": "1bf6f788-a4f2-4428-afb9-45dc3f34a085",
+      "description": "AI-powered analytics and reporting platform.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "LearnMate",
+      "tool_id": "67f0f3744d7690c0a41fd278",
+      "rid": "5ec5c5d1-7600-4702-a113-cc7e31dd2362",
+      "description": "AI-powered personalized learning platform.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "LegalMind",
+      "tool_id": "67f0f3744d7690c0a41fd277",
+      "rid": "dac0e967-f943-4cc4-9419-4012dcb6fc12",
+      "description": "AI legal document assistant.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "upload test again",
+      "tool_id": "6814e362d640bb29cb10f3d6",
+      "rid": "ed9f0a9a-30a3-4b4d-8e47-cbb7731a6d0b",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "New one for test",
+      "tool_id": "681cc644cedff7acf54fd144",
+      "rid": "9bf9a9ad-d6a3-4d39-a6cf-bf75e137956e",
+      "description": "This is for testing purpose only",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "SoundGenie",
+      "tool_id": "67f0f3744d7690c0a41fd275",
+      "rid": "447b627f-715b-4477-9d68-651445465449",
+      "description": "AI audio generator and enhancer.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "ChatPilot",
+      "tool_id": "67f0f3744d7690c0a41fd272",
+      "rid": "b2bb3135-86e9-484c-9137-569d1235ab77",
+      "description": "Conversational AI bot for customer service.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "Auto Write Ai Tool",
+      "tool_id": "67f0f3744d7690c0a41fd274",
+      "rid": "d11cb9ae-eb4b-4ba9-899b-59ff87528eb6",
+      "description": "AI writing tool for blogs, articles, and copy.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    },
+    {
+      "name": "VidMaker AI",
+      "tool_id": "67f0f3744d7690c0a41fd276",
+      "rid": "0eac858d-d769-4376-88d2-46be6d6479d6",
+      "description": "Video creation using text prompts.",
+      "categories": "N/A",
+      "pricing": "N/A"
+    }
+  ],
+  "bm25_index_status": {
+    "initialized": true,
+    "document_count": 20
+  }
+}
