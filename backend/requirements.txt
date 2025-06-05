@@ -2,8 +2,10 @@
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 
-# Vector Database
-pinecone-client==3.0.0
+# Vector Database - Updated for compatibility
+# pinecone-client==3.0.0
+pinecone==6.0.0                    # Changed from pinecone-client to pinecone
+langchain-pinecone==0.0.3
 
 # Environment & Configuration
 python-dotenv==1.0.0
@@ -13,11 +15,10 @@ typing-extensions>=4.8.0
 # File Handling
 python-multipart==0.0.6
 
-# LangChain Core Components
+# LangChain Core Components - Updated versions
 langchain-core==0.1.21
 langchain-community==0.0.19
 langchain==0.1.4
-langchain-ollama==0.2.3
 langchain-groq
 
 # Vector Operations & Embeddings
@@ -41,20 +42,3 @@ numpy>=1.24.0
 # Development & Testing
 pytest>=7.0.0
 pytest-asyncio>=0.21.0
-# fastapi==0.109.0
-# uvicorn==0.27.0
-# pinecone-client==3.0.0
-# python-dotenv==1.0.0
-# pydantic==2.5.3
-# typing-extensions>=4.8.0
-# python-multipart==0.0.6
-# langchain-core>=0.1.21
-# langchain-community==0.0.19
-# langchain==0.1.4
-# langchain-ollama==0.2.3
-# langchain-groq
-# simsimd
-# nomic
-# tiktoken
-# nltk==3.8.1
-# rank_bm25==0.2.2

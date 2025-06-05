@@ -36,7 +36,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from langchain.embeddings.base import Embeddings
-from langchain_community.vectorstores import Pinecone as LangchainPinecone
+from langchain_pinecone import PineconeVectorStore
 from langchain_groq import ChatGroq
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -72,10 +72,19 @@ class Config:
     HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
     # Processing settings
-    DEFAULT_BATCH_SIZE = 20
+    DEFAULT_BATCH_SIZE = 100
     MAX_RETRIES = 3
     BASE_RETRY_DELAY = 1
     REQUEST_TIMEOUT = 10
+    
+    # NEW: Vector loading settings
+    LOADING_FIRST_BATCH_MIN = 50        # Minimum first batch size
+    LOADING_FIRST_BATCH_MAX = 100       # Maximum first batch size  
+    LOADING_FIRST_BATCH_RATIO = 5       # total_vectors // this ratio
+    LOADING_SINGLE_QUERY_THRESHOLD = 10000  # Use single query if vectors <= this
+    LOADING_COVERAGE_TARGET = 0.95      # Stop multi-term search at 95% coverage
+    LOADING_MULTI_TERM_BATCH_SIZE = 100 # Batch size for multi-term strategy
+    LOADING_TERM_DELAY_SECONDS = 0.1    # Delay between search terms
 
 # System Validation
 if sys.version_info < Config.MIN_PYTHON_VERSION:
@@ -656,7 +665,9 @@ class ApplicationState:
         self.vectors_loaded = 0
         self.total_vectors = 0
         self.bm25_ready = False
-
+        self.vectors_loading = False
+        self.bm25_building = False
+        self.first_search_processed = False
 # ============================================================================
 # TOOL MANAGEMENT UTILITIES
 # ============================================================================
@@ -1363,9 +1374,9 @@ class VectorStoreManager:
                 api_key=env.nomic_api_key,
                 dimensionality=Config.DIMENSION
             )
-            
-            vector_store = LangchainPinecone.from_existing_index(
-                index_name=env.index_name,
+            pinecone_index = self.pc.Index(env.index_name)
+            vector_store = PineconeVectorStore(
+                index=pinecone_index,
                 embedding=embeddings,
                 text_key="text"
             )
@@ -1455,55 +1466,88 @@ app.add_middleware(
 # APPLICATION EVENT HANDLERS
 # ============================================================================
 
-async def load_vectors_for_bm25():
-    """Load vectors efficiently using direct Pinecone access."""
+def build_bm25_lazy():
+    """Build BM25 index lazily (called on first search)."""
     try:
-        total_vectors = app_state.total_vectors
-        logger.info(f"Starting BM25 loading for {total_vectors} vectors")
-        
-        if total_vectors == 0:
-            logger.warning("No vectors to load for BM25")
+        if app_state.bm25_ready or app_state.bm25_building:
             return
+            
+        app_state.bm25_building = True
+        logger.info("🔧 Building BM25 index lazily (first search detected)")
         
-        # Get direct Pinecone index access
+        start_time = time.time()
+        bm25_index.rebuild_index()
+        build_time = time.time() - start_time
+        
+        app_state.bm25_ready = True
+        app_state.bm25_building = False
+        app_state.first_search_processed = True
+        
+        logger.info(f"✅ BM25 index built successfully in {build_time:.2f}s ({len(bm25_index.tool_data)} documents)")
+        
+    except Exception as e:
+        logger.error(f"Error building BM25 index lazily: {str(e)}")
+        app_state.bm25_building = False
+
+async def load_vectors_optimized_serverless(total_vectors: int, first_batch_size: int) -> int:
+    """OPTIONAL: Load vectors using proper Pinecone serverless methods (only if new SDK available)."""
+    try:
+        # Only try this if the new SDK is available
         index = vector_store_manager.pc.Index(env.index_name)
         
-        # Use scan operation to get ALL vectors systematically
-        batch_size = 100
+        # Check if serverless list methods are available
+        if not hasattr(index, 'list_paginated'):
+            logger.info("list_paginated not available, skipping optimized serverless loading")
+            raise Exception("Serverless methods not available")
+        
         total_loaded = 0
-        processed_ids = set()
+        processed_rids = set()
         
-        # Create dummy vector for querying
-        dummy_vector = [0.0] * Config.DIMENSION
+        logger.info(f"Using Pinecone serverless list_paginated() method for batch loading")
         
-        # Make multiple queries to get different sets of vectors
-        for offset in range(0, total_vectors, batch_size):
+        batch_count = 0
+        pagination_token = None
+        
+        # Load vectors in batches using list_paginated
+        while total_loaded < total_vectors:
             try:
-                current_batch_size = min(batch_size, total_vectors - offset)
-                logger.info(f"Loading batch {offset//batch_size + 1} (requesting {current_batch_size} vectors)")
+                # Determine batch size - smaller for first batch, larger for subsequent
+                if batch_count == 0:
+                    limit = first_batch_size
+                else:
+                    limit = min(150, total_vectors - total_loaded)
                 
-                # Query with different approaches to get full coverage
-                response = index.query(
-                    vector=dummy_vector,
-                    top_k=current_batch_size * 2,  # Request more to account for duplicates
-                    include_metadata=True,
-                    include_values=False
-                )
+                # Use list_paginated for controlled batch loading
+                if pagination_token:
+                    results = index.list_paginated(
+                        limit=limit,
+                        pagination_token=pagination_token
+                    )
+                else:
+                    results = index.list_paginated(limit=limit)
+                
+                # Get vector IDs from this batch
+                vector_ids = [vector.id for vector in results.vectors]
+                
+                if not vector_ids:
+                    logger.info("No more vectors to fetch")
+                    break
+                
+                # Fetch the actual vector data using the IDs
+                fetched_vectors = index.fetch(ids=vector_ids)
                 
                 batch_loaded = 0
-                for match in response.matches:
-                    rid = match.id
-                    
-                    if rid in processed_ids:
-                        continue
-                        
-                    processed_ids.add(rid)
-                    metadata = match.metadata
-                    
-                    if not metadata or "tool_id" not in metadata:
-                        continue
-                    
+                for vector_id, vector_data in fetched_vectors.vectors.items():
                     try:
+                        if vector_id in processed_rids:
+                            continue
+                            
+                        processed_rids.add(vector_id)
+                        metadata = vector_data.metadata
+                        
+                        if not metadata or "tool_id" not in metadata:
+                            continue
+                        
                         tool = Tool(
                             tool_id=metadata.get("tool_id", ""),
                             name=metadata.get("name", "Unknown"),
@@ -1515,49 +1559,170 @@ async def load_vectors_for_bm25():
                             status=metadata.get("status", None)
                         )
                         
-                        bm25_index.add_tool(tool, rid)
+                        bm25_index.add_tool(tool, vector_id)
                         batch_loaded += 1
                         total_loaded += 1
                         
                     except Exception as e:
-                        logger.warning(f"Error processing tool {rid}: {str(e)}")
+                        logger.warning(f"Error processing vector {vector_id}: {str(e)}")
                         continue
                 
-                logger.info(f"Batch loaded {batch_loaded} new tools (total: {total_loaded})")
+                batch_count += 1
+                logger.info(f"Optimized batch {batch_count}: loaded {batch_loaded} vectors (total: {total_loaded})")
                 
-                # If we're not getting new tools, try vector store fallback
-                if batch_loaded == 0 and total_loaded < total_vectors:
-                    logger.info("Switching to vector store method for remaining tools")
+                # Update app state after first batch
+                if batch_count == 1:
+                    app_state.vectors_loaded = total_loaded
+                    app_state.index_ready = True
+                    logger.info(f"🚀 System ready after first optimized batch! Loaded {total_loaded} vectors")
+                
+                # Check for more data
+                if hasattr(results, 'pagination') and hasattr(results.pagination, 'next'):
+                    pagination_token = results.pagination.next
+                else:
+                    logger.info("No more pages available")
                     break
-                    
-                await asyncio.sleep(0.1)
                 
-            except Exception as e:
-                logger.error(f"Error in batch: {str(e)}")
+                # Small delay between batches
+                if batch_count > 1:
+                    await asyncio.sleep(0.5)
+                    
+            except Exception as batch_error:
+                logger.error(f"Error in optimized batch {batch_count}: {str(batch_error)}")
                 break
         
-        # Fallback to vector store if we didn't get all tools
+        return total_loaded
+        
+    except Exception as e:
+        logger.warning(f"Optimized serverless loading not available: {str(e)}")
+        return 0
+
+async def load_vectors_batch_fallback(total_vectors: int, first_batch_size: int) -> int:
+    """RELIABLE: Batch loading using existing similarity_search method (preserves current working approach)."""
+    try:
+        vector_store = vector_store_manager.get_vector_store()
+        total_loaded = 0
+        
+        # Load first batch quickly
+        logger.info(f"Loading first batch of {first_batch_size} vectors (similarity_search method)")
+        first_results = vector_store.similarity_search("", k=first_batch_size)
+        
+        for doc in first_results:
+            try:
+                metadata = doc.metadata
+                rid = metadata.get("rid")
+                
+                if not rid or "tool_id" not in metadata:
+                    continue
+                
+                tool = Tool(
+                    tool_id=metadata.get("tool_id", ""),
+                    name=metadata.get("name", "Unknown"),
+                    category_subcat=metadata.get("category_subcat", ""),
+                    url=metadata.get("url", "https://example.com"),
+                    description=metadata.get("description", ""),
+                    image_url=metadata.get("image_url", None),
+                    owner=metadata.get("owner", None),
+                    status=metadata.get("status", None)
+                )
+                
+                bm25_index.add_tool(tool, rid)
+                total_loaded += 1
+                
+            except Exception as e:
+                continue
+        
+        # READY AFTER FIRST BATCH
+        app_state.vectors_loaded = total_loaded
+        app_state.index_ready = True
+        logger.info(f"🚀 System ready after first batch! Loaded {total_loaded} vectors")
+        
+        # Continue loading remaining vectors in background
         if total_loaded < total_vectors:
-            logger.info(f"Using vector store fallback for remaining {total_vectors - total_loaded} tools")
+            logger.info(f"Loading remaining {total_vectors - total_loaded} vectors in background...")
+            remaining_results = vector_store.similarity_search("", k=total_vectors)
+            processed_rids = {metadata.get("rid") for doc in first_results for metadata in [doc.metadata] if metadata.get("rid")}
             
+            for doc in remaining_results:
+                try:
+                    metadata = doc.metadata
+                    rid = metadata.get("rid")
+                    
+                    if not rid or "tool_id" not in metadata or rid in processed_rids:
+                        continue
+                    
+                    processed_rids.add(rid)
+                    
+                    tool = Tool(
+                        tool_id=metadata.get("tool_id", ""),
+                        name=metadata.get("name", "Unknown"),
+                        category_subcat=metadata.get("category_subcat", ""),
+                        url=metadata.get("url", "https://example.com"),
+                        description=metadata.get("description", ""),
+                        image_url=metadata.get("image_url", None),
+                        owner=metadata.get("owner", None),
+                        status=metadata.get("status", None)
+                    )
+                    
+                    bm25_index.add_tool(tool, rid)
+                    total_loaded += 1
+                    
+                except Exception as e:
+                    continue
+            
+            logger.info(f"Background loading complete: {total_loaded} total vectors")
+        
+        return total_loaded
+        
+    except Exception as e:
+        logger.error(f"Batch fallback loading failed: {str(e)}")
+        return 0
+
+async def load_vectors_for_bm25():
+    """Clean batch loading with minimal logging."""
+    try:
+        total_vectors = app_state.total_vectors
+        logger.info(f"Loading {total_vectors} vectors")
+        
+        if total_vectors == 0:
+            app_state.index_ready = True
+            app_state.bm25_ready = False
+            return
+
+        first_batch_size = min(
+            Config.LOADING_FIRST_BATCH_MAX, 
+            max(Config.LOADING_FIRST_BATCH_MIN, total_vectors // Config.LOADING_FIRST_BATCH_RATIO)
+        )
+        
+        app_state.vectors_loading = True
+        total_loaded = 0
+        
+        # Strategy 1: Batch loading
+        try:
+            total_loaded = await load_vectors_batch_fallback(total_vectors, first_batch_size)
+            
+            if total_loaded > 0:
+                logger.info(f"✅ Loaded {total_loaded}/{total_vectors} vectors ({(total_loaded/total_vectors)*100:.1f}%)")
+            else:
+                raise Exception("Batch loading failed")
+                
+        except Exception as e:
+            logger.warning(f"Batch loading failed, using single query fallback")
+            
+            # Strategy 2: Single query fallback
             try:
                 vector_store = vector_store_manager.get_vector_store()
                 
-                # Try multiple searches to get different results
-                search_terms = ["", "tool", "ai", "software", "app"]
-                
-                for search_term in search_terms:
-                    if total_loaded >= total_vectors:
-                        break
-                        
-                    results = vector_store.similarity_search(search_term, k=50)
+                if total_vectors <= Config.LOADING_SINGLE_QUERY_THRESHOLD:
+                    results = vector_store.similarity_search("", k=total_vectors)
                     
                     for doc in results:
-                        metadata = doc.metadata
-                        rid = metadata.get("rid")
-                        
-                        if rid and rid not in processed_ids and "tool_id" in metadata:
-                            processed_ids.add(rid)
+                        try:
+                            metadata = doc.metadata
+                            rid = metadata.get("rid")
+                            
+                            if not rid or "tool_id" not in metadata:
+                                continue
                             
                             tool = Tool(
                                 tool_id=metadata.get("tool_id", ""),
@@ -1573,56 +1738,61 @@ async def load_vectors_for_bm25():
                             bm25_index.add_tool(tool, rid)
                             total_loaded += 1
                             
-                            if total_loaded >= total_vectors:
-                                break
+                        except Exception:
+                            continue
                     
-                    await asyncio.sleep(0.05)
+                else:
+                    # Multi-term strategy for large datasets
+                    processed_ids = set()
+                    search_terms = ["", "tool", "ai", "software", "app", "data", "design", "business", "platform"]
+                    coverage_target = total_vectors * Config.LOADING_COVERAGE_TARGET
                     
-            except Exception as e:
-                logger.error(f"Error in vector store fallback: {str(e)}")
+                    for term in search_terms:
+                        if total_loaded >= coverage_target:
+                            break
+                            
+                        results = vector_store.similarity_search(term, k=Config.LOADING_MULTI_TERM_BATCH_SIZE)
+                        
+                        for doc in results:
+                            metadata = doc.metadata
+                            rid = metadata.get("rid")
+                            
+                            if not rid or rid in processed_ids or "tool_id" not in metadata:
+                                continue
+                            
+                            processed_ids.add(rid)
+                            
+                            tool = Tool(
+                                tool_id=metadata.get("tool_id", ""),
+                                name=metadata.get("name", "Unknown"),
+                                category_subcat=metadata.get("category_subcat", ""),
+                                url=metadata.get("url", "https://example.com"),
+                                description=metadata.get("description", ""),
+                                image_url=metadata.get("image_url", None),
+                                owner=metadata.get("owner", None),
+                                status=metadata.get("status", None)
+                            )
+                            
+                            bm25_index.add_tool(tool, rid)
+                            total_loaded += 1
+                        
+                        await asyncio.sleep(Config.LOADING_TERM_DELAY_SECONDS)
+                
+                app_state.index_ready = True
+                logger.info(f"✅ Fallback loaded {total_loaded}/{total_vectors} vectors ({(total_loaded/total_vectors)*100:.1f}%)")
+                
+            except Exception:
+                app_state.index_ready = True
+                app_state.bm25_ready = False
         
-        logger.info(f"Finished loading. BM25 index now has {len(bm25_index.tool_data)} tools")
-        
-        # Build the BM25 index
-        logger.info("Building BM25 index")
-        bm25_index.rebuild_index()
-        app_state.bm25_ready = True
-        logger.info("BM25 index built successfully")
+        app_state.vectors_loaded = total_loaded
+        app_state.vectors_loading = False
+        app_state.bm25_ready = False  # Always lazy
         
     except Exception as e:
-        logger.error(f"Error during BM25 loading: {str(e)}")
-        # Final fallback - keep existing behavior
-        fetch_size = Config.DEFAULT_BATCH_SIZE
-        total_vectors = app_state.total_vectors
-        
-        for i in range(0, total_vectors, fetch_size):
-            batch_size = min(fetch_size, total_vectors - i)
-            try:
-                vector_store = vector_store_manager.get_vector_store()
-                results = vector_store.similarity_search("", k=batch_size)
-                
-                for doc in results:
-                    metadata = doc.metadata
-                    if "tool_id" in metadata and "rid" in metadata:
-                        tool = Tool(
-                            tool_id=metadata.get("tool_id", ""),
-                            name=metadata.get("name", "Unknown"),
-                            category_subcat=metadata.get("category_subcat", ""),
-                            url=metadata.get("url", "https://example.com"),
-                            description=metadata.get("description", ""),
-                            image_url=metadata.get("image_url", None),
-                            owner=metadata.get("owner", None),
-                            status=metadata.get("status", None)
-                        )
-                        bm25_index.add_tool(tool, metadata.get("rid"))
-                
-                await asyncio.sleep(0.01)
-                
-            except Exception as e:
-                logger.error(f"Error loading vector batch: {str(e)}")
-        
-        bm25_index.rebuild_index()
-        app_state.bm25_ready = True
+        logger.error(f"Loading failed: {str(e)}")
+        app_state.index_ready = True
+        app_state.bm25_ready = False
 
 async def initialize_indexes():
     """Initialize indexes in background with progress tracking."""
@@ -2049,7 +2219,9 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 "timestamp": datetime.now().isoformat()
             })
             return QueryResponse(response=initializing_response)
-        
+        if not app_state.bm25_ready and not app_state.bm25_building:
+            logger.info("First search detected - building BM25 index lazily")
+            build_bm25_lazy()
         # Get vector store
         vector_store = vector_store_manager.get_vector_store(headers, for_query=True)
         total_vectors = vector_store_manager.get_total_vectors()
@@ -2211,46 +2383,41 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             cleaned_context = TextCleaner.clean_text(context)
             
             system_text = f"""
-You are a tool retrieval assistant tasked with finding, picking and ranking ALLrelevant tools from provided Tool Data that closely relate to the User Query.
+You are a tool selection assistant.
 
-CORE RULE: If a tool doesn't directly address the query, EXCLUDE it completely.
+From the given Tool Data, return all tools that relate to the User Query. Your job is to select and rank all tools that match the query, and explain clearly why each tool is relevant.
 
-Instructions:
-- Analyze the User Query and understand their needs, including any quantity specifications (e.g., "top 1", "best 3", etc.).
-- If the User Query specifies a number of tools (e.g., "top 1", "best 3", "show me 2"), return EXACTLY that number of tools.
-- If no quantity is specified, analyze each tool in the Tool Data and include all the relevant tools based on the User Query analysis.
-- Don't include any tools that are not relevant to the User Query.
-- Rank them from most to least relevant.
-Quality check: Can you write specific, non-generic descriptions? If no, exclude the tool.
-- For each tool, generate:
-  - A short summary (1–2 lines) Specificing way this tool solves the user's exact need.
-  - 2–3 bullet points Specific feature addressing the query.
-- Format your response as a JSON object with the following schema:
+Strict Rules:
+- If the User Query specifies a number (e.g., "top 1", "best 3"), return exactly that many tools.
+- If the User Query does not specify a number, return **all tools from Tool Data** that are relevant. Do **not** limit the count.
+- Include **every tool** from Tool Data that matches the topic or is useful for the task described in the User Query.
+- Avoid selecting only the "top few" unless the query clearly asks for a specific count.
+- Rank tools from most to least relevant **but do not exclude any relevant tool**.
+
+For each selected tool:
+- Explain why this tool is a good answer to the User Query using reasoning that ties to the user’s needs. Avoid repeating generic product descriptions.
+- Focus on unique features that directly address the query’s context or intent.
+- Avoid generic, repetitive, or templated content.
+
+Output JSON format:
 {{
-  "tool_id": ["most_relevant_id", "next_most_relevant_id", ...],
+  "tool_id": ["most_relevant_tool_id", "next_most_relevant_tool_id", ...],
   "tools": [
     {{
       "id": "tool_id",
       "name": "Tool Name",
-      "description": "Describe how this tool helps with the User Query (3-4 lines)",
+      "description": "Explain why this tool fits the query.",
       "bullets": [
-        "Feature or benefit 1 that addresses the user query",
-        "Feature or benefit 2 that addresses the user query",
-        "Feature or benefit 3",
-        "Optional feature or benefit 4"
+        "Feature 1 that matches user query",
+        "Feature 2 that supports task or need",
+        "Optional feature 3",
+        "Optional feature 4"
       ]
-    }},
-    ...
+    }}
   ]
 }}
-
-Guidelines:
-- Pay special attention to quantity specifications in the query and strictly adhere to them.
-- Carefully evaluate each tool's semantic relevance to the User Query and include only relevant tools.
-- Strict ordering: The most relevant tool MUST be listed first, followed by decreasing relevance.
-- Do not include tools that are irrelevant to the User Query in the output JSON.
-- Match the tool description to the User Query.
-- Output ONLY the JSON. No preamble. No extra notes.
+-You may include 5, 8, or even 10 tools if relevant. Do not infer a limit from the Output JSON format.
+-Your response must be only the JSON. No extra explanations, no notes, no commentary.
 """
             
             prompt_text = f"""
