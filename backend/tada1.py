@@ -63,12 +63,12 @@ class Config:
     # Search settings
     VECTOR_SEARCH_K = 15
     BM25_SEARCH_K = 30
-    HYBRID_ALPHA = 0.5  # Weight for vector vs BM25 search
+    HYBRID_ALPHA = 0.6  # Weight for vector vs BM25 search
     POPULAR_TOOLS_LIMIT = 4
     
     # Score-based selection settings
-    HYBRID_MIN_SCORE = 0.6    # Minimum relevance threshold
-    HYBRID_MAX_TOOLS = 10       # Maximum tools to send to LLM
+    HYBRID_MIN_SCORE = 0.4    # Minimum relevance threshold
+    HYBRID_MAX_TOOLS = 20       # Maximum tools to send to LLM
     HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
     # Processing settings
@@ -2385,19 +2385,28 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             system_text = f"""
 You are a tool selection assistant.
 
-From the given Tool Data, return all tools that relate to the User Query. Your job is to select and rank all tools that match the query, and explain clearly why each tool is relevant.
+From the given Tool Data, return every tool that relates, even partially, to the User Query. Your job is to select and rank all tools that show any meaningful, partial, indirect, or contextual connection to the query — even if the overlap is small or based on just one aspect.
 
 Strict Rules:
 - If the User Query specifies a number (e.g., "top 1", "best 3"), return exactly that many tools.
-- If the User Query does not specify a number, return **all tools from Tool Data** that are relevant. Do **not** limit the count.
-- Include **every tool** from Tool Data that matches the topic or is useful for the task described in the User Query.
-- Avoid selecting only the "top few" unless the query clearly asks for a specific count.
-- Rank tools from most to least relevant **but do not exclude any relevant tool**.
+- If the User Query does not specify a number, return ALL tools from Tool Data that show even minimal relevance.
+- Do not exclude tools with loose, secondary, or indirect connections.
+
+Inclusion Criteria:
+- Include all tools that touches on a single feature, keyword, theme, task type, or use case from the User Query.
+- Include all tools with partial, tangential, supportive, or contextual usefulness.
+- Include all tools that could be creatively repurposed or adapted to help with the query.
+- Include all tools relevant to any part of the process (before, during, or after the user task).
+- If all the tools are relevant, return all of them.
+
+Ranking:
+- Rank selected tools from most to least relevant.
+- Do not skip or exclude any tool that passes the inclusion criteria.
 
 For each selected tool:
-- Explain why this tool is a good answer to the User Query using reasoning that ties to the user’s needs. Avoid repeating generic product descriptions.
-- Focus on unique features that directly address the query’s context or intent.
-- Avoid generic, repetitive, or templated content.
+- Explain clearly why this tool is relevant, even if the connection is partial or indirect.
+- Focus on unique capabilities or connections to the query, not just repeating product descriptions.
+- Tie features directly to the user’s intent or task.
 
 Output JSON format:
 {{
@@ -2406,20 +2415,21 @@ Output JSON format:
     {{
       "id": "tool_id",
       "name": "Tool Name",
-      "description": "Explain why this tool fits the query.",
+      "description": "Why this tool fits the query — even partially.",
       "bullets": [
-        "Feature 1 that matches user query",
-        "Feature 2 that supports task or need",
-        "Optional feature 3",
-        "Optional feature 4"
+        "Feature 1 that supports the query goal",
+        "Feature 2 that solves a subtask or related need",
+        "Optional: Indirect or tangential feature that still applies",
+        "Optional: Creative or extended relevance"
       ]
     }}
   ]
 }}
--You may include 5, 8, or even 10 tools if relevant. Do not infer a limit from the Output JSON format.
--Your response must be only the JSON. No extra explanations, no notes, no commentary.
+
+- Only return the JSON.
+- Do NOT include commentary, extra notes, or explanation outside the JSON.
+- Do NOT infer a limit — include every relevant tool if no specific count is requested.
 """
-            
             prompt_text = f"""
 User Query: {request.query}
 
@@ -2430,7 +2440,8 @@ Tool Data: {cleaned_context}
             llm = ChatGroq(
                 groq_api_key=env.groq_api_key,
                 model_name=current_model,
-                temperature=0.1
+                temperature=0.1,
+                top_p=1.0
             )
             
             try:

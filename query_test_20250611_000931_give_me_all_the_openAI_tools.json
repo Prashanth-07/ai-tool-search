@@ -1,0 +1,433 @@
+{
+  "timestamp": "2025-06-11T00:09:31.953647",
+  "input_query": "give me all the openAI tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 15,
+    "tool_ids": [
+      "68485ca5b939200515078c03",
+      "681a842c477018e34794e278",
+      "6843683fac33a46e0bf02e1e",
+      "684207a7ac33a46e0bb26986",
+      "6842037bac33a46e0bb1903d",
+      "681a7d0b477018e34794e0db",
+      "68436509ac33a46e0befc476",
+      "68419f79bce3a3d64c726310",
+      "681bd878477018e34795489d",
+      "681a8805477018e34794e440",
+      "68420d16ac33a46e0bb45216",
+      "68421836ac33a46e0bb6a503",
+      "6841c9e2bce3a3d64c7317e7",
+      "68435eefac33a46e0bee89a6",
+      "6841e61cac33a46e0baa0b03"
+    ],
+    "tools": [
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "Codex (OpenAI)",
+        "description": "Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code. It's the underlying model behind GitHub Copilot and is designed to help developers write code faster, learn new APIs, and prototype projects with simple language commands.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Developer Tools",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "681a842c477018e34794e278",
+        "name": "OpenAI o3-mini",
+        "description": "OpenAI o3-mini is a lightweight, efficient AI model from OpenAI\u2019s \"o3\" series, designed to balance cost, speed, and intelligence.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Education",
+          "Productivity",
+          "Business"
+        ]
+      },
+      {
+        "id": "6843683fac33a46e0bf02e1e",
+        "name": "OpenAI GPT 4 Turbo",
+        "description": "GPT-4 Turbo is OpenAI\u2019s enhanced version of GPT-4, engineered to deliver faster performance, extended context handling, and more cost-effective usage.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "684207a7ac33a46e0bb26986",
+        "name": "OpenAI o1-pro",
+        "description": "o1-pro is a highly capable AI model developed by OpenAI, designed to deliver efficient, high-quality text generation across a wide range of use cases.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "6842037bac33a46e0bb1903d",
+        "name": "OpenAI o3",
+        "description": "o3 is OpenAI's next-generation language model, representing a significant leap in performance, reasoning ability, and efficiency.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "681a7d0b477018e34794e0db",
+        "name": "OpenAI o1",
+        "description": "o1 is a fast, highly capable language model developed by OpenAI, optimized for performance, cost-efficiency, and general-purpose use.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Education",
+          "Productivity",
+          "Business"
+        ]
+      },
+      {
+        "id": "68436509ac33a46e0befc476",
+        "name": "OpenAI Omni Moderation Latest",
+        "description": "omni-moderation-latest is OpenAI\u2019s most advanced content moderation model, designed to detect and flag harmful, unsafe, or policy-violating content across a wide range of modalities and languages.",
+        "bullets": [
+          "AI Detector",
+          "AI Content Detector",
+          "AI Chatbot",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "68419f79bce3a3d64c726310",
+        "name": "OpenAI Realtime API",
+        "description": "OpenAI\u2019s Real-Time API is a game-changing advancement in AI interaction, enabling developers to build apps that respond instantly\u2014literally in milliseconds\u2014to user inputs.",
+        "bullets": [
+          "AI Chatbot",
+          "AI Developer Tools",
+          "AI API Design",
+          "Large Language Models (LLMs)",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "681bd878477018e34795489d",
+        "name": "OpenAI Deep Research",
+        "description": "Deep Research is an AI-powered agent that autonomously browses the web, interprets and analyzes text, images, and PDFs, and generates comprehensive, cited reports on user-specified topics.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Education",
+          "Productivity",
+          "Business"
+        ]
+      },
+      {
+        "id": "681a8805477018e34794e440",
+        "name": "OpenAI Operator",
+        "description": "OpenAI Operator is a cloud-native orchestration layer designed to help businesses deploy and manage AI models at scale.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Business",
+          "Productivity",
+          "Education"
+        ]
+      },
+      {
+        "id": "68420d16ac33a46e0bb45216",
+        "name": "OpenAI - GPT 4.1",
+        "description": "GPT-4.1 is OpenAI\u2019s newest multimodal large language model, designed to deliver highly capable, efficient, and intelligent performance across a broad range of tasks.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "68421836ac33a46e0bb6a503",
+        "name": "OpenAI GPT 4o Realtime",
+        "description": "GPT-4o Realtime Preview is OpenAI\u2019s latest and most advanced multimodal AI model\u2014designed for lightning-fast, real-time interaction across text, vision, and audio.",
+        "bullets": [
+          "Speech-to-Text",
+          "Text-to-Speech",
+          "AI Voice Assistants",
+          "AI Chatbot",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "6841c9e2bce3a3d64c7317e7",
+        "name": "OpenAI Whisper",
+        "description": "OpenAI Whisper is a powerful automatic speech recognition (ASR) system designed to transcribe and translate spoken language with high accuracy.",
+        "bullets": [
+          "Speech-to-Text",
+          "AI Speech Recognition",
+          "Transcription",
+          "AI Audio Enhancer",
+          "AI Voice Assistants"
+        ]
+      },
+      {
+        "id": "68435eefac33a46e0bee89a6",
+        "name": "OpenAI Computer Use Preview",
+        "description": "computer-use-preview is OpenAI\u2019s groundbreaking experimental model that enables AI agents to interact with computer interfaces\u2014just like a human would.",
+        "bullets": [
+          "AI Developer Tools",
+          "AI Productivity Tools",
+          "AI Workflow Management",
+          "AI Meeting Assistant",
+          "AI Task Management"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "OpenAI's TTS-1 (Text-to-Speech) is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance.",
+        "bullets": [
+          "Text-to-Speech",
+          "AI Voice Assistants",
+          "AI Speech Synthesis",
+          "AI Voice Cloning",
+          "AI Voice Chat Generator"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68485ca5b939200515078c03",
+      "681a842c477018e34794e278",
+      "6843683fac33a46e0bf02e1e",
+      "684207a7ac33a46e0bb26986",
+      "6842037bac33a46e0bb1903d",
+      "681a7d0b477018e34794e0db",
+      "68436509ac33a46e0befc476",
+      "68419f79bce3a3d64c726310",
+      "681bd878477018e34795489d",
+      "681a8805477018e34794e440",
+      "68420d16ac33a46e0bb45216",
+      "68421836ac33a46e0bb6a503",
+      "6841c9e2bce3a3d64c7317e7",
+      "68435eefac33a46e0bee89a6",
+      "6841e61cac33a46e0baa0b03"
+    ],
+    "tools": [
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "Codex (OpenAI)",
+        "description": "Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code. It's the underlying model behind GitHub Copilot and is designed to help developers write code faster, learn new APIs, and prototype projects with simple language commands.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Developer Tools",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "681a842c477018e34794e278",
+        "name": "OpenAI o3-mini",
+        "description": "OpenAI o3-mini is a lightweight, efficient AI model from OpenAI\u2019s \"o3\" series, designed to balance cost, speed, and intelligence.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Education",
+          "Productivity",
+          "Business"
+        ]
+      },
+      {
+        "id": "6843683fac33a46e0bf02e1e",
+        "name": "OpenAI GPT 4 Turbo",
+        "description": "GPT-4 Turbo is OpenAI\u2019s enhanced version of GPT-4, engineered to deliver faster performance, extended context handling, and more cost-effective usage.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "684207a7ac33a46e0bb26986",
+        "name": "OpenAI o1-pro",
+        "description": "o1-pro is a highly capable AI model developed by OpenAI, designed to deliver efficient, high-quality text generation across a wide range of use cases.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "6842037bac33a46e0bb1903d",
+        "name": "OpenAI o3",
+        "description": "o3 is OpenAI's next-generation language model, representing a significant leap in performance, reasoning ability, and efficiency.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "681a7d0b477018e34794e0db",
+        "name": "OpenAI o1",
+        "description": "o1 is a fast, highly capable language model developed by OpenAI, optimized for performance, cost-efficiency, and general-purpose use.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Education",
+          "Productivity",
+          "Business"
+        ]
+      },
+      {
+        "id": "68436509ac33a46e0befc476",
+        "name": "OpenAI Omni Moderation Latest",
+        "description": "omni-moderation-latest is OpenAI\u2019s most advanced content moderation model, designed to detect and flag harmful, unsafe, or policy-violating content across a wide range of modalities and languages.",
+        "bullets": [
+          "AI Detector",
+          "AI Content Detector",
+          "AI Chatbot",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "68419f79bce3a3d64c726310",
+        "name": "OpenAI Realtime API",
+        "description": "OpenAI\u2019s Real-Time API is a game-changing advancement in AI interaction, enabling developers to build apps that respond instantly\u2014literally in milliseconds\u2014to user inputs.",
+        "bullets": [
+          "AI Chatbot",
+          "AI Developer Tools",
+          "AI API Design",
+          "Large Language Models (LLMs)",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "681bd878477018e34795489d",
+        "name": "OpenAI Deep Research",
+        "description": "Deep Research is an AI-powered agent that autonomously browses the web, interprets and analyzes text, images, and PDFs, and generates comprehensive, cited reports on user-specified topics.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Education",
+          "Productivity",
+          "Business"
+        ]
+      },
+      {
+        "id": "681a8805477018e34794e440",
+        "name": "OpenAI Operator",
+        "description": "OpenAI Operator is a cloud-native orchestration layer designed to help businesses deploy and manage AI models at scale.",
+        "bullets": [
+          "AI Chatbot",
+          "Text & Writing",
+          "Business",
+          "Productivity",
+          "Education"
+        ]
+      },
+      {
+        "id": "68420d16ac33a46e0bb45216",
+        "name": "OpenAI - GPT 4.1",
+        "description": "GPT-4.1 is OpenAI\u2019s newest multimodal large language model, designed to deliver highly capable, efficient, and intelligent performance across a broad range of tasks.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "AI Developer Tools",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "68421836ac33a46e0bb6a503",
+        "name": "OpenAI GPT 4o Realtime",
+        "description": "GPT-4o Realtime Preview is OpenAI\u2019s latest and most advanced multimodal AI model\u2014designed for lightning-fast, real-time interaction across text, vision, and audio.",
+        "bullets": [
+          "Speech-to-Text",
+          "Text-to-Speech",
+          "AI Voice Assistants",
+          "AI Chatbot",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "6841c9e2bce3a3d64c7317e7",
+        "name": "OpenAI Whisper",
+        "description": "OpenAI Whisper is a powerful automatic speech recognition (ASR) system designed to transcribe and translate spoken language with high accuracy.",
+        "bullets": [
+          "Speech-to-Text",
+          "AI Speech Recognition",
+          "Transcription",
+          "AI Audio Enhancer",
+          "AI Voice Assistants"
+        ]
+      },
+      {
+        "id": "68435eefac33a46e0bee89a6",
+        "name": "OpenAI Computer Use Preview",
+        "description": "computer-use-preview is OpenAI\u2019s groundbreaking experimental model that enables AI agents to interact with computer interfaces\u2014just like a human would.",
+        "bullets": [
+          "AI Developer Tools",
+          "AI Productivity Tools",
+          "AI Workflow Management",
+          "AI Meeting Assistant",
+          "AI Task Management"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "OpenAI's TTS-1 (Text-to-Speech) is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance.",
+        "bullets": [
+          "Text-to-Speech",
+          "AI Voice Assistants",
+          "AI Speech Synthesis",
+          "AI Voice Cloning",
+          "AI Voice Chat Generator"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 6.84,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68485ca5b939200515078c03\",\n    \"681a842c477018e34794e278\",\n    \"6843683fac33a46e0bf02e1e\",\n    \"684207a7ac33a46e0bb26986\",\n    \"6842037bac33a46e0bb1903d\",\n    \"681a7d0b477018e34794e0db\",\n    \"68436509ac33a46e0befc476\",\n    \"68419f79bce3a3d64c726310\",\n    \"681bd878477018e34795489d\",\n    \"681a8805477018e34794e440\",\n    \"68420d16ac33a46e0bb45216\",\n    \"68421836ac33a46e0bb6a503\",\n    \"6841c9e2bce3a3d64c7317e7\",\n    \"68435eefac33a46e0bee89a6\",\n    \"6841e61cac33a46e0baa0b03\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68485ca5b939200515078c03\",\n      \"name\": \"Codex (OpenAI)\",\n      \"description\": \"Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code. It's the underlying model behind GitHub Copilot and is designed to help developers write code faster, learn new APIs, and prototype projects with simple language commands.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"Code Explanation\",\n        \"AI Code Generator\",\n        \"AI Developer Tools\",\n        \"AI Productivity Tools\"\n      ]\n    },\n    {\n      \"id\": \"681a842c477018e34794e278\",\n      \"name\": \"OpenAI o3-mini\",\n      \"description\": \"OpenAI o3-mini is a lightweight, efficient AI model from OpenAI\\u2019s \\\"o3\\\" series, designed to balance cost, speed, and intelligence.\",\n      \"bullets\": [\n        \"AI Chatbot\",\n        \"Text & Writing\",\n        \"Education\",\n        \"Productivity\",\n        \"Business\"\n      ]\n    },\n    {\n      \"id\": \"6843683fac33a46e0bf02e1e\",\n      \"name\": \"OpenAI GPT 4 Turbo\",\n      \"description\": \"GPT-4 Turbo is OpenAI\\u2019s enhanced version of GPT-4, engineered to deliver faster performance, extended context handling, and more cost-effective usage.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"AI Code Generator\",\n        \"AI Code Refactoring\",\n        \"AI Developer Tools\",\n        \"Large Language Models (LLMs)\"\n      ]\n    },\n    {\n      \"id\": \"684207a7ac33a46e0bb26986\",\n      \"name\": \"OpenAI o1-pro\",\n      \"description\": \"o1-pro is a highly capable AI model developed by OpenAI, designed to deliver efficient, high-quality text generation across a wide range of use cases.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"AI Code Generator\",\n        \"AI Code Refactoring\",\n        \"AI Developer Tools\",\n        \"Large Language Models (LLMs)\"\n      ]\n    },\n    {\n      \"id\": \"6842037bac33a46e0bb1903d\",\n      \"name\": \"OpenAI o3\",\n      \"description\": \"o3 is OpenAI's next-generation language model, representing a significant leap in performance, reasoning ability, and efficiency.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"AI Code Generator\",\n        \"AI Code Refactoring\",\n        \"AI Developer Tools\",\n        \"Large Language Models (LLMs)\"\n      ]\n    },\n    {\n      \"id\": \"681a7d0b477018e34794e0db\",\n      \"name\": \"OpenAI o1\",\n      \"description\": \"o1 is a fast, highly capable language model developed by OpenAI, optimized for performance, cost-efficiency, and general-purpose use.\",\n      \"bullets\": [\n        \"AI Chatbot\",\n        \"Text & Writing\",\n        \"Education\",\n        \"Productivity\",\n        \"Business\"\n      ]\n    },\n    {\n      \"id\": \"68436509ac33a46e0befc476\",\n      \"name\": \"OpenAI Omni Moderation Latest\",\n      \"description\": \"omni-moderation-latest is OpenAI\\u2019s most advanced content moderation model, designed to detect and flag harmful, unsafe, or policy-violating content across a wide range of modalities and languages.\",\n      \"bullets\": [\n        \"AI Detector\",\n        \"AI Content Detector\",\n        \"AI Chatbot\",\n        \"AI Developer Tools\",\n        \"Large Language Models (LLMs)\"\n      ]\n    },\n    {\n      \"id\": \"68419f79bce3a3d64c726310\",\n      \"name\": \"OpenAI Realtime API\",\n      \"description\": \"OpenAI\\u2019s Real-Time API is a game-changing advancement in AI interaction, enabling developers to build apps that respond instantly\\u2014literally in milliseconds\\u2014to user inputs.\",\n      \"bullets\": [\n        \"AI Chatbot\",\n        \"AI Developer Tools\",\n        \"AI API Design\",\n        \"Large Language Models (LLMs)\",\n        \"AI Productivity Tools\"\n      ]\n    },\n    {\n      \"id\": \"681bd878477018e34795489d\",\n      \"name\": \"OpenAI Deep Research\",\n      \"description\": \"Deep Research is an AI-powered agent that autonomously browses the web, interprets and analyzes text, images, and PDFs, and generates comprehensive, cited reports on user-specified topics.\",\n      \"bullets\": [\n        \"AI Chatbot\",\n        \"Text & Writing\",\n        \"Education\",\n        \"Productivity\",\n        \"Business\"\n      ]\n    },\n    {\n      \"id\": \"681a8805477018e34794e440\",\n      \"name\": \"OpenAI Operator\",\n      \"description\": \"OpenAI Operator is a cloud-native orchestration layer designed to help businesses deploy and manage AI models at scale.\",\n      \"bullets\": [\n        \"AI Chatbot\",\n        \"Text & Writing\",\n        \"Business\",\n        \"Productivity\",\n        \"Education\"\n      ]\n    },\n    {\n      \"id\": \"68420d16ac33a46e0bb45216\",\n      \"name\": \"OpenAI - GPT 4.1\",\n      \"description\": \"GPT-4.1 is OpenAI\\u2019s newest multimodal large language model, designed to deliver highly capable, efficient, and intelligent performance across a broad range of tasks.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"AI Code Generator\",\n        \"AI Code Refactoring\",\n        \"AI Developer Tools\",\n        \"Large Language Models (LLMs)\"\n      ]\n    },\n    {\n      \"id\": \"68421836ac33a46e0bb6a503\",\n      \"name\": \"OpenAI GPT 4o Realtime\",\n      \"description\": \"GPT-4o Realtime Preview is OpenAI\\u2019s latest and most advanced multimodal AI model\\u2014designed for lightning-fast, real-time interaction across text, vision, and audio.\",\n      \"bullets\": [\n        \"Speech-to-Text\",\n        \"Text-to-Speech\",\n        \"AI Voice Assistants\",\n        \"AI Chatbot\",\n        \"Large Language Models (LLMs)\"\n      ]\n    },\n    {\n      \"id\": \"6841c9e2bce3a3d64c7317e7\",\n      \"name\": \"OpenAI Whisper\",\n      \"description\": \"OpenAI Whisper is a powerful automatic speech recognition (ASR) system designed to transcribe and translate spoken language with high accuracy.\",\n      \"bullets\": [\n        \"Speech-to-Text\",\n        \"AI Speech Recognition\",\n        \"Transcription\",\n        \"AI Audio Enhancer\",\n        \"AI Voice Assistants\"\n      ]\n    },\n    {\n      \"id\": \"68435eefac33a46e0bee89a6\",\n      \"name\": \"OpenAI Computer Use Preview\",\n      \"description\": \"computer-use-preview is OpenAI\\u2019s groundbreaking experimental model that enables AI agents to interact with computer interfaces\\u2014just like a human would.\",\n      \"bullets\": [\n        \"AI Developer Tools\",\n        \"AI Productivity Tools\",\n        \"AI Workflow Management\",\n        \"AI Meeting Assistant\",\n        \"AI Task Management\"\n      ]\n    },\n    {\n      \"id\": \"6841e61cac33a46e0baa0b03\",\n      \"name\": \"OpenAI TTS1\",\n      \"description\": \"OpenAI's TTS-1 (Text-to-Speech) is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance.\",\n      \"bullets\": [\n        \"Text-to-Speech\",\n        \"AI Voice Assistants\",\n        \"AI Speech Synthesis\",\n        \"AI Voice Cloning\",\n        \"AI Voice Chat Generator\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

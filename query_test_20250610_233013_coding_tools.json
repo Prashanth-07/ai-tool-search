@@ -1,0 +1,235 @@
+{
+  "timestamp": "2025-06-10T23:30:13.626053",
+  "input_query": "coding tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 8,
+    "tool_ids": [
+      "68161b3c65f8e50d48e683e4",
+      "6843618eac33a46e0beebe30",
+      "6848556fb93920051506efa4",
+      "6846ae87b32d4d019c045617",
+      "68485950b9392005150750a2",
+      "68472210b939200515f4bc44",
+      "68485ca5b939200515078c03",
+      "684867d8b93920051508d781"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform that helps developers write, understand, convert, and improve code across 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code Generation",
+          "Code Conversion",
+          "Unit Testing"
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "codex-mini-latest is OpenAI\u2019s lightweight, high-speed AI coding model that brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation, debugging, and editing tasks.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Testing & QA"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Testing & QA",
+          "AI Developer Tools"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Refactoring",
+          "AI Developer Tools"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE that offers intelligent code suggestions, autocomplete, debugging help, and natural language explanations.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Developer Tools",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "Codex (OpenAI)",
+        "description": "OpenAI Codex is a powerful AI coding engine that translates natural language into code and understands and generates code in over a dozen programming languages.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool that provides intelligent code suggestions, auto-completions, and best practice recommendations based on machine learning models trained on thousands of high-quality open-source projects.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Productivity Tools"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68161b3c65f8e50d48e683e4",
+      "6843618eac33a46e0beebe30",
+      "6848556fb93920051506efa4",
+      "6846ae87b32d4d019c045617",
+      "68485950b9392005150750a2",
+      "68472210b939200515f4bc44",
+      "68485ca5b939200515078c03",
+      "684867d8b93920051508d781"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform that helps developers write, understand, convert, and improve code across 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code Generation",
+          "Code Conversion",
+          "Unit Testing"
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "codex-mini-latest is OpenAI\u2019s lightweight, high-speed AI coding model that brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation, debugging, and editing tasks.",
+        "bullets": [
+          "AI Code Assistant",
+          "AI Code Generator",
+          "AI Code Refactoring",
+          "Large Language Models (LLMs)"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Testing & QA"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Testing & QA",
+          "AI Developer Tools"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Refactoring",
+          "AI Developer Tools"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE that offers intelligent code suggestions, autocomplete, debugging help, and natural language explanations.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Developer Tools",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "Codex (OpenAI)",
+        "description": "OpenAI Codex is a powerful AI coding engine that translates natural language into code and understands and generates code in over a dozen programming languages.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Productivity Tools"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool that provides intelligent code suggestions, auto-completions, and best practice recommendations based on machine learning models trained on thousands of high-quality open-source projects.",
+        "bullets": [
+          "AI Code Assistant",
+          "Code Explanation",
+          "AI Code Generator",
+          "AI Productivity Tools"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 6.563,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68161b3c65f8e50d48e683e4\",\n    \"6843618eac33a46e0beebe30\",\n    \"6848556fb93920051506efa4\",\n    \"6846ae87b32d4d019c045617\",\n    \"68485950b9392005150750a2\",\n    \"68472210b939200515f4bc44\",\n    \"68485ca5b939200515078c03\",\n    \"684867d8b93920051508d781\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68161b3c65f8e50d48e683e4\",\n      \"name\": \"Coding Fleet\",\n      \"description\": \"CodingFleet is an AI-powered coding assistant platform that helps developers write, understand, convert, and improve code across 90+ programming languages and frameworks.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Code Generation\",\n        \"Code Conversion\",\n        \"Unit Testing\"\n      ]\n    },\n    {\n      \"id\": \"6843618eac33a46e0beebe30\",\n      \"name\": \"OpenAI Codex mini Latest\",\n      \"description\": \"codex-mini-latest is OpenAI\\u2019s lightweight, high-speed AI coding model that brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation, debugging, and editing tasks.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"AI Code Generator\",\n        \"AI Code Refactoring\",\n        \"Large Language Models (LLMs)\"\n      ]\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\",\n      \"description\": \"Amazon CodeWhisperer is an AI-powered coding companion that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"Code Explanation\",\n        \"AI Code Generator\",\n        \"AI Testing & QA\"\n      ]\n    },\n    {\n      \"id\": \"6846ae87b32d4d019c045617\",\n      \"name\": \"Aider\",\n      \"description\": \"Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"Code Explanation\",\n        \"AI Testing & QA\",\n        \"AI Developer Tools\"\n      ]\n    },\n    {\n      \"id\": \"68485950b9392005150750a2\",\n      \"name\": \"Sourcery\",\n      \"description\": \"Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"Code Explanation\",\n        \"AI Code Refactoring\",\n        \"AI Developer Tools\"\n      ]\n    },\n    {\n      \"id\": \"68472210b939200515f4bc44\",\n      \"name\": \"Replit Ghostwriter\",\n      \"description\": \"Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE that offers intelligent code suggestions, autocomplete, debugging help, and natural language explanations.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"Code Explanation\",\n        \"AI Developer Tools\",\n        \"AI Productivity Tools\"\n      ]\n    },\n    {\n      \"id\": \"68485ca5b939200515078c03\",\n      \"name\": \"Codex (OpenAI)\",\n      \"description\": \"OpenAI Codex is a powerful AI coding engine that translates natural language into code and understands and generates code in over a dozen programming languages.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"Code Explanation\",\n        \"AI Code Generator\",\n        \"AI Productivity Tools\"\n      ]\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"IntelliCode (Microsoft)\",\n      \"description\": \"IntelliCode is an AI-powered code assistance tool that provides intelligent code suggestions, auto-completions, and best practice recommendations based on machine learning models trained on thousands of high-quality open-source projects.\",\n      \"bullets\": [\n        \"AI Code Assistant\",\n        \"Code Explanation\",\n        \"AI Code Generator\",\n        \"AI Productivity Tools\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "timestamp": "2025-06-10T23:36:22.828392",
+  "input_query": "give me the coding tools related to chat gpthat",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 4,
+    "tool_ids": [
+      "68161b3c65f8e50d48e683e4",
+      "68472210b939200515f4bc44",
+      "6818ec34606258b6c075cf5a",
+      "6846ae87b32d4d019c045617"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform that can be used for chatbot development, as it supports 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant platform",
+          "Supports 90+ programming languages and frameworks",
+          "Code Generator, Code Assistant, Code Converter, and Unit Test Generator"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant that can be used for chatbot development, as it offers intelligent code suggestions, autocomplete, and natural language explanations.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code suggestions, autocomplete, and natural language explanations",
+          "Supports both novice and advanced programmers"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode is an intelligent AI coding assistant that can be used for chatbot development, as it provides real-time code suggestions, explanations, and refactoring support across multiple programming languages.",
+        "bullets": [
+          "Intelligent AI coding assistant",
+          "Real-time code suggestions, explanations, and refactoring support",
+          "Supports multiple programming languages"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that can be used for chatbot development, as it integrates seamlessly with Git and allows developers to collaborate with large language models like GPT-4.",
+        "bullets": [
+          "Open-source AI-powered coding assistant",
+          "Integrates seamlessly with Git",
+          "Collaborates with large language models like GPT-4"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68161b3c65f8e50d48e683e4",
+      "68472210b939200515f4bc44",
+      "6818ec34606258b6c075cf5a",
+      "6846ae87b32d4d019c045617"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform that can be used for chatbot development, as it supports 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant platform",
+          "Supports 90+ programming languages and frameworks",
+          "Code Generator, Code Assistant, Code Converter, and Unit Test Generator"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant that can be used for chatbot development, as it offers intelligent code suggestions, autocomplete, and natural language explanations.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code suggestions, autocomplete, and natural language explanations",
+          "Supports both novice and advanced programmers"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode is an intelligent AI coding assistant that can be used for chatbot development, as it provides real-time code suggestions, explanations, and refactoring support across multiple programming languages.",
+        "bullets": [
+          "Intelligent AI coding assistant",
+          "Real-time code suggestions, explanations, and refactoring support",
+          "Supports multiple programming languages"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that can be used for chatbot development, as it integrates seamlessly with Git and allows developers to collaborate with large language models like GPT-4.",
+        "bullets": [
+          "Open-source AI-powered coding assistant",
+          "Integrates seamlessly with Git",
+          "Collaborates with large language models like GPT-4"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 5.999,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68161b3c65f8e50d48e683e4\",\n    \"68472210b939200515f4bc44\",\n    \"6818ec34606258b6c075cf5a\",\n    \"6846ae87b32d4d019c045617\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68161b3c65f8e50d48e683e4\",\n      \"name\": \"Coding Fleet\",\n      \"description\": \"CodingFleet is an AI-powered coding assistant platform that can be used for chatbot development, as it supports 90+ programming languages and frameworks.\",\n      \"bullets\": [\n        \"AI-powered coding assistant platform\",\n        \"Supports 90+ programming languages and frameworks\",\n        \"Code Generator, Code Assistant, Code Converter, and Unit Test Generator\"\n      ]\n    },\n    {\n      \"id\": \"68472210b939200515f4bc44\",\n      \"name\": \"Replit Ghostwriter\",\n      \"description\": \"Replit Ghostwriter is an AI-powered coding assistant that can be used for chatbot development, as it offers intelligent code suggestions, autocomplete, and natural language explanations.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Intelligent code suggestions, autocomplete, and natural language explanations\",\n        \"Supports both novice and advanced programmers\"\n      ]\n    },\n    {\n      \"id\": \"6818ec34606258b6c075cf5a\",\n      \"name\": \"Augment Code\",\n      \"description\": \"AugmentCode is an intelligent AI coding assistant that can be used for chatbot development, as it provides real-time code suggestions, explanations, and refactoring support across multiple programming languages.\",\n      \"bullets\": [\n        \"Intelligent AI coding assistant\",\n        \"Real-time code suggestions, explanations, and refactoring support\",\n        \"Supports multiple programming languages\"\n      ]\n    },\n    {\n      \"id\": \"6846ae87b32d4d019c045617\",\n      \"name\": \"Aider\",\n      \"description\": \"Aider.ai is an open-source AI-powered coding assistant that can be used for chatbot development, as it integrates seamlessly with Git and allows developers to collaborate with large language models like GPT-4.\",\n      \"bullets\": [\n        \"Open-source AI-powered coding assistant\",\n        \"Integrates seamlessly with Git\",\n        \"Collaborates with large language models like GPT-4\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

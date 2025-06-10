@@ -1,0 +1,373 @@
+{
+  "timestamp": "2025-06-11T00:09:16.280136",
+  "input_query": "give me all the coding related tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 15,
+    "tool_ids": [
+      "68161b3c65f8e50d48e683e4",
+      "68486dbbb939200515091245",
+      "6848556fb93920051506efa4",
+      "6818ec34606258b6c075cf5a",
+      "684731b4b939200515f530cd",
+      "6846ae87b32d4d019c045617",
+      "68485950b9392005150750a2",
+      "68472210b939200515f4bc44",
+      "684867d8b93920051508d781",
+      "681cfde363aef50052dabf04",
+      "681eefd253d3e454a4ba34a5",
+      "684874ccb939200515094d57",
+      "6846ab17b32d4d019c03e243",
+      "68486109b939200515082770",
+      "6846a816b32d4d019c036ec3"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant platform",
+          "Supports 90+ programming languages and frameworks",
+          "Code Generator, Code Assistant, Code Converter, and Unit Test Generator tools"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm is a powerful integrated development environment (IDE) specifically designed for Python development by JetBrains.",
+        "bullets": [
+          "Integrated development environment (IDE) for Python development",
+          "Intelligent code assistance, smart debugging, code refactoring, and a seamless development experience",
+          "Built-in support for AI-powered coding tools and extensions"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely.",
+        "bullets": [
+          "AI-powered coding companion developed by AWS",
+          "Provides real-time code suggestions, snippets, and security scans within popular IDEs",
+          "Trained on billions of lines of code"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI.",
+        "bullets": [
+          "Intelligent AI coding assistant",
+          "Provides real-time code suggestions, explanations, and refactoring support across multiple programming languages",
+          "Powered by cutting-edge AI models"
+        ]
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine",
+        "description": "Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Provides intelligent code completions and suggestions directly within your IDE",
+          "Supports multiple programming languages"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.",
+        "bullets": [
+          "Open-source AI-powered coding assistant",
+          "Allows developers to collaborate with large language models like GPT-4 directly from the command line",
+          "Integrates seamlessly with Git"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Helps developers write cleaner, more efficient Python code",
+          "Integrates seamlessly with your IDE or codebase"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Integrated into the Replit online IDE",
+          "Provides intelligent code suggestions, autocomplete, debugging help, and natural language explanations"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "AI-powered code assistance tool",
+          "Built into Microsoft Visual Studio and Visual Studio Code",
+          "Provides intelligent code suggestions, auto-completions, and best practice recommendations"
+        ]
+      },
+      {
+        "id": "681cfde363aef50052dabf04",
+        "name": "Cursor",
+        "description": "Cursor AI-Powered Code Editor is an advanced AI-driven coding environment designed to enhance developer productivity with intelligent code completion, automated debugging, and AI-assisted refactoring.",
+        "bullets": [
+          "AI-driven coding environment",
+          "Enhances developer productivity with intelligent code completion, automated debugging, and AI-assisted refactoring",
+          "Integrates cutting-edge AI models"
+        ]
+      },
+      {
+        "id": "681eefd253d3e454a4ba34a5",
+        "name": "Trae",
+        "description": "Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process.",
+        "bullets": [
+          "AI-powered Integrated Development Environment (IDE)",
+          "Transforms and streamlines the coding process",
+          "Adaptive collaboration, smart autocomplete, and real-time code generation features"
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters.",
+        "bullets": [
+          "Powerful Visual Studio extension",
+          "Enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters",
+          "Intelligent suggestions, quick fixes, and deep code navigation features"
+        ]
+      },
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf",
+        "description": "Windsurf.ai is a powerful AI-driven code assistant designed to help developers write, navigate, and understand code faster and more efficiently.",
+        "bullets": [
+          "AI-driven code assistant",
+          "Helps developers write, navigate, and understand code faster and more efficiently",
+          "Intelligent code search, in-context code explanations, and AI-powered code completion"
+        ]
+      },
+      {
+        "id": "68486109b939200515082770",
+        "name": "Polycoder",
+        "description": "PolyCoder is an open-source AI code generation model focused on C programming, developed by researchers at Carnegie Mellon University.",
+        "bullets": [
+          "Open-source AI code generation model",
+          "Focused on C programming",
+          "Trained on a curated dataset of open-source C code"
+        ]
+      },
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot",
+        "description": "GitHub Copilot is an AI-powered code completion tool developed by GitHub and powered by OpenAI.",
+        "bullets": [
+          "AI-powered code completion tool",
+          "Developed by GitHub and powered by OpenAI",
+          "Suggests full lines, functions, or entire blocks of code directly within the editor"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68161b3c65f8e50d48e683e4",
+      "68486dbbb939200515091245",
+      "6848556fb93920051506efa4",
+      "6818ec34606258b6c075cf5a",
+      "684731b4b939200515f530cd",
+      "6846ae87b32d4d019c045617",
+      "68485950b9392005150750a2",
+      "68472210b939200515f4bc44",
+      "684867d8b93920051508d781",
+      "681cfde363aef50052dabf04",
+      "681eefd253d3e454a4ba34a5",
+      "684874ccb939200515094d57",
+      "6846ab17b32d4d019c03e243",
+      "68486109b939200515082770",
+      "6846a816b32d4d019c036ec3"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant platform",
+          "Supports 90+ programming languages and frameworks",
+          "Code Generator, Code Assistant, Code Converter, and Unit Test Generator tools"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm is a powerful integrated development environment (IDE) specifically designed for Python development by JetBrains.",
+        "bullets": [
+          "Integrated development environment (IDE) for Python development",
+          "Intelligent code assistance, smart debugging, code refactoring, and a seamless development experience",
+          "Built-in support for AI-powered coding tools and extensions"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely.",
+        "bullets": [
+          "AI-powered coding companion developed by AWS",
+          "Provides real-time code suggestions, snippets, and security scans within popular IDEs",
+          "Trained on billions of lines of code"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI.",
+        "bullets": [
+          "Intelligent AI coding assistant",
+          "Provides real-time code suggestions, explanations, and refactoring support across multiple programming languages",
+          "Powered by cutting-edge AI models"
+        ]
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine",
+        "description": "Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Provides intelligent code completions and suggestions directly within your IDE",
+          "Supports multiple programming languages"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.",
+        "bullets": [
+          "Open-source AI-powered coding assistant",
+          "Allows developers to collaborate with large language models like GPT-4 directly from the command line",
+          "Integrates seamlessly with Git"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Helps developers write cleaner, more efficient Python code",
+          "Integrates seamlessly with your IDE or codebase"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Integrated into the Replit online IDE",
+          "Provides intelligent code suggestions, autocomplete, debugging help, and natural language explanations"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "AI-powered code assistance tool",
+          "Built into Microsoft Visual Studio and Visual Studio Code",
+          "Provides intelligent code suggestions, auto-completions, and best practice recommendations"
+        ]
+      },
+      {
+        "id": "681cfde363aef50052dabf04",
+        "name": "Cursor",
+        "description": "Cursor AI-Powered Code Editor is an advanced AI-driven coding environment designed to enhance developer productivity with intelligent code completion, automated debugging, and AI-assisted refactoring.",
+        "bullets": [
+          "AI-driven coding environment",
+          "Enhances developer productivity with intelligent code completion, automated debugging, and AI-assisted refactoring",
+          "Integrates cutting-edge AI models"
+        ]
+      },
+      {
+        "id": "681eefd253d3e454a4ba34a5",
+        "name": "Trae",
+        "description": "Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process.",
+        "bullets": [
+          "AI-powered Integrated Development Environment (IDE)",
+          "Transforms and streamlines the coding process",
+          "Adaptive collaboration, smart autocomplete, and real-time code generation features"
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters.",
+        "bullets": [
+          "Powerful Visual Studio extension",
+          "Enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters",
+          "Intelligent suggestions, quick fixes, and deep code navigation features"
+        ]
+      },
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf",
+        "description": "Windsurf.ai is a powerful AI-driven code assistant designed to help developers write, navigate, and understand code faster and more efficiently.",
+        "bullets": [
+          "AI-driven code assistant",
+          "Helps developers write, navigate, and understand code faster and more efficiently",
+          "Intelligent code search, in-context code explanations, and AI-powered code completion"
+        ]
+      },
+      {
+        "id": "68486109b939200515082770",
+        "name": "Polycoder",
+        "description": "PolyCoder is an open-source AI code generation model focused on C programming, developed by researchers at Carnegie Mellon University.",
+        "bullets": [
+          "Open-source AI code generation model",
+          "Focused on C programming",
+          "Trained on a curated dataset of open-source C code"
+        ]
+      },
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot",
+        "description": "GitHub Copilot is an AI-powered code completion tool developed by GitHub and powered by OpenAI.",
+        "bullets": [
+          "AI-powered code completion tool",
+          "Developed by GitHub and powered by OpenAI",
+          "Suggests full lines, functions, or entire blocks of code directly within the editor"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 6.788,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68161b3c65f8e50d48e683e4\",\n    \"68486dbbb939200515091245\",\n    \"6848556fb93920051506efa4\",\n    \"6818ec34606258b6c075cf5a\",\n    \"684731b4b939200515f530cd\",\n    \"6846ae87b32d4d019c045617\",\n    \"68485950b9392005150750a2\",\n    \"68472210b939200515f4bc44\",\n    \"684867d8b93920051508d781\",\n    \"681cfde363aef50052dabf04\",\n    \"681eefd253d3e454a4ba34a5\",\n    \"684874ccb939200515094d57\",\n    \"6846ab17b32d4d019c03e243\",\n    \"68486109b939200515082770\",\n    \"6846a816b32d4d019c036ec3\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68161b3c65f8e50d48e683e4\",\n      \"name\": \"Coding Fleet\",\n      \"description\": \"CodingFleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks.\",\n      \"bullets\": [\n        \"AI-powered coding assistant platform\",\n        \"Supports 90+ programming languages and frameworks\",\n        \"Code Generator, Code Assistant, Code Converter, and Unit Test Generator tools\"\n      ]\n    },\n    {\n      \"id\": \"68486dbbb939200515091245\",\n      \"name\": \"PyCharm AI\",\n      \"description\": \"PyCharm is a powerful integrated development environment (IDE) specifically designed for Python development by JetBrains.\",\n      \"bullets\": [\n        \"Integrated development environment (IDE) for Python development\",\n        \"Intelligent code assistance, smart debugging, code refactoring, and a seamless development experience\",\n        \"Built-in support for AI-powered coding tools and extensions\"\n      ]\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\",\n      \"description\": \"Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely.\",\n      \"bullets\": [\n        \"AI-powered coding companion developed by AWS\",\n        \"Provides real-time code suggestions, snippets, and security scans within popular IDEs\",\n        \"Trained on billions of lines of code\"\n      ]\n    },\n    {\n      \"id\": \"6818ec34606258b6c075cf5a\",\n      \"name\": \"Augment Code\",\n      \"description\": \"AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI.\",\n      \"bullets\": [\n        \"Intelligent AI coding assistant\",\n        \"Provides real-time code suggestions, explanations, and refactoring support across multiple programming languages\",\n        \"Powered by cutting-edge AI models\"\n      ]\n    },\n    {\n      \"id\": \"684731b4b939200515f530cd\",\n      \"name\": \"Tabnine\",\n      \"description\": \"Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Provides intelligent code completions and suggestions directly within your IDE\",\n        \"Supports multiple programming languages\"\n      ]\n    },\n    {\n      \"id\": \"6846ae87b32d4d019c045617\",\n      \"name\": \"Aider\",\n      \"description\": \"Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.\",\n      \"bullets\": [\n        \"Open-source AI-powered coding assistant\",\n        \"Allows developers to collaborate with large language models like GPT-4 directly from the command line\",\n        \"Integrates seamlessly with Git\"\n      ]\n    },\n    {\n      \"id\": \"68485950b9392005150750a2\",\n      \"name\": \"Sourcery\",\n      \"description\": \"Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Helps developers write cleaner, more efficient Python code\",\n        \"Integrates seamlessly with your IDE or codebase\"\n      ]\n    },\n    {\n      \"id\": \"68472210b939200515f4bc44\",\n      \"name\": \"Replit Ghostwriter\",\n      \"description\": \"Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Integrated into the Replit online IDE\",\n        \"Provides intelligent code suggestions, autocomplete, debugging help, and natural language explanations\"\n      ]\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"IntelliCode (Microsoft)\",\n      \"description\": \"IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.\",\n      \"bullets\": [\n        \"AI-powered code assistance tool\",\n        \"Built into Microsoft Visual Studio and Visual Studio Code\",\n        \"Provides intelligent code suggestions, auto-completions, and best practice recommendations\"\n      ]\n    },\n    {\n      \"id\": \"681cfde363aef50052dabf04\",\n      \"name\": \"Cursor\",\n      \"description\": \"Cursor AI-Powered Code Editor is an advanced AI-driven coding environment designed to enhance developer productivity with intelligent code completion, automated debugging, and AI-assisted refactoring.\",\n      \"bullets\": [\n        \"AI-driven coding environment\",\n        \"Enhances developer productivity with intelligent code completion, automated debugging, and AI-assisted refactoring\",\n        \"Integrates cutting-edge AI models\"\n      ]\n    },\n    {\n      \"id\": \"681eefd253d3e454a4ba34a5\",\n      \"name\": \"Trae\",\n      \"description\": \"Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process.\",\n      \"bullets\": [\n        \"AI-powered Integrated Development Environment (IDE)\",\n        \"Transforms and streamlines the coding process\",\n        \"Adaptive collaboration, smart autocomplete, and real-time code generation features\"\n      ]\n    },\n    {\n      \"id\": \"684874ccb939200515094d57\",\n      \"name\": \"ReSharper\",\n      \"description\": \"ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters.\",\n      \"bullets\": [\n        \"Powerful Visual Studio extension\",\n        \"Enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters\",\n        \"Intelligent suggestions, quick fixes, and deep code navigation features\"\n      ]\n    },\n    {\n      \"id\": \"6846ab17b32d4d019c03e243\",\n      \"name\": \"Windsurf\",\n      \"description\": \"Windsurf.ai is a powerful AI-driven code assistant designed to help developers write, navigate, and understand code faster and more efficiently.\",\n      \"bullets\": [\n        \"AI-driven code assistant\",\n        \"Helps developers write, navigate, and understand code faster and more efficiently\",\n        \"Intelligent code search, in-context code explanations, and AI-powered code completion\"\n      ]\n    },\n    {\n      \"id\": \"68486109b939200515082770\",\n      \"name\": \"Polycoder\",\n      \"description\": \"PolyCoder is an open-source AI code generation model focused on C programming, developed by researchers at Carnegie Mellon University.\",\n      \"bullets\": [\n        \"Open-source AI code generation model\",\n        \"Focused on C programming\",\n        \"Trained on a curated dataset of open-source C code\"\n      ]\n    },\n    {\n      \"id\": \"6846a816b32d4d019c036ec3\",\n      \"name\": \"GitHub Copilot\",\n      \"description\": \"GitHub Copilot is an AI-powered code completion tool developed by GitHub and powered by OpenAI.\",\n      \"bullets\": [\n        \"AI-powered code completion tool\",\n        \"Developed by GitHub and powered by OpenAI\",\n        \"Suggests full lines, functions, or entire blocks of code directly within the editor\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

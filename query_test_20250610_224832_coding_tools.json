@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-06-10T22:48:32.985707",
+  "input_query": "coding tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 0,
+    "tool_ids": [],
+    "tools": []
+  },
+  "llm_answer": {
+    "error": "llm_error",
+    "message": "Error processing query with language model: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}",
+    "tools": [],
+    "timestamp": "2025-06-10T17:18:41.966218"
+  },
+  "processing_time_seconds": 8.992,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"error\": \"llm_error\", \"message\": \"Error processing query with language model: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}\", \"tools\": [], \"timestamp\": \"2025-06-10T17:18:41.966218\"}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

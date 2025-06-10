@@ -1,0 +1,175 @@
+{
+  "timestamp": "2025-06-10T23:56:24.411336",
+  "input_query": "give me the coding tools related to chat gpt",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 6,
+    "tool_ids": [
+      "6841e04dac33a46e0ba975d7",
+      "6843416eac33a46e0beddbb4",
+      "681bddfb477018e347954c23",
+      "6843683fac33a46e0bf02e1e",
+      "68433eabac33a46e0beda792",
+      "6841e61cac33a46e0baa0b03"
+    ],
+    "tools": [
+      {
+        "id": "6841e04dac33a46e0ba975d7",
+        "name": "OpenAI GPT 4o Audio",
+        "description": "Relevant since it is a real-time AI-powered voice assistant with instant, natural, and expressive conversations with AI, and supports applications like AI assistants, voice interactions, real-time translations, and accessibility tools.",
+        "bullets": [
+          "Real-time voice AI for natural and expressive conversations",
+          "Supports applications like AI assistants and real-time translations",
+          "Can understand, process, and respond to voice input within milliseconds"
+        ]
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "Relevant since it is a lightweight, high-speed speech-to-text model that converts spoken language into text with exceptional speed and accuracy, ideal for real-time transcription in resource-constrained environments.",
+        "bullets": [
+          "Lightweight and high-speed speech-to-text model",
+          "Ideal for real-time transcription in resource-constrained environments",
+          "Balances cost, performance, and ease of integration"
+        ]
+      },
+      {
+        "id": "681bddfb477018e347954c23",
+        "name": "OpenAI ChatGPT",
+        "description": "Relevant since it is an advanced AI chatbot that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations, widely used for customer support, content creation, tutoring, and casual chat.",
+        "bullets": [
+          "Advanced AI chatbot for generating human-like text",
+          "Supports applications like customer support and content creation",
+          "Engages in natural conversations"
+        ]
+      },
+      {
+        "id": "6843683fac33a46e0bf02e1e",
+        "name": "OpenAI GPT 4 Turbo",
+        "description": "Relevant since it is an enhanced version of GPT-4, engineered to deliver faster performance, extended context handling, and more cost-effective usage, suitable for various applications.",
+        "bullets": [
+          "Enhanced version of GPT-4 for faster performance and cost-effectiveness",
+          "Supports multimodal inputs, including text and images",
+          "Suitable for various applications"
+        ]
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "Relevant since it is a high-performance speech-to-text model that converts spoken audio into accurate, readable, and structured text, quickly and with surprising clarity.",
+        "bullets": [
+          "High-performance speech-to-text model",
+          "Converts spoken audio into accurate and readable text",
+          "Delivers fast, multilingual transcription"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "Relevant since it is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance, ideal for real-time voice applications like assistants and conversational agents.",
+        "bullets": [
+          "Cutting-edge generative voice model",
+          "Converts written text into natural-sounding speech",
+          "Ideal for real-time voice applications"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6841e04dac33a46e0ba975d7",
+      "6843416eac33a46e0beddbb4",
+      "681bddfb477018e347954c23",
+      "6843683fac33a46e0bf02e1e",
+      "68433eabac33a46e0beda792",
+      "6841e61cac33a46e0baa0b03"
+    ],
+    "tools": [
+      {
+        "id": "6841e04dac33a46e0ba975d7",
+        "name": "OpenAI GPT 4o Audio",
+        "description": "Relevant since it is a real-time AI-powered voice assistant with instant, natural, and expressive conversations with AI, and supports applications like AI assistants, voice interactions, real-time translations, and accessibility tools.",
+        "bullets": [
+          "Real-time voice AI for natural and expressive conversations",
+          "Supports applications like AI assistants and real-time translations",
+          "Can understand, process, and respond to voice input within milliseconds"
+        ]
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "Relevant since it is a lightweight, high-speed speech-to-text model that converts spoken language into text with exceptional speed and accuracy, ideal for real-time transcription in resource-constrained environments.",
+        "bullets": [
+          "Lightweight and high-speed speech-to-text model",
+          "Ideal for real-time transcription in resource-constrained environments",
+          "Balances cost, performance, and ease of integration"
+        ]
+      },
+      {
+        "id": "681bddfb477018e347954c23",
+        "name": "OpenAI ChatGPT",
+        "description": "Relevant since it is an advanced AI chatbot that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations, widely used for customer support, content creation, tutoring, and casual chat.",
+        "bullets": [
+          "Advanced AI chatbot for generating human-like text",
+          "Supports applications like customer support and content creation",
+          "Engages in natural conversations"
+        ]
+      },
+      {
+        "id": "6843683fac33a46e0bf02e1e",
+        "name": "OpenAI GPT 4 Turbo",
+        "description": "Relevant since it is an enhanced version of GPT-4, engineered to deliver faster performance, extended context handling, and more cost-effective usage, suitable for various applications.",
+        "bullets": [
+          "Enhanced version of GPT-4 for faster performance and cost-effectiveness",
+          "Supports multimodal inputs, including text and images",
+          "Suitable for various applications"
+        ]
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "Relevant since it is a high-performance speech-to-text model that converts spoken audio into accurate, readable, and structured text, quickly and with surprising clarity.",
+        "bullets": [
+          "High-performance speech-to-text model",
+          "Converts spoken audio into accurate and readable text",
+          "Delivers fast, multilingual transcription"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "Relevant since it is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance, ideal for real-time voice applications like assistants and conversational agents.",
+        "bullets": [
+          "Cutting-edge generative voice model",
+          "Converts written text into natural-sounding speech",
+          "Ideal for real-time voice applications"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 6.815,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6841e04dac33a46e0ba975d7\",\n    \"6843416eac33a46e0beddbb4\",\n    \"681bddfb477018e347954c23\",\n    \"6843683fac33a46e0bf02e1e\",\n    \"68433eabac33a46e0beda792\",\n    \"6841e61cac33a46e0baa0b03\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6841e04dac33a46e0ba975d7\",\n      \"name\": \"OpenAI GPT 4o Audio\",\n      \"description\": \"Relevant since it is a real-time AI-powered voice assistant with instant, natural, and expressive conversations with AI, and supports applications like AI assistants, voice interactions, real-time translations, and accessibility tools.\",\n      \"bullets\": [\n        \"Real-time voice AI for natural and expressive conversations\",\n        \"Supports applications like AI assistants and real-time translations\",\n        \"Can understand, process, and respond to voice input within milliseconds\"\n      ]\n    },\n    {\n      \"id\": \"6843416eac33a46e0beddbb4\",\n      \"name\": \"OpenAI GPT 4o mini Transcribe\",\n      \"description\": \"Relevant since it is a lightweight, high-speed speech-to-text model that converts spoken language into text with exceptional speed and accuracy, ideal for real-time transcription in resource-constrained environments.\",\n      \"bullets\": [\n        \"Lightweight and high-speed speech-to-text model\",\n        \"Ideal for real-time transcription in resource-constrained environments\",\n        \"Balances cost, performance, and ease of integration\"\n      ]\n    },\n    {\n      \"id\": \"681bddfb477018e347954c23\",\n      \"name\": \"OpenAI ChatGPT\",\n      \"description\": \"Relevant since it is an advanced AI chatbot that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations, widely used for customer support, content creation, tutoring, and casual chat.\",\n      \"bullets\": [\n        \"Advanced AI chatbot for generating human-like text\",\n        \"Supports applications like customer support and content creation\",\n        \"Engages in natural conversations\"\n      ]\n    },\n    {\n      \"id\": \"6843683fac33a46e0bf02e1e\",\n      \"name\": \"OpenAI GPT 4 Turbo\",\n      \"description\": \"Relevant since it is an enhanced version of GPT-4, engineered to deliver faster performance, extended context handling, and more cost-effective usage, suitable for various applications.\",\n      \"bullets\": [\n        \"Enhanced version of GPT-4 for faster performance and cost-effectiveness\",\n        \"Supports multimodal inputs, including text and images\",\n        \"Suitable for various applications\"\n      ]\n    },\n    {\n      \"id\": \"68433eabac33a46e0beda792\",\n      \"name\": \"OpenAI GPT 4o Transcribe\",\n      \"description\": \"Relevant since it is a high-performance speech-to-text model that converts spoken audio into accurate, readable, and structured text, quickly and with surprising clarity.\",\n      \"bullets\": [\n        \"High-performance speech-to-text model\",\n        \"Converts spoken audio into accurate and readable text\",\n        \"Delivers fast, multilingual transcription\"\n      ]\n    },\n    {\n      \"id\": \"6841e61cac33a46e0baa0b03\",\n      \"name\": \"OpenAI TTS1\",\n      \"description\": \"Relevant since it is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance, ideal for real-time voice applications like assistants and conversational agents.\",\n      \"bullets\": [\n        \"Cutting-edge generative voice model\",\n        \"Converts written text into natural-sounding speech\",\n        \"Ideal for real-time voice applications\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

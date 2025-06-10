@@ -1,0 +1,275 @@
+{
+  "timestamp": "2025-06-11T00:08:41.600561",
+  "input_query": "give me the top coding tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 10,
+    "tool_ids": [
+      "68486dbbb939200515091245",
+      "68161b3c65f8e50d48e683e4",
+      "6848556fb93920051506efa4",
+      "6833ce978f07ab07a7df8cf7",
+      "6818ec34606258b6c075cf5a",
+      "68485950b9392005150750a2",
+      "684731b4b939200515f530cd",
+      "684867d8b93920051508d781",
+      "68472210b939200515f4bc44",
+      "684874ccb939200515094d57"
+    ],
+    "tools": [
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm AI is a powerful AI-powered coding assistant integrated into PyCharm IDE, providing intelligent code assistance, smart debugging, and code refactoring.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code assistance",
+          "Smart debugging",
+          "Code refactoring"
+        ]
+      },
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "Coding Fleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code generation",
+          "Code conversion",
+          "Unit testing"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.",
+        "bullets": [
+          "AI-powered coding companion",
+          "Real-time code suggestions",
+          "Security scans",
+          "Code snippets"
+        ]
+      },
+      {
+        "id": "6833ce978f07ab07a7df8cf7",
+        "name": "lyzr- skott",
+        "description": "Skott is an AI-powered coding assistant designed to streamline software development by generating, reviewing, and optimizing code.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code generation",
+          "Code review",
+          "Code optimization"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI.",
+        "bullets": [
+          "Intelligent AI coding assistant",
+          "Code generation",
+          "Code debugging",
+          "Code optimization"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code refactoring",
+          "Code generation",
+          "Code optimization"
+        ]
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine",
+        "description": "Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code completions",
+          "Code suggestions"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "AI-powered code assistance",
+          "Intelligent code suggestions",
+          "Auto-completions"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code suggestions",
+          "Code debugging"
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters.",
+        "bullets": [
+          "Advanced code analysis",
+          "Code refactoring",
+          "Productivity boosters"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68486dbbb939200515091245",
+      "68161b3c65f8e50d48e683e4",
+      "6848556fb93920051506efa4",
+      "6833ce978f07ab07a7df8cf7",
+      "6818ec34606258b6c075cf5a",
+      "68485950b9392005150750a2",
+      "684731b4b939200515f530cd",
+      "684867d8b93920051508d781",
+      "68472210b939200515f4bc44",
+      "684874ccb939200515094d57"
+    ],
+    "tools": [
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm AI is a powerful AI-powered coding assistant integrated into PyCharm IDE, providing intelligent code assistance, smart debugging, and code refactoring.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code assistance",
+          "Smart debugging",
+          "Code refactoring"
+        ]
+      },
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "Coding Fleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code generation",
+          "Code conversion",
+          "Unit testing"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.",
+        "bullets": [
+          "AI-powered coding companion",
+          "Real-time code suggestions",
+          "Security scans",
+          "Code snippets"
+        ]
+      },
+      {
+        "id": "6833ce978f07ab07a7df8cf7",
+        "name": "lyzr- skott",
+        "description": "Skott is an AI-powered coding assistant designed to streamline software development by generating, reviewing, and optimizing code.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code generation",
+          "Code review",
+          "Code optimization"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI.",
+        "bullets": [
+          "Intelligent AI coding assistant",
+          "Code generation",
+          "Code debugging",
+          "Code optimization"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Code refactoring",
+          "Code generation",
+          "Code optimization"
+        ]
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine",
+        "description": "Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code completions",
+          "Code suggestions"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "AI-powered code assistance",
+          "Intelligent code suggestions",
+          "Auto-completions"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.",
+        "bullets": [
+          "AI-powered coding assistant",
+          "Intelligent code suggestions",
+          "Code debugging"
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters.",
+        "bullets": [
+          "Advanced code analysis",
+          "Code refactoring",
+          "Productivity boosters"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 7.392,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68486dbbb939200515091245\",\n    \"68161b3c65f8e50d48e683e4\",\n    \"6848556fb93920051506efa4\",\n    \"6833ce978f07ab07a7df8cf7\",\n    \"6818ec34606258b6c075cf5a\",\n    \"68485950b9392005150750a2\",\n    \"684731b4b939200515f530cd\",\n    \"684867d8b93920051508d781\",\n    \"68472210b939200515f4bc44\",\n    \"684874ccb939200515094d57\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68486dbbb939200515091245\",\n      \"name\": \"PyCharm AI\",\n      \"description\": \"PyCharm AI is a powerful AI-powered coding assistant integrated into PyCharm IDE, providing intelligent code assistance, smart debugging, and code refactoring.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Intelligent code assistance\",\n        \"Smart debugging\",\n        \"Code refactoring\"\n      ]\n    },\n    {\n      \"id\": \"68161b3c65f8e50d48e683e4\",\n      \"name\": \"Coding Fleet\",\n      \"description\": \"Coding Fleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Code generation\",\n        \"Code conversion\",\n        \"Unit testing\"\n      ]\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\",\n      \"description\": \"Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.\",\n      \"bullets\": [\n        \"AI-powered coding companion\",\n        \"Real-time code suggestions\",\n        \"Security scans\",\n        \"Code snippets\"\n      ]\n    },\n    {\n      \"id\": \"6833ce978f07ab07a7df8cf7\",\n      \"name\": \"lyzr- skott\",\n      \"description\": \"Skott is an AI-powered coding assistant designed to streamline software development by generating, reviewing, and optimizing code.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Code generation\",\n        \"Code review\",\n        \"Code optimization\"\n      ]\n    },\n    {\n      \"id\": \"6818ec34606258b6c075cf5a\",\n      \"name\": \"Augment Code\",\n      \"description\": \"AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI.\",\n      \"bullets\": [\n        \"Intelligent AI coding assistant\",\n        \"Code generation\",\n        \"Code debugging\",\n        \"Code optimization\"\n      ]\n    },\n    {\n      \"id\": \"68485950b9392005150750a2\",\n      \"name\": \"Sourcery\",\n      \"description\": \"Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Code refactoring\",\n        \"Code generation\",\n        \"Code optimization\"\n      ]\n    },\n    {\n      \"id\": \"684731b4b939200515f530cd\",\n      \"name\": \"Tabnine\",\n      \"description\": \"Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Intelligent code completions\",\n        \"Code suggestions\"\n      ]\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"IntelliCode (Microsoft)\",\n      \"description\": \"IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.\",\n      \"bullets\": [\n        \"AI-powered code assistance\",\n        \"Intelligent code suggestions\",\n        \"Auto-completions\"\n      ]\n    },\n    {\n      \"id\": \"68472210b939200515f4bc44\",\n      \"name\": \"Replit Ghostwriter\",\n      \"description\": \"Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.\",\n      \"bullets\": [\n        \"AI-powered coding assistant\",\n        \"Intelligent code suggestions\",\n        \"Code debugging\"\n      ]\n    },\n    {\n      \"id\": \"684874ccb939200515094d57\",\n      \"name\": \"ReSharper\",\n      \"description\": \"ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters.\",\n      \"bullets\": [\n        \"Advanced code analysis\",\n        \"Code refactoring\",\n        \"Productivity boosters\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

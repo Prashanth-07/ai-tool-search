@@ -1,0 +1,197 @@
+{
+  "timestamp": "2025-06-10T23:24:03.332725",
+  "input_query": "coding tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 7,
+    "tool_ids": [
+      "68161b3c65f8e50d48e683e4",
+      "6848556fb93920051506efa4",
+      "6846ae87b32d4d019c045617",
+      "68485950b9392005150750a2",
+      "68472210b939200515f4bc44",
+      "68485ca5b939200515078c03",
+      "684867d8b93920051508d781"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is a comprehensive AI-powered coding assistant platform that helps developers write, understand, convert, and improve code across 90+ programming languages and frameworks. It streamlines the coding process with tools like Code Generator, Code Assistant, Code Converter, and Unit Test Generator.",
+        "bullets": [
+          "AI-powered coding assistant for 90+ programming languages and frameworks",
+          "Code generation, conversion, and improvement features",
+          "Unit testing and code optimization support"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.",
+        "bullets": [
+          "AI-powered code suggestions and security scans",
+          "Real-time code suggestions and snippets",
+          "Security vulnerability detection and prevention"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.",
+        "bullets": [
+          "Open-source AI-powered coding assistant",
+          "Collaboration with large language models like GPT-4",
+          "Conversational programming, code editing, and refactoring support"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI-powered code refactoring and optimization",
+          "Real-time code suggestions and docstring generation",
+          "Automated code review and best practice enforcement"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.",
+        "bullets": [
+          "AI-powered code suggestions and autocomplete",
+          "Debugging help and natural language explanations",
+          "Integrated into the Replit online IDE"
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "Codex (OpenAI)",
+        "description": "OpenAI Codex is a powerful AI coding engine that translates natural language into code.",
+        "bullets": [
+          "Natural language to code translation",
+          "Code generation in over a dozen programming languages",
+          "Built on top of GPT-3"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "AI-powered code suggestions and auto-completions",
+          "Best practice recommendations based on machine learning models",
+          "Context-aware recommendations and code assistance"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68161b3c65f8e50d48e683e4",
+      "6848556fb93920051506efa4",
+      "6846ae87b32d4d019c045617",
+      "68485950b9392005150750a2",
+      "68472210b939200515f4bc44",
+      "68485ca5b939200515078c03",
+      "684867d8b93920051508d781"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is a comprehensive AI-powered coding assistant platform that helps developers write, understand, convert, and improve code across 90+ programming languages and frameworks. It streamlines the coding process with tools like Code Generator, Code Assistant, Code Converter, and Unit Test Generator.",
+        "bullets": [
+          "AI-powered coding assistant for 90+ programming languages and frameworks",
+          "Code generation, conversion, and improvement features",
+          "Unit testing and code optimization support"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.",
+        "bullets": [
+          "AI-powered code suggestions and security scans",
+          "Real-time code suggestions and snippets",
+          "Security vulnerability detection and prevention"
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.",
+        "bullets": [
+          "Open-source AI-powered coding assistant",
+          "Collaboration with large language models like GPT-4",
+          "Conversational programming, code editing, and refactoring support"
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.",
+        "bullets": [
+          "AI-powered code refactoring and optimization",
+          "Real-time code suggestions and docstring generation",
+          "Automated code review and best practice enforcement"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.",
+        "bullets": [
+          "AI-powered code suggestions and autocomplete",
+          "Debugging help and natural language explanations",
+          "Integrated into the Replit online IDE"
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "Codex (OpenAI)",
+        "description": "OpenAI Codex is a powerful AI coding engine that translates natural language into code.",
+        "bullets": [
+          "Natural language to code translation",
+          "Code generation in over a dozen programming languages",
+          "Built on top of GPT-3"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "IntelliCode (Microsoft)",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "AI-powered code suggestions and auto-completions",
+          "Best practice recommendations based on machine learning models",
+          "Context-aware recommendations and code assistance"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 11.977,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68161b3c65f8e50d48e683e4\",\n    \"6848556fb93920051506efa4\",\n    \"6846ae87b32d4d019c045617\",\n    \"68485950b9392005150750a2\",\n    \"68472210b939200515f4bc44\",\n    \"68485ca5b939200515078c03\",\n    \"684867d8b93920051508d781\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68161b3c65f8e50d48e683e4\",\n      \"name\": \"Coding Fleet\",\n      \"description\": \"CodingFleet is a comprehensive AI-powered coding assistant platform that helps developers write, understand, convert, and improve code across 90+ programming languages and frameworks. It streamlines the coding process with tools like Code Generator, Code Assistant, Code Converter, and Unit Test Generator.\",\n      \"bullets\": [\n        \"AI-powered coding assistant for 90+ programming languages and frameworks\",\n        \"Code generation, conversion, and improvement features\",\n        \"Unit testing and code optimization support\"\n      ]\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\",\n      \"description\": \"Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs.\",\n      \"bullets\": [\n        \"AI-powered code suggestions and security scans\",\n        \"Real-time code suggestions and snippets\",\n        \"Security vulnerability detection and prevention\"\n      ]\n    },\n    {\n      \"id\": \"6846ae87b32d4d019c045617\",\n      \"name\": \"Aider\",\n      \"description\": \"Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line.\",\n      \"bullets\": [\n        \"Open-source AI-powered coding assistant\",\n        \"Collaboration with large language models like GPT-4\",\n        \"Conversational programming, code editing, and refactoring support\"\n      ]\n    },\n    {\n      \"id\": \"68485950b9392005150750a2\",\n      \"name\": \"Sourcery\",\n      \"description\": \"Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code.\",\n      \"bullets\": [\n        \"AI-powered code refactoring and optimization\",\n        \"Real-time code suggestions and docstring generation\",\n        \"Automated code review and best practice enforcement\"\n      ]\n    },\n    {\n      \"id\": \"68472210b939200515f4bc44\",\n      \"name\": \"Replit Ghostwriter\",\n      \"description\": \"Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE.\",\n      \"bullets\": [\n        \"AI-powered code suggestions and autocomplete\",\n        \"Debugging help and natural language explanations\",\n        \"Integrated into the Replit online IDE\"\n      ]\n    },\n    {\n      \"id\": \"68485ca5b939200515078c03\",\n      \"name\": \"Codex (OpenAI)\",\n      \"description\": \"OpenAI Codex is a powerful AI coding engine that translates natural language into code.\",\n      \"bullets\": [\n        \"Natural language to code translation\",\n        \"Code generation in over a dozen programming languages\",\n        \"Built on top of GPT-3\"\n      ]\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"IntelliCode (Microsoft)\",\n      \"description\": \"IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.\",\n      \"bullets\": [\n        \"AI-powered code suggestions and auto-completions\",\n        \"Best practice recommendations based on machine learning models\",\n        \"Context-aware recommendations and code assistance\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

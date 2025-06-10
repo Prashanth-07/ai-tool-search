@@ -1,0 +1,153 @@
+{
+  "timestamp": "2025-06-10T23:56:38.496972",
+  "input_query": "coding tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 5,
+    "tool_ids": [
+      "68161b3c65f8e50d48e683e4",
+      "68486dbbb939200515091245",
+      "6818ec34606258b6c075cf5a",
+      "6843618eac33a46e0beebe30",
+      "6848556fb93920051506efa4"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet provides a suite of AI-powered tools for code generation, conversion, and unit testing, streamlining the coding process and making developers more productive.",
+        "bullets": [
+          "Code Generation, Code Conversion, and Unit Testing capabilities",
+          "Supports 90+ programming languages and frameworks",
+          "Real-time code suggestions and explanations"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm offers intelligent code assistance, smart debugging, and code refactoring, making it a powerful tool for Python developers.",
+        "bullets": [
+          "Intelligent code assistance and smart debugging",
+          "Code refactoring and seamless development experience",
+          "Support for AI-powered coding tools and extensions"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode is an AI-assisted coding tool that helps developers write, debug, and optimize code faster, reducing coding errors and boosting productivity.",
+        "bullets": [
+          "AI-assisted coding and debugging",
+          "Real-time code suggestions and explanations",
+          "Optimization and code refactoring support"
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "OpenAI Codex mini Latest is a lightweight AI coding model that brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation and debugging.",
+        "bullets": [
+          "Lightweight AI coding model for code generation and debugging",
+          "High-speed performance and cost-effectiveness",
+          "Ideal for developers seeking a fast coding assistant"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion that provides real-time code suggestions, snippets, and security scans within popular IDEs, accelerating software development and detecting security vulnerabilities.",
+        "bullets": [
+          "Real-time code suggestions and security scans",
+          "Integration with popular IDEs and billions of lines of code training",
+          "Accelerated software development and security vulnerability detection"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68161b3c65f8e50d48e683e4",
+      "68486dbbb939200515091245",
+      "6818ec34606258b6c075cf5a",
+      "6843618eac33a46e0beebe30",
+      "6848556fb93920051506efa4"
+    ],
+    "tools": [
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet provides a suite of AI-powered tools for code generation, conversion, and unit testing, streamlining the coding process and making developers more productive.",
+        "bullets": [
+          "Code Generation, Code Conversion, and Unit Testing capabilities",
+          "Supports 90+ programming languages and frameworks",
+          "Real-time code suggestions and explanations"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm offers intelligent code assistance, smart debugging, and code refactoring, making it a powerful tool for Python developers.",
+        "bullets": [
+          "Intelligent code assistance and smart debugging",
+          "Code refactoring and seamless development experience",
+          "Support for AI-powered coding tools and extensions"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "AugmentCode is an AI-assisted coding tool that helps developers write, debug, and optimize code faster, reducing coding errors and boosting productivity.",
+        "bullets": [
+          "AI-assisted coding and debugging",
+          "Real-time code suggestions and explanations",
+          "Optimization and code refactoring support"
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "OpenAI Codex mini Latest is a lightweight AI coding model that brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation and debugging.",
+        "bullets": [
+          "Lightweight AI coding model for code generation and debugging",
+          "High-speed performance and cost-effectiveness",
+          "Ideal for developers seeking a fast coding assistant"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion that provides real-time code suggestions, snippets, and security scans within popular IDEs, accelerating software development and detecting security vulnerabilities.",
+        "bullets": [
+          "Real-time code suggestions and security scans",
+          "Integration with popular IDEs and billions of lines of code training",
+          "Accelerated software development and security vulnerability detection"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 4.139,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68161b3c65f8e50d48e683e4\",\n    \"68486dbbb939200515091245\",\n    \"6818ec34606258b6c075cf5a\",\n    \"6843618eac33a46e0beebe30\",\n    \"6848556fb93920051506efa4\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68161b3c65f8e50d48e683e4\",\n      \"name\": \"Coding Fleet\",\n      \"description\": \"CodingFleet provides a suite of AI-powered tools for code generation, conversion, and unit testing, streamlining the coding process and making developers more productive.\",\n      \"bullets\": [\n        \"Code Generation, Code Conversion, and Unit Testing capabilities\",\n        \"Supports 90+ programming languages and frameworks\",\n        \"Real-time code suggestions and explanations\"\n      ]\n    },\n    {\n      \"id\": \"68486dbbb939200515091245\",\n      \"name\": \"PyCharm AI\",\n      \"description\": \"PyCharm offers intelligent code assistance, smart debugging, and code refactoring, making it a powerful tool for Python developers.\",\n      \"bullets\": [\n        \"Intelligent code assistance and smart debugging\",\n        \"Code refactoring and seamless development experience\",\n        \"Support for AI-powered coding tools and extensions\"\n      ]\n    },\n    {\n      \"id\": \"6818ec34606258b6c075cf5a\",\n      \"name\": \"Augment Code\",\n      \"description\": \"AugmentCode is an AI-assisted coding tool that helps developers write, debug, and optimize code faster, reducing coding errors and boosting productivity.\",\n      \"bullets\": [\n        \"AI-assisted coding and debugging\",\n        \"Real-time code suggestions and explanations\",\n        \"Optimization and code refactoring support\"\n      ]\n    },\n    {\n      \"id\": \"6843618eac33a46e0beebe30\",\n      \"name\": \"OpenAI Codex mini Latest\",\n      \"description\": \"OpenAI Codex mini Latest is a lightweight AI coding model that brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation and debugging.\",\n      \"bullets\": [\n        \"Lightweight AI coding model for code generation and debugging\",\n        \"High-speed performance and cost-effectiveness\",\n        \"Ideal for developers seeking a fast coding assistant\"\n      ]\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\",\n      \"description\": \"Amazon CodeWhisperer is an AI-powered coding companion that provides real-time code suggestions, snippets, and security scans within popular IDEs, accelerating software development and detecting security vulnerabilities.\",\n      \"bullets\": [\n        \"Real-time code suggestions and security scans\",\n        \"Integration with popular IDEs and billions of lines of code training\",\n        \"Accelerated software development and security vulnerability detection\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

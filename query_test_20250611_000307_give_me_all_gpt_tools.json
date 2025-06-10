@@ -1,0 +1,307 @@
+{
+  "timestamp": "2025-06-11T00:03:07.518766",
+  "input_query": "give me all gpt tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 12,
+    "tool_ids": [
+      "6844abecb32d4d019cc91f28",
+      "6843416eac33a46e0beddbb4",
+      "6843683fac33a46e0bf02e1e",
+      "68421b0bac33a46e0bb70ba7",
+      "6842131bac33a46e0bb51e1e",
+      "68420fffac33a46e0bb4c9bc",
+      "68422299ac33a46e0bb73f68",
+      "68433eabac33a46e0beda792",
+      "68435c8dac33a46e0bee5535",
+      "68435137ac33a46e0bee20d8",
+      "68421836ac33a46e0bb6a503",
+      "68420d16ac33a46e0bb45216"
+    ],
+    "tools": [
+      {
+        "id": "6844abecb32d4d019cc91f28",
+        "name": "GPT - Ecom AI Website Advisor",
+        "description": "This GPT model is used as a chatGPT-powered assistant for ecommerce website setup decisions, providing personalized advice.",
+        "bullets": [
+          "Powered by GPT, offering personalized advice",
+          "Designed for Shopify users, guiding them in choosing plans, apps, and themes",
+          "Acts as an on-demand Shopify expert in chat form"
+        ]
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "This speech-to-text model converts spoken language into text with exceptional speed and surprising accuracy, ideal for real-time transcription.",
+        "bullets": [
+          "Provides high-speed speech-to-text capabilities",
+          "Ideal for real-time transcription in resource-constrained environments",
+          "Multilingual transcription with surprising accuracy"
+        ]
+      },
+      {
+        "id": "6843683fac33a46e0bf02e1e",
+        "name": "OpenAI GPT 4 Turbo",
+        "description": "This GPT model delivers faster performance, extended context handling, and more cost-effective usage, ideal for complex content processing.",
+        "bullets": [
+          "Delivers faster performance and extended context handling",
+          "Cost-effective usage without compromising on performance",
+          "Multimodal inputs, including text and images"
+        ]
+      },
+      {
+        "id": "68421b0bac33a46e0bb70ba7",
+        "name": "OpenAI GPT 4o mini Realtime",
+        "description": "This speech-to-text model is lightweight, high-speed, and optimized for real-time responsiveness without compromising on core intelligence.",
+        "bullets": [
+          "Lightweight and high-speed speech-to-text capabilities",
+          "Blazing-fast, cost-efficient inference across text, vision, and voice inputs",
+          "Optimized for real-time responsiveness"
+        ]
+      },
+      {
+        "id": "6842131bac33a46e0bb51e1e",
+        "name": "OpenAI GPT 4.1 nano",
+        "description": "This small and efficient language model delivers ultra-fast, ultra-cheap, and surprisingly capable natural language responses, ideal for mobile apps and large-scale deployments.",
+        "bullets": [
+          "Ultra-fast and ultra-cheap natural language responses",
+          "Ideal for mobile apps and large-scale deployments",
+          "Real-time applications and use cases with budgets sensitivity"
+        ]
+      },
+      {
+        "id": "68420fffac33a46e0bb4c9bc",
+        "name": "OpenAI GPT 4.1 mini",
+        "description": "This lightweight version of the GPT-4.1 model delivers efficient, speed, and affordability without compromising on performance.",
+        "bullets": [
+          "Efficient, fast, and affordable without compromising on performance",
+          "Ideal for developers and teams with smaller-scale applications",
+          "Impressive accuracy and fast responses"
+        ]
+      },
+      {
+        "id": "68422299ac33a46e0bb73f68",
+        "name": "OpenAI GPT Image 1",
+        "description": "This vision model understands and interprets images with human-like perception, ideal for analyzing, summarizing, and extracting insights from images.",
+        "bullets": [
+          "Human-like image understanding and interpretation",
+          "Analyses, summarizes, and extracts insights from images",
+          "Optimized for use via API, handling diverse image types"
+        ]
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "This speech-to-text model converts spoken audio into accurate, readable, and structured text quickly and with surprising clarity.",
+        "bullets": [
+          "High-performance speech-to-text capabilities",
+          "Accurate, readable, and structured text with surprising clarity",
+          "Ideal for transcribing interviews, meetings, podcasts, or real-time conversations"
+        ]
+      },
+      {
+        "id": "68435c8dac33a46e0bee5535",
+        "name": "OpenAI GPT 4o mini Search Prev",
+        "description": "This semantic search feature powered by the GPT-4o-mini model brings retrieval-augmented intelligence to any product or tool that needs fast, accurate information lookup.",
+        "bullets": [
+          "Lightweight semantic search feature",
+          "Real-time applications and low-latency environments",
+          "Smarter, more relevant search results with fewer resources"
+        ]
+      },
+      {
+        "id": "68435137ac33a46e0bee20d8",
+        "name": "OpenAI GPT 4o Search Preview",
+        "description": "This experimental feature acts as a high-performance retrieval system, searching through large datasets, documents, or knowledge bases to surface relevant results with context-aware accuracy.",
+        "bullets": [
+          "Experimental high-performance retrieval system",
+          "Searches through large datasets, documents, or knowledge bases",
+          "Context-aware accuracy and relevant results"
+        ]
+      },
+      {
+        "id": "68421836ac33a46e0bb6a503",
+        "name": "OpenAI GPT 4o Realtime",
+        "description": "This multimodal AI model is designed for lightning-fast, real-time interaction across text, vision, and audio, ideal for voice assistants, dynamic UIs, or smart multi-input applications.",
+        "bullets": [
+          "Multimodal AI model for lightning-fast interaction",
+          "Ideal for real-time interaction across text, vision, and audio",
+          "Human-like responsiveness and top-tier intelligence"
+        ]
+      },
+      {
+        "id": "68420d16ac33a46e0bb45216",
+        "name": "OpenAI - GPT 4.1",
+        "description": "This newest multimodal large language model delivers highly capable, efficient, and intelligent performance across a broad range of tasks, ideal for complex content processing.",
+        "bullets": [
+          "Multimodal large language model with highly capable performance",
+          "Efficient and intelligent performance across various tasks",
+          "Native support for 128K token context window and function calling"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6844abecb32d4d019cc91f28",
+      "6843416eac33a46e0beddbb4",
+      "6843683fac33a46e0bf02e1e",
+      "68421b0bac33a46e0bb70ba7",
+      "6842131bac33a46e0bb51e1e",
+      "68420fffac33a46e0bb4c9bc",
+      "68422299ac33a46e0bb73f68",
+      "68433eabac33a46e0beda792",
+      "68435c8dac33a46e0bee5535",
+      "68435137ac33a46e0bee20d8",
+      "68421836ac33a46e0bb6a503",
+      "68420d16ac33a46e0bb45216"
+    ],
+    "tools": [
+      {
+        "id": "6844abecb32d4d019cc91f28",
+        "name": "GPT - Ecom AI Website Advisor",
+        "description": "This GPT model is used as a chatGPT-powered assistant for ecommerce website setup decisions, providing personalized advice.",
+        "bullets": [
+          "Powered by GPT, offering personalized advice",
+          "Designed for Shopify users, guiding them in choosing plans, apps, and themes",
+          "Acts as an on-demand Shopify expert in chat form"
+        ]
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "This speech-to-text model converts spoken language into text with exceptional speed and surprising accuracy, ideal for real-time transcription.",
+        "bullets": [
+          "Provides high-speed speech-to-text capabilities",
+          "Ideal for real-time transcription in resource-constrained environments",
+          "Multilingual transcription with surprising accuracy"
+        ]
+      },
+      {
+        "id": "6843683fac33a46e0bf02e1e",
+        "name": "OpenAI GPT 4 Turbo",
+        "description": "This GPT model delivers faster performance, extended context handling, and more cost-effective usage, ideal for complex content processing.",
+        "bullets": [
+          "Delivers faster performance and extended context handling",
+          "Cost-effective usage without compromising on performance",
+          "Multimodal inputs, including text and images"
+        ]
+      },
+      {
+        "id": "68421b0bac33a46e0bb70ba7",
+        "name": "OpenAI GPT 4o mini Realtime",
+        "description": "This speech-to-text model is lightweight, high-speed, and optimized for real-time responsiveness without compromising on core intelligence.",
+        "bullets": [
+          "Lightweight and high-speed speech-to-text capabilities",
+          "Blazing-fast, cost-efficient inference across text, vision, and voice inputs",
+          "Optimized for real-time responsiveness"
+        ]
+      },
+      {
+        "id": "6842131bac33a46e0bb51e1e",
+        "name": "OpenAI GPT 4.1 nano",
+        "description": "This small and efficient language model delivers ultra-fast, ultra-cheap, and surprisingly capable natural language responses, ideal for mobile apps and large-scale deployments.",
+        "bullets": [
+          "Ultra-fast and ultra-cheap natural language responses",
+          "Ideal for mobile apps and large-scale deployments",
+          "Real-time applications and use cases with budgets sensitivity"
+        ]
+      },
+      {
+        "id": "68420fffac33a46e0bb4c9bc",
+        "name": "OpenAI GPT 4.1 mini",
+        "description": "This lightweight version of the GPT-4.1 model delivers efficient, speed, and affordability without compromising on performance.",
+        "bullets": [
+          "Efficient, fast, and affordable without compromising on performance",
+          "Ideal for developers and teams with smaller-scale applications",
+          "Impressive accuracy and fast responses"
+        ]
+      },
+      {
+        "id": "68422299ac33a46e0bb73f68",
+        "name": "OpenAI GPT Image 1",
+        "description": "This vision model understands and interprets images with human-like perception, ideal for analyzing, summarizing, and extracting insights from images.",
+        "bullets": [
+          "Human-like image understanding and interpretation",
+          "Analyses, summarizes, and extracts insights from images",
+          "Optimized for use via API, handling diverse image types"
+        ]
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "This speech-to-text model converts spoken audio into accurate, readable, and structured text quickly and with surprising clarity.",
+        "bullets": [
+          "High-performance speech-to-text capabilities",
+          "Accurate, readable, and structured text with surprising clarity",
+          "Ideal for transcribing interviews, meetings, podcasts, or real-time conversations"
+        ]
+      },
+      {
+        "id": "68435c8dac33a46e0bee5535",
+        "name": "OpenAI GPT 4o mini Search Prev",
+        "description": "This semantic search feature powered by the GPT-4o-mini model brings retrieval-augmented intelligence to any product or tool that needs fast, accurate information lookup.",
+        "bullets": [
+          "Lightweight semantic search feature",
+          "Real-time applications and low-latency environments",
+          "Smarter, more relevant search results with fewer resources"
+        ]
+      },
+      {
+        "id": "68435137ac33a46e0bee20d8",
+        "name": "OpenAI GPT 4o Search Preview",
+        "description": "This experimental feature acts as a high-performance retrieval system, searching through large datasets, documents, or knowledge bases to surface relevant results with context-aware accuracy.",
+        "bullets": [
+          "Experimental high-performance retrieval system",
+          "Searches through large datasets, documents, or knowledge bases",
+          "Context-aware accuracy and relevant results"
+        ]
+      },
+      {
+        "id": "68421836ac33a46e0bb6a503",
+        "name": "OpenAI GPT 4o Realtime",
+        "description": "This multimodal AI model is designed for lightning-fast, real-time interaction across text, vision, and audio, ideal for voice assistants, dynamic UIs, or smart multi-input applications.",
+        "bullets": [
+          "Multimodal AI model for lightning-fast interaction",
+          "Ideal for real-time interaction across text, vision, and audio",
+          "Human-like responsiveness and top-tier intelligence"
+        ]
+      },
+      {
+        "id": "68420d16ac33a46e0bb45216",
+        "name": "OpenAI - GPT 4.1",
+        "description": "This newest multimodal large language model delivers highly capable, efficient, and intelligent performance across a broad range of tasks, ideal for complex content processing.",
+        "bullets": [
+          "Multimodal large language model with highly capable performance",
+          "Efficient and intelligent performance across various tasks",
+          "Native support for 128K token context window and function calling"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 6.191,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6844abecb32d4d019cc91f28\",\n    \"6843416eac33a46e0beddbb4\",\n    \"6843683fac33a46e0bf02e1e\",\n    \"68421b0bac33a46e0bb70ba7\",\n    \"6842131bac33a46e0bb51e1e\",\n    \"68420fffac33a46e0bb4c9bc\",\n    \"68422299ac33a46e0bb73f68\",\n    \"68433eabac33a46e0beda792\",\n    \"68435c8dac33a46e0bee5535\",\n    \"68435137ac33a46e0bee20d8\",\n    \"68421836ac33a46e0bb6a503\",\n    \"68420d16ac33a46e0bb45216\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6844abecb32d4d019cc91f28\",\n      \"name\": \"GPT - Ecom AI Website Advisor\",\n      \"description\": \"This GPT model is used as a chatGPT-powered assistant for ecommerce website setup decisions, providing personalized advice.\",\n      \"bullets\": [\n        \"Powered by GPT, offering personalized advice\",\n        \"Designed for Shopify users, guiding them in choosing plans, apps, and themes\",\n        \"Acts as an on-demand Shopify expert in chat form\"\n      ]\n    },\n    {\n      \"id\": \"6843416eac33a46e0beddbb4\",\n      \"name\": \"OpenAI GPT 4o mini Transcribe\",\n      \"description\": \"This speech-to-text model converts spoken language into text with exceptional speed and surprising accuracy, ideal for real-time transcription.\",\n      \"bullets\": [\n        \"Provides high-speed speech-to-text capabilities\",\n        \"Ideal for real-time transcription in resource-constrained environments\",\n        \"Multilingual transcription with surprising accuracy\"\n      ]\n    },\n    {\n      \"id\": \"6843683fac33a46e0bf02e1e\",\n      \"name\": \"OpenAI GPT 4 Turbo\",\n      \"description\": \"This GPT model delivers faster performance, extended context handling, and more cost-effective usage, ideal for complex content processing.\",\n      \"bullets\": [\n        \"Delivers faster performance and extended context handling\",\n        \"Cost-effective usage without compromising on performance\",\n        \"Multimodal inputs, including text and images\"\n      ]\n    },\n    {\n      \"id\": \"68421b0bac33a46e0bb70ba7\",\n      \"name\": \"OpenAI GPT 4o mini Realtime\",\n      \"description\": \"This speech-to-text model is lightweight, high-speed, and optimized for real-time responsiveness without compromising on core intelligence.\",\n      \"bullets\": [\n        \"Lightweight and high-speed speech-to-text capabilities\",\n        \"Blazing-fast, cost-efficient inference across text, vision, and voice inputs\",\n        \"Optimized for real-time responsiveness\"\n      ]\n    },\n    {\n      \"id\": \"6842131bac33a46e0bb51e1e\",\n      \"name\": \"OpenAI GPT 4.1 nano\",\n      \"description\": \"This small and efficient language model delivers ultra-fast, ultra-cheap, and surprisingly capable natural language responses, ideal for mobile apps and large-scale deployments.\",\n      \"bullets\": [\n        \"Ultra-fast and ultra-cheap natural language responses\",\n        \"Ideal for mobile apps and large-scale deployments\",\n        \"Real-time applications and use cases with budgets sensitivity\"\n      ]\n    },\n    {\n      \"id\": \"68420fffac33a46e0bb4c9bc\",\n      \"name\": \"OpenAI GPT 4.1 mini\",\n      \"description\": \"This lightweight version of the GPT-4.1 model delivers efficient, speed, and affordability without compromising on performance.\",\n      \"bullets\": [\n        \"Efficient, fast, and affordable without compromising on performance\",\n        \"Ideal for developers and teams with smaller-scale applications\",\n        \"Impressive accuracy and fast responses\"\n      ]\n    },\n    {\n      \"id\": \"68422299ac33a46e0bb73f68\",\n      \"name\": \"OpenAI GPT Image 1\",\n      \"description\": \"This vision model understands and interprets images with human-like perception, ideal for analyzing, summarizing, and extracting insights from images.\",\n      \"bullets\": [\n        \"Human-like image understanding and interpretation\",\n        \"Analyses, summarizes, and extracts insights from images\",\n        \"Optimized for use via API, handling diverse image types\"\n      ]\n    },\n    {\n      \"id\": \"68433eabac33a46e0beda792\",\n      \"name\": \"OpenAI GPT 4o Transcribe\",\n      \"description\": \"This speech-to-text model converts spoken audio into accurate, readable, and structured text quickly and with surprising clarity.\",\n      \"bullets\": [\n        \"High-performance speech-to-text capabilities\",\n        \"Accurate, readable, and structured text with surprising clarity\",\n        \"Ideal for transcribing interviews, meetings, podcasts, or real-time conversations\"\n      ]\n    },\n    {\n      \"id\": \"68435c8dac33a46e0bee5535\",\n      \"name\": \"OpenAI GPT 4o mini Search Prev\",\n      \"description\": \"This semantic search feature powered by the GPT-4o-mini model brings retrieval-augmented intelligence to any product or tool that needs fast, accurate information lookup.\",\n      \"bullets\": [\n        \"Lightweight semantic search feature\",\n        \"Real-time applications and low-latency environments\",\n        \"Smarter, more relevant search results with fewer resources\"\n      ]\n    },\n    {\n      \"id\": \"68435137ac33a46e0bee20d8\",\n      \"name\": \"OpenAI GPT 4o Search Preview\",\n      \"description\": \"This experimental feature acts as a high-performance retrieval system, searching through large datasets, documents, or knowledge bases to surface relevant results with context-aware accuracy.\",\n      \"bullets\": [\n        \"Experimental high-performance retrieval system\",\n        \"Searches through large datasets, documents, or knowledge bases\",\n        \"Context-aware accuracy and relevant results\"\n      ]\n    },\n    {\n      \"id\": \"68421836ac33a46e0bb6a503\",\n      \"name\": \"OpenAI GPT 4o Realtime\",\n      \"description\": \"This multimodal AI model is designed for lightning-fast, real-time interaction across text, vision, and audio, ideal for voice assistants, dynamic UIs, or smart multi-input applications.\",\n      \"bullets\": [\n        \"Multimodal AI model for lightning-fast interaction\",\n        \"Ideal for real-time interaction across text, vision, and audio\",\n        \"Human-like responsiveness and top-tier intelligence\"\n      ]\n    },\n    {\n      \"id\": \"68420d16ac33a46e0bb45216\",\n      \"name\": \"OpenAI - GPT 4.1\",\n      \"description\": \"This newest multimodal large language model delivers highly capable, efficient, and intelligent performance across a broad range of tasks, ideal for complex content processing.\",\n      \"bullets\": [\n        \"Multimodal large language model with highly capable performance\",\n        \"Efficient and intelligent performance across various tasks\",\n        \"Native support for 128K token context window and function calling\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

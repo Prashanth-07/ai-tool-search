@@ -1,0 +1,131 @@
+{
+  "timestamp": "2025-06-11T00:00:43.061666",
+  "input_query": "give me all the tools of openAI chat gpt",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 4,
+    "tool_ids": [
+      "681bddfb477018e347954c23",
+      "6841e296ac33a46e0ba9a7d6",
+      "6842131bac33a46e0bb51e1e",
+      "68420fffac33a46e0bb4c9bc"
+    ],
+    "tools": [
+      {
+        "id": "681bddfb477018e347954c23",
+        "name": "Open AI ChatGPT",
+        "description": "Open AI ChatGPT is an advanced AI chatbot developed by OpenAI that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations.",
+        "bullets": [
+          "Generates human-like text and conversations",
+          "Answers questions and assists with creative writing",
+          "Engages in natural conversations and provides helpful responses"
+        ]
+      },
+      {
+        "id": "6841e296ac33a46e0ba9a7d6",
+        "name": "OpenAI GPT 4o mini audio",
+        "description": "OpenAI GPT-4o Mini Audio is a lighter, faster, and cost-effective version of OpenAI's real-time voice AI, designed for natural and expressive AI conversations, providing instant voice interactions with low latency.",
+        "bullets": [
+          "Provides instant voice interactions with low latency",
+          "Designed for natural and expressive AI conversations",
+          "Ideal for applications like AI assistants, customer service, and real-time translation"
+        ]
+      },
+      {
+        "id": "6842131bac33a46e0bb51e1e",
+        "name": "OpenAI GPT 4.1 nano",
+        "description": "GPT-4.1 Nano is OpenAI's smallest and most efficient language model in the GPT-4.1 family, designed to deliver ultra-fast, ultra-cheap, and surprisingly capable natural language responses.",
+        "bullets": [
+          "Delivers ultra-fast and ultra-cheap natural language responses",
+          "Ideal for mobile apps, edge computing, and large-scale deployments with cost sensitivity",
+          "Built for real-time applications and use cases where milliseconds matter"
+        ]
+      },
+      {
+        "id": "68420fffac33a46e0bb4c9bc",
+        "name": "OpenAI GPT 4.1 mini",
+        "description": "GPT-4.1 Mini is a lightweight version of OpenAI's advanced GPT-4.1 model, designed for efficiency, speed, and affordability without compromising much on performance.",
+        "bullets": [
+          "Optimized for developers and teams who need capable AI reasoning and natural language processing in smaller-scale or cost-sensitive applications",
+          "Ideal for chatbots, content suggestions, productivity tools, and streamlined AI experiences",
+          "Delivers impressive accuracy, fast responses, and a reliable understanding of nuanced prompts"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "681bddfb477018e347954c23",
+      "6841e296ac33a46e0ba9a7d6",
+      "6842131bac33a46e0bb51e1e",
+      "68420fffac33a46e0bb4c9bc"
+    ],
+    "tools": [
+      {
+        "id": "681bddfb477018e347954c23",
+        "name": "Open AI ChatGPT",
+        "description": "Open AI ChatGPT is an advanced AI chatbot developed by OpenAI that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations.",
+        "bullets": [
+          "Generates human-like text and conversations",
+          "Answers questions and assists with creative writing",
+          "Engages in natural conversations and provides helpful responses"
+        ]
+      },
+      {
+        "id": "6841e296ac33a46e0ba9a7d6",
+        "name": "OpenAI GPT 4o mini audio",
+        "description": "OpenAI GPT-4o Mini Audio is a lighter, faster, and cost-effective version of OpenAI's real-time voice AI, designed for natural and expressive AI conversations, providing instant voice interactions with low latency.",
+        "bullets": [
+          "Provides instant voice interactions with low latency",
+          "Designed for natural and expressive AI conversations",
+          "Ideal for applications like AI assistants, customer service, and real-time translation"
+        ]
+      },
+      {
+        "id": "6842131bac33a46e0bb51e1e",
+        "name": "OpenAI GPT 4.1 nano",
+        "description": "GPT-4.1 Nano is OpenAI's smallest and most efficient language model in the GPT-4.1 family, designed to deliver ultra-fast, ultra-cheap, and surprisingly capable natural language responses.",
+        "bullets": [
+          "Delivers ultra-fast and ultra-cheap natural language responses",
+          "Ideal for mobile apps, edge computing, and large-scale deployments with cost sensitivity",
+          "Built for real-time applications and use cases where milliseconds matter"
+        ]
+      },
+      {
+        "id": "68420fffac33a46e0bb4c9bc",
+        "name": "OpenAI GPT 4.1 mini",
+        "description": "GPT-4.1 Mini is a lightweight version of OpenAI's advanced GPT-4.1 model, designed for efficiency, speed, and affordability without compromising much on performance.",
+        "bullets": [
+          "Optimized for developers and teams who need capable AI reasoning and natural language processing in smaller-scale or cost-sensitive applications",
+          "Ideal for chatbots, content suggestions, productivity tools, and streamlined AI experiences",
+          "Delivers impressive accuracy, fast responses, and a reliable understanding of nuanced prompts"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 4.24,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"681bddfb477018e347954c23\",\n    \"6841e296ac33a46e0ba9a7d6\",\n    \"6842131bac33a46e0bb51e1e\",\n    \"68420fffac33a46e0bb4c9bc\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"681bddfb477018e347954c23\",\n      \"name\": \"Open AI ChatGPT\",\n      \"description\": \"Open AI ChatGPT is an advanced AI chatbot developed by OpenAI that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations.\",\n      \"bullets\": [\n        \"Generates human-like text and conversations\",\n        \"Answers questions and assists with creative writing\",\n        \"Engages in natural conversations and provides helpful responses\"\n      ]\n    },\n    {\n      \"id\": \"6841e296ac33a46e0ba9a7d6\",\n      \"name\": \"OpenAI GPT 4o mini audio\",\n      \"description\": \"OpenAI GPT-4o Mini Audio is a lighter, faster, and cost-effective version of OpenAI's real-time voice AI, designed for natural and expressive AI conversations, providing instant voice interactions with low latency.\",\n      \"bullets\": [\n        \"Provides instant voice interactions with low latency\",\n        \"Designed for natural and expressive AI conversations\",\n        \"Ideal for applications like AI assistants, customer service, and real-time translation\"\n      ]\n    },\n    {\n      \"id\": \"6842131bac33a46e0bb51e1e\",\n      \"name\": \"OpenAI GPT 4.1 nano\",\n      \"description\": \"GPT-4.1 Nano is OpenAI's smallest and most efficient language model in the GPT-4.1 family, designed to deliver ultra-fast, ultra-cheap, and surprisingly capable natural language responses.\",\n      \"bullets\": [\n        \"Delivers ultra-fast and ultra-cheap natural language responses\",\n        \"Ideal for mobile apps, edge computing, and large-scale deployments with cost sensitivity\",\n        \"Built for real-time applications and use cases where milliseconds matter\"\n      ]\n    },\n    {\n      \"id\": \"68420fffac33a46e0bb4c9bc\",\n      \"name\": \"OpenAI GPT 4.1 mini\",\n      \"description\": \"GPT-4.1 Mini is a lightweight version of OpenAI's advanced GPT-4.1 model, designed for efficiency, speed, and affordability without compromising much on performance.\",\n      \"bullets\": [\n        \"Optimized for developers and teams who need capable AI reasoning and natural language processing in smaller-scale or cost-sensitive applications\",\n        \"Ideal for chatbots, content suggestions, productivity tools, and streamlined AI experiences\",\n        \"Delivers impressive accuracy, fast responses, and a reliable understanding of nuanced prompts\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
