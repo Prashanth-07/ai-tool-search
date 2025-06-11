@@ -2428,7 +2428,7 @@ Output JSON format:
 
 - Only return the JSON.
 - Do NOT include commentary, extra notes, or explanation outside the JSON.
-- Do NOT infer a limit — include every relevant tool if no specific count is requested.
+- Do NOT infer a limit — include all relevant tools if no specific count is requested.
 """
             prompt_text = f"""
 User Query: {request.query}
