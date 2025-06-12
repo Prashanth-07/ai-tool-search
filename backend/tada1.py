@@ -61,14 +61,14 @@ class Config:
     VECTOR_STORE_CACHE_LIFETIME = 3600  # seconds
     
     # Search settings
-    VECTOR_SEARCH_K = 15
-    BM25_SEARCH_K = 30
-    HYBRID_ALPHA = 0.6  # Weight for vector vs BM25 search
+    VECTOR_SEARCH_K = 40
+    BM25_SEARCH_K = 50
+    HYBRID_ALPHA = 0.5  # Weight for vector vs BM25 search
     POPULAR_TOOLS_LIMIT = 4
     
     # Score-based selection settings
-    HYBRID_MIN_SCORE = 0.4    # Minimum relevance threshold
-    HYBRID_MAX_TOOLS = 20       # Maximum tools to send to LLM
+    HYBRID_MIN_SCORE = 0.35    # Minimum relevance threshold
+    HYBRID_MAX_TOOLS = 50       # Maximum tools to send to LLM
     HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
     # Processing settings
@@ -539,12 +539,61 @@ class BM25IndexManager:
         self.stop_words = set(stopwords.words('english'))
     
     def preprocess_text(self, text: str) -> List[str]:
-        """Tokenize and remove stopwords from text."""
+        """Enhanced tokenization with compound word handling."""
         if not text:
             return []
         
         tokens = word_tokenize(str(text).lower())
-        return [token for token in tokens if token.isalnum() and token not in self.stop_words]
+        enhanced_tokens = []
+        
+        for token in tokens:
+            if token.isalnum() and token not in self.stop_words:
+                enhanced_tokens.append(token)
+                
+                # Handle compound words like "texttovideo" → ["text", "to", "video"]
+                if len(token) > 6:  # Only process longer words to avoid false splits
+                    compound_parts = self._split_compound_word(token)
+                    enhanced_tokens.extend(compound_parts)
+        
+        return enhanced_tokens
+
+    def _split_compound_word(self, word: str) -> List[str]:
+        """Split compound words into component parts using dynamic patterns."""
+        parts = []
+        
+        # Dynamic pattern-based splitting for common connectors
+        connectors = ['to', 'and', 'or', 'with', 'from', 'into', 'onto']
+        
+        for connector in connectors:
+            if connector in word and len(word) > len(connector) + 4:  # Ensure meaningful parts
+                idx = word.find(connector)
+                if idx > 2 and idx + len(connector) < len(word) - 2:  # Ensure both parts are meaningful
+                    before = word[:idx]
+                    after = word[idx + len(connector):]
+                    
+                    # Only split if both parts are valid words (alphanumeric, reasonable length)
+                    if (len(before) >= 2 and len(after) >= 2 and 
+                        before.isalnum() and after.isalnum()):
+                        parts.extend([before, connector, after])
+                        break
+        
+        # Additional pattern: split AI-related compounds (ai + word)
+        if word.startswith('ai') and len(word) > 4:
+            remainder = word[2:]
+            if remainder.isalnum() and len(remainder) >= 3:
+                parts.extend(['ai', remainder])
+        
+        # Pattern: split common tech suffixes (word + tech/tool/app)
+        tech_suffixes = ['tech', 'tool', 'app', 'bot', 'gen']
+        for suffix in tech_suffixes:
+            if word.endswith(suffix) and len(word) > len(suffix) + 2:
+                prefix = word[:-len(suffix)]
+                if prefix.isalnum() and len(prefix) >= 3:
+                    parts.extend([prefix, suffix])
+                    break
+        
+        # Only return valid, meaningful parts
+        return [part for part in parts if len(part) >= 2 and part.isalnum()]
     
     def create_document_text(self, tool: Tool) -> str:
         """Create searchable text from tool data."""
@@ -580,13 +629,67 @@ class BM25IndexManager:
         return " ".join(filter(None, parts))
     
     def add_tool(self, tool: Tool, rid: str) -> None:
-        """Add tool to BM25 index."""
+        """Add tool to BM25 index with complete metadata preservation."""
         doc_text = self.create_document_text(tool)
         tokenized_doc = self.preprocess_text(doc_text)
         
+        # Create comprehensive metadata for this tool
+        complete_metadata = {
+            "rid": rid,
+            "tool_id": tool.tool_id,
+            "name": tool.name,
+            "category_subcat": tool.category_subcat or "",
+            "url": str(tool.url),
+            "description": tool.description or "",
+            "image_url": tool.image_url or "",
+            "owner": tool.owner or "",
+            "status": tool.status or ""
+        }
+        
+        # Add pricingType if available
+        if hasattr(tool, 'pricingType') and tool.pricingType:
+            complete_metadata["pricingType"] = tool.pricingType
+        
+        # Add detailed information if available
+        if hasattr(tool, 'details') and tool.details:
+            if tool.details.introduction:
+                complete_metadata["details_introduction"] = tool.details.introduction
+            if tool.details.usage:
+                complete_metadata["details_usage"] = tool.details.usage
+            if tool.details.speciality:
+                complete_metadata["details_speciality"] = tool.details.speciality
+        
+        # Add features if available
+        if hasattr(tool, 'features') and tool.features:
+            if tool.features.pros:
+                complete_metadata["features_pros"] = ",".join(tool.features.pros)
+            if tool.features.cons:
+                complete_metadata["features_cons"] = ",".join(tool.features.cons)
+        
+        # Add metrics if available
+        if hasattr(tool, 'metrics') and tool.metrics:
+            for key, value in tool.metrics.dict().items():
+                complete_metadata[f"metrics_{key}"] = value
+        
+        # Add categories list if available
+        if hasattr(tool, 'categories') and tool.categories:
+            complete_metadata["categories_list"] = [cat.Category for cat in tool.categories]
+        
+        # Add pricing information if available
+        if hasattr(tool, 'pricing') and tool.pricing:
+            complete_metadata["pricing_plans"] = ",".join([plan.planName for plan in tool.pricing])
+            complete_metadata["pricing_prices"] = ",".join([plan.price for plan in tool.pricing])
+        
+        # Add QA section if available
+        if hasattr(tool, 'qaSection') and tool.qaSection:
+            complete_metadata["qa_questions"] = ",".join([qa.question for qa in tool.qaSection])
+            complete_metadata["qa_answers"] = ",".join([qa.answer for qa in tool.qaSection])
+        
+        # Store both tool object and complete metadata
         self.tool_data[rid] = {
             "tool": tool,
-            "tokenized_doc": tokenized_doc
+            "tokenized_doc": tokenized_doc,
+            "complete_metadata": complete_metadata  # Store complete metadata
         }
         self.is_initialized = False
     
@@ -616,7 +719,7 @@ class BM25IndexManager:
         logger.info(f"BM25 index successfully built with {len(self.doc_ids)} documents")
     
     def search(self, query: str, top_k: int = Config.BM25_SEARCH_K) -> List[Dict[str, Any]]:
-        """Search BM25 index."""
+        """Search BM25 index and return complete metadata."""
         if not self.is_initialized:
             self.rebuild_index()
         
@@ -636,19 +739,12 @@ class BM25IndexManager:
         for idx in top_indices:
             if scores[idx] > 0:
                 doc_id = self.doc_ids[idx]
-                tool = self.tool_data[doc_id]["tool"]
-                results.append({
-                    "rid": doc_id,
-                    "tool_id": tool.tool_id,
-                    "name": tool.name,
-                    "description": tool.description,
-                    "category_subcat": tool.category_subcat,
-                    "url": str(tool.url),
-                    "image_url": tool.image_url or "",
-                    "owner": tool.owner or "",
-                    "status": tool.status or "",
-                    "score": float(scores[idx])
-                })
+                
+                # Get the complete metadata that was stored with this tool
+                complete_metadata = dict(self.tool_data[doc_id]["complete_metadata"])
+                complete_metadata["score"] = float(scores[idx])
+                
+                results.append(complete_metadata)
         
         return results
 
@@ -2012,14 +2108,14 @@ async def get_stats(show_all: bool = True):
         
         vectors_info = []
         for doc in results:
-            vectors_info.append({
-                "name": doc.metadata.get("name", "N/A"),
-                "tool_id": doc.metadata.get("tool_id", "N/A"),
-                "rid": doc.metadata.get("rid", "N/A"),
-                "description": doc.metadata.get("description", "N/A"),
-                "categories": doc.metadata.get("categories", "N/A"),
-                "pricing": doc.metadata.get("pricing", "N/A")
-            })
+            # Return raw metadata exactly as stored in the database
+            # This gives complete visibility into what's actually there
+            metadata = doc.metadata
+            
+            # Create a copy of all metadata without any filtering or formatting
+            vector_info = dict(metadata)
+            
+            vectors_info.append(vector_info)
         
         stats_dict = {
             "total_vectors": total_vectors,
@@ -2246,22 +2342,14 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 logger.error(f"Error in vector search: {str(e)}")
                 vector_results_with_scores = []
             
-            # Process vector results
+            # Process vector results - UPDATED TO PASS ALL METADATA
             processed_vector_results = []
             for doc, score in vector_results_with_scores:
                 metadata = doc.metadata
-                processed_vector_results.append({
-                    "rid": metadata["rid"],
-                    "tool_id": metadata["tool_id"],
-                    "name": metadata["name"],
-                    "category_subcat": metadata.get("category_subcat", ""),
-                    "url": metadata.get("url", ""),
-                    "description": metadata.get("description", ""),
-                    "image_url": metadata.get("image_url", ""),
-                    "owner": metadata.get("owner", ""),
-                    "status": metadata.get("status", ""),
-                    "score": float(1.0 - score)
-                })
+                # Pass ALL metadata without filtering
+                result = dict(metadata)  # Copy all metadata fields
+                result["score"] = float(1.0 - score)  # Add relevance score
+                processed_vector_results.append(result)
 
             logger.info(f"Vector search returned {len(processed_vector_results)} results")
             
@@ -2327,7 +2415,7 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 fallback_count=Config.HYBRID_FALLBACK_COUNT
             )
 
-            # LOG TOOLS SENT TO LLM
+            # LOG TOOLS SENT TO LLM (basic info for logs)
             logger.info("=== TOOLS SENT TO LLM ===")
             for i, result in enumerate(selected_results):
                 tool_name = result.get("name", "Unknown")
@@ -2341,20 +2429,19 @@ async def query_tools(request: QueryRequest, request_headers: Request):
 
             logger.info(f"Sending {len(selected_results)} tools to LLM for processing (score-based selection)")
             
-            # Format documents for LLM
+            # Format documents for LLM - UPDATED TO PASS ALL METADATA AS JSON
             formatted_docs = []
             for result in selected_results:
-                formatted_doc = (
-                    f"Tool ID: {result.get('tool_id', 'N/A')}\n"
-                    f"Name: {result.get('name', 'N/A')}\n"
-                    f"Category/Sub-cat: {result.get('category_subcat', 'N/A')}\n"
-                    f"URL: {result.get('url', 'N/A')}\n"
-                    f"Description: {result.get('description', 'N/A')}\n"
-                    f"Image URL: {result.get('image_url', 'N/A')}\n"
-                    f"Owner: {result.get('owner', 'N/A')}\n"
-                    f"Status: {result.get('status', 'N/A')}"
-                )
+                # Pass ALL metadata as JSON to LLM - let LLM decide what's relevant
+                formatted_doc = json.dumps(result, indent=2, ensure_ascii=False)
                 formatted_docs.append(formatted_doc)
+            
+            # LOG ACTUAL DATA SENT TO LLM (first 2 tools for verification)
+            logger.info("=== ACTUAL DATA SENT TO LLM ===")
+            for i, formatted_doc in enumerate(formatted_docs[:2]):  # Log first 2 tools
+                logger.info(f"Tool {i+1} Complete Data to LLM:")
+                logger.info(formatted_doc[:500] + "..." if len(formatted_doc) > 500 else formatted_doc)
+                logger.info("-" * 80)
             
             # Handle no tools case
             if not formatted_docs:
@@ -2390,6 +2477,7 @@ From the given Tool Data, return every tool that relates, even partially, to the
 Strict Rules:
 - If the User Query specifies a number (e.g., "top 1", "best 3"), return exactly that many tools.
 - If the User Query does not specify a number, return ALL tools from Tool Data that show even minimal relevance.
+- If the User Query contains a specific tool name, only return that tool, dont return any other tools.
 - Do not exclude tools with loose, secondary, or indirect connections.
 
 Inclusion Criteria:
@@ -2406,7 +2494,7 @@ Ranking:
 For each selected tool:
 - Explain clearly why this tool is relevant, even if the connection is partial or indirect.
 - Focus on unique capabilities or connections to the query, not just repeating product descriptions.
-- Tie features directly to the user’s intent or task.
+- Tie features directly to the user's intent or task.
 
 Output JSON format:
 {{
@@ -2441,8 +2529,17 @@ Tool Data: {cleaned_context}
                 groq_api_key=env.groq_api_key,
                 model_name=current_model,
                 temperature=0.1,
-                top_p=1.0
+                model_kwargs={
+                    "top_p": 0.9,
+                    "frequency_penalty": 0.8,
+                    "presence_penalty": 0.6
+                    }
             )
+            
+# Count input tokens
+            total_input_text = system_text + prompt_text
+            input_tokens = len(encoder.encode(total_input_text))
+            logger.info(f"🔢 INPUT TOKENS: {input_tokens}")
             
             try:
                 response = llm.invoke([
@@ -2451,6 +2548,15 @@ Tool Data: {cleaned_context}
                 ])
                 
                 llm_response = response.content
+                
+                # Count output tokens
+                output_tokens = len(encoder.encode(llm_response))
+                total_tokens = input_tokens + output_tokens
+                
+                logger.info(f"🔢 OUTPUT TOKENS: {output_tokens}")
+                logger.info(f"🔢 TOTAL TOKENS: {total_tokens}")
+                logger.info(f"🔢 TOKEN BREAKDOWN - Input: {input_tokens}, Output: {output_tokens}, Total: {total_tokens}")
+                
                 logger.info("LLM response received and processed")
                 
                 # Post-process response
@@ -3037,18 +3143,21 @@ async def get_popular_by_usecase(request: PopularByUseCaseRequest):
             processed_vector_results = []
             for doc, score in vector_results_with_scores:
                 metadata = doc.metadata
-                processed_vector_results.append({
-                    "rid": metadata["rid"],
-                    "tool_id": metadata["tool_id"],
-                    "name": metadata["name"],
-                    "category_subcat": metadata.get("category_subcat", ""),
-                    "url": metadata.get("url", ""),
-                    "description": metadata.get("description", ""),
-                    "image_url": metadata.get("image_url", ""),
-                    "owner": metadata.get("owner", ""),
-                    "status": metadata.get("status", ""),
-                    "score": float(1.0 - score)
-                })
+                result = dict(metadata)
+                result["score"] = float(1.0 - score)
+                processed_vector_results.append(result)
+                # processed_vector_results.append({
+                #     "rid": metadata["rid"],
+                #     "tool_id": metadata["tool_id"],
+                #     "name": metadata["name"],
+                #     "category_subcat": metadata.get("category_subcat", ""),
+                #     "url": metadata.get("url", ""),
+                #     "description": metadata.get("description", ""),
+                #     "image_url": metadata.get("image_url", ""),
+                #     "owner": metadata.get("owner", ""),
+                #     "status": metadata.get("status", ""),
+                #     "score": float(1.0 - score)
+                # })
             
             logger.info(f"Vector search returned {len(processed_vector_results)} results")
             
