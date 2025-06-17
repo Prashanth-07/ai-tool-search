@@ -22,9 +22,11 @@ wheels/
 
 # Environment variable files
 .env
-.env.*
 *.env
+.env.*
 **/.env
+**/*.env
+
 
 # Virtual Environment
 venv/

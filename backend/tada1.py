@@ -2492,9 +2492,11 @@ Ranking:
 - Do not skip or exclude any tool that passes the inclusion criteria.
 
 For each selected tool:
-- Explain clearly why this tool is relevant, even if the connection is partial or indirect.
-- Focus on unique capabilities or connections to the query, not just repeating product descriptions.
-- Tie features directly to the user's intent or task.
+- You must provide a **tool-specific explanation** of why it relates to the query.
+- Bullets must describe specific, concrete features from the tool's own capabilities.
+- Do NOT use generic placeholders like “This tool was found in your search.”
+- Do NOT copy-paste the same bullets or descriptions across tools.
+- Be concise, but precise and relevant to the query. One tool = unique reasoning.
 
 Output JSON format:
 {{
@@ -2505,11 +2507,10 @@ Output JSON format:
       "name": "Tool Name",
       "description": "Why this tool fits the query — even partially.",
       "bullets": [
-        "Feature 1 that supports the query goal",
-        "Feature 2 that solves a subtask or related need",
-        "Optional: Indirect or tangential feature that still applies",
-        "Optional: Creative or extended relevance"
-      ]
+  "Concrete feature that directly relates to the user query (specific to this tool only)",
+  "Secondary feature that helps with a related task, workflow step, or subgoal",
+  "Optional: Creative or indirect use that still adds contextual value (must be tool-specific)"
+]
     }}
   ]
 }}
