@@ -2570,7 +2570,7 @@ QUALITY STANDARDS:
 - Avoid generic statements - be specific to both tool and query
 
 ### OUTPUT CONSTRAINTS:
-- Prioritize most relevant tools.
+- Prioritize most relevant tools and tool_id should be the tool_id of the tool of that tool.
 - Be selective and precise. Focus on meaningful connections to "{request.query}".
 ### JSON FORMAT (return only valid JSON):
 {{
