@@ -1,0 +1,905 @@
+{
+  "timestamp": "2025-06-19T12:06:48.404147",
+  "input_query": "audio generation tools",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 43,
+    "tool_ids": [
+      "684bf201b9392005153e3677",
+      "6841e296ac33a46e0ba9a7d6",
+      "6841c9e2bce3a3d64c7317e7",
+      "6841e04dac33a46e0ba975d7",
+      "68397c164c7d80405692f2fa",
+      "6849459ab9392005150a3adb",
+      "682f23a923aaf1a750abc439",
+      "682f6d9fbcf558ef8c314d34",
+      "68303475bcf558ef8c31d593",
+      "682f1e8123aaf1a750abb9eb",
+      "68433eabac33a46e0beda792",
+      "682f7221bcf558ef8c314d84",
+      "682d575923aaf1a750a99d53",
+      "682e0d2823aaf1a750aa8096",
+      "682e0b0823aaf1a750aa8074",
+      "682f1c9023aaf1a750abb9c5",
+      "683030a1bcf558ef8c31c07c",
+      "684947f8b9392005150a7565",
+      "6827545223aaf1a750a44379",
+      "68438a46ac33a46e0bf38e24",
+      "68447010b32d4d019cc01bd0",
+      "682f19ce23aaf1a750abb99f",
+      "682f7a72bcf558ef8c314e15",
+      "6843416eac33a46e0beddbb4",
+      "6818df22606258b6c075cd6f",
+      "68445055b32d4d019cbd5381",
+      "6840430bbce3a3d64c6a7ea0",
+      "6842e834ac33a46e0be7f680",
+      "68422725ac33a46e0bb7a684",
+      "68459f1fb32d4d019ceab644",
+      "682f251723aaf1a750abc462",
+      "68447e6ab32d4d019cc108d9",
+      "6841ee0cac33a46e0baa7e5f",
+      "6841e61cac33a46e0baa0b03",
+      "682d4a7d23aaf1a750a9939a",
+      "681f1fa153d3e454a4bb516c",
+      "6833416c8f07ab07a7db9ae7",
+      "681bddfb477018e347954c23",
+      "682f778bbcf558ef8c314def",
+      "6844a7a2b32d4d019cc79de5",
+      "681b5e43477018e34794fe9e",
+      "683694ac55e948f01b9762bd",
+      "684ffa81afca082a9fc3d318"
+    ],
+    "tools": [
+      {
+        "id": "684bf201b9392005153e3677",
+        "name": "Speechify",
+        "description": "Speechify.com is a leading AI-powered text-to-speech (TTS) reader designed to transform any written text into natural-sounding audio. With millions of users and high ratings, it aims to help individuals consume content faster and more efficiently across various devices and platforms. Beyond basic text-to-speech, Speechify also offers advanced AI features for content creators, including AI voice generation, voice cloning, and dubbing.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841e296ac33a46e0ba9a7d6",
+        "name": "OpenAI GPT 4o mini audio",
+        "description": "OpenAI GPT-4o Mini Audio is a lighter, faster, and cost-effective version of OpenAI's real-time voice AI, designed for natural and expressive AI conversations. It provides instant voice interactions with low latency, making it ideal for applications like AI assistants, customer service, and real-time translation without the high computational costs of full-scale GPT-4o Audio.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841c9e2bce3a3d64c7317e7",
+        "name": "OpenAI Whisper",
+        "description": "OpenAI Whisper is a powerful automatic speech recognition (ASR) system designed to transcribe and translate spoken language with high accuracy. It supports multiple languages and can handle a variety of audio formats, making it an essential tool for transcription services, accessibility solutions, and real-time voice applications. Whisper is trained on a vast dataset of multilingual audio, ensuring robustness even in noisy environments.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841e04dac33a46e0ba975d7",
+        "name": "OpenAI GPT 4o Audio",
+        "description": "OpenAI GPT-4o Audio is an advanced real-time AI-powered voice assistant that enables instant, natural, and expressive conversations with AI. Unlike previous AI voice models, GPT-4o Audio can listen, understand, and respond within milliseconds, making interactions feel fluid and human-like.\nThis model is designed to process and generate speech with emotion, tone, and contextual awareness, making it suitable for applications such as AI assistants, voice interactions, real-time translations, and accessibility tools.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68397c164c7d80405692f2fa",
+        "name": "tailored",
+        "description": "TailoredPod.ai is an AI-powered personalized news podcast and newsletter service that delivers concise, well-rounded, and balanced news summaries. It leverages AI to summarize articles from multiple trusted sources, aiming for neutral perspectives by merging different viewpoints. Users can consume their tailored news via a daily newsletter, a short podcast (around 12 minutes), a website, or an iOS app.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6849459ab9392005150a3adb",
+        "name": "Natural Reader",
+        "description": "NaturalReaders.com is an advanced AI-powered text-to-speech (TTS) software that transforms various types of text, including documents, PDFs, and web pages, into natural-sounding spoken audio. Its primary purpose is to enhance productivity, accessibility, and learning by allowing users to listen to content on the go, proofread their writing, and overcome reading difficulties.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f23a923aaf1a750abc439",
+        "name": "descript",
+        "description": "Descript is an all-in-one audio and video editing tool that makes content creation as easy as editing text. It uses AI-powered transcription, screen recording, and video editing features to simplify the process for creators.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f6d9fbcf558ef8c314d34",
+        "name": "Wisecut",
+        "description": "Wisecut AI is an automatic video editing tool powered by AI that simplifies the editing process by removing silences, generating subtitles, and enhancing audio. It is designed to help content creators, educators, and businesses produce professional videos effortlessly.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68303475bcf558ef8c31d593",
+        "name": "Davinci Resolve 20",
+        "description": "DaVinci Resolve 19 is a professional video editing, color correction, visual effects, and audio post-production software developed by Blackmagic Design. It is widely used in the film, television, and content creation industries for its advanced color grading tools, AI-powered features, and seamless workflow. Unlike other editing software, DaVinci Resolve combines multiple production stages into a single platform, making it an all-in-one solution for video professionals.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f1e8123aaf1a750abb9eb",
+        "name": "Media AI",
+        "description": "Wondershare Media AI is an advanced AI-powered multimedia platform that offers various tools for video, audio, and image editing. It helps users enhance, generate, and modify media content effortlessly using AI technology, making it ideal for creators, businesses, and professionals looking for smart editing solutions.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "GPT-4o Transcribe is OpenAI\u2019s high-performance speech-to-text model built into the GPT-4o family. It converts spoken audio into accurate, readable, and structured text\u2014quickly and with surprising clarity. Whether you're transcribing interviews, meetings, podcasts, or real-time conversations, GPT-4o Transcribe delivers fast, multilingual transcription powered by the same model that understands and generates across text, vision, and audio.\nIt\u2019s ideal for developers and teams building voice-enabled apps, transcription services, or any tool where spoken language needs to become text\u2014instantly and intelligently.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f7221bcf558ef8c314d84",
+        "name": "peech",
+        "description": "Peech AI is an AI-powered video editing and content creation tool designed to help marketers, content creators, and businesses streamline their video production process. It automates tasks like transcription, subtitles, branding, and social media optimization, making it easier to create professional-quality videos quickly.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682d575923aaf1a750a99d53",
+        "name": "Fliki",
+        "description": "Fliki is an AI-powered platform that converts text into videos and speech using realistic AI voices. It simplifies video and audio content creation, making it accessible for creators, businesses, and educators. Fliki provides tools for generating AI-powered animations, voiceovers, and videos from scripts or blogs without needing advanced editing skills.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT",
+        "description": "VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort. Using deep learning models, it transforms text prompts into engaging video content, making it ideal for content creators, marketers, and businesses.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f1c9023aaf1a750abb9c5",
+        "name": "neural frames",
+        "description": "Neural Frames is an AI-powered video generation platform that creates stunning visual content from text prompts. It allows users to generate unique, artistic, and engaging videos with minimal effort, making it ideal for creators, marketers, and businesses looking to enhance their digital content.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "683030a1bcf558ef8c31c07c",
+        "name": "IIElevenLabs",
+        "description": "ElevenLabs is an AI-powered voice synthesis platform specializing in realistic text-to-speech (TTS) and voice cloning. Designed for content creators, businesses, and developers, it allows users to generate high-quality, natural-sounding voices in multiple languages and accents. With advanced deep learning models, ElevenLabs creates lifelike speech that captures emotion, tone, and personality.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "684947f8b9392005150a7565",
+        "name": "Mubert",
+        "description": "Mubert.com is an advanced AI music generator and platform that leverages artificial intelligence in collaboration with human artists to create unique, royalty-free music. Its core purpose is to provide instant, perfectly suited soundtracks for various content needs, empowering content creators, artists, developers, and businesses to enhance their projects without copyright concerns.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6827545223aaf1a750a44379",
+        "name": "stability.ai",
+        "description": "Stability AI is at the forefront of AI-powered content generation, developing advanced models for creating images, videos, 3D assets, and audio. Their flagship model, Stable Diffusion, has revolutionized AI image generation by offering professional-grade results while remaining open and customizable.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f19ce23aaf1a750abb99f",
+        "name": "Pictory",
+        "description": "Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f7a72bcf558ef8c314e15",
+        "name": "VideoSynth.ai",
+        "description": "Videosynth AI is an AI-driven video creation tool that enables users to generate high-quality videos quickly and effortlessly. It leverages advanced artificial intelligence to transform text into visually engaging videos, making professional content creation accessible to everyone.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "GPT-4o-mini-transcribe is a lightweight, high-speed speech-to-text model from OpenAI, built on the GPT-4o-mini architecture. It converts spoken language into text with exceptional speed and surprising accuracy for its size\u2014making it ideal for real-time transcription in resource-constrained environments.\nWhether you're building voice-enabled apps, smart assistants, meeting transcription tools, or captioning systems, GPT-4o-mini-transcribe offers responsive, multilingual transcription that balances cost, performance, and ease of integration.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6818df22606258b6c075cd6f",
+        "name": "AI PPT Maker",
+        "description": "aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\u2014complete with structure, content, and design\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6840430bbce3a3d64c6a7ea0",
+        "name": "GodofPrompt AI",
+        "description": "The GodofPrompt.ai AI Prompt Generator is a specialized tool designed to help users effortlessly create powerful and professionally engineered AI prompts. It allows users to describe their goal in natural language, as if chatting with a friend, and then automatically generates a structured mega-prompt following expert prompt engineering principles, delivered directly to their email.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6842e834ac33a46e0be7f680",
+        "name": "echo",
+        "description": "MeetEcho.io is the company behind the Janus WebRTC Server, an open-source, general-purpose WebRTC gateway. It provides the foundational technology for developers and businesses to build robust, scalable, and customizable real-time communication (RTC) applications. Unlike off-the-shelf video conferencing solutions, MeetEcho.io offers the infrastructure that powers a wide range of real-time communication needs over the web.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68422725ac33a46e0bb7a684",
+        "name": "OpenAI GPT 4o mini TTS",
+        "description": "GPT-4o-mini-tts is OpenAI's lightweight, high-speed text-to-speech (TTS) model designed for fast, real-time voice synthesis using the GPT-4o-mini architecture. It's built to deliver natural, expressive, and low-latency speech output\u2014ideal for developers building interactive applications that require instant voice responses, such as AI assistants, voice agents, or educational tools.\nUnlike larger TTS models, GPT-4o-mini-tts balances performance and efficiency, enabling responsive, engaging voice output even in environments with limited compute resources.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68459f1fb32d4d019ceab644",
+        "name": "Pika Labs AI",
+        "description": "Pika Labs (often referred to as Pika.art) is an AI-powered video generation and animation tool that transforms text descriptions or images into high-quality, dynamic video clips. It is designed to empower storytellers, content creators, marketers, and editors to produce visually stunning and unique videos quickly, offering fine-tuned control over motion and cinematic effects.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f251723aaf1a750abc462",
+        "name": "DesignAI",
+        "description": "Designs AI is an AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently. It simplifies design tasks with automation and AI assistance.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68447e6ab32d4d019cc108d9",
+        "name": "Adpex AI",
+        "description": "AdpexAI is a comprehensive, AI-powered platform designed to simplify and enhance the creation and editing of images and videos. It offers a suite of tools that leverage advanced AI models to perform tasks such as face swapping, style transformation, background removal, and more. Whether you're a content creator, marketer, developer, or enthusiast, AdpexAI provides an intuitive interface to bring your creative visions to life effortlessly.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841ee0cac33a46e0baa7e5f",
+        "name": "OpenAI TTS1-HD",
+        "description": "TTS-1-HD is OpenAI\u2019s high-definition, low-latency streaming voice model designed to bring human-like speech to real-time applications. Building on the capabilities of the original TTS-1 model, TTS-1-HD enables developers to generate speech as the words are being produced\u2014perfect for voice assistants, interactive bots, or live narration tools.\nIt delivers smoother, faster, and more conversational speech experiences, making it an ideal choice for developers building next-gen voice-driven products.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "OpenAI's TTS-1 (Text-to-Speech) is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance. TTS-1 is designed to power real-time voice applications\u2014like assistants, narrators, or conversational agents\u2014with near-human vocal quality and minimal latency.\nAvailable through OpenAI\u2019s API, this model makes it easy for developers to give their applications a voice that actually sounds human\u2014not robotic. With multiple voices, languages, and low-latency streaming, TTS-1 redefines the synthetic voice experience.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI",
+        "description": "Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "681f1fa153d3e454a4bb516c",
+        "name": "Aiva",
+        "description": "AIVA (Artificial Intelligence Virtual Artist) is a cutting-edge AI music generation assistant designed to help you create original music in a matter of seconds. Whether you're a beginner exploring the world of music composition or a professional looking to speed up your creative process, AIVA uses generative AI to assist you in crafting songs across more than 250 different styles.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6833416c8f07ab07a7db9ae7",
+        "name": "AutoShorts.ai",
+        "description": "AutoShorts.ai is an AI-powered faceless video generator designed for content creators on platforms like TikTok, YouTube Shorts, and Instagram Reels. It automates the entire video production process, including scriptwriting, voiceovers, background images, subtitles, and even direct posting to social media. This makes it ideal for creators looking to run a faceless YouTube channel with minimal effort.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "681bddfb477018e347954c23",
+        "name": "OpenAI ChatGPT",
+        "description": "ChatGPT is an advanced AI chatbot developed by OpenAI that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations. Powered by OpenAI\u2019s GPT models, it is widely used for customer support, content creation, tutoring, and even casual chat. ChatGPT is available as a web app, API, and mobile app, making it accessible for personal and business use.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f778bbcf558ef8c314def",
+        "name": "Synthesys",
+        "description": "Synthesys AI Video is an advanced AI-powered video generation tool that allows users to create high-quality videos using AI-generated human-like avatars and voices. It simplifies video creation by enabling users to produce professional-grade content without requiring expensive equipment or professional editing skills.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6844a7a2b32d4d019cc79de5",
+        "name": "Domusic AI",
+        "description": "Domusic.ai is a powerful, AI-driven text-to-music generator that transforms simple text prompts or user-created lyrics into full-fledged songs, complete with melodies, harmonies, and even synthetic singing voices. With just a few minutes, users can generate original tracks tailored to their mood, genre, and creative vision\u2014all royalty-free for personal or commercial use.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "681b5e43477018e34794fe9e",
+        "name": "AskingTips",
+        "description": "AskingTips is a comprehensive platform offering a collection of AI tools and digital marketing solutions. It provides a one-stop solution for content creation, image generation, audio production, and AI transcription, making it a versatile tool for various professional and creative needs.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "683694ac55e948f01b9762bd",
+        "name": "AI Music Lab",
+        "description": "AIMusicLab.co is an AI-powered platform that helps users transform their ideas into beautiful melodies and music tracks using artificial intelligence. It offers features for generating a large volume of music, supporting various styles and fusion genres, and providing export options for different file formats, along with commercial licensing.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "684ffa81afca082a9fc3d318",
+        "name": "Rev AI",
+        "description": "Rev.ai is an AI-powered speech-to-text API platform that provides developers and enterprises with highly accurate transcription and advanced speech intelligence tools. Leveraging cutting-edge ASR models, Rev.ai enables seamless audio and video transcription, real-time streaming, language detection, sentiment analysis, topic extraction, summarization, translation, and more.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "684bf201b9392005153e3677",
+      "6841e296ac33a46e0ba9a7d6",
+      "6841c9e2bce3a3d64c7317e7",
+      "6841e04dac33a46e0ba975d7",
+      "68397c164c7d80405692f2fa",
+      "6849459ab9392005150a3adb",
+      "682f23a923aaf1a750abc439",
+      "682f6d9fbcf558ef8c314d34",
+      "68303475bcf558ef8c31d593",
+      "682f1e8123aaf1a750abb9eb",
+      "68433eabac33a46e0beda792",
+      "682f7221bcf558ef8c314d84",
+      "682d575923aaf1a750a99d53",
+      "682e0d2823aaf1a750aa8096",
+      "682e0b0823aaf1a750aa8074",
+      "682f1c9023aaf1a750abb9c5",
+      "683030a1bcf558ef8c31c07c",
+      "684947f8b9392005150a7565",
+      "6827545223aaf1a750a44379",
+      "68438a46ac33a46e0bf38e24",
+      "68447010b32d4d019cc01bd0",
+      "682f19ce23aaf1a750abb99f",
+      "682f7a72bcf558ef8c314e15",
+      "6843416eac33a46e0beddbb4",
+      "6818df22606258b6c075cd6f",
+      "68445055b32d4d019cbd5381",
+      "6840430bbce3a3d64c6a7ea0",
+      "6842e834ac33a46e0be7f680",
+      "68422725ac33a46e0bb7a684",
+      "68459f1fb32d4d019ceab644",
+      "682f251723aaf1a750abc462",
+      "68447e6ab32d4d019cc108d9",
+      "6841ee0cac33a46e0baa7e5f",
+      "6841e61cac33a46e0baa0b03",
+      "682d4a7d23aaf1a750a9939a",
+      "681f1fa153d3e454a4bb516c",
+      "6833416c8f07ab07a7db9ae7",
+      "681bddfb477018e347954c23",
+      "682f778bbcf558ef8c314def",
+      "6844a7a2b32d4d019cc79de5",
+      "681b5e43477018e34794fe9e",
+      "683694ac55e948f01b9762bd",
+      "684ffa81afca082a9fc3d318"
+    ],
+    "tools": [
+      {
+        "id": "684bf201b9392005153e3677",
+        "name": "Speechify",
+        "description": "Speechify.com is a leading AI-powered text-to-speech (TTS) reader designed to transform any written text into natural-sounding audio. With millions of users and high ratings, it aims to help individuals consume content faster and more efficiently across various devices and platforms. Beyond basic text-to-speech, Speechify also offers advanced AI features for content creators, including AI voice generation, voice cloning, and dubbing.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841e296ac33a46e0ba9a7d6",
+        "name": "OpenAI GPT 4o mini audio",
+        "description": "OpenAI GPT-4o Mini Audio is a lighter, faster, and cost-effective version of OpenAI's real-time voice AI, designed for natural and expressive AI conversations. It provides instant voice interactions with low latency, making it ideal for applications like AI assistants, customer service, and real-time translation without the high computational costs of full-scale GPT-4o Audio.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841c9e2bce3a3d64c7317e7",
+        "name": "OpenAI Whisper",
+        "description": "OpenAI Whisper is a powerful automatic speech recognition (ASR) system designed to transcribe and translate spoken language with high accuracy. It supports multiple languages and can handle a variety of audio formats, making it an essential tool for transcription services, accessibility solutions, and real-time voice applications. Whisper is trained on a vast dataset of multilingual audio, ensuring robustness even in noisy environments.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841e04dac33a46e0ba975d7",
+        "name": "OpenAI GPT 4o Audio",
+        "description": "OpenAI GPT-4o Audio is an advanced real-time AI-powered voice assistant that enables instant, natural, and expressive conversations with AI. Unlike previous AI voice models, GPT-4o Audio can listen, understand, and respond within milliseconds, making interactions feel fluid and human-like.\nThis model is designed to process and generate speech with emotion, tone, and contextual awareness, making it suitable for applications such as AI assistants, voice interactions, real-time translations, and accessibility tools.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68397c164c7d80405692f2fa",
+        "name": "tailored",
+        "description": "TailoredPod.ai is an AI-powered personalized news podcast and newsletter service that delivers concise, well-rounded, and balanced news summaries. It leverages AI to summarize articles from multiple trusted sources, aiming for neutral perspectives by merging different viewpoints. Users can consume their tailored news via a daily newsletter, a short podcast (around 12 minutes), a website, or an iOS app.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6849459ab9392005150a3adb",
+        "name": "Natural Reader",
+        "description": "NaturalReaders.com is an advanced AI-powered text-to-speech (TTS) software that transforms various types of text, including documents, PDFs, and web pages, into natural-sounding spoken audio. Its primary purpose is to enhance productivity, accessibility, and learning by allowing users to listen to content on the go, proofread their writing, and overcome reading difficulties.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f23a923aaf1a750abc439",
+        "name": "descript",
+        "description": "Descript is an all-in-one audio and video editing tool that makes content creation as easy as editing text. It uses AI-powered transcription, screen recording, and video editing features to simplify the process for creators.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f6d9fbcf558ef8c314d34",
+        "name": "Wisecut",
+        "description": "Wisecut AI is an automatic video editing tool powered by AI that simplifies the editing process by removing silences, generating subtitles, and enhancing audio. It is designed to help content creators, educators, and businesses produce professional videos effortlessly.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68303475bcf558ef8c31d593",
+        "name": "Davinci Resolve 20",
+        "description": "DaVinci Resolve 19 is a professional video editing, color correction, visual effects, and audio post-production software developed by Blackmagic Design. It is widely used in the film, television, and content creation industries for its advanced color grading tools, AI-powered features, and seamless workflow. Unlike other editing software, DaVinci Resolve combines multiple production stages into a single platform, making it an all-in-one solution for video professionals.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f1e8123aaf1a750abb9eb",
+        "name": "Media AI",
+        "description": "Wondershare Media AI is an advanced AI-powered multimedia platform that offers various tools for video, audio, and image editing. It helps users enhance, generate, and modify media content effortlessly using AI technology, making it ideal for creators, businesses, and professionals looking for smart editing solutions.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "GPT-4o Transcribe is OpenAI\u2019s high-performance speech-to-text model built into the GPT-4o family. It converts spoken audio into accurate, readable, and structured text\u2014quickly and with surprising clarity. Whether you're transcribing interviews, meetings, podcasts, or real-time conversations, GPT-4o Transcribe delivers fast, multilingual transcription powered by the same model that understands and generates across text, vision, and audio.\nIt\u2019s ideal for developers and teams building voice-enabled apps, transcription services, or any tool where spoken language needs to become text\u2014instantly and intelligently.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f7221bcf558ef8c314d84",
+        "name": "peech",
+        "description": "Peech AI is an AI-powered video editing and content creation tool designed to help marketers, content creators, and businesses streamline their video production process. It automates tasks like transcription, subtitles, branding, and social media optimization, making it easier to create professional-quality videos quickly.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682d575923aaf1a750a99d53",
+        "name": "Fliki",
+        "description": "Fliki is an AI-powered platform that converts text into videos and speech using realistic AI voices. It simplifies video and audio content creation, making it accessible for creators, businesses, and educators. Fliki provides tools for generating AI-powered animations, voiceovers, and videos from scripts or blogs without needing advanced editing skills.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT",
+        "description": "VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort. Using deep learning models, it transforms text prompts into engaging video content, making it ideal for content creators, marketers, and businesses.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f1c9023aaf1a750abb9c5",
+        "name": "neural frames",
+        "description": "Neural Frames is an AI-powered video generation platform that creates stunning visual content from text prompts. It allows users to generate unique, artistic, and engaging videos with minimal effort, making it ideal for creators, marketers, and businesses looking to enhance their digital content.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "683030a1bcf558ef8c31c07c",
+        "name": "IIElevenLabs",
+        "description": "ElevenLabs is an AI-powered voice synthesis platform specializing in realistic text-to-speech (TTS) and voice cloning. Designed for content creators, businesses, and developers, it allows users to generate high-quality, natural-sounding voices in multiple languages and accents. With advanced deep learning models, ElevenLabs creates lifelike speech that captures emotion, tone, and personality.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "684947f8b9392005150a7565",
+        "name": "Mubert",
+        "description": "Mubert.com is an advanced AI music generator and platform that leverages artificial intelligence in collaboration with human artists to create unique, royalty-free music. Its core purpose is to provide instant, perfectly suited soundtracks for various content needs, empowering content creators, artists, developers, and businesses to enhance their projects without copyright concerns.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6827545223aaf1a750a44379",
+        "name": "stability.ai",
+        "description": "Stability AI is at the forefront of AI-powered content generation, developing advanced models for creating images, videos, 3D assets, and audio. Their flagship model, Stable Diffusion, has revolutionized AI image generation by offering professional-grade results while remaining open and customizable.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f19ce23aaf1a750abb99f",
+        "name": "Pictory",
+        "description": "Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f7a72bcf558ef8c314e15",
+        "name": "VideoSynth.ai",
+        "description": "Videosynth AI is an AI-driven video creation tool that enables users to generate high-quality videos quickly and effortlessly. It leverages advanced artificial intelligence to transform text into visually engaging videos, making professional content creation accessible to everyone.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "GPT-4o-mini-transcribe is a lightweight, high-speed speech-to-text model from OpenAI, built on the GPT-4o-mini architecture. It converts spoken language into text with exceptional speed and surprising accuracy for its size\u2014making it ideal for real-time transcription in resource-constrained environments.\nWhether you're building voice-enabled apps, smart assistants, meeting transcription tools, or captioning systems, GPT-4o-mini-transcribe offers responsive, multilingual transcription that balances cost, performance, and ease of integration.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6818df22606258b6c075cd6f",
+        "name": "AI PPT Maker",
+        "description": "aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\u2014complete with structure, content, and design\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6840430bbce3a3d64c6a7ea0",
+        "name": "GodofPrompt AI",
+        "description": "The GodofPrompt.ai AI Prompt Generator is a specialized tool designed to help users effortlessly create powerful and professionally engineered AI prompts. It allows users to describe their goal in natural language, as if chatting with a friend, and then automatically generates a structured mega-prompt following expert prompt engineering principles, delivered directly to their email.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6842e834ac33a46e0be7f680",
+        "name": "echo",
+        "description": "MeetEcho.io is the company behind the Janus WebRTC Server, an open-source, general-purpose WebRTC gateway. It provides the foundational technology for developers and businesses to build robust, scalable, and customizable real-time communication (RTC) applications. Unlike off-the-shelf video conferencing solutions, MeetEcho.io offers the infrastructure that powers a wide range of real-time communication needs over the web.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68422725ac33a46e0bb7a684",
+        "name": "OpenAI GPT 4o mini TTS",
+        "description": "GPT-4o-mini-tts is OpenAI's lightweight, high-speed text-to-speech (TTS) model designed for fast, real-time voice synthesis using the GPT-4o-mini architecture. It's built to deliver natural, expressive, and low-latency speech output\u2014ideal for developers building interactive applications that require instant voice responses, such as AI assistants, voice agents, or educational tools.\nUnlike larger TTS models, GPT-4o-mini-tts balances performance and efficiency, enabling responsive, engaging voice output even in environments with limited compute resources.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68459f1fb32d4d019ceab644",
+        "name": "Pika Labs AI",
+        "description": "Pika Labs (often referred to as Pika.art) is an AI-powered video generation and animation tool that transforms text descriptions or images into high-quality, dynamic video clips. It is designed to empower storytellers, content creators, marketers, and editors to produce visually stunning and unique videos quickly, offering fine-tuned control over motion and cinematic effects.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f251723aaf1a750abc462",
+        "name": "DesignAI",
+        "description": "Designs AI is an AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently. It simplifies design tasks with automation and AI assistance.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "68447e6ab32d4d019cc108d9",
+        "name": "Adpex AI",
+        "description": "AdpexAI is a comprehensive, AI-powered platform designed to simplify and enhance the creation and editing of images and videos. It offers a suite of tools that leverage advanced AI models to perform tasks such as face swapping, style transformation, background removal, and more. Whether you're a content creator, marketer, developer, or enthusiast, AdpexAI provides an intuitive interface to bring your creative visions to life effortlessly.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841ee0cac33a46e0baa7e5f",
+        "name": "OpenAI TTS1-HD",
+        "description": "TTS-1-HD is OpenAI\u2019s high-definition, low-latency streaming voice model designed to bring human-like speech to real-time applications. Building on the capabilities of the original TTS-1 model, TTS-1-HD enables developers to generate speech as the words are being produced\u2014perfect for voice assistants, interactive bots, or live narration tools.\nIt delivers smoother, faster, and more conversational speech experiences, making it an ideal choice for developers building next-gen voice-driven products.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "OpenAI's TTS-1 (Text-to-Speech) is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance. TTS-1 is designed to power real-time voice applications\u2014like assistants, narrators, or conversational agents\u2014with near-human vocal quality and minimal latency.\nAvailable through OpenAI\u2019s API, this model makes it easy for developers to give their applications a voice that actually sounds human\u2014not robotic. With multiple voices, languages, and low-latency streaming, TTS-1 redefines the synthetic voice experience.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI",
+        "description": "Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "681f1fa153d3e454a4bb516c",
+        "name": "Aiva",
+        "description": "AIVA (Artificial Intelligence Virtual Artist) is a cutting-edge AI music generation assistant designed to help you create original music in a matter of seconds. Whether you're a beginner exploring the world of music composition or a professional looking to speed up your creative process, AIVA uses generative AI to assist you in crafting songs across more than 250 different styles.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6833416c8f07ab07a7db9ae7",
+        "name": "AutoShorts.ai",
+        "description": "AutoShorts.ai is an AI-powered faceless video generator designed for content creators on platforms like TikTok, YouTube Shorts, and Instagram Reels. It automates the entire video production process, including scriptwriting, voiceovers, background images, subtitles, and even direct posting to social media. This makes it ideal for creators looking to run a faceless YouTube channel with minimal effort.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "681bddfb477018e347954c23",
+        "name": "OpenAI ChatGPT",
+        "description": "ChatGPT is an advanced AI chatbot developed by OpenAI that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations. Powered by OpenAI\u2019s GPT models, it is widely used for customer support, content creation, tutoring, and even casual chat. ChatGPT is available as a web app, API, and mobile app, making it accessible for personal and business use.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "682f778bbcf558ef8c314def",
+        "name": "Synthesys",
+        "description": "Synthesys AI Video is an advanced AI-powered video generation tool that allows users to create high-quality videos using AI-generated human-like avatars and voices. It simplifies video creation by enabling users to produce professional-grade content without requiring expensive equipment or professional editing skills.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "6844a7a2b32d4d019cc79de5",
+        "name": "Domusic AI",
+        "description": "Domusic.ai is a powerful, AI-driven text-to-music generator that transforms simple text prompts or user-created lyrics into full-fledged songs, complete with melodies, harmonies, and even synthetic singing voices. With just a few minutes, users can generate original tracks tailored to their mood, genre, and creative vision\u2014all royalty-free for personal or commercial use.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "681b5e43477018e34794fe9e",
+        "name": "AskingTips",
+        "description": "AskingTips is a comprehensive platform offering a collection of AI tools and digital marketing solutions. It provides a one-stop solution for content creation, image generation, audio production, and AI transcription, making it a versatile tool for various professional and creative needs.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "683694ac55e948f01b9762bd",
+        "name": "AI Music Lab",
+        "description": "AIMusicLab.co is an AI-powered platform that helps users transform their ideas into beautiful melodies and music tracks using artificial intelligence. It offers features for generating a large volume of music, supporting various styles and fusion genres, and providing export options for different file formats, along with commercial licensing.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      },
+      {
+        "id": "684ffa81afca082a9fc3d318",
+        "name": "Rev AI",
+        "description": "Rev.ai is an AI-powered speech-to-text API platform that provides developers and enterprises with highly accurate transcription and advanced speech intelligence tools. Leveraging cutting-edge ASR models, Rev.ai enables seamless audio and video transcription, real-time streaming, language detection, sentiment analysis, topic extraction, summarization, translation, and more.",
+        "bullets": [
+          "This tool was found in your search",
+          "Check the description for more details"
+        ]
+      }
+    ],
+    "message": "Failed to parse LLM response, showing raw search results",
+    "timestamp": "2025-06-19T06:37:00.641020"
+  },
+  "processing_time_seconds": 12.25,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"684bf201b9392005153e3677\",\n    \"6841e296ac33a46e0ba9a7d6\",\n    \"6841c9e2bce3a3d64c7317e7\",\n    \"6841e04dac33a46e0ba975d7\",\n    \"68397c164c7d80405692f2fa\",\n    \"6849459ab9392005150a3adb\",\n    \"682f23a923aaf1a750abc439\",\n    \"682f6d9fbcf558ef8c314d34\",\n    \"68303475bcf558ef8c31d593\",\n    \"682f1e8123aaf1a750abb9eb\",\n    \"68433eabac33a46e0beda792\",\n    \"682f7221bcf558ef8c314d84\",\n    \"682d575923aaf1a750a99d53\",\n    \"682e0d2823aaf1a750aa8096\",\n    \"682e0b0823aaf1a750aa8074\",\n    \"682f1c9023aaf1a750abb9c5\",\n    \"683030a1bcf558ef8c31c07c\",\n    \"684947f8b9392005150a7565\",\n    \"6827545223aaf1a750a44379\",\n    \"68438a46ac33a46e0bf38e24\",\n    \"68447010b32d4d019cc01bd0\",\n    \"682f19ce23aaf1a750abb99f\",\n    \"682f7a72bcf558ef8c314e15\",\n    \"6843416eac33a46e0beddbb4\",\n    \"6818df22606258b6c075cd6f\",\n    \"68445055b32d4d019cbd5381\",\n    \"6840430bbce3a3d64c6a7ea0\",\n    \"6842e834ac33a46e0be7f680\",\n    \"68422725ac33a46e0bb7a684\",\n    \"68459f1fb32d4d019ceab644\",\n    \"682f251723aaf1a750abc462\",\n    \"68447e6ab32d4d019cc108d9\",\n    \"6841ee0cac33a46e0baa7e5f\",\n    \"6841e61cac33a46e0baa0b03\",\n    \"682d4a7d23aaf1a750a9939a\",\n    \"681f1fa153d3e454a4bb516c\",\n    \"6833416c8f07ab07a7db9ae7\",\n    \"681bddfb477018e347954c23\",\n    \"682f778bbcf558ef8c314def\",\n    \"6844a7a2b32d4d019cc79de5\",\n    \"681b5e43477018e34794fe9e\",\n    \"683694ac55e948f01b9762bd\",\n    \"684ffa81afca082a9fc3d318\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"684bf201b9392005153e3677\",\n      \"name\": \"Speechify\",\n      \"description\": \"Speechify.com is a leading AI-powered text-to-speech (TTS) reader designed to transform any written text into natural-sounding audio. With millions of users and high ratings, it aims to help individuals consume content faster and more efficiently across various devices and platforms. Beyond basic text-to-speech, Speechify also offers advanced AI features for content creators, including AI voice generation, voice cloning, and dubbing.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6841e296ac33a46e0ba9a7d6\",\n      \"name\": \"OpenAI GPT 4o mini audio\",\n      \"description\": \"OpenAI GPT-4o Mini Audio is a lighter, faster, and cost-effective version of OpenAI's real-time voice AI, designed for natural and expressive AI conversations. It provides instant voice interactions with low latency, making it ideal for applications like AI assistants, customer service, and real-time translation without the high computational costs of full-scale GPT-4o Audio.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6841c9e2bce3a3d64c7317e7\",\n      \"name\": \"OpenAI Whisper\",\n      \"description\": \"OpenAI Whisper is a powerful automatic speech recognition (ASR) system designed to transcribe and translate spoken language with high accuracy. It supports multiple languages and can handle a variety of audio formats, making it an essential tool for transcription services, accessibility solutions, and real-time voice applications. Whisper is trained on a vast dataset of multilingual audio, ensuring robustness even in noisy environments.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6841e04dac33a46e0ba975d7\",\n      \"name\": \"OpenAI GPT 4o Audio\",\n      \"description\": \"OpenAI GPT-4o Audio is an advanced real-time AI-powered voice assistant that enables instant, natural, and expressive conversations with AI. Unlike previous AI voice models, GPT-4o Audio can listen, understand, and respond within milliseconds, making interactions feel fluid and human-like.\\nThis model is designed to process and generate speech with emotion, tone, and contextual awareness, making it suitable for applications such as AI assistants, voice interactions, real-time translations, and accessibility tools.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68397c164c7d80405692f2fa\",\n      \"name\": \"tailored\",\n      \"description\": \"TailoredPod.ai is an AI-powered personalized news podcast and newsletter service that delivers concise, well-rounded, and balanced news summaries. It leverages AI to summarize articles from multiple trusted sources, aiming for neutral perspectives by merging different viewpoints. Users can consume their tailored news via a daily newsletter, a short podcast (around 12 minutes), a website, or an iOS app.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6849459ab9392005150a3adb\",\n      \"name\": \"Natural Reader\",\n      \"description\": \"NaturalReaders.com is an advanced AI-powered text-to-speech (TTS) software that transforms various types of text, including documents, PDFs, and web pages, into natural-sounding spoken audio. Its primary purpose is to enhance productivity, accessibility, and learning by allowing users to listen to content on the go, proofread their writing, and overcome reading difficulties.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f23a923aaf1a750abc439\",\n      \"name\": \"descript\",\n      \"description\": \"Descript is an all-in-one audio and video editing tool that makes content creation as easy as editing text. It uses AI-powered transcription, screen recording, and video editing features to simplify the process for creators.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f6d9fbcf558ef8c314d34\",\n      \"name\": \"Wisecut\",\n      \"description\": \"Wisecut AI is an automatic video editing tool powered by AI that simplifies the editing process by removing silences, generating subtitles, and enhancing audio. It is designed to help content creators, educators, and businesses produce professional videos effortlessly.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68303475bcf558ef8c31d593\",\n      \"name\": \"Davinci Resolve 20\",\n      \"description\": \"DaVinci Resolve 19 is a professional video editing, color correction, visual effects, and audio post-production software developed by Blackmagic Design. It is widely used in the film, television, and content creation industries for its advanced color grading tools, AI-powered features, and seamless workflow. Unlike other editing software, DaVinci Resolve combines multiple production stages into a single platform, making it an all-in-one solution for video professionals.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f1e8123aaf1a750abb9eb\",\n      \"name\": \"Media AI\",\n      \"description\": \"Wondershare Media AI is an advanced AI-powered multimedia platform that offers various tools for video, audio, and image editing. It helps users enhance, generate, and modify media content effortlessly using AI technology, making it ideal for creators, businesses, and professionals looking for smart editing solutions.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68433eabac33a46e0beda792\",\n      \"name\": \"OpenAI GPT 4o Transcribe\",\n      \"description\": \"GPT-4o Transcribe is OpenAI\\u2019s high-performance speech-to-text model built into the GPT-4o family. It converts spoken audio into accurate, readable, and structured text\\u2014quickly and with surprising clarity. Whether you're transcribing interviews, meetings, podcasts, or real-time conversations, GPT-4o Transcribe delivers fast, multilingual transcription powered by the same model that understands and generates across text, vision, and audio.\\nIt\\u2019s ideal for developers and teams building voice-enabled apps, transcription services, or any tool where spoken language needs to become text\\u2014instantly and intelligently.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f7221bcf558ef8c314d84\",\n      \"name\": \"peech\",\n      \"description\": \"Peech AI is an AI-powered video editing and content creation tool designed to help marketers, content creators, and businesses streamline their video production process. It automates tasks like transcription, subtitles, branding, and social media optimization, making it easier to create professional-quality videos quickly.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682d575923aaf1a750a99d53\",\n      \"name\": \"Fliki\",\n      \"description\": \"Fliki is an AI-powered platform that converts text into videos and speech using realistic AI voices. It simplifies video and audio content creation, making it accessible for creators, businesses, and educators. Fliki provides tools for generating AI-powered animations, voiceovers, and videos from scripts or blogs without needing advanced editing skills.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682e0d2823aaf1a750aa8096\",\n      \"name\": \"VideoGPT\",\n      \"description\": \"VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort. Using deep learning models, it transforms text prompts into engaging video content, making it ideal for content creators, marketers, and businesses.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682e0b0823aaf1a750aa8074\",\n      \"name\": \"powtoon imagine\",\n      \"description\": \"Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f1c9023aaf1a750abb9c5\",\n      \"name\": \"neural frames\",\n      \"description\": \"Neural Frames is an AI-powered video generation platform that creates stunning visual content from text prompts. It allows users to generate unique, artistic, and engaging videos with minimal effort, making it ideal for creators, marketers, and businesses looking to enhance their digital content.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"683030a1bcf558ef8c31c07c\",\n      \"name\": \"IIElevenLabs\",\n      \"description\": \"ElevenLabs is an AI-powered voice synthesis platform specializing in realistic text-to-speech (TTS) and voice cloning. Designed for content creators, businesses, and developers, it allows users to generate high-quality, natural-sounding voices in multiple languages and accents. With advanced deep learning models, ElevenLabs creates lifelike speech that captures emotion, tone, and personality.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"684947f8b9392005150a7565\",\n      \"name\": \"Mubert\",\n      \"description\": \"Mubert.com is an advanced AI music generator and platform that leverages artificial intelligence in collaboration with human artists to create unique, royalty-free music. Its core purpose is to provide instant, perfectly suited soundtracks for various content needs, empowering content creators, artists, developers, and businesses to enhance their projects without copyright concerns.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6827545223aaf1a750a44379\",\n      \"name\": \"stability.ai\",\n      \"description\": \"Stability AI is at the forefront of AI-powered content generation, developing advanced models for creating images, videos, 3D assets, and audio. Their flagship model, Stable Diffusion, has revolutionized AI image generation by offering professional-grade results while remaining open and customizable.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68438a46ac33a46e0bf38e24\",\n      \"name\": \"ViduStudio Image to Video\",\n      \"description\": \"Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68447010b32d4d019cc01bd0\",\n      \"name\": \"Vidu Studio AI Girl Video Gen\",\n      \"description\": \"Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f19ce23aaf1a750abb99f\",\n      \"name\": \"Pictory\",\n      \"description\": \"Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f7a72bcf558ef8c314e15\",\n      \"name\": \"VideoSynth.ai\",\n      \"description\": \"Videosynth AI is an AI-driven video creation tool that enables users to generate high-quality videos quickly and effortlessly. It leverages advanced artificial intelligence to transform text into visually engaging videos, making professional content creation accessible to everyone.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6843416eac33a46e0beddbb4\",\n      \"name\": \"OpenAI GPT 4o mini Transcribe\",\n      \"description\": \"GPT-4o-mini-transcribe is a lightweight, high-speed speech-to-text model from OpenAI, built on the GPT-4o-mini architecture. It converts spoken language into text with exceptional speed and surprising accuracy for its size\\u2014making it ideal for real-time transcription in resource-constrained environments.\\nWhether you're building voice-enabled apps, smart assistants, meeting transcription tools, or captioning systems, GPT-4o-mini-transcribe offers responsive, multilingual transcription that balances cost, performance, and ease of integration.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6818df22606258b6c075cd6f\",\n      \"name\": \"AI PPT Maker\",\n      \"description\": \"aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\\u2014complete with structure, content, and design\\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68445055b32d4d019cbd5381\",\n      \"name\": \"Vidu Studio - AI Video Create\",\n      \"description\": \"Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6840430bbce3a3d64c6a7ea0\",\n      \"name\": \"GodofPrompt AI\",\n      \"description\": \"The GodofPrompt.ai AI Prompt Generator is a specialized tool designed to help users effortlessly create powerful and professionally engineered AI prompts. It allows users to describe their goal in natural language, as if chatting with a friend, and then automatically generates a structured mega-prompt following expert prompt engineering principles, delivered directly to their email.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6842e834ac33a46e0be7f680\",\n      \"name\": \"echo\",\n      \"description\": \"MeetEcho.io is the company behind the Janus WebRTC Server, an open-source, general-purpose WebRTC gateway. It provides the foundational technology for developers and businesses to build robust, scalable, and customizable real-time communication (RTC) applications. Unlike off-the-shelf video conferencing solutions, MeetEcho.io offers the infrastructure that powers a wide range of real-time communication needs over the web.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68422725ac33a46e0bb7a684\",\n      \"name\": \"OpenAI GPT 4o mini TTS\",\n      \"description\": \"GPT-4o-mini-tts is OpenAI's lightweight, high-speed text-to-speech (TTS) model designed for fast, real-time voice synthesis using the GPT-4o-mini architecture. It's built to deliver natural, expressive, and low-latency speech output\\u2014ideal for developers building interactive applications that require instant voice responses, such as AI assistants, voice agents, or educational tools.\\nUnlike larger TTS models, GPT-4o-mini-tts balances performance and efficiency, enabling responsive, engaging voice output even in environments with limited compute resources.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68459f1fb32d4d019ceab644\",\n      \"name\": \"Pika Labs AI\",\n      \"description\": \"Pika Labs (often referred to as Pika.art) is an AI-powered video generation and animation tool that transforms text descriptions or images into high-quality, dynamic video clips. It is designed to empower storytellers, content creators, marketers, and editors to produce visually stunning and unique videos quickly, offering fine-tuned control over motion and cinematic effects.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f251723aaf1a750abc462\",\n      \"name\": \"DesignAI\",\n      \"description\": \"Designs AI is an AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently. It simplifies design tasks with automation and AI assistance.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"68447e6ab32d4d019cc108d9\",\n      \"name\": \"Adpex AI\",\n      \"description\": \"AdpexAI is a comprehensive, AI-powered platform designed to simplify and enhance the creation and editing of images and videos. It offers a suite of tools that leverage advanced AI models to perform tasks such as face swapping, style transformation, background removal, and more. Whether you're a content creator, marketer, developer, or enthusiast, AdpexAI provides an intuitive interface to bring your creative visions to life effortlessly.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6841ee0cac33a46e0baa7e5f\",\n      \"name\": \"OpenAI TTS1-HD\",\n      \"description\": \"TTS-1-HD is OpenAI\\u2019s high-definition, low-latency streaming voice model designed to bring human-like speech to real-time applications. Building on the capabilities of the original TTS-1 model, TTS-1-HD enables developers to generate speech as the words are being produced\\u2014perfect for voice assistants, interactive bots, or live narration tools.\\nIt delivers smoother, faster, and more conversational speech experiences, making it an ideal choice for developers building next-gen voice-driven products.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6841e61cac33a46e0baa0b03\",\n      \"name\": \"OpenAI TTS1\",\n      \"description\": \"OpenAI's TTS-1 (Text-to-Speech) is a cutting-edge generative voice model that converts written text into natural-sounding speech with astonishing clarity, pacing, and emotional nuance. TTS-1 is designed to power real-time voice applications\\u2014like assistants, narrators, or conversational agents\\u2014with near-human vocal quality and minimal latency.\\nAvailable through OpenAI\\u2019s API, this model makes it easy for developers to give their applications a voice that actually sounds human\\u2014not robotic. With multiple voices, languages, and low-latency streaming, TTS-1 redefines the synthetic voice experience.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682d4a7d23aaf1a750a9939a\",\n      \"name\": \"invideoAI\",\n      \"description\": \"Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"681f1fa153d3e454a4bb516c\",\n      \"name\": \"Aiva\",\n      \"description\": \"AIVA (Artificial Intelligence Virtual Artist) is a cutting-edge AI music generation assistant designed to help you create original music in a matter of seconds. Whether you're a beginner exploring the world of music composition or a professional looking to speed up your creative process, AIVA uses generative AI to assist you in crafting songs across more than 250 different styles.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6833416c8f07ab07a7db9ae7\",\n      \"name\": \"AutoShorts.ai\",\n      \"description\": \"AutoShorts.ai is an AI-powered faceless video generator designed for content creators on platforms like TikTok, YouTube Shorts, and Instagram Reels. It automates the entire video production process, including scriptwriting, voiceovers, background images, subtitles, and even direct posting to social media. This makes it ideal for creators looking to run a faceless YouTube channel with minimal effort.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"681bddfb477018e347954c23\",\n      \"name\": \"OpenAI ChatGPT\",\n      \"description\": \"ChatGPT is an advanced AI chatbot developed by OpenAI that can generate human-like text, answer questions, assist with creative writing, and engage in natural conversations. Powered by OpenAI\\u2019s GPT models, it is widely used for customer support, content creation, tutoring, and even casual chat. ChatGPT is available as a web app, API, and mobile app, making it accessible for personal and business use.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"682f778bbcf558ef8c314def\",\n      \"name\": \"Synthesys\",\n      \"description\": \"Synthesys AI Video is an advanced AI-powered video generation tool that allows users to create high-quality videos using AI-generated human-like avatars and voices. It simplifies video creation by enabling users to produce professional-grade content without requiring expensive equipment or professional editing skills.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"6844a7a2b32d4d019cc79de5\",\n      \"name\": \"Domusic AI\",\n      \"description\": \"Domusic.ai is a powerful, AI-driven text-to-music generator that transforms simple text prompts or user-created lyrics into full-fledged songs, complete with melodies, harmonies, and even synthetic singing voices. With just a few minutes, users can generate original tracks tailored to their mood, genre, and creative vision\\u2014all royalty-free for personal or commercial use.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"681b5e43477018e34794fe9e\",\n      \"name\": \"AskingTips\",\n      \"description\": \"AskingTips is a comprehensive platform offering a collection of AI tools and digital marketing solutions. It provides a one-stop solution for content creation, image generation, audio production, and AI transcription, making it a versatile tool for various professional and creative needs.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"683694ac55e948f01b9762bd\",\n      \"name\": \"AI Music Lab\",\n      \"description\": \"AIMusicLab.co is an AI-powered platform that helps users transform their ideas into beautiful melodies and music tracks using artificial intelligence. It offers features for generating a large volume of music, supporting various styles and fusion genres, and providing export options for different file formats, along with commercial licensing.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    },\n    {\n      \"id\": \"684ffa81afca082a9fc3d318\",\n      \"name\": \"Rev AI\",\n      \"description\": \"Rev.ai is an AI-powered speech-to-text API platform that provides developers and enterprises with highly accurate transcription and advanced speech intelligence tools. Leveraging cutting-edge ASR models, Rev.ai enables seamless audio and video transcription, real-time streaming, language detection, sentiment analysis, topic extraction, summarization, translation, and more.\",\n      \"bullets\": [\n        \"This tool was found in your search\",\n        \"Check the description for more details\"\n      ]\n    }\n  ],\n  \"message\": \"Failed to parse LLM response, showing raw search results\",\n  \"timestamp\": \"2025-06-19T06:37:00.641020\"\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

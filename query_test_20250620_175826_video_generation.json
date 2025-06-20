@@ -1,0 +1,647 @@
+{
+  "timestamp": "2025-06-20T17:58:26.100435",
+  "input_query": "video generation",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 29,
+    "tool_ids": [
+      "Pictory AI",
+      "Lumen5",
+      "Pika Labs (Pika.art)",
+      "Synthesys AI Video",
+      "VideoGPT",
+      "HeyGen",
+      "68447010b32d4d019cc01bd0",
+      "682e0eb223aaf1a750aa80b5",
+      "68438a46ac33a46e0bf38e24",
+      "682f6a39bcf558ef8c314cee",
+      "68333fc98f07ab07a7db9aac",
+      "682f73abbcf558ef8c314da3",
+      "681cc1c4477018e3479584e9",
+      "682d4e3d23aaf1a750a993e1",
+      "68304ddbbcf558ef8c31d785",
+      "6828433e23aaf1a750a63621",
+      "684120bbbce3a3d64c6fe4c5",
+      "68445055b32d4d019cbd5381",
+      "681cdfc063aef50052da8d80",
+      "682f6b89bcf558ef8c314d0e",
+      "682d575923aaf1a750a99d53",
+      "683fb9b1bce3a3d64c68fa95",
+      "682f251723aaf1a750abc462",
+      "6833416c8f07ab07a7db9ae7",
+      "682f7a72bcf558ef8c314e15",
+      "682d4a7d23aaf1a750a9939a",
+      "682d5b5b23aaf1a750a9c326",
+      "681f6e6dd877dcf3c6567e8b",
+      "682d4c3423aaf1a750a993bc"
+    ],
+    "tools": [
+      {
+        "id": "682f19ce23aaf1a750abb99f",
+        "name": "Pictory AI",
+        "description": "Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.",
+        "bullets": [
+          "AI-driven video creation makes editing fast and effortless.",
+          "Converts blog posts and long-form text into engaging videos.",
+          "Access to a vast library of stock videos, images, and music.",
+          "Simple drag-and-drop interface for easy customization."
+        ]
+      },
+      {
+        "id": "682e182623aaf1a750aa8af2",
+        "name": "Lumen5",
+        "description": "Lumen5 is an AI-powered video creation platform that helps users transform text content into engaging videos effortlessly. Designed for marketers, educators, and businesses, it offers an intuitive drag-and-drop interface, AI-driven automation, and a vast media library to simplify video production.",
+        "bullets": [
+          "AI-driven automation makes video creation quick and easy.",
+          "Converts blog posts, articles, and scripts into videos in minutes.",
+          "Access to millions of royalty-free media assets.",
+          "Simple drag-and-drop interface with no technical skills required."
+        ]
+      },
+      {
+        "id": "68459f1fb32d4d019ceab644",
+        "name": "Pika Labs (Pika.art)",
+        "description": "Pika Labs (often referred to as Pika.art) is an AI-powered video generation and animation tool that transforms text descriptions or images into high-quality, dynamic video clips.",
+        "bullets": [
+          "Comprehensive suite of AI tools for image and video generation.",
+          "Video to animation conversion allows users to restyle any video into various artistic styles.",
+          "Character animation capability to animate character videos into captivating cartoon or anime-inspired works of art.",
+          "Commercial use rights allow users to retain full ownership of generated content."
+        ]
+      },
+      {
+        "id": "682f778bbcf558ef8c314def",
+        "name": "Synthesys AI Video",
+        "description": "Synthesys AI Video is an advanced AI-powered video generation tool that allows users to create high-quality videos using AI-generated human-like avatars and voices.",
+        "bullets": [
+          "AI-powered avatars that look and sound like real humans.",
+          "High-quality AI-generated voiceovers in multiple languages and accents.",
+          "No need for cameras, actors, or costly production setups.",
+          "Easy-to-use interface with drag-and-drop functionality."
+        ]
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT",
+        "description": "VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort.",
+        "bullets": [
+          "AI-driven video creation generates high-quality videos using advanced AI.",
+          "Text-to-video technology transforms simple text descriptions into dynamic video content.",
+          "Customization options allow users to modify elements such as voiceovers, visuals, and animations.",
+          "Time-efficient drastically reduces the time needed to produce professional videos."
+        ]
+      },
+      {
+        "id": "682d5e7a23aaf1a750a9cc96",
+        "name": "HeyGen",
+        "description": "HeyGen is an AI-powered video creation platform that allows users to generate high-quality videos with AI avatars and text-to-video features.",
+        "bullets": [
+          "AI avatars with realistic lip-syncing.",
+          "Text-to-video conversion with customizable templates.",
+          "Real-time video translation in multiple languages.",
+          "Drag-and-drop editor for easy customization."
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "Advanced AI Algorithms: Reduces manual effort by accurately detecting visual discrepancies.",
+          "Creative Flexibility: Supports a wide range of animation styles guided by user input."
+        ]
+      },
+      {
+        "id": "682e0eb223aaf1a750aa80b5",
+        "name": "Leonardo.Ai",
+        "description": "Leonardo's AI Video Generator is an advanced AI-powered tool designed to create high-quality videos effortlessly. It allows users to generate animations, cinematic sequences, and promotional content using artificial intelligence, making video production more accessible and efficient.",
+        "bullets": [
+          "High-quality AI-generated visuals",
+          "Easy to use with minimal learning curve"
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "User-Friendly Interface: Simplifies the animation process",
+          "making it accessible to users with varying technical skills."
+        ]
+      },
+      {
+        "id": "682f6a39bcf558ef8c314cee",
+        "name": "Magisto",
+        "description": "Magisto is an AI-powered video editing tool designed to simplify the video creation process. It helps users create professional-looking videos with minimal effort by automating editing, adding effects, and enhancing footage with AI-driven techniques. Magisto is ideal for businesses, marketers, and content creators looking to produce engaging videos quickly.",
+        "bullets": [
+          "AI automation makes editing easy and fast.",
+          "A variety of templates suitable for different needs."
+        ]
+      },
+      {
+        "id": "68333fc98f07ab07a7db9aac",
+        "name": "Crayo",
+        "description": "Crayo is an AI-powered video creation tool designed for content creators, marketers, and businesses to generate short-form videos quickly. It enables users to create engaging video content by simply providing a text prompt or outline. The platform automates various aspects of video production, including captions, effects, background music, and transitions, making it ideal for social media platforms like TikTok, Instagram, and YouTube Shorts.",
+        "bullets": [
+          "Quick AI-powered video creation.",
+          "Automates captions"
+        ]
+      },
+      {
+        "id": "682f73abbcf558ef8c314da3",
+        "name": "Visla",
+        "description": "Visla is an AI-powered video creation and editing platform designed to simplify video production for businesses, marketers, and content creators. It enables users to generate, edit, and enhance videos using AI-driven tools, making high-quality video creation more accessible and efficient.",
+        "bullets": [
+          "AI-powered editing simplifies video creation.",
+          "Automatic captions improve video accessibility."
+        ]
+      },
+      {
+        "id": "681cc1c4477018e3479584e9",
+        "name": "Video Fusion",
+        "description": "Videofusion.io is an AI-powered video ad generator designed to maximize ROI for video marketing campaigns. It offers a suite of tools that help users create professional-quality videos tailored to their brand's voice and marketing goals. With features like detailed search queries, AI-generated ad variations, and advanced video editing capabilities, Videofusion.io enables users to scale their video content efficiently.",
+        "bullets": [
+          "Efficiency: Simplifies the process of creating professional-quality videos.",
+          "Customization: Offers extensive options to tailor videos to specific marketing goals."
+        ]
+      },
+      {
+        "id": "682d4e3d23aaf1a750a993e1",
+        "name": "Freepik AI Video Generator",
+        "description": "Freepik AI Video Generator turns your text prompts into dynamic videos\u2014automatically. Just type what you want to see, and boom: the AI whips up a video with visuals, movement, and sound. It\u2019s like having a full creative team in your browser, minus the coffee breaks.",
+        "bullets": [
+          "Ridiculously Easy to Use: No learning curve.",
+          "Creative Freedom: Wild prompt? No problem."
+        ]
+      },
+      {
+        "id": "68304ddbbcf558ef8c31d785",
+        "name": "wave.video",
+        "description": "Wave Video is an all-in-one online video platform that enables users to create, edit, host, and stream videos. It provides a vast library of templates, stock media, and AI-powered tools for businesses, marketers, and content creators.",
+        "bullets": [
+          "AI-powered tools simplify video editing.",
+          "Offers video hosting and live streaming."
+        ]
+      },
+      {
+        "id": "6828433e23aaf1a750a63621",
+        "name": "Vyond",
+        "description": "Vyond AI Video Creator is an all-in-one AI-powered video creation platform that allows users to generate professional-quality videos instantly. Designed for businesses, educators, and content creators, Vyond leverages AI to transform text prompts into engaging animated videos in multiple styles. Whether for marketing, training, or storytelling, Vyond makes video production effortless with its intuitive editing tools and pre-built templates.",
+        "bullets": [
+          "Instant AI-Generated Videos: Significantly reduces production time by generating videos in a matter of seconds based on text prompts.",
+          "Wide Range of Customization: Offers extensive flexibility in choosing animation styles"
+        ]
+      },
+      {
+        "id": "684120bbbce3a3d64c6fe4c5",
+        "name": "DeeVid AI",
+        "description": "DeeVid AI is an AI Video Generator that allows users to create high-quality videos from text, images, or video prompts without requiring any technical skills. It offers a user-friendly interface and employs advanced algorithms to ensure smooth animations, transitions, and effects, making video creation accessible and efficient. The platform also prioritizes data privacy and safe content creation by preventing harmful or inappropriate content.",
+        "bullets": [
+          "Ease of Use: The \"no technical skills required\" aspect is a major plus",
+          "democratizing video creation."
+        ]
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": [
+          "Intuitive Design: Easy-to-navigate interface enhances user experience.",
+          "Creative Flexibility: Supports a wide range of prompts and image inputs."
+        ]
+      },
+      {
+        "id": "681cdfc063aef50052da8d80",
+        "name": "Video Studio AI",
+        "description": "Videostudio-ai.com is an AI-powered platform designed to convert text and images into professional videos. By leveraging advanced artificial intelligence, it streamlines the video creation process, making it accessible to users of all experience levels. The platform offers a variety of templates, customization options, and real-time editing capabilities, ensuring that users can create high-quality videos with ease.",
+        "bullets": [
+          "Efficiency: Streamlines the video creation process",
+          "saving time and effort."
+        ]
+      },
+      {
+        "id": "682f6b89bcf558ef8c314d0e",
+        "name": "Animoto",
+        "description": "Animoto is an easy-to-use online video creation platform that allows users to create professional-quality videos quickly. It uses drag-and-drop functionality, pre-built templates, and a vast media library to help businesses, marketers, educators, and individuals produce engaging content without advanced editing skills.",
+        "bullets": [
+          "Simple and user-friendly interface.",
+          "High-quality templates for professional-looking videos."
+        ]
+      },
+      {
+        "id": "682d575923aaf1a750a99d53",
+        "name": "Fliki",
+        "description": "Fliki is an AI-powered platform that converts text into videos and speech using realistic AI voices. It simplifies video and audio content creation, making it accessible for creators, businesses, and educators. Fliki provides tools for generating AI-powered animations, voiceovers, and videos from scripts or blogs without needing advanced editing skills.",
+        "bullets": [
+          "Easy-to-use interface with fast video generation.",
+          "High-quality AI voices with emotions."
+        ]
+      },
+      {
+        "id": "683fb9b1bce3a3d64c68fa95",
+        "name": "imagemover ai",
+        "description": "ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos. It simplifies the video creation process, allowing users to effortlessly produce high-quality, captivating videos for various purposes, from personal projects to brand promotions and social media content, all while ensuring smooth transitions and crystal-clear quality.",
+        "bullets": [
+          "Simplicity and Speed: Transforms ideas into videos quickly and with minimal effort.",
+          "AI-Powered Quality: Produces visually appealing videos with smooth transitions and clear quality."
+        ]
+      },
+      {
+        "id": "682f251723aaf1a750abc462",
+        "name": "DesignAI",
+        "description": "Designs AI is an AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently. It simplifies design tasks with automation and AI assistance.",
+        "bullets": [
+          "Wide range of AI tools for different content creation needs",
+          "Fast and easy-to-use platform with automation"
+        ]
+      },
+      {
+        "id": "6833416c8f07ab07a7db9ae7",
+        "name": "AutoShorts.ai",
+        "description": "AutoShorts.ai is an AI-powered faceless video generator designed for content creators on platforms like TikTok, YouTube Shorts, and Instagram Reels. It automates the entire video production process, including scriptwriting, voiceovers, background images, subtitles, and even direct posting to social media. This makes it ideal for creators looking to run a faceless YouTube channel with minimal effort.",
+        "bullets": [
+          "Fully automated faceless video creation.",
+          "AI-powered scriptwriting"
+        ]
+      },
+      {
+        "id": "682f7a72bcf558ef8c314e15",
+        "name": "VideoSynth.ai",
+        "description": "Videosynth AI is an AI-driven video creation tool that enables users to generate high-quality videos quickly and effortlessly. It leverages advanced artificial intelligence to transform text into visually engaging videos, making professional content creation accessible to everyone.",
+        "bullets": [
+          "Simple and user-friendly interface.",
+          "AI-generated voiceovers add a professional touch."
+        ]
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI",
+        "description": "Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.",
+        "bullets": [
+          "AI-powered automation speeds up video creation.",
+          "Large media library for stock footage and music."
+        ]
+      },
+      {
+        "id": "682d5b5b23aaf1a750a9c326",
+        "name": "elai.",
+        "description": "Elai.io is an AI-powered platform that allows users to create professional videos from text. It is designed for businesses, educators, marketers, and content creators who want to generate high-quality video content without advanced editing skills. The platform converts scripts and blog posts into videos featuring AI avatars and voiceovers.",
+        "bullets": [
+          "Category: AI Video Generation",
+          "Additional features available"
+        ]
+      },
+      {
+        "id": "681f6e6dd877dcf3c6567e8b",
+        "name": "Virbo",
+        "description": "Virbo is an innovative AI-powered video generation tool designed to streamline the creation of professional-quality videos. With features like AI avatars, voiceovers, and script generation, Virbo allows users to transform text into engaging, dynamic videos effortlessly. Whether you're a content creator, educator, or marketer, Virbo provides a user-friendly interface and a wide range of customizable options to bring your ideas to life quickly and efficiently. The platform supports multiple languages and offers high-quality outputs, making it a versatile tool for various applications.",
+        "bullets": [
+          "Category: Video",
+          "Additional features available"
+        ]
+      },
+      {
+        "id": "682d4c3423aaf1a750a993bc",
+        "name": "renderforest AI",
+        "description": "Renderforest is an all-in-one branding platform that offers AI-powered video creation, logo design, website building, and graphic design tools. It provides users with intuitive and automated solutions to create high-quality videos, presentations, promotional content, and branding materials.",
+        "bullets": [
+          "Category: AI Video Generation",
+          "Additional features available"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "Pictory AI",
+      "Lumen5",
+      "Pika Labs (Pika.art)",
+      "Synthesys AI Video",
+      "VideoGPT",
+      "HeyGen",
+      "68447010b32d4d019cc01bd0",
+      "682e0eb223aaf1a750aa80b5",
+      "68438a46ac33a46e0bf38e24",
+      "682f6a39bcf558ef8c314cee",
+      "68333fc98f07ab07a7db9aac",
+      "682f73abbcf558ef8c314da3",
+      "681cc1c4477018e3479584e9",
+      "682d4e3d23aaf1a750a993e1",
+      "68304ddbbcf558ef8c31d785",
+      "6828433e23aaf1a750a63621",
+      "684120bbbce3a3d64c6fe4c5",
+      "68445055b32d4d019cbd5381",
+      "681cdfc063aef50052da8d80",
+      "682f6b89bcf558ef8c314d0e",
+      "682d575923aaf1a750a99d53",
+      "683fb9b1bce3a3d64c68fa95",
+      "682f251723aaf1a750abc462",
+      "6833416c8f07ab07a7db9ae7",
+      "682f7a72bcf558ef8c314e15",
+      "682d4a7d23aaf1a750a9939a",
+      "682d5b5b23aaf1a750a9c326",
+      "681f6e6dd877dcf3c6567e8b",
+      "682d4c3423aaf1a750a993bc"
+    ],
+    "tools": [
+      {
+        "id": "682f19ce23aaf1a750abb99f",
+        "name": "Pictory AI",
+        "description": "Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.",
+        "bullets": [
+          "AI-driven video creation makes editing fast and effortless.",
+          "Converts blog posts and long-form text into engaging videos.",
+          "Access to a vast library of stock videos, images, and music.",
+          "Simple drag-and-drop interface for easy customization."
+        ]
+      },
+      {
+        "id": "682e182623aaf1a750aa8af2",
+        "name": "Lumen5",
+        "description": "Lumen5 is an AI-powered video creation platform that helps users transform text content into engaging videos effortlessly. Designed for marketers, educators, and businesses, it offers an intuitive drag-and-drop interface, AI-driven automation, and a vast media library to simplify video production.",
+        "bullets": [
+          "AI-driven automation makes video creation quick and easy.",
+          "Converts blog posts, articles, and scripts into videos in minutes.",
+          "Access to millions of royalty-free media assets.",
+          "Simple drag-and-drop interface with no technical skills required."
+        ]
+      },
+      {
+        "id": "68459f1fb32d4d019ceab644",
+        "name": "Pika Labs (Pika.art)",
+        "description": "Pika Labs (often referred to as Pika.art) is an AI-powered video generation and animation tool that transforms text descriptions or images into high-quality, dynamic video clips.",
+        "bullets": [
+          "Comprehensive suite of AI tools for image and video generation.",
+          "Video to animation conversion allows users to restyle any video into various artistic styles.",
+          "Character animation capability to animate character videos into captivating cartoon or anime-inspired works of art.",
+          "Commercial use rights allow users to retain full ownership of generated content."
+        ]
+      },
+      {
+        "id": "682f778bbcf558ef8c314def",
+        "name": "Synthesys AI Video",
+        "description": "Synthesys AI Video is an advanced AI-powered video generation tool that allows users to create high-quality videos using AI-generated human-like avatars and voices.",
+        "bullets": [
+          "AI-powered avatars that look and sound like real humans.",
+          "High-quality AI-generated voiceovers in multiple languages and accents.",
+          "No need for cameras, actors, or costly production setups.",
+          "Easy-to-use interface with drag-and-drop functionality."
+        ]
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT",
+        "description": "VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort.",
+        "bullets": [
+          "AI-driven video creation generates high-quality videos using advanced AI.",
+          "Text-to-video technology transforms simple text descriptions into dynamic video content.",
+          "Customization options allow users to modify elements such as voiceovers, visuals, and animations.",
+          "Time-efficient drastically reduces the time needed to produce professional videos."
+        ]
+      },
+      {
+        "id": "682d5e7a23aaf1a750a9cc96",
+        "name": "HeyGen",
+        "description": "HeyGen is an AI-powered video creation platform that allows users to generate high-quality videos with AI avatars and text-to-video features.",
+        "bullets": [
+          "AI avatars with realistic lip-syncing.",
+          "Text-to-video conversion with customizable templates.",
+          "Real-time video translation in multiple languages.",
+          "Drag-and-drop editor for easy customization."
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "Advanced AI Algorithms: Reduces manual effort by accurately detecting visual discrepancies.",
+          "Creative Flexibility: Supports a wide range of animation styles guided by user input."
+        ]
+      },
+      {
+        "id": "682e0eb223aaf1a750aa80b5",
+        "name": "Leonardo.Ai",
+        "description": "Leonardo's AI Video Generator is an advanced AI-powered tool designed to create high-quality videos effortlessly. It allows users to generate animations, cinematic sequences, and promotional content using artificial intelligence, making video production more accessible and efficient.",
+        "bullets": [
+          "High-quality AI-generated visuals",
+          "Easy to use with minimal learning curve"
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": [
+          "User-Friendly Interface: Simplifies the animation process",
+          "making it accessible to users with varying technical skills."
+        ]
+      },
+      {
+        "id": "682f6a39bcf558ef8c314cee",
+        "name": "Magisto",
+        "description": "Magisto is an AI-powered video editing tool designed to simplify the video creation process. It helps users create professional-looking videos with minimal effort by automating editing, adding effects, and enhancing footage with AI-driven techniques. Magisto is ideal for businesses, marketers, and content creators looking to produce engaging videos quickly.",
+        "bullets": [
+          "AI automation makes editing easy and fast.",
+          "A variety of templates suitable for different needs."
+        ]
+      },
+      {
+        "id": "68333fc98f07ab07a7db9aac",
+        "name": "Crayo",
+        "description": "Crayo is an AI-powered video creation tool designed for content creators, marketers, and businesses to generate short-form videos quickly. It enables users to create engaging video content by simply providing a text prompt or outline. The platform automates various aspects of video production, including captions, effects, background music, and transitions, making it ideal for social media platforms like TikTok, Instagram, and YouTube Shorts.",
+        "bullets": [
+          "Quick AI-powered video creation.",
+          "Automates captions"
+        ]
+      },
+      {
+        "id": "682f73abbcf558ef8c314da3",
+        "name": "Visla",
+        "description": "Visla is an AI-powered video creation and editing platform designed to simplify video production for businesses, marketers, and content creators. It enables users to generate, edit, and enhance videos using AI-driven tools, making high-quality video creation more accessible and efficient.",
+        "bullets": [
+          "AI-powered editing simplifies video creation.",
+          "Automatic captions improve video accessibility."
+        ]
+      },
+      {
+        "id": "681cc1c4477018e3479584e9",
+        "name": "Video Fusion",
+        "description": "Videofusion.io is an AI-powered video ad generator designed to maximize ROI for video marketing campaigns. It offers a suite of tools that help users create professional-quality videos tailored to their brand's voice and marketing goals. With features like detailed search queries, AI-generated ad variations, and advanced video editing capabilities, Videofusion.io enables users to scale their video content efficiently.",
+        "bullets": [
+          "Efficiency: Simplifies the process of creating professional-quality videos.",
+          "Customization: Offers extensive options to tailor videos to specific marketing goals."
+        ]
+      },
+      {
+        "id": "682d4e3d23aaf1a750a993e1",
+        "name": "Freepik AI Video Generator",
+        "description": "Freepik AI Video Generator turns your text prompts into dynamic videos\u2014automatically. Just type what you want to see, and boom: the AI whips up a video with visuals, movement, and sound. It\u2019s like having a full creative team in your browser, minus the coffee breaks.",
+        "bullets": [
+          "Ridiculously Easy to Use: No learning curve.",
+          "Creative Freedom: Wild prompt? No problem."
+        ]
+      },
+      {
+        "id": "68304ddbbcf558ef8c31d785",
+        "name": "wave.video",
+        "description": "Wave Video is an all-in-one online video platform that enables users to create, edit, host, and stream videos. It provides a vast library of templates, stock media, and AI-powered tools for businesses, marketers, and content creators.",
+        "bullets": [
+          "AI-powered tools simplify video editing.",
+          "Offers video hosting and live streaming."
+        ]
+      },
+      {
+        "id": "6828433e23aaf1a750a63621",
+        "name": "Vyond",
+        "description": "Vyond AI Video Creator is an all-in-one AI-powered video creation platform that allows users to generate professional-quality videos instantly. Designed for businesses, educators, and content creators, Vyond leverages AI to transform text prompts into engaging animated videos in multiple styles. Whether for marketing, training, or storytelling, Vyond makes video production effortless with its intuitive editing tools and pre-built templates.",
+        "bullets": [
+          "Instant AI-Generated Videos: Significantly reduces production time by generating videos in a matter of seconds based on text prompts.",
+          "Wide Range of Customization: Offers extensive flexibility in choosing animation styles"
+        ]
+      },
+      {
+        "id": "684120bbbce3a3d64c6fe4c5",
+        "name": "DeeVid AI",
+        "description": "DeeVid AI is an AI Video Generator that allows users to create high-quality videos from text, images, or video prompts without requiring any technical skills. It offers a user-friendly interface and employs advanced algorithms to ensure smooth animations, transitions, and effects, making video creation accessible and efficient. The platform also prioritizes data privacy and safe content creation by preventing harmful or inappropriate content.",
+        "bullets": [
+          "Ease of Use: The \"no technical skills required\" aspect is a major plus",
+          "democratizing video creation."
+        ]
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": [
+          "Intuitive Design: Easy-to-navigate interface enhances user experience.",
+          "Creative Flexibility: Supports a wide range of prompts and image inputs."
+        ]
+      },
+      {
+        "id": "681cdfc063aef50052da8d80",
+        "name": "Video Studio AI",
+        "description": "Videostudio-ai.com is an AI-powered platform designed to convert text and images into professional videos. By leveraging advanced artificial intelligence, it streamlines the video creation process, making it accessible to users of all experience levels. The platform offers a variety of templates, customization options, and real-time editing capabilities, ensuring that users can create high-quality videos with ease.",
+        "bullets": [
+          "Efficiency: Streamlines the video creation process",
+          "saving time and effort."
+        ]
+      },
+      {
+        "id": "682f6b89bcf558ef8c314d0e",
+        "name": "Animoto",
+        "description": "Animoto is an easy-to-use online video creation platform that allows users to create professional-quality videos quickly. It uses drag-and-drop functionality, pre-built templates, and a vast media library to help businesses, marketers, educators, and individuals produce engaging content without advanced editing skills.",
+        "bullets": [
+          "Simple and user-friendly interface.",
+          "High-quality templates for professional-looking videos."
+        ]
+      },
+      {
+        "id": "682d575923aaf1a750a99d53",
+        "name": "Fliki",
+        "description": "Fliki is an AI-powered platform that converts text into videos and speech using realistic AI voices. It simplifies video and audio content creation, making it accessible for creators, businesses, and educators. Fliki provides tools for generating AI-powered animations, voiceovers, and videos from scripts or blogs without needing advanced editing skills.",
+        "bullets": [
+          "Easy-to-use interface with fast video generation.",
+          "High-quality AI voices with emotions."
+        ]
+      },
+      {
+        "id": "683fb9b1bce3a3d64c68fa95",
+        "name": "imagemover ai",
+        "description": "ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos. It simplifies the video creation process, allowing users to effortlessly produce high-quality, captivating videos for various purposes, from personal projects to brand promotions and social media content, all while ensuring smooth transitions and crystal-clear quality.",
+        "bullets": [
+          "Simplicity and Speed: Transforms ideas into videos quickly and with minimal effort.",
+          "AI-Powered Quality: Produces visually appealing videos with smooth transitions and clear quality."
+        ]
+      },
+      {
+        "id": "682f251723aaf1a750abc462",
+        "name": "DesignAI",
+        "description": "Designs AI is an AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently. It simplifies design tasks with automation and AI assistance.",
+        "bullets": [
+          "Wide range of AI tools for different content creation needs",
+          "Fast and easy-to-use platform with automation"
+        ]
+      },
+      {
+        "id": "6833416c8f07ab07a7db9ae7",
+        "name": "AutoShorts.ai",
+        "description": "AutoShorts.ai is an AI-powered faceless video generator designed for content creators on platforms like TikTok, YouTube Shorts, and Instagram Reels. It automates the entire video production process, including scriptwriting, voiceovers, background images, subtitles, and even direct posting to social media. This makes it ideal for creators looking to run a faceless YouTube channel with minimal effort.",
+        "bullets": [
+          "Fully automated faceless video creation.",
+          "AI-powered scriptwriting"
+        ]
+      },
+      {
+        "id": "682f7a72bcf558ef8c314e15",
+        "name": "VideoSynth.ai",
+        "description": "Videosynth AI is an AI-driven video creation tool that enables users to generate high-quality videos quickly and effortlessly. It leverages advanced artificial intelligence to transform text into visually engaging videos, making professional content creation accessible to everyone.",
+        "bullets": [
+          "Simple and user-friendly interface.",
+          "AI-generated voiceovers add a professional touch."
+        ]
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI",
+        "description": "Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.",
+        "bullets": [
+          "AI-powered automation speeds up video creation.",
+          "Large media library for stock footage and music."
+        ]
+      },
+      {
+        "id": "682d5b5b23aaf1a750a9c326",
+        "name": "elai.",
+        "description": "Elai.io is an AI-powered platform that allows users to create professional videos from text. It is designed for businesses, educators, marketers, and content creators who want to generate high-quality video content without advanced editing skills. The platform converts scripts and blog posts into videos featuring AI avatars and voiceovers.",
+        "bullets": [
+          "Category: AI Video Generation",
+          "Additional features available"
+        ]
+      },
+      {
+        "id": "681f6e6dd877dcf3c6567e8b",
+        "name": "Virbo",
+        "description": "Virbo is an innovative AI-powered video generation tool designed to streamline the creation of professional-quality videos. With features like AI avatars, voiceovers, and script generation, Virbo allows users to transform text into engaging, dynamic videos effortlessly. Whether you're a content creator, educator, or marketer, Virbo provides a user-friendly interface and a wide range of customizable options to bring your ideas to life quickly and efficiently. The platform supports multiple languages and offers high-quality outputs, making it a versatile tool for various applications.",
+        "bullets": [
+          "Category: Video",
+          "Additional features available"
+        ]
+      },
+      {
+        "id": "682d4c3423aaf1a750a993bc",
+        "name": "renderforest AI",
+        "description": "Renderforest is an all-in-one branding platform that offers AI-powered video creation, logo design, website building, and graphic design tools. It provides users with intuitive and automated solutions to create high-quality videos, presentations, promotional content, and branding materials.",
+        "bullets": [
+          "Category: AI Video Generation",
+          "Additional features available"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 5.892,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"Pictory AI\",\n    \"Lumen5\",\n    \"Pika Labs (Pika.art)\",\n    \"Synthesys AI Video\",\n    \"VideoGPT\",\n    \"HeyGen\",\n    \"68447010b32d4d019cc01bd0\",\n    \"682e0eb223aaf1a750aa80b5\",\n    \"68438a46ac33a46e0bf38e24\",\n    \"682f6a39bcf558ef8c314cee\",\n    \"68333fc98f07ab07a7db9aac\",\n    \"682f73abbcf558ef8c314da3\",\n    \"681cc1c4477018e3479584e9\",\n    \"682d4e3d23aaf1a750a993e1\",\n    \"68304ddbbcf558ef8c31d785\",\n    \"6828433e23aaf1a750a63621\",\n    \"684120bbbce3a3d64c6fe4c5\",\n    \"68445055b32d4d019cbd5381\",\n    \"681cdfc063aef50052da8d80\",\n    \"682f6b89bcf558ef8c314d0e\",\n    \"682d575923aaf1a750a99d53\",\n    \"683fb9b1bce3a3d64c68fa95\",\n    \"682f251723aaf1a750abc462\",\n    \"6833416c8f07ab07a7db9ae7\",\n    \"682f7a72bcf558ef8c314e15\",\n    \"682d4a7d23aaf1a750a9939a\",\n    \"682d5b5b23aaf1a750a9c326\",\n    \"681f6e6dd877dcf3c6567e8b\",\n    \"682d4c3423aaf1a750a993bc\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"682f19ce23aaf1a750abb99f\",\n      \"name\": \"Pictory AI\",\n      \"description\": \"Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.\",\n      \"bullets\": [\n        \"AI-driven video creation makes editing fast and effortless.\",\n        \"Converts blog posts and long-form text into engaging videos.\",\n        \"Access to a vast library of stock videos, images, and music.\",\n        \"Simple drag-and-drop interface for easy customization.\"\n      ]\n    },\n    {\n      \"id\": \"682e182623aaf1a750aa8af2\",\n      \"name\": \"Lumen5\",\n      \"description\": \"Lumen5 is an AI-powered video creation platform that helps users transform text content into engaging videos effortlessly. Designed for marketers, educators, and businesses, it offers an intuitive drag-and-drop interface, AI-driven automation, and a vast media library to simplify video production.\",\n      \"bullets\": [\n        \"AI-driven automation makes video creation quick and easy.\",\n        \"Converts blog posts, articles, and scripts into videos in minutes.\",\n        \"Access to millions of royalty-free media assets.\",\n        \"Simple drag-and-drop interface with no technical skills required.\"\n      ]\n    },\n    {\n      \"id\": \"68459f1fb32d4d019ceab644\",\n      \"name\": \"Pika Labs (Pika.art)\",\n      \"description\": \"Pika Labs (often referred to as Pika.art) is an AI-powered video generation and animation tool that transforms text descriptions or images into high-quality, dynamic video clips.\",\n      \"bullets\": [\n        \"Comprehensive suite of AI tools for image and video generation.\",\n        \"Video to animation conversion allows users to restyle any video into various artistic styles.\",\n        \"Character animation capability to animate character videos into captivating cartoon or anime-inspired works of art.\",\n        \"Commercial use rights allow users to retain full ownership of generated content.\"\n      ]\n    },\n    {\n      \"id\": \"682f778bbcf558ef8c314def\",\n      \"name\": \"Synthesys AI Video\",\n      \"description\": \"Synthesys AI Video is an advanced AI-powered video generation tool that allows users to create high-quality videos using AI-generated human-like avatars and voices.\",\n      \"bullets\": [\n        \"AI-powered avatars that look and sound like real humans.\",\n        \"High-quality AI-generated voiceovers in multiple languages and accents.\",\n        \"No need for cameras, actors, or costly production setups.\",\n        \"Easy-to-use interface with drag-and-drop functionality.\"\n      ]\n    },\n    {\n      \"id\": \"682e0d2823aaf1a750aa8096\",\n      \"name\": \"VideoGPT\",\n      \"description\": \"VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort.\",\n      \"bullets\": [\n        \"AI-driven video creation generates high-quality videos using advanced AI.\",\n        \"Text-to-video technology transforms simple text descriptions into dynamic video content.\",\n        \"Customization options allow users to modify elements such as voiceovers, visuals, and animations.\",\n        \"Time-efficient drastically reduces the time needed to produce professional videos.\"\n      ]\n    },\n    {\n      \"id\": \"682d5e7a23aaf1a750a9cc96\",\n      \"name\": \"HeyGen\",\n      \"description\": \"HeyGen is an AI-powered video creation platform that allows users to generate high-quality videos with AI avatars and text-to-video features.\",\n      \"bullets\": [\n        \"AI avatars with realistic lip-syncing.\",\n        \"Text-to-video conversion with customizable templates.\",\n        \"Real-time video translation in multiple languages.\",\n        \"Drag-and-drop editor for easy customization.\"\n      ]\n    },\n    {\n      \"id\": \"68447010b32d4d019cc01bd0\",\n      \"name\": \"Vidu Studio AI Girl Video Gen\",\n      \"description\": \"Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.\",\n      \"bullets\": [\n        \"Advanced AI Algorithms: Reduces manual effort by accurately detecting visual discrepancies.\",\n        \"Creative Flexibility: Supports a wide range of animation styles guided by user input.\"\n      ]\n    },\n    {\n      \"id\": \"682e0eb223aaf1a750aa80b5\",\n      \"name\": \"Leonardo.Ai\",\n      \"description\": \"Leonardo's AI Video Generator is an advanced AI-powered tool designed to create high-quality videos effortlessly. It allows users to generate animations, cinematic sequences, and promotional content using artificial intelligence, making video production more accessible and efficient.\",\n      \"bullets\": [\n        \"High-quality AI-generated visuals\",\n        \"Easy to use with minimal learning curve\"\n      ]\n    },\n    {\n      \"id\": \"68438a46ac33a46e0bf38e24\",\n      \"name\": \"ViduStudio Image to Video\",\n      \"description\": \"Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.\",\n      \"bullets\": [\n        \"User-Friendly Interface: Simplifies the animation process\",\n        \"making it accessible to users with varying technical skills.\"\n      ]\n    },\n    {\n      \"id\": \"682f6a39bcf558ef8c314cee\",\n      \"name\": \"Magisto\",\n      \"description\": \"Magisto is an AI-powered video editing tool designed to simplify the video creation process. It helps users create professional-looking videos with minimal effort by automating editing, adding effects, and enhancing footage with AI-driven techniques. Magisto is ideal for businesses, marketers, and content creators looking to produce engaging videos quickly.\",\n      \"bullets\": [\n        \"AI automation makes editing easy and fast.\",\n        \"A variety of templates suitable for different needs.\"\n      ]\n    },\n    {\n      \"id\": \"68333fc98f07ab07a7db9aac\",\n      \"name\": \"Crayo\",\n      \"description\": \"Crayo is an AI-powered video creation tool designed for content creators, marketers, and businesses to generate short-form videos quickly. It enables users to create engaging video content by simply providing a text prompt or outline. The platform automates various aspects of video production, including captions, effects, background music, and transitions, making it ideal for social media platforms like TikTok, Instagram, and YouTube Shorts.\",\n      \"bullets\": [\n        \"Quick AI-powered video creation.\",\n        \"Automates captions\"\n      ]\n    },\n    {\n      \"id\": \"682f73abbcf558ef8c314da3\",\n      \"name\": \"Visla\",\n      \"description\": \"Visla is an AI-powered video creation and editing platform designed to simplify video production for businesses, marketers, and content creators. It enables users to generate, edit, and enhance videos using AI-driven tools, making high-quality video creation more accessible and efficient.\",\n      \"bullets\": [\n        \"AI-powered editing simplifies video creation.\",\n        \"Automatic captions improve video accessibility.\"\n      ]\n    },\n    {\n      \"id\": \"681cc1c4477018e3479584e9\",\n      \"name\": \"Video Fusion\",\n      \"description\": \"Videofusion.io is an AI-powered video ad generator designed to maximize ROI for video marketing campaigns. It offers a suite of tools that help users create professional-quality videos tailored to their brand's voice and marketing goals. With features like detailed search queries, AI-generated ad variations, and advanced video editing capabilities, Videofusion.io enables users to scale their video content efficiently.\",\n      \"bullets\": [\n        \"Efficiency: Simplifies the process of creating professional-quality videos.\",\n        \"Customization: Offers extensive options to tailor videos to specific marketing goals.\"\n      ]\n    },\n    {\n      \"id\": \"682d4e3d23aaf1a750a993e1\",\n      \"name\": \"Freepik AI Video Generator\",\n      \"description\": \"Freepik AI Video Generator turns your text prompts into dynamic videos\\u2014automatically. Just type what you want to see, and boom: the AI whips up a video with visuals, movement, and sound. It\\u2019s like having a full creative team in your browser, minus the coffee breaks.\",\n      \"bullets\": [\n        \"Ridiculously Easy to Use: No learning curve.\",\n        \"Creative Freedom: Wild prompt? No problem.\"\n      ]\n    },\n    {\n      \"id\": \"68304ddbbcf558ef8c31d785\",\n      \"name\": \"wave.video\",\n      \"description\": \"Wave Video is an all-in-one online video platform that enables users to create, edit, host, and stream videos. It provides a vast library of templates, stock media, and AI-powered tools for businesses, marketers, and content creators.\",\n      \"bullets\": [\n        \"AI-powered tools simplify video editing.\",\n        \"Offers video hosting and live streaming.\"\n      ]\n    },\n    {\n      \"id\": \"6828433e23aaf1a750a63621\",\n      \"name\": \"Vyond\",\n      \"description\": \"Vyond AI Video Creator is an all-in-one AI-powered video creation platform that allows users to generate professional-quality videos instantly. Designed for businesses, educators, and content creators, Vyond leverages AI to transform text prompts into engaging animated videos in multiple styles. Whether for marketing, training, or storytelling, Vyond makes video production effortless with its intuitive editing tools and pre-built templates.\",\n      \"bullets\": [\n        \"Instant AI-Generated Videos: Significantly reduces production time by generating videos in a matter of seconds based on text prompts.\",\n        \"Wide Range of Customization: Offers extensive flexibility in choosing animation styles\"\n      ]\n    },\n    {\n      \"id\": \"684120bbbce3a3d64c6fe4c5\",\n      \"name\": \"DeeVid AI\",\n      \"description\": \"DeeVid AI is an AI Video Generator that allows users to create high-quality videos from text, images, or video prompts without requiring any technical skills. It offers a user-friendly interface and employs advanced algorithms to ensure smooth animations, transitions, and effects, making video creation accessible and efficient. The platform also prioritizes data privacy and safe content creation by preventing harmful or inappropriate content.\",\n      \"bullets\": [\n        \"Ease of Use: The \\\"no technical skills required\\\" aspect is a major plus\",\n        \"democratizing video creation.\"\n      ]\n    },\n    {\n      \"id\": \"68445055b32d4d019cbd5381\",\n      \"name\": \"Vidu Studio - AI Video Create\",\n      \"description\": \"Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.\",\n      \"bullets\": [\n        \"Intuitive Design: Easy-to-navigate interface enhances user experience.\",\n        \"Creative Flexibility: Supports a wide range of prompts and image inputs.\"\n      ]\n    },\n    {\n      \"id\": \"681cdfc063aef50052da8d80\",\n      \"name\": \"Video Studio AI\",\n      \"description\": \"Videostudio-ai.com is an AI-powered platform designed to convert text and images into professional videos. By leveraging advanced artificial intelligence, it streamlines the video creation process, making it accessible to users of all experience levels. The platform offers a variety of templates, customization options, and real-time editing capabilities, ensuring that users can create high-quality videos with ease.\",\n      \"bullets\": [\n        \"Efficiency: Streamlines the video creation process\",\n        \"saving time and effort.\"\n      ]\n    },\n    {\n      \"id\": \"682f6b89bcf558ef8c314d0e\",\n      \"name\": \"Animoto\",\n      \"description\": \"Animoto is an easy-to-use online video creation platform that allows users to create professional-quality videos quickly. It uses drag-and-drop functionality, pre-built templates, and a vast media library to help businesses, marketers, educators, and individuals produce engaging content without advanced editing skills.\",\n      \"bullets\": [\n        \"Simple and user-friendly interface.\",\n        \"High-quality templates for professional-looking videos.\"\n      ]\n    },\n    {\n      \"id\": \"682d575923aaf1a750a99d53\",\n      \"name\": \"Fliki\",\n      \"description\": \"Fliki is an AI-powered platform that converts text into videos and speech using realistic AI voices. It simplifies video and audio content creation, making it accessible for creators, businesses, and educators. Fliki provides tools for generating AI-powered animations, voiceovers, and videos from scripts or blogs without needing advanced editing skills.\",\n      \"bullets\": [\n        \"Easy-to-use interface with fast video generation.\",\n        \"High-quality AI voices with emotions.\"\n      ]\n    },\n    {\n      \"id\": \"683fb9b1bce3a3d64c68fa95\",\n      \"name\": \"imagemover ai\",\n      \"description\": \"ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos. It simplifies the video creation process, allowing users to effortlessly produce high-quality, captivating videos for various purposes, from personal projects to brand promotions and social media content, all while ensuring smooth transitions and crystal-clear quality.\",\n      \"bullets\": [\n        \"Simplicity and Speed: Transforms ideas into videos quickly and with minimal effort.\",\n        \"AI-Powered Quality: Produces visually appealing videos with smooth transitions and clear quality.\"\n      ]\n    },\n    {\n      \"id\": \"682f251723aaf1a750abc462\",\n      \"name\": \"DesignAI\",\n      \"description\": \"Designs AI is an AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently. It simplifies design tasks with automation and AI assistance.\",\n      \"bullets\": [\n        \"Wide range of AI tools for different content creation needs\",\n        \"Fast and easy-to-use platform with automation\"\n      ]\n    },\n    {\n      \"id\": \"6833416c8f07ab07a7db9ae7\",\n      \"name\": \"AutoShorts.ai\",\n      \"description\": \"AutoShorts.ai is an AI-powered faceless video generator designed for content creators on platforms like TikTok, YouTube Shorts, and Instagram Reels. It automates the entire video production process, including scriptwriting, voiceovers, background images, subtitles, and even direct posting to social media. This makes it ideal for creators looking to run a faceless YouTube channel with minimal effort.\",\n      \"bullets\": [\n        \"Fully automated faceless video creation.\",\n        \"AI-powered scriptwriting\"\n      ]\n    },\n    {\n      \"id\": \"682f7a72bcf558ef8c314e15\",\n      \"name\": \"VideoSynth.ai\",\n      \"description\": \"Videosynth AI is an AI-driven video creation tool that enables users to generate high-quality videos quickly and effortlessly. It leverages advanced artificial intelligence to transform text into visually engaging videos, making professional content creation accessible to everyone.\",\n      \"bullets\": [\n        \"Simple and user-friendly interface.\",\n        \"AI-generated voiceovers add a professional touch.\"\n      ]\n    },\n    {\n      \"id\": \"682d4a7d23aaf1a750a9939a\",\n      \"name\": \"invideoAI\",\n      \"description\": \"Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.\",\n      \"bullets\": [\n        \"AI-powered automation speeds up video creation.\",\n        \"Large media library for stock footage and music.\"\n      ]\n    },\n    {\n      \"id\": \"682d5b5b23aaf1a750a9c326\",\n      \"name\": \"elai.\",\n      \"description\": \"Elai.io is an AI-powered platform that allows users to create professional videos from text. It is designed for businesses, educators, marketers, and content creators who want to generate high-quality video content without advanced editing skills. The platform converts scripts and blog posts into videos featuring AI avatars and voiceovers.\",\n      \"bullets\": [\n        \"Category: AI Video Generation\",\n        \"Additional features available\"\n      ]\n    },\n    {\n      \"id\": \"681f6e6dd877dcf3c6567e8b\",\n      \"name\": \"Virbo\",\n      \"description\": \"Virbo is an innovative AI-powered video generation tool designed to streamline the creation of professional-quality videos. With features like AI avatars, voiceovers, and script generation, Virbo allows users to transform text into engaging, dynamic videos effortlessly. Whether you're a content creator, educator, or marketer, Virbo provides a user-friendly interface and a wide range of customizable options to bring your ideas to life quickly and efficiently. The platform supports multiple languages and offers high-quality outputs, making it a versatile tool for various applications.\",\n      \"bullets\": [\n        \"Category: Video\",\n        \"Additional features available\"\n      ]\n    },\n    {\n      \"id\": \"682d4c3423aaf1a750a993bc\",\n      \"name\": \"renderforest AI\",\n      \"description\": \"Renderforest is an all-in-one branding platform that offers AI-powered video creation, logo design, website building, and graphic design tools. It provides users with intuitive and automated solutions to create high-quality videos, presentations, promotional content, and branding materials.\",\n      \"bullets\": [\n        \"Category: AI Video Generation\",\n        \"Additional features available\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

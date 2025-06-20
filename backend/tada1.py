@@ -67,7 +67,7 @@ class Config:
     POPULAR_TOOLS_LIMIT = 4
     
     # Score-based selection settings
-    HYBRID_MIN_SCORE = 0.35    # Minimum relevance threshold
+    HYBRID_MIN_SCORE = 0.36    # Minimum relevance threshold
     HYBRID_MAX_TOOLS = 50       # Maximum tools to send to LLM
     HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
@@ -77,7 +77,7 @@ class Config:
     BASE_RETRY_DELAY = 1
     REQUEST_TIMEOUT = 10
     
-    # NEW: Vector loading settings
+    # NEW: Vector loading setting3
     LOADING_FIRST_BATCH_MIN = 50        # Minimum first batch size
     LOADING_FIRST_BATCH_MAX = 100       # Maximum first batch size  
     LOADING_FIRST_BATCH_RATIO = 5       # total_vectors // this ratio
@@ -2253,6 +2253,62 @@ async def test_connection(request: Request):
                 "error_type": type(e).__name__
             }
         }
+    
+
+def extract_tool_bullets(result):
+    """Extract meaningful bullets from tool metadata instead of static text."""
+    bullets = []
+    
+    # Try to get bullets from features.pros
+    if result.get("features_pros"):
+        pros = result.get("features_pros", "").split(",")
+        bullets.extend([pro.strip() for pro in pros[:3] if pro.strip()])
+    
+    # Try to get bullets from features.cons (mark as limitations)
+    if result.get("features_cons") and len(bullets) < 2:
+        cons = result.get("features_cons", "").split(",")
+        for con in cons[:1]:
+            if con.strip():
+                bullets.append(f"Limitation: {con.strip()}")
+    
+    # Try to get bullets from QA section
+    if result.get("qa_questions") and len(bullets) < 2:
+        questions = result.get("qa_questions", "").split(",")
+        for q in questions[:2]:
+            if q.strip():
+                bullets.append(f"Supports: {q.strip()}")
+    
+    # Try to get bullets from details
+    if result.get("details_speciality") and len(bullets) < 2:
+        speciality = result.get("details_speciality", "")
+        if speciality:
+            bullets.append(f"Specializes in: {speciality[:50]}...")
+    
+    # Try to get bullets from pricing
+    if result.get("pricing_plans") and len(bullets) < 2:
+        plans = result.get("pricing_plans", "").split(",")
+        if plans and plans[0].strip():
+            bullets.append(f"Pricing: {plans[0].strip()} available")
+    
+    # Try to get bullets from categories
+    if result.get("category_subcat") and len(bullets) < 2:
+        categories = result.get("category_subcat", "").split(",")
+        if categories and categories[0].strip():
+            bullets.append(f"Category: {categories[0].strip()}")
+    
+    # Fallback bullets if no metadata found
+    if not bullets:
+        bullets = [
+            "Found via search relevance",
+            "Check description for details"
+        ]
+    
+    # Ensure we have exactly 2 bullets
+    while len(bullets) < 2:
+        bullets.append("Additional features available")
+    
+    return bullets[:2]
+
 
 @app.post("/query", response_model=QueryResponse)
 async def query_tools(request: QueryRequest, request_headers: Request):
@@ -2315,9 +2371,11 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 "timestamp": datetime.now().isoformat()
             })
             return QueryResponse(response=initializing_response)
+        
         if not app_state.bm25_ready and not app_state.bm25_building:
             logger.info("First search detected - building BM25 index lazily")
             build_bm25_lazy()
+        
         # Get vector store
         vector_store = vector_store_manager.get_vector_store(headers, for_query=True)
         total_vectors = vector_store_manager.get_total_vectors()
@@ -2407,17 +2465,24 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 })
                 return QueryResponse(response=filter_response)
             
-            # Use score-based selection instead of fixed count
-            selected_results = SearchUtils.select_tools_by_score(
+            # Use score-based selection and split into LLM vs database processing
+            all_selected_results = SearchUtils.select_tools_by_score(
                 hybrid_results, 
                 min_score=Config.HYBRID_MIN_SCORE,
                 max_tools=Config.HYBRID_MAX_TOOLS,
                 fallback_count=Config.HYBRID_FALLBACK_COUNT
             )
 
+            # Split into LLM and database processing groups
+            llm_tools = all_selected_results[:20]  # Top 20 for LLM
+            db_tools = all_selected_results[20:]   # Remaining for database processing
+
+            logger.info(f"Split results: {len(llm_tools)} tools for LLM, {len(db_tools)} tools for database processing")
+            logger.info(f"Total tools to process: {len(all_selected_results)}")
+
             # LOG TOOLS SENT TO LLM (basic info for logs)
             logger.info("=== TOOLS SENT TO LLM ===")
-            for i, result in enumerate(selected_results):
+            for i, result in enumerate(llm_tools):
                 tool_name = result.get("name", "Unknown")
                 tool_id = result.get("tool_id", "Unknown")
                 score = result.get("score", 0)
@@ -2427,14 +2492,16 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 logger.info(f"            Description: {description}")
                 logger.info("-" * 40)
 
-            logger.info(f"Sending {len(selected_results)} tools to LLM for processing (score-based selection)")
+            logger.info(f"Sending {len(llm_tools)} tools to LLM for processing (score-based selection)")
             
             # Format documents for LLM - UPDATED TO PASS ALL METADATA AS JSON
             formatted_docs = []
-            for result in selected_results:
+            for result in llm_tools:  # Only process top 20
                 # Pass ALL metadata as JSON to LLM - let LLM decide what's relevant
                 formatted_doc = json.dumps(result, indent=2, ensure_ascii=False)
                 formatted_docs.append(formatted_doc)
+            
+            logger.info(f"Sending {len(llm_tools)} tools to LLM (reduced from {len(all_selected_results)} total)")
             
             # LOG ACTUAL DATA SENT TO LLM (first 2 tools for verification)
             logger.info("=== ACTUAL DATA SENT TO LLM ===")
@@ -2444,7 +2511,7 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 logger.info("-" * 80)
             
             # Handle no tools case
-            if not formatted_docs:
+            if not llm_tools and not db_tools:
                 empty_response = json.dumps({
                     "tool_id": [],
                     "tools": [],
@@ -2468,76 +2535,84 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             
             context = "\n\n---\n\n".join(formatted_docs)
             cleaned_context = TextCleaner.clean_text(context)
+
+            # Calculate token budget for output management
+            tool_count = len(llm_tools)
+            tokens_per_tool = min(150, 3000 // max(tool_count, 1)) 
             
             system_text = f"""
-You are a tool selection assistant.
+### ROLE
+You are an expert AI tool recommendation assistant with deep knowledge of software capabilities and use cases. 
+You are given a query and a list of tools. You need to select the most relevant tools and return them in a JSON format.
 
-From the given Tool Data, return every tool that relates, even partially, to the User Query. Your job is to select and rank all tools that show any meaningful, partial, indirect, or contextual connection to the query — even if the overlap is small or based on just one aspect.
+### SEMANTIC RELEVANCE FRAMEWORK:
+Step 1: Query Analysis
+- Identify if query mentions specific tool names → include those tools regardless of score
+- Determine query type: specific task, general category, or tool comparison
+- Extract key concepts, technologies, and use case requirements
 
-Strict Rules:
-- If the User Query specifies a number (e.g., "top 1", "best 3"), return exactly that many tools.
-- If the User Query does not specify a number, return ALL tools from Tool Data that show even minimal relevance.
-- If the User Query contains a specific tool name, only return that tool, dont return any other tools.
-- Do not exclude tools with loose, secondary, or indirect connections.
+Step 2: Tool Relevance Assessment
+- PRIMARY relevance: Tools directly designed for the stated task/domain
+- SECONDARY relevance: Tools with specific features applicable to the use case  
+- CONTEXTUAL relevance: Tools useful in related workflows or adjacent processes
+- EXCLUDE: Generic tools with no specific connection to the query context
 
-Inclusion Criteria:
-- Include all tools that touches on a single feature, keyword, theme, task type, or use case from the User Query.
-- Include all tools with partial, tangential, supportive, or contextual usefulness.
-- Include all tools that could be creatively repurposed or adapted to help with the query.
-- Include all tools relevant to any part of the process (before, during, or after the user task).
-- If all the tools are relevant, return all of them.
+Step 3: Selection Rules
+- If query specifies number ("top 3", "best 5"): return exactly that count
+- If query mentions specific tool name: prioritize that tool highly
+- For general queries: include only tools with meaningful connection to the domain
+- Rank by relevance strength: direct > feature-specific > workflow-adjacent
 
-Ranking:
-- Rank selected tools from most to least relevant.
-- Do not skip or exclude any tool that passes the inclusion criteria.
+QUALITY STANDARDS:
+- Description: 1-2 sentences explaining specific relevance to "{request.query}"
+- Bullets: Features that are relevant to "{request.query}".
+- Focus on WHY each tool helps with this particular query
+- Avoid generic statements - be specific to both tool and query
 
-For each selected tool:
-- You must provide a **tool-specific explanation** of why it relates to the query.
-- Bullets must describe specific, concrete features from the tool's own capabilities.
-- Do NOT use generic placeholders like “This tool was found in your search.”
-- Do NOT copy-paste the same bullets or descriptions across tools.
-- Be concise, but precise and relevant to the query. One tool = unique reasoning.
-
-Output JSON format:
+### OUTPUT CONSTRAINTS:
+- Prioritize most relevant tools.
+- Be selective and precise. Focus on meaningful connections to "{request.query}".
+### JSON FORMAT (return only valid JSON):
 {{
   "tool_id": ["most_relevant_tool_id", "next_most_relevant_tool_id", ...],
   "tools": [
     {{
       "id": "tool_id",
       "name": "Tool Name",
-      "description": "Why this tool fits the query — even partially.",
+      "description": "Specific relevance to {request.query}",
       "bullets": [
-  "Concrete feature that directly relates to the user query (specific to this tool only)",
-  "Secondary feature that helps with a related task, workflow step, or subgoal",
-  "Optional: Creative or indirect use that still adds contextual value (must be tool-specific)"
-]
+        "Concrete feature for {request.query} task",
+        "Specific capability addressing {request.query} need"
+      ]
     }}
   ]
 }}
 
-- Only return the JSON.
-- Do NOT include commentary, extra notes, or explanation outside the JSON.
-- Do NOT infer a limit — include all relevant tools if no specific count is requested.
 """
             prompt_text = f"""
-User Query: {request.query}
+Query Analysis Required: "{request.query}"
 
-Tool Data: {cleaned_context}
-"""
+Available Tools Data:
+{cleaned_context}
+
+Task: Select and rank tools with meaningful relevance to the query. Explain specific connections."""
             
             # Initialize LLM and get response
             llm = ChatGroq(
                 groq_api_key=env.groq_api_key,
                 model_name=current_model,
-                temperature=0.1,
+                temperature=0.2,
                 model_kwargs={
-                    "top_p": 0.9,
-                    "frequency_penalty": 0.8,
-                    "presence_penalty": 0.6
-                    }
+                    "top_p": 0.8,
+                    "frequency_penalty": 0.2,
+                    "presence_penalty": 0.1,
+                    "response_format": {"type": "json_object"}
+                }
             )
             
-# Count input tokens
+            logger.info(f"LLM configured for 3500 max_tokens with {len(llm_tools)} tools")
+            
+            # Count input tokens
             total_input_text = system_text + prompt_text
             input_tokens = len(encoder.encode(total_input_text))
             logger.info(f"🔢 INPUT TOKENS: {input_tokens}")
@@ -2562,6 +2637,7 @@ Tool Data: {cleaned_context}
                 
                 # Post-process response
                 processed_response = QueryProcessor.post_process_llm_response(llm_response)
+                logger.info(f"DEBUG: Raw LLM response before JSON parsing: {processed_response[:500]}...")
                 
                 # Parse and validate JSON response
                 try:
@@ -2577,15 +2653,13 @@ Tool Data: {cleaned_context}
                         response_data["tools"] = []
                         response_data["tool_id"] = []
                         
-                        for result in selected_results:
+                        for result in llm_tools:
+                            bullets = extract_tool_bullets(result)
                             tool_data = {
                                 "id": result.get("tool_id", ""),
                                 "name": result.get("name", ""),
                                 "description": result.get("description", ""),
-                                "bullets": [
-                                    "This tool was found in your search",
-                                    "Check the description for more details"
-                                ]
+                                "bullets": bullets
                             }
                             response_data["tools"].append(tool_data)
                             response_data["tool_id"].append(result.get("tool_id", ""))
@@ -2595,26 +2669,57 @@ Tool Data: {cleaned_context}
                     clean_response = json.dumps(response_data, indent=2)
                     logger.info("Successfully processed valid JSON response")
                     
+                    # Process remaining tools from database
+                    if db_tools:
+                        logger.info(f"Processing {len(db_tools)} additional tools from database")
+                        
+                        for result in db_tools:
+                            # Extract meaningful bullets from metadata
+                            bullets = extract_tool_bullets(result)
+                            
+                            tool_data = {
+                                "id": result.get("tool_id", ""),
+                                "name": result.get("name", ""),
+                                "description": result.get("description", ""),
+                                "bullets": bullets
+                            }
+                            
+                            response_data["tools"].append(tool_data)
+                            response_data["tool_id"].append(result.get("tool_id", ""))
+                            
+                            logger.debug(f"Tool {result.get('name', 'Unknown')}: extracted {len(bullets)} bullets from metadata")
+                        
+                        # Update the JSON response with all tools
+                        clean_response = json.dumps(response_data, indent=2)
+                        logger.info(f"Added {len(db_tools)} database-processed tools to LLM results")
+                        logger.info(f"Final response contains {len(response_data['tools'])} total tools")
+                    
                 except json.JSONDecodeError:
                     # Fallback JSON response
                     fallback_data = {
-                        "tool_id": [result.get("tool_id", "") for result in selected_results],
+                        "tool_id": [result.get("tool_id", "") for result in all_selected_results],
                         "tools": [],
-                        "message": "Failed to parse LLM response, showing raw search results",
+                        "message": "Using enhanced database processing with extracted features",
                         "timestamp": datetime.now().isoformat()
                     }
                     
-                    for result in selected_results:
+                    logger.warning("LLM JSON parsing failed - using enhanced database processing for all tools")
+                    
+                    for result in all_selected_results:
+                        # Extract meaningful bullets from metadata
+                        bullets = extract_tool_bullets(result)
+                        
                         tool_data = {
                             "id": result.get("tool_id", ""),
                             "name": result.get("name", ""),
                             "description": result.get("description", ""),
-                            "bullets": [
-                                "This tool was found in your search",
-                                "Check the description for more details"
-                            ]
+                            "bullets": bullets
                         }
                         fallback_data["tools"].append(tool_data)
+                        
+                        logger.debug(f"Fallback - Tool {result.get('name', 'Unknown')}: extracted {len(bullets)} bullets from metadata")
+                    
+                    logger.info(f"Fallback: Created enhanced response with {len(fallback_data['tools'])} tools using metadata extraction")
                     
                     if request.searchFrom:
                         fallback_data["search_filter_applied"] = True
