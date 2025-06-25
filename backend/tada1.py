@@ -2255,60 +2255,110 @@ async def test_connection(request: Request):
         }
     
 
-def extract_tool_bullets(result):
-    """Extract meaningful bullets from tool metadata instead of static text."""
-    bullets = []
+# def extract_tool_bullets(result):
+#     """Extract meaningful bullets from tool metadata instead of static text."""
+#     bullets = []
     
-    # Try to get bullets from features.pros
-    if result.get("features_pros"):
-        pros = result.get("features_pros", "").split(",")
-        bullets.extend([pro.strip() for pro in pros[:3] if pro.strip()])
+#     # Try to get bullets from features.pros
+#     if result.get("features_pros"):
+#         pros = result.get("features_pros", "").split(",")
+#         bullets.extend([pro.strip() for pro in pros[:3] if pro.strip()])
     
-    # Try to get bullets from features.cons (mark as limitations)
-    if result.get("features_cons") and len(bullets) < 2:
-        cons = result.get("features_cons", "").split(",")
-        for con in cons[:1]:
-            if con.strip():
-                bullets.append(f"Limitation: {con.strip()}")
+#     # Try to get bullets from features.cons (mark as limitations)
+#     if result.get("features_cons") and len(bullets) < 2:
+#         cons = result.get("features_cons", "").split(",")
+#         for con in cons[:1]:
+#             if con.strip():
+#                 bullets.append(f"Limitation: {con.strip()}")
     
-    # Try to get bullets from QA section
-    if result.get("qa_questions") and len(bullets) < 2:
-        questions = result.get("qa_questions", "").split(",")
-        for q in questions[:2]:
-            if q.strip():
-                bullets.append(f"Supports: {q.strip()}")
+#     # Try to get bullets from QA section
+#     if result.get("qa_questions") and len(bullets) < 2:
+#         questions = result.get("qa_questions", "").split(",")
+#         for q in questions[:2]:
+#             if q.strip():
+#                 bullets.append(f"Supports: {q.strip()}")
     
-    # Try to get bullets from details
-    if result.get("details_speciality") and len(bullets) < 2:
-        speciality = result.get("details_speciality", "")
-        if speciality:
-            bullets.append(f"Specializes in: {speciality[:50]}...")
+#     # Try to get bullets from details
+#     if result.get("details_speciality") and len(bullets) < 2:
+#         speciality = result.get("details_speciality", "")
+#         if speciality:
+#             bullets.append(f"Specializes in: {speciality[:50]}...")
     
-    # Try to get bullets from pricing
-    if result.get("pricing_plans") and len(bullets) < 2:
-        plans = result.get("pricing_plans", "").split(",")
-        if plans and plans[0].strip():
-            bullets.append(f"Pricing: {plans[0].strip()} available")
+#     # Try to get bullets from pricing
+#     if result.get("pricing_plans") and len(bullets) < 2:
+#         plans = result.get("pricing_plans", "").split(",")
+#         if plans and plans[0].strip():
+#             bullets.append(f"Pricing: {plans[0].strip()} available")
     
-    # Try to get bullets from categories
-    if result.get("category_subcat") and len(bullets) < 2:
-        categories = result.get("category_subcat", "").split(",")
-        if categories and categories[0].strip():
-            bullets.append(f"Category: {categories[0].strip()}")
+#     # Try to get bullets from categories
+#     if result.get("category_subcat") and len(bullets) < 2:
+#         categories = result.get("category_subcat", "").split(",")
+#         if categories and categories[0].strip():
+#             bullets.append(f"Category: {categories[0].strip()}")
     
-    # Fallback bullets if no metadata found
-    if not bullets:
-        bullets = [
-            "Found via search relevance",
-            "Check description for details"
-        ]
+#     # Fallback bullets if no metadata found
+#     if not bullets:
+#         bullets = [
+#             "Found via search relevance",
+#             "Check description for details"
+#         ]
     
-    # Ensure we have exactly 2 bullets
-    while len(bullets) < 2:
-        bullets.append("Additional features available")
+#     # Ensure we have exactly 2 bullets
+#     while len(bullets) < 2:
+#         bullets.append("Additional features available")
     
-    return bullets[:2]
+#     return bullets[:2]
 
+def extract_tool_bullets(result):
+    """Return empty bullets array - no fabricated bullet points."""
+    return []
+
+def validate_and_fix_tool_ids(response_data: dict, llm_tools: List[Dict]) -> dict:
+    """Validate and fix tool IDs in LLM response - ensure actual tool_id values are used."""
+    
+    # Create mapping from tool names to tool IDs
+    name_to_id = {}
+    id_to_tool = {}
+    
+    for tool in llm_tools:
+        tool_name = tool.get("name", "").strip()
+        tool_id = tool.get("tool_id", "").strip()
+        
+        if tool_name and tool_id:
+            name_to_id[tool_name] = tool_id
+            id_to_tool[tool_id] = tool
+    
+    # Fix tool_id array if it contains names instead of IDs
+    if "tool_id" in response_data and isinstance(response_data["tool_id"], list):
+        fixed_tool_ids = []
+        
+        for item in response_data["tool_id"]:
+            item_str = str(item).strip()
+            
+            # Check if it's already a valid tool_id (not a name)
+            if item_str in id_to_tool:
+                fixed_tool_ids.append(item_str)
+            # If it's a tool name, convert to tool_id
+            elif item_str in name_to_id:
+                fixed_tool_ids.append(name_to_id[item_str])
+                logger.info(f"Fixed tool_id: '{item_str}' → '{name_to_id[item_str]}'")
+            else:
+                logger.warning(f"Could not resolve tool identifier: '{item_str}'")
+        
+        response_data["tool_id"] = fixed_tool_ids
+    
+    # Fix tools array - ensure id field uses tool_id not name
+    if "tools" in response_data and isinstance(response_data["tools"], list):
+        for tool_entry in response_data["tools"]:
+            if isinstance(tool_entry, dict) and "id" in tool_entry:
+                current_id = str(tool_entry["id"]).strip()
+                
+                # If id field contains a name instead of ID, fix it
+                if current_id in name_to_id:
+                    tool_entry["id"] = name_to_id[current_id]
+                    logger.info(f"Fixed tool.id: '{current_id}' → '{name_to_id[current_id]}'")
+    
+    return response_data
 
 @app.post("/query", response_model=QueryResponse)
 async def query_tools(request: QueryRequest, request_headers: Request):
@@ -2559,7 +2609,7 @@ Step 2: Tool Relevance Assessment
 
 Step 3: Selection Rules
 - If query specifies number ("top 3", "best 5"): return exactly that count
-- If query mentions specific tool name: prioritize that tool highly
+- If query mentions specific tool name: prioritize and return that tool on top 1st position.
 - For general queries: include only tools with meaningful connection to the domain
 - Rank by relevance strength: direct > feature-specific > workflow-adjacent
 
@@ -2570,15 +2620,15 @@ QUALITY STANDARDS:
 - Avoid generic statements - be specific to both tool and query
 
 ### OUTPUT CONSTRAINTS:
-- Prioritize most relevant tools and tool_id should be the tool_id of the tool of that tool.
+- Prioritize most relevant tools and *id field in the JSON should be the exact tool_id of that tool given in the Tools Data of length exactly 24 characters.*
 - Be selective and precise. Focus on meaningful connections to "{request.query}".
 ### JSON FORMAT (return only valid JSON):
 {{
-  "tool_id": ["most_relevant_tool_id", "next_most_relevant_tool_id", ...],
+  "tool_id": ["most_relevant_exact_tool_id", "next_most_relevant_exact_tool_id", ...],
   "tools": [
     {{
-      "id": "tool_id",
-      "name": "Tool Name",
+      "id": "exact_tool_id_from_data",
+      "name": "name",
       "description": "Specific relevance to {request.query}",
       "bullets": [
         "Concrete feature for {request.query} task",
@@ -2587,6 +2637,9 @@ QUALITY STANDARDS:
     }}
   ]
 }}
+### CRITICAL INSTRUCTION - TOOL IDS
+**IMPORTANT**: In the tool_id array, you MUST use the exact "tool_id" field from each tool's metadata, NOT the tool name.
+Each tool in the data has a "tool_id" field - use that exact value in your tool_id array.
 
 """
             prompt_text = f"""
@@ -2642,6 +2695,7 @@ Task: Select and rank tools with meaningful relevance to the query. Explain spec
                 # Parse and validate JSON response
                 try:
                     response_data = json.loads(processed_response)
+                    response_data = validate_and_fix_tool_ids(response_data, llm_tools)
                     
                     # Add search filter info if applied
                     if request.searchFrom:
@@ -2659,7 +2713,7 @@ Task: Select and rank tools with meaningful relevance to the query. Explain spec
                                 "id": result.get("tool_id", ""),
                                 "name": result.get("name", ""),
                                 "description": result.get("description", ""),
-                                "bullets": bullets
+                                "bullets": []
                             }
                             response_data["tools"].append(tool_data)
                             response_data["tool_id"].append(result.get("tool_id", ""))
@@ -2681,7 +2735,7 @@ Task: Select and rank tools with meaningful relevance to the query. Explain spec
                                 "id": result.get("tool_id", ""),
                                 "name": result.get("name", ""),
                                 "description": result.get("description", ""),
-                                "bullets": bullets
+                                "bullets": []
                             }
                             
                             response_data["tools"].append(tool_data)
@@ -2713,7 +2767,7 @@ Task: Select and rank tools with meaningful relevance to the query. Explain spec
                             "id": result.get("tool_id", ""),
                             "name": result.get("name", ""),
                             "description": result.get("description", ""),
-                            "bullets": bullets
+                            "bullets": []
                         }
                         fallback_data["tools"].append(tool_data)
                         

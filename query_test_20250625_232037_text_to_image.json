@@ -1,0 +1,491 @@
+{
+  "timestamp": "2025-06-25T23:20:37.662378",
+  "input_query": "text to image",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 29,
+    "tool_ids": [
+      "684422a2b32d4d019cba490e",
+      "6855690127c6eba075dcc746",
+      "68438a46ac33a46e0bf38e24",
+      "6856b76eee78f2aff0d1774c",
+      "6856afecee78f2aff0d170f5",
+      "6856aefeee78f2aff0d17032",
+      "6856aaecee78f2aff0d16c6a",
+      "68334dac8f07ab07a7db9c87",
+      "683056cebcf558ef8c31d819",
+      "685561e527c6eba075dcbca4",
+      "6849459ab9392005150a3adb",
+      "6856b571ee78f2aff0d175d8",
+      "684bf201b9392005153e3677",
+      "681f5b01525588084f4cc47f",
+      "68447010b32d4d019cc01bd0",
+      "6843416eac33a46e0beddbb4",
+      "684049dcbce3a3d64c6a7f97",
+      "68595bbe1c16582699a63935",
+      "6857813a1c16582699a4b869",
+      "68433eabac33a46e0beda792",
+      "681b6200477018e34794ffb6",
+      "684fede5afca082a9fc31c75",
+      "68556fda27c6eba075dcce40",
+      "6856addcee78f2aff0d16f6f",
+      "6855729027c6eba075dcd467",
+      "68303f27bcf558ef8c31d658",
+      "68445055b32d4d019cbd5381",
+      "68422299ac33a46e0bb73f68",
+      "6859693a1c16582699a64e18"
+    ],
+    "tools": [
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FLUX AI is an AI platform that leverages the 4o image generator to create diverse and vibrant artwork. Its core purpose is to enable users to transform textual ideas into stunning visuals across various artistic styles, including Ghibli, Chibi, and Pixar, as well as photorealistic and abstract designs.",
+        "bullets": [
+          "4o Image Generator Powered: Implies the use of highly advanced, often multimodal, AI models for image generation, capable of nuanced prompt understanding and high-quality output.",
+          "Broad Artistic Style Versatility: Excels at generating images in a wide array of distinct artistic styles like Ghibli, Chibi, and Pixar, which sets it apart from many general-purpose AI art tools."
+        ]
+      },
+      {
+        "id": "6855690127c6eba075dcc746",
+        "name": "Imagen 3",
+        "description": "Imagen 3 is Google DeepMind\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.",
+        "bullets": [
+          "Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.",
+          "Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language."
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos.",
+        "bullets": [
+          "Natural Language Processing: Utilizes text prompts to guide the animation, allowing for intuitive user interaction.",
+          "High-Quality Output: Generates videos with smooth transitions and realistic motion effects."
+        ]
+      },
+      {
+        "id": "6856b76eee78f2aff0d1774c",
+        "name": "Meta Llama 3.2 Vision",
+        "description": "Llama 3.2 Vision is Meta\u2019s first open-source multimodal Llama model series, released on September 25, 2024.",
+        "bullets": [
+          "Vision Excellence: Achieves top-tier scores\u2014DocVQA ~70.7% and AI2 Diagram ~75.3% (11B) or ~90.1% & ~92.3% (90B).",
+          "Visual Math & Charts: ChartQA ~85.5% and MathVista ~57.3% with chain-of-thought reasoning."
+        ]
+      },
+      {
+        "id": "6856afecee78f2aff0d170f5",
+        "name": "Grok 2 Image 1212",
+        "description": "Grok 2 Image 1212 (also known as grok-2-image-1212) is xAI\u2019s December 2024 release of their unified image generation and understanding model.",
+        "bullets": [
+          "Unified Vision Pipeline: Single model handles image creation, editing, and comprehension.",
+          "Aurora Engine: xAI\u2019s custom autoregressive mixture-of-experts model, delivering instruction-following, photolevel realism, and editing."
+        ]
+      },
+      {
+        "id": "6856aefeee78f2aff0d17032",
+        "name": "Grok 2 Image (Latest)",
+        "description": "Grok 2 Image (a.k.a. Grok 2-image-latest) is xAI\u2019s vision-forward extension of its Grok 2 model.",
+        "bullets": [
+          "Unified Vision Model: Combines photorealistic image creation and multimodal comprehension in one endpoint.",
+          "Aurora Engine: xAI\u2019s custom autoregressive mixture-of-experts model, delivering instruction-following, photolevel realism, and editing."
+        ]
+      },
+      {
+        "id": "6856aaecee78f2aff0d16c6a",
+        "name": "Grok 2 Vision",
+        "description": "Grok 2 Vision (also known as Grok-2-Vision-1212 or grok-2-vision-latest) is xAI\u2019s multimodal variant of Grok 2, designed specifically for advanced image understanding and generation.",
+        "bullets": [
+          "Strong Vision Understanding: Achieves state-of-the-art in MathVista and DocVQA\u2014surpassing GPT4 Turbo on those benchmarks.",
+          "Integrated Image Generation: Offers FLUX.1-powered photorealistic outputs with fewer restrictions than mainstream tools."
+        ]
+      },
+      {
+        "id": "68334dac8f07ab07a7db9c87",
+        "name": "INK",
+        "description": "INK is an AI-powered content creation and optimization tool designed to help businesses, marketers, and writers generate high-quality, SEO-friendly content. It leverages Natural Language Optimization (NLO) technology to improve content performance, increase engagement, and boost search engine rankings. INK includes various features like AI-powered copywriting, plagiarism detection, grammar checks, and real-time SEO analysis to ensure that content is both effective and compliant with search engine guidelines.",
+        "bullets": []
+      },
+      {
+        "id": "683056cebcf558ef8c31d819",
+        "name": "rawshorts",
+        "description": "Raw Shorts is an AI-powered video creation platform that enables users to convert text into engaging animated videos. It provides drag-and-drop tools, AI-assisted script-to-video functionality, and a variety of templates for different industries.",
+        "bullets": []
+      },
+      {
+        "id": "685561e527c6eba075dcbca4",
+        "name": "Gemini 2.5 Flash Preview TTS",
+        "description": "Gemini\u202f2.5\u202fFlash Preview TTS is Google DeepMind\u2019s cutting-edge text-to-speech model that converts text into natural, expressive audio. It supports both single-speaker and multi-speaker output, allowing fine-grained control over style, emotion, pace, and tone. This preview variant is optimized for low latency and structured use cases like podcasts, audiobooks, and customer support workflows .",
+        "bullets": []
+      },
+      {
+        "id": "6849459ab9392005150a3adb",
+        "name": "Natural Reader",
+        "description": "NaturalReaders.com is an advanced AI-powered text-to-speech (TTS) software that transforms various types of text, including documents, PDFs, and web pages, into natural-sounding spoken audio. Its primary purpose is to enhance productivity, accessibility, and learning by allowing users to listen to content on the go, proofread their writing, and overcome reading difficulties.",
+        "bullets": []
+      },
+      {
+        "id": "6856b571ee78f2aff0d175d8",
+        "name": "Meta Llama 3.2",
+        "description": "Llama\u202f3.2 is Meta\u2019s multimodal and lightweight update to its Llama\u202f3 line, released on September\u202f25,\u202f2024. The family includes 1B and 3B text-only models optimized for edge devices, as well as 11B and 90B Vision models capable of image understanding. It offers a 128K-token context window, Grouped-Query Attention for efficient inference, and opens up on-device, private AI with strong multilingual (e.g. Hindi, Spanish) support.",
+        "bullets": []
+      },
+      {
+        "id": "684bf201b9392005153e3677",
+        "name": "Speechify",
+        "description": "Speechify.com is a leading AI-powered text-to-speech (TTS) reader designed to transform any written text into natural-sounding audio. With millions of users and high ratings, it aims to help individuals consume content faster and more efficiently across various devices and platforms. Beyond basic text-to-speech, Speechify also offers advanced AI features for content creators, including AI voice generation, voice cloning, and dubbing.",
+        "bullets": []
+      },
+      {
+        "id": "681f5b01525588084f4cc47f",
+        "name": "Artguru",
+        "description": "Artguru AI Art Generator is an advanced AI-powered tool that transforms text descriptions and photos into stunning digital artworks. Whether you want to create AI-generated paintings, avatars, or artistic transformations of your photos, Artguru makes it possible in just a few clicks.",
+        "bullets": []
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": []
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "GPT-4o-mini-transcribe is a lightweight, high-speed speech-to-text model from OpenAI, built on the GPT-4o-mini architecture. It converts spoken language into text with exceptional speed and surprising accuracy for its size\u2014making it ideal for real-time transcription in resource-constrained environments.\nWhether you're building voice-enabled apps, smart assistants, meeting transcription tools, or captioning systems, GPT-4o-mini-transcribe offers responsive, multilingual transcription that balances cost, performance, and ease of integration.",
+        "bullets": []
+      },
+      {
+        "id": "684049dcbce3a3d64c6a7f97",
+        "name": "VinteoAI",
+        "description": "Vinteo.ai is an AI product photography service specifically designed for e-commerce businesses, including retailers, manufacturers, and online stores. It leverages artificial intelligence to help users create professional-level product imagery, aiming to increase conversion rates while significantly reducing the time and costs associated with traditional product photoshohoots. The platform allows for instant personalization of product visuals, advanced AI editing, and the ability to set products within professionally styled, custom interiors.",
+        "bullets": []
+      },
+      {
+        "id": "68595bbe1c16582699a63935",
+        "name": "Lummi AI",
+        "description": "Lummi AI is a curated library of royalty-free stock images and illustrations, all AI-generated by digital artists. Launched in late 2023, the platform offers over 13,000 unique visuals\u2014photos, illustrations, 3D renders\u2014designed to replace generic stock photos with fresh, high-quality imagery that integrates seamlessly with popular design tools.",
+        "bullets": []
+      },
+      {
+        "id": "6857813a1c16582699a4b869",
+        "name": "Visme",
+        "description": "Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\u2014all within an intuitive visual editor that empowers non-designers.",
+        "bullets": []
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "GPT-4o Transcribe is OpenAI\u2019s high-performance speech-to-text model built into the GPT-4o family. It converts spoken audio into accurate, readable, and structured text\u2014quickly and with surprising clarity. Whether you're transcribing interviews, meetings, podcasts, or real-time conversations, GPT-4o Transcribe delivers fast, multilingual transcription powered by the same model that understands and generates across text, vision, and audio.\nIt\u2019s ideal for developers and teams building voice-enabled apps, transcription services, or any tool where spoken language needs to become text\u2014instantly and intelligently.",
+        "bullets": []
+      },
+      {
+        "id": "681b6200477018e34794ffb6",
+        "name": "Icon",
+        "description": "Icon.me is an innovative AI-driven platform designed to streamline the process of creating winning advertisements. By combining the capabilities of ChatGPT and CapCut, Icon.me allows users to generate high-quality ads in minutes. The platform analyzes your video library, tags scenes, and integrates various tools for scriptwriting, video editing, creative storage, user-generated content (UGC), creative analytics, and competitor ad spying, making it a comprehensive solution for digital marketing needs.",
+        "bullets": []
+      },
+      {
+        "id": "684fede5afca082a9fc31c75",
+        "name": "PiktoChart",
+        "description": "Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities. It enables users to create infographics, presentations, posters, social media graphics, reports, and more\u2014with drag\u2011and\u2011drop ease and professionally designed templates",
+        "bullets": []
+      },
+      {
+        "id": "68556fda27c6eba075dcce40",
+        "name": "Janus-Pro-7B",
+        "description": "anus Pro\u202f7B is DeepSeek\u2019s flagship open-source multimodal AI model, unifying vision understanding and text-to-image generation within a single transformer architecture. Built on DeepSeek\u2011LLM\u20117B, it uses a decoupled visual encoding approach paired with SigLIP\u2011L and VQ tokenizer, delivering superior visual fidelity, prompt alignment, and stability across tasks\u2014benchmarked ahead of OpenAI\u2019s DALL\u2011E\u202f3 and Stable Diffusion variants.",
+        "bullets": []
+      },
+      {
+        "id": "6856addcee78f2aff0d16f6f",
+        "name": "grok-2-image",
+        "description": "Grok\u202f2 Image is xAI\u2019s image-generation model integrated into the Grok\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\u2014allowing users to generate, edit, and chat using images\u2014with a 32K-token visual-text context and produces photorealistic outputs.",
+        "bullets": []
+      },
+      {
+        "id": "6855729027c6eba075dcd467",
+        "name": "DeepSeek VL",
+        "description": "DeepSeek\u202fVL is DeepSeek\u2019s open-source vision-language model designed for real-world multimodal understanding. It employs a hybrid vision encoder (SigLIP\u2011L\u202f+\u202fSAM), processes high-resolution images (up to 1024\u00d71024), and supports both base and chat variants across two sizes: 1.3B and 7B parameters. It excels on tasks like OCR, diagram reasoning, webpage parsing, and visual Q&A\u2014while preserving strong language ability.",
+        "bullets": []
+      },
+      {
+        "id": "68303f27bcf558ef8c31d658",
+        "name": "Ideogram",
+        "description": "Ideogram is an AI-powered text-to-image generation tool designed to create high-quality visuals with seamless typography integration. Unlike traditional image-generation models, Ideogram specializes in producing images with accurate and aesthetically pleasing text, making it ideal for branding, social media content, and graphic design.",
+        "bullets": []
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": []
+      },
+      {
+        "id": "68422299ac33a46e0bb73f68",
+        "name": "OpenAI GPT Image 1",
+        "description": "GPT-Image-1 is OpenAI's state-of-the-art vision model designed to understand and interpret images with human-like perception. It enables developers and businesses to analyze, summarize, and extract detailed insights from images using natural language. Whether you're building AI agents, accessibility tools, or image-driven workflows, GPT-Image-1 brings powerful multimodal capabilities into your applications with impressive accuracy.\nOptimized for use via API, it can handle diverse image types\u2014charts, screenshots, photographs, documents, and more\u2014making it one of the most versatile models in OpenAI\u2019s portfolio.",
+        "bullets": []
+      },
+      {
+        "id": "6859693a1c16582699a64e18",
+        "name": "Microsoft Designer",
+        "description": "Microsoft Designer is Microsoft\u2019s AI-powered graphic design and image editing tool, officially launched in 2023 and broadly available in 2024. It leverages generative AI\u2014including DALL\u00b7E 3\u2014for creating visuals from text prompts, smart layout suggestions, and professional-level photo editing (e.g., background removal, object erasure, framing, and restyling) \u2014 all accessible via web, mobile, and integration within Microsoft 365 apps.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "684422a2b32d4d019cba490e",
+      "6855690127c6eba075dcc746",
+      "68438a46ac33a46e0bf38e24",
+      "6856b76eee78f2aff0d1774c",
+      "6856afecee78f2aff0d170f5",
+      "6856aefeee78f2aff0d17032",
+      "6856aaecee78f2aff0d16c6a",
+      "68334dac8f07ab07a7db9c87",
+      "683056cebcf558ef8c31d819",
+      "685561e527c6eba075dcbca4",
+      "6849459ab9392005150a3adb",
+      "6856b571ee78f2aff0d175d8",
+      "684bf201b9392005153e3677",
+      "681f5b01525588084f4cc47f",
+      "68447010b32d4d019cc01bd0",
+      "6843416eac33a46e0beddbb4",
+      "684049dcbce3a3d64c6a7f97",
+      "68595bbe1c16582699a63935",
+      "6857813a1c16582699a4b869",
+      "68433eabac33a46e0beda792",
+      "681b6200477018e34794ffb6",
+      "684fede5afca082a9fc31c75",
+      "68556fda27c6eba075dcce40",
+      "6856addcee78f2aff0d16f6f",
+      "6855729027c6eba075dcd467",
+      "68303f27bcf558ef8c31d658",
+      "68445055b32d4d019cbd5381",
+      "68422299ac33a46e0bb73f68",
+      "6859693a1c16582699a64e18"
+    ],
+    "tools": [
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FLUX AI is an AI platform that leverages the 4o image generator to create diverse and vibrant artwork. Its core purpose is to enable users to transform textual ideas into stunning visuals across various artistic styles, including Ghibli, Chibi, and Pixar, as well as photorealistic and abstract designs.",
+        "bullets": [
+          "4o Image Generator Powered: Implies the use of highly advanced, often multimodal, AI models for image generation, capable of nuanced prompt understanding and high-quality output.",
+          "Broad Artistic Style Versatility: Excels at generating images in a wide array of distinct artistic styles like Ghibli, Chibi, and Pixar, which sets it apart from many general-purpose AI art tools."
+        ]
+      },
+      {
+        "id": "6855690127c6eba075dcc746",
+        "name": "Imagen 3",
+        "description": "Imagen 3 is Google DeepMind\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.",
+        "bullets": [
+          "Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.",
+          "Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language."
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos.",
+        "bullets": [
+          "Natural Language Processing: Utilizes text prompts to guide the animation, allowing for intuitive user interaction.",
+          "High-Quality Output: Generates videos with smooth transitions and realistic motion effects."
+        ]
+      },
+      {
+        "id": "6856b76eee78f2aff0d1774c",
+        "name": "Meta Llama 3.2 Vision",
+        "description": "Llama 3.2 Vision is Meta\u2019s first open-source multimodal Llama model series, released on September 25, 2024.",
+        "bullets": [
+          "Vision Excellence: Achieves top-tier scores\u2014DocVQA ~70.7% and AI2 Diagram ~75.3% (11B) or ~90.1% & ~92.3% (90B).",
+          "Visual Math & Charts: ChartQA ~85.5% and MathVista ~57.3% with chain-of-thought reasoning."
+        ]
+      },
+      {
+        "id": "6856afecee78f2aff0d170f5",
+        "name": "Grok 2 Image 1212",
+        "description": "Grok 2 Image 1212 (also known as grok-2-image-1212) is xAI\u2019s December 2024 release of their unified image generation and understanding model.",
+        "bullets": [
+          "Unified Vision Pipeline: Single model handles image creation, editing, and comprehension.",
+          "Aurora Engine: xAI\u2019s custom autoregressive mixture-of-experts model, delivering instruction-following, photolevel realism, and editing."
+        ]
+      },
+      {
+        "id": "6856aefeee78f2aff0d17032",
+        "name": "Grok 2 Image (Latest)",
+        "description": "Grok 2 Image (a.k.a. Grok 2-image-latest) is xAI\u2019s vision-forward extension of its Grok 2 model.",
+        "bullets": [
+          "Unified Vision Model: Combines photorealistic image creation and multimodal comprehension in one endpoint.",
+          "Aurora Engine: xAI\u2019s custom autoregressive mixture-of-experts model, delivering instruction-following, photolevel realism, and editing."
+        ]
+      },
+      {
+        "id": "6856aaecee78f2aff0d16c6a",
+        "name": "Grok 2 Vision",
+        "description": "Grok 2 Vision (also known as Grok-2-Vision-1212 or grok-2-vision-latest) is xAI\u2019s multimodal variant of Grok 2, designed specifically for advanced image understanding and generation.",
+        "bullets": [
+          "Strong Vision Understanding: Achieves state-of-the-art in MathVista and DocVQA\u2014surpassing GPT4 Turbo on those benchmarks.",
+          "Integrated Image Generation: Offers FLUX.1-powered photorealistic outputs with fewer restrictions than mainstream tools."
+        ]
+      },
+      {
+        "id": "68334dac8f07ab07a7db9c87",
+        "name": "INK",
+        "description": "INK is an AI-powered content creation and optimization tool designed to help businesses, marketers, and writers generate high-quality, SEO-friendly content. It leverages Natural Language Optimization (NLO) technology to improve content performance, increase engagement, and boost search engine rankings. INK includes various features like AI-powered copywriting, plagiarism detection, grammar checks, and real-time SEO analysis to ensure that content is both effective and compliant with search engine guidelines.",
+        "bullets": []
+      },
+      {
+        "id": "683056cebcf558ef8c31d819",
+        "name": "rawshorts",
+        "description": "Raw Shorts is an AI-powered video creation platform that enables users to convert text into engaging animated videos. It provides drag-and-drop tools, AI-assisted script-to-video functionality, and a variety of templates for different industries.",
+        "bullets": []
+      },
+      {
+        "id": "685561e527c6eba075dcbca4",
+        "name": "Gemini 2.5 Flash Preview TTS",
+        "description": "Gemini\u202f2.5\u202fFlash Preview TTS is Google DeepMind\u2019s cutting-edge text-to-speech model that converts text into natural, expressive audio. It supports both single-speaker and multi-speaker output, allowing fine-grained control over style, emotion, pace, and tone. This preview variant is optimized for low latency and structured use cases like podcasts, audiobooks, and customer support workflows .",
+        "bullets": []
+      },
+      {
+        "id": "6849459ab9392005150a3adb",
+        "name": "Natural Reader",
+        "description": "NaturalReaders.com is an advanced AI-powered text-to-speech (TTS) software that transforms various types of text, including documents, PDFs, and web pages, into natural-sounding spoken audio. Its primary purpose is to enhance productivity, accessibility, and learning by allowing users to listen to content on the go, proofread their writing, and overcome reading difficulties.",
+        "bullets": []
+      },
+      {
+        "id": "6856b571ee78f2aff0d175d8",
+        "name": "Meta Llama 3.2",
+        "description": "Llama\u202f3.2 is Meta\u2019s multimodal and lightweight update to its Llama\u202f3 line, released on September\u202f25,\u202f2024. The family includes 1B and 3B text-only models optimized for edge devices, as well as 11B and 90B Vision models capable of image understanding. It offers a 128K-token context window, Grouped-Query Attention for efficient inference, and opens up on-device, private AI with strong multilingual (e.g. Hindi, Spanish) support.",
+        "bullets": []
+      },
+      {
+        "id": "684bf201b9392005153e3677",
+        "name": "Speechify",
+        "description": "Speechify.com is a leading AI-powered text-to-speech (TTS) reader designed to transform any written text into natural-sounding audio. With millions of users and high ratings, it aims to help individuals consume content faster and more efficiently across various devices and platforms. Beyond basic text-to-speech, Speechify also offers advanced AI features for content creators, including AI voice generation, voice cloning, and dubbing.",
+        "bullets": []
+      },
+      {
+        "id": "681f5b01525588084f4cc47f",
+        "name": "Artguru",
+        "description": "Artguru AI Art Generator is an advanced AI-powered tool that transforms text descriptions and photos into stunning digital artworks. Whether you want to create AI-generated paintings, avatars, or artistic transformations of your photos, Artguru makes it possible in just a few clicks.",
+        "bullets": []
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.",
+        "bullets": []
+      },
+      {
+        "id": "6843416eac33a46e0beddbb4",
+        "name": "OpenAI GPT 4o mini Transcribe",
+        "description": "GPT-4o-mini-transcribe is a lightweight, high-speed speech-to-text model from OpenAI, built on the GPT-4o-mini architecture. It converts spoken language into text with exceptional speed and surprising accuracy for its size\u2014making it ideal for real-time transcription in resource-constrained environments.\nWhether you're building voice-enabled apps, smart assistants, meeting transcription tools, or captioning systems, GPT-4o-mini-transcribe offers responsive, multilingual transcription that balances cost, performance, and ease of integration.",
+        "bullets": []
+      },
+      {
+        "id": "684049dcbce3a3d64c6a7f97",
+        "name": "VinteoAI",
+        "description": "Vinteo.ai is an AI product photography service specifically designed for e-commerce businesses, including retailers, manufacturers, and online stores. It leverages artificial intelligence to help users create professional-level product imagery, aiming to increase conversion rates while significantly reducing the time and costs associated with traditional product photoshohoots. The platform allows for instant personalization of product visuals, advanced AI editing, and the ability to set products within professionally styled, custom interiors.",
+        "bullets": []
+      },
+      {
+        "id": "68595bbe1c16582699a63935",
+        "name": "Lummi AI",
+        "description": "Lummi AI is a curated library of royalty-free stock images and illustrations, all AI-generated by digital artists. Launched in late 2023, the platform offers over 13,000 unique visuals\u2014photos, illustrations, 3D renders\u2014designed to replace generic stock photos with fresh, high-quality imagery that integrates seamlessly with popular design tools.",
+        "bullets": []
+      },
+      {
+        "id": "6857813a1c16582699a4b869",
+        "name": "Visme",
+        "description": "Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\u2014all within an intuitive visual editor that empowers non-designers.",
+        "bullets": []
+      },
+      {
+        "id": "68433eabac33a46e0beda792",
+        "name": "OpenAI GPT 4o Transcribe",
+        "description": "GPT-4o Transcribe is OpenAI\u2019s high-performance speech-to-text model built into the GPT-4o family. It converts spoken audio into accurate, readable, and structured text\u2014quickly and with surprising clarity. Whether you're transcribing interviews, meetings, podcasts, or real-time conversations, GPT-4o Transcribe delivers fast, multilingual transcription powered by the same model that understands and generates across text, vision, and audio.\nIt\u2019s ideal for developers and teams building voice-enabled apps, transcription services, or any tool where spoken language needs to become text\u2014instantly and intelligently.",
+        "bullets": []
+      },
+      {
+        "id": "681b6200477018e34794ffb6",
+        "name": "Icon",
+        "description": "Icon.me is an innovative AI-driven platform designed to streamline the process of creating winning advertisements. By combining the capabilities of ChatGPT and CapCut, Icon.me allows users to generate high-quality ads in minutes. The platform analyzes your video library, tags scenes, and integrates various tools for scriptwriting, video editing, creative storage, user-generated content (UGC), creative analytics, and competitor ad spying, making it a comprehensive solution for digital marketing needs.",
+        "bullets": []
+      },
+      {
+        "id": "684fede5afca082a9fc31c75",
+        "name": "PiktoChart",
+        "description": "Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities. It enables users to create infographics, presentations, posters, social media graphics, reports, and more\u2014with drag\u2011and\u2011drop ease and professionally designed templates",
+        "bullets": []
+      },
+      {
+        "id": "68556fda27c6eba075dcce40",
+        "name": "Janus-Pro-7B",
+        "description": "anus Pro\u202f7B is DeepSeek\u2019s flagship open-source multimodal AI model, unifying vision understanding and text-to-image generation within a single transformer architecture. Built on DeepSeek\u2011LLM\u20117B, it uses a decoupled visual encoding approach paired with SigLIP\u2011L and VQ tokenizer, delivering superior visual fidelity, prompt alignment, and stability across tasks\u2014benchmarked ahead of OpenAI\u2019s DALL\u2011E\u202f3 and Stable Diffusion variants.",
+        "bullets": []
+      },
+      {
+        "id": "6856addcee78f2aff0d16f6f",
+        "name": "grok-2-image",
+        "description": "Grok\u202f2 Image is xAI\u2019s image-generation model integrated into the Grok\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\u2014allowing users to generate, edit, and chat using images\u2014with a 32K-token visual-text context and produces photorealistic outputs.",
+        "bullets": []
+      },
+      {
+        "id": "6855729027c6eba075dcd467",
+        "name": "DeepSeek VL",
+        "description": "DeepSeek\u202fVL is DeepSeek\u2019s open-source vision-language model designed for real-world multimodal understanding. It employs a hybrid vision encoder (SigLIP\u2011L\u202f+\u202fSAM), processes high-resolution images (up to 1024\u00d71024), and supports both base and chat variants across two sizes: 1.3B and 7B parameters. It excels on tasks like OCR, diagram reasoning, webpage parsing, and visual Q&A\u2014while preserving strong language ability.",
+        "bullets": []
+      },
+      {
+        "id": "68303f27bcf558ef8c31d658",
+        "name": "Ideogram",
+        "description": "Ideogram is an AI-powered text-to-image generation tool designed to create high-quality visuals with seamless typography integration. Unlike traditional image-generation models, Ideogram specializes in producing images with accurate and aesthetically pleasing text, making it ideal for branding, social media content, and graphic design.",
+        "bullets": []
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": []
+      },
+      {
+        "id": "68422299ac33a46e0bb73f68",
+        "name": "OpenAI GPT Image 1",
+        "description": "GPT-Image-1 is OpenAI's state-of-the-art vision model designed to understand and interpret images with human-like perception. It enables developers and businesses to analyze, summarize, and extract detailed insights from images using natural language. Whether you're building AI agents, accessibility tools, or image-driven workflows, GPT-Image-1 brings powerful multimodal capabilities into your applications with impressive accuracy.\nOptimized for use via API, it can handle diverse image types\u2014charts, screenshots, photographs, documents, and more\u2014making it one of the most versatile models in OpenAI\u2019s portfolio.",
+        "bullets": []
+      },
+      {
+        "id": "6859693a1c16582699a64e18",
+        "name": "Microsoft Designer",
+        "description": "Microsoft Designer is Microsoft\u2019s AI-powered graphic design and image editing tool, officially launched in 2023 and broadly available in 2024. It leverages generative AI\u2014including DALL\u00b7E 3\u2014for creating visuals from text prompts, smart layout suggestions, and professional-level photo editing (e.g., background removal, object erasure, framing, and restyling) \u2014 all accessible via web, mobile, and integration within Microsoft 365 apps.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 6.091,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"684422a2b32d4d019cba490e\",\n    \"6855690127c6eba075dcc746\",\n    \"68438a46ac33a46e0bf38e24\",\n    \"6856b76eee78f2aff0d1774c\",\n    \"6856afecee78f2aff0d170f5\",\n    \"6856aefeee78f2aff0d17032\",\n    \"6856aaecee78f2aff0d16c6a\",\n    \"68334dac8f07ab07a7db9c87\",\n    \"683056cebcf558ef8c31d819\",\n    \"685561e527c6eba075dcbca4\",\n    \"6849459ab9392005150a3adb\",\n    \"6856b571ee78f2aff0d175d8\",\n    \"684bf201b9392005153e3677\",\n    \"681f5b01525588084f4cc47f\",\n    \"68447010b32d4d019cc01bd0\",\n    \"6843416eac33a46e0beddbb4\",\n    \"684049dcbce3a3d64c6a7f97\",\n    \"68595bbe1c16582699a63935\",\n    \"6857813a1c16582699a4b869\",\n    \"68433eabac33a46e0beda792\",\n    \"681b6200477018e34794ffb6\",\n    \"684fede5afca082a9fc31c75\",\n    \"68556fda27c6eba075dcce40\",\n    \"6856addcee78f2aff0d16f6f\",\n    \"6855729027c6eba075dcd467\",\n    \"68303f27bcf558ef8c31d658\",\n    \"68445055b32d4d019cbd5381\",\n    \"68422299ac33a46e0bb73f68\",\n    \"6859693a1c16582699a64e18\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"684422a2b32d4d019cba490e\",\n      \"name\": \"FLUX AI\",\n      \"description\": \"FLUX AI is an AI platform that leverages the 4o image generator to create diverse and vibrant artwork. Its core purpose is to enable users to transform textual ideas into stunning visuals across various artistic styles, including Ghibli, Chibi, and Pixar, as well as photorealistic and abstract designs.\",\n      \"bullets\": [\n        \"4o Image Generator Powered: Implies the use of highly advanced, often multimodal, AI models for image generation, capable of nuanced prompt understanding and high-quality output.\",\n        \"Broad Artistic Style Versatility: Excels at generating images in a wide array of distinct artistic styles like Ghibli, Chibi, and Pixar, which sets it apart from many general-purpose AI art tools.\"\n      ]\n    },\n    {\n      \"id\": \"6855690127c6eba075dcc746\",\n      \"name\": \"Imagen 3\",\n      \"description\": \"Imagen 3 is Google DeepMind\\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.\",\n      \"bullets\": [\n        \"Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.\",\n        \"Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language.\"\n      ]\n    },\n    {\n      \"id\": \"68438a46ac33a46e0bf38e24\",\n      \"name\": \"ViduStudio Image to Video\",\n      \"description\": \"Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos.\",\n      \"bullets\": [\n        \"Natural Language Processing: Utilizes text prompts to guide the animation, allowing for intuitive user interaction.\",\n        \"High-Quality Output: Generates videos with smooth transitions and realistic motion effects.\"\n      ]\n    },\n    {\n      \"id\": \"6856b76eee78f2aff0d1774c\",\n      \"name\": \"Meta Llama 3.2 Vision\",\n      \"description\": \"Llama 3.2 Vision is Meta\\u2019s first open-source multimodal Llama model series, released on September 25, 2024.\",\n      \"bullets\": [\n        \"Vision Excellence: Achieves top-tier scores\\u2014DocVQA ~70.7% and AI2 Diagram ~75.3% (11B) or ~90.1% & ~92.3% (90B).\",\n        \"Visual Math & Charts: ChartQA ~85.5% and MathVista ~57.3% with chain-of-thought reasoning.\"\n      ]\n    },\n    {\n      \"id\": \"6856afecee78f2aff0d170f5\",\n      \"name\": \"Grok 2 Image 1212\",\n      \"description\": \"Grok 2 Image 1212 (also known as grok-2-image-1212) is xAI\\u2019s December 2024 release of their unified image generation and understanding model.\",\n      \"bullets\": [\n        \"Unified Vision Pipeline: Single model handles image creation, editing, and comprehension.\",\n        \"Aurora Engine: xAI\\u2019s custom autoregressive mixture-of-experts model, delivering instruction-following, photolevel realism, and editing.\"\n      ]\n    },\n    {\n      \"id\": \"6856aefeee78f2aff0d17032\",\n      \"name\": \"Grok 2 Image (Latest)\",\n      \"description\": \"Grok 2 Image (a.k.a. Grok 2-image-latest) is xAI\\u2019s vision-forward extension of its Grok 2 model.\",\n      \"bullets\": [\n        \"Unified Vision Model: Combines photorealistic image creation and multimodal comprehension in one endpoint.\",\n        \"Aurora Engine: xAI\\u2019s custom autoregressive mixture-of-experts model, delivering instruction-following, photolevel realism, and editing.\"\n      ]\n    },\n    {\n      \"id\": \"6856aaecee78f2aff0d16c6a\",\n      \"name\": \"Grok 2 Vision\",\n      \"description\": \"Grok 2 Vision (also known as Grok-2-Vision-1212 or grok-2-vision-latest) is xAI\\u2019s multimodal variant of Grok 2, designed specifically for advanced image understanding and generation.\",\n      \"bullets\": [\n        \"Strong Vision Understanding: Achieves state-of-the-art in MathVista and DocVQA\\u2014surpassing GPT4 Turbo on those benchmarks.\",\n        \"Integrated Image Generation: Offers FLUX.1-powered photorealistic outputs with fewer restrictions than mainstream tools.\"\n      ]\n    },\n    {\n      \"id\": \"68334dac8f07ab07a7db9c87\",\n      \"name\": \"INK\",\n      \"description\": \"INK is an AI-powered content creation and optimization tool designed to help businesses, marketers, and writers generate high-quality, SEO-friendly content. It leverages Natural Language Optimization (NLO) technology to improve content performance, increase engagement, and boost search engine rankings. INK includes various features like AI-powered copywriting, plagiarism detection, grammar checks, and real-time SEO analysis to ensure that content is both effective and compliant with search engine guidelines.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"683056cebcf558ef8c31d819\",\n      \"name\": \"rawshorts\",\n      \"description\": \"Raw Shorts is an AI-powered video creation platform that enables users to convert text into engaging animated videos. It provides drag-and-drop tools, AI-assisted script-to-video functionality, and a variety of templates for different industries.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685561e527c6eba075dcbca4\",\n      \"name\": \"Gemini 2.5 Flash Preview TTS\",\n      \"description\": \"Gemini\\u202f2.5\\u202fFlash Preview TTS is Google DeepMind\\u2019s cutting-edge text-to-speech model that converts text into natural, expressive audio. It supports both single-speaker and multi-speaker output, allowing fine-grained control over style, emotion, pace, and tone. This preview variant is optimized for low latency and structured use cases like podcasts, audiobooks, and customer support workflows .\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6849459ab9392005150a3adb\",\n      \"name\": \"Natural Reader\",\n      \"description\": \"NaturalReaders.com is an advanced AI-powered text-to-speech (TTS) software that transforms various types of text, including documents, PDFs, and web pages, into natural-sounding spoken audio. Its primary purpose is to enhance productivity, accessibility, and learning by allowing users to listen to content on the go, proofread their writing, and overcome reading difficulties.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6856b571ee78f2aff0d175d8\",\n      \"name\": \"Meta Llama 3.2\",\n      \"description\": \"Llama\\u202f3.2 is Meta\\u2019s multimodal and lightweight update to its Llama\\u202f3 line, released on September\\u202f25,\\u202f2024. The family includes 1B and 3B text-only models optimized for edge devices, as well as 11B and 90B Vision models capable of image understanding. It offers a 128K-token context window, Grouped-Query Attention for efficient inference, and opens up on-device, private AI with strong multilingual (e.g. Hindi, Spanish) support.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684bf201b9392005153e3677\",\n      \"name\": \"Speechify\",\n      \"description\": \"Speechify.com is a leading AI-powered text-to-speech (TTS) reader designed to transform any written text into natural-sounding audio. With millions of users and high ratings, it aims to help individuals consume content faster and more efficiently across various devices and platforms. Beyond basic text-to-speech, Speechify also offers advanced AI features for content creators, including AI voice generation, voice cloning, and dubbing.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681f5b01525588084f4cc47f\",\n      \"name\": \"Artguru\",\n      \"description\": \"Artguru AI Art Generator is an advanced AI-powered tool that transforms text descriptions and photos into stunning digital artworks. Whether you want to create AI-generated paintings, avatars, or artistic transformations of your photos, Artguru makes it possible in just a few clicks.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68447010b32d4d019cc01bd0\",\n      \"name\": \"Vidu Studio AI Girl Video Gen\",\n      \"description\": \"Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly. Whether you're aiming to animate a portrait, create a short video clip, or add motion to product images, Vidu Studio simplifies the process, making high-quality video generation accessible to all.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6843416eac33a46e0beddbb4\",\n      \"name\": \"OpenAI GPT 4o mini Transcribe\",\n      \"description\": \"GPT-4o-mini-transcribe is a lightweight, high-speed speech-to-text model from OpenAI, built on the GPT-4o-mini architecture. It converts spoken language into text with exceptional speed and surprising accuracy for its size\\u2014making it ideal for real-time transcription in resource-constrained environments.\\nWhether you're building voice-enabled apps, smart assistants, meeting transcription tools, or captioning systems, GPT-4o-mini-transcribe offers responsive, multilingual transcription that balances cost, performance, and ease of integration.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684049dcbce3a3d64c6a7f97\",\n      \"name\": \"VinteoAI\",\n      \"description\": \"Vinteo.ai is an AI product photography service specifically designed for e-commerce businesses, including retailers, manufacturers, and online stores. It leverages artificial intelligence to help users create professional-level product imagery, aiming to increase conversion rates while significantly reducing the time and costs associated with traditional product photoshohoots. The platform allows for instant personalization of product visuals, advanced AI editing, and the ability to set products within professionally styled, custom interiors.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68595bbe1c16582699a63935\",\n      \"name\": \"Lummi AI\",\n      \"description\": \"Lummi AI is a curated library of royalty-free stock images and illustrations, all AI-generated by digital artists. Launched in late 2023, the platform offers over 13,000 unique visuals\\u2014photos, illustrations, 3D renders\\u2014designed to replace generic stock photos with fresh, high-quality imagery that integrates seamlessly with popular design tools.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6857813a1c16582699a4b869\",\n      \"name\": \"Visme\",\n      \"description\": \"Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\\u2014all within an intuitive visual editor that empowers non-designers.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68433eabac33a46e0beda792\",\n      \"name\": \"OpenAI GPT 4o Transcribe\",\n      \"description\": \"GPT-4o Transcribe is OpenAI\\u2019s high-performance speech-to-text model built into the GPT-4o family. It converts spoken audio into accurate, readable, and structured text\\u2014quickly and with surprising clarity. Whether you're transcribing interviews, meetings, podcasts, or real-time conversations, GPT-4o Transcribe delivers fast, multilingual transcription powered by the same model that understands and generates across text, vision, and audio.\\nIt\\u2019s ideal for developers and teams building voice-enabled apps, transcription services, or any tool where spoken language needs to become text\\u2014instantly and intelligently.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681b6200477018e34794ffb6\",\n      \"name\": \"Icon\",\n      \"description\": \"Icon.me is an innovative AI-driven platform designed to streamline the process of creating winning advertisements. By combining the capabilities of ChatGPT and CapCut, Icon.me allows users to generate high-quality ads in minutes. The platform analyzes your video library, tags scenes, and integrates various tools for scriptwriting, video editing, creative storage, user-generated content (UGC), creative analytics, and competitor ad spying, making it a comprehensive solution for digital marketing needs.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684fede5afca082a9fc31c75\",\n      \"name\": \"PiktoChart\",\n      \"description\": \"Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities. It enables users to create infographics, presentations, posters, social media graphics, reports, and more\\u2014with drag\\u2011and\\u2011drop ease and professionally designed templates\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68556fda27c6eba075dcce40\",\n      \"name\": \"Janus-Pro-7B\",\n      \"description\": \"anus Pro\\u202f7B is DeepSeek\\u2019s flagship open-source multimodal AI model, unifying vision understanding and text-to-image generation within a single transformer architecture. Built on DeepSeek\\u2011LLM\\u20117B, it uses a decoupled visual encoding approach paired with SigLIP\\u2011L and VQ tokenizer, delivering superior visual fidelity, prompt alignment, and stability across tasks\\u2014benchmarked ahead of OpenAI\\u2019s DALL\\u2011E\\u202f3 and Stable Diffusion variants.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6856addcee78f2aff0d16f6f\",\n      \"name\": \"grok-2-image\",\n      \"description\": \"Grok\\u202f2 Image is xAI\\u2019s image-generation model integrated into the Grok\\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\\u2014allowing users to generate, edit, and chat using images\\u2014with a 32K-token visual-text context and produces photorealistic outputs.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6855729027c6eba075dcd467\",\n      \"name\": \"DeepSeek VL\",\n      \"description\": \"DeepSeek\\u202fVL is DeepSeek\\u2019s open-source vision-language model designed for real-world multimodal understanding. It employs a hybrid vision encoder (SigLIP\\u2011L\\u202f+\\u202fSAM), processes high-resolution images (up to 1024\\u00d71024), and supports both base and chat variants across two sizes: 1.3B and 7B parameters. It excels on tasks like OCR, diagram reasoning, webpage parsing, and visual Q&A\\u2014while preserving strong language ability.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68303f27bcf558ef8c31d658\",\n      \"name\": \"Ideogram\",\n      \"description\": \"Ideogram is an AI-powered text-to-image generation tool designed to create high-quality visuals with seamless typography integration. Unlike traditional image-generation models, Ideogram specializes in producing images with accurate and aesthetically pleasing text, making it ideal for branding, social media content, and graphic design.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68445055b32d4d019cbd5381\",\n      \"name\": \"Vidu Studio - AI Video Create\",\n      \"description\": \"Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68422299ac33a46e0bb73f68\",\n      \"name\": \"OpenAI GPT Image 1\",\n      \"description\": \"GPT-Image-1 is OpenAI's state-of-the-art vision model designed to understand and interpret images with human-like perception. It enables developers and businesses to analyze, summarize, and extract detailed insights from images using natural language. Whether you're building AI agents, accessibility tools, or image-driven workflows, GPT-Image-1 brings powerful multimodal capabilities into your applications with impressive accuracy.\\nOptimized for use via API, it can handle diverse image types\\u2014charts, screenshots, photographs, documents, and more\\u2014making it one of the most versatile models in OpenAI\\u2019s portfolio.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6859693a1c16582699a64e18\",\n      \"name\": \"Microsoft Designer\",\n      \"description\": \"Microsoft Designer is Microsoft\\u2019s AI-powered graphic design and image editing tool, officially launched in 2023 and broadly available in 2024. It leverages generative AI\\u2014including DALL\\u00b7E 3\\u2014for creating visuals from text prompts, smart layout suggestions, and professional-level photo editing (e.g., background removal, object erasure, framing, and restyling) \\u2014 all accessible via web, mobile, and integration within Microsoft 365 apps.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
