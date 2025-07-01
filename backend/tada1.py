@@ -68,7 +68,7 @@ class Config:
     
     # Score-based selection settings
     HYBRID_MIN_SCORE = 0.36    # Minimum relevance threshold
-    HYBRID_MAX_TOOLS = 50       # Maximum tools to send to LLM
+    HYBRID_MAX_TOOLS = 60       # Maximum tools to send to LLM
     HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
     # Processing settings
@@ -2524,8 +2524,8 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             )
 
             # Split into LLM and database processing groups
-            llm_tools = all_selected_results[:20]  # Top 20 for LLM
-            db_tools = all_selected_results[20:]   # Remaining for database processing
+            llm_tools = all_selected_results[:30]  # Top 20 for LLM
+            db_tools = all_selected_results[30:]   # Remaining for database processing
 
             logger.info(f"Split results: {len(llm_tools)} tools for LLM, {len(db_tools)} tools for database processing")
             logger.info(f"Total tools to process: {len(all_selected_results)}")
@@ -2590,75 +2590,86 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             tool_count = len(llm_tools)
             tokens_per_tool = min(150, 3000 // max(tool_count, 1)) 
             
-            system_text = f"""
-### ROLE
-You are an expert AI tool recommendation assistant with deep knowledge of software capabilities and use cases. 
-You are given a query and a list of tools. You need to select the most relevant tools and return them in a JSON format.
+            system_text = f"""You are an expert AI tool recommendation assistant. Your task is to select and rank the relevant tools only upto 20 from the provided list for the query: "{request.query}"
 
-### SEMANTIC RELEVANCE FRAMEWORK:
-Step 1: Query Analysis
-- Identify if query mentions specific tool names → include those tools regardless of score
-- Determine query type: specific task, general category, or tool comparison
-- Extract key concepts, technologies, and use case requirements
+### SELECTION CRITERIA:
 
-Step 2: Tool Relevance Assessment
-- PRIMARY relevance: Tools directly designed for the stated task/domain
-- SECONDARY relevance: Tools with specific features applicable to the use case  
-- CONTEXTUAL relevance: Tools useful in related workflows or adjacent processes
-- EXCLUDE: Generic tools with no specific connection to the query context
+**Step 1: Relevance Assessment**
+- INCLUDE ONLY tools that directly address the query's main purpose with core functionality matching the query without any padding or duplicates.
+- EXCLUDE tools from different domains (e.g., for "text to image" query, exclude image-to-video, video editing, etc.)
 
-Step 3: Selection Rules
-- If query specifies number ("top 3", "best 5"): return exactly that count
-- If query mentions specific tool name: prioritize and return that tool on top 1st position.
-- For general queries: include only tools with meaningful connection to the domain
-- Rank by relevance strength: direct > feature-specific > workflow-adjacent
+**Step 2: Ranking Rules**
+- Order by relevance: most relevant tool in 1st position, least relevant in last position
+- If query specifies number ("top 3", "best 5"): return exactly that count.
+- If query mentions specific tool name: prioritize and return that tool in 1st position
+- Rank selected tools from most to least relevant based on direct functionality match
 
-QUALITY STANDARDS:
-- Description: 1-2 sentences explaining specific relevance to "{request.query}"
-- Bullets: Features that are relevant to "{request.query}".
-- Focus on WHY each tool helps with this particular query
-- Avoid generic statements - be specific to both tool and query
+**Step 3: Response Guidelines**
+- Select ONLY tools that truly match the query (can only be upto 20 tools) without any padding or duplicates.
+- NEVER duplicate tools - each tool should appear exactly once
+- STOP when you run out of relevant tools - don't force a specific count
+- Description: Explain specific relevance to "{request.query}" using exact query keywords
+- Bullets: List features directly applicable to "{request.query}" and give only 2 bullet points
 
-### OUTPUT CONSTRAINTS:
-- Prioritize most relevant tools and *id field in the JSON should be the exact tool_id of that tool given in the Tools Data of length exactly 24 characters.*
-- Be selective and precise. Focus on meaningful connections to "{request.query}".
+### IMPORTANT RULES:
+- NO DUPLICATES: Each tool_id can only appear once in your response
+- NO PADDING: Don't add irrelevant tools just to reach a number
+- RELEVANCE FIRST: Only include tools that actually solve the user's need
+- VARIABLE COUNT: You can return anywhere only upto 20 tools based on what's actually relevant.
+
+### DOMAIN FILTERING EXAMPLE:
+Query: "text to image"
+INCLUDE: Text-to-image tools, AI image creation from text
+EXCLUDE: Dont include image-to-video converters, video creation tools, design tools
+Reason: User wants text→image generation specifically, not image manipulation or video other media types
+
+### DESCRIPTION EXAMPLE:
+Query: "write PRD for me"
+Good Description: "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows"
+Good Bullets: ["PRD-specific templates and sections for goals, users, specs, features.", "Collaborative PRD editing and review features with real-time version tracking."]
+
 ### JSON FORMAT (return only valid JSON):
+##CRITICAL: You MUST return ONLY valid JSON in this EXACT format:
 {{
-  "tool_id": ["most_relevant_exact_tool_id", "next_most_relevant_exact_tool_id", ...],
+  "tool_id": ["most_relevant_exact_tool_id", "second_most_relevant_exact_tool_id"],
   "tools": [
     {{
       "id": "exact_tool_id_from_data",
-      "name": "name",
-      "description": "Specific relevance to {request.query}",
-      "bullets": [
-        "Concrete feature for {request.query} task",
-        "Specific capability addressing {request.query} need"
-      ]
+      "name": "tool_name",
+      "description": "Specific relevance to {request.query} using exact query keywords",
+      "bullets": ["Feature directly addressing {request.query}", "Capability specifically for {request.query} task"]
     }}
   ]
 }}
-### CRITICAL INSTRUCTION - TOOL IDS
-**IMPORTANT**: In the tool_id array, you MUST use the exact "tool_id" field from each tool's metadata, NOT the tool name.
-Each tool in the data has a "tool_id" field - use that exact value in your tool_id array.
 
-"""
-            prompt_text = f"""
-Query Analysis Required: "{request.query}"
+### CRITICAL REQUIREMENTS:
+- Return ONLY valid JSON in the EXACT format provided above *without any PREAMBLE or EXPLANATION.*
+- Ensure all brackets and quotes are properly closed
+- Use exact "tool_id" field from metadata, NOT tool name
+- Each tool_id should appear exactly once (NO DUPLICATES)
+- Only include tools that are genuinely relevant to "{request.query}"
+- Rank tools from most to least relevant (1st = most relevant)
+- Return as many tools as are relevant upto 20.
+- Better to return fewer high-quality matches than many poor matches"""
+            
+            prompt_text = f"""Query: "{request.query}"
 
 Available Tools Data:
 {cleaned_context}
 
-Task: Select and rank tools with meaningful relevance to the query. Explain specific connections."""
-            
+Task: Select the most relevant tools for this query. Focus on quality over quantity - only include tools that genuinely solve the user's need. Rank from most to least relevant and explain specific connections to "{request.query}".
+
+Remember: NO DUPLICATES and NO PADDING with irrelevant tools."""            
             # Initialize LLM and get response
             llm = ChatGroq(
                 groq_api_key=env.groq_api_key,
                 model_name=current_model,
-                temperature=0.2,
+                temperature=0.05,
+                max_tokens=8000,
                 model_kwargs={
-                    "top_p": 0.8,
-                    "frequency_penalty": 0.2,
-                    "presence_penalty": 0.1,
+                    "top_p": 0.9,
+                    "frequency_penalty": 0.1,
+                    "presence_penalty": 0.05,
                     "response_format": {"type": "json_object"}
                 }
             )

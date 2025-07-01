@@ -1,0 +1,623 @@
+{
+  "timestamp": "2025-07-01T22:49:00.776873",
+  "input_query": "AI coder",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 38,
+    "tool_ids": [
+      "684122aebce3a3d64c6fe511",
+      "6844736ab32d4d019cc05268",
+      "68595a0c1c16582699a63856",
+      "68495fd2b9392005150e81a5",
+      "682f251723aaf1a750abc462",
+      "684867d8b93920051508d781",
+      "6846a816b32d4d019c036ec3",
+      "68486dbbb939200515091245",
+      "68595bbe1c16582699a63935",
+      "68458120b32d4d019ce7ff35",
+      "6853117227c6eba075db55c9",
+      "684d82f079b4f531e34b4df4",
+      "681eefd253d3e454a4ba34a5",
+      "68454232b32d4d019cd5bba0",
+      "684495a9b32d4d019cc4f169",
+      "6845a885b32d4d019ceb39b7",
+      "684874ccb939200515094d57",
+      "682cb00e23aaf1a750a92892",
+      "6839668c4c7d80405692f2b3",
+      "68485950b9392005150750a2",
+      "684072bfbce3a3d64c6acd16",
+      "684417e5b32d4d019cb8c85d",
+      "6833ce978f07ab07a7df8cf7",
+      "686286fc062604ba9bec89f6",
+      "6853153827c6eba075db6983",
+      "6857813a1c16582699a4b869",
+      "685965971c16582699a644e6",
+      "6856cdd0ee78f2aff0d1c77b",
+      "68441b69b32d4d019cb93116",
+      "684995dbb9392005151c1ae9",
+      "68445543b32d4d019cbe07bd",
+      "6846ab17b32d4d019c03e243",
+      "68494f9fb9392005150bad22",
+      "6864013c015bd4929b381e54",
+      "684998deb9392005151c32a9",
+      "684530e4b32d4d019cd3fe90",
+      "68411ccfbce3a3d64c6fc520",
+      "681d9ed763aef50052db3cea"
+    ],
+    "tools": [
+      {
+        "id": "684122aebce3a3d64c6fe511",
+        "name": "WordChiefs",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6844736ab32d4d019cc05268",
+        "name": "The Humanizer AI",
+        "description": "AI-powered tool designed to transform AI-generated text into content that reads as if written by a human",
+        "bullets": [
+          "Effective humanization: Significantly improves the naturalness of AI-generated text.",
+          "Quick processing: Transforms content swiftly, saving users time."
+        ]
+      },
+      {
+        "id": "68595a0c1c16582699a63856",
+        "name": "Kittl",
+        "description": "Full-service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos",
+        "bullets": [
+          "End-to-end automation saves time and removes editing complexity",
+          "Realistic avatars and multilingual support make global use easy"
+        ]
+      },
+      {
+        "id": "68495fd2b9392005150e81a5",
+        "name": "Bypass GPT",
+        "description": "AI bypasser and humanizer tool designed to rewrite AI-generated text, making it indistinguishable from human-written content",
+        "bullets": [
+          "High effectiveness rate in bypassing various AI detectors",
+          "Produces genuinely human-like and natural-sounding content"
+        ]
+      },
+      {
+        "id": "682f251723aaf1a750abc462",
+        "name": "Designs AI",
+        "description": "AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently",
+        "bullets": [
+          "Wide range of AI tools for different content creation needs",
+          "Fast and easy-to-use platform with automation"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code",
+        "bullets": [
+          "Context-Aware Code Suggestions: Learns from code context for smarter, accurate completions",
+          "Team Model Training: Customizes suggestions based on your organization\u2019s codebase"
+        ]
+      },
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot",
+        "description": "AI-powered code completion tool developed by GitHub and powered by OpenAI",
+        "bullets": [
+          "Time-Saving Autocompletion: Suggests full lines and functions as you type",
+          "IDE Integration: Works smoothly within popular code editors"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "Powerful integrated development environment (IDE) specifically designed for Python development by JetBrains",
+        "bullets": [
+          "Best-in-Class Python Support: Specialized tools for Python and frameworks like Django",
+          "Smart Debugging Tools: Integrated, visual debugger makes complex debugging easier"
+        ]
+      },
+      {
+        "id": "68595bbe1c16582699a63935",
+        "name": "Lummi AI",
+        "description": "Lummi AI is a curated library of royalty-free stock images and illustrations, all AI-generated by digital artists. Launched in late 2023, the platform offers over 13,000 unique visuals\u2014photos, illustrations, 3D renders\u2014designed to replace generic stock photos with fresh, high-quality imagery that integrates seamlessly with popular design tools.",
+        "bullets": []
+      },
+      {
+        "id": "68458120b32d4d019ce7ff35",
+        "name": "DenserRetriever",
+        "description": "Denser Retriever is an enterprise-grade AI retriever that integrates multiple search technologies into a single platform. It is designed to enhance the accuracy and efficiency of information retrieval for AI applications, particularly within the Retrieval-Augmented Generation (RAG) framework. While retriever.denser.ai itself was inaccessible, the core functionality of Denser Retriever is to intelligently sift through vast amounts of data to find information highly relevant to a user's query, acting as a sophisticated search engine for AI systems.",
+        "bullets": []
+      },
+      {
+        "id": "6853117227c6eba075db55c9",
+        "name": "Mailchimp AI",
+        "description": "Mailchimp AI is a suite of AI-driven marketing tools within Mailchimp designed to improve campaign creation, targeting, and performance. It includes email subject line suggestions, content generation, segmentation insights, send-time optimization, and audience management\u2014making marketing smarter and faster.",
+        "bullets": []
+      },
+      {
+        "id": "684d82f079b4f531e34b4df4",
+        "name": "Peak AI",
+        "description": "Peak.ai is an AI-powered Decision Intelligence platform that helps businesses make smarter decisions using data and machine learning. By combining AI with real-time data processing, Peak.ai enables companies to optimize demand forecasting, inventory management, pricing, supply chain operations, and more \u2014 driving better commercial outcomes through data-driven decision-making.",
+        "bullets": []
+      },
+      {
+        "id": "681eefd253d3e454a4ba34a5",
+        "name": "Trae",
+        "description": "Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process. By leveraging advanced AI capabilities, Trae AI offers adaptive collaboration, smart autocomplete, and real-time code generation features. This tool is tailored to enhance developer productivity by automating tasks, providing intelligent code suggestions, and facilitating better team communication. With support for multiple programming languages and seamless integration with popular development environments, Trae AI is a comprehensive solution for developers of all levels, aiming to boost efficiency and reduce project completion times.",
+        "bullets": []
+      },
+      {
+        "id": "68454232b32d4d019cd5bba0",
+        "name": "Kupid AI",
+        "description": "Kupid.ai is an AI companion app designed to create realistic romantic and flirty conversations with AI-generated characters. Its primary purpose is to help users find and interact with their \"dream companions,\" offering a highly personalized virtual relationship experience. The platform emphasizes realistic conversations, customizable AI companions, and the exchange of various media like images and voice messages.",
+        "bullets": []
+      },
+      {
+        "id": "684495a9b32d4d019cc4f169",
+        "name": "Airshot",
+        "description": "AirShot is a premium AI-powered video generator designed for influencers and creators who want to turn static photos or avatars into trendy, engaging videos. Leveraging GPU-backed AI, it offers realistic, expressive motion that boosts social media engagement and follower count. Many users describe its output as \u201cso natural, you forget it\u2019s AI,\u201d especially for captivating, sultry, or character-driven scenes.",
+        "bullets": []
+      },
+      {
+        "id": "6845a885b32d4d019ceb39b7",
+        "name": "Poe AI",
+        "description": "Poe.com is a comprehensive AI chatbot aggregation platform developed by Quora, providing users with unified access to a wide range of conversational AI models from various leading providers, including OpenAI, Anthropic, Google, and Meta. It simplifies the process of discovering and interacting with different AI chatbots and also empowers users to create and monetize their own custom AI bots.",
+        "bullets": []
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters. It streamlines C#, VB.NET, ASP.NET, and other .NET language development by offering intelligent suggestions, quick fixes, and deep code navigation features\u2014all designed to help developers write cleaner, faster, and more maintainable code.",
+        "bullets": []
+      },
+      {
+        "id": "682cb00e23aaf1a750a92892",
+        "name": "Vance AI",
+        "description": "VanceAI is an AI-powered photo enhancement and restoration platform designed to transform images with one click. It offers a suite of advanced AI tools, including AI Image Enhancer, AI Upscaler, AI Sharpener, AI Denoiser, AI Photo Restorer, AI Cartoonizer, Background Remover, and more. Whether you need to enhance image quality, restore old photos, remove noise, or sharpen blurry images, VanceAI simplifies the process with deep-learning-powered automation.",
+        "bullets": []
+      },
+      {
+        "id": "6839668c4c7d80405692f2b3",
+        "name": "Latta",
+        "description": "Latta AI is an AI-powered debugging tool designed to help software developers, testers, project managers, and users efficiently find and fix non-working code and bugs. It aims to streamline the debugging process by automating bug detection and resolution, ultimately enhancing productivity and accelerating release cycles for individuals and teams.",
+        "bullets": []
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code. It integrates seamlessly with your IDE or codebase to suggest real-time refactorings, generate docstrings, and enforce best practices automatically. Sourcery acts as an automated code reviewer, improving code quality and reducing technical debt across teams and projects.",
+        "bullets": []
+      },
+      {
+        "id": "684072bfbce3a3d64c6acd16",
+        "name": "chat mentor",
+        "description": "AI ChatMentor is an application powered by the OpenAI ChatGPT API and the advanced GPT-4 model, designed to assist users with various writing and communication tasks. It offers AI-powered templates for emails, diverse story templates, and rapid translation features, aiming to streamline communication and content creation.",
+        "bullets": []
+      },
+      {
+        "id": "684417e5b32d4d019cb8c85d",
+        "name": "Candy AI",
+        "description": "Candy.ai is an innovative platform that allows users to create, customize, and interact with their own virtual AI companions, often referred to as AI Girlfriends (GF) or AI Boyfriends (BF). It leverages advanced AI, including large language models (LLMs), to enable natural language chat, voice calls, personalized image generation, and engaging roleplaying scenarios, aiming to provide a sense of emotional connection and companionship.",
+        "bullets": []
+      },
+      {
+        "id": "6833ce978f07ab07a7df8cf7",
+        "name": "lyzr- skott",
+        "description": "Skott is an AI-powered coding assistant designed to streamline software development. It helps developers by generating, reviewing, and optimizing code while integrating seamlessly with various development environments.",
+        "bullets": []
+      },
+      {
+        "id": "686286fc062604ba9bec89f6",
+        "name": "Hoody AI",
+        "description": "Hoody AI is a privacy-first, all-in-one AI dashboard that enables anonymous access to top language models\u2014including GPT-4, Claude\u202f3.7, Llama\u202f3.1, and more\u2014without requiring email or phone verification. It lets users chat with multiple LLMs simultaneously, upload documents, converse via voice, and switch contexts easily, all through encrypted, private instances that protect identity and data.",
+        "bullets": []
+      },
+      {
+        "id": "6853153827c6eba075db6983",
+        "name": "Outbrain AI",
+        "description": "Outbrain AI is the intelligent recommendation engine powering Outbrain\u2019s content discovery platform. It uses machine learning to analyze reader behavior and serve personalized content suggestions across premium publisher sites\u2014improving user engagement, content monetization, and campaign performance.",
+        "bullets": []
+      },
+      {
+        "id": "6857813a1c16582699a4b869",
+        "name": "Visme",
+        "description": "Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\u2014all within an intuitive visual editor that empowers non-designers.",
+        "bullets": []
+      },
+      {
+        "id": "685965971c16582699a644e6",
+        "name": "Galileo AI",
+        "description": "Galileo\u202fAI (formerly usegalileo.ai) is a text\u2011to\u2011UI and image\u2011to\u2011UI generative design platform launched in early 2023. It enables users\u2014from designers to non-designers\u2014to create editable, high-fidelity web and mobile interface designs quickly. By interpreting prompts or sketches, it builds complete UIs that can be exported into design tools like Figma or code frameworks.",
+        "bullets": []
+      },
+      {
+        "id": "6856cdd0ee78f2aff0d1c77b",
+        "name": "Figma AI",
+        "description": "Figma AI is a suite of native AI-powered design tools introduced in 2024 to boost creativity, efficiency, and prototyping within the Figma ecosystem. It includes capabilities like visual and asset search, layer renaming, content generation, background removal, translation, prototyping, and new tools such as First Draft (AI app creator), Sites, Make, Buzz, and Draw.",
+        "bullets": []
+      },
+      {
+        "id": "68441b69b32d4d019cb93116",
+        "name": "Spicy Chat AI",
+        "description": "SpicyChat.AI is an AI roleplay platform primarily for adults, offering unfiltered NSFW (Not Safe For Work) AI chatbots. It provides a vast array of AI characters and roleplay scenarios, enabling users to engage in personalized, intimate, and often explicit conversations without content restrictions. The platform aims to deliver a high degree of customization and immersion, making it a popular choice for those seeking uncensored AI chat experiences.",
+        "bullets": []
+      },
+      {
+        "id": "684995dbb9392005151c1ae9",
+        "name": "Caktus AI",
+        "description": "Caktus.ai is an advanced AI-powered academic assistant designed to help students and educators streamline various tasks. It utilizes AI to generate high-quality essays, solve math problems, provide coding assistance, and offer personalized learning guidance. Its purpose is to enhance productivity and understanding by automating complex academic tasks and providing tailored support.",
+        "bullets": []
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models. Leveraging the power of Flux.1 AI developed by Black Forest Labs, it offers users the ability to create stunning visuals across various styles and resolutions, making it ideal for artists, designers, marketers, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf",
+        "description": "Windsurf.ai is a powerful AI-driven code assistant designed to help developers write, navigate, and understand code faster and more efficiently. By integrating advanced AI with your codebase, Windsurf provides intelligent code search, in-context code explanations, and AI-powered code completion to boost developer productivity and accelerate software development workflows.",
+        "bullets": []
+      },
+      {
+        "id": "68494f9fb9392005150bad22",
+        "name": "Tutor AI",
+        "description": "TutorAI.me is an advanced AI-powered learning platform designed to transform education and corporate training by providing personalized and adaptive learning experiences. It leverages generative AI technology to automatically structure and create customized courses, offer instant homework help, generate quizzes, and provide real-time feedback, making learning more engaging and effective for students, educators, and professionals.",
+        "bullets": []
+      },
+      {
+        "id": "6864013c015bd4929b381e54",
+        "name": "TalentWell",
+        "description": "TalentWell AI is an AI-powered talent sourcing platform designed to streamline the recruitment process. It leverages generative AI to help hiring managers and recruiters discover top talent and engage them through personalized outreach, including automated videos and emails. This approach aims to boost response rates and accelerate the hiring process.",
+        "bullets": []
+      },
+      {
+        "id": "684998deb9392005151c32a9",
+        "name": "ExamRoom AI",
+        "description": "ExamRoom.AI is an all-in-one, AI-powered assessment platform designed to provide end-to-end exam creation and delivery, specializing in secure and streamlined remote proctoring. It aims to revolutionize the examination process by offering robust solutions for test content management, assessment assembly, advanced proctoring (blending AI and human oversight), and comprehensive integrity solutions for academic and professional certifications.",
+        "bullets": []
+      },
+      {
+        "id": "684530e4b32d4d019cd3fe90",
+        "name": "AI Dungeon",
+        "description": "AI Dungeon is a pioneering text-based adventure game and AI-powered storytelling platform where users direct the narrative. Unlike traditional games with predefined plots, AI Dungeon leverages advanced AI models to generate infinite possibilities, allowing players to create and explore worlds, characters, and scenarios that respond dynamically to their inputs. It acts as an infinitely adaptable Dungeon Master, creating unique and unexpected adventures.",
+        "bullets": []
+      },
+      {
+        "id": "68411ccfbce3a3d64c6fc520",
+        "name": "Funy AI",
+        "description": "Funy.ai is an all-in-one platform providing innovative and efficient AI creative tools. It aims to simplify various creative tasks, particularly focusing on video creation, image editing, and enhancement through artificial intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "681d9ed763aef50052db3cea",
+        "name": "PumpChat",
+        "description": "PumpChat AI is an innovative platform that combines AI and meme culture to create a unique social experience. It allows users to launch AI characters with associated tokens, trade AI meme tokens, and engage in a chat-to-earn system where interactions with AI characters can generate rewards. This platform is designed to make AI more fun and integrative into daily entertainment, offering a blend of creativity and financial incentives.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "684122aebce3a3d64c6fe511",
+      "6844736ab32d4d019cc05268",
+      "68595a0c1c16582699a63856",
+      "68495fd2b9392005150e81a5",
+      "682f251723aaf1a750abc462",
+      "684867d8b93920051508d781",
+      "6846a816b32d4d019c036ec3",
+      "68486dbbb939200515091245",
+      "68595bbe1c16582699a63935",
+      "68458120b32d4d019ce7ff35",
+      "6853117227c6eba075db55c9",
+      "684d82f079b4f531e34b4df4",
+      "681eefd253d3e454a4ba34a5",
+      "68454232b32d4d019cd5bba0",
+      "684495a9b32d4d019cc4f169",
+      "6845a885b32d4d019ceb39b7",
+      "684874ccb939200515094d57",
+      "682cb00e23aaf1a750a92892",
+      "6839668c4c7d80405692f2b3",
+      "68485950b9392005150750a2",
+      "684072bfbce3a3d64c6acd16",
+      "684417e5b32d4d019cb8c85d",
+      "6833ce978f07ab07a7df8cf7",
+      "686286fc062604ba9bec89f6",
+      "6853153827c6eba075db6983",
+      "6857813a1c16582699a4b869",
+      "685965971c16582699a644e6",
+      "6856cdd0ee78f2aff0d1c77b",
+      "68441b69b32d4d019cb93116",
+      "684995dbb9392005151c1ae9",
+      "68445543b32d4d019cbe07bd",
+      "6846ab17b32d4d019c03e243",
+      "68494f9fb9392005150bad22",
+      "6864013c015bd4929b381e54",
+      "684998deb9392005151c32a9",
+      "684530e4b32d4d019cd3fe90",
+      "68411ccfbce3a3d64c6fc520",
+      "681d9ed763aef50052db3cea"
+    ],
+    "tools": [
+      {
+        "id": "684122aebce3a3d64c6fe511",
+        "name": "WordChiefs",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6844736ab32d4d019cc05268",
+        "name": "The Humanizer AI",
+        "description": "AI-powered tool designed to transform AI-generated text into content that reads as if written by a human",
+        "bullets": [
+          "Effective humanization: Significantly improves the naturalness of AI-generated text.",
+          "Quick processing: Transforms content swiftly, saving users time."
+        ]
+      },
+      {
+        "id": "68595a0c1c16582699a63856",
+        "name": "Kittl",
+        "description": "Full-service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos",
+        "bullets": [
+          "End-to-end automation saves time and removes editing complexity",
+          "Realistic avatars and multilingual support make global use easy"
+        ]
+      },
+      {
+        "id": "68495fd2b9392005150e81a5",
+        "name": "Bypass GPT",
+        "description": "AI bypasser and humanizer tool designed to rewrite AI-generated text, making it indistinguishable from human-written content",
+        "bullets": [
+          "High effectiveness rate in bypassing various AI detectors",
+          "Produces genuinely human-like and natural-sounding content"
+        ]
+      },
+      {
+        "id": "682f251723aaf1a750abc462",
+        "name": "Designs AI",
+        "description": "AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently",
+        "bullets": [
+          "Wide range of AI tools for different content creation needs",
+          "Fast and easy-to-use platform with automation"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code",
+        "bullets": [
+          "Context-Aware Code Suggestions: Learns from code context for smarter, accurate completions",
+          "Team Model Training: Customizes suggestions based on your organization\u2019s codebase"
+        ]
+      },
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot",
+        "description": "AI-powered code completion tool developed by GitHub and powered by OpenAI",
+        "bullets": [
+          "Time-Saving Autocompletion: Suggests full lines and functions as you type",
+          "IDE Integration: Works smoothly within popular code editors"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "Powerful integrated development environment (IDE) specifically designed for Python development by JetBrains",
+        "bullets": [
+          "Best-in-Class Python Support: Specialized tools for Python and frameworks like Django",
+          "Smart Debugging Tools: Integrated, visual debugger makes complex debugging easier"
+        ]
+      },
+      {
+        "id": "68595bbe1c16582699a63935",
+        "name": "Lummi AI",
+        "description": "Lummi AI is a curated library of royalty-free stock images and illustrations, all AI-generated by digital artists. Launched in late 2023, the platform offers over 13,000 unique visuals\u2014photos, illustrations, 3D renders\u2014designed to replace generic stock photos with fresh, high-quality imagery that integrates seamlessly with popular design tools.",
+        "bullets": []
+      },
+      {
+        "id": "68458120b32d4d019ce7ff35",
+        "name": "DenserRetriever",
+        "description": "Denser Retriever is an enterprise-grade AI retriever that integrates multiple search technologies into a single platform. It is designed to enhance the accuracy and efficiency of information retrieval for AI applications, particularly within the Retrieval-Augmented Generation (RAG) framework. While retriever.denser.ai itself was inaccessible, the core functionality of Denser Retriever is to intelligently sift through vast amounts of data to find information highly relevant to a user's query, acting as a sophisticated search engine for AI systems.",
+        "bullets": []
+      },
+      {
+        "id": "6853117227c6eba075db55c9",
+        "name": "Mailchimp AI",
+        "description": "Mailchimp AI is a suite of AI-driven marketing tools within Mailchimp designed to improve campaign creation, targeting, and performance. It includes email subject line suggestions, content generation, segmentation insights, send-time optimization, and audience management\u2014making marketing smarter and faster.",
+        "bullets": []
+      },
+      {
+        "id": "684d82f079b4f531e34b4df4",
+        "name": "Peak AI",
+        "description": "Peak.ai is an AI-powered Decision Intelligence platform that helps businesses make smarter decisions using data and machine learning. By combining AI with real-time data processing, Peak.ai enables companies to optimize demand forecasting, inventory management, pricing, supply chain operations, and more \u2014 driving better commercial outcomes through data-driven decision-making.",
+        "bullets": []
+      },
+      {
+        "id": "681eefd253d3e454a4ba34a5",
+        "name": "Trae",
+        "description": "Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process. By leveraging advanced AI capabilities, Trae AI offers adaptive collaboration, smart autocomplete, and real-time code generation features. This tool is tailored to enhance developer productivity by automating tasks, providing intelligent code suggestions, and facilitating better team communication. With support for multiple programming languages and seamless integration with popular development environments, Trae AI is a comprehensive solution for developers of all levels, aiming to boost efficiency and reduce project completion times.",
+        "bullets": []
+      },
+      {
+        "id": "68454232b32d4d019cd5bba0",
+        "name": "Kupid AI",
+        "description": "Kupid.ai is an AI companion app designed to create realistic romantic and flirty conversations with AI-generated characters. Its primary purpose is to help users find and interact with their \"dream companions,\" offering a highly personalized virtual relationship experience. The platform emphasizes realistic conversations, customizable AI companions, and the exchange of various media like images and voice messages.",
+        "bullets": []
+      },
+      {
+        "id": "684495a9b32d4d019cc4f169",
+        "name": "Airshot",
+        "description": "AirShot is a premium AI-powered video generator designed for influencers and creators who want to turn static photos or avatars into trendy, engaging videos. Leveraging GPU-backed AI, it offers realistic, expressive motion that boosts social media engagement and follower count. Many users describe its output as \u201cso natural, you forget it\u2019s AI,\u201d especially for captivating, sultry, or character-driven scenes.",
+        "bullets": []
+      },
+      {
+        "id": "6845a885b32d4d019ceb39b7",
+        "name": "Poe AI",
+        "description": "Poe.com is a comprehensive AI chatbot aggregation platform developed by Quora, providing users with unified access to a wide range of conversational AI models from various leading providers, including OpenAI, Anthropic, Google, and Meta. It simplifies the process of discovering and interacting with different AI chatbots and also empowers users to create and monetize their own custom AI bots.",
+        "bullets": []
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters. It streamlines C#, VB.NET, ASP.NET, and other .NET language development by offering intelligent suggestions, quick fixes, and deep code navigation features\u2014all designed to help developers write cleaner, faster, and more maintainable code.",
+        "bullets": []
+      },
+      {
+        "id": "682cb00e23aaf1a750a92892",
+        "name": "Vance AI",
+        "description": "VanceAI is an AI-powered photo enhancement and restoration platform designed to transform images with one click. It offers a suite of advanced AI tools, including AI Image Enhancer, AI Upscaler, AI Sharpener, AI Denoiser, AI Photo Restorer, AI Cartoonizer, Background Remover, and more. Whether you need to enhance image quality, restore old photos, remove noise, or sharpen blurry images, VanceAI simplifies the process with deep-learning-powered automation.",
+        "bullets": []
+      },
+      {
+        "id": "6839668c4c7d80405692f2b3",
+        "name": "Latta",
+        "description": "Latta AI is an AI-powered debugging tool designed to help software developers, testers, project managers, and users efficiently find and fix non-working code and bugs. It aims to streamline the debugging process by automating bug detection and resolution, ultimately enhancing productivity and accelerating release cycles for individuals and teams.",
+        "bullets": []
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code. It integrates seamlessly with your IDE or codebase to suggest real-time refactorings, generate docstrings, and enforce best practices automatically. Sourcery acts as an automated code reviewer, improving code quality and reducing technical debt across teams and projects.",
+        "bullets": []
+      },
+      {
+        "id": "684072bfbce3a3d64c6acd16",
+        "name": "chat mentor",
+        "description": "AI ChatMentor is an application powered by the OpenAI ChatGPT API and the advanced GPT-4 model, designed to assist users with various writing and communication tasks. It offers AI-powered templates for emails, diverse story templates, and rapid translation features, aiming to streamline communication and content creation.",
+        "bullets": []
+      },
+      {
+        "id": "684417e5b32d4d019cb8c85d",
+        "name": "Candy AI",
+        "description": "Candy.ai is an innovative platform that allows users to create, customize, and interact with their own virtual AI companions, often referred to as AI Girlfriends (GF) or AI Boyfriends (BF). It leverages advanced AI, including large language models (LLMs), to enable natural language chat, voice calls, personalized image generation, and engaging roleplaying scenarios, aiming to provide a sense of emotional connection and companionship.",
+        "bullets": []
+      },
+      {
+        "id": "6833ce978f07ab07a7df8cf7",
+        "name": "lyzr- skott",
+        "description": "Skott is an AI-powered coding assistant designed to streamline software development. It helps developers by generating, reviewing, and optimizing code while integrating seamlessly with various development environments.",
+        "bullets": []
+      },
+      {
+        "id": "686286fc062604ba9bec89f6",
+        "name": "Hoody AI",
+        "description": "Hoody AI is a privacy-first, all-in-one AI dashboard that enables anonymous access to top language models\u2014including GPT-4, Claude\u202f3.7, Llama\u202f3.1, and more\u2014without requiring email or phone verification. It lets users chat with multiple LLMs simultaneously, upload documents, converse via voice, and switch contexts easily, all through encrypted, private instances that protect identity and data.",
+        "bullets": []
+      },
+      {
+        "id": "6853153827c6eba075db6983",
+        "name": "Outbrain AI",
+        "description": "Outbrain AI is the intelligent recommendation engine powering Outbrain\u2019s content discovery platform. It uses machine learning to analyze reader behavior and serve personalized content suggestions across premium publisher sites\u2014improving user engagement, content monetization, and campaign performance.",
+        "bullets": []
+      },
+      {
+        "id": "6857813a1c16582699a4b869",
+        "name": "Visme",
+        "description": "Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\u2014all within an intuitive visual editor that empowers non-designers.",
+        "bullets": []
+      },
+      {
+        "id": "685965971c16582699a644e6",
+        "name": "Galileo AI",
+        "description": "Galileo\u202fAI (formerly usegalileo.ai) is a text\u2011to\u2011UI and image\u2011to\u2011UI generative design platform launched in early 2023. It enables users\u2014from designers to non-designers\u2014to create editable, high-fidelity web and mobile interface designs quickly. By interpreting prompts or sketches, it builds complete UIs that can be exported into design tools like Figma or code frameworks.",
+        "bullets": []
+      },
+      {
+        "id": "6856cdd0ee78f2aff0d1c77b",
+        "name": "Figma AI",
+        "description": "Figma AI is a suite of native AI-powered design tools introduced in 2024 to boost creativity, efficiency, and prototyping within the Figma ecosystem. It includes capabilities like visual and asset search, layer renaming, content generation, background removal, translation, prototyping, and new tools such as First Draft (AI app creator), Sites, Make, Buzz, and Draw.",
+        "bullets": []
+      },
+      {
+        "id": "68441b69b32d4d019cb93116",
+        "name": "Spicy Chat AI",
+        "description": "SpicyChat.AI is an AI roleplay platform primarily for adults, offering unfiltered NSFW (Not Safe For Work) AI chatbots. It provides a vast array of AI characters and roleplay scenarios, enabling users to engage in personalized, intimate, and often explicit conversations without content restrictions. The platform aims to deliver a high degree of customization and immersion, making it a popular choice for those seeking uncensored AI chat experiences.",
+        "bullets": []
+      },
+      {
+        "id": "684995dbb9392005151c1ae9",
+        "name": "Caktus AI",
+        "description": "Caktus.ai is an advanced AI-powered academic assistant designed to help students and educators streamline various tasks. It utilizes AI to generate high-quality essays, solve math problems, provide coding assistance, and offer personalized learning guidance. Its purpose is to enhance productivity and understanding by automating complex academic tasks and providing tailored support.",
+        "bullets": []
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models. Leveraging the power of Flux.1 AI developed by Black Forest Labs, it offers users the ability to create stunning visuals across various styles and resolutions, making it ideal for artists, designers, marketers, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf",
+        "description": "Windsurf.ai is a powerful AI-driven code assistant designed to help developers write, navigate, and understand code faster and more efficiently. By integrating advanced AI with your codebase, Windsurf provides intelligent code search, in-context code explanations, and AI-powered code completion to boost developer productivity and accelerate software development workflows.",
+        "bullets": []
+      },
+      {
+        "id": "68494f9fb9392005150bad22",
+        "name": "Tutor AI",
+        "description": "TutorAI.me is an advanced AI-powered learning platform designed to transform education and corporate training by providing personalized and adaptive learning experiences. It leverages generative AI technology to automatically structure and create customized courses, offer instant homework help, generate quizzes, and provide real-time feedback, making learning more engaging and effective for students, educators, and professionals.",
+        "bullets": []
+      },
+      {
+        "id": "6864013c015bd4929b381e54",
+        "name": "TalentWell",
+        "description": "TalentWell AI is an AI-powered talent sourcing platform designed to streamline the recruitment process. It leverages generative AI to help hiring managers and recruiters discover top talent and engage them through personalized outreach, including automated videos and emails. This approach aims to boost response rates and accelerate the hiring process.",
+        "bullets": []
+      },
+      {
+        "id": "684998deb9392005151c32a9",
+        "name": "ExamRoom AI",
+        "description": "ExamRoom.AI is an all-in-one, AI-powered assessment platform designed to provide end-to-end exam creation and delivery, specializing in secure and streamlined remote proctoring. It aims to revolutionize the examination process by offering robust solutions for test content management, assessment assembly, advanced proctoring (blending AI and human oversight), and comprehensive integrity solutions for academic and professional certifications.",
+        "bullets": []
+      },
+      {
+        "id": "684530e4b32d4d019cd3fe90",
+        "name": "AI Dungeon",
+        "description": "AI Dungeon is a pioneering text-based adventure game and AI-powered storytelling platform where users direct the narrative. Unlike traditional games with predefined plots, AI Dungeon leverages advanced AI models to generate infinite possibilities, allowing players to create and explore worlds, characters, and scenarios that respond dynamically to their inputs. It acts as an infinitely adaptable Dungeon Master, creating unique and unexpected adventures.",
+        "bullets": []
+      },
+      {
+        "id": "68411ccfbce3a3d64c6fc520",
+        "name": "Funy AI",
+        "description": "Funy.ai is an all-in-one platform providing innovative and efficient AI creative tools. It aims to simplify various creative tasks, particularly focusing on video creation, image editing, and enhancement through artificial intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "681d9ed763aef50052db3cea",
+        "name": "PumpChat",
+        "description": "PumpChat AI is an innovative platform that combines AI and meme culture to create a unique social experience. It allows users to launch AI characters with associated tokens, trade AI meme tokens, and engage in a chat-to-earn system where interactions with AI characters can generate rewards. This platform is designed to make AI more fun and integrative into daily entertainment, offering a blend of creativity and financial incentives.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 4.625,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"684122aebce3a3d64c6fe511\",\n    \"6844736ab32d4d019cc05268\",\n    \"68595a0c1c16582699a63856\",\n    \"68495fd2b9392005150e81a5\",\n    \"682f251723aaf1a750abc462\",\n    \"684867d8b93920051508d781\",\n    \"6846a816b32d4d019c036ec3\",\n    \"68486dbbb939200515091245\",\n    \"68595bbe1c16582699a63935\",\n    \"68458120b32d4d019ce7ff35\",\n    \"6853117227c6eba075db55c9\",\n    \"684d82f079b4f531e34b4df4\",\n    \"681eefd253d3e454a4ba34a5\",\n    \"68454232b32d4d019cd5bba0\",\n    \"684495a9b32d4d019cc4f169\",\n    \"6845a885b32d4d019ceb39b7\",\n    \"684874ccb939200515094d57\",\n    \"682cb00e23aaf1a750a92892\",\n    \"6839668c4c7d80405692f2b3\",\n    \"68485950b9392005150750a2\",\n    \"684072bfbce3a3d64c6acd16\",\n    \"684417e5b32d4d019cb8c85d\",\n    \"6833ce978f07ab07a7df8cf7\",\n    \"686286fc062604ba9bec89f6\",\n    \"6853153827c6eba075db6983\",\n    \"6857813a1c16582699a4b869\",\n    \"685965971c16582699a644e6\",\n    \"6856cdd0ee78f2aff0d1c77b\",\n    \"68441b69b32d4d019cb93116\",\n    \"684995dbb9392005151c1ae9\",\n    \"68445543b32d4d019cbe07bd\",\n    \"6846ab17b32d4d019c03e243\",\n    \"68494f9fb9392005150bad22\",\n    \"6864013c015bd4929b381e54\",\n    \"684998deb9392005151c32a9\",\n    \"684530e4b32d4d019cd3fe90\",\n    \"68411ccfbce3a3d64c6fc520\",\n    \"681d9ed763aef50052db3cea\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"684122aebce3a3d64c6fe511\",\n      \"name\": \"WordChiefs\",\n      \"description\": \"AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6844736ab32d4d019cc05268\",\n      \"name\": \"The Humanizer AI\",\n      \"description\": \"AI-powered tool designed to transform AI-generated text into content that reads as if written by a human\",\n      \"bullets\": [\n        \"Effective humanization: Significantly improves the naturalness of AI-generated text.\",\n        \"Quick processing: Transforms content swiftly, saving users time.\"\n      ]\n    },\n    {\n      \"id\": \"68595a0c1c16582699a63856\",\n      \"name\": \"Kittl\",\n      \"description\": \"Full-service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos\",\n      \"bullets\": [\n        \"End-to-end automation saves time and removes editing complexity\",\n        \"Realistic avatars and multilingual support make global use easy\"\n      ]\n    },\n    {\n      \"id\": \"68495fd2b9392005150e81a5\",\n      \"name\": \"Bypass GPT\",\n      \"description\": \"AI bypasser and humanizer tool designed to rewrite AI-generated text, making it indistinguishable from human-written content\",\n      \"bullets\": [\n        \"High effectiveness rate in bypassing various AI detectors\",\n        \"Produces genuinely human-like and natural-sounding content\"\n      ]\n    },\n    {\n      \"id\": \"682f251723aaf1a750abc462\",\n      \"name\": \"Designs AI\",\n      \"description\": \"AI-powered content creation platform that helps users generate high-quality videos, logos, voiceovers, and marketing materials quickly and efficiently\",\n      \"bullets\": [\n        \"Wide range of AI tools for different content creation needs\",\n        \"Fast and easy-to-use platform with automation\"\n      ]\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"Microsoft - IntelliCode\",\n      \"description\": \"AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code\",\n      \"bullets\": [\n        \"Context-Aware Code Suggestions: Learns from code context for smarter, accurate completions\",\n        \"Team Model Training: Customizes suggestions based on your organization\\u2019s codebase\"\n      ]\n    },\n    {\n      \"id\": \"6846a816b32d4d019c036ec3\",\n      \"name\": \"GitHub Copilot\",\n      \"description\": \"AI-powered code completion tool developed by GitHub and powered by OpenAI\",\n      \"bullets\": [\n        \"Time-Saving Autocompletion: Suggests full lines and functions as you type\",\n        \"IDE Integration: Works smoothly within popular code editors\"\n      ]\n    },\n    {\n      \"id\": \"68486dbbb939200515091245\",\n      \"name\": \"PyCharm AI\",\n      \"description\": \"Powerful integrated development environment (IDE) specifically designed for Python development by JetBrains\",\n      \"bullets\": [\n        \"Best-in-Class Python Support: Specialized tools for Python and frameworks like Django\",\n        \"Smart Debugging Tools: Integrated, visual debugger makes complex debugging easier\"\n      ]\n    },\n    {\n      \"id\": \"68595bbe1c16582699a63935\",\n      \"name\": \"Lummi AI\",\n      \"description\": \"Lummi AI is a curated library of royalty-free stock images and illustrations, all AI-generated by digital artists. Launched in late 2023, the platform offers over 13,000 unique visuals\\u2014photos, illustrations, 3D renders\\u2014designed to replace generic stock photos with fresh, high-quality imagery that integrates seamlessly with popular design tools.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68458120b32d4d019ce7ff35\",\n      \"name\": \"DenserRetriever\",\n      \"description\": \"Denser Retriever is an enterprise-grade AI retriever that integrates multiple search technologies into a single platform. It is designed to enhance the accuracy and efficiency of information retrieval for AI applications, particularly within the Retrieval-Augmented Generation (RAG) framework. While retriever.denser.ai itself was inaccessible, the core functionality of Denser Retriever is to intelligently sift through vast amounts of data to find information highly relevant to a user's query, acting as a sophisticated search engine for AI systems.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6853117227c6eba075db55c9\",\n      \"name\": \"Mailchimp AI\",\n      \"description\": \"Mailchimp AI is a suite of AI-driven marketing tools within Mailchimp designed to improve campaign creation, targeting, and performance. It includes email subject line suggestions, content generation, segmentation insights, send-time optimization, and audience management\\u2014making marketing smarter and faster.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684d82f079b4f531e34b4df4\",\n      \"name\": \"Peak AI\",\n      \"description\": \"Peak.ai is an AI-powered Decision Intelligence platform that helps businesses make smarter decisions using data and machine learning. By combining AI with real-time data processing, Peak.ai enables companies to optimize demand forecasting, inventory management, pricing, supply chain operations, and more \\u2014 driving better commercial outcomes through data-driven decision-making.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681eefd253d3e454a4ba34a5\",\n      \"name\": \"Trae\",\n      \"description\": \"Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process. By leveraging advanced AI capabilities, Trae AI offers adaptive collaboration, smart autocomplete, and real-time code generation features. This tool is tailored to enhance developer productivity by automating tasks, providing intelligent code suggestions, and facilitating better team communication. With support for multiple programming languages and seamless integration with popular development environments, Trae AI is a comprehensive solution for developers of all levels, aiming to boost efficiency and reduce project completion times.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68454232b32d4d019cd5bba0\",\n      \"name\": \"Kupid AI\",\n      \"description\": \"Kupid.ai is an AI companion app designed to create realistic romantic and flirty conversations with AI-generated characters. Its primary purpose is to help users find and interact with their \\\"dream companions,\\\" offering a highly personalized virtual relationship experience. The platform emphasizes realistic conversations, customizable AI companions, and the exchange of various media like images and voice messages.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684495a9b32d4d019cc4f169\",\n      \"name\": \"Airshot\",\n      \"description\": \"AirShot is a premium AI-powered video generator designed for influencers and creators who want to turn static photos or avatars into trendy, engaging videos. Leveraging GPU-backed AI, it offers realistic, expressive motion that boosts social media engagement and follower count. Many users describe its output as \\u201cso natural, you forget it\\u2019s AI,\\u201d especially for captivating, sultry, or character-driven scenes.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6845a885b32d4d019ceb39b7\",\n      \"name\": \"Poe AI\",\n      \"description\": \"Poe.com is a comprehensive AI chatbot aggregation platform developed by Quora, providing users with unified access to a wide range of conversational AI models from various leading providers, including OpenAI, Anthropic, Google, and Meta. It simplifies the process of discovering and interacting with different AI chatbots and also empowers users to create and monetize their own custom AI bots.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684874ccb939200515094d57\",\n      \"name\": \"ReSharper\",\n      \"description\": \"ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters. It streamlines C#, VB.NET, ASP.NET, and other .NET language development by offering intelligent suggestions, quick fixes, and deep code navigation features\\u2014all designed to help developers write cleaner, faster, and more maintainable code.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682cb00e23aaf1a750a92892\",\n      \"name\": \"Vance AI\",\n      \"description\": \"VanceAI is an AI-powered photo enhancement and restoration platform designed to transform images with one click. It offers a suite of advanced AI tools, including AI Image Enhancer, AI Upscaler, AI Sharpener, AI Denoiser, AI Photo Restorer, AI Cartoonizer, Background Remover, and more. Whether you need to enhance image quality, restore old photos, remove noise, or sharpen blurry images, VanceAI simplifies the process with deep-learning-powered automation.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6839668c4c7d80405692f2b3\",\n      \"name\": \"Latta\",\n      \"description\": \"Latta AI is an AI-powered debugging tool designed to help software developers, testers, project managers, and users efficiently find and fix non-working code and bugs. It aims to streamline the debugging process by automating bug detection and resolution, ultimately enhancing productivity and accelerating release cycles for individuals and teams.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68485950b9392005150750a2\",\n      \"name\": \"Sourcery\",\n      \"description\": \"Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code. It integrates seamlessly with your IDE or codebase to suggest real-time refactorings, generate docstrings, and enforce best practices automatically. Sourcery acts as an automated code reviewer, improving code quality and reducing technical debt across teams and projects.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684072bfbce3a3d64c6acd16\",\n      \"name\": \"chat mentor\",\n      \"description\": \"AI ChatMentor is an application powered by the OpenAI ChatGPT API and the advanced GPT-4 model, designed to assist users with various writing and communication tasks. It offers AI-powered templates for emails, diverse story templates, and rapid translation features, aiming to streamline communication and content creation.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684417e5b32d4d019cb8c85d\",\n      \"name\": \"Candy AI\",\n      \"description\": \"Candy.ai is an innovative platform that allows users to create, customize, and interact with their own virtual AI companions, often referred to as AI Girlfriends (GF) or AI Boyfriends (BF). It leverages advanced AI, including large language models (LLMs), to enable natural language chat, voice calls, personalized image generation, and engaging roleplaying scenarios, aiming to provide a sense of emotional connection and companionship.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6833ce978f07ab07a7df8cf7\",\n      \"name\": \"lyzr- skott\",\n      \"description\": \"Skott is an AI-powered coding assistant designed to streamline software development. It helps developers by generating, reviewing, and optimizing code while integrating seamlessly with various development environments.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"686286fc062604ba9bec89f6\",\n      \"name\": \"Hoody AI\",\n      \"description\": \"Hoody AI is a privacy-first, all-in-one AI dashboard that enables anonymous access to top language models\\u2014including GPT-4, Claude\\u202f3.7, Llama\\u202f3.1, and more\\u2014without requiring email or phone verification. It lets users chat with multiple LLMs simultaneously, upload documents, converse via voice, and switch contexts easily, all through encrypted, private instances that protect identity and data.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6853153827c6eba075db6983\",\n      \"name\": \"Outbrain AI\",\n      \"description\": \"Outbrain AI is the intelligent recommendation engine powering Outbrain\\u2019s content discovery platform. It uses machine learning to analyze reader behavior and serve personalized content suggestions across premium publisher sites\\u2014improving user engagement, content monetization, and campaign performance.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6857813a1c16582699a4b869\",\n      \"name\": \"Visme\",\n      \"description\": \"Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\\u2014all within an intuitive visual editor that empowers non-designers.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685965971c16582699a644e6\",\n      \"name\": \"Galileo AI\",\n      \"description\": \"Galileo\\u202fAI (formerly usegalileo.ai) is a text\\u2011to\\u2011UI and image\\u2011to\\u2011UI generative design platform launched in early 2023. It enables users\\u2014from designers to non-designers\\u2014to create editable, high-fidelity web and mobile interface designs quickly. By interpreting prompts or sketches, it builds complete UIs that can be exported into design tools like Figma or code frameworks.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6856cdd0ee78f2aff0d1c77b\",\n      \"name\": \"Figma AI\",\n      \"description\": \"Figma AI is a suite of native AI-powered design tools introduced in 2024 to boost creativity, efficiency, and prototyping within the Figma ecosystem. It includes capabilities like visual and asset search, layer renaming, content generation, background removal, translation, prototyping, and new tools such as First Draft (AI app creator), Sites, Make, Buzz, and Draw.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68441b69b32d4d019cb93116\",\n      \"name\": \"Spicy Chat AI\",\n      \"description\": \"SpicyChat.AI is an AI roleplay platform primarily for adults, offering unfiltered NSFW (Not Safe For Work) AI chatbots. It provides a vast array of AI characters and roleplay scenarios, enabling users to engage in personalized, intimate, and often explicit conversations without content restrictions. The platform aims to deliver a high degree of customization and immersion, making it a popular choice for those seeking uncensored AI chat experiences.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684995dbb9392005151c1ae9\",\n      \"name\": \"Caktus AI\",\n      \"description\": \"Caktus.ai is an advanced AI-powered academic assistant designed to help students and educators streamline various tasks. It utilizes AI to generate high-quality essays, solve math problems, provide coding assistance, and offer personalized learning guidance. Its purpose is to enhance productivity and understanding by automating complex academic tasks and providing tailored support.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68445543b32d4d019cbe07bd\",\n      \"name\": \"Vidu Studio Flux AI Image Gen\",\n      \"description\": \"Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models. Leveraging the power of Flux.1 AI developed by Black Forest Labs, it offers users the ability to create stunning visuals across various styles and resolutions, making it ideal for artists, designers, marketers, and content creators.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6846ab17b32d4d019c03e243\",\n      \"name\": \"Windsurf\",\n      \"description\": \"Windsurf.ai is a powerful AI-driven code assistant designed to help developers write, navigate, and understand code faster and more efficiently. By integrating advanced AI with your codebase, Windsurf provides intelligent code search, in-context code explanations, and AI-powered code completion to boost developer productivity and accelerate software development workflows.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68494f9fb9392005150bad22\",\n      \"name\": \"Tutor AI\",\n      \"description\": \"TutorAI.me is an advanced AI-powered learning platform designed to transform education and corporate training by providing personalized and adaptive learning experiences. It leverages generative AI technology to automatically structure and create customized courses, offer instant homework help, generate quizzes, and provide real-time feedback, making learning more engaging and effective for students, educators, and professionals.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6864013c015bd4929b381e54\",\n      \"name\": \"TalentWell\",\n      \"description\": \"TalentWell AI is an AI-powered talent sourcing platform designed to streamline the recruitment process. It leverages generative AI to help hiring managers and recruiters discover top talent and engage them through personalized outreach, including automated videos and emails. This approach aims to boost response rates and accelerate the hiring process.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684998deb9392005151c32a9\",\n      \"name\": \"ExamRoom AI\",\n      \"description\": \"ExamRoom.AI is an all-in-one, AI-powered assessment platform designed to provide end-to-end exam creation and delivery, specializing in secure and streamlined remote proctoring. It aims to revolutionize the examination process by offering robust solutions for test content management, assessment assembly, advanced proctoring (blending AI and human oversight), and comprehensive integrity solutions for academic and professional certifications.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684530e4b32d4d019cd3fe90\",\n      \"name\": \"AI Dungeon\",\n      \"description\": \"AI Dungeon is a pioneering text-based adventure game and AI-powered storytelling platform where users direct the narrative. Unlike traditional games with predefined plots, AI Dungeon leverages advanced AI models to generate infinite possibilities, allowing players to create and explore worlds, characters, and scenarios that respond dynamically to their inputs. It acts as an infinitely adaptable Dungeon Master, creating unique and unexpected adventures.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68411ccfbce3a3d64c6fc520\",\n      \"name\": \"Funy AI\",\n      \"description\": \"Funy.ai is an all-in-one platform providing innovative and efficient AI creative tools. It aims to simplify various creative tasks, particularly focusing on video creation, image editing, and enhancement through artificial intelligence.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681d9ed763aef50052db3cea\",\n      \"name\": \"PumpChat\",\n      \"description\": \"PumpChat AI is an innovative platform that combines AI and meme culture to create a unique social experience. It allows users to launch AI characters with associated tokens, trade AI meme tokens, and engage in a chat-to-earn system where interactions with AI characters can generate rewards. This platform is designed to make AI more fun and integrative into daily entertainment, offering a blend of creativity and financial incentives.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
