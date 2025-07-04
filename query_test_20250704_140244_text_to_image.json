@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-07-04T14:02:44.431177",
+  "input_query": "text to image",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 0,
+    "tool_ids": [],
+    "tools": []
+  },
+  "llm_answer": {
+    "error": "llm_error",
+    "message": "Error processing query with language model: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'max completion tokens reached before generating a valid document'}}",
+    "tools": [],
+    "timestamp": "2025-07-04T08:33:00.045049"
+  },
+  "processing_time_seconds": 15.628,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"error\": \"llm_error\", \"message\": \"Error processing query with language model: Error code: 400 - {'error': {'message': \\\"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\\\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'max completion tokens reached before generating a valid document'}}\", \"tools\": [], \"timestamp\": \"2025-07-04T08:33:00.045049\"}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

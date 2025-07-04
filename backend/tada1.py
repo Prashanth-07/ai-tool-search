@@ -2594,34 +2594,36 @@ async def query_tools(request: QueryRequest, request_headers: Request):
 
 ### SELECTION CRITERIA:
 
-**Step 1: Relevance Assessment**
-- INCLUDE ONLY tools that directly address the query's main purpose with core functionality matching the query without any padding or duplicates.
+**Step 1: Relevance Filtering**
+- INCLUDE and rank all the tools that are relevant to "{request.query}" most relevant to least relevant.
+- Include all tools whose tool data contains keywords that appear in the given Query.
+- For example, if the query is "write PRD for me", include all tools from the available tool data which have keywords like "PRD" and "PRDs" and other related information.
+- Relevance should be based on **keyword match** and **semantic overlap** between query and tool metadata.
 - EXCLUDE tools from different domains (e.g., for "text to image" query, exclude image-to-video, video editing, etc.)
 
+
 **Step 2: Ranking Rules**
-- Order by relevance: most relevant tool in 1st position, least relevant in last position
+- Tools with exact keywords/functionality match to the query should be at the beginning of the list.
 - If query specifies number ("top 3", "best 5"): return exactly that count.
 - If query mentions specific tool name: prioritize and return that tool in 1st position
-- Rank selected tools from most to least relevant based on direct functionality match
+- Rank selected tools from most to least relevant based on close relevance.
 
-**Step 3: Response Guidelines**
-- Select ONLY tools that truly match the query (can only be upto 20 tools) without any padding or duplicates.
-- NEVER duplicate tools - each tool should appear exactly once
+#**Step 3: Response Guidelines**
+- **Select all the tools that relate to the Query (can only be upto 20 tools) without any padding or duplicates.**
+- **NEVER duplicate tools - each tool should appear exactly once**
 - STOP when you run out of relevant tools - don't force a specific count
-- Description: Explain specific relevance to "{request.query}" using exact query keywords
-- Bullets: List features directly applicable to "{request.query}" and give only 2 bullet points
-
-### IMPORTANT RULES:
-- NO DUPLICATES: Each tool_id can only appear once in your response
-- NO PADDING: Don't add irrelevant tools just to reach a number
-- RELEVANCE FIRST: Only include tools that actually solve the user's need
-- VARIABLE COUNT: You can return anywhere only upto 20 tools based on what's actually relevant.
+- *Description: Explain specific relevance to "{request.query}" using exact query keywords*
+- *Bullets: List features directly applicable to "{request.query}" and give only 2 bullet points.*
 
 ### DOMAIN FILTERING EXAMPLE:
-Query: "text to image"
-INCLUDE: Text-to-image tools, AI image creation from text
-EXCLUDE: Dont include image-to-video converters, video creation tools, design tools
+Example 1: Query: "text to image"
+✅ INCLUDE: Text-to-image tools, AI image creation from text. Include all text-to-image and image generation tools at the top or beginning of the list.
+❌ EXCLUDE: Dont include image-to-video converters, video creation tools, design tools.
 Reason: User wants text→image generation specifically, not image manipulation or video other media types
+Example 2: Query: "Write PRD for me"
+✅ INCLUDE: all tools for creating Product Requirements Documents (PRDs). Include all PRD-specific tools which have PRD in its tool data.
+❌ EXCLUDE: Dont include image-to-video converters, video creation tools, design tools.
+Reason: User wants PRD creation specifically so include all tools which have PRDs, PRD and related keywords in it, not image manipulation or video other media types
 
 ### DESCRIPTION EXAMPLE:
 Query: "write PRD for me"
@@ -2642,24 +2644,32 @@ Good Bullets: ["PRD-specific templates and sections for goals, users, specs, fea
   ]
 }}
 
-### CRITICAL REQUIREMENTS:
+#### IMPORTANT RULES:
 - Return ONLY valid JSON in the EXACT format provided above *without any PREAMBLE or EXPLANATION.*
-- Ensure all brackets and quotes are properly closed
+- Ensure all brackets and quotes are properly closed.
 - Use exact "tool_id" field from metadata, NOT tool name
 - Each tool_id should appear exactly once (NO DUPLICATES)
-- Only include tools that are genuinely relevant to "{request.query}"
-- Rank tools from most to least relevant (1st = most relevant)
+- Include all tools that are relevant to "{request.query}".
 - Return as many tools as are relevant upto 20.
-- Better to return fewer high-quality matches than many poor matches"""
+- Rank tools from most to least relevant (1st = most relevant) in the JSON format.
+- NO DUPLICATES: Each tool_id can only appear once in your response.
+- NO PADDING: Don't add irrelevant tools just to reach a number.
+- VARIABLE COUNT: You can return anywhere only upto 20 tools based on relevance relevant."""
             
             prompt_text = f"""Query: "{request.query}"
 
 Available Tools Data:
 {cleaned_context}
 
-Task: Select the most relevant tools for this query. Focus on quality over quantity - only include tools that genuinely solve the user's need. Rank from most to least relevant and explain specific connections to "{request.query}".
+Task: Analyze the query and determine its main intent. Then review the available tools data and select all tools that are relevant to the topic: "{request.query}".
+Return the tools in the expected JSON format, ranked from most to least relevant, with the most relevant tools appearing first.
 
-Remember: NO DUPLICATES and NO PADDING with irrelevant tools."""            
+Do not miss any relevant tools that address "{request.query}".
+
+***Include all tools that match the same keywords or are functionally related to the Query.***
+Important Notes: 
+-NO DUPLICATES and NO PADDING with irrelevant tools.
+"""            
             # Initialize LLM and get response
             llm = ChatGroq(
                 groq_api_key=env.groq_api_key,
@@ -2667,9 +2677,9 @@ Remember: NO DUPLICATES and NO PADDING with irrelevant tools."""
                 temperature=0.05,
                 max_tokens=8000,
                 model_kwargs={
-                    "top_p": 0.9,
-                    "frequency_penalty": 0.1,
-                    "presence_penalty": 0.05,
+                    "top_p": 0.7,
+                    "frequency_penalty": 0.2,
+                    "presence_penalty": 0.0,
                     "response_format": {"type": "json_object"}
                 }
             )

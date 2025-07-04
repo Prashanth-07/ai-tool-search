@@ -1,0 +1,343 @@
+{
+  "timestamp": "2025-07-04T14:36:02.553945",
+  "input_query": "write product requiremenets documents for me",
+  "model_info_before_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 18,
+    "tool_ids": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863599c015bd4929b37d01d",
+      "6863673d015bd4929b37d69d",
+      "68636b0c015bd4929b37d7a4",
+      "685e9c4b1c16582699a7b791",
+      "68666360ef7018fbfef69bc7",
+      "684d816b79b4f531e34af945",
+      "68263f2423aaf1a750a137ec",
+      "68330775dc5f9153e5ac564a",
+      "6832c345dc5f9153e5a98ca9",
+      "68347674492254eb6808cd0e",
+      "682d63e623aaf1a750a9e846",
+      "681f265153d3e454a4bb7207",
+      "681ed8f853d3e454a4b9e18b",
+      "68654a74015bd4929b395000",
+      "68668e1bef7018fbfef6ae79",
+      "681e0e3a63aef50052dc2b5a"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI-driven assistant for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features",
+          "Collaborative PRD editing and review features with real-time version tracking"
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "AI-driven PRD Generator for streamlining product documentation with diverse input formats and structured PRD outputs",
+        "bullets": [
+          "Multi-source intelligence for generating PRDs from various inputs",
+          "Rapid PRD creation with template-driven speed and AI-guided editing"
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "AI copilot for product managers to draft PRDs, one-pagers, roadmaps, and more with intelligent templates and iterative feedback",
+        "bullets": [
+          "Product-centric AI for guiding PRD creation and refinement",
+          "On-demand CPO feedback for coaching and critique"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "AI-powered solution for creating PRDs from diverse input formats with intelligent extraction and structuring",
+        "bullets": [
+          "Multi-source intelligence for generating PRDs from text, web pages, documents, and audio",
+          "AI-guided editing for refining and customizing PRD drafts"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "AI-powered product management tool for creating PRDs, technical specifications, and related tasks with a single prompt",
+        "bullets": [
+          "Specialized product expertise with proven frameworks for consistency and quality",
+          "Unified product studio for combining PRD writing, tech specs, and task workflows"
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "AI-powered collaboration app for creating clear PRDs, converting them into actionable user stories and test plans",
+        "bullets": [
+          "In-Confluence, no-context-switching AI for streamlined PRD creation",
+          "Intelligent prompts to avoid gaps and ensure comprehensive PRDs"
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "AI-powered platform offering a suite of specialized agents for product management tasks, including PRD generation",
+        "bullets": [
+          "PM-focused agents for automating tasks like PRD writing and market research",
+          "Ease of use with a web-based interface requiring no installs or API keys"
+        ]
+      },
+      {
+        "id": "684d816b79b4f531e34af945",
+        "name": "ProductBoard",
+        "description": "Customer-centric product management platform for building products that meet user needs, with features for feedback management and prioritization",
+        "bullets": [
+          "Customer-driven prioritization connecting raw customer feedback to feature ideas",
+          "Dynamic roadmaps for aligning product strategy with business goals"
+        ]
+      },
+      {
+        "id": "68263f2423aaf1a750a137ec",
+        "name": "myperfectresume",
+        "description": "My Perfect Resume - AI Resume Writer is an AI-powered resume generator that helps job seekers create professional, ATS-friendly resumes with expert guidance. It offers free resume generation with step-by-step prompts and pro tips, along with premium features for advanced job application support.",
+        "bullets": []
+      },
+      {
+        "id": "68330775dc5f9153e5ac564a",
+        "name": "StealthWriter",
+        "description": "Stealth Writer is an AI-powered content rewriting tool designed to make AI-generated text appear human-written. It helps users bypass AI detection tools while maintaining readability, coherence, and originality. The tool is particularly useful for writers, marketers, and professionals who want to refine AI-assisted content for authenticity and undetectability.",
+        "bullets": []
+      },
+      {
+        "id": "6832c345dc5f9153e5a98ca9",
+        "name": "WriteHuman",
+        "description": "WriteHuman is an AI-powered tool designed to humanize AI-generated text, making it undetectable by AI detection tools like GPTZero, Turnitin, and Originality.ai. It ensures AI-assisted content maintains a natural, human-like tone while preserving readability and coherence.",
+        "bullets": []
+      },
+      {
+        "id": "68347674492254eb6808cd0e",
+        "name": "Copy.ai",
+        "description": "Copy.ai is an AI-powered writing assistant designed to help users create high-quality content quickly and efficiently. It uses advanced language models to generate marketing copy, blog posts, product descriptions, and social media content. With an easy-to-use interface and various templates, Copy.ai simplifies the content creation process, making it accessible to businesses, marketers, and creators looking to enhance their writing workflow.",
+        "bullets": []
+      },
+      {
+        "id": "682d63e623aaf1a750a9e846",
+        "name": "wordtune",
+        "description": "Wordtune is an AI-powered writing assistant designed to help users refine, rewrite, and enhance their text for clarity, conciseness, and improved readability. Unlike traditional grammar checkers, Wordtune focuses on rephrasing sentences with better tone, flow, and engagement, making it ideal for professional, academic, and everyday writing.",
+        "bullets": []
+      },
+      {
+        "id": "681f265153d3e454a4bb7207",
+        "name": "Writer",
+        "description": "Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.",
+        "bullets": []
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite",
+        "description": "HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.",
+        "bullets": []
+      },
+      {
+        "id": "68654a74015bd4929b395000",
+        "name": "TableSprint",
+        "description": "TableSprint is an AI-driven productivity tool that transforms natural language into fully functional spreadsheets and structured tables within seconds. Whether you need a financial tracker, content calendar, sales dashboard, or project management table, TableSprint lets you skip manual setup and instantly generate accurate, formula-ready tables just by describing them in plain English.\nInstead of spending hours formatting cells, inputting formulas, or structuring data, users can simply write prompts like \u201ca monthly expense tracker with categories, totals, and a chart\u201d or \u201ca content calendar with dates, platforms, topics, and status.\u201d The AI understands your intent and produces a clean, organized spreadsheet that\u2019s ready for editing or export.",
+        "bullets": []
+      },
+      {
+        "id": "68668e1bef7018fbfef6ae79",
+        "name": "Manus AI",
+        "description": "Manus is an intelligent, distraction-free writing tool powered by AI to help you focus entirely on crafting high-quality written content. Unlike traditional editors that overload you with formatting options and clutter, Manus puts simplicity and clarity at the center of your writing process\u2014allowing ideas to flow with minimal friction. It integrates AI assistance to help with brainstorming, rewriting, shortening, expanding, translating, and refining your work, all without ever breaking your writing flow.\nIdeal for professional writers, students, knowledge workers, and content creators, Manus doesn\u2019t just help you write\u2014it helps you think better and stay productive. It combines the clean aesthetic of a minimalist editor with powerful AI under the hood, making it a unique offering in the world of AI-powered writing assistants.",
+        "bullets": []
+      },
+      {
+        "id": "681e0e3a63aef50052dc2b5a",
+        "name": "ThesisAI",
+        "description": "ThesisAI is an AI-powered writing assistant designed to help users draft comprehensive scientific documents with ease. Whether you\u2019re working on a thesis, dissertation, research paper, or academic article, ThesisAI allows you to generate up to 50 pages of well-structured content from a single prompt. With features like inline citations, LaTeX integration, and support for over 20 languages, it ensures that your writing adheres to professional academic standards.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863599c015bd4929b37d01d",
+      "6863673d015bd4929b37d69d",
+      "68636b0c015bd4929b37d7a4",
+      "685e9c4b1c16582699a7b791",
+      "68666360ef7018fbfef69bc7",
+      "684d816b79b4f531e34af945",
+      "68263f2423aaf1a750a137ec",
+      "68330775dc5f9153e5ac564a",
+      "6832c345dc5f9153e5a98ca9",
+      "68347674492254eb6808cd0e",
+      "682d63e623aaf1a750a9e846",
+      "681f265153d3e454a4bb7207",
+      "681ed8f853d3e454a4b9e18b",
+      "68654a74015bd4929b395000",
+      "68668e1bef7018fbfef6ae79",
+      "681e0e3a63aef50052dc2b5a"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI-driven assistant for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features",
+          "Collaborative PRD editing and review features with real-time version tracking"
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "AI-driven PRD Generator for streamlining product documentation with diverse input formats and structured PRD outputs",
+        "bullets": [
+          "Multi-source intelligence for generating PRDs from various inputs",
+          "Rapid PRD creation with template-driven speed and AI-guided editing"
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "AI copilot for product managers to draft PRDs, one-pagers, roadmaps, and more with intelligent templates and iterative feedback",
+        "bullets": [
+          "Product-centric AI for guiding PRD creation and refinement",
+          "On-demand CPO feedback for coaching and critique"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "AI-powered solution for creating PRDs from diverse input formats with intelligent extraction and structuring",
+        "bullets": [
+          "Multi-source intelligence for generating PRDs from text, web pages, documents, and audio",
+          "AI-guided editing for refining and customizing PRD drafts"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "AI-powered product management tool for creating PRDs, technical specifications, and related tasks with a single prompt",
+        "bullets": [
+          "Specialized product expertise with proven frameworks for consistency and quality",
+          "Unified product studio for combining PRD writing, tech specs, and task workflows"
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "AI-powered collaboration app for creating clear PRDs, converting them into actionable user stories and test plans",
+        "bullets": [
+          "In-Confluence, no-context-switching AI for streamlined PRD creation",
+          "Intelligent prompts to avoid gaps and ensure comprehensive PRDs"
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "AI-powered platform offering a suite of specialized agents for product management tasks, including PRD generation",
+        "bullets": [
+          "PM-focused agents for automating tasks like PRD writing and market research",
+          "Ease of use with a web-based interface requiring no installs or API keys"
+        ]
+      },
+      {
+        "id": "684d816b79b4f531e34af945",
+        "name": "ProductBoard",
+        "description": "Customer-centric product management platform for building products that meet user needs, with features for feedback management and prioritization",
+        "bullets": [
+          "Customer-driven prioritization connecting raw customer feedback to feature ideas",
+          "Dynamic roadmaps for aligning product strategy with business goals"
+        ]
+      },
+      {
+        "id": "68263f2423aaf1a750a137ec",
+        "name": "myperfectresume",
+        "description": "My Perfect Resume - AI Resume Writer is an AI-powered resume generator that helps job seekers create professional, ATS-friendly resumes with expert guidance. It offers free resume generation with step-by-step prompts and pro tips, along with premium features for advanced job application support.",
+        "bullets": []
+      },
+      {
+        "id": "68330775dc5f9153e5ac564a",
+        "name": "StealthWriter",
+        "description": "Stealth Writer is an AI-powered content rewriting tool designed to make AI-generated text appear human-written. It helps users bypass AI detection tools while maintaining readability, coherence, and originality. The tool is particularly useful for writers, marketers, and professionals who want to refine AI-assisted content for authenticity and undetectability.",
+        "bullets": []
+      },
+      {
+        "id": "6832c345dc5f9153e5a98ca9",
+        "name": "WriteHuman",
+        "description": "WriteHuman is an AI-powered tool designed to humanize AI-generated text, making it undetectable by AI detection tools like GPTZero, Turnitin, and Originality.ai. It ensures AI-assisted content maintains a natural, human-like tone while preserving readability and coherence.",
+        "bullets": []
+      },
+      {
+        "id": "68347674492254eb6808cd0e",
+        "name": "Copy.ai",
+        "description": "Copy.ai is an AI-powered writing assistant designed to help users create high-quality content quickly and efficiently. It uses advanced language models to generate marketing copy, blog posts, product descriptions, and social media content. With an easy-to-use interface and various templates, Copy.ai simplifies the content creation process, making it accessible to businesses, marketers, and creators looking to enhance their writing workflow.",
+        "bullets": []
+      },
+      {
+        "id": "682d63e623aaf1a750a9e846",
+        "name": "wordtune",
+        "description": "Wordtune is an AI-powered writing assistant designed to help users refine, rewrite, and enhance their text for clarity, conciseness, and improved readability. Unlike traditional grammar checkers, Wordtune focuses on rephrasing sentences with better tone, flow, and engagement, making it ideal for professional, academic, and everyday writing.",
+        "bullets": []
+      },
+      {
+        "id": "681f265153d3e454a4bb7207",
+        "name": "Writer",
+        "description": "Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.",
+        "bullets": []
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite",
+        "description": "HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.",
+        "bullets": []
+      },
+      {
+        "id": "68654a74015bd4929b395000",
+        "name": "TableSprint",
+        "description": "TableSprint is an AI-driven productivity tool that transforms natural language into fully functional spreadsheets and structured tables within seconds. Whether you need a financial tracker, content calendar, sales dashboard, or project management table, TableSprint lets you skip manual setup and instantly generate accurate, formula-ready tables just by describing them in plain English.\nInstead of spending hours formatting cells, inputting formulas, or structuring data, users can simply write prompts like \u201ca monthly expense tracker with categories, totals, and a chart\u201d or \u201ca content calendar with dates, platforms, topics, and status.\u201d The AI understands your intent and produces a clean, organized spreadsheet that\u2019s ready for editing or export.",
+        "bullets": []
+      },
+      {
+        "id": "68668e1bef7018fbfef6ae79",
+        "name": "Manus AI",
+        "description": "Manus is an intelligent, distraction-free writing tool powered by AI to help you focus entirely on crafting high-quality written content. Unlike traditional editors that overload you with formatting options and clutter, Manus puts simplicity and clarity at the center of your writing process\u2014allowing ideas to flow with minimal friction. It integrates AI assistance to help with brainstorming, rewriting, shortening, expanding, translating, and refining your work, all without ever breaking your writing flow.\nIdeal for professional writers, students, knowledge workers, and content creators, Manus doesn\u2019t just help you write\u2014it helps you think better and stay productive. It combines the clean aesthetic of a minimalist editor with powerful AI under the hood, making it a unique offering in the world of AI-powered writing assistants.",
+        "bullets": []
+      },
+      {
+        "id": "681e0e3a63aef50052dc2b5a",
+        "name": "ThesisAI",
+        "description": "ThesisAI is an AI-powered writing assistant designed to help users draft comprehensive scientific documents with ease. Whether you\u2019re working on a thesis, dissertation, research paper, or academic article, ThesisAI allows you to generate up to 50 pages of well-structured content from a single prompt. With features like inline citations, LaTeX integration, and support for over 20 languages, it ensures that your writing adheres to professional academic standards.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 11.605,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68635e5e015bd4929b37d18a\",\n    \"6863632c015bd4929b37d359\",\n    \"6863599c015bd4929b37d01d\",\n    \"6863673d015bd4929b37d69d\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"685e9c4b1c16582699a7b791\",\n    \"68666360ef7018fbfef69bc7\",\n    \"684d816b79b4f531e34af945\",\n    \"68263f2423aaf1a750a137ec\",\n    \"68330775dc5f9153e5ac564a\",\n    \"6832c345dc5f9153e5a98ca9\",\n    \"68347674492254eb6808cd0e\",\n    \"682d63e623aaf1a750a9e846\",\n    \"681f265153d3e454a4bb7207\",\n    \"681ed8f853d3e454a4b9e18b\",\n    \"68654a74015bd4929b395000\",\n    \"68668e1bef7018fbfef6ae79\",\n    \"681e0e3a63aef50052dc2b5a\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"AI-driven assistant for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features\",\n        \"Collaborative PRD editing and review features with real-time version tracking\"\n      ]\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"AI-driven PRD Generator for streamlining product documentation with diverse input formats and structured PRD outputs\",\n      \"bullets\": [\n        \"Multi-source intelligence for generating PRDs from various inputs\",\n        \"Rapid PRD creation with template-driven speed and AI-guided editing\"\n      ]\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"AI copilot for product managers to draft PRDs, one-pagers, roadmaps, and more with intelligent templates and iterative feedback\",\n      \"bullets\": [\n        \"Product-centric AI for guiding PRD creation and refinement\",\n        \"On-demand CPO feedback for coaching and critique\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"AI-powered solution for creating PRDs from diverse input formats with intelligent extraction and structuring\",\n      \"bullets\": [\n        \"Multi-source intelligence for generating PRDs from text, web pages, documents, and audio\",\n        \"AI-guided editing for refining and customizing PRD drafts\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"AI-powered product management tool for creating PRDs, technical specifications, and related tasks with a single prompt\",\n      \"bullets\": [\n        \"Specialized product expertise with proven frameworks for consistency and quality\",\n        \"Unified product studio for combining PRD writing, tech specs, and task workflows\"\n      ]\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"AI-powered collaboration app for creating clear PRDs, converting them into actionable user stories and test plans\",\n      \"bullets\": [\n        \"In-Confluence, no-context-switching AI for streamlined PRD creation\",\n        \"Intelligent prompts to avoid gaps and ensure comprehensive PRDs\"\n      ]\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\",\n      \"description\": \"AI-powered platform offering a suite of specialized agents for product management tasks, including PRD generation\",\n      \"bullets\": [\n        \"PM-focused agents for automating tasks like PRD writing and market research\",\n        \"Ease of use with a web-based interface requiring no installs or API keys\"\n      ]\n    },\n    {\n      \"id\": \"684d816b79b4f531e34af945\",\n      \"name\": \"ProductBoard\",\n      \"description\": \"Customer-centric product management platform for building products that meet user needs, with features for feedback management and prioritization\",\n      \"bullets\": [\n        \"Customer-driven prioritization connecting raw customer feedback to feature ideas\",\n        \"Dynamic roadmaps for aligning product strategy with business goals\"\n      ]\n    },\n    {\n      \"id\": \"68263f2423aaf1a750a137ec\",\n      \"name\": \"myperfectresume\",\n      \"description\": \"My Perfect Resume - AI Resume Writer is an AI-powered resume generator that helps job seekers create professional, ATS-friendly resumes with expert guidance. It offers free resume generation with step-by-step prompts and pro tips, along with premium features for advanced job application support.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68330775dc5f9153e5ac564a\",\n      \"name\": \"StealthWriter\",\n      \"description\": \"Stealth Writer is an AI-powered content rewriting tool designed to make AI-generated text appear human-written. It helps users bypass AI detection tools while maintaining readability, coherence, and originality. The tool is particularly useful for writers, marketers, and professionals who want to refine AI-assisted content for authenticity and undetectability.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6832c345dc5f9153e5a98ca9\",\n      \"name\": \"WriteHuman\",\n      \"description\": \"WriteHuman is an AI-powered tool designed to humanize AI-generated text, making it undetectable by AI detection tools like GPTZero, Turnitin, and Originality.ai. It ensures AI-assisted content maintains a natural, human-like tone while preserving readability and coherence.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68347674492254eb6808cd0e\",\n      \"name\": \"Copy.ai\",\n      \"description\": \"Copy.ai is an AI-powered writing assistant designed to help users create high-quality content quickly and efficiently. It uses advanced language models to generate marketing copy, blog posts, product descriptions, and social media content. With an easy-to-use interface and various templates, Copy.ai simplifies the content creation process, making it accessible to businesses, marketers, and creators looking to enhance their writing workflow.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682d63e623aaf1a750a9e846\",\n      \"name\": \"wordtune\",\n      \"description\": \"Wordtune is an AI-powered writing assistant designed to help users refine, rewrite, and enhance their text for clarity, conciseness, and improved readability. Unlike traditional grammar checkers, Wordtune focuses on rephrasing sentences with better tone, flow, and engagement, making it ideal for professional, academic, and everyday writing.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681f265153d3e454a4bb7207\",\n      \"name\": \"Writer\",\n      \"description\": \"Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681ed8f853d3e454a4b9e18b\",\n      \"name\": \"HyperWrite\",\n      \"description\": \"HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68654a74015bd4929b395000\",\n      \"name\": \"TableSprint\",\n      \"description\": \"TableSprint is an AI-driven productivity tool that transforms natural language into fully functional spreadsheets and structured tables within seconds. Whether you need a financial tracker, content calendar, sales dashboard, or project management table, TableSprint lets you skip manual setup and instantly generate accurate, formula-ready tables just by describing them in plain English.\\nInstead of spending hours formatting cells, inputting formulas, or structuring data, users can simply write prompts like \\u201ca monthly expense tracker with categories, totals, and a chart\\u201d or \\u201ca content calendar with dates, platforms, topics, and status.\\u201d The AI understands your intent and produces a clean, organized spreadsheet that\\u2019s ready for editing or export.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68668e1bef7018fbfef6ae79\",\n      \"name\": \"Manus AI\",\n      \"description\": \"Manus is an intelligent, distraction-free writing tool powered by AI to help you focus entirely on crafting high-quality written content. Unlike traditional editors that overload you with formatting options and clutter, Manus puts simplicity and clarity at the center of your writing process\\u2014allowing ideas to flow with minimal friction. It integrates AI assistance to help with brainstorming, rewriting, shortening, expanding, translating, and refining your work, all without ever breaking your writing flow.\\nIdeal for professional writers, students, knowledge workers, and content creators, Manus doesn\\u2019t just help you write\\u2014it helps you think better and stay productive. It combines the clean aesthetic of a minimalist editor with powerful AI under the hood, making it a unique offering in the world of AI-powered writing assistants.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681e0e3a63aef50052dc2b5a\",\n      \"name\": \"ThesisAI\",\n      \"description\": \"ThesisAI is an AI-powered writing assistant designed to help users draft comprehensive scientific documents with ease. Whether you\\u2019re working on a thesis, dissertation, research paper, or academic article, ThesisAI allows you to generate up to 50 pages of well-structured content from a single prompt. With features like inline citations, LaTeX integration, and support for over 20 languages, it ensures that your writing adheres to professional academic standards.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

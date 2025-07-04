@@ -1,0 +1,323 @@
+{
+  "timestamp": "2025-07-04T14:22:22.960418",
+  "input_query": "help me with PRD",
+  "model_info_before_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 17,
+    "tool_ids": [
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68666360ef7018fbfef69bc7",
+      "68635e5e015bd4929b37d18a",
+      "68636b0c015bd4929b37d7a4",
+      "684d7f4479b4f531e34aa3d8",
+      "684d932e79b4f531e3513c96",
+      "682e164a23aaf1a750aa8ace",
+      "684c82d4b9392005154a3270",
+      "681cbad6477018e3479577b4",
+      "68347ac2492254eb6808da60",
+      "685e9c4b1c16582699a7b791",
+      "681a2705606258b6c075eda7",
+      "681c8e41477018e3479561f9",
+      "6832c87ddc5f9153e5a9d1fd",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "AI-driven PRD Generator streamlines product documentation for teams, generating comprehensive, structured Product Requirement Documents in minutes.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs).",
+        "bullets": [
+          "Multi-Source Intelligence: Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation.",
+          "Template-Driven Speed: Speedsters past blank-page paralysis using a tried-and-tested PRD template."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification.",
+        "bullets": [
+          "PM-Focused: Unlike general-purpose AI, these agents are fine-tuned for product management workflows.",
+          "Specialized Agents: Each AI agent has a clear purpose\u2014from research to resume review\u2014reducing friction."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirements Documents (PRDs).",
+        "bullets": [
+          "ChatGPT-Prompt Engineered: Tailored prompts and formatting optimized for PRD generation\u2014saves time versus writing in vanilla chat interfaces.",
+          "User-Friendly Interface: Clean, intuitive design guides users through each section."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool, with a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks.",
+        "bullets": [
+          "Specialized Product Expertise\u2014built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "684d7f4479b4f531e34aa3d8",
+        "name": "Zeda",
+        "description": "Zeda.io is an AI-powered product management platform designed to help product teams build better products faster, with smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization.",
+        "bullets": [
+          "AI-Powered Prioritization: A key unique feature that automatically scores and ranks features and ideas based on various inputs.",
+          "Unified Feedback Hub: Collects and centralizes customer feedback from diverse sources into a single, organized hub."
+        ]
+      },
+      {
+        "id": "684d932e79b4f531e3513c96",
+        "name": "Prisync",
+        "description": "Prisync is an AI-powered competitor price tracking and dynamic pricing platform designed for eCommerce businesses, helping brands monitor competitor pricing, optimize product prices in real-time, and maximize profits with intelligent pricing strategies.",
+        "bullets": [
+          "Real-Time Competitor Price Monitoring: Provides 24/7, continuous monitoring of competitor pricing.",
+          "Dynamic Pricing Automation: Automatically adjusts product prices based on customizable rules, current inventory levels, and competitor actions."
+        ]
+      },
+      {
+        "id": "682e164a23aaf1a750aa8ace",
+        "name": "revid.ai",
+        "description": "Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence. It offers tools and features that simplify the video production process, making it accessible to both professionals and beginners.",
+        "bullets": []
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.",
+        "bullets": []
+      },
+      {
+        "id": "681cbad6477018e3479577b4",
+        "name": "Publer",
+        "description": "Publer AI is an AI-powered social media management and content creation tool designed to streamline scheduling, automation, and analytics. With AI Assist, users can generate high-quality captions, repurpose content, and optimize posts for better engagement. Publer supports multiple platforms, including Facebook, Instagram, Twitter, LinkedIn, Pinterest, TikTok, and Google My Business, making it an all-in-one solution for social media marketers, businesses, and creators.",
+        "bullets": []
+      },
+      {
+        "id": "68347ac2492254eb6808da60",
+        "name": "Rendom",
+        "description": "Meomni is an AI-powered browser extension designed to transform your new tab and sidebar into a personalized, elegant, and productive space. It offers a clutter-free interface with a wide range of features aimed at streamlining daily tasks, keeping you informed, and inspiring productivity.",
+        "bullets": []
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": []
+      },
+      {
+        "id": "681a2705606258b6c075eda7",
+        "name": "Solvr",
+        "description": "Solvr.me is an AI-powered platform designed to streamline problem-solving and collaboration. It connects individuals and teams with subject matter experts to tackle challenges across various industries. Whether you need quick advice, strategic insights, or a collaborative solution, Solvr.me provides a seamless interface for users to post problems and receive actionable solutions from experienced professionals.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68666360ef7018fbfef69bc7",
+      "68635e5e015bd4929b37d18a",
+      "68636b0c015bd4929b37d7a4",
+      "684d7f4479b4f531e34aa3d8",
+      "684d932e79b4f531e3513c96",
+      "682e164a23aaf1a750aa8ace",
+      "684c82d4b9392005154a3270",
+      "681cbad6477018e3479577b4",
+      "68347ac2492254eb6808da60",
+      "685e9c4b1c16582699a7b791",
+      "681a2705606258b6c075eda7",
+      "681c8e41477018e3479561f9",
+      "6832c87ddc5f9153e5a9d1fd",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "AI-driven PRD Generator streamlines product documentation for teams, generating comprehensive, structured Product Requirement Documents in minutes.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs).",
+        "bullets": [
+          "Multi-Source Intelligence: Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation.",
+          "Template-Driven Speed: Speedsters past blank-page paralysis using a tried-and-tested PRD template."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification.",
+        "bullets": [
+          "PM-Focused: Unlike general-purpose AI, these agents are fine-tuned for product management workflows.",
+          "Specialized Agents: Each AI agent has a clear purpose\u2014from research to resume review\u2014reducing friction."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirements Documents (PRDs).",
+        "bullets": [
+          "ChatGPT-Prompt Engineered: Tailored prompts and formatting optimized for PRD generation\u2014saves time versus writing in vanilla chat interfaces.",
+          "User-Friendly Interface: Clean, intuitive design guides users through each section."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool, with a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks.",
+        "bullets": [
+          "Specialized Product Expertise\u2014built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "684d7f4479b4f531e34aa3d8",
+        "name": "Zeda",
+        "description": "Zeda.io is an AI-powered product management platform designed to help product teams build better products faster, with smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization.",
+        "bullets": [
+          "AI-Powered Prioritization: A key unique feature that automatically scores and ranks features and ideas based on various inputs.",
+          "Unified Feedback Hub: Collects and centralizes customer feedback from diverse sources into a single, organized hub."
+        ]
+      },
+      {
+        "id": "684d932e79b4f531e3513c96",
+        "name": "Prisync",
+        "description": "Prisync is an AI-powered competitor price tracking and dynamic pricing platform designed for eCommerce businesses, helping brands monitor competitor pricing, optimize product prices in real-time, and maximize profits with intelligent pricing strategies.",
+        "bullets": [
+          "Real-Time Competitor Price Monitoring: Provides 24/7, continuous monitoring of competitor pricing.",
+          "Dynamic Pricing Automation: Automatically adjusts product prices based on customizable rules, current inventory levels, and competitor actions."
+        ]
+      },
+      {
+        "id": "682e164a23aaf1a750aa8ace",
+        "name": "revid.ai",
+        "description": "Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence. It offers tools and features that simplify the video production process, making it accessible to both professionals and beginners.",
+        "bullets": []
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.",
+        "bullets": []
+      },
+      {
+        "id": "681cbad6477018e3479577b4",
+        "name": "Publer",
+        "description": "Publer AI is an AI-powered social media management and content creation tool designed to streamline scheduling, automation, and analytics. With AI Assist, users can generate high-quality captions, repurpose content, and optimize posts for better engagement. Publer supports multiple platforms, including Facebook, Instagram, Twitter, LinkedIn, Pinterest, TikTok, and Google My Business, making it an all-in-one solution for social media marketers, businesses, and creators.",
+        "bullets": []
+      },
+      {
+        "id": "68347ac2492254eb6808da60",
+        "name": "Rendom",
+        "description": "Meomni is an AI-powered browser extension designed to transform your new tab and sidebar into a personalized, elegant, and productive space. It offers a clutter-free interface with a wide range of features aimed at streamlining daily tasks, keeping you informed, and inspiring productivity.",
+        "bullets": []
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": []
+      },
+      {
+        "id": "681a2705606258b6c075eda7",
+        "name": "Solvr",
+        "description": "Solvr.me is an AI-powered platform designed to streamline problem-solving and collaboration. It connects individuals and teams with subject matter experts to tackle challenges across various industries. Whether you need quick advice, strategic insights, or a collaborative solution, Solvr.me provides a seamless interface for users to post problems and receive actionable solutions from experienced professionals.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 11.148,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6863632c015bd4929b37d359\",\n    \"6863673d015bd4929b37d69d\",\n    \"68666360ef7018fbfef69bc7\",\n    \"68635e5e015bd4929b37d18a\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"684d7f4479b4f531e34aa3d8\",\n    \"684d932e79b4f531e3513c96\",\n    \"682e164a23aaf1a750aa8ace\",\n    \"684c82d4b9392005154a3270\",\n    \"681cbad6477018e3479577b4\",\n    \"68347ac2492254eb6808da60\",\n    \"685e9c4b1c16582699a7b791\",\n    \"681a2705606258b6c075eda7\",\n    \"681c8e41477018e3479561f9\",\n    \"6832c87ddc5f9153e5a9d1fd\",\n    \"685004e1afca082a9fc4178b\",\n    \"6863599c015bd4929b37d01d\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"AI-driven PRD Generator streamlines product documentation for teams, generating comprehensive, structured Product Requirement Documents in minutes.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"Bash\\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs).\",\n      \"bullets\": [\n        \"Multi-Source Intelligence: Generates PRDs from diverse inputs\\u2014text, webpages, or even audio\\u2014for comprehensive documentation.\",\n        \"Template-Driven Speed: Speedsters past blank-page paralysis using a tried-and-tested PRD template.\"\n      ]\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\",\n      \"description\": \"Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification.\",\n      \"bullets\": [\n        \"PM-Focused: Unlike general-purpose AI, these agents are fine-tuned for product management workflows.\",\n        \"Specialized Agents: Each AI agent has a clear purpose\\u2014from research to resume review\\u2014reducing friction.\"\n      ]\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\\u20113, designed to simplify and accelerate the creation of Product Requirements Documents (PRDs).\",\n      \"bullets\": [\n        \"ChatGPT-Prompt Engineered: Tailored prompts and formatting optimized for PRD generation\\u2014saves time versus writing in vanilla chat interfaces.\",\n        \"User-Friendly Interface: Clean, intuitive design guides users through each section.\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"Signlz is AI-powered product management tool, with a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks.\",\n      \"bullets\": [\n        \"Specialized Product Expertise\\u2014built using proven frameworks to enhance consistency and professional quality.\",\n        \"Unified Product Studio\\u2014combines PRD writing, tech specs, and task workflows in one tool.\"\n      ]\n    },\n    {\n      \"id\": \"684d7f4479b4f531e34aa3d8\",\n      \"name\": \"Zeda\",\n      \"description\": \"Zeda.io is an AI-powered product management platform designed to help product teams build better products faster, with smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization.\",\n      \"bullets\": [\n        \"AI-Powered Prioritization: A key unique feature that automatically scores and ranks features and ideas based on various inputs.\",\n        \"Unified Feedback Hub: Collects and centralizes customer feedback from diverse sources into a single, organized hub.\"\n      ]\n    },\n    {\n      \"id\": \"684d932e79b4f531e3513c96\",\n      \"name\": \"Prisync\",\n      \"description\": \"Prisync is an AI-powered competitor price tracking and dynamic pricing platform designed for eCommerce businesses, helping brands monitor competitor pricing, optimize product prices in real-time, and maximize profits with intelligent pricing strategies.\",\n      \"bullets\": [\n        \"Real-Time Competitor Price Monitoring: Provides 24/7, continuous monitoring of competitor pricing.\",\n        \"Dynamic Pricing Automation: Automatically adjusts product prices based on customizable rules, current inventory levels, and competitor actions.\"\n      ]\n    },\n    {\n      \"id\": \"682e164a23aaf1a750aa8ace\",\n      \"name\": \"revid.ai\",\n      \"description\": \"Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence. It offers tools and features that simplify the video production process, making it accessible to both professionals and beginners.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684c82d4b9392005154a3270\",\n      \"name\": \"Zed\",\n      \"description\": \"Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681cbad6477018e3479577b4\",\n      \"name\": \"Publer\",\n      \"description\": \"Publer AI is an AI-powered social media management and content creation tool designed to streamline scheduling, automation, and analytics. With AI Assist, users can generate high-quality captions, repurpose content, and optimize posts for better engagement. Publer supports multiple platforms, including Facebook, Instagram, Twitter, LinkedIn, Pinterest, TikTok, and Google My Business, making it an all-in-one solution for social media marketers, businesses, and creators.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68347ac2492254eb6808da60\",\n      \"name\": \"Rendom\",\n      \"description\": \"Meomni is an AI-powered browser extension designed to transform your new tab and sidebar into a personalized, elegant, and productive space. It offers a clutter-free interface with a wide range of features aimed at streamlining daily tasks, keeping you informed, and inspiring productivity.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681a2705606258b6c075eda7\",\n      \"name\": \"Solvr\",\n      \"description\": \"Solvr.me is an AI-powered platform designed to streamline problem-solving and collaboration. It connects individuals and teams with subject matter experts to tackle challenges across various industries. Whether you need quick advice, strategic insights, or a collaborative solution, Solvr.me provides a seamless interface for users to post problems and receive actionable solutions from experienced professionals.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681c8e41477018e3479561f9\",\n      \"name\": \"Predis\",\n      \"description\": \"Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6832c87ddc5f9153e5a9d1fd\",\n      \"name\": \"PRophet\",\n      \"description\": \"PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\",\n      \"description\": \"ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\\u2014helping PMs elevate their documentation and workflow efficiency.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

@@ -1,0 +1,497 @@
+{
+  "timestamp": "2025-07-04T14:09:17.135434",
+  "input_query": "text to image",
+  "model_info_before_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 27,
+    "tool_ids": [
+      "6855640a27c6eba075dcc244",
+      "68445543b32d4d019cbe07bd",
+      "68596cdd1c16582699a650c9",
+      "68333e7b8f07ab07a7db8e63",
+      "68450b12b32d4d019cd16976",
+      "6861680c3482c3b263fa6a75",
+      "683fb9b1bce3a3d64c68fa95",
+      "68653272015bd4929b394ad0",
+      "6855690127c6eba075dcc746",
+      "681beb12477018e34795523b",
+      "684422a2b32d4d019cba490e",
+      "681a8633477018e34794e35b",
+      "686786faef7018fbfef78a1a",
+      "6857813a1c16582699a4b869",
+      "681b6200477018e34794ffb6",
+      "684fede5afca082a9fc31c75",
+      "68556fda27c6eba075dcce40",
+      "6856addcee78f2aff0d16f6f",
+      "6856aaecee78f2aff0d16c6a",
+      "6855729027c6eba075dcd467",
+      "68303f27bcf558ef8c31d658",
+      "686407a5015bd4929b3826e3",
+      "68422299ac33a46e0bb73f68",
+      "68445055b32d4d019cbd5381",
+      "6859693a1c16582699a64e18",
+      "6863f65b015bd4929b381939"
+    ],
+    "tools": [
+      {
+        "id": "6855640a27c6eba075dcc244",
+        "name": "Gemini 2.0 Flash Preview Image",
+        "description": "Gemini 2.0 Flash Preview Image Generation is Google\u2019s experimental vision feature built into the Flash model, enabling developers to generate and edit images alongside text in a conversational manner.",
+        "bullets": [
+          "Conversational Image Generation & Editing: Supports back-and-forth refinements with context awareness.",
+          "Text Rendering in Images: Optimized for high-quality text overlays in visuals like banners and educational diagrams."
+        ]
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models.",
+        "bullets": [
+          "Multiple AI Models: Offers a range of models like Flux.1 Pro, Flux.1 Dev, and Flux.1 Schnell, each catering to different creative needs.",
+          "High-Resolution Outputs: Capable of generating images up to 4 megapixels, ensuring detailed and crisp visuals."
+        ]
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon",
+        "description": "Craiyon (formerly DALL\u00b7E Mini) is a free, web-based AI image generator launched in 2022 by Boris Dayma and his team, transforming simple text prompts into creative image sets.",
+        "bullets": [
+          "Truly Free & Unlimited: Offers unrestricted usage without account or paywall, supported by ads.",
+          "Beginner-Friendly Interface: Straightforward prompt-to-image flow ideal for casual users."
+        ]
+      },
+      {
+        "id": "68333e7b8f07ab07a7db8e63",
+        "name": "Lexica",
+        "description": "Lexica is an AI-powered image generation platform that allows users to create and explore AI-generated images, known for its Aperture v5 model.",
+        "bullets": [
+          "High-Quality Image Generation: Uses the advanced Aperture v5 model.",
+          "AI Image Search: Acts as a database of AI-generated images."
+        ]
+      },
+      {
+        "id": "68450b12b32d4d019cd16976",
+        "name": "DomoAI",
+        "description": "DomoAI is an advanced AI art generation platform that leverages artificial intelligence to transform text, images, and videos into various artistic styles.",
+        "bullets": [
+          "Comprehensive Suite: Offers a wide range of AI tools for both image and video generation and transformation within a single platform.",
+          "Video to Animation Conversion: A standout feature allowing users to restyle any video into various artistic styles."
+        ]
+      },
+      {
+        "id": "6861680c3482c3b263fa6a75",
+        "name": "GenColor AI",
+        "description": "GenColor.ai is a free, web-based AI tool that converts your photos or text prompts into clean, printable coloring pages.",
+        "bullets": [
+          "Dual Input Options: Offers both photo-to-line-art and imaginative prompt-based page generation.",
+          "Professional-Quality Output: AI ensures clean lines that capture fine details\u2014ideal for casual or professional use."
+        ]
+      },
+      {
+        "id": "683fb9b1bce3a3d64c68fa95",
+        "name": "ImageMover AI",
+        "description": "ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos.",
+        "bullets": [
+          "AI-Powered Video Generation: Transforms static images and text into dynamic, visually stunning videos using advanced AI technology.",
+          "Effortless Creation Process: Simplifies video production into three easy steps: upload, generate, and download."
+        ]
+      },
+      {
+        "id": "68653272015bd4929b394ad0",
+        "name": "Schnell AI",
+        "description": "SchnellAI (Flux Schnell) is an ultra-fast, free-to-use AI image generator powered by a 12-billion-parameter flow transformer model.",
+        "bullets": [
+          "Speed & Efficiency: Flux Schnell delivers pro-grade images in as few as four steps\u2014far faster than many diffusion models.",
+          "Open-Source & Commercial-Friendly: Built on Apache2.0 licensed tech, so you can use outputs freely."
+        ]
+      },
+      {
+        "id": "6855690127c6eba075dcc746",
+        "name": "Imagen 3",
+        "description": "Imagen 3 is Google DeepMind\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.",
+        "bullets": [
+          "Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.",
+          "Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language."
+        ]
+      },
+      {
+        "id": "681beb12477018e34795523b",
+        "name": "OpenAI Dall-E 3",
+        "description": "OpenAI DALL\u00b7E 3 is an advanced AI image generation model that creates highly detailed and realistic images from text prompts.",
+        "bullets": [
+          "Highly Accurate Image Generation: Better at understanding complex prompts.",
+          "Seamless ChatGPT Integration: Allows users to refine images interactively."
+        ]
+      },
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FluxAI.art is an AI-powered platform that leverages the 4o image generator to create diverse and vibrant artwork from text prompts.",
+        "bullets": [
+          "4o Image Generator Powered: Implies the use of highly advanced, often multimodal, AI models for image generation.",
+          "Broad Artistic Style Versatility: Excels at generating images in a wide array of distinct artistic styles."
+        ]
+      },
+      {
+        "id": "7770b9b2-bdcc-446f-ad8b-4b1a049a1b14",
+        "name": "Imagen 3",
+        "description": "Imagen 3 is Google DeepMind\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.",
+        "bullets": [
+          "Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.",
+          "Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language."
+        ]
+      },
+      {
+        "id": "681a8633477018e34794e35b",
+        "name": "OpenAI Dall-E 2",
+        "description": "DALL\u00b7E 2 is an AI model developed by OpenAI that generates images from text descriptions (prompts).",
+        "bullets": [
+          "Creative & Detailed Images: Generates high-quality, original artwork from text.",
+          "Inpainting & Editing: Users could modify or expand images, adding new elements seamlessly."
+        ]
+      },
+      {
+        "id": "686786faef7018fbfef78a1a",
+        "name": "Media.io AI Video Generator",
+        "description": "Media.io AI Video Generator is an online, AI-powered platform that converts text prompts and static images into engaging, high-quality videos. It combines text-to-video and image-to-video capabilities along with built-in editing tools such as subtitles, voiceovers, music integration, and dynamic effects. Its intuitive web interface makes professional-grade video creation accessible to all users",
+        "bullets": []
+      },
+      {
+        "id": "6857813a1c16582699a4b869",
+        "name": "Visme",
+        "description": "Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\u2014all within an intuitive visual editor that empowers non-designers.",
+        "bullets": []
+      },
+      {
+        "id": "681b6200477018e34794ffb6",
+        "name": "Icon",
+        "description": "Icon.me is an innovative AI-driven platform designed to streamline the process of creating winning advertisements. By combining the capabilities of ChatGPT and CapCut, Icon.me allows users to generate high-quality ads in minutes. The platform analyzes your video library, tags scenes, and integrates various tools for scriptwriting, video editing, creative storage, user-generated content (UGC), creative analytics, and competitor ad spying, making it a comprehensive solution for digital marketing needs.",
+        "bullets": []
+      },
+      {
+        "id": "684fede5afca082a9fc31c75",
+        "name": "PiktoChart",
+        "description": "Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities. It enables users to create infographics, presentations, posters, social media graphics, reports, and more\u2014with drag\u2011and\u2011drop ease and professionally designed templates",
+        "bullets": []
+      },
+      {
+        "id": "68556fda27c6eba075dcce40",
+        "name": "Janus-Pro-7B",
+        "description": "anus Pro\u202f7B is DeepSeek\u2019s flagship open-source multimodal AI model, unifying vision understanding and text-to-image generation within a single transformer architecture. Built on DeepSeek\u2011LLM\u20117B, it uses a decoupled visual encoding approach paired with SigLIP\u2011L and VQ tokenizer, delivering superior visual fidelity, prompt alignment, and stability across tasks\u2014benchmarked ahead of OpenAI\u2019s DALL\u2011E\u202f3 and Stable Diffusion variants.",
+        "bullets": []
+      },
+      {
+        "id": "6856addcee78f2aff0d16f6f",
+        "name": "grok-2-image",
+        "description": "Grok\u202f2 Image is xAI\u2019s image-generation model integrated into the Grok\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\u2014allowing users to generate, edit, and chat using images\u2014with a 32K-token visual-text context and produces photorealistic outputs.",
+        "bullets": []
+      },
+      {
+        "id": "6856aaecee78f2aff0d16c6a",
+        "name": "grok-2-vision",
+        "description": "Grok\u202f2 Vision (also known as Grok\u20112\u2011Vision\u20111212 or grok\u20112\u2011vision\u2011latest) is xAI\u2019s multimodal variant of Grok\u202f2, designed specifically for advanced image understanding and generation. Launched in December\u202f2024, it supports joint text+image inputs up to 32,768 tokens, excelling in visual math reasoning (MathVista), document question answering (DocVQA), object recognition, and style analysis\u2014while also offering photorealistic image creation via the FLUX.1 model.",
+        "bullets": []
+      },
+      {
+        "id": "6855729027c6eba075dcd467",
+        "name": "DeepSeek VL",
+        "description": "DeepSeek\u202fVL is DeepSeek\u2019s open-source vision-language model designed for real-world multimodal understanding. It employs a hybrid vision encoder (SigLIP\u2011L\u202f+\u202fSAM), processes high-resolution images (up to 1024\u00d71024), and supports both base and chat variants across two sizes: 1.3B and 7B parameters. It excels on tasks like OCR, diagram reasoning, webpage parsing, and visual Q&A\u2014while preserving strong language ability.",
+        "bullets": []
+      },
+      {
+        "id": "68303f27bcf558ef8c31d658",
+        "name": "Ideogram",
+        "description": "Ideogram is an AI-powered text-to-image generation tool designed to create high-quality visuals with seamless typography integration. Unlike traditional image-generation models, Ideogram specializes in producing images with accurate and aesthetically pleasing text, making it ideal for branding, social media content, and graphic design.",
+        "bullets": []
+      },
+      {
+        "id": "686407a5015bd4929b3826e3",
+        "name": "Pixvify",
+        "description": "Pixvify is a free, all-in-one AI-powered photo generation and editing suite designed for creating high-quality, photorealistic images from text prompts or existing photos. It also offers advanced tools like face swapping, image upscaling, and a wide variety of creative filters\u2014no signup required.",
+        "bullets": []
+      },
+      {
+        "id": "68422299ac33a46e0bb73f68",
+        "name": "OpenAI GPT Image 1",
+        "description": "GPT-Image-1 is OpenAI's state-of-the-art vision model designed to understand and interpret images with human-like perception. It enables developers and businesses to analyze, summarize, and extract detailed insights from images using natural language. Whether you're building AI agents, accessibility tools, or image-driven workflows, GPT-Image-1 brings powerful multimodal capabilities into your applications with impressive accuracy.\nOptimized for use via API, it can handle diverse image types\u2014charts, screenshots, photographs, documents, and more\u2014making it one of the most versatile models in OpenAI\u2019s portfolio.",
+        "bullets": []
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": []
+      },
+      {
+        "id": "6859693a1c16582699a64e18",
+        "name": "Microsoft Designer",
+        "description": "Microsoft Designer is Microsoft\u2019s AI-powered graphic design and image editing tool, officially launched in 2023 and broadly available in 2024. It leverages generative AI\u2014including DALL\u00b7E 3\u2014for creating visuals from text prompts, smart layout suggestions, and professional-level photo editing (e.g., background removal, object erasure, framing, and restyling) \u2014 all accessible via web, mobile, and integration within Microsoft 365 apps.",
+        "bullets": []
+      },
+      {
+        "id": "6863f65b015bd4929b381939",
+        "name": "Qwen Chat",
+        "description": "Qwen Chat is Alibaba Cloud\u2019s conversational AI assistant built on the Qwen series (e.g., Qwen\u20117B\u2011Chat, Qwen1.5\u20117B\u2011Chat, Qwen\u2011VL, Qwen\u2011Audio, and Qwen2.5\u2011Omni). It supports text, vision, audio, and video understanding, plus image and document processing, web search integration, and image generation\u2014all through a unified chat interface.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6855640a27c6eba075dcc244",
+      "68445543b32d4d019cbe07bd",
+      "68596cdd1c16582699a650c9",
+      "68333e7b8f07ab07a7db8e63",
+      "68450b12b32d4d019cd16976",
+      "6861680c3482c3b263fa6a75",
+      "683fb9b1bce3a3d64c68fa95",
+      "68653272015bd4929b394ad0",
+      "6855690127c6eba075dcc746",
+      "681beb12477018e34795523b",
+      "684422a2b32d4d019cba490e",
+      "681a8633477018e34794e35b",
+      "686786faef7018fbfef78a1a",
+      "6857813a1c16582699a4b869",
+      "681b6200477018e34794ffb6",
+      "684fede5afca082a9fc31c75",
+      "68556fda27c6eba075dcce40",
+      "6856addcee78f2aff0d16f6f",
+      "6856aaecee78f2aff0d16c6a",
+      "6855729027c6eba075dcd467",
+      "68303f27bcf558ef8c31d658",
+      "686407a5015bd4929b3826e3",
+      "68422299ac33a46e0bb73f68",
+      "68445055b32d4d019cbd5381",
+      "6859693a1c16582699a64e18",
+      "6863f65b015bd4929b381939"
+    ],
+    "tools": [
+      {
+        "id": "6855640a27c6eba075dcc244",
+        "name": "Gemini 2.0 Flash Preview Image",
+        "description": "Gemini 2.0 Flash Preview Image Generation is Google\u2019s experimental vision feature built into the Flash model, enabling developers to generate and edit images alongside text in a conversational manner.",
+        "bullets": [
+          "Conversational Image Generation & Editing: Supports back-and-forth refinements with context awareness.",
+          "Text Rendering in Images: Optimized for high-quality text overlays in visuals like banners and educational diagrams."
+        ]
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models.",
+        "bullets": [
+          "Multiple AI Models: Offers a range of models like Flux.1 Pro, Flux.1 Dev, and Flux.1 Schnell, each catering to different creative needs.",
+          "High-Resolution Outputs: Capable of generating images up to 4 megapixels, ensuring detailed and crisp visuals."
+        ]
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon",
+        "description": "Craiyon (formerly DALL\u00b7E Mini) is a free, web-based AI image generator launched in 2022 by Boris Dayma and his team, transforming simple text prompts into creative image sets.",
+        "bullets": [
+          "Truly Free & Unlimited: Offers unrestricted usage without account or paywall, supported by ads.",
+          "Beginner-Friendly Interface: Straightforward prompt-to-image flow ideal for casual users."
+        ]
+      },
+      {
+        "id": "68333e7b8f07ab07a7db8e63",
+        "name": "Lexica",
+        "description": "Lexica is an AI-powered image generation platform that allows users to create and explore AI-generated images, known for its Aperture v5 model.",
+        "bullets": [
+          "High-Quality Image Generation: Uses the advanced Aperture v5 model.",
+          "AI Image Search: Acts as a database of AI-generated images."
+        ]
+      },
+      {
+        "id": "68450b12b32d4d019cd16976",
+        "name": "DomoAI",
+        "description": "DomoAI is an advanced AI art generation platform that leverages artificial intelligence to transform text, images, and videos into various artistic styles.",
+        "bullets": [
+          "Comprehensive Suite: Offers a wide range of AI tools for both image and video generation and transformation within a single platform.",
+          "Video to Animation Conversion: A standout feature allowing users to restyle any video into various artistic styles."
+        ]
+      },
+      {
+        "id": "6861680c3482c3b263fa6a75",
+        "name": "GenColor AI",
+        "description": "GenColor.ai is a free, web-based AI tool that converts your photos or text prompts into clean, printable coloring pages.",
+        "bullets": [
+          "Dual Input Options: Offers both photo-to-line-art and imaginative prompt-based page generation.",
+          "Professional-Quality Output: AI ensures clean lines that capture fine details\u2014ideal for casual or professional use."
+        ]
+      },
+      {
+        "id": "683fb9b1bce3a3d64c68fa95",
+        "name": "ImageMover AI",
+        "description": "ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos.",
+        "bullets": [
+          "AI-Powered Video Generation: Transforms static images and text into dynamic, visually stunning videos using advanced AI technology.",
+          "Effortless Creation Process: Simplifies video production into three easy steps: upload, generate, and download."
+        ]
+      },
+      {
+        "id": "68653272015bd4929b394ad0",
+        "name": "Schnell AI",
+        "description": "SchnellAI (Flux Schnell) is an ultra-fast, free-to-use AI image generator powered by a 12-billion-parameter flow transformer model.",
+        "bullets": [
+          "Speed & Efficiency: Flux Schnell delivers pro-grade images in as few as four steps\u2014far faster than many diffusion models.",
+          "Open-Source & Commercial-Friendly: Built on Apache2.0 licensed tech, so you can use outputs freely."
+        ]
+      },
+      {
+        "id": "6855690127c6eba075dcc746",
+        "name": "Imagen 3",
+        "description": "Imagen 3 is Google DeepMind\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.",
+        "bullets": [
+          "Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.",
+          "Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language."
+        ]
+      },
+      {
+        "id": "681beb12477018e34795523b",
+        "name": "OpenAI Dall-E 3",
+        "description": "OpenAI DALL\u00b7E 3 is an advanced AI image generation model that creates highly detailed and realistic images from text prompts.",
+        "bullets": [
+          "Highly Accurate Image Generation: Better at understanding complex prompts.",
+          "Seamless ChatGPT Integration: Allows users to refine images interactively."
+        ]
+      },
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FluxAI.art is an AI-powered platform that leverages the 4o image generator to create diverse and vibrant artwork from text prompts.",
+        "bullets": [
+          "4o Image Generator Powered: Implies the use of highly advanced, often multimodal, AI models for image generation.",
+          "Broad Artistic Style Versatility: Excels at generating images in a wide array of distinct artistic styles."
+        ]
+      },
+      {
+        "id": "7770b9b2-bdcc-446f-ad8b-4b1a049a1b14",
+        "name": "Imagen 3",
+        "description": "Imagen 3 is Google DeepMind\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.",
+        "bullets": [
+          "Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.",
+          "Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language."
+        ]
+      },
+      {
+        "id": "681a8633477018e34794e35b",
+        "name": "OpenAI Dall-E 2",
+        "description": "DALL\u00b7E 2 is an AI model developed by OpenAI that generates images from text descriptions (prompts).",
+        "bullets": [
+          "Creative & Detailed Images: Generates high-quality, original artwork from text.",
+          "Inpainting & Editing: Users could modify or expand images, adding new elements seamlessly."
+        ]
+      },
+      {
+        "id": "686786faef7018fbfef78a1a",
+        "name": "Media.io AI Video Generator",
+        "description": "Media.io AI Video Generator is an online, AI-powered platform that converts text prompts and static images into engaging, high-quality videos. It combines text-to-video and image-to-video capabilities along with built-in editing tools such as subtitles, voiceovers, music integration, and dynamic effects. Its intuitive web interface makes professional-grade video creation accessible to all users",
+        "bullets": []
+      },
+      {
+        "id": "6857813a1c16582699a4b869",
+        "name": "Visme",
+        "description": "Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\u2014all within an intuitive visual editor that empowers non-designers.",
+        "bullets": []
+      },
+      {
+        "id": "681b6200477018e34794ffb6",
+        "name": "Icon",
+        "description": "Icon.me is an innovative AI-driven platform designed to streamline the process of creating winning advertisements. By combining the capabilities of ChatGPT and CapCut, Icon.me allows users to generate high-quality ads in minutes. The platform analyzes your video library, tags scenes, and integrates various tools for scriptwriting, video editing, creative storage, user-generated content (UGC), creative analytics, and competitor ad spying, making it a comprehensive solution for digital marketing needs.",
+        "bullets": []
+      },
+      {
+        "id": "684fede5afca082a9fc31c75",
+        "name": "PiktoChart",
+        "description": "Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities. It enables users to create infographics, presentations, posters, social media graphics, reports, and more\u2014with drag\u2011and\u2011drop ease and professionally designed templates",
+        "bullets": []
+      },
+      {
+        "id": "68556fda27c6eba075dcce40",
+        "name": "Janus-Pro-7B",
+        "description": "anus Pro\u202f7B is DeepSeek\u2019s flagship open-source multimodal AI model, unifying vision understanding and text-to-image generation within a single transformer architecture. Built on DeepSeek\u2011LLM\u20117B, it uses a decoupled visual encoding approach paired with SigLIP\u2011L and VQ tokenizer, delivering superior visual fidelity, prompt alignment, and stability across tasks\u2014benchmarked ahead of OpenAI\u2019s DALL\u2011E\u202f3 and Stable Diffusion variants.",
+        "bullets": []
+      },
+      {
+        "id": "6856addcee78f2aff0d16f6f",
+        "name": "grok-2-image",
+        "description": "Grok\u202f2 Image is xAI\u2019s image-generation model integrated into the Grok\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\u2014allowing users to generate, edit, and chat using images\u2014with a 32K-token visual-text context and produces photorealistic outputs.",
+        "bullets": []
+      },
+      {
+        "id": "6856aaecee78f2aff0d16c6a",
+        "name": "grok-2-vision",
+        "description": "Grok\u202f2 Vision (also known as Grok\u20112\u2011Vision\u20111212 or grok\u20112\u2011vision\u2011latest) is xAI\u2019s multimodal variant of Grok\u202f2, designed specifically for advanced image understanding and generation. Launched in December\u202f2024, it supports joint text+image inputs up to 32,768 tokens, excelling in visual math reasoning (MathVista), document question answering (DocVQA), object recognition, and style analysis\u2014while also offering photorealistic image creation via the FLUX.1 model.",
+        "bullets": []
+      },
+      {
+        "id": "6855729027c6eba075dcd467",
+        "name": "DeepSeek VL",
+        "description": "DeepSeek\u202fVL is DeepSeek\u2019s open-source vision-language model designed for real-world multimodal understanding. It employs a hybrid vision encoder (SigLIP\u2011L\u202f+\u202fSAM), processes high-resolution images (up to 1024\u00d71024), and supports both base and chat variants across two sizes: 1.3B and 7B parameters. It excels on tasks like OCR, diagram reasoning, webpage parsing, and visual Q&A\u2014while preserving strong language ability.",
+        "bullets": []
+      },
+      {
+        "id": "68303f27bcf558ef8c31d658",
+        "name": "Ideogram",
+        "description": "Ideogram is an AI-powered text-to-image generation tool designed to create high-quality visuals with seamless typography integration. Unlike traditional image-generation models, Ideogram specializes in producing images with accurate and aesthetically pleasing text, making it ideal for branding, social media content, and graphic design.",
+        "bullets": []
+      },
+      {
+        "id": "686407a5015bd4929b3826e3",
+        "name": "Pixvify",
+        "description": "Pixvify is a free, all-in-one AI-powered photo generation and editing suite designed for creating high-quality, photorealistic images from text prompts or existing photos. It also offers advanced tools like face swapping, image upscaling, and a wide variety of creative filters\u2014no signup required.",
+        "bullets": []
+      },
+      {
+        "id": "68422299ac33a46e0bb73f68",
+        "name": "OpenAI GPT Image 1",
+        "description": "GPT-Image-1 is OpenAI's state-of-the-art vision model designed to understand and interpret images with human-like perception. It enables developers and businesses to analyze, summarize, and extract detailed insights from images using natural language. Whether you're building AI agents, accessibility tools, or image-driven workflows, GPT-Image-1 brings powerful multimodal capabilities into your applications with impressive accuracy.\nOptimized for use via API, it can handle diverse image types\u2014charts, screenshots, photographs, documents, and more\u2014making it one of the most versatile models in OpenAI\u2019s portfolio.",
+        "bullets": []
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": []
+      },
+      {
+        "id": "6859693a1c16582699a64e18",
+        "name": "Microsoft Designer",
+        "description": "Microsoft Designer is Microsoft\u2019s AI-powered graphic design and image editing tool, officially launched in 2023 and broadly available in 2024. It leverages generative AI\u2014including DALL\u00b7E 3\u2014for creating visuals from text prompts, smart layout suggestions, and professional-level photo editing (e.g., background removal, object erasure, framing, and restyling) \u2014 all accessible via web, mobile, and integration within Microsoft 365 apps.",
+        "bullets": []
+      },
+      {
+        "id": "6863f65b015bd4929b381939",
+        "name": "Qwen Chat",
+        "description": "Qwen Chat is Alibaba Cloud\u2019s conversational AI assistant built on the Qwen series (e.g., Qwen\u20117B\u2011Chat, Qwen1.5\u20117B\u2011Chat, Qwen\u2011VL, Qwen\u2011Audio, and Qwen2.5\u2011Omni). It supports text, vision, audio, and video understanding, plus image and document processing, web search integration, and image generation\u2014all through a unified chat interface.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 12.203,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6855640a27c6eba075dcc244\",\n    \"68445543b32d4d019cbe07bd\",\n    \"68596cdd1c16582699a650c9\",\n    \"68333e7b8f07ab07a7db8e63\",\n    \"68450b12b32d4d019cd16976\",\n    \"6861680c3482c3b263fa6a75\",\n    \"683fb9b1bce3a3d64c68fa95\",\n    \"68653272015bd4929b394ad0\",\n    \"6855690127c6eba075dcc746\",\n    \"681beb12477018e34795523b\",\n    \"684422a2b32d4d019cba490e\",\n    \"681a8633477018e34794e35b\",\n    \"686786faef7018fbfef78a1a\",\n    \"6857813a1c16582699a4b869\",\n    \"681b6200477018e34794ffb6\",\n    \"684fede5afca082a9fc31c75\",\n    \"68556fda27c6eba075dcce40\",\n    \"6856addcee78f2aff0d16f6f\",\n    \"6856aaecee78f2aff0d16c6a\",\n    \"6855729027c6eba075dcd467\",\n    \"68303f27bcf558ef8c31d658\",\n    \"686407a5015bd4929b3826e3\",\n    \"68422299ac33a46e0bb73f68\",\n    \"68445055b32d4d019cbd5381\",\n    \"6859693a1c16582699a64e18\",\n    \"6863f65b015bd4929b381939\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6855640a27c6eba075dcc244\",\n      \"name\": \"Gemini 2.0 Flash Preview Image\",\n      \"description\": \"Gemini 2.0 Flash Preview Image Generation is Google\\u2019s experimental vision feature built into the Flash model, enabling developers to generate and edit images alongside text in a conversational manner.\",\n      \"bullets\": [\n        \"Conversational Image Generation & Editing: Supports back-and-forth refinements with context awareness.\",\n        \"Text Rendering in Images: Optimized for high-quality text overlays in visuals like banners and educational diagrams.\"\n      ]\n    },\n    {\n      \"id\": \"68445543b32d4d019cbe07bd\",\n      \"name\": \"Vidu Studio Flux AI Image Gen\",\n      \"description\": \"Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models.\",\n      \"bullets\": [\n        \"Multiple AI Models: Offers a range of models like Flux.1 Pro, Flux.1 Dev, and Flux.1 Schnell, each catering to different creative needs.\",\n        \"High-Resolution Outputs: Capable of generating images up to 4 megapixels, ensuring detailed and crisp visuals.\"\n      ]\n    },\n    {\n      \"id\": \"68596cdd1c16582699a650c9\",\n      \"name\": \"Craiyon\",\n      \"description\": \"Craiyon (formerly DALL\\u00b7E Mini) is a free, web-based AI image generator launched in 2022 by Boris Dayma and his team, transforming simple text prompts into creative image sets.\",\n      \"bullets\": [\n        \"Truly Free & Unlimited: Offers unrestricted usage without account or paywall, supported by ads.\",\n        \"Beginner-Friendly Interface: Straightforward prompt-to-image flow ideal for casual users.\"\n      ]\n    },\n    {\n      \"id\": \"68333e7b8f07ab07a7db8e63\",\n      \"name\": \"Lexica\",\n      \"description\": \"Lexica is an AI-powered image generation platform that allows users to create and explore AI-generated images, known for its Aperture v5 model.\",\n      \"bullets\": [\n        \"High-Quality Image Generation: Uses the advanced Aperture v5 model.\",\n        \"AI Image Search: Acts as a database of AI-generated images.\"\n      ]\n    },\n    {\n      \"id\": \"68450b12b32d4d019cd16976\",\n      \"name\": \"DomoAI\",\n      \"description\": \"DomoAI is an advanced AI art generation platform that leverages artificial intelligence to transform text, images, and videos into various artistic styles.\",\n      \"bullets\": [\n        \"Comprehensive Suite: Offers a wide range of AI tools for both image and video generation and transformation within a single platform.\",\n        \"Video to Animation Conversion: A standout feature allowing users to restyle any video into various artistic styles.\"\n      ]\n    },\n    {\n      \"id\": \"6861680c3482c3b263fa6a75\",\n      \"name\": \"GenColor AI\",\n      \"description\": \"GenColor.ai is a free, web-based AI tool that converts your photos or text prompts into clean, printable coloring pages.\",\n      \"bullets\": [\n        \"Dual Input Options: Offers both photo-to-line-art and imaginative prompt-based page generation.\",\n        \"Professional-Quality Output: AI ensures clean lines that capture fine details\\u2014ideal for casual or professional use.\"\n      ]\n    },\n    {\n      \"id\": \"683fb9b1bce3a3d64c68fa95\",\n      \"name\": \"ImageMover AI\",\n      \"description\": \"ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos.\",\n      \"bullets\": [\n        \"AI-Powered Video Generation: Transforms static images and text into dynamic, visually stunning videos using advanced AI technology.\",\n        \"Effortless Creation Process: Simplifies video production into three easy steps: upload, generate, and download.\"\n      ]\n    },\n    {\n      \"id\": \"68653272015bd4929b394ad0\",\n      \"name\": \"Schnell AI\",\n      \"description\": \"SchnellAI (Flux Schnell) is an ultra-fast, free-to-use AI image generator powered by a 12-billion-parameter flow transformer model.\",\n      \"bullets\": [\n        \"Speed & Efficiency: Flux Schnell delivers pro-grade images in as few as four steps\\u2014far faster than many diffusion models.\",\n        \"Open-Source & Commercial-Friendly: Built on Apache2.0 licensed tech, so you can use outputs freely.\"\n      ]\n    },\n    {\n      \"id\": \"6855690127c6eba075dcc746\",\n      \"name\": \"Imagen 3\",\n      \"description\": \"Imagen 3 is Google DeepMind\\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.\",\n      \"bullets\": [\n        \"Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.\",\n        \"Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language.\"\n      ]\n    },\n    {\n      \"id\": \"681beb12477018e34795523b\",\n      \"name\": \"OpenAI Dall-E 3\",\n      \"description\": \"OpenAI DALL\\u00b7E 3 is an advanced AI image generation model that creates highly detailed and realistic images from text prompts.\",\n      \"bullets\": [\n        \"Highly Accurate Image Generation: Better at understanding complex prompts.\",\n        \"Seamless ChatGPT Integration: Allows users to refine images interactively.\"\n      ]\n    },\n    {\n      \"id\": \"684422a2b32d4d019cba490e\",\n      \"name\": \"FLUX AI\",\n      \"description\": \"FluxAI.art is an AI-powered platform that leverages the 4o image generator to create diverse and vibrant artwork from text prompts.\",\n      \"bullets\": [\n        \"4o Image Generator Powered: Implies the use of highly advanced, often multimodal, AI models for image generation.\",\n        \"Broad Artistic Style Versatility: Excels at generating images in a wide array of distinct artistic styles.\"\n      ]\n    },\n    {\n      \"id\": \"7770b9b2-bdcc-446f-ad8b-4b1a049a1b14\",\n      \"name\": \"Imagen 3\",\n      \"description\": \"Imagen 3 is Google DeepMind\\u2019s latest state-of-the-art text-to-image model, capable of creating photorealistic or stylized visuals from simple, natural language prompts.\",\n      \"bullets\": [\n        \"Photorealistic Quality: Produces images with rich lighting, fine textures, and fewer artifacts than previous models.\",\n        \"Natural Prompt Understanding: Capable of following long, detailed instructions written in everyday language.\"\n      ]\n    },\n    {\n      \"id\": \"681a8633477018e34794e35b\",\n      \"name\": \"OpenAI Dall-E 2\",\n      \"description\": \"DALL\\u00b7E 2 is an AI model developed by OpenAI that generates images from text descriptions (prompts).\",\n      \"bullets\": [\n        \"Creative & Detailed Images: Generates high-quality, original artwork from text.\",\n        \"Inpainting & Editing: Users could modify or expand images, adding new elements seamlessly.\"\n      ]\n    },\n    {\n      \"id\": \"686786faef7018fbfef78a1a\",\n      \"name\": \"Media.io AI Video Generator\",\n      \"description\": \"Media.io AI Video Generator is an online, AI-powered platform that converts text prompts and static images into engaging, high-quality videos. It combines text-to-video and image-to-video capabilities along with built-in editing tools such as subtitles, voiceovers, music integration, and dynamic effects. Its intuitive web interface makes professional-grade video creation accessible to all users\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6857813a1c16582699a4b869\",\n      \"name\": \"Visme\",\n      \"description\": \"Visme AI is a comprehensive generative design and content platform that enables users to create presentations, documents, infographics, videos, and more\\u2014entirely from prompts. Built for efficiency and creativity, Visme AI offers tools like image generation, AI writing, touch-up editing, speech synthesis, resizing, and brand consistency\\u2014all within an intuitive visual editor that empowers non-designers.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681b6200477018e34794ffb6\",\n      \"name\": \"Icon\",\n      \"description\": \"Icon.me is an innovative AI-driven platform designed to streamline the process of creating winning advertisements. By combining the capabilities of ChatGPT and CapCut, Icon.me allows users to generate high-quality ads in minutes. The platform analyzes your video library, tags scenes, and integrates various tools for scriptwriting, video editing, creative storage, user-generated content (UGC), creative analytics, and competitor ad spying, making it a comprehensive solution for digital marketing needs.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684fede5afca082a9fc31c75\",\n      \"name\": \"PiktoChart\",\n      \"description\": \"Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities. It enables users to create infographics, presentations, posters, social media graphics, reports, and more\\u2014with drag\\u2011and\\u2011drop ease and professionally designed templates\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68556fda27c6eba075dcce40\",\n      \"name\": \"Janus-Pro-7B\",\n      \"description\": \"anus Pro\\u202f7B is DeepSeek\\u2019s flagship open-source multimodal AI model, unifying vision understanding and text-to-image generation within a single transformer architecture. Built on DeepSeek\\u2011LLM\\u20117B, it uses a decoupled visual encoding approach paired with SigLIP\\u2011L and VQ tokenizer, delivering superior visual fidelity, prompt alignment, and stability across tasks\\u2014benchmarked ahead of OpenAI\\u2019s DALL\\u2011E\\u202f3 and Stable Diffusion variants.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6856addcee78f2aff0d16f6f\",\n      \"name\": \"grok-2-image\",\n      \"description\": \"Grok\\u202f2 Image is xAI\\u2019s image-generation model integrated into the Grok\\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\\u2014allowing users to generate, edit, and chat using images\\u2014with a 32K-token visual-text context and produces photorealistic outputs.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6856aaecee78f2aff0d16c6a\",\n      \"name\": \"grok-2-vision\",\n      \"description\": \"Grok\\u202f2 Vision (also known as Grok\\u20112\\u2011Vision\\u20111212 or grok\\u20112\\u2011vision\\u2011latest) is xAI\\u2019s multimodal variant of Grok\\u202f2, designed specifically for advanced image understanding and generation. Launched in December\\u202f2024, it supports joint text+image inputs up to 32,768 tokens, excelling in visual math reasoning (MathVista), document question answering (DocVQA), object recognition, and style analysis\\u2014while also offering photorealistic image creation via the FLUX.1 model.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6855729027c6eba075dcd467\",\n      \"name\": \"DeepSeek VL\",\n      \"description\": \"DeepSeek\\u202fVL is DeepSeek\\u2019s open-source vision-language model designed for real-world multimodal understanding. It employs a hybrid vision encoder (SigLIP\\u2011L\\u202f+\\u202fSAM), processes high-resolution images (up to 1024\\u00d71024), and supports both base and chat variants across two sizes: 1.3B and 7B parameters. It excels on tasks like OCR, diagram reasoning, webpage parsing, and visual Q&A\\u2014while preserving strong language ability.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68303f27bcf558ef8c31d658\",\n      \"name\": \"Ideogram\",\n      \"description\": \"Ideogram is an AI-powered text-to-image generation tool designed to create high-quality visuals with seamless typography integration. Unlike traditional image-generation models, Ideogram specializes in producing images with accurate and aesthetically pleasing text, making it ideal for branding, social media content, and graphic design.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"686407a5015bd4929b3826e3\",\n      \"name\": \"Pixvify\",\n      \"description\": \"Pixvify is a free, all-in-one AI-powered photo generation and editing suite designed for creating high-quality, photorealistic images from text prompts or existing photos. It also offers advanced tools like face swapping, image upscaling, and a wide variety of creative filters\\u2014no signup required.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68422299ac33a46e0bb73f68\",\n      \"name\": \"OpenAI GPT Image 1\",\n      \"description\": \"GPT-Image-1 is OpenAI's state-of-the-art vision model designed to understand and interpret images with human-like perception. It enables developers and businesses to analyze, summarize, and extract detailed insights from images using natural language. Whether you're building AI agents, accessibility tools, or image-driven workflows, GPT-Image-1 brings powerful multimodal capabilities into your applications with impressive accuracy.\\nOptimized for use via API, it can handle diverse image types\\u2014charts, screenshots, photographs, documents, and more\\u2014making it one of the most versatile models in OpenAI\\u2019s portfolio.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68445055b32d4d019cbd5381\",\n      \"name\": \"Vidu Studio - AI Video Create\",\n      \"description\": \"Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6859693a1c16582699a64e18\",\n      \"name\": \"Microsoft Designer\",\n      \"description\": \"Microsoft Designer is Microsoft\\u2019s AI-powered graphic design and image editing tool, officially launched in 2023 and broadly available in 2024. It leverages generative AI\\u2014including DALL\\u00b7E 3\\u2014for creating visuals from text prompts, smart layout suggestions, and professional-level photo editing (e.g., background removal, object erasure, framing, and restyling) \\u2014 all accessible via web, mobile, and integration within Microsoft 365 apps.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6863f65b015bd4929b381939\",\n      \"name\": \"Qwen Chat\",\n      \"description\": \"Qwen Chat is Alibaba Cloud\\u2019s conversational AI assistant built on the Qwen series (e.g., Qwen\\u20117B\\u2011Chat, Qwen1.5\\u20117B\\u2011Chat, Qwen\\u2011VL, Qwen\\u2011Audio, and Qwen2.5\\u2011Omni). It supports text, vision, audio, and video understanding, plus image and document processing, web search integration, and image generation\\u2014all through a unified chat interface.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

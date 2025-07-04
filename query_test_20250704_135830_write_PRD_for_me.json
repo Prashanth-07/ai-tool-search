@@ -1,0 +1,283 @@
+{
+  "timestamp": "2025-07-04T13:58:30.304941",
+  "input_query": "write PRD for me",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 15,
+    "tool_ids": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68636b0c015bd4929b37d7a4",
+      "6864fb65015bd4929b392b26",
+      "685318d727c6eba075db6c95",
+      "68406f75bce3a3d64c6acc92",
+      "682d6b7e23aaf1a750a9e896",
+      "685e9c4b1c16582699a7b791",
+      "6832c87ddc5f9153e5a9d1fd",
+      "681f85c7d877dcf3c6576614",
+      "681c8e41477018e3479561f9",
+      "685004e1afca082a9fc4178b",
+      "681f21d253d3e454a4bb61b9",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs)",
+        "bullets": [
+          "MultiSource Intelligence:Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation\u202f.",
+          "TemplateDriven Speed:Speedsters past blankpage paralysis using a triedandtested PRD template."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "6864fb65015bd4929b392b26",
+        "name": "Prompt Perfekt",
+        "description": "AI-powered platform for crafting, optimizing, and managing prompts across language and image models like GPT\u20114, Claude, Midjourney, and Stable Diffusion",
+        "bullets": [
+          "Model agnostic prompting:Works seamlessly across LLMs and image models.",
+          "Side by side prompt testing:Arena lets users compare outputs instantly."
+        ]
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado",
+        "description": "Persado is an enterprise \u201cMotivation AI\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale. By analyzing language patterns across hundreds of thousands of campaigns, it crafts optimized versions for emails, web copy, ads, and SMS\u2014helping brands drive engagement and conversions.",
+        "bullets": []
+      },
+      {
+        "id": "68406f75bce3a3d64c6acc92",
+        "name": "Humanizer.Pro",
+        "description": "Humanizer.Pro is a powerful AI-powered tool designed to transform AI-generated text into authentic, high-quality, and natural-sounding human content. It utilizes a sophisticated Large Language Model (LLM) trained to mimic human writing nuances, making AI content suitable for various professional and creative uses such as marketing copy, blog posts, emails, business reports, and website articles.",
+        "bullets": []
+      },
+      {
+        "id": "682d6b7e23aaf1a750a9e896",
+        "name": "Rytr",
+        "description": "Rytr is an AI-powered writing assistant designed to help users generate high-quality content quickly and efficiently. Whether you need blog posts, marketing copy, emails, or social media content, Rytr uses advanced natural language processing (NLP) to create engaging and relevant text with minimal effort.",
+        "bullets": []
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease. The platform provides step-by-step guidance, expert-approved templates, and pre-written content suggestions to streamline the resume-writing process. With ResumeNerd, users can optimize their job applications and increase their chances of landing interviews.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid",
+        "description": "ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing. Whether you're working on a novel, essay, or any other type of written content, ProWritingAid provides actionable advice to make your writing more powerful, engaging, and error-free. With easy-to-use tools and comprehensive feedback, it helps writers unlock their potential and create their best work.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68636b0c015bd4929b37d7a4",
+      "6864fb65015bd4929b392b26",
+      "685318d727c6eba075db6c95",
+      "68406f75bce3a3d64c6acc92",
+      "682d6b7e23aaf1a750a9e896",
+      "685e9c4b1c16582699a7b791",
+      "6832c87ddc5f9153e5a9d1fd",
+      "681f85c7d877dcf3c6576614",
+      "681c8e41477018e3479561f9",
+      "685004e1afca082a9fc4178b",
+      "681f21d253d3e454a4bb61b9",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs)",
+        "bullets": [
+          "MultiSource Intelligence:Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation\u202f.",
+          "TemplateDriven Speed:Speedsters past blankpage paralysis using a triedandtested PRD template."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "6864fb65015bd4929b392b26",
+        "name": "Prompt Perfekt",
+        "description": "AI-powered platform for crafting, optimizing, and managing prompts across language and image models like GPT\u20114, Claude, Midjourney, and Stable Diffusion",
+        "bullets": [
+          "Model agnostic prompting:Works seamlessly across LLMs and image models.",
+          "Side by side prompt testing:Arena lets users compare outputs instantly."
+        ]
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado",
+        "description": "Persado is an enterprise \u201cMotivation AI\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale. By analyzing language patterns across hundreds of thousands of campaigns, it crafts optimized versions for emails, web copy, ads, and SMS\u2014helping brands drive engagement and conversions.",
+        "bullets": []
+      },
+      {
+        "id": "68406f75bce3a3d64c6acc92",
+        "name": "Humanizer.Pro",
+        "description": "Humanizer.Pro is a powerful AI-powered tool designed to transform AI-generated text into authentic, high-quality, and natural-sounding human content. It utilizes a sophisticated Large Language Model (LLM) trained to mimic human writing nuances, making AI content suitable for various professional and creative uses such as marketing copy, blog posts, emails, business reports, and website articles.",
+        "bullets": []
+      },
+      {
+        "id": "682d6b7e23aaf1a750a9e896",
+        "name": "Rytr",
+        "description": "Rytr is an AI-powered writing assistant designed to help users generate high-quality content quickly and efficiently. Whether you need blog posts, marketing copy, emails, or social media content, Rytr uses advanced natural language processing (NLP) to create engaging and relevant text with minimal effort.",
+        "bullets": []
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease. The platform provides step-by-step guidance, expert-approved templates, and pre-written content suggestions to streamline the resume-writing process. With ResumeNerd, users can optimize their job applications and increase their chances of landing interviews.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid",
+        "description": "ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing. Whether you're working on a novel, essay, or any other type of written content, ProWritingAid provides actionable advice to make your writing more powerful, engaging, and error-free. With easy-to-use tools and comprehensive feedback, it helps writers unlock their potential and create their best work.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 7.297,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68635e5e015bd4929b37d18a\",\n    \"6863632c015bd4929b37d359\",\n    \"6863673d015bd4929b37d69d\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"6864fb65015bd4929b392b26\",\n    \"685318d727c6eba075db6c95\",\n    \"68406f75bce3a3d64c6acc92\",\n    \"682d6b7e23aaf1a750a9e896\",\n    \"685e9c4b1c16582699a7b791\",\n    \"6832c87ddc5f9153e5a9d1fd\",\n    \"681f85c7d877dcf3c6576614\",\n    \"681c8e41477018e3479561f9\",\n    \"685004e1afca082a9fc4178b\",\n    \"681f21d253d3e454a4bb61b9\",\n    \"6863599c015bd4929b37d01d\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams\",\n      \"bullets\": [\n        \"Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.\",\n        \"Rapid PRD Creation:Cuts documentation time from hours to minutes.\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"Bash\\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs)\",\n      \"bullets\": [\n        \"MultiSource Intelligence:Generates PRDs from diverse inputs\\u2014text, webpages, or even audio\\u2014for comprehensive documentation\\u202f.\",\n        \"TemplateDriven Speed:Speedsters past blankpage paralysis using a triedandtested PRD template.\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks\",\n      \"bullets\": [\n        \"Specialized Product Expertise\\u2014 built using proven frameworks to enhance consistency and professional quality.\",\n        \"Unified Product Studio\\u2014 combines PRD writing, tech specs, and task workflows in one tool.\"\n      ]\n    },\n    {\n      \"id\": \"6864fb65015bd4929b392b26\",\n      \"name\": \"Prompt Perfekt\",\n      \"description\": \"AI-powered platform for crafting, optimizing, and managing prompts across language and image models like GPT\\u20114, Claude, Midjourney, and Stable Diffusion\",\n      \"bullets\": [\n        \"Model agnostic prompting:Works seamlessly across LLMs and image models.\",\n        \"Side by side prompt testing:Arena lets users compare outputs instantly.\"\n      ]\n    },\n    {\n      \"id\": \"685318d727c6eba075db6c95\",\n      \"name\": \"Persado\",\n      \"description\": \"Persado is an enterprise \\u201cMotivation AI\\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale. By analyzing language patterns across hundreds of thousands of campaigns, it crafts optimized versions for emails, web copy, ads, and SMS\\u2014helping brands drive engagement and conversions.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68406f75bce3a3d64c6acc92\",\n      \"name\": \"Humanizer.Pro\",\n      \"description\": \"Humanizer.Pro is a powerful AI-powered tool designed to transform AI-generated text into authentic, high-quality, and natural-sounding human content. It utilizes a sophisticated Large Language Model (LLM) trained to mimic human writing nuances, making AI content suitable for various professional and creative uses such as marketing copy, blog posts, emails, business reports, and website articles.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682d6b7e23aaf1a750a9e896\",\n      \"name\": \"Rytr\",\n      \"description\": \"Rytr is an AI-powered writing assistant designed to help users generate high-quality content quickly and efficiently. Whether you need blog posts, marketing copy, emails, or social media content, Rytr uses advanced natural language processing (NLP) to create engaging and relevant text with minimal effort.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6832c87ddc5f9153e5a9d1fd\",\n      \"name\": \"PRophet\",\n      \"description\": \"PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681f85c7d877dcf3c6576614\",\n      \"name\": \"ResumeNerd\",\n      \"description\": \"ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease. The platform provides step-by-step guidance, expert-approved templates, and pre-written content suggestions to streamline the resume-writing process. With ResumeNerd, users can optimize their job applications and increase their chances of landing interviews.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681c8e41477018e3479561f9\",\n      \"name\": \"Predis\",\n      \"description\": \"Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\",\n      \"description\": \"ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681f21d253d3e454a4bb61b9\",\n      \"name\": \"ProWritingAid\",\n      \"description\": \"ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing. Whether you're working on a novel, essay, or any other type of written content, ProWritingAid provides actionable advice to make your writing more powerful, engaging, and error-free. With easy-to-use tools and comprehensive feedback, it helps writers unlock their potential and create their best work.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\\u2014helping PMs elevate their documentation and workflow efficiency.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

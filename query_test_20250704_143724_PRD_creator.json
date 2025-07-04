@@ -1,0 +1,323 @@
+{
+  "timestamp": "2025-07-04T14:37:24.204135",
+  "input_query": "PRD creator",
+  "model_info_before_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 17,
+    "tool_ids": [
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68635e5e015bd4929b37d18a",
+      "68666360ef7018fbfef69bc7",
+      "68636b0c015bd4929b37d7a4",
+      "685e9c4b1c16582699a7b791",
+      "681f85c7d877dcf3c6576614",
+      "6818df22606258b6c075cd6f",
+      "6832c87ddc5f9153e5a9d1fd",
+      "683343098f07ab07a7db9b22",
+      "6827584823aaf1a750a44b29",
+      "6856c86bee78f2aff0d1c27d",
+      "681ce5a963aef50052da95d2",
+      "682e0b0823aaf1a750aa8074",
+      "685004e1afca082a9fc4178b",
+      "681c8e41477018e3479561f9",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "AI-driven PRD Generator streamlines product documentation for teams by generating comprehensive, structured Product Requirement Documents in minutes.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs) by accepting diverse input formats and structuring them into comprehensive PRDs.",
+        "bullets": [
+          "Multi-Source Intelligence generates PRDs from diverse inputs like text, webpages, or audio.",
+          "Template-Driven Speed enables rapid PRD creation with tried-and-tested PRD templates."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs) by inputting basic information and generating structured, professional PRD drafts.",
+        "bullets": [
+          "ChatGPT-Prompt Engineered for PRD generation saves time versus writing in vanilla chat interfaces.",
+          "User-Friendly Interface guides users through each section of the PRD creation process."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification.",
+        "bullets": [
+          "PM-Focused AI agents are finetuned for product management workflows, reducing friction.",
+          "Ease of Use with a fully web-based platform requiring no installs or API keys."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is an AI-powered product management tool that creates Product Requirements Documents (PRDs), detailed technical specifications, and related tasks with a single prompt and just a few clicks.",
+        "bullets": [
+          "Specialized Product Expertise built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments by guiding the creation of clear PRDs and converting them into actionable user stories and test plans.",
+        "bullets": [
+          "In-Confluence, No Context Switching as AI works where documents already live.",
+          "Intelligent Prompts to Avoid Gaps with the AI asking clarifying questions."
+        ]
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder, not primarily a PRD creator but can be used for generating structured documents like PRDs with its AI-driven resume-building features.",
+        "bullets": [
+          "ATS-Optimized Resumes ensures compatibility with Applicant Tracking Systems.",
+          "Step-by-Step Guidance helps users fill out their resumes with expert recommendations."
+        ]
+      },
+      {
+        "id": "6818df22606258b6c075cd6f",
+        "name": "AI PPT Maker",
+        "description": "aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\u2014complete with structure, content, and design\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "683343098f07ab07a7db9b22",
+        "name": "creatify",
+        "description": "Creatify is an AI-powered tool designed to create engaging video advertisements, specifically for social media marketing. It allows users to generate video ads using AI avatars, scriptwriting tools, and customizable templates. The platform is particularly suited for producing User-Generated Content (UGC) style videos, which are widely used in digital marketing campaigns.",
+        "bullets": []
+      },
+      {
+        "id": "6827584823aaf1a750a44b29",
+        "name": "Recraft",
+        "description": "Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision. Unlike basic AI image generators, Recraft Pro focuses on style consistency, scalability, and fine-tuned customization, making it ideal for commercial and design-centric applications.",
+        "bullets": []
+      },
+      {
+        "id": "6856c86bee78f2aff0d1c27d",
+        "name": "Ad Maker AI",
+        "description": "AdMaker.ai is an AI-driven ad creation platform designed to help businesses and marketers effortlessly generate high-performing ad visuals and copy across multiple formats. By combining automated image generation, text creation, resizing, and performance insights, AdMaker accelerates campaign production and optimization.",
+        "bullets": []
+      },
+      {
+        "id": "681ce5a963aef50052da95d2",
+        "name": "logo makerr",
+        "description": "Logomakerr.AI is an AI-powered logo design platform that helps businesses, startups, and entrepreneurs create professional logos effortlessly. With just a few clicks, users can generate high-quality, fully customizable logos tailored to their brand identity. Beyond logos, Logomakerr.AI provides a Brand Kit with 200+ branded templates, allowing users to create marketing materials like business cards, social media posts, and presentations\u2014all in one place.",
+        "bullets": []
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68635e5e015bd4929b37d18a",
+      "68666360ef7018fbfef69bc7",
+      "68636b0c015bd4929b37d7a4",
+      "685e9c4b1c16582699a7b791",
+      "681f85c7d877dcf3c6576614",
+      "6818df22606258b6c075cd6f",
+      "6832c87ddc5f9153e5a9d1fd",
+      "683343098f07ab07a7db9b22",
+      "6827584823aaf1a750a44b29",
+      "6856c86bee78f2aff0d1c27d",
+      "681ce5a963aef50052da95d2",
+      "682e0b0823aaf1a750aa8074",
+      "685004e1afca082a9fc4178b",
+      "681c8e41477018e3479561f9",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "AI-driven PRD Generator streamlines product documentation for teams by generating comprehensive, structured Product Requirement Documents in minutes.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs) by accepting diverse input formats and structuring them into comprehensive PRDs.",
+        "bullets": [
+          "Multi-Source Intelligence generates PRDs from diverse inputs like text, webpages, or audio.",
+          "Template-Driven Speed enables rapid PRD creation with tried-and-tested PRD templates."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs) by inputting basic information and generating structured, professional PRD drafts.",
+        "bullets": [
+          "ChatGPT-Prompt Engineered for PRD generation saves time versus writing in vanilla chat interfaces.",
+          "User-Friendly Interface guides users through each section of the PRD creation process."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification.",
+        "bullets": [
+          "PM-Focused AI agents are finetuned for product management workflows, reducing friction.",
+          "Ease of Use with a fully web-based platform requiring no installs or API keys."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is an AI-powered product management tool that creates Product Requirements Documents (PRDs), detailed technical specifications, and related tasks with a single prompt and just a few clicks.",
+        "bullets": [
+          "Specialized Product Expertise built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments by guiding the creation of clear PRDs and converting them into actionable user stories and test plans.",
+        "bullets": [
+          "In-Confluence, No Context Switching as AI works where documents already live.",
+          "Intelligent Prompts to Avoid Gaps with the AI asking clarifying questions."
+        ]
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder, not primarily a PRD creator but can be used for generating structured documents like PRDs with its AI-driven resume-building features.",
+        "bullets": [
+          "ATS-Optimized Resumes ensures compatibility with Applicant Tracking Systems.",
+          "Step-by-Step Guidance helps users fill out their resumes with expert recommendations."
+        ]
+      },
+      {
+        "id": "6818df22606258b6c075cd6f",
+        "name": "AI PPT Maker",
+        "description": "aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\u2014complete with structure, content, and design\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "683343098f07ab07a7db9b22",
+        "name": "creatify",
+        "description": "Creatify is an AI-powered tool designed to create engaging video advertisements, specifically for social media marketing. It allows users to generate video ads using AI avatars, scriptwriting tools, and customizable templates. The platform is particularly suited for producing User-Generated Content (UGC) style videos, which are widely used in digital marketing campaigns.",
+        "bullets": []
+      },
+      {
+        "id": "6827584823aaf1a750a44b29",
+        "name": "Recraft",
+        "description": "Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision. Unlike basic AI image generators, Recraft Pro focuses on style consistency, scalability, and fine-tuned customization, making it ideal for commercial and design-centric applications.",
+        "bullets": []
+      },
+      {
+        "id": "6856c86bee78f2aff0d1c27d",
+        "name": "Ad Maker AI",
+        "description": "AdMaker.ai is an AI-driven ad creation platform designed to help businesses and marketers effortlessly generate high-performing ad visuals and copy across multiple formats. By combining automated image generation, text creation, resizing, and performance insights, AdMaker accelerates campaign production and optimization.",
+        "bullets": []
+      },
+      {
+        "id": "681ce5a963aef50052da95d2",
+        "name": "logo makerr",
+        "description": "Logomakerr.AI is an AI-powered logo design platform that helps businesses, startups, and entrepreneurs create professional logos effortlessly. With just a few clicks, users can generate high-quality, fully customizable logos tailored to their brand identity. Beyond logos, Logomakerr.AI provides a Brand Kit with 200+ branded templates, allowing users to create marketing materials like business cards, social media posts, and presentations\u2014all in one place.",
+        "bullets": []
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 12.604,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6863632c015bd4929b37d359\",\n    \"6863673d015bd4929b37d69d\",\n    \"68635e5e015bd4929b37d18a\",\n    \"68666360ef7018fbfef69bc7\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"685e9c4b1c16582699a7b791\",\n    \"681f85c7d877dcf3c6576614\",\n    \"6818df22606258b6c075cd6f\",\n    \"6832c87ddc5f9153e5a9d1fd\",\n    \"683343098f07ab07a7db9b22\",\n    \"6827584823aaf1a750a44b29\",\n    \"6856c86bee78f2aff0d1c27d\",\n    \"681ce5a963aef50052da95d2\",\n    \"682e0b0823aaf1a750aa8074\",\n    \"685004e1afca082a9fc4178b\",\n    \"681c8e41477018e3479561f9\",\n    \"6863599c015bd4929b37d01d\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"AI-driven PRD Generator streamlines product documentation for teams by generating comprehensive, structured Product Requirement Documents in minutes.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"Bash\\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs) by accepting diverse input formats and structuring them into comprehensive PRDs.\",\n      \"bullets\": [\n        \"Multi-Source Intelligence generates PRDs from diverse inputs like text, webpages, or audio.\",\n        \"Template-Driven Speed enables rapid PRD creation with tried-and-tested PRD templates.\"\n      ]\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs) by inputting basic information and generating structured, professional PRD drafts.\",\n      \"bullets\": [\n        \"ChatGPT-Prompt Engineered for PRD generation saves time versus writing in vanilla chat interfaces.\",\n        \"User-Friendly Interface guides users through each section of the PRD creation process.\"\n      ]\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\",\n      \"description\": \"Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification.\",\n      \"bullets\": [\n        \"PM-Focused AI agents are finetuned for product management workflows, reducing friction.\",\n        \"Ease of Use with a fully web-based platform requiring no installs or API keys.\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"Signlz is an AI-powered product management tool that creates Product Requirements Documents (PRDs), detailed technical specifications, and related tasks with a single prompt and just a few clicks.\",\n      \"bullets\": [\n        \"Specialized Product Expertise built using proven frameworks to enhance consistency and professional quality.\",\n        \"Unified Product Studio combines PRD writing, tech specs, and task workflows in one tool.\"\n      ]\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments by guiding the creation of clear PRDs and converting them into actionable user stories and test plans.\",\n      \"bullets\": [\n        \"In-Confluence, No Context Switching as AI works where documents already live.\",\n        \"Intelligent Prompts to Avoid Gaps with the AI asking clarifying questions.\"\n      ]\n    },\n    {\n      \"id\": \"681f85c7d877dcf3c6576614\",\n      \"name\": \"ResumeNerd\",\n      \"description\": \"ResumeNerd is an AI-powered resume and cover letter builder, not primarily a PRD creator but can be used for generating structured documents like PRDs with its AI-driven resume-building features.\",\n      \"bullets\": [\n        \"ATS-Optimized Resumes ensures compatibility with Applicant Tracking Systems.\",\n        \"Step-by-Step Guidance helps users fill out their resumes with expert recommendations.\"\n      ]\n    },\n    {\n      \"id\": \"6818df22606258b6c075cd6f\",\n      \"name\": \"AI PPT Maker\",\n      \"description\": \"aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\\u2014complete with structure, content, and design\\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6832c87ddc5f9153e5a9d1fd\",\n      \"name\": \"PRophet\",\n      \"description\": \"PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"683343098f07ab07a7db9b22\",\n      \"name\": \"creatify\",\n      \"description\": \"Creatify is an AI-powered tool designed to create engaging video advertisements, specifically for social media marketing. It allows users to generate video ads using AI avatars, scriptwriting tools, and customizable templates. The platform is particularly suited for producing User-Generated Content (UGC) style videos, which are widely used in digital marketing campaigns.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6827584823aaf1a750a44b29\",\n      \"name\": \"Recraft\",\n      \"description\": \"Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision. Unlike basic AI image generators, Recraft Pro focuses on style consistency, scalability, and fine-tuned customization, making it ideal for commercial and design-centric applications.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6856c86bee78f2aff0d1c27d\",\n      \"name\": \"Ad Maker AI\",\n      \"description\": \"AdMaker.ai is an AI-driven ad creation platform designed to help businesses and marketers effortlessly generate high-performing ad visuals and copy across multiple formats. By combining automated image generation, text creation, resizing, and performance insights, AdMaker accelerates campaign production and optimization.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681ce5a963aef50052da95d2\",\n      \"name\": \"logo makerr\",\n      \"description\": \"Logomakerr.AI is an AI-powered logo design platform that helps businesses, startups, and entrepreneurs create professional logos effortlessly. With just a few clicks, users can generate high-quality, fully customizable logos tailored to their brand identity. Beyond logos, Logomakerr.AI provides a Brand Kit with 200+ branded templates, allowing users to create marketing materials like business cards, social media posts, and presentations\\u2014all in one place.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682e0b0823aaf1a750aa8074\",\n      \"name\": \"powtoon imagine\",\n      \"description\": \"Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\",\n      \"description\": \"ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681c8e41477018e3479561f9\",\n      \"name\": \"Predis\",\n      \"description\": \"Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\\u2014helping PMs elevate their documentation and workflow efficiency.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.3-70b-versatile",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
