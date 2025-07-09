@@ -67,7 +67,7 @@ class Config:
     POPULAR_TOOLS_LIMIT = 4
     
     # Score-based selection settings
-    HYBRID_MIN_SCORE = 0.36    # Minimum relevance threshold
+    HYBRID_MIN_SCORE = 0.49   # Minimum relevance threshold
     HYBRID_MAX_TOOLS = 60       # Maximum tools to send to LLM
     HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
@@ -2590,26 +2590,26 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             tool_count = len(llm_tools)
             tokens_per_tool = min(150, 3000 // max(tool_count, 1)) 
             
-            system_text = f"""You are an expert AI tool recommendation assistant. Your task is to select and rank the relevant tools only upto 20 from the provided list for the query: "{request.query}"
+            system_text = f"""You are an expert AI tool recommendation assistant who recommend and return all the relevant tools based on "{request.query}". Your task is to select and rank all the relevant tools from the provided list which are related to the query: "{request.query}"
 
 ### SELECTION CRITERIA:
 
 **Step 1: Relevance Filtering**
 - INCLUDE and rank all the tools that are relevant to "{request.query}" most relevant to least relevant.
 - Include all tools whose tool data contains keywords that appear in the given Query.
-- For example, if the query is "write PRD for me", include all tools from the available tool data which have keywords like "PRD" and "PRDs" and other related information.
-- Relevance should be based on **keyword match** and **semantic overlap** between query and tool metadata.
+- For example, if the query is "write PRD for me", include all tools from the available tool data which have keywords like "PRD" and "PRDs" and  Product Requirements Documents (PRDs) and other related information.
+- Relevance should be based on **keyword match** and **semantic overlap** between Query and tool metadata of given Available Tools Data.
 - EXCLUDE tools from different domains (e.g., for "text to image" query, exclude image-to-video, video editing, etc.)
 
 
 **Step 2: Ranking Rules**
-- Tools with exact keywords/functionality match to the query should be at the beginning of the list.
+- Tools with exact keywords/functionality match to the Query should be at the beginning of the list.
 - If query specifies number ("top 3", "best 5"): return exactly that count.
 - If query mentions specific tool name: prioritize and return that tool in 1st position
 - Rank selected tools from most to least relevant based on close relevance.
 
 #**Step 3: Response Guidelines**
-- **Select all the tools that relate to the Query (can only be upto 20 tools) without any padding or duplicates.**
+- **Select all the tools that relate to the Query without any padding or duplicates.**
 - **NEVER duplicate tools - each tool should appear exactly once**
 - STOP when you run out of relevant tools - don't force a specific count
 - *Description: Explain specific relevance to "{request.query}" using exact query keywords*
@@ -2621,8 +2621,8 @@ Example 1: Query: "text to image"
 ❌ EXCLUDE: Dont include image-to-video converters, video creation tools, design tools.
 Reason: User wants text→image generation specifically, not image manipulation or video other media types
 Example 2: Query: "Write PRD for me"
-✅ INCLUDE: all tools for creating Product Requirements Documents (PRDs). Include all PRD-specific tools which have PRD in its tool data.
-❌ EXCLUDE: Dont include image-to-video converters, video creation tools, design tools.
+*✅ INCLUDE: Include all the PRD related tools for creating Product Requirements Documents (PRDs). Include all PRD-specific tools which have PRD in its tool data.*
+*❌ EXCLUDE: Dont include image-to-video converters, video creation tools, design tools, or any other domain tool.*
 Reason: User wants PRD creation specifically so include all tools which have PRDs, PRD and related keywords in it, not image manipulation or video other media types
 
 ### DESCRIPTION EXAMPLE:
@@ -2645,28 +2645,28 @@ Good Bullets: ["PRD-specific templates and sections for goals, users, specs, fea
 }}
 
 #### IMPORTANT RULES:
-- Return ONLY valid JSON in the EXACT format provided above *without any PREAMBLE or EXPLANATION.*
-- Ensure all brackets and quotes are properly closed.
 - Use exact "tool_id" field from metadata, NOT tool name
 - Each tool_id should appear exactly once (NO DUPLICATES)
 - Include all tools that are relevant to "{request.query}".
-- Return as many tools as are relevant upto 20.
+- Return as many tools as are relevant.
+- VARIABLE COUNT: You can return anywhere only upto 20 tools based on relevance relevant.
 - Rank tools from most to least relevant (1st = most relevant) in the JSON format.
 - NO DUPLICATES: Each tool_id can only appear once in your response.
 - NO PADDING: Don't add irrelevant tools just to reach a number.
-- VARIABLE COUNT: You can return anywhere only upto 20 tools based on relevance relevant."""
+- Return *ONLY valid JSON* in the EXACT format provided above *without any PREAMBLE or EXPLANATION.*
+- Ensure all brackets and quotes are properly closed."""
             
             prompt_text = f"""Query: "{request.query}"
 
 Available Tools Data:
 {cleaned_context}
 
-Task: Analyze the query and determine its main intent. Then review the available tools data and select all tools that are relevant to the topic: "{request.query}".
+Task: Analyze the query and determine its main intent. Then review the Available Tools Data and select all tools that are relevant to the topic: "{request.query}".
 Return the tools in the expected JSON format, ranked from most to least relevant, with the most relevant tools appearing first.
 
 Do not miss any relevant tools that address "{request.query}".
 
-***Include all tools that match the same keywords or are functionally related to the Query.***
+***Include as many tools that are relevant that match the same keywords and which are functionally related to the Query.***
 Important Notes: 
 -NO DUPLICATES and NO PADDING with irrelevant tools.
 """            

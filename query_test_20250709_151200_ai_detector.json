@@ -1,0 +1,103 @@
+{
+  "timestamp": "2025-07-09T15:12:00.761831",
+  "input_query": "ai detector",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 3,
+    "tool_ids": [
+      "68662b90ef7018fbfef68c99",
+      "683fbd36bce3a3d64c6909c9",
+      "68495fd2b9392005150e81a5"
+    ],
+    "tools": [
+      {
+        "id": "68662b90ef7018fbfef68c99",
+        "name": "Undetected",
+        "description": "Undetectable AI is an AI-powered paraphrasing and detection tool that transforms machine-generated text into natural, human-like writing\u2014making it undetectable by common AI content detectors.",
+        "bullets": [
+          "High effectiveness rate in bypassing various AI detectors.",
+          "Produces genuinely human-like and natural-sounding content."
+        ]
+      },
+      {
+        "id": "683fbd36bce3a3d64c6909c9",
+        "name": "MyDetector",
+        "description": "MyDetector.ai is a free and easy-to-use AI detector that utilizes advanced algorithms to analyze text and determine whether it was written by a human or an AI.",
+        "bullets": [
+          "High Accuracy: Utilizes advanced algorithms for precise detection of AI-generated content.",
+          "User-Friendly: Simple interface and free access make it easy for anyone to use."
+        ]
+      },
+      {
+        "id": "68495fd2b9392005150e81a5",
+        "name": "Bypass GPT",
+        "description": "BypassGPT.ai is an AI bypasser and humanizer tool designed to rewrite AI-generated text, making it indistinguishable from human-written content.",
+        "bullets": [
+          "High effectiveness can sometimes vary with highly technical or nuanced content.",
+          "Produces genuinely human-like and natural-sounding content."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68662b90ef7018fbfef68c99",
+      "683fbd36bce3a3d64c6909c9",
+      "68495fd2b9392005150e81a5"
+    ],
+    "tools": [
+      {
+        "id": "68662b90ef7018fbfef68c99",
+        "name": "Undetected",
+        "description": "Undetectable AI is an AI-powered paraphrasing and detection tool that transforms machine-generated text into natural, human-like writing\u2014making it undetectable by common AI content detectors.",
+        "bullets": [
+          "High effectiveness rate in bypassing various AI detectors.",
+          "Produces genuinely human-like and natural-sounding content."
+        ]
+      },
+      {
+        "id": "683fbd36bce3a3d64c6909c9",
+        "name": "MyDetector",
+        "description": "MyDetector.ai is a free and easy-to-use AI detector that utilizes advanced algorithms to analyze text and determine whether it was written by a human or an AI.",
+        "bullets": [
+          "High Accuracy: Utilizes advanced algorithms for precise detection of AI-generated content.",
+          "User-Friendly: Simple interface and free access make it easy for anyone to use."
+        ]
+      },
+      {
+        "id": "68495fd2b9392005150e81a5",
+        "name": "Bypass GPT",
+        "description": "BypassGPT.ai is an AI bypasser and humanizer tool designed to rewrite AI-generated text, making it indistinguishable from human-written content.",
+        "bullets": [
+          "High effectiveness can sometimes vary with highly technical or nuanced content.",
+          "Produces genuinely human-like and natural-sounding content."
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 9.02,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68662b90ef7018fbfef68c99\",\n    \"683fbd36bce3a3d64c6909c9\",\n    \"68495fd2b9392005150e81a5\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68662b90ef7018fbfef68c99\",\n      \"name\": \"Undetected\",\n      \"description\": \"Undetectable AI is an AI-powered paraphrasing and detection tool that transforms machine-generated text into natural, human-like writing\\u2014making it undetectable by common AI content detectors.\",\n      \"bullets\": [\n        \"High effectiveness rate in bypassing various AI detectors.\",\n        \"Produces genuinely human-like and natural-sounding content.\"\n      ]\n    },\n    {\n      \"id\": \"683fbd36bce3a3d64c6909c9\",\n      \"name\": \"MyDetector\",\n      \"description\": \"MyDetector.ai is a free and easy-to-use AI detector that utilizes advanced algorithms to analyze text and determine whether it was written by a human or an AI.\",\n      \"bullets\": [\n        \"High Accuracy: Utilizes advanced algorithms for precise detection of AI-generated content.\",\n        \"User-Friendly: Simple interface and free access make it easy for anyone to use.\"\n      ]\n    },\n    {\n      \"id\": \"68495fd2b9392005150e81a5\",\n      \"name\": \"Bypass GPT\",\n      \"description\": \"BypassGPT.ai is an AI bypasser and humanizer tool designed to rewrite AI-generated text, making it indistinguishable from human-written content.\",\n      \"bullets\": [\n        \"High effectiveness can sometimes vary with highly technical or nuanced content.\",\n        \"Produces genuinely human-like and natural-sounding content.\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

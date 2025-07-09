@@ -1,0 +1,471 @@
+{
+  "timestamp": "2025-07-09T15:12:57.911319",
+  "input_query": "write code for me",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 23,
+    "tool_ids": [
+      "6846ab17b32d4d019c03e243",
+      "684c5bf3b93920051544ef60",
+      "684874ccb939200515094d57",
+      "6848556fb93920051506efa4",
+      "684731b4b939200515f530cd",
+      "684c7f6cb93920051549350a",
+      "68485950b9392005150750a2",
+      "68485ca5b939200515078c03",
+      "684c7442b93920051546767c",
+      "684c82d4b9392005154a3270",
+      "68495092b9392005150bad29",
+      "684867d8b93920051508d781",
+      "684c769db93920051546b4a7",
+      "684c70bbb939200515463884",
+      "684c84a383acd0b04c70e6f1",
+      "6843618eac33a46e0beebe30",
+      "68472210b939200515f4bc44",
+      "6843618eac33a46e0beebe30",
+      "68472210b939200515f4bc44",
+      "681da82063aef50052db4604",
+      "681ed8f853d3e454a4b9e18b",
+      "6832c345dc5f9153e5a98ca9",
+      "686ce6063a087b487359dd08",
+      "681f265153d3e454a4bb7207",
+      "686a831ae1d0bbc07e323f89"
+    ],
+    "tools": [
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Sourcegraph Cody",
+        "description": "Sourcegraph Cody is an AI-powered coding assistant built into Sourcegraph, designed to help developers understand, write, and navigate complex codebases efficiently",
+        "bullets": [
+          "FullContext Awareness:Understands entire repositories and project structure\u2014not just the file you're editing.",
+          "AIPowered Chat:Ask questions in natural language and get answers directly related to your code."
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters",
+        "bullets": [
+          "Deep .NET Code Analysis:Provides more than 2,200 code inspections across supported languages.",
+          "ContextAware Refactorings:Automates complex refactorings without breaking code."
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs",
+        "bullets": [
+          "Deep AWS Integration:Optimized for developers building on AWS services with contextaware AWSrelated suggestions.",
+          "Security Scanning:Automatically detects hardcoded secrets and security issues in realtime."
+        ]
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine",
+        "description": "Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE",
+        "bullets": [
+          "Private Code Models:Offers the option to run Tabnine entirely on your local machine or private server.",
+          "Team Learning:Trains on your team\u2019s codebase to provide more relevant and contextual suggestions."
+        ]
+      },
+      {
+        "id": "684c7f6cb93920051549350a",
+        "name": "OneCompiler",
+        "description": "OneCompiler is a free, browser-based platform that lets developers write, compile, run, and debug code across 70+ programming languages instantly",
+        "bullets": [
+          "Supports 70+ Languages:From Java and Python to Rust and R.",
+          "Live Collaboration:Share your coding session in realtime via URL."
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code",
+        "bullets": [
+          "PythonFocused AI:Tailored specifically for Python development, offering deep understanding of Python syntax and idioms.",
+          "Instant Refactorings:Suggests realtime code improvements as you type."
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "OpenAI Codex",
+        "description": "OpenAI Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code",
+        "bullets": [
+          "Natural Language to Code:Converts plain English instructions into code in real time.",
+          "Multilingual Coding Support:Understands and writes code in over a dozen languages."
+        ]
+      },
+      {
+        "id": "684c7442b93920051546767c",
+        "name": "GitHub Copilot",
+        "description": "GitHub Copilot is an AI-powered code completion tool developed by GitHub and powered by OpenAI",
+        "bullets": [
+          "ContextAware Code Suggestions:Writes code that adapts to your project\u2019s language, framework, and style.",
+          "Supports Multiple Languages:Works across dozens of programming languages including Python, JavaScript, C++, and Go."
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Augment Code",
+        "description": "AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI",
+        "bullets": [
+          "RealTime AI Coding Assistance:Offers instant suggestions, completions, and fixes as you type.",
+          "Code Explanation Tool:Understand complex code through naturallanguage breakdowns."
+        ]
+      },
+      {
+        "id": "68495092b9392005150bad29",
+        "name": "Ask Codi",
+        "description": "AskCodi.com is an AI-powered coding assistant designed to simplify and accelerate the software development process",
+        "bullets": [
+          "Comprehensive Suite of Coding Tools:Offers a wide array of specialized AI tools that cover the entire software development lifecycle",
+          "Native IDE Integrations:Provides seamless integration with popular IDEs (VS Code, JetBrains, Sublime Text), allowing developers to access AI assistance directly within their familiar coding environment"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code",
+        "bullets": [
+          "Trained on HighQuality Repos:Models are trained on over 500,000 GitHub repos for accuracy.",
+          "Personalized Team Models:Finetune IntelliCode to match your team\u2019s coding style and preferences."
+        ]
+      },
+      {
+        "id": "684c769db93920051546b4a7",
+        "name": "CodeStory",
+        "description": "CodeStory is an AI-native, privacy-focused IDE (a fork of VS Code) that lets humans and AI pair-program together",
+        "bullets": [
+          "Multi\u2011File Edits:AI can make coordinated changes across many files with consistent logic and safety.",
+          "Proactive Agents:Automatically fix linter errors, type mismatches, and common pitfalls."
+        ]
+      },
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI",
+        "description": "PearAI is an open-source, AI-powered code editor based on Visual Studio Code that combines top AI coding tools like GPT-4, Claude, LLaMA, and AI agents into one intelligent workspace",
+        "bullets": [
+          "Unified AI Ecosystem:Combines multiple large language models and agents in a single interface.",
+          "Local Code Awareness:Understands your entire codebase stored locally for more relevant responses."
+        ]
+      },
+      {
+        "id": "684c84a383acd0b04c70e6f1",
+        "name": "Ellipsis",
+        "description": "Ellipsis is a visual AI-powered interface for crafting GPT-based workflows",
+        "bullets": [
+          "FlowBased GPT Workflows:Build multistep automation visually like flowcharts.",
+          "PreBuilt Functions:Includes common tasks like summarization, translation, classification."
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "codex-mini-latest is OpenAI\u2019s lightweight, high-speed AI coding model, fine-tuned from the o4-mini architecture",
+        "bullets": [
+          "Optimized for Terminal Use:Tailored for commandline interactions, providing seamless integration into terminal workflows.",
+          "High Performance:Delivers fast response times, making it suitable for realtime coding assistance."
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE",
+        "bullets": [
+          "AllinOne Web IDE + AI:Code, debug, and build with AI\u2014all inside a powerful browserbased IDE.",
+          "ContextAware Suggestions:Ghostwriter understands your code context to give accurate completions."
+        ]
+      },
+      {
+        "id": "681da82063aef50052db4604",
+        "name": "RegexMy",
+        "description": "RegexMy is a versatile platform offering powerful AI tools designed to streamline search and file operations tasks. It features an AI-powered regex builder, XPath builder, and tools for file summarization, reporting, translation, and code localization. Whether you're looking to enhance productivity or ensure accuracy in your workflow, RegexMy provides advanced features to meet your needs.",
+        "bullets": []
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite",
+        "description": "HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.",
+        "bullets": []
+      },
+      {
+        "id": "6832c345dc5f9153e5a98ca9",
+        "name": "WriteHuman",
+        "description": "WriteHuman is an AI-powered tool designed to humanize AI-generated text, making it undetectable by AI detection tools like GPTZero, Turnitin, and Originality.ai. It ensures AI-assisted content maintains a natural, human-like tone while preserving readability and coherence.",
+        "bullets": []
+      },
+      {
+        "id": "686ce6063a087b487359dd08",
+        "name": "RooCode",
+        "description": "Roo Code (formerly Roo Cline) is an open-source, AI-powered development assistant built directly into Visual Studio Code. Acting like a full-stack \u201cAI dev team,\u201d it helps you plan, write, and refactor code across multiple files, run terminal commands, launch browsers, and debug\u2014all from within your editor.",
+        "bullets": []
+      },
+      {
+        "id": "681f265153d3e454a4bb7207",
+        "name": "Writer",
+        "description": "Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.",
+        "bullets": []
+      },
+      {
+        "id": "686a831ae1d0bbc07e323f89",
+        "name": "CodeSnaps",
+        "description": "Codesnaps.io is a React and Tailwind CSS UI Library primarily designed to help developers build websites and Minimum Viable Products (MVPs) faster and design more efficiently. Its main purpose is to provide instant access to a vast collection of production-ready React and Tailwind CSS components, alongside an AI site generator, eliminating the need for tedious package installations and accelerating the development workflow.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6846ab17b32d4d019c03e243",
+      "684c5bf3b93920051544ef60",
+      "684874ccb939200515094d57",
+      "6848556fb93920051506efa4",
+      "684731b4b939200515f530cd",
+      "684c7f6cb93920051549350a",
+      "68485950b9392005150750a2",
+      "68485ca5b939200515078c03",
+      "684c7442b93920051546767c",
+      "684c82d4b9392005154a3270",
+      "68495092b9392005150bad29",
+      "684867d8b93920051508d781",
+      "684c769db93920051546b4a7",
+      "684c70bbb939200515463884",
+      "684c84a383acd0b04c70e6f1",
+      "6843618eac33a46e0beebe30",
+      "68472210b939200515f4bc44",
+      "6843618eac33a46e0beebe30",
+      "68472210b939200515f4bc44",
+      "681da82063aef50052db4604",
+      "681ed8f853d3e454a4b9e18b",
+      "6832c345dc5f9153e5a98ca9",
+      "686ce6063a087b487359dd08",
+      "681f265153d3e454a4bb7207",
+      "686a831ae1d0bbc07e323f89"
+    ],
+    "tools": [
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Sourcegraph Cody",
+        "description": "Sourcegraph Cody is an AI-powered coding assistant built into Sourcegraph, designed to help developers understand, write, and navigate complex codebases efficiently",
+        "bullets": [
+          "FullContext Awareness:Understands entire repositories and project structure\u2014not just the file you're editing.",
+          "AIPowered Chat:Ask questions in natural language and get answers directly related to your code."
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters",
+        "bullets": [
+          "Deep .NET Code Analysis:Provides more than 2,200 code inspections across supported languages.",
+          "ContextAware Refactorings:Automates complex refactorings without breaking code."
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs",
+        "bullets": [
+          "Deep AWS Integration:Optimized for developers building on AWS services with contextaware AWSrelated suggestions.",
+          "Security Scanning:Automatically detects hardcoded secrets and security issues in realtime."
+        ]
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine",
+        "description": "Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE",
+        "bullets": [
+          "Private Code Models:Offers the option to run Tabnine entirely on your local machine or private server.",
+          "Team Learning:Trains on your team\u2019s codebase to provide more relevant and contextual suggestions."
+        ]
+      },
+      {
+        "id": "684c7f6cb93920051549350a",
+        "name": "OneCompiler",
+        "description": "OneCompiler is a free, browser-based platform that lets developers write, compile, run, and debug code across 70+ programming languages instantly",
+        "bullets": [
+          "Supports 70+ Languages:From Java and Python to Rust and R.",
+          "Live Collaboration:Share your coding session in realtime via URL."
+        ]
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery",
+        "description": "Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code",
+        "bullets": [
+          "PythonFocused AI:Tailored specifically for Python development, offering deep understanding of Python syntax and idioms.",
+          "Instant Refactorings:Suggests realtime code improvements as you type."
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "OpenAI Codex",
+        "description": "OpenAI Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code",
+        "bullets": [
+          "Natural Language to Code:Converts plain English instructions into code in real time.",
+          "Multilingual Coding Support:Understands and writes code in over a dozen languages."
+        ]
+      },
+      {
+        "id": "684c7442b93920051546767c",
+        "name": "GitHub Copilot",
+        "description": "GitHub Copilot is an AI-powered code completion tool developed by GitHub and powered by OpenAI",
+        "bullets": [
+          "ContextAware Code Suggestions:Writes code that adapts to your project\u2019s language, framework, and style.",
+          "Supports Multiple Languages:Works across dozens of programming languages including Python, JavaScript, C++, and Go."
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Augment Code",
+        "description": "AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI",
+        "bullets": [
+          "RealTime AI Coding Assistance:Offers instant suggestions, completions, and fixes as you type.",
+          "Code Explanation Tool:Understand complex code through naturallanguage breakdowns."
+        ]
+      },
+      {
+        "id": "68495092b9392005150bad29",
+        "name": "Ask Codi",
+        "description": "AskCodi.com is an AI-powered coding assistant designed to simplify and accelerate the software development process",
+        "bullets": [
+          "Comprehensive Suite of Coding Tools:Offers a wide array of specialized AI tools that cover the entire software development lifecycle",
+          "Native IDE Integrations:Provides seamless integration with popular IDEs (VS Code, JetBrains, Sublime Text), allowing developers to access AI assistance directly within their familiar coding environment"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code",
+        "bullets": [
+          "Trained on HighQuality Repos:Models are trained on over 500,000 GitHub repos for accuracy.",
+          "Personalized Team Models:Finetune IntelliCode to match your team\u2019s coding style and preferences."
+        ]
+      },
+      {
+        "id": "684c769db93920051546b4a7",
+        "name": "CodeStory",
+        "description": "CodeStory is an AI-native, privacy-focused IDE (a fork of VS Code) that lets humans and AI pair-program together",
+        "bullets": [
+          "Multi\u2011File Edits:AI can make coordinated changes across many files with consistent logic and safety.",
+          "Proactive Agents:Automatically fix linter errors, type mismatches, and common pitfalls."
+        ]
+      },
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI",
+        "description": "PearAI is an open-source, AI-powered code editor based on Visual Studio Code that combines top AI coding tools like GPT-4, Claude, LLaMA, and AI agents into one intelligent workspace",
+        "bullets": [
+          "Unified AI Ecosystem:Combines multiple large language models and agents in a single interface.",
+          "Local Code Awareness:Understands your entire codebase stored locally for more relevant responses."
+        ]
+      },
+      {
+        "id": "684c84a383acd0b04c70e6f1",
+        "name": "Ellipsis",
+        "description": "Ellipsis is a visual AI-powered interface for crafting GPT-based workflows",
+        "bullets": [
+          "FlowBased GPT Workflows:Build multistep automation visually like flowcharts.",
+          "PreBuilt Functions:Includes common tasks like summarization, translation, classification."
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "codex-mini-latest is OpenAI\u2019s lightweight, high-speed AI coding model, fine-tuned from the o4-mini architecture",
+        "bullets": [
+          "Optimized for Terminal Use:Tailored for commandline interactions, providing seamless integration into terminal workflows.",
+          "High Performance:Delivers fast response times, making it suitable for realtime coding assistance."
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE",
+        "bullets": [
+          "AllinOne Web IDE + AI:Code, debug, and build with AI\u2014all inside a powerful browserbased IDE.",
+          "ContextAware Suggestions:Ghostwriter understands your code context to give accurate completions."
+        ]
+      },
+      {
+        "id": "681da82063aef50052db4604",
+        "name": "RegexMy",
+        "description": "RegexMy is a versatile platform offering powerful AI tools designed to streamline search and file operations tasks. It features an AI-powered regex builder, XPath builder, and tools for file summarization, reporting, translation, and code localization. Whether you're looking to enhance productivity or ensure accuracy in your workflow, RegexMy provides advanced features to meet your needs.",
+        "bullets": []
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite",
+        "description": "HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.",
+        "bullets": []
+      },
+      {
+        "id": "6832c345dc5f9153e5a98ca9",
+        "name": "WriteHuman",
+        "description": "WriteHuman is an AI-powered tool designed to humanize AI-generated text, making it undetectable by AI detection tools like GPTZero, Turnitin, and Originality.ai. It ensures AI-assisted content maintains a natural, human-like tone while preserving readability and coherence.",
+        "bullets": []
+      },
+      {
+        "id": "686ce6063a087b487359dd08",
+        "name": "RooCode",
+        "description": "Roo Code (formerly Roo Cline) is an open-source, AI-powered development assistant built directly into Visual Studio Code. Acting like a full-stack \u201cAI dev team,\u201d it helps you plan, write, and refactor code across multiple files, run terminal commands, launch browsers, and debug\u2014all from within your editor.",
+        "bullets": []
+      },
+      {
+        "id": "681f265153d3e454a4bb7207",
+        "name": "Writer",
+        "description": "Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.",
+        "bullets": []
+      },
+      {
+        "id": "686a831ae1d0bbc07e323f89",
+        "name": "CodeSnaps",
+        "description": "Codesnaps.io is a React and Tailwind CSS UI Library primarily designed to help developers build websites and Minimum Viable Products (MVPs) faster and design more efficiently. Its main purpose is to provide instant access to a vast collection of production-ready React and Tailwind CSS components, alongside an AI site generator, eliminating the need for tedious package installations and accelerating the development workflow.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 0.053,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6846ab17b32d4d019c03e243\",\n    \"684c5bf3b93920051544ef60\",\n    \"684874ccb939200515094d57\",\n    \"6848556fb93920051506efa4\",\n    \"684731b4b939200515f530cd\",\n    \"684c7f6cb93920051549350a\",\n    \"68485950b9392005150750a2\",\n    \"68485ca5b939200515078c03\",\n    \"684c7442b93920051546767c\",\n    \"684c82d4b9392005154a3270\",\n    \"68495092b9392005150bad29\",\n    \"684867d8b93920051508d781\",\n    \"684c769db93920051546b4a7\",\n    \"684c70bbb939200515463884\",\n    \"684c84a383acd0b04c70e6f1\",\n    \"6843618eac33a46e0beebe30\",\n    \"68472210b939200515f4bc44\",\n    \"6843618eac33a46e0beebe30\",\n    \"68472210b939200515f4bc44\",\n    \"681da82063aef50052db4604\",\n    \"681ed8f853d3e454a4b9e18b\",\n    \"6832c345dc5f9153e5a98ca9\",\n    \"686ce6063a087b487359dd08\",\n    \"681f265153d3e454a4bb7207\",\n    \"686a831ae1d0bbc07e323f89\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6846ab17b32d4d019c03e243\",\n      \"name\": \"Windsurf\",\n      \"description\": \"AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"684c5bf3b93920051544ef60\",\n      \"name\": \"Sourcegraph Cody\",\n      \"description\": \"Sourcegraph Cody is an AI-powered coding assistant built into Sourcegraph, designed to help developers understand, write, and navigate complex codebases efficiently\",\n      \"bullets\": [\n        \"FullContext Awareness:Understands entire repositories and project structure\\u2014not just the file you're editing.\",\n        \"AIPowered Chat:Ask questions in natural language and get answers directly related to your code.\"\n      ]\n    },\n    {\n      \"id\": \"684874ccb939200515094d57\",\n      \"name\": \"ReSharper\",\n      \"description\": \"ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters\",\n      \"bullets\": [\n        \"Deep .NET Code Analysis:Provides more than 2,200 code inspections across supported languages.\",\n        \"ContextAware Refactorings:Automates complex refactorings without breaking code.\"\n      ]\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\",\n      \"description\": \"Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely by providing real-time code suggestions, snippets, and security scans within popular IDEs\",\n      \"bullets\": [\n        \"Deep AWS Integration:Optimized for developers building on AWS services with contextaware AWSrelated suggestions.\",\n        \"Security Scanning:Automatically detects hardcoded secrets and security issues in realtime.\"\n      ]\n    },\n    {\n      \"id\": \"684731b4b939200515f530cd\",\n      \"name\": \"Tabnine\",\n      \"description\": \"Tabnine is an AI-powered coding assistant designed to accelerate software development by providing intelligent code completions and suggestions directly within your IDE\",\n      \"bullets\": [\n        \"Private Code Models:Offers the option to run Tabnine entirely on your local machine or private server.\",\n        \"Team Learning:Trains on your team\\u2019s codebase to provide more relevant and contextual suggestions.\"\n      ]\n    },\n    {\n      \"id\": \"684c7f6cb93920051549350a\",\n      \"name\": \"OneCompiler\",\n      \"description\": \"OneCompiler is a free, browser-based platform that lets developers write, compile, run, and debug code across 70+ programming languages instantly\",\n      \"bullets\": [\n        \"Supports 70+ Languages:From Java and Python to Rust and R.\",\n        \"Live Collaboration:Share your coding session in realtime via URL.\"\n      ]\n    },\n    {\n      \"id\": \"68485950b9392005150750a2\",\n      \"name\": \"Sourcery\",\n      \"description\": \"Sourcery is an AI-powered coding assistant specifically designed to help developers write cleaner, more efficient Python code\",\n      \"bullets\": [\n        \"PythonFocused AI:Tailored specifically for Python development, offering deep understanding of Python syntax and idioms.\",\n        \"Instant Refactorings:Suggests realtime code improvements as you type.\"\n      ]\n    },\n    {\n      \"id\": \"68485ca5b939200515078c03\",\n      \"name\": \"OpenAI Codex\",\n      \"description\": \"OpenAI Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code\",\n      \"bullets\": [\n        \"Natural Language to Code:Converts plain English instructions into code in real time.\",\n        \"Multilingual Coding Support:Understands and writes code in over a dozen languages.\"\n      ]\n    },\n    {\n      \"id\": \"684c7442b93920051546767c\",\n      \"name\": \"GitHub Copilot\",\n      \"description\": \"GitHub Copilot is an AI-powered code completion tool developed by GitHub and powered by OpenAI\",\n      \"bullets\": [\n        \"ContextAware Code Suggestions:Writes code that adapts to your project\\u2019s language, framework, and style.\",\n        \"Supports Multiple Languages:Works across dozens of programming languages including Python, JavaScript, C++, and Go.\"\n      ]\n    },\n    {\n      \"id\": \"684c82d4b9392005154a3270\",\n      \"name\": \"Augment Code\",\n      \"description\": \"AugmentCode.com is an intelligent AI coding assistant that helps developers write, debug, and optimize code faster using AI\",\n      \"bullets\": [\n        \"RealTime AI Coding Assistance:Offers instant suggestions, completions, and fixes as you type.\",\n        \"Code Explanation Tool:Understand complex code through naturallanguage breakdowns.\"\n      ]\n    },\n    {\n      \"id\": \"68495092b9392005150bad29\",\n      \"name\": \"Ask Codi\",\n      \"description\": \"AskCodi.com is an AI-powered coding assistant designed to simplify and accelerate the software development process\",\n      \"bullets\": [\n        \"Comprehensive Suite of Coding Tools:Offers a wide array of specialized AI tools that cover the entire software development lifecycle\",\n        \"Native IDE Integrations:Provides seamless integration with popular IDEs (VS Code, JetBrains, Sublime Text), allowing developers to access AI assistance directly within their familiar coding environment\"\n      ]\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"Microsoft - IntelliCode\",\n      \"description\": \"IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code\",\n      \"bullets\": [\n        \"Trained on HighQuality Repos:Models are trained on over 500,000 GitHub repos for accuracy.\",\n        \"Personalized Team Models:Finetune IntelliCode to match your team\\u2019s coding style and preferences.\"\n      ]\n    },\n    {\n      \"id\": \"684c769db93920051546b4a7\",\n      \"name\": \"CodeStory\",\n      \"description\": \"CodeStory is an AI-native, privacy-focused IDE (a fork of VS Code) that lets humans and AI pair-program together\",\n      \"bullets\": [\n        \"Multi\\u2011File Edits:AI can make coordinated changes across many files with consistent logic and safety.\",\n        \"Proactive Agents:Automatically fix linter errors, type mismatches, and common pitfalls.\"\n      ]\n    },\n    {\n      \"id\": \"684c70bbb939200515463884\",\n      \"name\": \"PearAI\",\n      \"description\": \"PearAI is an open-source, AI-powered code editor based on Visual Studio Code that combines top AI coding tools like GPT-4, Claude, LLaMA, and AI agents into one intelligent workspace\",\n      \"bullets\": [\n        \"Unified AI Ecosystem:Combines multiple large language models and agents in a single interface.\",\n        \"Local Code Awareness:Understands your entire codebase stored locally for more relevant responses.\"\n      ]\n    },\n    {\n      \"id\": \"684c84a383acd0b04c70e6f1\",\n      \"name\": \"Ellipsis\",\n      \"description\": \"Ellipsis is a visual AI-powered interface for crafting GPT-based workflows\",\n      \"bullets\": [\n        \"FlowBased GPT Workflows:Build multistep automation visually like flowcharts.\",\n        \"PreBuilt Functions:Includes common tasks like summarization, translation, classification.\"\n      ]\n    },\n    {\n      \"id\": \"6843618eac33a46e0beebe30\",\n      \"name\": \"OpenAI Codex mini Latest\",\n      \"description\": \"codex-mini-latest is OpenAI\\u2019s lightweight, high-speed AI coding model, fine-tuned from the o4-mini architecture\",\n      \"bullets\": [\n        \"Optimized for Terminal Use:Tailored for commandline interactions, providing seamless integration into terminal workflows.\",\n        \"High Performance:Delivers fast response times, making it suitable for realtime coding assistance.\"\n      ]\n    },\n    {\n      \"id\": \"68472210b939200515f4bc44\",\n      \"name\": \"Replit Ghostwriter\",\n      \"description\": \"Replit Ghostwriter is an AI-powered coding assistant integrated into the Replit online IDE\",\n      \"bullets\": [\n        \"AllinOne Web IDE + AI:Code, debug, and build with AI\\u2014all inside a powerful browserbased IDE.\",\n        \"ContextAware Suggestions:Ghostwriter understands your code context to give accurate completions.\"\n      ]\n    },\n    {\n      \"id\": \"681da82063aef50052db4604\",\n      \"name\": \"RegexMy\",\n      \"description\": \"RegexMy is a versatile platform offering powerful AI tools designed to streamline search and file operations tasks. It features an AI-powered regex builder, XPath builder, and tools for file summarization, reporting, translation, and code localization. Whether you're looking to enhance productivity or ensure accuracy in your workflow, RegexMy provides advanced features to meet your needs.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681ed8f853d3e454a4b9e18b\",\n      \"name\": \"HyperWrite\",\n      \"description\": \"HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6832c345dc5f9153e5a98ca9\",\n      \"name\": \"WriteHuman\",\n      \"description\": \"WriteHuman is an AI-powered tool designed to humanize AI-generated text, making it undetectable by AI detection tools like GPTZero, Turnitin, and Originality.ai. It ensures AI-assisted content maintains a natural, human-like tone while preserving readability and coherence.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"686ce6063a087b487359dd08\",\n      \"name\": \"RooCode\",\n      \"description\": \"Roo Code (formerly Roo Cline) is an open-source, AI-powered development assistant built directly into Visual Studio Code. Acting like a full-stack \\u201cAI dev team,\\u201d it helps you plan, write, and refactor code across multiple files, run terminal commands, launch browsers, and debug\\u2014all from within your editor.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681f265153d3e454a4bb7207\",\n      \"name\": \"Writer\",\n      \"description\": \"Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"686a831ae1d0bbc07e323f89\",\n      \"name\": \"CodeSnaps\",\n      \"description\": \"Codesnaps.io is a React and Tailwind CSS UI Library primarily designed to help developers build websites and Minimum Viable Products (MVPs) faster and design more efficiently. Its main purpose is to provide instant access to a vast collection of production-ready React and Tailwind CSS components, alongside an AI site generator, eliminating the need for tedious package installations and accelerating the development workflow.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

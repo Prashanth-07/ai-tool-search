@@ -1,0 +1,273 @@
+{
+  "timestamp": "2025-07-09T15:12:47.018604",
+  "input_query": "write PRD which is Product Requirements Documents (PRDs) for me",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 12,
+    "tool_ids": [
+      "6863673d015bd4929b37d69d",
+      "6863632c015bd4929b37d359",
+      "68636b0c015bd4929b37d7a4",
+      "68666360ef7018fbfef69bc7",
+      "684d7f4479b4f531e34aa3d8",
+      "6863599c015bd4929b37d01d",
+      "686a2ec5e1d0bbc07e321361",
+      "685e9c4b1c16582699a7b791",
+      "6863632c015bd4929b37d359",
+      "68413605bce3a3d64c709464"
+    ],
+    "tools": [
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs). By accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings, the tool intelligently extracts relevant information and structures it into a comprehensive PRD. Within seconds, users receive a ready-to-edit document that includes sections like product overview, goals, user stories, and feature specs\u2014perfect for aligning cross-functional teams.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "57a73e91-831a-4300-b105-b4f32d2d3fb8",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs). Instead of crafting detailed spec documents from scratch, users can input basic information\u2014like feature ideas, product goals, and user needs\u2014and instantly generate a structured, professional PRD draft that covers scope, requirements, user stories, and success metrics.",
+        "bullets": [
+          "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+          "Generates a complete, structured PRD using AI from basic user inputs"
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification. The platform emphasizes rapid productivity gains\u2014\u201c10\u00d7 PMs\u201d\u2014and targets both entry- and mid-level professionals.",
+        "bullets": [
+          "PMFocused: Unlike generalpurpose AI, these agents are finetuned for product management workflows.",
+          "Specialized Agents: Each AI agent has a clear purpose\u2014from research to resume review\u2014reducing friction."
+        ]
+      },
+      {
+        "id": "684d7f4479b4f531e34aa3d8",
+        "name": "Zeda.io",
+        "description": "Zeda.io is an AI-powered product management platform designed to help product teams build better products faster. With smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization, Zeda.io simplifies the end-to-end product management process. It enables product managers to align teams, make data-driven decisions, and streamline product development efficiently.",
+        "bullets": [
+          "AIPowered Prioritization:A key unique feature that automatically scores and ranks features and ideas based on various inputs, including customer feedback, strategic goals, and perceived business impact, enabling datadriven prioritization.",
+          "Unified Feedback Hub:Collects and centralizes customer feedback from diverse sources (e.g., NPS, support, sales, direct input) into a single, organized hub."
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": [
+          "ProductCentric AI:Built specifically for PM roles\u2014not generic AI tools\u2014ChatPRD understands product processes and document standards.",
+          "OnDemand CPO Feedback:Acts like a virtual Chief Product Officer, offering realtime coaching and critique as you work."
+        ]
+      },
+      {
+        "id": "686a2ec5e1d0bbc07e321361",
+        "name": "StoriesOnBoard",
+        "description": "StoriesOnBoard is a collaborative user story mapping tool designed for software projects and product management. It provides a visual, end-to-end platform for agile teams to identify, manage, and validate product ideas, helping to create understandable backlogs and align stakeholders throughout the development process. The platform also integrates AI capabilities to assist with various product management tasks.",
+        "bullets": [
+          "AIPowered Product Management: Integrates AI to assist with brainstorming user stories, acceptance criteria, user personas, and release summaries.",
+          "Visual Story Mapping: Provides an intuitive visual interface for creating and managing user story maps that are easy for all stakeholders to understand."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": [
+          "InConfluence, No Context Switching: AI works where documents already live\u2014no new tools needed.",
+          "Intelligent Prompts to Avoid Gaps: The AI asks clarifying questions to fill blind spots in PRDs."
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "68413605bce3a3d64c709464",
+        "name": "Buildpad",
+        "description": "Buildpad.io is an AI-powered platform specifically designed to assist founders and entrepreneurs in the comprehensive process of developing successful products, from initial idea generation to launching with a solid business strategy. It guides users through a proven process, leveraging AI to help with brainstorming, idea validation, branding, and strategic planning.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6863673d015bd4929b37d69d",
+      "6863632c015bd4929b37d359",
+      "68636b0c015bd4929b37d7a4",
+      "68666360ef7018fbfef69bc7",
+      "684d7f4479b4f531e34aa3d8",
+      "6863599c015bd4929b37d01d",
+      "686a2ec5e1d0bbc07e321361",
+      "685e9c4b1c16582699a7b791",
+      "6863632c015bd4929b37d359",
+      "68413605bce3a3d64c709464"
+    ],
+    "tools": [
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs). By accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings, the tool intelligently extracts relevant information and structures it into a comprehensive PRD. Within seconds, users receive a ready-to-edit document that includes sections like product overview, goals, user stories, and feature specs\u2014perfect for aligning cross-functional teams.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "57a73e91-831a-4300-b105-b4f32d2d3fb8",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs). Instead of crafting detailed spec documents from scratch, users can input basic information\u2014like feature ideas, product goals, and user needs\u2014and instantly generate a structured, professional PRD draft that covers scope, requirements, user stories, and success metrics.",
+        "bullets": [
+          "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+          "Generates a complete, structured PRD using AI from basic user inputs"
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification. The platform emphasizes rapid productivity gains\u2014\u201c10\u00d7 PMs\u201d\u2014and targets both entry- and mid-level professionals.",
+        "bullets": [
+          "PMFocused: Unlike generalpurpose AI, these agents are finetuned for product management workflows.",
+          "Specialized Agents: Each AI agent has a clear purpose\u2014from research to resume review\u2014reducing friction."
+        ]
+      },
+      {
+        "id": "684d7f4479b4f531e34aa3d8",
+        "name": "Zeda.io",
+        "description": "Zeda.io is an AI-powered product management platform designed to help product teams build better products faster. With smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization, Zeda.io simplifies the end-to-end product management process. It enables product managers to align teams, make data-driven decisions, and streamline product development efficiently.",
+        "bullets": [
+          "AIPowered Prioritization:A key unique feature that automatically scores and ranks features and ideas based on various inputs, including customer feedback, strategic goals, and perceived business impact, enabling datadriven prioritization.",
+          "Unified Feedback Hub:Collects and centralizes customer feedback from diverse sources (e.g., NPS, support, sales, direct input) into a single, organized hub."
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": [
+          "ProductCentric AI:Built specifically for PM roles\u2014not generic AI tools\u2014ChatPRD understands product processes and document standards.",
+          "OnDemand CPO Feedback:Acts like a virtual Chief Product Officer, offering realtime coaching and critique as you work."
+        ]
+      },
+      {
+        "id": "686a2ec5e1d0bbc07e321361",
+        "name": "StoriesOnBoard",
+        "description": "StoriesOnBoard is a collaborative user story mapping tool designed for software projects and product management. It provides a visual, end-to-end platform for agile teams to identify, manage, and validate product ideas, helping to create understandable backlogs and align stakeholders throughout the development process. The platform also integrates AI capabilities to assist with various product management tasks.",
+        "bullets": [
+          "AIPowered Product Management: Integrates AI to assist with brainstorming user stories, acceptance criteria, user personas, and release summaries.",
+          "Visual Story Mapping: Provides an intuitive visual interface for creating and managing user story maps that are easy for all stakeholders to understand."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": [
+          "InConfluence, No Context Switching: AI works where documents already live\u2014no new tools needed.",
+          "Intelligent Prompts to Avoid Gaps: The AI asks clarifying questions to fill blind spots in PRDs."
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality.",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool."
+        ]
+      },
+      {
+        "id": "68413605bce3a3d64c709464",
+        "name": "Buildpad",
+        "description": "Buildpad.io is an AI-powered platform specifically designed to assist founders and entrepreneurs in the comprehensive process of developing successful products, from initial idea generation to launching with a solid business strategy. It guides users through a proven process, leveraging AI to help with brainstorming, idea validation, branding, and strategic planning.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 0.058,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6863673d015bd4929b37d69d\",\n    \"6863632c015bd4929b37d359\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"68666360ef7018fbfef69bc7\",\n    \"684d7f4479b4f531e34aa3d8\",\n    \"6863599c015bd4929b37d01d\",\n    \"686a2ec5e1d0bbc07e321361\",\n    \"685e9c4b1c16582699a7b791\",\n    \"6863632c015bd4929b37d359\",\n    \"68413605bce3a3d64c709464\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"Bash\\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs). By accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings, the tool intelligently extracts relevant information and structures it into a comprehensive PRD. Within seconds, users receive a ready-to-edit document that includes sections like product overview, goals, user stories, and feature specs\\u2014perfect for aligning cross-functional teams.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"57a73e91-831a-4300-b105-b4f32d2d3fb8\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs). Instead of crafting detailed spec documents from scratch, users can input basic information\\u2014like feature ideas, product goals, and user needs\\u2014and instantly generate a structured, professional PRD draft that covers scope, requirements, user stories, and success metrics.\",\n      \"bullets\": [\n        \"AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows\",\n        \"Generates a complete, structured PRD using AI from basic user inputs\"\n      ]\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\\u2014like product vision, feature ideas, or market context\\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.\",\n      \"bullets\": [\n        \"Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.\",\n        \"Rapid PRD Creation:Cuts documentation time from hours to minutes.\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.\",\n      \"bullets\": [\n        \"Specialized Product Expertise\\u2014 built using proven frameworks to enhance consistency and professional quality.\",\n        \"Unified Product Studio\\u2014 combines PRD writing, tech specs, and task workflows in one tool.\"\n      ]\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\",\n      \"description\": \"Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification. The platform emphasizes rapid productivity gains\\u2014\\u201c10\\u00d7 PMs\\u201d\\u2014and targets both entry- and mid-level professionals.\",\n      \"bullets\": [\n        \"PMFocused: Unlike generalpurpose AI, these agents are finetuned for product management workflows.\",\n        \"Specialized Agents: Each AI agent has a clear purpose\\u2014from research to resume review\\u2014reducing friction.\"\n      ]\n    },\n    {\n      \"id\": \"684d7f4479b4f531e34aa3d8\",\n      \"name\": \"Zeda.io\",\n      \"description\": \"Zeda.io is an AI-powered product management platform designed to help product teams build better products faster. With smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization, Zeda.io simplifies the end-to-end product management process. It enables product managers to align teams, make data-driven decisions, and streamline product development efficiently.\",\n      \"bullets\": [\n        \"AIPowered Prioritization:A key unique feature that automatically scores and ranks features and ideas based on various inputs, including customer feedback, strategic goals, and perceived business impact, enabling datadriven prioritization.\",\n        \"Unified Feedback Hub:Collects and centralizes customer feedback from diverse sources (e.g., NPS, support, sales, direct input) into a single, organized hub.\"\n      ]\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\\u2014helping PMs elevate their documentation and workflow efficiency.\",\n      \"bullets\": [\n        \"ProductCentric AI:Built specifically for PM roles\\u2014not generic AI tools\\u2014ChatPRD understands product processes and document standards.\",\n        \"OnDemand CPO Feedback:Acts like a virtual Chief Product Officer, offering realtime coaching and critique as you work.\"\n      ]\n    },\n    {\n      \"id\": \"686a2ec5e1d0bbc07e321361\",\n      \"name\": \"StoriesOnBoard\",\n      \"description\": \"StoriesOnBoard is a collaborative user story mapping tool designed for software projects and product management. It provides a visual, end-to-end platform for agile teams to identify, manage, and validate product ideas, helping to create understandable backlogs and align stakeholders throughout the development process. The platform also integrates AI capabilities to assist with various product management tasks.\",\n      \"bullets\": [\n        \"AIPowered Product Management: Integrates AI to assist with brainstorming user stories, acceptance criteria, user personas, and release summaries.\",\n        \"Visual Story Mapping: Provides an intuitive visual interface for creating and managing user story maps that are easy for all stakeholders to understand.\"\n      ]\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.\",\n      \"bullets\": [\n        \"InConfluence, No Context Switching: AI works where documents already live\\u2014no new tools needed.\",\n        \"Intelligent Prompts to Avoid Gaps: The AI asks clarifying questions to fill blind spots in PRDs.\"\n      ]\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\\u2014like product vision, feature ideas, or market context\\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.\",\n      \"bullets\": [\n        \"Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.\",\n        \"Rapid PRD Creation:Cuts documentation time from hours to minutes.\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.\",\n      \"bullets\": [\n        \"Specialized Product Expertise\\u2014 built using proven frameworks to enhance consistency and professional quality.\",\n        \"Unified Product Studio\\u2014 combines PRD writing, tech specs, and task workflows in one tool.\"\n      ]\n    },\n    {\n      \"id\": \"68413605bce3a3d64c709464\",\n      \"name\": \"Buildpad\",\n      \"description\": \"Buildpad.io is an AI-powered platform specifically designed to assist founders and entrepreneurs in the comprehensive process of developing successful products, from initial idea generation to launching with a solid business strategy. It guides users through a proven process, leveraging AI to help with brainstorming, idea validation, branding, and strategic planning.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
