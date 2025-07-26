@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-07-16T10:01:08.845808",
+  "input_query": "coding tools to learn coding",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 0,
+    "tool_ids": [],
+    "tools": []
+  },
+  "llm_answer": {
+    "error": "search_error",
+    "message": "Failed to process search: Invalid format specifier",
+    "tools": [],
+    "timestamp": "2025-07-16T04:31:13.427396"
+  },
+  "processing_time_seconds": 4.595,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"error\": \"search_error\", \"message\": \"Failed to process search: Invalid format specifier\", \"tools\": [], \"timestamp\": \"2025-07-16T04:31:13.427396\"}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

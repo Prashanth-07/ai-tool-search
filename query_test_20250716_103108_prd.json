@@ -1,0 +1,697 @@
+{
+  "timestamp": "2025-07-16T10:31:08.162279",
+  "input_query": "prd",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 36,
+    "tool_ids": [
+      "6863632c015bd4929b37d359",
+      "68666360ef7018fbfef69bc7",
+      "6863673d015bd4929b37d69d",
+      "68635e5e015bd4929b37d18a",
+      "68636b0c015bd4929b37d7a4",
+      "686a2c32e1d0bbc07e32112c",
+      "685e989b1c16582699a7b350",
+      "681d8db563aef50052db3613",
+      "681ef86353d3e454a4ba598f",
+      "6838685955e948f01b994fd3",
+      "685318d727c6eba075db6c95",
+      "6873a460cc23a952f76ce160",
+      "682e0b0823aaf1a750aa8074",
+      "6828433e23aaf1a750a63621",
+      "685abbce1c16582699a66eca",
+      "685006c3afca082a9fc423f7",
+      "684d7f4479b4f531e34aa3d8",
+      "6827374923aaf1a750a3a057",
+      "6827584823aaf1a750a44b29",
+      "6873bb4acc23a952f76cfa69",
+      "684d932e79b4f531e3513c96",
+      "681cbad6477018e3479577b4",
+      "682d557123aaf1a750a99d2e",
+      "6864ec0e015bd4929b392957",
+      "685310f027c6eba075db537e",
+      "684d912a79b4f531e34ecbb7",
+      "682e164a23aaf1a750aa8ace",
+      "685e9c4b1c16582699a7b791",
+      "684c82d4b9392005154a3270",
+      "681f21d253d3e454a4bb61b9",
+      "68736660cc23a952f76cc66f",
+      "681f85c7d877dcf3c6576614",
+      "681c8e41477018e3479561f9",
+      "6832c87ddc5f9153e5a9d1fd",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification. The platform emphasizes rapid productivity gains\u2014\u201c10\u00d7 PMs\u201d\u2014and targets both entry- and mid-level professionals.",
+        "bullets": [
+          "Streamlined, task-specific agents designed for PM use-cases",
+          "Free to start, with generous AI credit model linked to community engagement"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs). By accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings, the tool intelligently extracts relevant information and structures it into a comprehensive PRD. Within seconds, users receive a ready-to-edit document that includes sections like product overview, goals, user stories, and feature specs\u2014perfect for aligning cross-functional teams.",
+        "bullets": [
+          "MultiSource Intelligence:Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation.",
+          "TemplateDriven Speed:Speedsters past blankpage paralysis using a triedandtested PRD template."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs). Instead of crafting detailed spec documents from scratch, users can input basic information\u2014like feature ideas, product goals, and user needs\u2014and instantly generate a structured, professional PRD draft that covers scope, requirements, user stories, and success metrics.",
+        "bullets": [
+          "ChatGPTPrompt Engineered:Tailored prompts and formatting optimized for PRD generation\u2014saves time versus writing in vanilla chat interfaces",
+          "UserFriendly Interface:Clean, intuitive design guides users through each section"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool"
+        ]
+      },
+      {
+        "id": "686a2c32e1d0bbc07e32112c",
+        "name": "Autoppt",
+        "description": "AutoPPT.com is an AI-powered tool designed to instantly create stunning and professional-looking presentations. It simplifies and accelerates the presentation creation process by generating AI slideshows from a given topic or uploaded documents like Word or PDF files, making professional design skills unnecessary.",
+        "bullets": [
+          "AIPowered Instant Generation: Creates professional slideshows instantly from text or documents using AI",
+          "Document to AI Slides: Converts various document formats (PDF, Word, Txt, Excel, PPT, JPG) into AIgenerated slides with a single click"
+        ]
+      },
+      {
+        "id": "685e989b1c16582699a7b350",
+        "name": "Mistral Pixtral Large",
+        "description": "Pixtral Large is Mistral\u202fAI\u2019s latest multimodal powerhouse, launched November\u202f18,\u202f2024. Built atop the 123B\u2011parameter Mistral Large\u202f2, it features a 124B\u2011parameter multimodal decoder paired with a 1B\u2011parameter vision encoder, and supports a massive 128K\u2011token context window\u2014enabling it to process up to 30 high-resolution images or ~300-page documents.",
+        "bullets": [
+          "Multimodal Decoder Setup: Merges strong text performance with robust vision understanding using a 1B encoder",
+          "Huge Context: 128K tokens processing long docs and dozens of images at once"
+        ]
+      },
+      {
+        "id": "681d8db563aef50052db3613",
+        "name": "V0",
+        "description": "V0.dev is an AI-powered UI generator that allows developers and designers to quickly create stunning user interfaces using natural language prompts. Built on ShadCN, Tailwind CSS, and React, V0.dev translates text-based descriptions into functional UI components\u2014making it an essential tool for rapid prototyping, front-end development, and UI/UX design.",
+        "bullets": [
+          "AIPowered UI Generation:Instantly transforms text descriptions into productionready UI components",
+          "Built on Modern Frontend Tech:Uses ShadCN, Tailwind CSS, and React for highquality, customizable outputs"
+        ]
+      },
+      {
+        "id": "681ef86353d3e454a4ba598f",
+        "name": "Tome",
+        "description": "Tome is a powerful AI platform designed to supercharge sales teams by acting as a second brain for your sales strategy. Trained on your playbook and CRM data, Tome helps you identify strategic initiatives, key decision-makers, and the right messaging to break into large accounts.",
+        "bullets": [
+          "SalesFocused AI:Tome is trained on your CRM data and playbook, meaning it has a deep understanding of your specific business and sales approach",
+          "Targeted Outreach:The platform helps identify key decisionmakers, initiatives, and opportunities, allowing you to craft outreach that speaks directly to the needs of your target accounts"
+        ]
+      },
+      {
+        "id": "6838685955e948f01b994fd3",
+        "name": "Audo",
+        "description": "Audo is an innovative AI-powered career platform designed to help individuals navigate their career paths effectively. It offers a comprehensive suite of tools, including career path guidance, resume optimization, job matching, skill development courses, and interview preparation.",
+        "bullets": [
+          "AI Career Concierge:Provides personalized career guidance based on individual experiences, skills, and interests",
+          "Comprehensive Toolkit:Offers a range of tools, including resume builders, job matching dashboards, and skill development courses"
+        ]
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado",
+        "description": "Persado is an enterprise \u201cMotivation AI\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale. By analyzing language patterns across hundreds of thousands of campaigns, it crafts optimized versions for emails, web copy, ads, and SMS\u2014helping brands drive engagement and conversions.",
+        "bullets": [
+          "EmotionCentric AI:Focuses on motivational language to drive behavioral response\u2014based on billions of data points",
+          "Proven ROI:Examples show up to +70% email opens and +114% click rates"
+        ]
+      },
+      {
+        "id": "6873a460cc23a952f76ce160",
+        "name": "ProApplyAI",
+        "description": "ProApply AI is an AI-powered career assistant focused on automating cover letter and resume creation. It uses your background, role details, and job descriptions to generate tailored application documents, which can then be downloaded as PDFs.",
+        "bullets": [
+          "Tailored Output:Uses templates to create jobspecific cover letters",
+          "AI + Templates:Streamlines document creation with intelligent formatting"
+        ]
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": [
+          "AIpowered:video generation with minimal effort",
+          "Customizable:Extensive library of templates"
+        ]
+      },
+      {
+        "id": "6828433e23aaf1a750a63621",
+        "name": "Vyond",
+        "description": "Vyond AI Video Creator is an all-in-one AI-powered video creation platform that allows users to generate professional-quality videos instantly. Designed for businesses, educators, and content creators, Vyond leverages AI to transform text prompts into engaging animated videos in multiple styles.",
+        "bullets": [
+          "AIPowered Video Generation:Instantly convert simple text prompts into fully animated videos with voiceovers",
+          "Multiple Animation Styles:Choose from a variety of video styles, including whiteboard animation, modern business, and casual"
+        ]
+      },
+      {
+        "id": "685abbce1c16582699a66eca",
+        "name": "Perplexity AI",
+        "description": "Perplexity\u202fAI is a powerful AI\u2011powered answer engine and search assistant launched in December\u202f2022. It combines real\u2011time web search with large language models (like GPT\u20114.1, Claude 4, Sonar), delivering direct answers with in\u2011text citations and multi\u2011turn conversational context.",
+        "bullets": [
+          "RealTime & Cited Answers: Synthesizes uptodate web info with verifiable citations",
+          "Hybrid Search + Chat: Combines instant responses with conversational dialogue and followups"
+        ]
+      },
+      {
+        "id": "685006c3afca082a9fc423f7",
+        "name": "Refiner.io",
+        "description": "Refiner.io is an AI-enhanced in-product survey and customer feedback platform designed specifically for SaaS, mobile, and digital product companies. It enables highly targeted, beautifully branded surveys\u2014like NPS, CSAT, CES, feature research, and growth surveys\u2014to be triggered contextually across web, mobile, and email, helping teams collect valuable user insights and act faster.",
+        "bullets": [
+          "Optimized InProduct Microsurveys for High Response:Refiner.io's core strength lies in its perfectly timed inproduct microsurveys (modal, slidein, banner formats)",
+          "Rich Customization & Branding:Offers extensive customization options to ensure surveys seamlessly integrate with your product's UI/UX and brand identity"
+        ]
+      },
+      {
+        "id": "684d7f4479b4f531e34aa3d8",
+        "name": "zeda.io",
+        "description": "Zeda.io is an AI-powered product management platform designed to help product teams build better products faster. With smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization, Zeda.io simplifies the end-to-end product management process.",
+        "bullets": [
+          "AIPowered Prioritization:A key unique feature that automatically scores and ranks features and ideas based on various inputs, including customer feedback, strategic goals, and perceived business impact",
+          "Unified Feedback Hub:Collects and centralizes customer feedback from diverse sources (e.g., NPS, support, sales, direct input) into a single, organized hub"
+        ]
+      },
+      {
+        "id": "6827374923aaf1a750a3a057",
+        "name": "Skillroads",
+        "description": "Skillroads AI Resume Builder is an advanced AI-powered platform designed to streamline the job application process. It provides automated resume writing, career counseling, and job matching services, ensuring that candidates create professional, optimized resumes tailored to their industry and experience level.",
+        "bullets": [
+          "AIPowered Resume Writing:Generates industryspecific, ATSfriendly resumes in minutes, eliminating the need for manual formatting and structuring",
+          "Instant Resume Review & Optimization:Analyzes existing resumes, providing detailed feedback and improvement suggestions for better job compatibility"
+        ]
+      },
+      {
+        "id": "6827584823aaf1a750a44b29",
+        "name": "Recraft",
+        "description": "Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision.",
+        "bullets": [
+          "AIPowered Vector Generation:Unlike pixelbased image generators, Recraft Pro creates scalable vector graphics suitable for professional use",
+          "Style Consistency:Ensures uniform design aesthetics across multiple assets"
+        ]
+      },
+      {
+        "id": "6873bb4acc23a952f76cfa69",
+        "name": "HippoMod",
+        "description": "HippoMod is an AI-powered tool for social media engagement and content moderation. Designed for brands and businesses, it uses artificial intelligence to automate responses, manage community interactions, and moderate comments in real-time, helping to increase positive engagement and protect a brand's online reputation.",
+        "bullets": [
+          "RealTime AI Moderation: The tool works 24/7 to provide instant moderation and engagement without manual intervention",
+          "High Accuracy: Boasts an industryleading 99% accuracy in identifying and filtering out harmful or unwanted comments"
+        ]
+      },
+      {
+        "id": "684d932e79b4f531e3513c96",
+        "name": "Prisync",
+        "description": "Prisync is an AI-powered competitor price tracking and dynamic pricing platform designed for eCommerce businesses. It helps brands monitor competitor pricing, optimize product prices in real-time, and maximize profits with intelligent pricing strategies.",
+        "bullets": [
+          "RealTime Competitor Price Monitoring:Provides 24/7, continuous monitoring of competitor pricing, ensuring businesses always have the most uptodate market intelligence",
+          "Dynamic Pricing Automation:Automatically adjusts product prices based on customizable rules, current inventory levels, and competitor actions"
+        ]
+      },
+      {
+        "id": "681cbad6477018e3479577b4",
+        "name": "Publer",
+        "description": "Publer AI is an AI-powered social media management and content creation tool designed to streamline scheduling, automation, and analytics. With AI Assist, users can generate high-quality captions, repurpose content, and optimize posts for better engagement.",
+        "bullets": [
+          "AIPowered Content Creation:Publer AI Assist generates captions, repurposes existing content, and suggests relevant hashtags for better engagement",
+          "MultiPlatform Scheduling & Automation:Plan and automate posts across various social media platforms with ease"
+        ]
+      },
+      {
+        "id": "682d557123aaf1a750a99d2e",
+        "name": "D-id",
+        "description": "D-iD is an AI-powered platform that specializes in creating lifelike digital avatars and AI-generated videos. It enables businesses, content creators, and developers to generate realistic talking avatars from text or audio input.",
+        "bullets": [
+          "AIpowered:realtime video generation",
+          "Realistic:Hyper avatars with natural facial expressions"
+        ]
+      },
+      {
+        "id": "6864ec0e015bd4929b392957",
+        "name": "proshot.app",
+        "description": "ProShot is an advanced AI-powered image enhancement platform that specializes in transforming everyday selfies into professional-grade headshots.",
+        "bullets": [
+          "Fast, professionalgrade results in seconds",
+          "Diverse style library\u2014from corporate to creative templates"
+        ]
+      },
+      {
+        "id": "685310f027c6eba075db537e",
+        "name": "Test123",
+        "description": "abc asdfsad;fka;sdfl jdsa;f;slkfj; asd",
+        "bullets": []
+      },
+      {
+        "id": "684d912a79b4f531e34ecbb7",
+        "name": "Proto.io",
+        "description": "Proto.io is a powerful no-code prototyping platform that allows product teams, designers, and founders to create fully interactive, high-fidelity prototypes of mobile apps, websites, and digital products\u2014without writing any code.",
+        "bullets": [
+          "NoCode, HighFidelity Prototyping:A core differentiator is its ability to enable the creation of highly realistic, pixelperfect prototypes that look and feel like actual applications, all without requiring any coding knowledge",
+          "Extensive Interaction Capabilities:Stands out for its robust support for complex interactions, microinteractions, custom animations, and intricate screen transitions"
+        ]
+      },
+      {
+        "id": "682e164a23aaf1a750aa8ace",
+        "name": "revid.ai",
+        "description": "Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence. It offers tools and features that simplify the video production process, making it accessible to both professionals and beginners.",
+        "bullets": []
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": []
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.",
+        "bullets": []
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid",
+        "description": "ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing. Whether you're working on a novel, essay, or any other type of written content, ProWritingAid provides actionable advice to make your writing more powerful, engaging, and error-free. With easy-to-use tools and comprehensive feedback, it helps writers unlock their potential and create their best work.",
+        "bullets": []
+      },
+      {
+        "id": "68736660cc23a952f76cc66f",
+        "name": "QuickPR",
+        "description": "QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.",
+        "bullets": []
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease. The platform provides step-by-step guidance, expert-approved templates, and pre-written content suggestions to streamline the resume-writing process. With ResumeNerd, users can optimize their job applications and increase their chances of landing interviews.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6863632c015bd4929b37d359",
+      "68666360ef7018fbfef69bc7",
+      "6863673d015bd4929b37d69d",
+      "68635e5e015bd4929b37d18a",
+      "68636b0c015bd4929b37d7a4",
+      "686a2c32e1d0bbc07e32112c",
+      "685e989b1c16582699a7b350",
+      "681d8db563aef50052db3613",
+      "681ef86353d3e454a4ba598f",
+      "6838685955e948f01b994fd3",
+      "685318d727c6eba075db6c95",
+      "6873a460cc23a952f76ce160",
+      "682e0b0823aaf1a750aa8074",
+      "6828433e23aaf1a750a63621",
+      "685abbce1c16582699a66eca",
+      "685006c3afca082a9fc423f7",
+      "684d7f4479b4f531e34aa3d8",
+      "6827374923aaf1a750a3a057",
+      "6827584823aaf1a750a44b29",
+      "6873bb4acc23a952f76cfa69",
+      "684d932e79b4f531e3513c96",
+      "681cbad6477018e3479577b4",
+      "682d557123aaf1a750a99d2e",
+      "6864ec0e015bd4929b392957",
+      "685310f027c6eba075db537e",
+      "684d912a79b4f531e34ecbb7",
+      "682e164a23aaf1a750aa8ace",
+      "685e9c4b1c16582699a7b791",
+      "684c82d4b9392005154a3270",
+      "681f21d253d3e454a4bb61b9",
+      "68736660cc23a952f76cc66f",
+      "681f85c7d877dcf3c6576614",
+      "681c8e41477018e3479561f9",
+      "6832c87ddc5f9153e5a9d1fd",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.",
+        "bullets": [
+          "Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.",
+          "Rapid PRD Creation:Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification. The platform emphasizes rapid productivity gains\u2014\u201c10\u00d7 PMs\u201d\u2014and targets both entry- and mid-level professionals.",
+        "bullets": [
+          "Streamlined, task-specific agents designed for PM use-cases",
+          "Free to start, with generous AI credit model linked to community engagement"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs). By accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings, the tool intelligently extracts relevant information and structures it into a comprehensive PRD. Within seconds, users receive a ready-to-edit document that includes sections like product overview, goals, user stories, and feature specs\u2014perfect for aligning cross-functional teams.",
+        "bullets": [
+          "MultiSource Intelligence:Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation.",
+          "TemplateDriven Speed:Speedsters past blankpage paralysis using a triedandtested PRD template."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs). Instead of crafting detailed spec documents from scratch, users can input basic information\u2014like feature ideas, product goals, and user needs\u2014and instantly generate a structured, professional PRD draft that covers scope, requirements, user stories, and success metrics.",
+        "bullets": [
+          "ChatGPTPrompt Engineered:Tailored prompts and formatting optimized for PRD generation\u2014saves time versus writing in vanilla chat interfaces",
+          "UserFriendly Interface:Clean, intuitive design guides users through each section"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.",
+        "bullets": [
+          "Specialized Product Expertise\u2014 built using proven frameworks to enhance consistency and professional quality",
+          "Unified Product Studio\u2014 combines PRD writing, tech specs, and task workflows in one tool"
+        ]
+      },
+      {
+        "id": "686a2c32e1d0bbc07e32112c",
+        "name": "Autoppt",
+        "description": "AutoPPT.com is an AI-powered tool designed to instantly create stunning and professional-looking presentations. It simplifies and accelerates the presentation creation process by generating AI slideshows from a given topic or uploaded documents like Word or PDF files, making professional design skills unnecessary.",
+        "bullets": [
+          "AIPowered Instant Generation: Creates professional slideshows instantly from text or documents using AI",
+          "Document to AI Slides: Converts various document formats (PDF, Word, Txt, Excel, PPT, JPG) into AIgenerated slides with a single click"
+        ]
+      },
+      {
+        "id": "685e989b1c16582699a7b350",
+        "name": "Mistral Pixtral Large",
+        "description": "Pixtral Large is Mistral\u202fAI\u2019s latest multimodal powerhouse, launched November\u202f18,\u202f2024. Built atop the 123B\u2011parameter Mistral Large\u202f2, it features a 124B\u2011parameter multimodal decoder paired with a 1B\u2011parameter vision encoder, and supports a massive 128K\u2011token context window\u2014enabling it to process up to 30 high-resolution images or ~300-page documents.",
+        "bullets": [
+          "Multimodal Decoder Setup: Merges strong text performance with robust vision understanding using a 1B encoder",
+          "Huge Context: 128K tokens processing long docs and dozens of images at once"
+        ]
+      },
+      {
+        "id": "681d8db563aef50052db3613",
+        "name": "V0",
+        "description": "V0.dev is an AI-powered UI generator that allows developers and designers to quickly create stunning user interfaces using natural language prompts. Built on ShadCN, Tailwind CSS, and React, V0.dev translates text-based descriptions into functional UI components\u2014making it an essential tool for rapid prototyping, front-end development, and UI/UX design.",
+        "bullets": [
+          "AIPowered UI Generation:Instantly transforms text descriptions into productionready UI components",
+          "Built on Modern Frontend Tech:Uses ShadCN, Tailwind CSS, and React for highquality, customizable outputs"
+        ]
+      },
+      {
+        "id": "681ef86353d3e454a4ba598f",
+        "name": "Tome",
+        "description": "Tome is a powerful AI platform designed to supercharge sales teams by acting as a second brain for your sales strategy. Trained on your playbook and CRM data, Tome helps you identify strategic initiatives, key decision-makers, and the right messaging to break into large accounts.",
+        "bullets": [
+          "SalesFocused AI:Tome is trained on your CRM data and playbook, meaning it has a deep understanding of your specific business and sales approach",
+          "Targeted Outreach:The platform helps identify key decisionmakers, initiatives, and opportunities, allowing you to craft outreach that speaks directly to the needs of your target accounts"
+        ]
+      },
+      {
+        "id": "6838685955e948f01b994fd3",
+        "name": "Audo",
+        "description": "Audo is an innovative AI-powered career platform designed to help individuals navigate their career paths effectively. It offers a comprehensive suite of tools, including career path guidance, resume optimization, job matching, skill development courses, and interview preparation.",
+        "bullets": [
+          "AI Career Concierge:Provides personalized career guidance based on individual experiences, skills, and interests",
+          "Comprehensive Toolkit:Offers a range of tools, including resume builders, job matching dashboards, and skill development courses"
+        ]
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado",
+        "description": "Persado is an enterprise \u201cMotivation AI\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale. By analyzing language patterns across hundreds of thousands of campaigns, it crafts optimized versions for emails, web copy, ads, and SMS\u2014helping brands drive engagement and conversions.",
+        "bullets": [
+          "EmotionCentric AI:Focuses on motivational language to drive behavioral response\u2014based on billions of data points",
+          "Proven ROI:Examples show up to +70% email opens and +114% click rates"
+        ]
+      },
+      {
+        "id": "6873a460cc23a952f76ce160",
+        "name": "ProApplyAI",
+        "description": "ProApply AI is an AI-powered career assistant focused on automating cover letter and resume creation. It uses your background, role details, and job descriptions to generate tailored application documents, which can then be downloaded as PDFs.",
+        "bullets": [
+          "Tailored Output:Uses templates to create jobspecific cover letters",
+          "AI + Templates:Streamlines document creation with intelligent formatting"
+        ]
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": [
+          "AIpowered:video generation with minimal effort",
+          "Customizable:Extensive library of templates"
+        ]
+      },
+      {
+        "id": "6828433e23aaf1a750a63621",
+        "name": "Vyond",
+        "description": "Vyond AI Video Creator is an all-in-one AI-powered video creation platform that allows users to generate professional-quality videos instantly. Designed for businesses, educators, and content creators, Vyond leverages AI to transform text prompts into engaging animated videos in multiple styles.",
+        "bullets": [
+          "AIPowered Video Generation:Instantly convert simple text prompts into fully animated videos with voiceovers",
+          "Multiple Animation Styles:Choose from a variety of video styles, including whiteboard animation, modern business, and casual"
+        ]
+      },
+      {
+        "id": "685abbce1c16582699a66eca",
+        "name": "Perplexity AI",
+        "description": "Perplexity\u202fAI is a powerful AI\u2011powered answer engine and search assistant launched in December\u202f2022. It combines real\u2011time web search with large language models (like GPT\u20114.1, Claude 4, Sonar), delivering direct answers with in\u2011text citations and multi\u2011turn conversational context.",
+        "bullets": [
+          "RealTime & Cited Answers: Synthesizes uptodate web info with verifiable citations",
+          "Hybrid Search + Chat: Combines instant responses with conversational dialogue and followups"
+        ]
+      },
+      {
+        "id": "685006c3afca082a9fc423f7",
+        "name": "Refiner.io",
+        "description": "Refiner.io is an AI-enhanced in-product survey and customer feedback platform designed specifically for SaaS, mobile, and digital product companies. It enables highly targeted, beautifully branded surveys\u2014like NPS, CSAT, CES, feature research, and growth surveys\u2014to be triggered contextually across web, mobile, and email, helping teams collect valuable user insights and act faster.",
+        "bullets": [
+          "Optimized InProduct Microsurveys for High Response:Refiner.io's core strength lies in its perfectly timed inproduct microsurveys (modal, slidein, banner formats)",
+          "Rich Customization & Branding:Offers extensive customization options to ensure surveys seamlessly integrate with your product's UI/UX and brand identity"
+        ]
+      },
+      {
+        "id": "684d7f4479b4f531e34aa3d8",
+        "name": "zeda.io",
+        "description": "Zeda.io is an AI-powered product management platform designed to help product teams build better products faster. With smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization, Zeda.io simplifies the end-to-end product management process.",
+        "bullets": [
+          "AIPowered Prioritization:A key unique feature that automatically scores and ranks features and ideas based on various inputs, including customer feedback, strategic goals, and perceived business impact",
+          "Unified Feedback Hub:Collects and centralizes customer feedback from diverse sources (e.g., NPS, support, sales, direct input) into a single, organized hub"
+        ]
+      },
+      {
+        "id": "6827374923aaf1a750a3a057",
+        "name": "Skillroads",
+        "description": "Skillroads AI Resume Builder is an advanced AI-powered platform designed to streamline the job application process. It provides automated resume writing, career counseling, and job matching services, ensuring that candidates create professional, optimized resumes tailored to their industry and experience level.",
+        "bullets": [
+          "AIPowered Resume Writing:Generates industryspecific, ATSfriendly resumes in minutes, eliminating the need for manual formatting and structuring",
+          "Instant Resume Review & Optimization:Analyzes existing resumes, providing detailed feedback and improvement suggestions for better job compatibility"
+        ]
+      },
+      {
+        "id": "6827584823aaf1a750a44b29",
+        "name": "Recraft",
+        "description": "Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision.",
+        "bullets": [
+          "AIPowered Vector Generation:Unlike pixelbased image generators, Recraft Pro creates scalable vector graphics suitable for professional use",
+          "Style Consistency:Ensures uniform design aesthetics across multiple assets"
+        ]
+      },
+      {
+        "id": "6873bb4acc23a952f76cfa69",
+        "name": "HippoMod",
+        "description": "HippoMod is an AI-powered tool for social media engagement and content moderation. Designed for brands and businesses, it uses artificial intelligence to automate responses, manage community interactions, and moderate comments in real-time, helping to increase positive engagement and protect a brand's online reputation.",
+        "bullets": [
+          "RealTime AI Moderation: The tool works 24/7 to provide instant moderation and engagement without manual intervention",
+          "High Accuracy: Boasts an industryleading 99% accuracy in identifying and filtering out harmful or unwanted comments"
+        ]
+      },
+      {
+        "id": "684d932e79b4f531e3513c96",
+        "name": "Prisync",
+        "description": "Prisync is an AI-powered competitor price tracking and dynamic pricing platform designed for eCommerce businesses. It helps brands monitor competitor pricing, optimize product prices in real-time, and maximize profits with intelligent pricing strategies.",
+        "bullets": [
+          "RealTime Competitor Price Monitoring:Provides 24/7, continuous monitoring of competitor pricing, ensuring businesses always have the most uptodate market intelligence",
+          "Dynamic Pricing Automation:Automatically adjusts product prices based on customizable rules, current inventory levels, and competitor actions"
+        ]
+      },
+      {
+        "id": "681cbad6477018e3479577b4",
+        "name": "Publer",
+        "description": "Publer AI is an AI-powered social media management and content creation tool designed to streamline scheduling, automation, and analytics. With AI Assist, users can generate high-quality captions, repurpose content, and optimize posts for better engagement.",
+        "bullets": [
+          "AIPowered Content Creation:Publer AI Assist generates captions, repurposes existing content, and suggests relevant hashtags for better engagement",
+          "MultiPlatform Scheduling & Automation:Plan and automate posts across various social media platforms with ease"
+        ]
+      },
+      {
+        "id": "682d557123aaf1a750a99d2e",
+        "name": "D-id",
+        "description": "D-iD is an AI-powered platform that specializes in creating lifelike digital avatars and AI-generated videos. It enables businesses, content creators, and developers to generate realistic talking avatars from text or audio input.",
+        "bullets": [
+          "AIpowered:realtime video generation",
+          "Realistic:Hyper avatars with natural facial expressions"
+        ]
+      },
+      {
+        "id": "6864ec0e015bd4929b392957",
+        "name": "proshot.app",
+        "description": "ProShot is an advanced AI-powered image enhancement platform that specializes in transforming everyday selfies into professional-grade headshots.",
+        "bullets": [
+          "Fast, professionalgrade results in seconds",
+          "Diverse style library\u2014from corporate to creative templates"
+        ]
+      },
+      {
+        "id": "685310f027c6eba075db537e",
+        "name": "Test123",
+        "description": "abc asdfsad;fka;sdfl jdsa;f;slkfj; asd",
+        "bullets": []
+      },
+      {
+        "id": "684d912a79b4f531e34ecbb7",
+        "name": "Proto.io",
+        "description": "Proto.io is a powerful no-code prototyping platform that allows product teams, designers, and founders to create fully interactive, high-fidelity prototypes of mobile apps, websites, and digital products\u2014without writing any code.",
+        "bullets": [
+          "NoCode, HighFidelity Prototyping:A core differentiator is its ability to enable the creation of highly realistic, pixelperfect prototypes that look and feel like actual applications, all without requiring any coding knowledge",
+          "Extensive Interaction Capabilities:Stands out for its robust support for complex interactions, microinteractions, custom animations, and intricate screen transitions"
+        ]
+      },
+      {
+        "id": "682e164a23aaf1a750aa8ace",
+        "name": "revid.ai",
+        "description": "Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence. It offers tools and features that simplify the video production process, making it accessible to both professionals and beginners.",
+        "bullets": []
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.",
+        "bullets": []
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.",
+        "bullets": []
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid",
+        "description": "ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing. Whether you're working on a novel, essay, or any other type of written content, ProWritingAid provides actionable advice to make your writing more powerful, engaging, and error-free. With easy-to-use tools and comprehensive feedback, it helps writers unlock their potential and create their best work.",
+        "bullets": []
+      },
+      {
+        "id": "68736660cc23a952f76cc66f",
+        "name": "QuickPR",
+        "description": "QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.",
+        "bullets": []
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease. The platform provides step-by-step guidance, expert-approved templates, and pre-written content suggestions to streamline the resume-writing process. With ResumeNerd, users can optimize their job applications and increase their chances of landing interviews.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 14.314,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6863632c015bd4929b37d359\",\n    \"68666360ef7018fbfef69bc7\",\n    \"6863673d015bd4929b37d69d\",\n    \"68635e5e015bd4929b37d18a\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"686a2c32e1d0bbc07e32112c\",\n    \"685e989b1c16582699a7b350\",\n    \"681d8db563aef50052db3613\",\n    \"681ef86353d3e454a4ba598f\",\n    \"6838685955e948f01b994fd3\",\n    \"685318d727c6eba075db6c95\",\n    \"6873a460cc23a952f76ce160\",\n    \"682e0b0823aaf1a750aa8074\",\n    \"6828433e23aaf1a750a63621\",\n    \"685abbce1c16582699a66eca\",\n    \"685006c3afca082a9fc423f7\",\n    \"684d7f4479b4f531e34aa3d8\",\n    \"6827374923aaf1a750a3a057\",\n    \"6827584823aaf1a750a44b29\",\n    \"6873bb4acc23a952f76cfa69\",\n    \"684d932e79b4f531e3513c96\",\n    \"681cbad6477018e3479577b4\",\n    \"682d557123aaf1a750a99d2e\",\n    \"6864ec0e015bd4929b392957\",\n    \"685310f027c6eba075db537e\",\n    \"684d912a79b4f531e34ecbb7\",\n    \"682e164a23aaf1a750aa8ace\",\n    \"685e9c4b1c16582699a7b791\",\n    \"684c82d4b9392005154a3270\",\n    \"681f21d253d3e454a4bb61b9\",\n    \"68736660cc23a952f76cc66f\",\n    \"681f85c7d877dcf3c6576614\",\n    \"681c8e41477018e3479561f9\",\n    \"6832c87ddc5f9153e5a9d1fd\",\n    \"685004e1afca082a9fc4178b\",\n    \"6863599c015bd4929b37d01d\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\\u2014like product vision, feature ideas, or market context\\u2014and it generates comprehensive, structured Product Requirement Documents in minutes. With built-in AI capabilities, it suggests key features, crafts user stories, and formats your PRD in a clear, professional style.\",\n      \"bullets\": [\n        \"Feature Detection & Storytelling:Autoextracts essential features and generates structured user stories.\",\n        \"Rapid PRD Creation:Cuts documentation time from hours to minutes.\"\n      ]\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\",\n      \"description\": \"Aigents.pm is a web-based platform offering a suite of specialized AI agents designed to help Product Managers (PMs) and aspiring PMs by automating tasks like market research, PRD generation, resume review, product strategy, ideation, and assumption identification. The platform emphasizes rapid productivity gains\\u2014\\u201c10\\u00d7 PMs\\u201d\\u2014and targets both entry- and mid-level professionals.\",\n      \"bullets\": [\n        \"Streamlined, task-specific agents designed for PM use-cases\",\n        \"Free to start, with generous AI credit model linked to community engagement\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"Bash\\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs). By accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings, the tool intelligently extracts relevant information and structures it into a comprehensive PRD. Within seconds, users receive a ready-to-edit document that includes sections like product overview, goals, user stories, and feature specs\\u2014perfect for aligning cross-functional teams.\",\n      \"bullets\": [\n        \"MultiSource Intelligence:Generates PRDs from diverse inputs\\u2014text, webpages, or even audio\\u2014for comprehensive documentation.\",\n        \"TemplateDriven Speed:Speedsters past blankpage paralysis using a triedandtested PRD template.\"\n      ]\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"WriteMyPRD is an AI-driven assistant powered by ChatGPT/GPT\\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs). Instead of crafting detailed spec documents from scratch, users can input basic information\\u2014like feature ideas, product goals, and user needs\\u2014and instantly generate a structured, professional PRD draft that covers scope, requirements, user stories, and success metrics.\",\n      \"bullets\": [\n        \"ChatGPTPrompt Engineered:Tailored prompts and formatting optimized for PRD generation\\u2014saves time versus writing in vanilla chat interfaces\",\n        \"UserFriendly Interface:Clean, intuitive design guides users through each section\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"Signlz is AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks. Plus, seamlessly transfer this valuable data to your preferred task management tool. Signlz streamlines your product management journey, making it easier than ever to bring your ideas to life.\",\n      \"bullets\": [\n        \"Specialized Product Expertise\\u2014 built using proven frameworks to enhance consistency and professional quality\",\n        \"Unified Product Studio\\u2014 combines PRD writing, tech specs, and task workflows in one tool\"\n      ]\n    },\n    {\n      \"id\": \"686a2c32e1d0bbc07e32112c\",\n      \"name\": \"Autoppt\",\n      \"description\": \"AutoPPT.com is an AI-powered tool designed to instantly create stunning and professional-looking presentations. It simplifies and accelerates the presentation creation process by generating AI slideshows from a given topic or uploaded documents like Word or PDF files, making professional design skills unnecessary.\",\n      \"bullets\": [\n        \"AIPowered Instant Generation: Creates professional slideshows instantly from text or documents using AI\",\n        \"Document to AI Slides: Converts various document formats (PDF, Word, Txt, Excel, PPT, JPG) into AIgenerated slides with a single click\"\n      ]\n    },\n    {\n      \"id\": \"685e989b1c16582699a7b350\",\n      \"name\": \"Mistral Pixtral Large\",\n      \"description\": \"Pixtral Large is Mistral\\u202fAI\\u2019s latest multimodal powerhouse, launched November\\u202f18,\\u202f2024. Built atop the 123B\\u2011parameter Mistral Large\\u202f2, it features a 124B\\u2011parameter multimodal decoder paired with a 1B\\u2011parameter vision encoder, and supports a massive 128K\\u2011token context window\\u2014enabling it to process up to 30 high-resolution images or ~300-page documents.\",\n      \"bullets\": [\n        \"Multimodal Decoder Setup: Merges strong text performance with robust vision understanding using a 1B encoder\",\n        \"Huge Context: 128K tokens processing long docs and dozens of images at once\"\n      ]\n    },\n    {\n      \"id\": \"681d8db563aef50052db3613\",\n      \"name\": \"V0\",\n      \"description\": \"V0.dev is an AI-powered UI generator that allows developers and designers to quickly create stunning user interfaces using natural language prompts. Built on ShadCN, Tailwind CSS, and React, V0.dev translates text-based descriptions into functional UI components\\u2014making it an essential tool for rapid prototyping, front-end development, and UI/UX design.\",\n      \"bullets\": [\n        \"AIPowered UI Generation:Instantly transforms text descriptions into productionready UI components\",\n        \"Built on Modern Frontend Tech:Uses ShadCN, Tailwind CSS, and React for highquality, customizable outputs\"\n      ]\n    },\n    {\n      \"id\": \"681ef86353d3e454a4ba598f\",\n      \"name\": \"Tome\",\n      \"description\": \"Tome is a powerful AI platform designed to supercharge sales teams by acting as a second brain for your sales strategy. Trained on your playbook and CRM data, Tome helps you identify strategic initiatives, key decision-makers, and the right messaging to break into large accounts.\",\n      \"bullets\": [\n        \"SalesFocused AI:Tome is trained on your CRM data and playbook, meaning it has a deep understanding of your specific business and sales approach\",\n        \"Targeted Outreach:The platform helps identify key decisionmakers, initiatives, and opportunities, allowing you to craft outreach that speaks directly to the needs of your target accounts\"\n      ]\n    },\n    {\n      \"id\": \"6838685955e948f01b994fd3\",\n      \"name\": \"Audo\",\n      \"description\": \"Audo is an innovative AI-powered career platform designed to help individuals navigate their career paths effectively. It offers a comprehensive suite of tools, including career path guidance, resume optimization, job matching, skill development courses, and interview preparation.\",\n      \"bullets\": [\n        \"AI Career Concierge:Provides personalized career guidance based on individual experiences, skills, and interests\",\n        \"Comprehensive Toolkit:Offers a range of tools, including resume builders, job matching dashboards, and skill development courses\"\n      ]\n    },\n    {\n      \"id\": \"685318d727c6eba075db6c95\",\n      \"name\": \"Persado\",\n      \"description\": \"Persado is an enterprise \\u201cMotivation AI\\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale. By analyzing language patterns across hundreds of thousands of campaigns, it crafts optimized versions for emails, web copy, ads, and SMS\\u2014helping brands drive engagement and conversions.\",\n      \"bullets\": [\n        \"EmotionCentric AI:Focuses on motivational language to drive behavioral response\\u2014based on billions of data points\",\n        \"Proven ROI:Examples show up to +70% email opens and +114% click rates\"\n      ]\n    },\n    {\n      \"id\": \"6873a460cc23a952f76ce160\",\n      \"name\": \"ProApplyAI\",\n      \"description\": \"ProApply AI is an AI-powered career assistant focused on automating cover letter and resume creation. It uses your background, role details, and job descriptions to generate tailored application documents, which can then be downloaded as PDFs.\",\n      \"bullets\": [\n        \"Tailored Output:Uses templates to create jobspecific cover letters\",\n        \"AI + Templates:Streamlines document creation with intelligent formatting\"\n      ]\n    },\n    {\n      \"id\": \"682e0b0823aaf1a750aa8074\",\n      \"name\": \"powtoon imagine\",\n      \"description\": \"Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.\",\n      \"bullets\": [\n        \"AIpowered:video generation with minimal effort\",\n        \"Customizable:Extensive library of templates\"\n      ]\n    },\n    {\n      \"id\": \"6828433e23aaf1a750a63621\",\n      \"name\": \"Vyond\",\n      \"description\": \"Vyond AI Video Creator is an all-in-one AI-powered video creation platform that allows users to generate professional-quality videos instantly. Designed for businesses, educators, and content creators, Vyond leverages AI to transform text prompts into engaging animated videos in multiple styles.\",\n      \"bullets\": [\n        \"AIPowered Video Generation:Instantly convert simple text prompts into fully animated videos with voiceovers\",\n        \"Multiple Animation Styles:Choose from a variety of video styles, including whiteboard animation, modern business, and casual\"\n      ]\n    },\n    {\n      \"id\": \"685abbce1c16582699a66eca\",\n      \"name\": \"Perplexity AI\",\n      \"description\": \"Perplexity\\u202fAI is a powerful AI\\u2011powered answer engine and search assistant launched in December\\u202f2022. It combines real\\u2011time web search with large language models (like GPT\\u20114.1, Claude 4, Sonar), delivering direct answers with in\\u2011text citations and multi\\u2011turn conversational context.\",\n      \"bullets\": [\n        \"RealTime & Cited Answers: Synthesizes uptodate web info with verifiable citations\",\n        \"Hybrid Search + Chat: Combines instant responses with conversational dialogue and followups\"\n      ]\n    },\n    {\n      \"id\": \"685006c3afca082a9fc423f7\",\n      \"name\": \"Refiner.io\",\n      \"description\": \"Refiner.io is an AI-enhanced in-product survey and customer feedback platform designed specifically for SaaS, mobile, and digital product companies. It enables highly targeted, beautifully branded surveys\\u2014like NPS, CSAT, CES, feature research, and growth surveys\\u2014to be triggered contextually across web, mobile, and email, helping teams collect valuable user insights and act faster.\",\n      \"bullets\": [\n        \"Optimized InProduct Microsurveys for High Response:Refiner.io's core strength lies in its perfectly timed inproduct microsurveys (modal, slidein, banner formats)\",\n        \"Rich Customization & Branding:Offers extensive customization options to ensure surveys seamlessly integrate with your product's UI/UX and brand identity\"\n      ]\n    },\n    {\n      \"id\": \"684d7f4479b4f531e34aa3d8\",\n      \"name\": \"zeda.io\",\n      \"description\": \"Zeda.io is an AI-powered product management platform designed to help product teams build better products faster. With smart AI assistance, collaborative roadmapping, feedback collection, and intelligent prioritization, Zeda.io simplifies the end-to-end product management process.\",\n      \"bullets\": [\n        \"AIPowered Prioritization:A key unique feature that automatically scores and ranks features and ideas based on various inputs, including customer feedback, strategic goals, and perceived business impact\",\n        \"Unified Feedback Hub:Collects and centralizes customer feedback from diverse sources (e.g., NPS, support, sales, direct input) into a single, organized hub\"\n      ]\n    },\n    {\n      \"id\": \"6827374923aaf1a750a3a057\",\n      \"name\": \"Skillroads\",\n      \"description\": \"Skillroads AI Resume Builder is an advanced AI-powered platform designed to streamline the job application process. It provides automated resume writing, career counseling, and job matching services, ensuring that candidates create professional, optimized resumes tailored to their industry and experience level.\",\n      \"bullets\": [\n        \"AIPowered Resume Writing:Generates industryspecific, ATSfriendly resumes in minutes, eliminating the need for manual formatting and structuring\",\n        \"Instant Resume Review & Optimization:Analyzes existing resumes, providing detailed feedback and improvement suggestions for better job compatibility\"\n      ]\n    },\n    {\n      \"id\": \"6827584823aaf1a750a44b29\",\n      \"name\": \"Recraft\",\n      \"description\": \"Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision.\",\n      \"bullets\": [\n        \"AIPowered Vector Generation:Unlike pixelbased image generators, Recraft Pro creates scalable vector graphics suitable for professional use\",\n        \"Style Consistency:Ensures uniform design aesthetics across multiple assets\"\n      ]\n    },\n    {\n      \"id\": \"6873bb4acc23a952f76cfa69\",\n      \"name\": \"HippoMod\",\n      \"description\": \"HippoMod is an AI-powered tool for social media engagement and content moderation. Designed for brands and businesses, it uses artificial intelligence to automate responses, manage community interactions, and moderate comments in real-time, helping to increase positive engagement and protect a brand's online reputation.\",\n      \"bullets\": [\n        \"RealTime AI Moderation: The tool works 24/7 to provide instant moderation and engagement without manual intervention\",\n        \"High Accuracy: Boasts an industryleading 99% accuracy in identifying and filtering out harmful or unwanted comments\"\n      ]\n    },\n    {\n      \"id\": \"684d932e79b4f531e3513c96\",\n      \"name\": \"Prisync\",\n      \"description\": \"Prisync is an AI-powered competitor price tracking and dynamic pricing platform designed for eCommerce businesses. It helps brands monitor competitor pricing, optimize product prices in real-time, and maximize profits with intelligent pricing strategies.\",\n      \"bullets\": [\n        \"RealTime Competitor Price Monitoring:Provides 24/7, continuous monitoring of competitor pricing, ensuring businesses always have the most uptodate market intelligence\",\n        \"Dynamic Pricing Automation:Automatically adjusts product prices based on customizable rules, current inventory levels, and competitor actions\"\n      ]\n    },\n    {\n      \"id\": \"681cbad6477018e3479577b4\",\n      \"name\": \"Publer\",\n      \"description\": \"Publer AI is an AI-powered social media management and content creation tool designed to streamline scheduling, automation, and analytics. With AI Assist, users can generate high-quality captions, repurpose content, and optimize posts for better engagement.\",\n      \"bullets\": [\n        \"AIPowered Content Creation:Publer AI Assist generates captions, repurposes existing content, and suggests relevant hashtags for better engagement\",\n        \"MultiPlatform Scheduling & Automation:Plan and automate posts across various social media platforms with ease\"\n      ]\n    },\n    {\n      \"id\": \"682d557123aaf1a750a99d2e\",\n      \"name\": \"D-id\",\n      \"description\": \"D-iD is an AI-powered platform that specializes in creating lifelike digital avatars and AI-generated videos. It enables businesses, content creators, and developers to generate realistic talking avatars from text or audio input.\",\n      \"bullets\": [\n        \"AIpowered:realtime video generation\",\n        \"Realistic:Hyper avatars with natural facial expressions\"\n      ]\n    },\n    {\n      \"id\": \"6864ec0e015bd4929b392957\",\n      \"name\": \"proshot.app\",\n      \"description\": \"ProShot is an advanced AI-powered image enhancement platform that specializes in transforming everyday selfies into professional-grade headshots.\",\n      \"bullets\": [\n        \"Fast, professionalgrade results in seconds\",\n        \"Diverse style library\\u2014from corporate to creative templates\"\n      ]\n    },\n    {\n      \"id\": \"685310f027c6eba075db537e\",\n      \"name\": \"Test123\",\n      \"description\": \"abc asdfsad;fka;sdfl jdsa;f;slkfj; asd\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684d912a79b4f531e34ecbb7\",\n      \"name\": \"Proto.io\",\n      \"description\": \"Proto.io is a powerful no-code prototyping platform that allows product teams, designers, and founders to create fully interactive, high-fidelity prototypes of mobile apps, websites, and digital products\\u2014without writing any code.\",\n      \"bullets\": [\n        \"NoCode, HighFidelity Prototyping:A core differentiator is its ability to enable the creation of highly realistic, pixelperfect prototypes that look and feel like actual applications, all without requiring any coding knowledge\",\n        \"Extensive Interaction Capabilities:Stands out for its robust support for complex interactions, microinteractions, custom animations, and intricate screen transitions\"\n      ]\n    },\n    {\n      \"id\": \"682e164a23aaf1a750aa8ace\",\n      \"name\": \"revid.ai\",\n      \"description\": \"Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence. It offers tools and features that simplify the video production process, making it accessible to both professionals and beginners.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments. It guides the creation of clear PRDs, converts them into actionable user stories and test plans, surfaces communication gaps, and embeds organizational knowledge directly into workflows.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684c82d4b9392005154a3270\",\n      \"name\": \"Zed\",\n      \"description\": \"Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681f21d253d3e454a4bb61b9\",\n      \"name\": \"ProWritingAid\",\n      \"description\": \"ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing. Whether you're working on a novel, essay, or any other type of written content, ProWritingAid provides actionable advice to make your writing more powerful, engaging, and error-free. With easy-to-use tools and comprehensive feedback, it helps writers unlock their potential and create their best work.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68736660cc23a952f76cc66f\",\n      \"name\": \"QuickPR\",\n      \"description\": \"QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681f85c7d877dcf3c6576614\",\n      \"name\": \"ResumeNerd\",\n      \"description\": \"ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease. The platform provides step-by-step guidance, expert-approved templates, and pre-written content suggestions to streamline the resume-writing process. With ResumeNerd, users can optimize their job applications and increase their chances of landing interviews.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681c8e41477018e3479561f9\",\n      \"name\": \"Predis\",\n      \"description\": \"Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6832c87ddc5f9153e5a9d1fd\",\n      \"name\": \"PRophet\",\n      \"description\": \"PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\",\n      \"description\": \"ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\\u2014helping PMs elevate their documentation and workflow efficiency.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

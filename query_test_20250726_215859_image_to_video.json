@@ -1,0 +1,425 @@
+{
+  "timestamp": "2025-07-26T21:58:59.651711",
+  "input_query": "image to video",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 23,
+    "tool_ids": [
+      "68445055b32d4d019cbd5381",
+      "686a58cde1d0bbc07e322a6b",
+      "684495a9b32d4d019cc4f169",
+      "68450b12b32d4d019cd16976",
+      "68438a46ac33a46e0bf38e24",
+      "686786faef7018fbfef78a1a",
+      "68675ec4ef7018fbfef776aa",
+      "68447010b32d4d019cc01bd0",
+      "684120bbbce3a3d64c6fe4c5",
+      "683fb9b1bce3a3d64c68fa95",
+      "682e14e823aaf1a750aa8ab0",
+      "68678af5ef7018fbfef79658",
+      "682f19ce23aaf1a750abb99f",
+      "68303811bcf558ef8c31d5e9",
+      "6867697eef7018fbfef77b21",
+      "682d4a7d23aaf1a750a9939a",
+      "682e0d2823aaf1a750aa8096",
+      "6877596a05cf15748251dce4",
+      "682e0b0823aaf1a750aa8074",
+      "681cdfc063aef50052da8d80",
+      "686349ca015bd4929b37ceea",
+      "68411ccfbce3a3d64c6fc520",
+      "687753df05cf15748251d685"
+    ],
+    "tools": [
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": [
+          "Transforms text prompts into dynamic videos automatically",
+          "Combines uploaded images with prompts to create personalized videos"
+        ]
+      },
+      {
+        "id": "686a58cde1d0bbc07e322a6b",
+        "name": "Vance Video AI",
+        "description": "Vance.ai is an AI-powered platform that offers a comprehensive suite of tools for image and video enhancement, editing, and generation. Its primary purpose is to help users quickly improve, restore, and transform visual content with artificial intelligence, making complex photo and video editing accessible to both professionals and casual users.",
+        "bullets": [
+          "Upscales images up to 40x without significant loss of quality",
+          "Provides specialized AI for video noise reduction, stabilization, and HDR conversion"
+        ]
+      },
+      {
+        "id": "684495a9b32d4d019cc4f169",
+        "name": "Airshot",
+        "description": "AirShot is a premium AI-powered video generator designed for influencers and creators who want to turn static photos or avatars into trendy, engaging videos. Leveraging GPU-backed AI, it offers realistic, expressive motion that boosts social media engagement and follower count.",
+        "bullets": [
+          "Turns static photos or avatars into dynamic, engaging videos",
+          "Offers realistic, expressive motion with GPU-backed AI"
+        ]
+      },
+      {
+        "id": "68450b12b32d4d019cd16976",
+        "name": "DomoAI",
+        "description": "DomoAI is an advanced AI art generation platform that leverages artificial intelligence to transform text, images, and videos into various artistic styles, including anime and realistic art. It serves as a creative toolkit for professionals and beginners alike, simplifying content creation for diverse applications such as social media, presentations, and creative storytelling.",
+        "bullets": [
+          "Transforms text, images, and videos into various artistic styles",
+          "Offers a wide range of AI tools for image and video generation and transformation"
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly.",
+        "bullets": [
+          "Transforms static images into dynamic, animated videos",
+          "Uses natural language processing to guide animation"
+        ]
+      },
+      {
+        "id": "686786faef7018fbfef78a1a",
+        "name": "Media.io AI Video Generator",
+        "description": "Media.io AI Video Generator is an online, AI-powered platform that converts text prompts and static images into engaging, high-quality videos. It combines text-to-video and image-to-video capabilities along with built-in editing tools such as subtitles, voiceovers, music integration, and dynamic effects.",
+        "bullets": [
+          "Converts text prompts and static images into engaging, high-quality videos",
+          "Combines text-to-video and image-to-video capabilities"
+        ]
+      },
+      {
+        "id": "68675ec4ef7018fbfef776aa",
+        "name": "Video Plus AI",
+        "description": "VideoPlus.ai is an AI-powered video creator that transforms static images or text prompts into polished, dynamic videos\u2014without technical expertise or sign-up requirements. It supports multiple aspect ratios like 16:9, 9:16, and 1:1, making it ideal for social and ad content.",
+        "bullets": [
+          "Transforms static images or text prompts into polished, dynamic videos",
+          "Supports multiple aspect ratios for social and ad content"
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly.",
+        "bullets": [
+          "Transforms static images of women into dynamic, animated videos",
+          "Uses advanced artificial intelligence to bring still photos to life"
+        ]
+      },
+      {
+        "id": "684120bbbce3a3d64c6fe4c5",
+        "name": "DeeVid AI",
+        "description": "DeeVid AI is an AI Video Generator that allows users to create high-quality videos from text, images, or video prompts without requiring any technical skills. It offers a user-friendly interface and employs advanced algorithms to ensure smooth animations, transitions, and effects.",
+        "bullets": [
+          "Creates high-quality videos from text, images, or video prompts",
+          "Offers a user-friendly interface and advanced algorithms for smooth animations"
+        ]
+      },
+      {
+        "id": "683fb9b1bce3a3d64c68fa95",
+        "name": "Imagemover AI",
+        "description": "ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos. It simplifies the video creation process, allowing users to effortlessly produce high-quality, captivating videos for various purposes.",
+        "bullets": [
+          "Transforms creative ideas, images, and text into visually stunning videos",
+          "Simplifies the video creation process with a user-friendly interface"
+        ]
+      },
+      {
+        "id": "682e14e823aaf1a750aa8ab0",
+        "name": "HailuoAi",
+        "description": "Hailuo AI is an advanced artificial intelligence platform designed to enhance video creation and editing processes. It leverages AI to automate tasks such as video editing, effects generation, and content optimization, making it easier for users to produce professional-quality videos.",
+        "bullets": []
+      },
+      {
+        "id": "68678af5ef7018fbfef79658",
+        "name": "Vidu AI",
+        "description": "Vidu AI is a powerful, web-based AI video creation platform that transforms text prompts, static images, or multiple visual references into high-quality, cinematic videos within seconds. It supports text-to-video, image-to-video, and reference-to-video modes\u2014offering creative flexibility for stylized, realistic, and anime-style content",
+        "bullets": []
+      },
+      {
+        "id": "682f19ce23aaf1a750abb99f",
+        "name": "Pictory",
+        "description": "Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.",
+        "bullets": []
+      },
+      {
+        "id": "68303811bcf558ef8c31d5e9",
+        "name": "Topaz Video AI",
+        "description": "Topaz Video AI is an advanced AI-powered video enhancement tool designed to upscale, stabilize, and restore videos with stunning clarity. Developed by Topaz Labs, it leverages deep learning models to improve resolution, remove noise, reduce motion blur, and enhance frame rates, making it an essential tool for content creators, filmmakers, and video professionals.",
+        "bullets": []
+      },
+      {
+        "id": "6867697eef7018fbfef77b21",
+        "name": "Wan 2.1",
+        "description": "WanAI, powered by Alibaba Cloud\u2019s cutting-edge Wan2.1 model, is a next-generation AI video generator that transforms text descriptions or static images into vibrant, high-quality videos. Leveraging advanced VAE and Diffusion Transformer (DiT) technologies, it delivers smooth, realistic motion with exceptional spatial consistency .",
+        "bullets": []
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI",
+        "description": "Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.",
+        "bullets": []
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT",
+        "description": "VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort. Using deep learning models, it transforms text prompts into engaging video content, making it ideal for content creators, marketers, and businesses.",
+        "bullets": []
+      },
+      {
+        "id": "6877596a05cf15748251dce4",
+        "name": "Live Portrait AI Tool",
+        "description": "The Live Portrait AI Tool is an AI-powered application designed to transform static images into animated videos. It uses advanced reenactment technology to animate faces within photos, accurately replicating head movements, facial expressions, emotions, and even synchronizing with a voice from a reference video.",
+        "bullets": []
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "681cdfc063aef50052da8d80",
+        "name": "Video Studio AI",
+        "description": "Videostudio-ai.com is an AI-powered platform designed to convert text and images into professional videos. By leveraging advanced artificial intelligence, it streamlines the video creation process, making it accessible to users of all experience levels. The platform offers a variety of templates, customization options, and real-time editing capabilities, ensuring that users can create high-quality videos with ease.",
+        "bullets": []
+      },
+      {
+        "id": "686349ca015bd4929b37ceea",
+        "name": "ClipZap AI",
+        "description": "ClipZap.ai is an AI-driven, all-in-one content creation platform that combines advanced video, image, and workflow tools. With support for 50+ AI models\u2014like Google VEO3, Kling 2.1, MiniMax\u2014it enables users to design automated content pipelines for tasks like face-swapping, text/video generation, translation, and image editing\u2014all from a unified web interface .",
+        "bullets": []
+      },
+      {
+        "id": "68411ccfbce3a3d64c6fc520",
+        "name": "Funy AI",
+        "description": "Funy.ai is an all-in-one platform providing innovative and efficient AI creative tools. It aims to simplify various creative tasks, particularly focusing on video creation, image editing, and enhancement through artificial intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "687753df05cf15748251d685",
+        "name": "Telewer",
+        "description": "Telewer is a no-code platform that empowers users to create and launch AI-powered Telegram bots in minutes, without requiring any coding experience. It integrates advanced AI capabilities such as AI chat, image and video generation, and image recognition, and also provides built-in monetization options.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68445055b32d4d019cbd5381",
+      "686a58cde1d0bbc07e322a6b",
+      "684495a9b32d4d019cc4f169",
+      "68450b12b32d4d019cd16976",
+      "68438a46ac33a46e0bf38e24",
+      "686786faef7018fbfef78a1a",
+      "68675ec4ef7018fbfef776aa",
+      "68447010b32d4d019cc01bd0",
+      "684120bbbce3a3d64c6fe4c5",
+      "683fb9b1bce3a3d64c68fa95",
+      "682e14e823aaf1a750aa8ab0",
+      "68678af5ef7018fbfef79658",
+      "682f19ce23aaf1a750abb99f",
+      "68303811bcf558ef8c31d5e9",
+      "6867697eef7018fbfef77b21",
+      "682d4a7d23aaf1a750a9939a",
+      "682e0d2823aaf1a750aa8096",
+      "6877596a05cf15748251dce4",
+      "682e0b0823aaf1a750aa8074",
+      "681cdfc063aef50052da8d80",
+      "686349ca015bd4929b37ceea",
+      "68411ccfbce3a3d64c6fc520",
+      "687753df05cf15748251d685"
+    ],
+    "tools": [
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.",
+        "bullets": [
+          "Transforms text prompts into dynamic videos automatically",
+          "Combines uploaded images with prompts to create personalized videos"
+        ]
+      },
+      {
+        "id": "686a58cde1d0bbc07e322a6b",
+        "name": "Vance Video AI",
+        "description": "Vance.ai is an AI-powered platform that offers a comprehensive suite of tools for image and video enhancement, editing, and generation. Its primary purpose is to help users quickly improve, restore, and transform visual content with artificial intelligence, making complex photo and video editing accessible to both professionals and casual users.",
+        "bullets": [
+          "Upscales images up to 40x without significant loss of quality",
+          "Provides specialized AI for video noise reduction, stabilization, and HDR conversion"
+        ]
+      },
+      {
+        "id": "684495a9b32d4d019cc4f169",
+        "name": "Airshot",
+        "description": "AirShot is a premium AI-powered video generator designed for influencers and creators who want to turn static photos or avatars into trendy, engaging videos. Leveraging GPU-backed AI, it offers realistic, expressive motion that boosts social media engagement and follower count.",
+        "bullets": [
+          "Turns static photos or avatars into dynamic, engaging videos",
+          "Offers realistic, expressive motion with GPU-backed AI"
+        ]
+      },
+      {
+        "id": "68450b12b32d4d019cd16976",
+        "name": "DomoAI",
+        "description": "DomoAI is an advanced AI art generation platform that leverages artificial intelligence to transform text, images, and videos into various artistic styles, including anime and realistic art. It serves as a creative toolkit for professionals and beginners alike, simplifying content creation for diverse applications such as social media, presentations, and creative storytelling.",
+        "bullets": [
+          "Transforms text, images, and videos into various artistic styles",
+          "Offers a wide range of AI tools for image and video generation and transformation"
+        ]
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video",
+        "description": "Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly.",
+        "bullets": [
+          "Transforms static images into dynamic, animated videos",
+          "Uses natural language processing to guide animation"
+        ]
+      },
+      {
+        "id": "686786faef7018fbfef78a1a",
+        "name": "Media.io AI Video Generator",
+        "description": "Media.io AI Video Generator is an online, AI-powered platform that converts text prompts and static images into engaging, high-quality videos. It combines text-to-video and image-to-video capabilities along with built-in editing tools such as subtitles, voiceovers, music integration, and dynamic effects.",
+        "bullets": [
+          "Converts text prompts and static images into engaging, high-quality videos",
+          "Combines text-to-video and image-to-video capabilities"
+        ]
+      },
+      {
+        "id": "68675ec4ef7018fbfef776aa",
+        "name": "Video Plus AI",
+        "description": "VideoPlus.ai is an AI-powered video creator that transforms static images or text prompts into polished, dynamic videos\u2014without technical expertise or sign-up requirements. It supports multiple aspect ratios like 16:9, 9:16, and 1:1, making it ideal for social and ad content.",
+        "bullets": [
+          "Transforms static images or text prompts into polished, dynamic videos",
+          "Supports multiple aspect ratios for social and ad content"
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly.",
+        "bullets": [
+          "Transforms static images of women into dynamic, animated videos",
+          "Uses advanced artificial intelligence to bring still photos to life"
+        ]
+      },
+      {
+        "id": "684120bbbce3a3d64c6fe4c5",
+        "name": "DeeVid AI",
+        "description": "DeeVid AI is an AI Video Generator that allows users to create high-quality videos from text, images, or video prompts without requiring any technical skills. It offers a user-friendly interface and employs advanced algorithms to ensure smooth animations, transitions, and effects.",
+        "bullets": [
+          "Creates high-quality videos from text, images, or video prompts",
+          "Offers a user-friendly interface and advanced algorithms for smooth animations"
+        ]
+      },
+      {
+        "id": "683fb9b1bce3a3d64c68fa95",
+        "name": "Imagemover AI",
+        "description": "ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos. It simplifies the video creation process, allowing users to effortlessly produce high-quality, captivating videos for various purposes.",
+        "bullets": [
+          "Transforms creative ideas, images, and text into visually stunning videos",
+          "Simplifies the video creation process with a user-friendly interface"
+        ]
+      },
+      {
+        "id": "682e14e823aaf1a750aa8ab0",
+        "name": "HailuoAi",
+        "description": "Hailuo AI is an advanced artificial intelligence platform designed to enhance video creation and editing processes. It leverages AI to automate tasks such as video editing, effects generation, and content optimization, making it easier for users to produce professional-quality videos.",
+        "bullets": []
+      },
+      {
+        "id": "68678af5ef7018fbfef79658",
+        "name": "Vidu AI",
+        "description": "Vidu AI is a powerful, web-based AI video creation platform that transforms text prompts, static images, or multiple visual references into high-quality, cinematic videos within seconds. It supports text-to-video, image-to-video, and reference-to-video modes\u2014offering creative flexibility for stylized, realistic, and anime-style content",
+        "bullets": []
+      },
+      {
+        "id": "682f19ce23aaf1a750abb99f",
+        "name": "Pictory",
+        "description": "Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.",
+        "bullets": []
+      },
+      {
+        "id": "68303811bcf558ef8c31d5e9",
+        "name": "Topaz Video AI",
+        "description": "Topaz Video AI is an advanced AI-powered video enhancement tool designed to upscale, stabilize, and restore videos with stunning clarity. Developed by Topaz Labs, it leverages deep learning models to improve resolution, remove noise, reduce motion blur, and enhance frame rates, making it an essential tool for content creators, filmmakers, and video professionals.",
+        "bullets": []
+      },
+      {
+        "id": "6867697eef7018fbfef77b21",
+        "name": "Wan 2.1",
+        "description": "WanAI, powered by Alibaba Cloud\u2019s cutting-edge Wan2.1 model, is a next-generation AI video generator that transforms text descriptions or static images into vibrant, high-quality videos. Leveraging advanced VAE and Diffusion Transformer (DiT) technologies, it delivers smooth, realistic motion with exceptional spatial consistency .",
+        "bullets": []
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI",
+        "description": "Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.",
+        "bullets": []
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT",
+        "description": "VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort. Using deep learning models, it transforms text prompts into engaging video content, making it ideal for content creators, marketers, and businesses.",
+        "bullets": []
+      },
+      {
+        "id": "6877596a05cf15748251dce4",
+        "name": "Live Portrait AI Tool",
+        "description": "The Live Portrait AI Tool is an AI-powered application designed to transform static images into animated videos. It uses advanced reenactment technology to animate faces within photos, accurately replicating head movements, facial expressions, emotions, and even synchronizing with a voice from a reference video.",
+        "bullets": []
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "681cdfc063aef50052da8d80",
+        "name": "Video Studio AI",
+        "description": "Videostudio-ai.com is an AI-powered platform designed to convert text and images into professional videos. By leveraging advanced artificial intelligence, it streamlines the video creation process, making it accessible to users of all experience levels. The platform offers a variety of templates, customization options, and real-time editing capabilities, ensuring that users can create high-quality videos with ease.",
+        "bullets": []
+      },
+      {
+        "id": "686349ca015bd4929b37ceea",
+        "name": "ClipZap AI",
+        "description": "ClipZap.ai is an AI-driven, all-in-one content creation platform that combines advanced video, image, and workflow tools. With support for 50+ AI models\u2014like Google VEO3, Kling 2.1, MiniMax\u2014it enables users to design automated content pipelines for tasks like face-swapping, text/video generation, translation, and image editing\u2014all from a unified web interface .",
+        "bullets": []
+      },
+      {
+        "id": "68411ccfbce3a3d64c6fc520",
+        "name": "Funy AI",
+        "description": "Funy.ai is an all-in-one platform providing innovative and efficient AI creative tools. It aims to simplify various creative tasks, particularly focusing on video creation, image editing, and enhancement through artificial intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "687753df05cf15748251d685",
+        "name": "Telewer",
+        "description": "Telewer is a no-code platform that empowers users to create and launch AI-powered Telegram bots in minutes, without requiring any coding experience. It integrates advanced AI capabilities such as AI chat, image and video generation, and image recognition, and also provides built-in monetization options.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 18.434,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68445055b32d4d019cbd5381\",\n    \"686a58cde1d0bbc07e322a6b\",\n    \"684495a9b32d4d019cc4f169\",\n    \"68450b12b32d4d019cd16976\",\n    \"68438a46ac33a46e0bf38e24\",\n    \"686786faef7018fbfef78a1a\",\n    \"68675ec4ef7018fbfef776aa\",\n    \"68447010b32d4d019cc01bd0\",\n    \"684120bbbce3a3d64c6fe4c5\",\n    \"683fb9b1bce3a3d64c68fa95\",\n    \"682e14e823aaf1a750aa8ab0\",\n    \"68678af5ef7018fbfef79658\",\n    \"682f19ce23aaf1a750abb99f\",\n    \"68303811bcf558ef8c31d5e9\",\n    \"6867697eef7018fbfef77b21\",\n    \"682d4a7d23aaf1a750a9939a\",\n    \"682e0d2823aaf1a750aa8096\",\n    \"6877596a05cf15748251dce4\",\n    \"682e0b0823aaf1a750aa8074\",\n    \"681cdfc063aef50052da8d80\",\n    \"686349ca015bd4929b37ceea\",\n    \"68411ccfbce3a3d64c6fc520\",\n    \"687753df05cf15748251d685\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68445055b32d4d019cbd5381\",\n      \"name\": \"Vidu Studio - AI Video Create\",\n      \"description\": \"Vidu Studio's Create Page is a user-friendly interface that allows users to generate AI-powered videos by combining text prompts with optional image uploads. Leveraging advanced artificial intelligence, it transforms your ideas into dynamic visual content, making video creation accessible to everyone.\",\n      \"bullets\": [\n        \"Transforms text prompts into dynamic videos automatically\",\n        \"Combines uploaded images with prompts to create personalized videos\"\n      ]\n    },\n    {\n      \"id\": \"686a58cde1d0bbc07e322a6b\",\n      \"name\": \"Vance Video AI\",\n      \"description\": \"Vance.ai is an AI-powered platform that offers a comprehensive suite of tools for image and video enhancement, editing, and generation. Its primary purpose is to help users quickly improve, restore, and transform visual content with artificial intelligence, making complex photo and video editing accessible to both professionals and casual users.\",\n      \"bullets\": [\n        \"Upscales images up to 40x without significant loss of quality\",\n        \"Provides specialized AI for video noise reduction, stabilization, and HDR conversion\"\n      ]\n    },\n    {\n      \"id\": \"684495a9b32d4d019cc4f169\",\n      \"name\": \"Airshot\",\n      \"description\": \"AirShot is a premium AI-powered video generator designed for influencers and creators who want to turn static photos or avatars into trendy, engaging videos. Leveraging GPU-backed AI, it offers realistic, expressive motion that boosts social media engagement and follower count.\",\n      \"bullets\": [\n        \"Turns static photos or avatars into dynamic, engaging videos\",\n        \"Offers realistic, expressive motion with GPU-backed AI\"\n      ]\n    },\n    {\n      \"id\": \"68450b12b32d4d019cd16976\",\n      \"name\": \"DomoAI\",\n      \"description\": \"DomoAI is an advanced AI art generation platform that leverages artificial intelligence to transform text, images, and videos into various artistic styles, including anime and realistic art. It serves as a creative toolkit for professionals and beginners alike, simplifying content creation for diverse applications such as social media, presentations, and creative storytelling.\",\n      \"bullets\": [\n        \"Transforms text, images, and videos into various artistic styles\",\n        \"Offers a wide range of AI tools for image and video generation and transformation\"\n      ]\n    },\n    {\n      \"id\": \"68438a46ac33a46e0bf38e24\",\n      \"name\": \"ViduStudio Image to Video\",\n      \"description\": \"Vidu Studio's Image-to-Video Generator is a cutting-edge AI-powered tool that transforms static images into dynamic, animated videos. By leveraging advanced artificial intelligence and natural language processing, it brings still photos to life, allowing users to create engaging visual content effortlessly.\",\n      \"bullets\": [\n        \"Transforms static images into dynamic, animated videos\",\n        \"Uses natural language processing to guide animation\"\n      ]\n    },\n    {\n      \"id\": \"686786faef7018fbfef78a1a\",\n      \"name\": \"Media.io AI Video Generator\",\n      \"description\": \"Media.io AI Video Generator is an online, AI-powered platform that converts text prompts and static images into engaging, high-quality videos. It combines text-to-video and image-to-video capabilities along with built-in editing tools such as subtitles, voiceovers, music integration, and dynamic effects.\",\n      \"bullets\": [\n        \"Converts text prompts and static images into engaging, high-quality videos\",\n        \"Combines text-to-video and image-to-video capabilities\"\n      ]\n    },\n    {\n      \"id\": \"68675ec4ef7018fbfef776aa\",\n      \"name\": \"Video Plus AI\",\n      \"description\": \"VideoPlus.ai is an AI-powered video creator that transforms static images or text prompts into polished, dynamic videos\\u2014without technical expertise or sign-up requirements. It supports multiple aspect ratios like 16:9, 9:16, and 1:1, making it ideal for social and ad content.\",\n      \"bullets\": [\n        \"Transforms static images or text prompts into polished, dynamic videos\",\n        \"Supports multiple aspect ratios for social and ad content\"\n      ]\n    },\n    {\n      \"id\": \"68447010b32d4d019cc01bd0\",\n      \"name\": \"Vidu Studio AI Girl Video Gen\",\n      \"description\": \"Vidu Studio's AI Girl Video Generator is an AI-powered tool that transforms static images of women into dynamic, animated videos. By leveraging advanced artificial intelligence, it brings still photos to life, allowing users to create engaging visual content effortlessly.\",\n      \"bullets\": [\n        \"Transforms static images of women into dynamic, animated videos\",\n        \"Uses advanced artificial intelligence to bring still photos to life\"\n      ]\n    },\n    {\n      \"id\": \"684120bbbce3a3d64c6fe4c5\",\n      \"name\": \"DeeVid AI\",\n      \"description\": \"DeeVid AI is an AI Video Generator that allows users to create high-quality videos from text, images, or video prompts without requiring any technical skills. It offers a user-friendly interface and employs advanced algorithms to ensure smooth animations, transitions, and effects.\",\n      \"bullets\": [\n        \"Creates high-quality videos from text, images, or video prompts\",\n        \"Offers a user-friendly interface and advanced algorithms for smooth animations\"\n      ]\n    },\n    {\n      \"id\": \"683fb9b1bce3a3d64c68fa95\",\n      \"name\": \"Imagemover AI\",\n      \"description\": \"ImageMover.ai is an AI video generator that transforms creative ideas, images, descriptive text, and engaging scripts into visually stunning videos. It simplifies the video creation process, allowing users to effortlessly produce high-quality, captivating videos for various purposes.\",\n      \"bullets\": [\n        \"Transforms creative ideas, images, and text into visually stunning videos\",\n        \"Simplifies the video creation process with a user-friendly interface\"\n      ]\n    },\n    {\n      \"id\": \"682e14e823aaf1a750aa8ab0\",\n      \"name\": \"HailuoAi\",\n      \"description\": \"Hailuo AI is an advanced artificial intelligence platform designed to enhance video creation and editing processes. It leverages AI to automate tasks such as video editing, effects generation, and content optimization, making it easier for users to produce professional-quality videos.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68678af5ef7018fbfef79658\",\n      \"name\": \"Vidu AI\",\n      \"description\": \"Vidu AI is a powerful, web-based AI video creation platform that transforms text prompts, static images, or multiple visual references into high-quality, cinematic videos within seconds. It supports text-to-video, image-to-video, and reference-to-video modes\\u2014offering creative flexibility for stylized, realistic, and anime-style content\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682f19ce23aaf1a750abb99f\",\n      \"name\": \"Pictory\",\n      \"description\": \"Pictory AI is an AI-powered video creation platform that transforms text content into high-quality videos. It helps businesses, marketers, and content creators generate engaging videos from blog posts, scripts, and long-form content without requiring video editing skills.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68303811bcf558ef8c31d5e9\",\n      \"name\": \"Topaz Video AI\",\n      \"description\": \"Topaz Video AI is an advanced AI-powered video enhancement tool designed to upscale, stabilize, and restore videos with stunning clarity. Developed by Topaz Labs, it leverages deep learning models to improve resolution, remove noise, reduce motion blur, and enhance frame rates, making it an essential tool for content creators, filmmakers, and video professionals.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6867697eef7018fbfef77b21\",\n      \"name\": \"Wan 2.1\",\n      \"description\": \"WanAI, powered by Alibaba Cloud\\u2019s cutting-edge Wan2.1 model, is a next-generation AI video generator that transforms text descriptions or static images into vibrant, high-quality videos. Leveraging advanced VAE and Diffusion Transformer (DiT) technologies, it delivers smooth, realistic motion with exceptional spatial consistency .\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682d4a7d23aaf1a750a9939a\",\n      \"name\": \"invideoAI\",\n      \"description\": \"Invideo is an AI-powered video creation platform that enables users to generate high-quality videos quickly and efficiently. It provides a wide range of templates, AI-driven editing tools, and automation features to streamline video production for businesses, content creators, and marketers.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682e0d2823aaf1a750aa8096\",\n      \"name\": \"VideoGPT\",\n      \"description\": \"VideoGPT is an advanced AI-powered video generation tool that enables users to create high-quality videos with minimal effort. Using deep learning models, it transforms text prompts into engaging video content, making it ideal for content creators, marketers, and businesses.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6877596a05cf15748251dce4\",\n      \"name\": \"Live Portrait AI Tool\",\n      \"description\": \"The Live Portrait AI Tool is an AI-powered application designed to transform static images into animated videos. It uses advanced reenactment technology to animate faces within photos, accurately replicating head movements, facial expressions, emotions, and even synchronizing with a voice from a reference video.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682e0b0823aaf1a750aa8074\",\n      \"name\": \"powtoon imagine\",\n      \"description\": \"Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681cdfc063aef50052da8d80\",\n      \"name\": \"Video Studio AI\",\n      \"description\": \"Videostudio-ai.com is an AI-powered platform designed to convert text and images into professional videos. By leveraging advanced artificial intelligence, it streamlines the video creation process, making it accessible to users of all experience levels. The platform offers a variety of templates, customization options, and real-time editing capabilities, ensuring that users can create high-quality videos with ease.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"686349ca015bd4929b37ceea\",\n      \"name\": \"ClipZap AI\",\n      \"description\": \"ClipZap.ai is an AI-driven, all-in-one content creation platform that combines advanced video, image, and workflow tools. With support for 50+ AI models\\u2014like Google VEO3, Kling 2.1, MiniMax\\u2014it enables users to design automated content pipelines for tasks like face-swapping, text/video generation, translation, and image editing\\u2014all from a unified web interface .\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68411ccfbce3a3d64c6fc520\",\n      \"name\": \"Funy AI\",\n      \"description\": \"Funy.ai is an all-in-one platform providing innovative and efficient AI creative tools. It aims to simplify various creative tasks, particularly focusing on video creation, image editing, and enhancement through artificial intelligence.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"687753df05cf15748251d685\",\n      \"name\": \"Telewer\",\n      \"description\": \"Telewer is a no-code platform that empowers users to create and launch AI-powered Telegram bots in minutes, without requiring any coding experience. It integrates advanced AI capabilities such as AI chat, image and video generation, and image recognition, and also provides built-in monetization options.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

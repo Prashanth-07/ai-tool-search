@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-07-15T12:01:04.926017",
+  "input_query": "PRD",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 0,
+    "tool_ids": [],
+    "tools": []
+  },
+  "llm_answer": {
+    "error": "search_error",
+    "message": "Failed to process search: Invalid format specifier",
+    "tools": [],
+    "timestamp": "2025-07-15T06:31:08.895562"
+  },
+  "processing_time_seconds": 3.98,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"error\": \"search_error\", \"message\": \"Failed to process search: Invalid format specifier\", \"tools\": [], \"timestamp\": \"2025-07-15T06:31:08.895562\"}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

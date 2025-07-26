@@ -1,0 +1,701 @@
+{
+  "timestamp": "2025-07-15T09:53:23.006084",
+  "input_query": "PRD generator",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 36,
+    "tool_ids": [
+      "68666360ef7018fbfef69bc7",
+      "68636b0c015bd4929b37d7a4",
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "6867507bef7018fbfef773e1",
+      "686c8bd73a087b487359c39a",
+      "684fede5afca082a9fc31c75",
+      "68595a0c1c16582699a63856",
+      "68596cdd1c16582699a650c9",
+      "68445543b32d4d019cbe07bd",
+      "684422a2b32d4d019cba490e",
+      "68655481015bd4929b3961dd",
+      "681f21d253d3e454a4bb61b9",
+      "684c82d4b9392005154a3270",
+      "684d912a79b4f531e34ecbb7",
+      "686d173a3a087b487359f050",
+      "685318d727c6eba075db6c95",
+      "68669e39ef7018fbfef6b831",
+      "681f85c7d877dcf3c6576614",
+      "682e164a23aaf1a750aa8ace",
+      "685e9c4b1c16582699a7b791",
+      "68669e2aef7018fbfef6b829",
+      "6864ec0e015bd4929b392957",
+      "682d557123aaf1a750a99d2e",
+      "6832c87ddc5f9153e5a9d1fd",
+      "6827584823aaf1a750a44b29",
+      "68708dded7e13670cd1b5e0e",
+      "681c8e41477018e3479561f9",
+      "686a2c32e1d0bbc07e32112c",
+      "6818df22606258b6c075cd6f",
+      "685004e1afca082a9fc4178b",
+      "68736660cc23a952f76cc66f",
+      "682e0b0823aaf1a750aa8074",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs).",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs).",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "686f3bdd-141a-4293-9ada-dd1274da5132",
+        "name": "Kittl",
+        "description": "vidBoard.ai is a full\u2011service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6867507bef7018fbfef773e1",
+        "name": "Photo Arts",
+        "description": "PhotoArts.ai is an AI-powered headshot generator designed to create ultra-realistic, professional-quality portrait images from user-uploaded photos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "686c8bd73a087b487359c39a",
+        "name": "AI Music Generator",
+        "description": "MusicGeneratorAI.com is an AI-powered music creation platform that enables users to generate original, royalty-free music in various genres, moods, and tempos within seconds.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684fede5afca082a9fc31c75",
+        "name": "Piktochart",
+        "description": "Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68595a0c1c16582699a63856",
+        "name": "vidBoard.ai",
+        "description": "vidBoard.ai is a full\u2011service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon",
+        "description": "Craiyon (formerly DALL\u00b7E Mini) is a free, web-based AI image generator launched in 2022 by Boris Dayma and his team.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FluxAI.art is an AI-powered platform that leverages the \"4o image generator\" (referring to advanced generative AI models like OpenAI's GPT-4o's image capabilities, or similar sophisticated models) to create diverse and vibrant artwork.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68655481015bd4929b3961dd",
+        "name": "Photo GPT AI",
+        "description": "PhotoGPT AI is an AI-driven tool that generates professional-quality portraits and themed headshots from your photos and custom prompts.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid",
+        "description": "ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684d912a79b4f531e34ecbb7",
+        "name": "Proto.io",
+        "description": "Proto.io is a powerful no-code prototyping platform that allows product teams, designers, and founders to create fully interactive, high-fidelity prototypes of mobile apps, websites, and digital products.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "686d173a3a087b487359f050",
+        "name": "Heurist Imagine",
+        "description": "Heurist Imagine is an AI-powered platform designed for creating images using a distributed GPU network.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado",
+        "description": "Persado is an enterprise \u201cMotivation AI\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68669e39ef7018fbfef6b831",
+        "name": "Janus Pro",
+        "description": "Janus Pro is an open-source, multimodal AI model developed by DeepSeek, available in two sizes\u20141\u202fB\u2011parameter and 7\u202fB\u2011parameter.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "682e164a23aaf1a750aa8ace",
+        "name": "revid.ai",
+        "description": "Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68669e2aef7018fbfef6b829",
+        "name": "NailDesignHub",
+        "description": "NailDesignHub is an AI-powered nail art inspiration platform that helps users discover personalized nail design ideas instantly.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6864ec0e015bd4929b392957",
+        "name": "proshot.app",
+        "description": "ProShot is an advanced AI-powered image enhancement platform that specializes in transforming everyday selfies into professional-grade headshots.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "682d557123aaf1a750a99d2e",
+        "name": "D-id",
+        "description": "D-iD is an AI-powered platform that specializes in creating lifelike digital avatars and AI-generated videos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "6827584823aaf1a750a44b29",
+        "name": "Recraft",
+        "description": "Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision. Unlike basic AI image generators, Recraft Pro focuses on style consistency, scalability, and fine-tuned customization, making it ideal for commercial and design-centric applications.",
+        "bullets": []
+      },
+      {
+        "id": "68708dded7e13670cd1b5e0e",
+        "name": "AI Powered template",
+        "description": "PoweredTemplate\u2019s AI Presentation Maker is a web-based tool that uses artificial intelligence to convert topics, audience insights, and objectives into polished slide decks instantly. With hundreds of templates, stock visuals, and ChatGPT integration, it aims to streamline presentation creation\u2014boosting design quality and saving users significant time.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "686a2c32e1d0bbc07e32112c",
+        "name": "Autoppt",
+        "description": "AutoPPT.com is an AI-powered tool designed to instantly create stunning and professional-looking presentations. It simplifies and accelerates the presentation creation process by generating AI slideshows from a given topic or uploaded documents like Word or PDF files, making professional design skills unnecessary.",
+        "bullets": []
+      },
+      {
+        "id": "6818df22606258b6c075cd6f",
+        "name": "AI PPT Maker",
+        "description": "aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\u2014complete with structure, content, and design\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "68736660cc23a952f76cc66f",
+        "name": "QuickPR",
+        "description": "QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.",
+        "bullets": []
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68666360ef7018fbfef69bc7",
+      "68636b0c015bd4929b37d7a4",
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "6867507bef7018fbfef773e1",
+      "686c8bd73a087b487359c39a",
+      "684fede5afca082a9fc31c75",
+      "68595a0c1c16582699a63856",
+      "68596cdd1c16582699a650c9",
+      "68445543b32d4d019cbe07bd",
+      "684422a2b32d4d019cba490e",
+      "68655481015bd4929b3961dd",
+      "681f21d253d3e454a4bb61b9",
+      "684c82d4b9392005154a3270",
+      "684d912a79b4f531e34ecbb7",
+      "686d173a3a087b487359f050",
+      "685318d727c6eba075db6c95",
+      "68669e39ef7018fbfef6b831",
+      "681f85c7d877dcf3c6576614",
+      "682e164a23aaf1a750aa8ace",
+      "685e9c4b1c16582699a7b791",
+      "68669e2aef7018fbfef6b829",
+      "6864ec0e015bd4929b392957",
+      "682d557123aaf1a750a99d2e",
+      "6832c87ddc5f9153e5a9d1fd",
+      "6827584823aaf1a750a44b29",
+      "68708dded7e13670cd1b5e0e",
+      "681c8e41477018e3479561f9",
+      "686a2c32e1d0bbc07e32112c",
+      "6818df22606258b6c075cd6f",
+      "685004e1afca082a9fc4178b",
+      "68736660cc23a952f76cc66f",
+      "682e0b0823aaf1a750aa8074",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI-driven assistant powered by ChatGPT/GPT\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs).",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\u2014like product vision, feature ideas, or market context\u2014and it generates comprehensive, structured Product Requirement Documents in minutes.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Bash\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs).",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "686f3bdd-141a-4293-9ada-dd1274da5132",
+        "name": "Kittl",
+        "description": "vidBoard.ai is a full\u2011service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6867507bef7018fbfef773e1",
+        "name": "Photo Arts",
+        "description": "PhotoArts.ai is an AI-powered headshot generator designed to create ultra-realistic, professional-quality portrait images from user-uploaded photos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "686c8bd73a087b487359c39a",
+        "name": "AI Music Generator",
+        "description": "MusicGeneratorAI.com is an AI-powered music creation platform that enables users to generate original, royalty-free music in various genres, moods, and tempos within seconds.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684fede5afca082a9fc31c75",
+        "name": "Piktochart",
+        "description": "Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68595a0c1c16582699a63856",
+        "name": "vidBoard.ai",
+        "description": "vidBoard.ai is a full\u2011service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon",
+        "description": "Craiyon (formerly DALL\u00b7E Mini) is a free, web-based AI image generator launched in 2022 by Boris Dayma and his team.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FluxAI.art is an AI-powered platform that leverages the \"4o image generator\" (referring to advanced generative AI models like OpenAI's GPT-4o's image capabilities, or similar sophisticated models) to create diverse and vibrant artwork.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68655481015bd4929b3961dd",
+        "name": "Photo GPT AI",
+        "description": "PhotoGPT AI is an AI-driven tool that generates professional-quality portraits and themed headshots from your photos and custom prompts.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid",
+        "description": "ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "684d912a79b4f531e34ecbb7",
+        "name": "Proto.io",
+        "description": "Proto.io is a powerful no-code prototyping platform that allows product teams, designers, and founders to create fully interactive, high-fidelity prototypes of mobile apps, websites, and digital products.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "686d173a3a087b487359f050",
+        "name": "Heurist Imagine",
+        "description": "Heurist Imagine is an AI-powered platform designed for creating images using a distributed GPU network.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado",
+        "description": "Persado is an enterprise \u201cMotivation AI\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68669e39ef7018fbfef6b831",
+        "name": "Janus Pro",
+        "description": "Janus Pro is an open-source, multimodal AI model developed by DeepSeek, available in two sizes\u20141\u202fB\u2011parameter and 7\u202fB\u2011parameter.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "681f85c7d877dcf3c6576614",
+        "name": "ResumeNerd",
+        "description": "ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "682e164a23aaf1a750aa8ace",
+        "name": "revid.ai",
+        "description": "Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "68669e2aef7018fbfef6b829",
+        "name": "NailDesignHub",
+        "description": "NailDesignHub is an AI-powered nail art inspiration platform that helps users discover personalized nail design ideas instantly.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6864ec0e015bd4929b392957",
+        "name": "proshot.app",
+        "description": "ProShot is an advanced AI-powered image enhancement platform that specializes in transforming everyday selfies into professional-grade headshots.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "682d557123aaf1a750a99d2e",
+        "name": "D-id",
+        "description": "D-iD is an AI-powered platform that specializes in creating lifelike digital avatars and AI-generated videos.",
+        "bullets": [
+          "PRD-specific templates and sections for goals, users, specs, features.",
+          "Collaborative PRD editing and review features with real-time version tracking."
+        ]
+      },
+      {
+        "id": "6832c87ddc5f9153e5a9d1fd",
+        "name": "PRophet",
+        "description": "PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.",
+        "bullets": []
+      },
+      {
+        "id": "6827584823aaf1a750a44b29",
+        "name": "Recraft",
+        "description": "Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision. Unlike basic AI image generators, Recraft Pro focuses on style consistency, scalability, and fine-tuned customization, making it ideal for commercial and design-centric applications.",
+        "bullets": []
+      },
+      {
+        "id": "68708dded7e13670cd1b5e0e",
+        "name": "AI Powered template",
+        "description": "PoweredTemplate\u2019s AI Presentation Maker is a web-based tool that uses artificial intelligence to convert topics, audience insights, and objectives into polished slide decks instantly. With hundreds of templates, stock visuals, and ChatGPT integration, it aims to streamline presentation creation\u2014boosting design quality and saving users significant time.",
+        "bullets": []
+      },
+      {
+        "id": "681c8e41477018e3479561f9",
+        "name": "Predis",
+        "description": "Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.",
+        "bullets": []
+      },
+      {
+        "id": "686a2c32e1d0bbc07e32112c",
+        "name": "Autoppt",
+        "description": "AutoPPT.com is an AI-powered tool designed to instantly create stunning and professional-looking presentations. It simplifies and accelerates the presentation creation process by generating AI slideshows from a given topic or uploaded documents like Word or PDF files, making professional design skills unnecessary.",
+        "bullets": []
+      },
+      {
+        "id": "6818df22606258b6c075cd6f",
+        "name": "AI PPT Maker",
+        "description": "aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\u2014complete with structure, content, and design\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.",
+        "bullets": []
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.",
+        "bullets": []
+      },
+      {
+        "id": "68736660cc23a952f76cc66f",
+        "name": "QuickPR",
+        "description": "QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.",
+        "bullets": []
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine",
+        "description": "Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.",
+        "bullets": []
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\u2014helping PMs elevate their documentation and workflow efficiency.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 12.166,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68666360ef7018fbfef69bc7\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"68635e5e015bd4929b37d18a\",\n    \"6863632c015bd4929b37d359\",\n    \"6863673d015bd4929b37d69d\",\n    \"6867507bef7018fbfef773e1\",\n    \"686c8bd73a087b487359c39a\",\n    \"684fede5afca082a9fc31c75\",\n    \"68595a0c1c16582699a63856\",\n    \"68596cdd1c16582699a650c9\",\n    \"68445543b32d4d019cbe07bd\",\n    \"684422a2b32d4d019cba490e\",\n    \"68655481015bd4929b3961dd\",\n    \"681f21d253d3e454a4bb61b9\",\n    \"684c82d4b9392005154a3270\",\n    \"684d912a79b4f531e34ecbb7\",\n    \"686d173a3a087b487359f050\",\n    \"685318d727c6eba075db6c95\",\n    \"68669e39ef7018fbfef6b831\",\n    \"681f85c7d877dcf3c6576614\",\n    \"682e164a23aaf1a750aa8ace\",\n    \"685e9c4b1c16582699a7b791\",\n    \"68669e2aef7018fbfef6b829\",\n    \"6864ec0e015bd4929b392957\",\n    \"682d557123aaf1a750a99d2e\",\n    \"6832c87ddc5f9153e5a9d1fd\",\n    \"6827584823aaf1a750a44b29\",\n    \"68708dded7e13670cd1b5e0e\",\n    \"681c8e41477018e3479561f9\",\n    \"686a2c32e1d0bbc07e32112c\",\n    \"6818df22606258b6c075cd6f\",\n    \"685004e1afca082a9fc4178b\",\n    \"68736660cc23a952f76cc66f\",\n    \"682e0b0823aaf1a750aa8074\",\n    \"6863599c015bd4929b37d01d\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\",\n      \"description\": \"AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"AI-powered product management tool. With a single prompt and just a few clicks, you can effortlessly create your Product Requirements Document (PRD), detailed technical specifications, and related tasks.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"AI-driven assistant powered by ChatGPT/GPT\\u20113, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs).\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"The AI-driven PRD Generator by BrilWorks (also called Doc Maker) streamlines product documentation for teams. Simply input core details\\u2014like product vision, feature ideas, or market context\\u2014and it generates comprehensive, structured Product Requirement Documents in minutes.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"Bash\\u2019s PRD Generator is an advanced AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs).\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"686f3bdd-141a-4293-9ada-dd1274da5132\",\n      \"name\": \"Kittl\",\n      \"description\": \"vidBoard.ai is a full\\u2011service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6867507bef7018fbfef773e1\",\n      \"name\": \"Photo Arts\",\n      \"description\": \"PhotoArts.ai is an AI-powered headshot generator designed to create ultra-realistic, professional-quality portrait images from user-uploaded photos.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"686c8bd73a087b487359c39a\",\n      \"name\": \"AI Music Generator\",\n      \"description\": \"MusicGeneratorAI.com is an AI-powered music creation platform that enables users to generate original, royalty-free music in various genres, moods, and tempos within seconds.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"684fede5afca082a9fc31c75\",\n      \"name\": \"Piktochart\",\n      \"description\": \"Piktochart is a cloud-based visual communication tool that blends the simplicity of a spreadsheet with powerful graphical capabilities.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68595a0c1c16582699a63856\",\n      \"name\": \"vidBoard.ai\",\n      \"description\": \"vidBoard.ai is a full\\u2011service generative AI video creation platform that transforms text, documents, or URLs into professional-looking videos.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68596cdd1c16582699a650c9\",\n      \"name\": \"Craiyon\",\n      \"description\": \"Craiyon (formerly DALL\\u00b7E Mini) is a free, web-based AI image generator launched in 2022 by Boris Dayma and his team.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68445543b32d4d019cbe07bd\",\n      \"name\": \"Vidu Studio Flux AI Image Gen\",\n      \"description\": \"Vidu Studio's Flux AI Image Generator is an advanced, web-based tool that transforms text prompts into high-quality images using cutting-edge AI models.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"684422a2b32d4d019cba490e\",\n      \"name\": \"FLUX AI\",\n      \"description\": \"FluxAI.art is an AI-powered platform that leverages the \\\"4o image generator\\\" (referring to advanced generative AI models like OpenAI's GPT-4o's image capabilities, or similar sophisticated models) to create diverse and vibrant artwork.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68655481015bd4929b3961dd\",\n      \"name\": \"Photo GPT AI\",\n      \"description\": \"PhotoGPT AI is an AI-driven tool that generates professional-quality portraits and themed headshots from your photos and custom prompts.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"681f21d253d3e454a4bb61b9\",\n      \"name\": \"ProWritingAid\",\n      \"description\": \"ProWritingAid is a versatile writing assistant designed to help you craft, polish, and elevate your writing.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"684c82d4b9392005154a3270\",\n      \"name\": \"Zed\",\n      \"description\": \"Zed is a high-performance, open-source code editor built for speed and collaboration.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"684d912a79b4f531e34ecbb7\",\n      \"name\": \"Proto.io\",\n      \"description\": \"Proto.io is a powerful no-code prototyping platform that allows product teams, designers, and founders to create fully interactive, high-fidelity prototypes of mobile apps, websites, and digital products.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"686d173a3a087b487359f050\",\n      \"name\": \"Heurist Imagine\",\n      \"description\": \"Heurist Imagine is an AI-powered platform designed for creating images using a distributed GPU network.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"685318d727c6eba075db6c95\",\n      \"name\": \"Persado\",\n      \"description\": \"Persado is an enterprise \\u201cMotivation AI\\u201d platform that uses natural language processing and deep learning to generate emotionally resonant messaging at scale.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68669e39ef7018fbfef6b831\",\n      \"name\": \"Janus Pro\",\n      \"description\": \"Janus Pro is an open-source, multimodal AI model developed by DeepSeek, available in two sizes\\u20141\\u202fB\\u2011parameter and 7\\u202fB\\u2011parameter.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"681f85c7d877dcf3c6576614\",\n      \"name\": \"ResumeNerd\",\n      \"description\": \"ResumeNerd is an AI-powered resume and cover letter builder designed to help job seekers create professional, ATS-friendly resumes with ease.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"682e164a23aaf1a750aa8ace\",\n      \"name\": \"revid.ai\",\n      \"description\": \"Revid AI is an innovative platform designed to enhance video content creation and editing through artificial intelligence.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"Wisary is an AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"68669e2aef7018fbfef6b829\",\n      \"name\": \"NailDesignHub\",\n      \"description\": \"NailDesignHub is an AI-powered nail art inspiration platform that helps users discover personalized nail design ideas instantly.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6864ec0e015bd4929b392957\",\n      \"name\": \"proshot.app\",\n      \"description\": \"ProShot is an advanced AI-powered image enhancement platform that specializes in transforming everyday selfies into professional-grade headshots.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"682d557123aaf1a750a99d2e\",\n      \"name\": \"D-id\",\n      \"description\": \"D-iD is an AI-powered platform that specializes in creating lifelike digital avatars and AI-generated videos.\",\n      \"bullets\": [\n        \"PRD-specific templates and sections for goals, users, specs, features.\",\n        \"Collaborative PRD editing and review features with real-time version tracking.\"\n      ]\n    },\n    {\n      \"id\": \"6832c87ddc5f9153e5a9d1fd\",\n      \"name\": \"PRophet\",\n      \"description\": \"PRophet is an award-winning, AI-driven Data-as-a-Service (DaaS) platform designed specifically for public relations professionals. It leverages artificial intelligence to analyze historical media data, enabling users to predict the success of their pitches and optimize media strategies. PRophet's suite of tools includes features for generating personalized PR pitches, discovering relevant journalists and social media influencers, and monitoring brand coverage with high accuracy. By integrating advanced AI technologies, PRophet aims to enhance the efficiency and effectiveness of PR campaigns, saving time and resources for communications teams.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6827584823aaf1a750a44b29\",\n      \"name\": \"Recraft\",\n      \"description\": \"Recraft Pro is a premium AI-powered image generation and editing tool designed for professional designers and creatives. It enables users to generate high-quality vector illustrations, icons, 3D images, and photorealistic artwork with AI-driven precision. Unlike basic AI image generators, Recraft Pro focuses on style consistency, scalability, and fine-tuned customization, making it ideal for commercial and design-centric applications.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68708dded7e13670cd1b5e0e\",\n      \"name\": \"AI Powered template\",\n      \"description\": \"PoweredTemplate\\u2019s AI Presentation Maker is a web-based tool that uses artificial intelligence to convert topics, audience insights, and objectives into polished slide decks instantly. With hundreds of templates, stock visuals, and ChatGPT integration, it aims to streamline presentation creation\\u2014boosting design quality and saving users significant time.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"681c8e41477018e3479561f9\",\n      \"name\": \"Predis\",\n      \"description\": \"Predis.ai is an AI-powered ad creative and social media content generator designed to help businesses, marketers, and eCommerce brands create high-quality video ads, social posts, and product promotions effortlessly. By leveraging AI, Predis.ai helps users boost click-through rates (CTR) and return on ad spend (ROAS) while keeping social media accounts active with automated posting.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"686a2c32e1d0bbc07e32112c\",\n      \"name\": \"Autoppt\",\n      \"description\": \"AutoPPT.com is an AI-powered tool designed to instantly create stunning and professional-looking presentations. It simplifies and accelerates the presentation creation process by generating AI slideshows from a given topic or uploaded documents like Word or PDF files, making professional design skills unnecessary.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6818df22606258b6c075cd6f\",\n      \"name\": \"AI PPT Maker\",\n      \"description\": \"aipptmaker.ai is an AI-powered presentation generator that helps users create professional, visually appealing PowerPoint slides in minutes. Using advanced AI algorithms, it transforms text prompts and topic inputs into full slide decks\\u2014complete with structure, content, and design\\u2014saving hours of manual effort. Whether you're building a business pitch, academic presentation, or marketing deck, aipptmaker.ai simplifies the process with automation and design intelligence.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\",\n      \"description\": \"ProdPad is a comprehensive AI-augmented product management platform that unifies roadmapping, idea management, feedback, and strategy workflows. With built-in AI CoPilot, teams can prioritize ideas, gather insights, and create aligned roadmaps from strategy to execution effectively.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68736660cc23a952f76cc66f\",\n      \"name\": \"QuickPR\",\n      \"description\": \"QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"682e0b0823aaf1a750aa8074\",\n      \"name\": \"powtoon imagine\",\n      \"description\": \"Powtoon's AI Video Generator is an AI-powered video creation platform that helps users make animated and live-action videos quickly. It offers customizable templates, drag-and-drop editing, and AI-assisted video generation for businesses, educators, and content creators.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"ChatPRD is an AI copilot designed specifically for product managers and their teams. It enables users to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts. By leveraging intelligent templates, role-based coaching, and iterative feedback, ChatPRD enhances clarity, consistency, and completeness\\u2014helping PMs elevate their documentation and workflow efficiency.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

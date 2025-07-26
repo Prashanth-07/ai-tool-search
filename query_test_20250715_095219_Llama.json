@@ -1,0 +1,365 @@
+{
+  "timestamp": "2025-07-15T09:52:19.664421",
+  "input_query": "Llama",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 19,
+    "tool_ids": [
+      "6856b319ee78f2aff0d17402",
+      "6856b249ee78f2aff0d1733f",
+      "6856b13dee78f2aff0d1727c",
+      "68556c1527c6eba075dccb43",
+      "68556d5827c6eba075dccc22",
+      "6856b43fee78f2aff0d174e3",
+      "6856b571ee78f2aff0d175d8",
+      "6856b66eee78f2aff0d17692",
+      "6856b76eee78f2aff0d1774c",
+      "6856b13dee78f2aff0d1727c",
+      "6856ba2eee78f2aff0d1798c",
+      "68275c3423aaf1a750a45a3c",
+      "68711e81d7e13670cd1b7d4f",
+      "685ab9bc1c16582699a66df7",
+      "685abd381c16582699a66f9c",
+      "685e8f091c16582699a7ad2f",
+      "685e864b1c16582699a7a962",
+      "685e94ca1c16582699a7b051",
+      "684137c9bce3a3d64c7094b0",
+      "6863f65b015bd4929b381939"
+    ],
+    "tools": [
+      {
+        "id": "6856b319ee78f2aff0d17402",
+        "name": "Meta Llama 4 Behemoth",
+        "description": "Llama\u202f4\u202fBehemoth is Meta\u2019s ultimate \u201cteacher\u201d model within the Llama\u202f4 series, currently in preview and training. Featuring an enormous 2\u202ftrillion total parameters with 288\u202fbillion active in a Mixture-of-Experts architecture (16 experts), it's designed to push the limits of multimodal reasoning, STEM, and long-context tasks.",
+        "bullets": [
+          "Massive Scale: 2 trillion parameters\u2014one of the largest MoEbased language models ever built.",
+          "STEM Benchmark Leader: Internal performance shows ~95% on MATH500, ~82% GPQA Diamond, ~85.8% multilingual MMLU\u2014surpassing existing flagship models."
+        ]
+      },
+      {
+        "id": "6856b249ee78f2aff0d1733f",
+        "name": "Meta Llama 4 Maverick",
+        "description": "Llama\u202f4\u202fMaverick is Meta\u2019s powerful mid-sized model in the Llama\u202f4 series, released April\u202f5,\u202f2025. Built with a mixture-of-experts (MoE) architecture featuring 17\u202fB active parameters (out of 400\u202fB total) and 128 experts, it supports a 1\u202fmillion-token context window and native multimodality for text and image inputs.",
+        "bullets": [
+          "Native Multimodality: Processes text and images jointly using earlyfusion training.",
+          "UltraLong Context: 1 milliontoken window supports massive documents and complex workflows."
+        ]
+      },
+      {
+        "id": "6856b13dee78f2aff0d1727c",
+        "name": "Meta Llama 4 Scout",
+        "description": "Llama\u202f4\u202fScout is Meta\u2019s compact and high-performance entry in the Llama\u202f4 family, released April\u202f5,\u202f2025. Built on a mixture-of-experts (MoE) architecture with 17B active parameters (109B total) and a staggering 10\u2011million-token context window, it delivers top-tier speed and long-context reasoning while fitting on a single Nvidia H100 GPU.",
+        "bullets": [
+          "Unmatched Context Capacity: 10 million tokensfar exceed any other model's capability.",
+          "MoE Efficiency: 16 experts activate per token, balancing scalability and compute from MoE design."
+        ]
+      },
+      {
+        "id": "68556c1527c6eba075dccb43",
+        "name": "Meta Llama 4",
+        "description": "Meta\u202fLlama\u202f4 is the latest generation of Meta\u2019s large language model series. It features a mixture-of-experts (MoE) architecture, making it both highly efficient and powerful. Llama\u202f4 is natively multimodal\u2014supporting text and image inputs\u2014and offers three key variants: Scout (17B active parameters, 10\u202fM token context), Maverick (17B active, 1\u202fM token context), and Behemoth (288B active, 2\u202fT total parameters; still in development).",
+        "bullets": [
+          "MixtureofExperts Efficiency: Only relevant expert subnetworks are activated, enabling high performance with fewer resources.",
+          "Native Multimodality: Joint training on text, images, and video enables coherent understanding across media types."
+        ]
+      },
+      {
+        "id": "68556d5827c6eba075dccc22",
+        "name": "Meta Llama 3",
+        "description": "Meta Llama\u202f3 is Meta\u2019s third-generation open-weight large language model family, released in April 2024 and enhanced in July 2024 with the 3.1 update. It spans three sizes\u20148B, 70B, and 405B parameters\u2014each offering a 128K\u2011token context window.",
+        "bullets": [
+          "Huge Context Window: 128K tokens across models\u2014handled via grouped query attention and token masking.",
+          "MultiSize OpenWeight: 8B and 70B are opensource and accessible; 405B offers frontierlevel performance in research settings."
+        ]
+      },
+      {
+        "id": "6856b43fee78f2aff0d174e3",
+        "name": "Meta Llama 3.1",
+        "description": "Llama\u202f3.1 is Meta\u2019s most advanced open-source Llama 3 model, released on July\u202f23,\u202f2024. It comes in three sizes\u20148B, 70B, and 405B parameters\u2014with an expanded 128K-token context window and improved multilingual and multimodal capabilities.",
+        "bullets": [
+          "Expanded Context: 128Ktoken windowoffers ultralong input support versus typical 8K contexts.",
+          "Multimodal & Multilingual: Adds limited image understanding and strong multilingual abilities."
+        ]
+      },
+      {
+        "id": "6856b571ee78f2aff0d175d8",
+        "name": "Meta Llama 3.2",
+        "description": "Llama\u202f3.2 is Meta\u2019s multimodal and lightweight update to its Llama\u202f3 line, released on September\u202f25,\u202f2024. The family includes 1B and 3B text-only models optimized for edge devices, as well as 11B and 90B Vision models capable of image understanding.",
+        "bullets": [
+          "EdgeReady Text Models: 1B/3B run locally with low latency and minimal resource use.",
+          "First Open Multimodal: 11B/90B Vision models rival closedsource systems in chart and diagram understanding."
+        ]
+      },
+      {
+        "id": "6856b66eee78f2aff0d17692",
+        "name": "Meta Llama 3.3",
+        "description": "Llama\u202f3.3 is Meta\u2019s instruction-tuned, text-only large language model released on December 6, 2024, available in a 70B-parameter size.",
+        "bullets": [
+          "EdgeReady Text Models: 1B/3B run locally with low latency and minimal resource use.",
+          "First Open Multimodal: 11B/90B Vision models rival closedsource systems in chart and diagram understanding."
+        ]
+      },
+      {
+        "id": "6856b76eee78f2aff0d1774c",
+        "name": "Meta Llama 3.2 Vision",
+        "description": "Llama\u202f3.2\u202fVision is Meta\u2019s first open-source multimodal Llama model series, released on September\u202f25,\u202f2024. Available in 11\u202fB and 90\u202fB parameter sizes, it merges advanced image understanding with a massive 128\u202fK\u2011token text context.",
+        "bullets": [
+          "Vision Excellence: Achieves toptier scores\u2014DocVQA ~70.7% and AI2 Diagram ~75.3% (11B) or ~90.1% & ~92.3% (90B).",
+          "Visual Math & Charts: ChartQA ~85.5% and MathVista ~57.3% with chainofthought reasoning."
+        ]
+      },
+      {
+        "id": "6856ba2eee78f2aff0d1798c",
+        "name": "DeepSeek-R1-Distill",
+        "description": "DeepSeek\u202fR1\u202fDistill refers to a family of dense, smaller models distilled from DeepSeek\u2019s flagship DeepSeek\u202fR1 reasoning model. Released early 2025, these models come in sizes ranging from 1.5B to 70B parameters (e.g., DeepSeek\u2011R1\u2011Distill\u2011Qwen\u201132B) and retain powerful reasoning and chain-of-thought abilities in a more efficient architecture. Benchmarks show distilled variants outperform models like OpenAI\u2019s o1\u2011mini, while remaining open\u2011source under MIT license.",
+        "bullets": []
+      },
+      {
+        "id": "68275c3423aaf1a750a45a3c",
+        "name": "lumalabs",
+        "description": "Luma Photon is a next-generation AI-powered image generation model designed for ultra-high-quality, cost-efficient visual creation. Built on a groundbreaking new architecture, Photon delivers ten-times higher cost efficiency while eliminating the traditional \u201cAI look.\u201d It is tailored for designers, filmmakers, architects, and creative professionals who need unparalleled control, realism, and personalization in their generated visuals.",
+        "bullets": []
+      },
+      {
+        "id": "68711e81d7e13670cd1b7d4f",
+        "name": "Bahama",
+        "description": "Bahama.ai is an innovative AI platform that empowers businesses to create and deploy personalized AI assistants. These tailored AI agents seamlessly integrate with internal data sources and third-party applications (like CRMs and project management systems) to streamline and automate various workflows across departments such as customer service, sales, and finance. The platform focuses on providing quick access to relevant data and actionable insights to enhance operational efficiency and informed decision-making.",
+        "bullets": []
+      },
+      {
+        "id": "685ab9bc1c16582699a66df7",
+        "name": "Odia Gen AI",
+        "description": "OdiaGenAI is a collaborative open-source initiative launched in 2023 to develop generative AI and LLM technologies tailored for Odia\u2014a low-resource Indic language\u2014and other regional languages. Led by Odia technologists and hosted under Odisha\u202fAI, it focuses on building pretrained, fine-tuned, and instruction-following models, datasets, and tools to empower areas like education, governance, agriculture, tourism, health, and industry.",
+        "bullets": []
+      },
+      {
+        "id": "685abd381c16582699a66f9c",
+        "name": "Mistral Magistral",
+        "description": "Magistral is Mistral AI\u2019s first dedicated reasoning model, released on June 10, 2025, available in two versions: open-source 24\u202fB Magistral Small and enterprise-grade Magistral Medium. It\u2019s built to provide transparent, multilingual, domain-specific chain-of-thought reasoning, excelling in step-by-step logic tasks like math, finance, legal, and engineering.",
+        "bullets": []
+      },
+      {
+        "id": "685e8f091c16582699a7ad2f",
+        "name": "Mistral Ministral 3B",
+        "description": "Ministral refers to Mistral AI\u2019s new \u201cLes Ministraux\u201d series\u2014comprising Ministral\u202f3B and Ministral\u202f8B\u2014launched in October\u00a02024. These are ultra-efficient, open-weight LLMs optimized for on-device and edge computing, with a massive 128\u202fK\u2011token context window. They offer strong reasoning, knowledge, multilingual support, and function-calling capabilities, outperforming previous models in the sub\u201110B parameter class",
+        "bullets": []
+      },
+      {
+        "id": "685e864b1c16582699a7a962",
+        "name": "Mistral Saba",
+        "description": "Mistral\u202fSaba is a 24\u202fbillion\u2011parameter regional language model launched by Mistral\u202fAI on February 17, 2025. Designed for native fluency in Arabic and South Asian languages (like Tamil, Malayalam, and Urdu), it delivers culturally-aware responses on single\u2011GPU systems\u2014faster and more precise than much larger general models.",
+        "bullets": []
+      },
+      {
+        "id": "685e94ca1c16582699a7b051",
+        "name": "Mistral Small 3.1",
+        "description": "Mistral Small\u202f3.1 is the March\u202f17,\u202f2025 update to Mistral AI's open-source 24B-parameter small model. It offers instruction-following, multimodal vision understanding, and an expanded 128K-token context window, delivering performance on par with or better than GPT\u20114o Mini, Gemma\u202f3, and Claude\u202f3.5 Haiku\u2014all while maintaining fast inference speeds (~150 tokens/sec) and running on devices like an RTX\u202f4090 or a 32\u202fGB Mac.",
+        "bullets": []
+      },
+      {
+        "id": "684137c9bce3a3d64c7094b0",
+        "name": "LangChain AI",
+        "description": "LangChain AI Local Deep Researcher is an autonomous, fully local web research assistant designed to conduct in-depth research on user-provided topics. It leverages local Large Language Models (LLMs) hosted by Ollama or LM Studio to iteratively generate search queries, summarize findings from web sources, and refine its understanding by identifying and addressing knowledge gaps. The final output is a comprehensive markdown report with citations to all sources.",
+        "bullets": []
+      },
+      {
+        "id": "6863f65b015bd4929b381939",
+        "name": "Qwen Chat",
+        "description": "Qwen Chat is Alibaba Cloud\u2019s conversational AI assistant built on the Qwen series (e.g., Qwen\u20117B\u2011Chat, Qwen1.5\u20117B\u2011Chat, Qwen\u2011VL, Qwen\u2011Audio, and Qwen2.5\u2011Omni). It supports text, vision, audio, and video understanding, plus image and document processing, web search integration, and image generation\u2014all through a unified chat interface.",
+        "bullets": []
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6856b319ee78f2aff0d17402",
+      "6856b249ee78f2aff0d1733f",
+      "6856b13dee78f2aff0d1727c",
+      "68556c1527c6eba075dccb43",
+      "68556d5827c6eba075dccc22",
+      "6856b43fee78f2aff0d174e3",
+      "6856b571ee78f2aff0d175d8",
+      "6856b66eee78f2aff0d17692",
+      "6856b76eee78f2aff0d1774c",
+      "6856b13dee78f2aff0d1727c",
+      "6856ba2eee78f2aff0d1798c",
+      "68275c3423aaf1a750a45a3c",
+      "68711e81d7e13670cd1b7d4f",
+      "685ab9bc1c16582699a66df7",
+      "685abd381c16582699a66f9c",
+      "685e8f091c16582699a7ad2f",
+      "685e864b1c16582699a7a962",
+      "685e94ca1c16582699a7b051",
+      "684137c9bce3a3d64c7094b0",
+      "6863f65b015bd4929b381939"
+    ],
+    "tools": [
+      {
+        "id": "6856b319ee78f2aff0d17402",
+        "name": "Meta Llama 4 Behemoth",
+        "description": "Llama\u202f4\u202fBehemoth is Meta\u2019s ultimate \u201cteacher\u201d model within the Llama\u202f4 series, currently in preview and training. Featuring an enormous 2\u202ftrillion total parameters with 288\u202fbillion active in a Mixture-of-Experts architecture (16 experts), it's designed to push the limits of multimodal reasoning, STEM, and long-context tasks.",
+        "bullets": [
+          "Massive Scale: 2 trillion parameters\u2014one of the largest MoEbased language models ever built.",
+          "STEM Benchmark Leader: Internal performance shows ~95% on MATH500, ~82% GPQA Diamond, ~85.8% multilingual MMLU\u2014surpassing existing flagship models."
+        ]
+      },
+      {
+        "id": "6856b249ee78f2aff0d1733f",
+        "name": "Meta Llama 4 Maverick",
+        "description": "Llama\u202f4\u202fMaverick is Meta\u2019s powerful mid-sized model in the Llama\u202f4 series, released April\u202f5,\u202f2025. Built with a mixture-of-experts (MoE) architecture featuring 17\u202fB active parameters (out of 400\u202fB total) and 128 experts, it supports a 1\u202fmillion-token context window and native multimodality for text and image inputs.",
+        "bullets": [
+          "Native Multimodality: Processes text and images jointly using earlyfusion training.",
+          "UltraLong Context: 1 milliontoken window supports massive documents and complex workflows."
+        ]
+      },
+      {
+        "id": "6856b13dee78f2aff0d1727c",
+        "name": "Meta Llama 4 Scout",
+        "description": "Llama\u202f4\u202fScout is Meta\u2019s compact and high-performance entry in the Llama\u202f4 family, released April\u202f5,\u202f2025. Built on a mixture-of-experts (MoE) architecture with 17B active parameters (109B total) and a staggering 10\u2011million-token context window, it delivers top-tier speed and long-context reasoning while fitting on a single Nvidia H100 GPU.",
+        "bullets": [
+          "Unmatched Context Capacity: 10 million tokensfar exceed any other model's capability.",
+          "MoE Efficiency: 16 experts activate per token, balancing scalability and compute from MoE design."
+        ]
+      },
+      {
+        "id": "68556c1527c6eba075dccb43",
+        "name": "Meta Llama 4",
+        "description": "Meta\u202fLlama\u202f4 is the latest generation of Meta\u2019s large language model series. It features a mixture-of-experts (MoE) architecture, making it both highly efficient and powerful. Llama\u202f4 is natively multimodal\u2014supporting text and image inputs\u2014and offers three key variants: Scout (17B active parameters, 10\u202fM token context), Maverick (17B active, 1\u202fM token context), and Behemoth (288B active, 2\u202fT total parameters; still in development).",
+        "bullets": [
+          "MixtureofExperts Efficiency: Only relevant expert subnetworks are activated, enabling high performance with fewer resources.",
+          "Native Multimodality: Joint training on text, images, and video enables coherent understanding across media types."
+        ]
+      },
+      {
+        "id": "68556d5827c6eba075dccc22",
+        "name": "Meta Llama 3",
+        "description": "Meta Llama\u202f3 is Meta\u2019s third-generation open-weight large language model family, released in April 2024 and enhanced in July 2024 with the 3.1 update. It spans three sizes\u20148B, 70B, and 405B parameters\u2014each offering a 128K\u2011token context window.",
+        "bullets": [
+          "Huge Context Window: 128K tokens across models\u2014handled via grouped query attention and token masking.",
+          "MultiSize OpenWeight: 8B and 70B are opensource and accessible; 405B offers frontierlevel performance in research settings."
+        ]
+      },
+      {
+        "id": "6856b43fee78f2aff0d174e3",
+        "name": "Meta Llama 3.1",
+        "description": "Llama\u202f3.1 is Meta\u2019s most advanced open-source Llama 3 model, released on July\u202f23,\u202f2024. It comes in three sizes\u20148B, 70B, and 405B parameters\u2014with an expanded 128K-token context window and improved multilingual and multimodal capabilities.",
+        "bullets": [
+          "Expanded Context: 128Ktoken windowoffers ultralong input support versus typical 8K contexts.",
+          "Multimodal & Multilingual: Adds limited image understanding and strong multilingual abilities."
+        ]
+      },
+      {
+        "id": "6856b571ee78f2aff0d175d8",
+        "name": "Meta Llama 3.2",
+        "description": "Llama\u202f3.2 is Meta\u2019s multimodal and lightweight update to its Llama\u202f3 line, released on September\u202f25,\u202f2024. The family includes 1B and 3B text-only models optimized for edge devices, as well as 11B and 90B Vision models capable of image understanding.",
+        "bullets": [
+          "EdgeReady Text Models: 1B/3B run locally with low latency and minimal resource use.",
+          "First Open Multimodal: 11B/90B Vision models rival closedsource systems in chart and diagram understanding."
+        ]
+      },
+      {
+        "id": "6856b66eee78f2aff0d17692",
+        "name": "Meta Llama 3.3",
+        "description": "Llama\u202f3.3 is Meta\u2019s instruction-tuned, text-only large language model released on December 6, 2024, available in a 70B-parameter size.",
+        "bullets": [
+          "EdgeReady Text Models: 1B/3B run locally with low latency and minimal resource use.",
+          "First Open Multimodal: 11B/90B Vision models rival closedsource systems in chart and diagram understanding."
+        ]
+      },
+      {
+        "id": "6856b76eee78f2aff0d1774c",
+        "name": "Meta Llama 3.2 Vision",
+        "description": "Llama\u202f3.2\u202fVision is Meta\u2019s first open-source multimodal Llama model series, released on September\u202f25,\u202f2024. Available in 11\u202fB and 90\u202fB parameter sizes, it merges advanced image understanding with a massive 128\u202fK\u2011token text context.",
+        "bullets": [
+          "Vision Excellence: Achieves toptier scores\u2014DocVQA ~70.7% and AI2 Diagram ~75.3% (11B) or ~90.1% & ~92.3% (90B).",
+          "Visual Math & Charts: ChartQA ~85.5% and MathVista ~57.3% with chainofthought reasoning."
+        ]
+      },
+      {
+        "id": "6856ba2eee78f2aff0d1798c",
+        "name": "DeepSeek-R1-Distill",
+        "description": "DeepSeek\u202fR1\u202fDistill refers to a family of dense, smaller models distilled from DeepSeek\u2019s flagship DeepSeek\u202fR1 reasoning model. Released early 2025, these models come in sizes ranging from 1.5B to 70B parameters (e.g., DeepSeek\u2011R1\u2011Distill\u2011Qwen\u201132B) and retain powerful reasoning and chain-of-thought abilities in a more efficient architecture. Benchmarks show distilled variants outperform models like OpenAI\u2019s o1\u2011mini, while remaining open\u2011source under MIT license.",
+        "bullets": []
+      },
+      {
+        "id": "68275c3423aaf1a750a45a3c",
+        "name": "lumalabs",
+        "description": "Luma Photon is a next-generation AI-powered image generation model designed for ultra-high-quality, cost-efficient visual creation. Built on a groundbreaking new architecture, Photon delivers ten-times higher cost efficiency while eliminating the traditional \u201cAI look.\u201d It is tailored for designers, filmmakers, architects, and creative professionals who need unparalleled control, realism, and personalization in their generated visuals.",
+        "bullets": []
+      },
+      {
+        "id": "68711e81d7e13670cd1b7d4f",
+        "name": "Bahama",
+        "description": "Bahama.ai is an innovative AI platform that empowers businesses to create and deploy personalized AI assistants. These tailored AI agents seamlessly integrate with internal data sources and third-party applications (like CRMs and project management systems) to streamline and automate various workflows across departments such as customer service, sales, and finance. The platform focuses on providing quick access to relevant data and actionable insights to enhance operational efficiency and informed decision-making.",
+        "bullets": []
+      },
+      {
+        "id": "685ab9bc1c16582699a66df7",
+        "name": "Odia Gen AI",
+        "description": "OdiaGenAI is a collaborative open-source initiative launched in 2023 to develop generative AI and LLM technologies tailored for Odia\u2014a low-resource Indic language\u2014and other regional languages. Led by Odia technologists and hosted under Odisha\u202fAI, it focuses on building pretrained, fine-tuned, and instruction-following models, datasets, and tools to empower areas like education, governance, agriculture, tourism, health, and industry.",
+        "bullets": []
+      },
+      {
+        "id": "685abd381c16582699a66f9c",
+        "name": "Mistral Magistral",
+        "description": "Magistral is Mistral AI\u2019s first dedicated reasoning model, released on June 10, 2025, available in two versions: open-source 24\u202fB Magistral Small and enterprise-grade Magistral Medium. It\u2019s built to provide transparent, multilingual, domain-specific chain-of-thought reasoning, excelling in step-by-step logic tasks like math, finance, legal, and engineering.",
+        "bullets": []
+      },
+      {
+        "id": "685e8f091c16582699a7ad2f",
+        "name": "Mistral Ministral 3B",
+        "description": "Ministral refers to Mistral AI\u2019s new \u201cLes Ministraux\u201d series\u2014comprising Ministral\u202f3B and Ministral\u202f8B\u2014launched in October\u00a02024. These are ultra-efficient, open-weight LLMs optimized for on-device and edge computing, with a massive 128\u202fK\u2011token context window. They offer strong reasoning, knowledge, multilingual support, and function-calling capabilities, outperforming previous models in the sub\u201110B parameter class",
+        "bullets": []
+      },
+      {
+        "id": "685e864b1c16582699a7a962",
+        "name": "Mistral Saba",
+        "description": "Mistral\u202fSaba is a 24\u202fbillion\u2011parameter regional language model launched by Mistral\u202fAI on February 17, 2025. Designed for native fluency in Arabic and South Asian languages (like Tamil, Malayalam, and Urdu), it delivers culturally-aware responses on single\u2011GPU systems\u2014faster and more precise than much larger general models.",
+        "bullets": []
+      },
+      {
+        "id": "685e94ca1c16582699a7b051",
+        "name": "Mistral Small 3.1",
+        "description": "Mistral Small\u202f3.1 is the March\u202f17,\u202f2025 update to Mistral AI's open-source 24B-parameter small model. It offers instruction-following, multimodal vision understanding, and an expanded 128K-token context window, delivering performance on par with or better than GPT\u20114o Mini, Gemma\u202f3, and Claude\u202f3.5 Haiku\u2014all while maintaining fast inference speeds (~150 tokens/sec) and running on devices like an RTX\u202f4090 or a 32\u202fGB Mac.",
+        "bullets": []
+      },
+      {
+        "id": "684137c9bce3a3d64c7094b0",
+        "name": "LangChain AI",
+        "description": "LangChain AI Local Deep Researcher is an autonomous, fully local web research assistant designed to conduct in-depth research on user-provided topics. It leverages local Large Language Models (LLMs) hosted by Ollama or LM Studio to iteratively generate search queries, summarize findings from web sources, and refine its understanding by identifying and addressing knowledge gaps. The final output is a comprehensive markdown report with citations to all sources.",
+        "bullets": []
+      },
+      {
+        "id": "6863f65b015bd4929b381939",
+        "name": "Qwen Chat",
+        "description": "Qwen Chat is Alibaba Cloud\u2019s conversational AI assistant built on the Qwen series (e.g., Qwen\u20117B\u2011Chat, Qwen1.5\u20117B\u2011Chat, Qwen\u2011VL, Qwen\u2011Audio, and Qwen2.5\u2011Omni). It supports text, vision, audio, and video understanding, plus image and document processing, web search integration, and image generation\u2014all through a unified chat interface.",
+        "bullets": []
+      }
+    ]
+  },
+  "processing_time_seconds": 6.163,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6856b319ee78f2aff0d17402\",\n    \"6856b249ee78f2aff0d1733f\",\n    \"6856b13dee78f2aff0d1727c\",\n    \"68556c1527c6eba075dccb43\",\n    \"68556d5827c6eba075dccc22\",\n    \"6856b43fee78f2aff0d174e3\",\n    \"6856b571ee78f2aff0d175d8\",\n    \"6856b66eee78f2aff0d17692\",\n    \"6856b76eee78f2aff0d1774c\",\n    \"6856b13dee78f2aff0d1727c\",\n    \"6856ba2eee78f2aff0d1798c\",\n    \"68275c3423aaf1a750a45a3c\",\n    \"68711e81d7e13670cd1b7d4f\",\n    \"685ab9bc1c16582699a66df7\",\n    \"685abd381c16582699a66f9c\",\n    \"685e8f091c16582699a7ad2f\",\n    \"685e864b1c16582699a7a962\",\n    \"685e94ca1c16582699a7b051\",\n    \"684137c9bce3a3d64c7094b0\",\n    \"6863f65b015bd4929b381939\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6856b319ee78f2aff0d17402\",\n      \"name\": \"Meta Llama 4 Behemoth\",\n      \"description\": \"Llama\\u202f4\\u202fBehemoth is Meta\\u2019s ultimate \\u201cteacher\\u201d model within the Llama\\u202f4 series, currently in preview and training. Featuring an enormous 2\\u202ftrillion total parameters with 288\\u202fbillion active in a Mixture-of-Experts architecture (16 experts), it's designed to push the limits of multimodal reasoning, STEM, and long-context tasks.\",\n      \"bullets\": [\n        \"Massive Scale: 2 trillion parameters\\u2014one of the largest MoEbased language models ever built.\",\n        \"STEM Benchmark Leader: Internal performance shows ~95% on MATH500, ~82% GPQA Diamond, ~85.8% multilingual MMLU\\u2014surpassing existing flagship models.\"\n      ]\n    },\n    {\n      \"id\": \"6856b249ee78f2aff0d1733f\",\n      \"name\": \"Meta Llama 4 Maverick\",\n      \"description\": \"Llama\\u202f4\\u202fMaverick is Meta\\u2019s powerful mid-sized model in the Llama\\u202f4 series, released April\\u202f5,\\u202f2025. Built with a mixture-of-experts (MoE) architecture featuring 17\\u202fB active parameters (out of 400\\u202fB total) and 128 experts, it supports a 1\\u202fmillion-token context window and native multimodality for text and image inputs.\",\n      \"bullets\": [\n        \"Native Multimodality: Processes text and images jointly using earlyfusion training.\",\n        \"UltraLong Context: 1 milliontoken window supports massive documents and complex workflows.\"\n      ]\n    },\n    {\n      \"id\": \"6856b13dee78f2aff0d1727c\",\n      \"name\": \"Meta Llama 4 Scout\",\n      \"description\": \"Llama\\u202f4\\u202fScout is Meta\\u2019s compact and high-performance entry in the Llama\\u202f4 family, released April\\u202f5,\\u202f2025. Built on a mixture-of-experts (MoE) architecture with 17B active parameters (109B total) and a staggering 10\\u2011million-token context window, it delivers top-tier speed and long-context reasoning while fitting on a single Nvidia H100 GPU.\",\n      \"bullets\": [\n        \"Unmatched Context Capacity: 10 million tokensfar exceed any other model's capability.\",\n        \"MoE Efficiency: 16 experts activate per token, balancing scalability and compute from MoE design.\"\n      ]\n    },\n    {\n      \"id\": \"68556c1527c6eba075dccb43\",\n      \"name\": \"Meta Llama 4\",\n      \"description\": \"Meta\\u202fLlama\\u202f4 is the latest generation of Meta\\u2019s large language model series. It features a mixture-of-experts (MoE) architecture, making it both highly efficient and powerful. Llama\\u202f4 is natively multimodal\\u2014supporting text and image inputs\\u2014and offers three key variants: Scout (17B active parameters, 10\\u202fM token context), Maverick (17B active, 1\\u202fM token context), and Behemoth (288B active, 2\\u202fT total parameters; still in development).\",\n      \"bullets\": [\n        \"MixtureofExperts Efficiency: Only relevant expert subnetworks are activated, enabling high performance with fewer resources.\",\n        \"Native Multimodality: Joint training on text, images, and video enables coherent understanding across media types.\"\n      ]\n    },\n    {\n      \"id\": \"68556d5827c6eba075dccc22\",\n      \"name\": \"Meta Llama 3\",\n      \"description\": \"Meta Llama\\u202f3 is Meta\\u2019s third-generation open-weight large language model family, released in April 2024 and enhanced in July 2024 with the 3.1 update. It spans three sizes\\u20148B, 70B, and 405B parameters\\u2014each offering a 128K\\u2011token context window.\",\n      \"bullets\": [\n        \"Huge Context Window: 128K tokens across models\\u2014handled via grouped query attention and token masking.\",\n        \"MultiSize OpenWeight: 8B and 70B are opensource and accessible; 405B offers frontierlevel performance in research settings.\"\n      ]\n    },\n    {\n      \"id\": \"6856b43fee78f2aff0d174e3\",\n      \"name\": \"Meta Llama 3.1\",\n      \"description\": \"Llama\\u202f3.1 is Meta\\u2019s most advanced open-source Llama 3 model, released on July\\u202f23,\\u202f2024. It comes in three sizes\\u20148B, 70B, and 405B parameters\\u2014with an expanded 128K-token context window and improved multilingual and multimodal capabilities.\",\n      \"bullets\": [\n        \"Expanded Context: 128Ktoken windowoffers ultralong input support versus typical 8K contexts.\",\n        \"Multimodal & Multilingual: Adds limited image understanding and strong multilingual abilities.\"\n      ]\n    },\n    {\n      \"id\": \"6856b571ee78f2aff0d175d8\",\n      \"name\": \"Meta Llama 3.2\",\n      \"description\": \"Llama\\u202f3.2 is Meta\\u2019s multimodal and lightweight update to its Llama\\u202f3 line, released on September\\u202f25,\\u202f2024. The family includes 1B and 3B text-only models optimized for edge devices, as well as 11B and 90B Vision models capable of image understanding.\",\n      \"bullets\": [\n        \"EdgeReady Text Models: 1B/3B run locally with low latency and minimal resource use.\",\n        \"First Open Multimodal: 11B/90B Vision models rival closedsource systems in chart and diagram understanding.\"\n      ]\n    },\n    {\n      \"id\": \"6856b66eee78f2aff0d17692\",\n      \"name\": \"Meta Llama 3.3\",\n      \"description\": \"Llama\\u202f3.3 is Meta\\u2019s instruction-tuned, text-only large language model released on December 6, 2024, available in a 70B-parameter size.\",\n      \"bullets\": [\n        \"EdgeReady Text Models: 1B/3B run locally with low latency and minimal resource use.\",\n        \"First Open Multimodal: 11B/90B Vision models rival closedsource systems in chart and diagram understanding.\"\n      ]\n    },\n    {\n      \"id\": \"6856b76eee78f2aff0d1774c\",\n      \"name\": \"Meta Llama 3.2 Vision\",\n      \"description\": \"Llama\\u202f3.2\\u202fVision is Meta\\u2019s first open-source multimodal Llama model series, released on September\\u202f25,\\u202f2024. Available in 11\\u202fB and 90\\u202fB parameter sizes, it merges advanced image understanding with a massive 128\\u202fK\\u2011token text context.\",\n      \"bullets\": [\n        \"Vision Excellence: Achieves toptier scores\\u2014DocVQA ~70.7% and AI2 Diagram ~75.3% (11B) or ~90.1% & ~92.3% (90B).\",\n        \"Visual Math & Charts: ChartQA ~85.5% and MathVista ~57.3% with chainofthought reasoning.\"\n      ]\n    },\n    {\n      \"id\": \"6856ba2eee78f2aff0d1798c\",\n      \"name\": \"DeepSeek-R1-Distill\",\n      \"description\": \"DeepSeek\\u202fR1\\u202fDistill refers to a family of dense, smaller models distilled from DeepSeek\\u2019s flagship DeepSeek\\u202fR1 reasoning model. Released early 2025, these models come in sizes ranging from 1.5B to 70B parameters (e.g., DeepSeek\\u2011R1\\u2011Distill\\u2011Qwen\\u201132B) and retain powerful reasoning and chain-of-thought abilities in a more efficient architecture. Benchmarks show distilled variants outperform models like OpenAI\\u2019s o1\\u2011mini, while remaining open\\u2011source under MIT license.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68275c3423aaf1a750a45a3c\",\n      \"name\": \"lumalabs\",\n      \"description\": \"Luma Photon is a next-generation AI-powered image generation model designed for ultra-high-quality, cost-efficient visual creation. Built on a groundbreaking new architecture, Photon delivers ten-times higher cost efficiency while eliminating the traditional \\u201cAI look.\\u201d It is tailored for designers, filmmakers, architects, and creative professionals who need unparalleled control, realism, and personalization in their generated visuals.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"68711e81d7e13670cd1b7d4f\",\n      \"name\": \"Bahama\",\n      \"description\": \"Bahama.ai is an innovative AI platform that empowers businesses to create and deploy personalized AI assistants. These tailored AI agents seamlessly integrate with internal data sources and third-party applications (like CRMs and project management systems) to streamline and automate various workflows across departments such as customer service, sales, and finance. The platform focuses on providing quick access to relevant data and actionable insights to enhance operational efficiency and informed decision-making.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685ab9bc1c16582699a66df7\",\n      \"name\": \"Odia Gen AI\",\n      \"description\": \"OdiaGenAI is a collaborative open-source initiative launched in 2023 to develop generative AI and LLM technologies tailored for Odia\\u2014a low-resource Indic language\\u2014and other regional languages. Led by Odia technologists and hosted under Odisha\\u202fAI, it focuses on building pretrained, fine-tuned, and instruction-following models, datasets, and tools to empower areas like education, governance, agriculture, tourism, health, and industry.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685abd381c16582699a66f9c\",\n      \"name\": \"Mistral Magistral\",\n      \"description\": \"Magistral is Mistral AI\\u2019s first dedicated reasoning model, released on June 10, 2025, available in two versions: open-source 24\\u202fB Magistral Small and enterprise-grade Magistral Medium. It\\u2019s built to provide transparent, multilingual, domain-specific chain-of-thought reasoning, excelling in step-by-step logic tasks like math, finance, legal, and engineering.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685e8f091c16582699a7ad2f\",\n      \"name\": \"Mistral Ministral 3B\",\n      \"description\": \"Ministral refers to Mistral AI\\u2019s new \\u201cLes Ministraux\\u201d series\\u2014comprising Ministral\\u202f3B and Ministral\\u202f8B\\u2014launched in October\\u00a02024. These are ultra-efficient, open-weight LLMs optimized for on-device and edge computing, with a massive 128\\u202fK\\u2011token context window. They offer strong reasoning, knowledge, multilingual support, and function-calling capabilities, outperforming previous models in the sub\\u201110B parameter class\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685e864b1c16582699a7a962\",\n      \"name\": \"Mistral Saba\",\n      \"description\": \"Mistral\\u202fSaba is a 24\\u202fbillion\\u2011parameter regional language model launched by Mistral\\u202fAI on February 17, 2025. Designed for native fluency in Arabic and South Asian languages (like Tamil, Malayalam, and Urdu), it delivers culturally-aware responses on single\\u2011GPU systems\\u2014faster and more precise than much larger general models.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"685e94ca1c16582699a7b051\",\n      \"name\": \"Mistral Small 3.1\",\n      \"description\": \"Mistral Small\\u202f3.1 is the March\\u202f17,\\u202f2025 update to Mistral AI's open-source 24B-parameter small model. It offers instruction-following, multimodal vision understanding, and an expanded 128K-token context window, delivering performance on par with or better than GPT\\u20114o Mini, Gemma\\u202f3, and Claude\\u202f3.5 Haiku\\u2014all while maintaining fast inference speeds (~150 tokens/sec) and running on devices like an RTX\\u202f4090 or a 32\\u202fGB Mac.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"684137c9bce3a3d64c7094b0\",\n      \"name\": \"LangChain AI\",\n      \"description\": \"LangChain AI Local Deep Researcher is an autonomous, fully local web research assistant designed to conduct in-depth research on user-provided topics. It leverages local Large Language Models (LLMs) hosted by Ollama or LM Studio to iteratively generate search queries, summarize findings from web sources, and refine its understanding by identifying and addressing knowledge gaps. The final output is a comprehensive markdown report with citations to all sources.\",\n      \"bullets\": []\n    },\n    {\n      \"id\": \"6863f65b015bd4929b381939\",\n      \"name\": \"Qwen Chat\",\n      \"description\": \"Qwen Chat is Alibaba Cloud\\u2019s conversational AI assistant built on the Qwen series (e.g., Qwen\\u20117B\\u2011Chat, Qwen1.5\\u20117B\\u2011Chat, Qwen\\u2011VL, Qwen\\u2011Audio, and Qwen2.5\\u2011Omni). It supports text, vision, audio, and video understanding, plus image and document processing, web search integration, and image generation\\u2014all through a unified chat interface.\",\n      \"bullets\": []\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

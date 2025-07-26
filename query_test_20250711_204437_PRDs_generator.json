@@ -1,0 +1,123 @@
+{
+  "timestamp": "2025-07-11T20:44:37.680697",
+  "input_query": "PRDs generator",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 4,
+    "tool_ids": [
+      "6863599c015bd4929b37d01d",
+      "685e9c4b1c16582699a7b791",
+      "68635e5e015bd4929b37d18a",
+      "6863673d015bd4929b37d69d"
+    ],
+    "tools": [
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "AI copilot designed specifically for product managers and their teams to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts.",
+        "bullets": [
+          "ProductCentric AI: Built specifically for PM roles\u2014ChatPRD understands product processes and document standards.",
+          "OnDemand CPO Feedback: Acts like a virtual Chief Product Officer, offering real-time coaching and critique as you work."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments, guiding the creation of clear PRDs.",
+        "bullets": [
+          "InConfluence, No Context Switching: AI works where documents already live\u2014no new tools needed.",
+          "Intelligent Prompts to Avoid Gaps: The AI asks clarifying questions to fill blind spots in PRDs."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI-driven assistant powered by ChatGPT/GPT-3, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs).",
+        "bullets": [
+          "ChatGPT-Prompt Engineered: Tailored prompts and formatting optimized for PRD generation\u2014saves time versus writing in vanilla chat interfaces",
+          "User-Friendly Interface: Clean, intuitive design guides users through each section"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generator",
+        "description": "AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs) by accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings.",
+        "bullets": [
+          "MultiSource Intelligence: Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation",
+          "TemplateDriven Speed: Speedsters past blankpage paralysis using a tried-and-tested PRD template"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6863599c015bd4929b37d01d",
+      "685e9c4b1c16582699a7b791",
+      "68635e5e015bd4929b37d18a",
+      "6863673d015bd4929b37d69d"
+    ],
+    "tools": [
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "AI copilot designed specifically for product managers and their teams to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts.",
+        "bullets": [
+          "ProductCentric AI: Built specifically for PM roles\u2014ChatPRD understands product processes and document standards.",
+          "OnDemand CPO Feedback: Acts like a virtual Chief Product Officer, offering real-time coaching and critique as you work."
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments, guiding the creation of clear PRDs.",
+        "bullets": [
+          "InConfluence, No Context Switching: AI works where documents already live\u2014no new tools needed.",
+          "Intelligent Prompts to Avoid Gaps: The AI asks clarifying questions to fill blind spots in PRDs."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "AI-driven assistant powered by ChatGPT/GPT-3, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs).",
+        "bullets": [
+          "ChatGPT-Prompt Engineered: Tailored prompts and formatting optimized for PRD generation\u2014saves time versus writing in vanilla chat interfaces",
+          "User-Friendly Interface: Clean, intuitive design guides users through each section"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generator",
+        "description": "AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs) by accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings.",
+        "bullets": [
+          "MultiSource Intelligence: Generates PRDs from diverse inputs\u2014text, webpages, or even audio\u2014for comprehensive documentation",
+          "TemplateDriven Speed: Speedsters past blankpage paralysis using a tried-and-tested PRD template"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 23.339,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6863599c015bd4929b37d01d\",\n    \"685e9c4b1c16582699a7b791\",\n    \"68635e5e015bd4929b37d18a\",\n    \"6863673d015bd4929b37d69d\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"AI copilot designed specifically for product managers and their teams to draft complete Product Requirement Documents (PRDs), one-pagers, roadmaps, and more with just a few prompts.\",\n      \"bullets\": [\n        \"ProductCentric AI: Built specifically for PM roles\\u2014ChatPRD understands product processes and document standards.\",\n        \"OnDemand CPO Feedback: Acts like a virtual Chief Product Officer, offering real-time coaching and critique as you work.\"\n      ]\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\",\n      \"description\": \"AI-powered collaboration app embedded in Confluence, designed to help product leaders and teams align across remote or scaling environments, guiding the creation of clear PRDs.\",\n      \"bullets\": [\n        \"InConfluence, No Context Switching: AI works where documents already live\\u2014no new tools needed.\",\n        \"Intelligent Prompts to Avoid Gaps: The AI asks clarifying questions to fill blind spots in PRDs.\"\n      ]\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"AI-driven assistant powered by ChatGPT/GPT-3, designed to simplify and accelerate the creation of Product Requirement Documents (PRDs).\",\n      \"bullets\": [\n        \"ChatGPT-Prompt Engineered: Tailored prompts and formatting optimized for PRD generation\\u2014saves time versus writing in vanilla chat interfaces\",\n        \"User-Friendly Interface: Clean, intuitive design guides users through each section\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generator\",\n      \"description\": \"AI-powered solution designed to streamline the creation of Product Requirements Documents (PRDs) by accepting diverse input formats such as competitor URLs, product pages, meeting notes, and audio recordings.\",\n      \"bullets\": [\n        \"MultiSource Intelligence: Generates PRDs from diverse inputs\\u2014text, webpages, or even audio\\u2014for comprehensive documentation\",\n        \"TemplateDriven Speed: Speedsters past blankpage paralysis using a tried-and-tested PRD template\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

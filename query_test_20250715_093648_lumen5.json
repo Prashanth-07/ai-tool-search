@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-07-15T09:36:48.711812",
+  "input_query": "lumen5",
+  "model_info_before_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 1,
+    "tool_ids": [
+      "682e182623aaf1a750aa8af2"
+    ],
+    "tools": [
+      {
+        "id": "682e182623aaf1a750aa8af2",
+        "name": "lumen5",
+        "description": "AI-powered video creation platform that helps users transform text content into engaging videos effortlessly.",
+        "bullets": [
+          "AI-driven automation speeds up video creation",
+          "Huge library of stock videos, images, and music"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "682e182623aaf1a750aa8af2"
+    ],
+    "tools": [
+      {
+        "id": "682e182623aaf1a750aa8af2",
+        "name": "lumen5",
+        "description": "AI-powered video creation platform that helps users transform text content into engaging videos effortlessly.",
+        "bullets": [
+          "AI-driven automation speeds up video creation",
+          "Huge library of stock videos, images, and music"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 6.477,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"682e182623aaf1a750aa8af2\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"682e182623aaf1a750aa8af2\",\n      \"name\": \"lumen5\",\n      \"description\": \"AI-powered video creation platform that helps users transform text content into engaging videos effortlessly.\",\n      \"bullets\": [\n        \"AI-driven automation speeds up video creation\",\n        \"Huge library of stock videos, images, and music\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_model": "llama-3.1-8b-instant",
+    "provider": "Groq (LLM) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

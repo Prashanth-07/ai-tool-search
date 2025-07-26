@@ -63,12 +63,12 @@ class Config:
     # Search settings
     VECTOR_SEARCH_K = 40
     BM25_SEARCH_K = 50
-    HYBRID_ALPHA = 0.5  # Weight for vector vs BM25 search
+    HYBRID_ALPHA = 0.7  # Weight for vector vs BM25 search
     POPULAR_TOOLS_LIMIT = 4
     
     # Score-based selection settings
-    HYBRID_MIN_SCORE = 0.49   # Minimum relevance threshold
-    HYBRID_MAX_TOOLS = 60       # Maximum tools to send to LLM
+    HYBRID_MIN_SCORE = 0.5   # Minimum relevance threshold
+    HYBRID_MAX_TOOLS = 50       # Maximum tools to send to LLM
     HYBRID_FALLBACK_COUNT = 1  # Minimum tools if none meet threshold
     
     # Processing settings
@@ -1085,37 +1085,59 @@ class SearchUtils:
     
     @staticmethod
     def select_tools_by_score(hybrid_results: List[Dict], 
-                             min_score: float = Config.HYBRID_MIN_SCORE, 
-                             max_tools: int = Config.HYBRID_MAX_TOOLS,
-                             fallback_count: int = Config.HYBRID_FALLBACK_COUNT) -> List[Dict]:
-        """Select tools based on score thresholds rather than fixed count."""
-        qualified_tools = []
-        
-        logger.info(f"Score-based selection: min_score={min_score}, max_tools={max_tools}")
-        
-        for i, result in enumerate(hybrid_results):
-            score = result.get("score", 0)
-            tool_name = result.get("name", "Unknown")
-            
-            # Only include tools that meet minimum relevance threshold
-            if score >= min_score:
-                qualified_tools.append(result)
-                logger.info(f"Tool {i+1}: '{tool_name}' qualified with score {score:.3f}")
-            else:
-                logger.info(f"Tool {i+1}: '{tool_name}' rejected with score {score:.3f} (below {min_score})")
-            
-            # Don't exceed maximum to avoid token limits
-            if len(qualified_tools) >= max_tools:
-                logger.info(f"Reached maximum {max_tools} tools, stopping selection")
-                break
-        
-        # Ensure we send at least fallback_count tools even if scores are low
-        if len(qualified_tools) == 0 and len(hybrid_results) > 0:
-            qualified_tools = hybrid_results[:fallback_count]
-            logger.warning(f"No tools met score threshold, using fallback: top {fallback_count} tools")
-        
-        logger.info(f"Selected {len(qualified_tools)} tools for LLM processing")
-        return qualified_tools
+                            min_score: float = Config.HYBRID_MIN_SCORE, 
+                            max_tools: int = Config.HYBRID_MAX_TOOLS,
+                            fallback_count: int = Config.HYBRID_FALLBACK_COUNT,
+                            high_individual_threshold: float = 0.9) -> List[Dict]:
+       """Select tools based on score thresholds with special handling for high individual scores."""
+       qualified_tools = []
+       
+       logger.info(f"Score-based selection: min_score={min_score}, max_tools={max_tools}, high_individual_threshold={high_individual_threshold}")
+       
+       for i, result in enumerate(hybrid_results):
+           score = result.get("score", 0)
+           tool_name = result.get("name", "Unknown")
+           tool_id = result.get("tool_id", "Unknown")
+           vector_score = result.get("vector_score", 0)
+           bm25_score = result.get("bm25_score", 0)
+
+           # Check inclusion conditions
+           meets_min_threshold = score >= min_score
+           high_vector_score = vector_score >= high_individual_threshold
+           high_bm25_score = bm25_score >= high_individual_threshold
+           
+           # Include if ANY condition is met
+           if meets_min_threshold or high_vector_score or high_bm25_score:
+               qualified_tools.append(result)
+               
+               # Log with appropriate reason
+               reasons = []
+               if meets_min_threshold:
+                   reasons.append("min_threshold")
+               if high_vector_score:
+                   reasons.append("high_vector")
+               if high_bm25_score:
+                   reasons.append("high_bm25")
+               
+               reason_str = "+".join(reasons)
+               logger.info("Rank %2d: '%s' (ID: %s) qualified (%s) - Score: %.3f (V:%.3f + B:%.3f)", 
+                          i+1, str(tool_name), str(tool_id), reason_str, score, vector_score, bm25_score)
+           else:
+               logger.info("Rank %2d: '%s' (ID: %s) rejected - Score: %.3f (V:%.3f + B:%.3f)", 
+                          i+1, str(tool_name), str(tool_id), score, vector_score, bm25_score)
+
+           # Don't exceed maximum to avoid token limits
+           if len(qualified_tools) >= max_tools:
+               logger.info(f"Reached maximum {max_tools} tools, stopping selection")
+               break
+       
+       # Ensure we send at least fallback_count tools even if scores are low
+       if len(qualified_tools) == 0 and len(hybrid_results) > 0:
+           qualified_tools = hybrid_results[:fallback_count]
+           logger.warning(f"No tools met any threshold, using fallback: top {fallback_count} tools")
+       
+       logger.info(f"Selected {len(qualified_tools)} tools for LLM processing")
+       return qualified_tools
 
 # ============================================================================
 # KEYWORD EXTRACTION UTILITIES
@@ -2489,19 +2511,19 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             logger.info(f"Hybrid search returned {len(hybrid_results)} results")
             
             # LOG ALL HYBRID RESULTS WITH SCORES
-            logger.info("=== HYBRID SEARCH RESULTS (ALL TOOLS) ===")
-            for i, result in enumerate(hybrid_results[:20]):  # Log top 20 to see the full picture
-                tool_name = result.get("name", "Unknown")
-                tool_id = result.get("tool_id", "Unknown")
-                score = result.get("score", 0)
-                vector_score = result.get("vector_score", 0)
-                bm25_score = result.get("bm25_score", 0)
-                description = result.get("description", "")[:100]  # First 100 chars
+            # logger.info("=== HYBRID SEARCH RESULTS (ALL TOOLS) ===")
+            # for i, result in enumerate(hybrid_results[:20]):  # Log top 20 to see the full picture
+            #     tool_name = result.get("name", "Unknown")
+            #     tool_id = result.get("tool_id", "Unknown")
+            #     score = result.get("score", 0)
+            #     vector_score = result.get("vector_score", 0)
+            #     bm25_score = result.get("bm25_score", 0)
+            #     description = result.get("description", "")[:100]  # First 100 chars
                 
-                logger.info(f"Rank {i+1:2d}: '{tool_name}' (ID: {tool_id})")
-                logger.info(f"         Score: {score:.3f} (V:{vector_score:.3f} + B:{bm25_score:.3f})")
-                logger.info(f"         Desc: {description}...")
-                logger.info("-" * 50)
+            #     logger.info(f"Rank {i+1:2d}: '{tool_name}' (ID: {tool_id})")
+            #     logger.info(f"         Score: {score:.3f} (V:{vector_score:.3f} + B:{bm25_score:.3f})")
+            #     logger.info(f"         Desc: {description}...")
+            #     logger.info("-" * 50)
             
             # Handle no results with filter
             if not hybrid_results and request.searchFrom:
@@ -2517,11 +2539,12 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             
             # Use score-based selection and split into LLM vs database processing
             all_selected_results = SearchUtils.select_tools_by_score(
-                hybrid_results, 
-                min_score=Config.HYBRID_MIN_SCORE,
-                max_tools=Config.HYBRID_MAX_TOOLS,
-                fallback_count=Config.HYBRID_FALLBACK_COUNT
-            )
+    hybrid_results, 
+    min_score=Config.HYBRID_MIN_SCORE,
+    max_tools=Config.HYBRID_MAX_TOOLS,
+    fallback_count=Config.HYBRID_FALLBACK_COUNT,
+    high_individual_threshold=0.9
+)
 
             # Split into LLM and database processing groups
             llm_tools = all_selected_results[:30]  # Top 20 for LLM
@@ -2536,10 +2559,7 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 tool_name = result.get("name", "Unknown")
                 tool_id = result.get("tool_id", "Unknown")
                 score = result.get("score", 0)
-                description = result.get("description", "")
-                
                 logger.info(f"LLM Tool {i+1}: '{tool_name}' (ID: {tool_id}) - Score: {score:.3f}")
-                logger.info(f"            Description: {description}")
                 logger.info("-" * 40)
 
             logger.info(f"Sending {len(llm_tools)} tools to LLM for processing (score-based selection)")
@@ -2553,12 +2573,12 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             
             logger.info(f"Sending {len(llm_tools)} tools to LLM (reduced from {len(all_selected_results)} total)")
             
-            # LOG ACTUAL DATA SENT TO LLM (first 2 tools for verification)
-            logger.info("=== ACTUAL DATA SENT TO LLM ===")
-            for i, formatted_doc in enumerate(formatted_docs[:2]):  # Log first 2 tools
-                logger.info(f"Tool {i+1} Complete Data to LLM:")
-                logger.info(formatted_doc[:500] + "..." if len(formatted_doc) > 500 else formatted_doc)
-                logger.info("-" * 80)
+            # # LOG ACTUAL DATA SENT TO LLM (first 2 tools for verification)
+            # logger.info("=== ACTUAL DATA SENT TO LLM ===")
+            # for i, formatted_doc in enumerate(formatted_docs[:2]):  # Log first 2 tools
+            #     logger.info(f"Tool {i+1} Complete Data to LLM:")
+            #     logger.info(formatted_doc[:500] + "..." if len(formatted_doc) > 500 else formatted_doc)
+            #     logger.info("-" * 80)
             
             # Handle no tools case
             if not llm_tools and not db_tools:
@@ -2590,70 +2610,60 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             tool_count = len(llm_tools)
             tokens_per_tool = min(150, 3000 // max(tool_count, 1)) 
             
-            system_text = f"""You are an expert AI tool recommendation assistant who recommend and return all the relevant tools based on "{request.query}". Your task is to select and rank all the relevant tools from the provided list which are related to the query: "{request.query}"
+            system_text = f"""You are an expert AI tool recommendation assistant who is specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to *select and rank all the relevant tools* from a given Available Tools Data if they **match or related** to Query which is: "{request.query}".
 
-### SELECTION CRITERIA:
+##Selection Criteria OR Rules:
+- **STRICT INCLUSION**: INCLUDE tools that:
+  - Have core functionality directly addressing the Query domain and intent
+  - Contain semantically related keywords from the Query in their metadata
+  - Would be logically chosen by someone with this specific need
+- **Ranking Requirements**: Rank them from most to least relevant (1st = most relevant)
+- **Query-Specific Conditions**:
+  - If query specifies a number ("top 3", "best 5"): return exactly that count
+  - If query mentions specific tool name: prioritize and return that tool in 1st position
+- **Relevance Threshold**: Each tool must score 7/10 or higher on this test:
+  - Does the tool's core functionality directly address the query and are they semantically relevant? (0-7 points)
+  - Does the tool contain query related keywords in name/description? (0-3 points)  
+- **STRICT EXCLUSION**: EXCLUDE tools that:
+  - Are from completely different domains than the query
+  - Have only tangential/indirect relevance
+  - Don't contain any semantic matches
+- **EXCLUSION EXAMPLES**: 
+  - For "PRD" queries: exclude PR tools, general writing tools, resume builders, prototyping tools
+  - For "image" queries: exclude video tools, audio tools, text tools
+  - For "coding" queries: exclude design tools, writing tools, marketing tools
+- **NO PADDING**: 
+  - *Do not duplicate tools - each tool should appear exactly once*
+  - Don't add irrelevant tools just to reach a number
+- **Edge Cases**: If no tools match the query, return: {{ "tool_id": [], "tools": [] }}
+- **Count Limits**: *Return up to 20 tools based on relevance*
+- **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
+- **Output Specifications**:
+  - *Description: Should contain specific relevance by using keywords from Query: "{request.query}"*
+  - *Bullets: List features applicable to Query in 2 bullet points*
 
-**Step 1: Relevance Filtering**
-- INCLUDE and rank all the tools that are relevant to "{request.query}" most relevant to least relevant.
-- Include all tools whose tool data contains keywords that appear in the given Query.
-- For example, if the query is "write PRD for me", include all tools from the available tool data which have keywords like "PRD" and "PRDs" and  Product Requirements Documents (PRDs) and other related information.
-- Relevance should be based on **keyword match** and **semantic overlap** between Query and tool metadata of given Available Tools Data.
-- EXCLUDE tools from different domains (e.g., for "text to image" query, exclude image-to-video, video editing, etc.)
-
-
-**Step 2: Ranking Rules**
-- Tools with exact keywords/functionality match to the Query should be at the beginning of the list.
-- If query specifies number ("top 3", "best 5"): return exactly that count.
-- If query mentions specific tool name: prioritize and return that tool in 1st position
-- Rank selected tools from most to least relevant based on close relevance.
-
-#**Step 3: Response Guidelines**
-- **Select all the tools that relate to the Query without any padding or duplicates.**
-- **NEVER duplicate tools - each tool should appear exactly once**
-- STOP when you run out of relevant tools - don't force a specific count
-- *Description: Explain specific relevance to "{request.query}" using exact query keywords*
-- *Bullets: List features directly applicable to "{request.query}" and give only 2 bullet points.*
-
-### DOMAIN FILTERING EXAMPLE:
-Example 1: Query: "text to image"
-✅ INCLUDE: Text-to-image tools, AI image creation from text. Include all text-to-image and image generation tools at the top or beginning of the list.
-❌ EXCLUDE: Dont include image-to-video converters, video creation tools, design tools.
-Reason: User wants text→image generation specifically, not image manipulation or video other media types
-Example 2: Query: "Write PRD for me"
-*✅ INCLUDE: Include all the PRD related tools for creating Product Requirements Documents (PRDs). Include all PRD-specific tools which have PRD in its tool data.*
-*❌ EXCLUDE: Dont include image-to-video converters, video creation tools, design tools, or any other domain tool.*
-Reason: User wants PRD creation specifically so include all tools which have PRDs, PRD and related keywords in it, not image manipulation or video other media types
-
-### DESCRIPTION EXAMPLE:
-Query: "write PRD for me"
-Good Description: "AI tool for creating Product Requirements Documents (PRDs) with templates and structured formatting for product management workflows"
-Good Bullets: ["PRD-specific templates and sections for goals, users, specs, features.", "Collaborative PRD editing and review features with real-time version tracking."]
-
-### JSON FORMAT (return only valid JSON):
-##CRITICAL: You MUST return ONLY valid JSON in this EXACT format:
+##JSON FORMAT:
 {{
   "tool_id": ["most_relevant_exact_tool_id", "second_most_relevant_exact_tool_id"],
   "tools": [
     {{
       "id": "exact_tool_id_from_data",
       "name": "tool_name",
-      "description": "Specific relevance to {request.query} using exact query keywords",
-      "bullets": ["Feature directly addressing {request.query}", "Capability specifically for {request.query} task"]
+      "description": "Explain how this tool is relevant to the user query using keywords and intent from the query.",
+      "bullets":[
+        "Feature that directly solves the task described in the query",
+        "Specific capability aligned with the user’s intent"
+      ]
     }}
   ]
 }}
 
-#### IMPORTANT RULES:
-- Use exact "tool_id" field from metadata, NOT tool name
-- Each tool_id should appear exactly once (NO DUPLICATES)
-- Include all tools that are relevant to "{request.query}".
-- Return as many tools as are relevant.
-- VARIABLE COUNT: You can return anywhere only upto 20 tools based on relevance relevant.
-- Rank tools from most to least relevant (1st = most relevant) in the JSON format.
-- NO DUPLICATES: Each tool_id can only appear once in your response.
-- NO PADDING: Don't add irrelevant tools just to reach a number.
-- Return *ONLY valid JSON* in the EXACT format provided above *without any PREAMBLE or EXPLANATION.*
+
+- The "tool_id" array should mirror the ranking order of tools returned in the "tools" list.
+- The "id" field inside each object must match its corresponding entry in "tool_id".
+
+##*Important Rules*:
+- Return *ONLY valid JSON* in the below given JSON FORMAT *without any PREAMBLE or EXPLANATION.*
 - Ensure all brackets and quotes are properly closed."""
             
             prompt_text = f"""Query: "{request.query}"
@@ -2661,30 +2671,41 @@ Good Bullets: ["PRD-specific templates and sections for goals, users, specs, fea
 Available Tools Data:
 {cleaned_context}
 
-Task: Analyze the query and determine its main intent. Then review the Available Tools Data and select all tools that are relevant to the topic: "{request.query}".
-Return the tools in the expected JSON format, ranked from most to least relevant, with the most relevant tools appearing first.
+## Task
+Your task is to select and rank tools that are most relevant to the above Query, using the provided Available Tools Data.
 
-Do not miss any relevant tools that address "{request.query}".
+## Evaluation Process:
+For each tool, evaluate:
+1. Does this tool's primary function directly match the query intent?
+2. Are there shared keywords between the query and tool name/description?
+3. Would someone with this specific need realistically choose this tool?
+4. Score each tool on relevance (0-10) and include only tools scoring 7+ 
 
-***Include as many tools that are relevant that match the same keywords and which are functionally related to the Query.***
-Important Notes: 
--NO DUPLICATES and NO PADDING with irrelevant tools.
-"""            
+## Requirements:
+- Apply the Selection Criteria and Output Format rules as defined above
+- Analyze query intent first, then evaluate each tool against that intent
+- NO DUPLICATES and NO PADDING with irrelevant tools
+- Focus on semantic relevance over quantity.
+- Return only the final JSON result — no extra text or explanations
+
+## Critical Reminder:
+Only include tools that directly solve the user's stated problem. Exclude tangentially related tools even if they could theoretically be relevant."""
+
             # Initialize LLM and get response
             llm = ChatGroq(
                 groq_api_key=env.groq_api_key,
                 model_name=current_model,
                 temperature=0.05,
-                max_tokens=8000,
+                # max_tokens=8000,
                 model_kwargs={
-                    "top_p": 0.7,
+                    "top_p": 0.5,
                     "frequency_penalty": 0.2,
                     "presence_penalty": 0.0,
                     "response_format": {"type": "json_object"}
                 }
             )
             
-            logger.info(f"LLM configured for 3500 max_tokens with {len(llm_tools)} tools")
+            logger.info("LLM configured for 3500 max_tokens with %d tools", len(llm_tools))
             
             # Count input tokens
             total_input_text = system_text + prompt_text
@@ -2705,13 +2726,14 @@ Important Notes:
                 
                 logger.info(f"🔢 OUTPUT TOKENS: {output_tokens}")
                 logger.info(f"🔢 TOTAL TOKENS: {total_tokens}")
-                logger.info(f"🔢 TOKEN BREAKDOWN - Input: {input_tokens}, Output: {output_tokens}, Total: {total_tokens}")
+                logger.info("🔢 TOKEN BREAKDOWN - Input: %d, Output: %d, Total: %d", input_tokens, output_tokens, total_tokens)
+
                 
                 logger.info("LLM response received and processed")
                 
                 # Post-process response
                 processed_response = QueryProcessor.post_process_llm_response(llm_response)
-                logger.info(f"DEBUG: Raw LLM response before JSON parsing: {processed_response[:500]}...")
+                logger.info("DEBUG: Raw LLM response before JSON parsing: %s...", str(processed_response[:500]))
                 
                 # Parse and validate JSON response
                 try:
