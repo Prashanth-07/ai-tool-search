@@ -1,0 +1,147 @@
+{
+  "timestamp": "2025-08-02T19:55:59.498852",
+  "input_query": "write PRD for me",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 5,
+    "tool_ids": [
+      "6863632c015bd4929b37d359",
+      "68636b0c015bd4929b37d7a4",
+      "68635e5e015bd4929b37d18a",
+      "6863673d015bd4929b37d69d",
+      "68668e1bef7018fbfef6ae79"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks streamlines product documentation for teams. It generates comprehensive, structured Product Requirement Documents in minutes by inputting core details. This is highly relevant for those looking to quickly write a PRD.",
+        "bullets": [
+          "Auto-detects essential features and crafts structured user stories.",
+          "Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is an AI-powered product management tool that enables you to create your Product Requirements Document (PRD) effortlessly with a few clicks. The convenience of generating and managing your PRD makes it a strong fit for those needing to write it quickly.",
+        "bullets": [
+          "Offers specialized frameworks that enhance consistency and quality.",
+          "Seamlessly combines PRD creation with task management."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "Write My PRD is specifically designed to simplify and accelerate the creation of Product Requirement Documents by allowing users to input basic information for instant generation of structured PRDs. This directly addresses the need for writing a PRD.",
+        "bullets": [
+          "Optimized prompts and formatting for quick PRD generation.",
+          "User-friendly interface guides through each section."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "GetBash\u2019s PRD Generator intelligently extracts information from diverse inputs and structures it into a comprehensive PRD. This can save invaluable drafting time for teams looking to create well-formed product documents.",
+        "bullets": [
+          "Generates PRDs in seconds from various input formats.",
+          "Includes template-driven speed to combat writer\u2019s block."
+        ]
+      },
+      {
+        "id": "68668e1bef7018fbfef6ae79",
+        "name": "ChatPRD",
+        "description": "ChatPRD is designed specifically for product managers to draft PRDs and related documents with ease. Its role-based coaching and intelligent templates promote clarity and efficiency in the documentation process, making it an ideal tool for writing PRDs.",
+        "bullets": [
+          "Acts as a virtual Chief Product Officer for real-time feedback.",
+          "Speedy drafting capabilities cut the time to create PRDs significantly."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6863632c015bd4929b37d359",
+      "68636b0c015bd4929b37d7a4",
+      "68635e5e015bd4929b37d18a",
+      "6863673d015bd4929b37d69d",
+      "68668e1bef7018fbfef6ae79"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "The AI-driven PRD Generator by BrilWorks streamlines product documentation for teams. It generates comprehensive, structured Product Requirement Documents in minutes by inputting core details. This is highly relevant for those looking to quickly write a PRD.",
+        "bullets": [
+          "Auto-detects essential features and crafts structured user stories.",
+          "Cuts documentation time from hours to minutes."
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "Signlz is an AI-powered product management tool that enables you to create your Product Requirements Document (PRD) effortlessly with a few clicks. The convenience of generating and managing your PRD makes it a strong fit for those needing to write it quickly.",
+        "bullets": [
+          "Offers specialized frameworks that enhance consistency and quality.",
+          "Seamlessly combines PRD creation with task management."
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "Write My PRD is specifically designed to simplify and accelerate the creation of Product Requirement Documents by allowing users to input basic information for instant generation of structured PRDs. This directly addresses the need for writing a PRD.",
+        "bullets": [
+          "Optimized prompts and formatting for quick PRD generation.",
+          "User-friendly interface guides through each section."
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "GetBash\u2019s PRD Generator intelligently extracts information from diverse inputs and structures it into a comprehensive PRD. This can save invaluable drafting time for teams looking to create well-formed product documents.",
+        "bullets": [
+          "Generates PRDs in seconds from various input formats.",
+          "Includes template-driven speed to combat writer\u2019s block."
+        ]
+      },
+      {
+        "id": "68668e1bef7018fbfef6ae79",
+        "name": "ChatPRD",
+        "description": "ChatPRD is designed specifically for product managers to draft PRDs and related documents with ease. Its role-based coaching and intelligent templates promote clarity and efficiency in the documentation process, making it an ideal tool for writing PRDs.",
+        "bullets": [
+          "Acts as a virtual Chief Product Officer for real-time feedback.",
+          "Speedy drafting capabilities cut the time to create PRDs significantly."
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 18.096,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6863632c015bd4929b37d359\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"68635e5e015bd4929b37d18a\",\n    \"6863673d015bd4929b37d69d\",\n    \"68668e1bef7018fbfef6ae79\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\",\n      \"description\": \"The AI-driven PRD Generator by BrilWorks streamlines product documentation for teams. It generates comprehensive, structured Product Requirement Documents in minutes by inputting core details. This is highly relevant for those looking to quickly write a PRD.\",\n      \"bullets\": [\n        \"Auto-detects essential features and crafts structured user stories.\",\n        \"Cuts documentation time from hours to minutes.\"\n      ]\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\",\n      \"description\": \"Signlz is an AI-powered product management tool that enables you to create your Product Requirements Document (PRD) effortlessly with a few clicks. The convenience of generating and managing your PRD makes it a strong fit for those needing to write it quickly.\",\n      \"bullets\": [\n        \"Offers specialized frameworks that enhance consistency and quality.\",\n        \"Seamlessly combines PRD creation with task management.\"\n      ]\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\",\n      \"description\": \"Write My PRD is specifically designed to simplify and accelerate the creation of Product Requirement Documents by allowing users to input basic information for instant generation of structured PRDs. This directly addresses the need for writing a PRD.\",\n      \"bullets\": [\n        \"Optimized prompts and formatting for quick PRD generation.\",\n        \"User-friendly interface guides through each section.\"\n      ]\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\",\n      \"description\": \"GetBash\\u2019s PRD Generator intelligently extracts information from diverse inputs and structures it into a comprehensive PRD. This can save invaluable drafting time for teams looking to create well-formed product documents.\",\n      \"bullets\": [\n        \"Generates PRDs in seconds from various input formats.\",\n        \"Includes template-driven speed to combat writer\\u2019s block.\"\n      ]\n    },\n    {\n      \"id\": \"68668e1bef7018fbfef6ae79\",\n      \"name\": \"ChatPRD\",\n      \"description\": \"ChatPRD is designed specifically for product managers to draft PRDs and related documents with ease. Its role-based coaching and intelligent templates promote clarity and efficiency in the documentation process, making it an ideal tool for writing PRDs.\",\n      \"bullets\": [\n        \"Acts as a virtual Chief Product Officer for real-time feedback.\",\n        \"Speedy drafting capabilities cut the time to create PRDs significantly.\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

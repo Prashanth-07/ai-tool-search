@@ -17,6 +17,9 @@ services:
       - DEV_MODEL=${DEV_MODEL}
       - PROD_MODEL=${PROD_MODEL}
       - NOMIC_API_KEY=${NOMIC_API_KEY}
+      # Add OpenAI (only for query tools)
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL}
     volumes:
       - ./backend:/app
     extra_hosts:

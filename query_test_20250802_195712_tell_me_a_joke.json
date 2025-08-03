@@ -1,0 +1,127 @@
+{
+  "timestamp": "2025-08-02T19:57:12.261805",
+  "input_query": "tell me a joke",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 4,
+    "tool_ids": [
+      "681d9ed763aef50052db3cea",
+      "6877412a05cf15748251c03f",
+      "6826e11323aaf1a750a2b8ba",
+      "681e0fbd63aef50052dc33d1"
+    ],
+    "tools": [
+      {
+        "id": "681d9ed763aef50052db3cea",
+        "name": "PumpChat",
+        "description": "PumpChat AI blends AI and meme culture for a fun social experience, encouraging users to generate and share humorous content, which aligns well with telling jokes.",
+        "bullets": [
+          "Engage with AI characters for humorous interactions.",
+          "Integrates meme culture to enhance entertainment."
+        ]
+      },
+      {
+        "id": "6877412a05cf15748251c03f",
+        "name": "LM Studio",
+        "description": "LM Studio enables interactions with Large Language Models, allowing for the generation of jokes or humorous content directly from a personal machine, making it relevant for those looking to tell a joke.",
+        "bullets": [
+          "Chat with models to generate jokes and funny content.",
+          "Run LLMs locally for customizable joke-telling."
+        ]
+      },
+      {
+        "id": "6826e11323aaf1a750a2b8ba",
+        "name": "Talk2Page",
+        "description": "Talk2Page turns any webpage into a conversational interface, which can be utilized to extract humorous content or jokes from websites in an interactive manner, fitting the context of sharing jokes.",
+        "bullets": [
+          "Converse directly with webpages to extract content.",
+          "Summarizes sections on demand, including potentially humorous segments."
+        ]
+      },
+      {
+        "id": "681e0fbd63aef50052dc33d1",
+        "name": "Read",
+        "description": "Read AI Copilot assists with communication and can help users devise witty responses or humorous content quickly, making it suitable for telling jokes in conversational contexts.",
+        "bullets": [
+          "Provides actionable insights for crafting humorous content.",
+          "Enhances collaboration for sharing jokes across teams."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "681d9ed763aef50052db3cea",
+      "6877412a05cf15748251c03f",
+      "6826e11323aaf1a750a2b8ba",
+      "681e0fbd63aef50052dc33d1"
+    ],
+    "tools": [
+      {
+        "id": "681d9ed763aef50052db3cea",
+        "name": "PumpChat",
+        "description": "PumpChat AI blends AI and meme culture for a fun social experience, encouraging users to generate and share humorous content, which aligns well with telling jokes.",
+        "bullets": [
+          "Engage with AI characters for humorous interactions.",
+          "Integrates meme culture to enhance entertainment."
+        ]
+      },
+      {
+        "id": "6877412a05cf15748251c03f",
+        "name": "LM Studio",
+        "description": "LM Studio enables interactions with Large Language Models, allowing for the generation of jokes or humorous content directly from a personal machine, making it relevant for those looking to tell a joke.",
+        "bullets": [
+          "Chat with models to generate jokes and funny content.",
+          "Run LLMs locally for customizable joke-telling."
+        ]
+      },
+      {
+        "id": "6826e11323aaf1a750a2b8ba",
+        "name": "Talk2Page",
+        "description": "Talk2Page turns any webpage into a conversational interface, which can be utilized to extract humorous content or jokes from websites in an interactive manner, fitting the context of sharing jokes.",
+        "bullets": [
+          "Converse directly with webpages to extract content.",
+          "Summarizes sections on demand, including potentially humorous segments."
+        ]
+      },
+      {
+        "id": "681e0fbd63aef50052dc33d1",
+        "name": "Read",
+        "description": "Read AI Copilot assists with communication and can help users devise witty responses or humorous content quickly, making it suitable for telling jokes in conversational contexts.",
+        "bullets": [
+          "Provides actionable insights for crafting humorous content.",
+          "Enhances collaboration for sharing jokes across teams."
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 14.96,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"681d9ed763aef50052db3cea\",\n    \"6877412a05cf15748251c03f\",\n    \"6826e11323aaf1a750a2b8ba\",\n    \"681e0fbd63aef50052dc33d1\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"681d9ed763aef50052db3cea\",\n      \"name\": \"PumpChat\",\n      \"description\": \"PumpChat AI blends AI and meme culture for a fun social experience, encouraging users to generate and share humorous content, which aligns well with telling jokes.\",\n      \"bullets\": [\n        \"Engage with AI characters for humorous interactions.\",\n        \"Integrates meme culture to enhance entertainment.\"\n      ]\n    },\n    {\n      \"id\": \"6877412a05cf15748251c03f\",\n      \"name\": \"LM Studio\",\n      \"description\": \"LM Studio enables interactions with Large Language Models, allowing for the generation of jokes or humorous content directly from a personal machine, making it relevant for those looking to tell a joke.\",\n      \"bullets\": [\n        \"Chat with models to generate jokes and funny content.\",\n        \"Run LLMs locally for customizable joke-telling.\"\n      ]\n    },\n    {\n      \"id\": \"6826e11323aaf1a750a2b8ba\",\n      \"name\": \"Talk2Page\",\n      \"description\": \"Talk2Page turns any webpage into a conversational interface, which can be utilized to extract humorous content or jokes from websites in an interactive manner, fitting the context of sharing jokes.\",\n      \"bullets\": [\n        \"Converse directly with webpages to extract content.\",\n        \"Summarizes sections on demand, including potentially humorous segments.\"\n      ]\n    },\n    {\n      \"id\": \"681e0fbd63aef50052dc33d1\",\n      \"name\": \"Read\",\n      \"description\": \"Read AI Copilot assists with communication and can help users devise witty responses or humorous content quickly, making it suitable for telling jokes in conversational contexts.\",\n      \"bullets\": [\n        \"Provides actionable insights for crafting humorous content.\",\n        \"Enhances collaboration for sharing jokes across teams.\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "timestamp": "2025-08-03T06:49:18.350989",
+  "input_query": "coding tools",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 12,
+    "tool_ids": [
+      "684c70bbb939200515463884",
+      "68486dbbb939200515091245",
+      "684c82d4b9392005154a3270",
+      "6850720810a1e47b57c93923",
+      "6843618eac33a46e0beebe30",
+      "684c7bb6b93920051547d675",
+      "6877bd3f05cf157482523290",
+      "6848556fb93920051506efa4",
+      "684c5bf3b93920051544ef60",
+      "684c7a24b939200515475a11",
+      "684867d8b93920051508d781"
+    ],
+    "tools": [
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI",
+        "description": "PearAI is an open-source, AI-powered code editor based on Visual Studio Code that combines top AI coding tools like GPT-4, Claude, LLaMA, and AI agents into one intelligent workspace. Designed for developers who want deep codebase understanding, automated assistance, and fast project scaffolding, PearAI delivers a unified, local-first AI coding experience.",
+        "bullets": [
+          "Supports multiple AI coding tools in one interface for enhanced productivity.",
+          "Open-source, allowing customization and extensibility for developers."
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm is a powerful integrated development environment (IDE) specifically designed for Python development by JetBrains. It offers intelligent code assistance, smart debugging, code refactoring, and a seamless development experience for professionals working on Python, Django, data science, and web development projects.",
+        "bullets": [
+          "Tailored for Python development with advanced refactoring and debugging tools.",
+          "Built-in support for AI-powered extensions enhances coding efficiency."
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.",
+        "bullets": [
+          "Offers real-time collaboration and AI-assisted code editing features.",
+          "Fast performance optimized for large codebases and instant loading."
+        ]
+      },
+      {
+        "id": "6850720810a1e47b57c93923",
+        "name": "JetBrains IDEs",
+        "description": "JetBrains IDEs are a suite of professional, language-specific integrated development environments (IDEs) backed by robust coding assistance, smart refactoring, debugging, testing, and AI-powered plugin support across multiple languages.",
+        "bullets": [
+          "Support for multiple languages with rich AI-powered enhancements.",
+          "Integrated refactoring and debugging tools for a streamlined development process."
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "Codex mini is OpenAI\u2019s lightweight, high-speed AI coding model, enabling efficient code generation, debugging, and editing tasks, designed specifically for command-line interactions.",
+        "bullets": [
+          "Lightweight AI coding model optimized for terminal workflows.",
+          "Fast performance suitable for real-time coding assistance."
+        ]
+      },
+      {
+        "id": "684c7bb6b93920051547d675",
+        "name": "GitWit",
+        "description": "Gitwit is an open-source, browser-based AI coding platform that combines in-browser development with AI-powered autocomplete, instant deployment, and community collaboration.",
+        "bullets": [
+          "Real-time AI assistance within a collaborative browser environment.",
+          "Free and open-source, promoting community contributions."
+        ]
+      },
+      {
+        "id": "6877bd3f05cf157482523290",
+        "name": "Cline - Claude Dev",
+        "description": "Cline is an open-source AI coding agent for VS Code that automates tasks via natural language instructions, such as file creation and debugging.",
+        "bullets": [
+          "Automates complex tasks in VS Code using natural language commands.",
+          "Open-source with a focus on transparency and community enhancements."
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely.",
+        "bullets": [
+          "Real-time code suggestions and security scans for various languages.",
+          "Deep integration with AWS services providing context-aware suggestions."
+        ]
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models directly from the command line.",
+        "bullets": [
+          "Enhances terminal workflows with AI collaboration features.",
+          "Fully open-source with customizable functionalities."
+        ]
+      },
+      {
+        "id": "684c7a24b939200515475a11",
+        "name": "Ask Codi",
+        "description": "AskCodi.com is an AI-powered coding assistant designed to simplify the software development process across multiple programming languages.",
+        "bullets": [
+          "Comprehensive AI tools for code generation, refactoring, and testing.",
+          "Seamless integration with popular IDEs for minimal context switching."
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "Context-aware code suggestions based on thousands of quality repos.",
+          "Multi-language support integrated into popular IDEs for enhanced development."
+        ]
+      },
+      {
+        "id": "6845a701b939200515442067",
+        "name": "DeepSeek-Coder-V2",
+        "description": "DeepSeek-Coder V2 is an open-source, code-focused variant of DeepSeek V2, purpose-built for code generation and debugging across multiple programming languages.",
+        "bullets": [
+          "Supports code generation in 338 programming languages.",
+          "Large context support for handling extensive codebases effectively."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "684c70bbb939200515463884",
+      "68486dbbb939200515091245",
+      "684c82d4b9392005154a3270",
+      "6850720810a1e47b57c93923",
+      "6843618eac33a46e0beebe30",
+      "684c7bb6b93920051547d675",
+      "6877bd3f05cf157482523290",
+      "6848556fb93920051506efa4",
+      "684c5bf3b93920051544ef60",
+      "684c7a24b939200515475a11",
+      "684867d8b93920051508d781"
+    ],
+    "tools": [
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI",
+        "description": "PearAI is an open-source, AI-powered code editor based on Visual Studio Code that combines top AI coding tools like GPT-4, Claude, LLaMA, and AI agents into one intelligent workspace. Designed for developers who want deep codebase understanding, automated assistance, and fast project scaffolding, PearAI delivers a unified, local-first AI coding experience.",
+        "bullets": [
+          "Supports multiple AI coding tools in one interface for enhanced productivity.",
+          "Open-source, allowing customization and extensibility for developers."
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm is a powerful integrated development environment (IDE) specifically designed for Python development by JetBrains. It offers intelligent code assistance, smart debugging, code refactoring, and a seamless development experience for professionals working on Python, Django, data science, and web development projects.",
+        "bullets": [
+          "Tailored for Python development with advanced refactoring and debugging tools.",
+          "Built-in support for AI-powered extensions enhances coding efficiency."
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.",
+        "bullets": [
+          "Offers real-time collaboration and AI-assisted code editing features.",
+          "Fast performance optimized for large codebases and instant loading."
+        ]
+      },
+      {
+        "id": "6850720810a1e47b57c93923",
+        "name": "JetBrains IDEs",
+        "description": "JetBrains IDEs are a suite of professional, language-specific integrated development environments (IDEs) backed by robust coding assistance, smart refactoring, debugging, testing, and AI-powered plugin support across multiple languages.",
+        "bullets": [
+          "Support for multiple languages with rich AI-powered enhancements.",
+          "Integrated refactoring and debugging tools for a streamlined development process."
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "Codex mini is OpenAI\u2019s lightweight, high-speed AI coding model, enabling efficient code generation, debugging, and editing tasks, designed specifically for command-line interactions.",
+        "bullets": [
+          "Lightweight AI coding model optimized for terminal workflows.",
+          "Fast performance suitable for real-time coding assistance."
+        ]
+      },
+      {
+        "id": "684c7bb6b93920051547d675",
+        "name": "GitWit",
+        "description": "Gitwit is an open-source, browser-based AI coding platform that combines in-browser development with AI-powered autocomplete, instant deployment, and community collaboration.",
+        "bullets": [
+          "Real-time AI assistance within a collaborative browser environment.",
+          "Free and open-source, promoting community contributions."
+        ]
+      },
+      {
+        "id": "6877bd3f05cf157482523290",
+        "name": "Cline - Claude Dev",
+        "description": "Cline is an open-source AI coding agent for VS Code that automates tasks via natural language instructions, such as file creation and debugging.",
+        "bullets": [
+          "Automates complex tasks in VS Code using natural language commands.",
+          "Open-source with a focus on transparency and community enhancements."
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely.",
+        "bullets": [
+          "Real-time code suggestions and security scans for various languages.",
+          "Deep integration with AWS services providing context-aware suggestions."
+        ]
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models directly from the command line.",
+        "bullets": [
+          "Enhances terminal workflows with AI collaboration features.",
+          "Fully open-source with customizable functionalities."
+        ]
+      },
+      {
+        "id": "684c7a24b939200515475a11",
+        "name": "Ask Codi",
+        "description": "AskCodi.com is an AI-powered coding assistant designed to simplify the software development process across multiple programming languages.",
+        "bullets": [
+          "Comprehensive AI tools for code generation, refactoring, and testing.",
+          "Seamless integration with popular IDEs for minimal context switching."
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.",
+        "bullets": [
+          "Context-aware code suggestions based on thousands of quality repos.",
+          "Multi-language support integrated into popular IDEs for enhanced development."
+        ]
+      },
+      {
+        "id": "6845a701b939200515442067",
+        "name": "DeepSeek-Coder-V2",
+        "description": "DeepSeek-Coder V2 is an open-source, code-focused variant of DeepSeek V2, purpose-built for code generation and debugging across multiple programming languages.",
+        "bullets": [
+          "Supports code generation in 338 programming languages.",
+          "Large context support for handling extensive codebases effectively."
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 36.489,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"684c70bbb939200515463884\",\n    \"68486dbbb939200515091245\",\n    \"684c82d4b9392005154a3270\",\n    \"6850720810a1e47b57c93923\",\n    \"6843618eac33a46e0beebe30\",\n    \"684c7bb6b93920051547d675\",\n    \"6877bd3f05cf157482523290\",\n    \"6848556fb93920051506efa4\",\n    \"684c5bf3b93920051544ef60\",\n    \"684c7a24b939200515475a11\",\n    \"684867d8b93920051508d781\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"684c70bbb939200515463884\",\n      \"name\": \"PearAI\",\n      \"description\": \"PearAI is an open-source, AI-powered code editor based on Visual Studio Code that combines top AI coding tools like GPT-4, Claude, LLaMA, and AI agents into one intelligent workspace. Designed for developers who want deep codebase understanding, automated assistance, and fast project scaffolding, PearAI delivers a unified, local-first AI coding experience.\",\n      \"bullets\": [\n        \"Supports multiple AI coding tools in one interface for enhanced productivity.\",\n        \"Open-source, allowing customization and extensibility for developers.\"\n      ]\n    },\n    {\n      \"id\": \"68486dbbb939200515091245\",\n      \"name\": \"PyCharm AI\",\n      \"description\": \"PyCharm is a powerful integrated development environment (IDE) specifically designed for Python development by JetBrains. It offers intelligent code assistance, smart debugging, code refactoring, and a seamless development experience for professionals working on Python, Django, data science, and web development projects.\",\n      \"bullets\": [\n        \"Tailored for Python development with advanced refactoring and debugging tools.\",\n        \"Built-in support for AI-powered extensions enhances coding efficiency.\"\n      ]\n    },\n    {\n      \"id\": \"684c82d4b9392005154a3270\",\n      \"name\": \"Zed\",\n      \"description\": \"Zed is a high-performance, open-source code editor built for speed and collaboration. It combines lightning-fast responsiveness with built-in real-time collaboration and AI-assisted code editing, redefining editor precision and coding velocity.\",\n      \"bullets\": [\n        \"Offers real-time collaboration and AI-assisted code editing features.\",\n        \"Fast performance optimized for large codebases and instant loading.\"\n      ]\n    },\n    {\n      \"id\": \"6850720810a1e47b57c93923\",\n      \"name\": \"JetBrains IDEs\",\n      \"description\": \"JetBrains IDEs are a suite of professional, language-specific integrated development environments (IDEs) backed by robust coding assistance, smart refactoring, debugging, testing, and AI-powered plugin support across multiple languages.\",\n      \"bullets\": [\n        \"Support for multiple languages with rich AI-powered enhancements.\",\n        \"Integrated refactoring and debugging tools for a streamlined development process.\"\n      ]\n    },\n    {\n      \"id\": \"6843618eac33a46e0beebe30\",\n      \"name\": \"OpenAI Codex mini Latest\",\n      \"description\": \"Codex mini is OpenAI\\u2019s lightweight, high-speed AI coding model, enabling efficient code generation, debugging, and editing tasks, designed specifically for command-line interactions.\",\n      \"bullets\": [\n        \"Lightweight AI coding model optimized for terminal workflows.\",\n        \"Fast performance suitable for real-time coding assistance.\"\n      ]\n    },\n    {\n      \"id\": \"684c7bb6b93920051547d675\",\n      \"name\": \"GitWit\",\n      \"description\": \"Gitwit is an open-source, browser-based AI coding platform that combines in-browser development with AI-powered autocomplete, instant deployment, and community collaboration.\",\n      \"bullets\": [\n        \"Real-time AI assistance within a collaborative browser environment.\",\n        \"Free and open-source, promoting community contributions.\"\n      ]\n    },\n    {\n      \"id\": \"6877bd3f05cf157482523290\",\n      \"name\": \"Cline - Claude Dev\",\n      \"description\": \"Cline is an open-source AI coding agent for VS Code that automates tasks via natural language instructions, such as file creation and debugging.\",\n      \"bullets\": [\n        \"Automates complex tasks in VS Code using natural language commands.\",\n        \"Open-source with a focus on transparency and community enhancements.\"\n      ]\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\",\n      \"description\": \"Amazon CodeWhisperer is an AI-powered coding companion developed by AWS that helps developers write code faster and more securely.\",\n      \"bullets\": [\n        \"Real-time code suggestions and security scans for various languages.\",\n        \"Deep integration with AWS services providing context-aware suggestions.\"\n      ]\n    },\n    {\n      \"id\": \"684c5bf3b93920051544ef60\",\n      \"name\": \"Aider\",\n      \"description\": \"Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models directly from the command line.\",\n      \"bullets\": [\n        \"Enhances terminal workflows with AI collaboration features.\",\n        \"Fully open-source with customizable functionalities.\"\n      ]\n    },\n    {\n      \"id\": \"684c7a24b939200515475a11\",\n      \"name\": \"Ask Codi\",\n      \"description\": \"AskCodi.com is an AI-powered coding assistant designed to simplify the software development process across multiple programming languages.\",\n      \"bullets\": [\n        \"Comprehensive AI tools for code generation, refactoring, and testing.\",\n        \"Seamless integration with popular IDEs for minimal context switching.\"\n      ]\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"Microsoft - IntelliCode\",\n      \"description\": \"IntelliCode is an AI-powered code assistance tool built into Microsoft Visual Studio and Visual Studio Code.\",\n      \"bullets\": [\n        \"Context-aware code suggestions based on thousands of quality repos.\",\n        \"Multi-language support integrated into popular IDEs for enhanced development.\"\n      ]\n    },\n    {\n      \"id\": \"6845a701b939200515442067\",\n      \"name\": \"DeepSeek-Coder-V2\",\n      \"description\": \"DeepSeek-Coder V2 is an open-source, code-focused variant of DeepSeek V2, purpose-built for code generation and debugging across multiple programming languages.\",\n      \"bullets\": [\n        \"Supports code generation in 338 programming languages.\",\n        \"Large context support for handling extensive codebases effectively.\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

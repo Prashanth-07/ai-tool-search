@@ -127,7 +127,7 @@ class SimpleAPITester:
             result["debug_info"]["headers_sent"] = dict(headers)
             
             # Make API request
-            payload = {"query": query, "limit": 5}
+            payload = {"query": query}
             logger.info(f"DEBUG: Making POST request to {self.base_url}/query")
             logger.info(f"DEBUG: Payload: {payload}")
             
