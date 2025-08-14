@@ -276,6 +276,7 @@ class QueryRequest(BaseModel):
     query: str
     searchFrom: Optional[List[str]] = None
     limit: Optional[int] = Field(default=5, gt=0, le=50)
+    flow_type: Optional[str] = Field(default="current", description="Flow type: 'reranker', 'groq', 'openai', 'structured', 'current'")
 
 class QueryResponse(BaseModel):
     """Query response model."""
@@ -395,272 +396,564 @@ class TextCleaner:
         return single_space.strip()
 
 class ModelUtils:
-   """Model and header utilities."""
-   
-   @staticmethod
-   def get_ollama_url(headers=None) -> str:
-       """Get Ollama URL from headers or environment."""
-       if headers and "OLLAMA_URL" in headers:
-           url = headers.get("OLLAMA_URL")
-           if url and url.strip():
-               logger.info(f"Using custom Ollama URL from headers: {url}")
-               return url
-       
-       logger.info(f"Using default Ollama URL from environment: {env.ollama_base_url}")
-       return env.ollama_base_url
-   
-   @staticmethod
-   def should_verify_ssl(headers=None) -> bool:
-       """Determine if SSL verification should be enabled."""
-       if headers and "OLLAMA_VERIFY_SSL" in headers:
-           verify_ssl = headers.get("OLLAMA_VERIFY_SSL", "true").lower() == "true"
-           logger.info(f"SSL verification setting from headers: {verify_ssl}")
-           return verify_ssl
-       
-       logger.info(f"SSL verification setting from environment: {env.ollama_verify_ssl}")
-       return env.ollama_verify_ssl
-   
-   @staticmethod
-   def get_current_model(headers=None) -> str:
-       """Get current model based on headers or environment."""
-       current_env = env.environment
-       dev_model = env.dev_model
-       prod_model = env.prod_model
-       
-       logger.info(f"DEBUG: get_current_model called - env={current_env}, dev={dev_model}, prod={prod_model}")
-       logger.info(f"DEBUG: headers type: {type(headers)}, headers present: {headers is not None}")
-       
-       if not headers:
-           result = dev_model if current_env == "DEV" else prod_model
-           logger.info(f"DEBUG: No headers - env={current_env}, returning {result}")
-           return result
-       
-       # Check if MODEL_CHOICE is explicitly set in headers
-       model_choice = headers.get("MODEL_CHOICE")  # No default!
-       logger.info(f"DEBUG: MODEL_CHOICE from headers: {model_choice}")
-       
-       if model_choice == "PROD_MODEL":
-           logger.info(f"DEBUG: Explicit PROD_MODEL requested, returning {prod_model}")
-           return prod_model
-       elif model_choice == "DEV_MODEL":
-           logger.info(f"DEBUG: Explicit DEV_MODEL requested, returning {dev_model}")
-           return dev_model
-       else:
-           # No MODEL_CHOICE specified, use environment setting
-           result = dev_model if current_env == "DEV" else prod_model
-           logger.info(f"DEBUG: No MODEL_CHOICE specified, using environment {current_env}, returning {result}")
-           return result
-   
-   @staticmethod
-   def call_openai_for_query_tools(system_prompt: str, user_prompt: str, tier1_system: str=None, tier1_user: str=None) -> dict:
-       """Call OpenAI with Structured Outputs - AUTOMATIC CACHING ENABLED."""
-       import os
-       
-       try:
-           openai_api_key = os.getenv("OPENAI_API_KEY")
-           openai_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-           
-           if not openai_api_key:
-               raise ValueError("OPENAI_API_KEY not found in environment variables")
-           
-           logger.info(f"🚀 Using OpenAI model: {openai_model} with AUTOMATIC PROMPT CACHING")
-           
-           # ✅ TRY 1: Structured Outputs with Automatic Caching
-           try:
-               from openai import OpenAI
-               
-               client = OpenAI(
-                   api_key=openai_api_key,
-                   timeout=60.0,
-                   max_retries=3
-               )
-               final_system = tier1_system if tier1_system else system_prompt
-               final_user = tier1_user if tier1_user else user_prompt
+    """Model and header utilities."""
+    
+    @staticmethod
+    def get_ollama_url(headers=None) -> str:
+        """Get Ollama URL from headers or environment."""
+        if headers and "OLLAMA_URL" in headers:
+            url = headers.get("OLLAMA_URL")
+            if url and url.strip():
+                logger.info(f"Using custom Ollama URL from headers: {url}")
+                return url
+        
+        logger.info(f"Using default Ollama URL from environment: {env.ollama_base_url}")
+        return env.ollama_base_url
+    
+    @staticmethod
+    def should_verify_ssl(headers=None) -> bool:
+        """Determine if SSL verification should be enabled."""
+        if headers and "OLLAMA_VERIFY_SSL" in headers:
+            verify_ssl = headers.get("OLLAMA_VERIFY_SSL", "true").lower() == "true"
+            logger.info(f"SSL verification setting from headers: {verify_ssl}")
+            return verify_ssl
+        
+        logger.info(f"SSL verification setting from environment: {env.ollama_verify_ssl}")
+        return env.ollama_verify_ssl
+    
+    @staticmethod
+    def get_current_model(headers=None) -> str:
+        """Get current model based on headers or environment."""
+        current_env = env.environment
+        dev_model = env.dev_model
+        prod_model = env.prod_model
+        
+        logger.info(f"DEBUG: get_current_model called - env={current_env}, dev={dev_model}, prod={prod_model}")
+        logger.info(f"DEBUG: headers type: {type(headers)}, headers present: {headers is not None}")
+        
+        if not headers:
+            result = dev_model if current_env == "DEV" else prod_model
+            logger.info(f"DEBUG: No headers - env={current_env}, returning {result}")
+            return result
+        
+        # Check if MODEL_CHOICE is explicitly set in headers
+        model_choice = headers.get("MODEL_CHOICE")  # No default!
+        logger.info(f"DEBUG: MODEL_CHOICE from headers: {model_choice}")
+        
+        if model_choice == "PROD_MODEL":
+            logger.info(f"DEBUG: Explicit PROD_MODEL requested, returning {prod_model}")
+            return prod_model
+        elif model_choice == "DEV_MODEL":
+            logger.info(f"DEBUG: Explicit DEV_MODEL requested, returning {dev_model}")
+            return dev_model
+        else:
+            # No MODEL_CHOICE specified, use environment setting
+            result = dev_model if current_env == "DEV" else prod_model
+            logger.info(f"DEBUG: No MODEL_CHOICE specified, using environment {current_env}, returning {result}")
+            return result
+    
+    @staticmethod
+    def call_openai_for_query_tools(system_prompt: str, user_prompt: str, tier1_system: str=None, tier1_user: str=None) -> dict:
+        """Call OpenAI with JSON Mode and Connection Pooling - OPTIMIZED FOR SPEED."""
+        import os
+        
+        try:
+            openai_api_key = os.getenv("OPENAI_API_KEY")
+            openai_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+            
+            if not openai_api_key:
+                raise ValueError("OPENAI_API_KEY not found in environment variables")
+            
+            logger.info(f"🚀 Using OpenAI model: {openai_model} with JSON MODE + CONNECTION POOLING")
+            
+            # ✅ TRY 1: JSON Mode with Connection Pooling (Faster than Structured Outputs)
+            try:
+                # Use optimized client with connection pooling
+                client = optimized_openai_client.get_client()
+                
+                final_system = tier1_system if tier1_system else system_prompt
+                final_user = tier1_user if tier1_user else user_prompt
 
-               logger.info(f"📏 System prompt: {len(final_system)} chars, User prompt: {len(final_user)} chars")
-               logger.info("🎯 TIER 1: Using Structured Outputs with optimized prompts")
-               
-               # Log prompt lengths for caching analysis
-               logger.info(f"📏 System prompt: {len(system_prompt)} chars, User prompt: {len(user_prompt)} chars")
-               
-               # ✅ STRUCTURED OUTPUTS (Caching happens automatically)
-               response = client.responses.create(
-                   model=openai_model,
-                   input=[
-                       {"role": "system", "content": final_system},
-                       {"role": "user", "content": final_user}
-                   ],
-                   text={
-                       "format": {
-                           "type": "json_schema",
-                           "name": "structured_query_response", 
-                           "strict": True,
-                           "schema": {
-                               "type": "object",
-                               "properties": {
-                                   "tool_id": {
-                                       "type": "array",
-                                       "items": {"type": "string"}
-                                   },
-                                   "tools": {
-                                       "type": "array",
-                                       "items": {
-                                           "type": "object",
-                                           "properties": {
-                                               "id": {"type": "string"},
-                                               "name": {"type": "string"}, 
-                                               "description": {"type": "string"},
-                                               "bullets": {"type": "array", "items": {"type": "string"}}
-                                           },
-                                           "required": ["id", "name", "description", "bullets"],
-                                           "additionalProperties": False
-                                       }
-                                   }
-                               },
-                               "required": ["tool_id", "tools"],
-                               "additionalProperties": False
-                           }
-                       }
-                   }
-               )
-               
-               # ✅ ANALYZE TOKENS & CACHING
-               cached_tokens = 0
-               cache_hit = False
-               cache_percentage = 0.0
-               
-               try:
-                   import tiktoken
-                   encoder = tiktoken.encoding_for_model(openai_model)
-                   input_text = system_prompt + user_prompt
-                   output_text = response.output_text or ""
-                   input_tokens = len(encoder.encode(input_text))
-                   output_tokens = len(encoder.encode(output_text))
-                   total_tokens = input_tokens + output_tokens
-                   
-                   # Extract cache information from API response
-                   usage = response.usage
-                   if hasattr(usage, 'prompt_tokens_details') and usage.prompt_tokens_details:
-                       cached_tokens = getattr(usage.prompt_tokens_details, 'cached_tokens', 0)
-                       cache_hit = cached_tokens > 0
-                       cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
-                   
-                   # ✅ COMPREHENSIVE TOKEN LOGGING
-                   logger.info(f"🔢 TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
-                   
-                   if cache_hit:
-                       logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
-                       logger.info(f"💰 Savings: ~{cache_percentage:.1f}% cost reduction + significant speed boost")
-                   else:
-                       logger.info(f"💾 CACHE MISS - Building cache for next request")
-                       if input_tokens >= 1024:
-                           logger.info(f"✅ Qualifies for caching ({input_tokens} ≥ 1024 tokens)")
-                       else:
-                           logger.info(f"❌ Too short for caching ({input_tokens} < 1024 tokens)")
-                   
-               except Exception as e:
-                   logger.warning(f"Token analysis failed: {str(e)}")
-               
-               logger.info("✅ OpenAI Structured Outputs successful")
-               
-               return {
-                   "content": response.output_text,
-                   "model": openai_model,
-                   "success": True,
-                   "structured": True,
-                   "cached_tokens": cached_tokens,
-                   "cache_hit": cache_hit,
-                   "usage": response.usage.model_dump() if hasattr(response.usage, 'model_dump') else str(response.usage)
-               }
-               
-           except Exception as structured_error:
-               logger.warning(f"Structured Outputs failed: {str(structured_error)}")
-               logger.info("Falling back to Chat Completions...")
-               
-               # ✅ TRY 2: Chat Completions Fallback (also has caching)
-               import requests
-               
-               headers = {
-                   "Authorization": f"Bearer {openai_api_key}",
-                   "Content-Type": "application/json"
-               }
-               
-               data = {
-                   "model": openai_model,
-                   "messages": [
-                       {"role": "system", "content": system_prompt},
-                       {"role": "user", "content": user_prompt}
-                   ],
-                   "temperature": 0.05,
-                   "response_format": {"type": "json_object"},
-                   "max_tokens": 4000
-               }
-               
-               response = requests.post(
-                   "https://api.openai.com/v1/chat/completions",
-                   headers=headers,
-                   json=data,
-                   timeout=60
-               )
-               
-               if response.status_code == 200:
-                   response_data = response.json()
-                   content = response_data["choices"][0]["message"]["content"]
-                   usage = response_data.get("usage", {})
-                   
-                   # ✅ ANALYZE TOKENS & CACHING FOR FALLBACK TOO
-                   cached_tokens = 0
-                   cache_hit = False
-                   cache_percentage = 0.0
-                   
-                   try:
-                       import tiktoken
-                       encoder = tiktoken.encoding_for_model(openai_model)
-                       input_text = system_prompt + user_prompt
-                       input_tokens = len(encoder.encode(input_text))
-                       output_tokens = len(encoder.encode(content))
-                       total_tokens = input_tokens + output_tokens
-                       
-                       # Extract cache information from Chat Completions response
-                       if 'prompt_tokens_details' in usage and usage['prompt_tokens_details']:
-                           cached_tokens = usage['prompt_tokens_details'].get('cached_tokens', 0)
-                           cache_hit = cached_tokens > 0
-                           cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
-                       
-                       # ✅ COMPREHENSIVE TOKEN LOGGING
-                       logger.info(f"🔢 TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
-                       
-                       if cache_hit:
-                           logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
-                       else:
-                           logger.info(f"💾 CACHE MISS - Building cache for next request")
-                           
-                   except Exception as e:
-                       logger.warning(f"Token analysis failed: {str(e)}")
-                   
-                   logger.info("✅ Chat Completions fallback successful")
-                   
-                   return {
-                       "content": content,
-                       "model": openai_model,
-                       "success": True,
-                       "structured": False,
-                       "cached_tokens": cached_tokens,
-                       "cache_hit": cache_hit,
-                       "usage": usage
-                   }
-               else:
-                   raise Exception(f"Chat Completions failed: {response.status_code}: {response.text}")
-                   
-       except Exception as e:
-           logger.error(f"❌ OpenAI API call failed: {str(e)}")
-           return {
-               "content": None,
-               "error": str(e),
-               "success": False,
-               "cached_tokens": 0,
-               "cache_hit": False
-           }
+                logger.info(f"📏 System prompt: {len(final_system)} chars, User prompt: {len(final_user)} chars")
+                logger.info("🎯 OPTIMIZED: Using JSON Mode with connection pooling")
+                
+                # ✅ JSON MODE (3-5x faster than Structured Outputs)
+                response = client.chat.completions.create(
+                    model=openai_model,
+                    messages=[
+                        {"role": "system", "content": final_system},
+                        {"role": "user", "content": final_user}
+                    ],
+                    temperature=0.05,
+                    response_format={"type": "json_object"},
+                    max_tokens=4000,
+                    timeout=30
+                )
+                
+                content = response.choices[0].message.content
+                usage = response.usage
+                
+                # ✅ ANALYZE TOKENS & CACHING FOR JSON MODE
+                cached_tokens = 0
+                cache_hit = False
+                cache_percentage = 0.0
+                
+                try:
+                    import tiktoken
+                    encoder = tiktoken.encoding_for_model(openai_model)
+                    input_text = final_system + final_user
+                    input_tokens = len(encoder.encode(input_text))
+                    output_tokens = len(encoder.encode(content))
+                    total_tokens = input_tokens + output_tokens
+                    
+                    # Extract cache information from Chat Completions response
+                    if hasattr(usage, 'prompt_tokens_details') and usage.prompt_tokens_details:
+                        cached_tokens = getattr(usage.prompt_tokens_details, 'cached_tokens', 0)
+                        cache_hit = cached_tokens > 0
+                        cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
+                    
+                    # ✅ COMPREHENSIVE TOKEN LOGGING
+                    logger.info(f"🔢 JSON MODE TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
+                    
+                    if cache_hit:
+                        logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
+                        logger.info(f"💰 Savings: ~{cache_percentage:.1f}% cost reduction + significant speed boost")
+                    else:
+                        logger.info(f"💾 CACHE MISS - Building cache for next request")
+                        if input_tokens >= 1024:
+                            logger.info(f"✅ Qualifies for caching ({input_tokens} ≥ 1024 tokens)")
+                        else:
+                            logger.info(f"❌ Too short for caching ({input_tokens} < 1024 tokens)")
+                    
+                except Exception as e:
+                    logger.warning(f"Token analysis failed: {str(e)}")
+                
+                logger.info("✅ OpenAI JSON Mode with connection pooling successful")
+                
+                return {
+                    "content": content,
+                    "model": openai_model,
+                    "success": True,
+                    "structured": False,
+                    "cached_tokens": cached_tokens,
+                    "cache_hit": cache_hit,
+                    "usage": usage.model_dump() if hasattr(usage, 'model_dump') else str(usage)
+                }
+                
+            except Exception as json_error:
+                logger.warning(f"JSON Mode failed: {str(json_error)}")
+                logger.info("Falling back to direct HTTP request...")
+                
+                # ✅ TRY 2: Direct HTTP Fallback
+                import requests
+                
+                headers = {
+                    "Authorization": f"Bearer {openai_api_key}",
+                    "Content-Type": "application/json"
+                }
+                
+                data = {
+                    "model": openai_model,
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    "temperature": 0.05,
+                    "response_format": {"type": "json_object"},
+                    "max_tokens": 4000
+                }
+                
+                response = requests.post(
+                    "https://api.openai.com/v1/chat/completions",
+                    headers=headers,
+                    json=data,
+                    timeout=30
+                )
+                
+                if response.status_code == 200:
+                    response_data = response.json()
+                    content = response_data["choices"][0]["message"]["content"]
+                    usage = response_data.get("usage", {})
+                    
+                    # ✅ ANALYZE TOKENS & CACHING FOR FALLBACK TOO
+                    cached_tokens = 0
+                    cache_hit = False
+                    cache_percentage = 0.0
+                    
+                    try:
+                        import tiktoken
+                        encoder = tiktoken.encoding_for_model(openai_model)
+                        input_text = system_prompt + user_prompt
+                        input_tokens = len(encoder.encode(input_text))
+                        output_tokens = len(encoder.encode(content))
+                        total_tokens = input_tokens + output_tokens
+                        
+                        # Extract cache information from Chat Completions response
+                        if 'prompt_tokens_details' in usage and usage['prompt_tokens_details']:
+                            cached_tokens = usage['prompt_tokens_details'].get('cached_tokens', 0)
+                            cache_hit = cached_tokens > 0
+                            cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
+                        
+                        # ✅ COMPREHENSIVE TOKEN LOGGING
+                        logger.info(f"🔢 FALLBACK TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
+                        
+                        if cache_hit:
+                            logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
+                        else:
+                            logger.info(f"💾 CACHE MISS - Building cache for next request")
+                            
+                    except Exception as e:
+                        logger.warning(f"Token analysis failed: {str(e)}")
+                    
+                    logger.info("✅ Direct HTTP fallback successful")
+                    
+                    return {
+                        "content": content,
+                        "model": openai_model,
+                        "success": True,
+                        "structured": False,
+                        "cached_tokens": cached_tokens,
+                        "cache_hit": cache_hit,
+                        "usage": usage
+                    }
+                else:
+                    raise Exception(f"HTTP fallback failed: {response.status_code}: {response.text}")
+                    
+        except Exception as e:
+            logger.error(f"❌ OpenAI API call failed: {str(e)}")
+            return {
+                "content": None,
+                "error": str(e),
+                "success": False,
+                "cached_tokens": 0,
+                "cache_hit": False
+            }
+    
+    @staticmethod
+    async def call_llm_with_fallback(
+        system_prompt: str,
+        user_prompt: str,
+        call_type: str = "selection",  # "selection" or "description"
+        headers = None
+    ):
+        """
+        Try OpenAI first, fallback to Groq if it fails
+        Returns same schema format for both providers
+        """
+        
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        
+        # TRY OPENAI FIRST
+        if openai_api_key:
+            try:
+                logger.info(f"🚀 Trying OpenAI for {call_type}")
+                
+                openai_result = ModelUtils.call_openai_for_query_tools(
+                    system_prompt=system_prompt,
+                    user_prompt=user_prompt
+                )
+                
+                if openai_result["success"]:
+                    logger.info(f"✅ OpenAI {call_type} successful")
+                    return {
+                        "content": openai_result["content"],
+                        "success": True,
+                        "provider": "openai",
+                        "cache_hit": openai_result.get("cache_hit", False)
+                    }
+                else:
+                    logger.warning(f"❌ OpenAI {call_type} failed: {openai_result['error']}")
+                    raise Exception(f"OpenAI failed: {openai_result['error']}")
+                    
+            except Exception as e:
+                logger.warning(f"OpenAI {call_type} failed: {str(e)}, falling back to Groq")
+        
+        # FALLBACK TO GROQ
+        try:
+            logger.info(f"🔄 Using Groq fallback for {call_type}")
+            
+            current_model = ModelUtils.get_current_model(headers)
+            
+            llm = ChatGroq(
+                groq_api_key=env.groq_api_key,
+                model_name=current_model,
+                temperature=0.05,
+                model_kwargs={
+                    "top_p": 0.5,
+                    "frequency_penalty": 0.2,
+                    "presence_penalty": 0.0,
+                    "response_format": {"type": "json_object"}
+                }
+            )
+            
+            response = llm.invoke([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ])
+            
+            logger.info(f"✅ Groq {call_type} successful")
+            
+            return {
+                "content": response.content,
+                "success": True,
+                "provider": "groq",
+                "cache_hit": False
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Both OpenAI and Groq failed for {call_type}: {str(e)}")
+            return {
+                "content": None,
+                "success": False,
+                "provider": "none",
+                "error": str(e)
+            }
+        
+class OptimizedOpenAIClient:
+    """Singleton OpenAI client with connection pooling optimization"""
+    _instance = None
+    _client = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._client = None
+        return cls._instance
+    
+    def get_client(self):
+        """Get or create optimized OpenAI client"""
+        if self._client is None:
+            try:
+                openai_api_key = os.getenv("OPENAI_API_KEY")
+                if not openai_api_key:
+                    raise ValueError("OPENAI_API_KEY not found")
+                
+                self._client = OpenAI(
+                    api_key=openai_api_key,
+                    timeout=30.0,  # Shorter timeout for faster failure detection
+                    max_retries=2  # Fewer retries for faster processing
+                )
+                logger.info("✅ Optimized OpenAI client created with connection pooling")
+                
+            except Exception as e:
+                logger.error(f"❌ Failed to create OpenAI client: {str(e)}")
+                raise
+        
+        return self._client
+    
+    def is_available(self):
+        """Check if OpenAI client is available"""
+        try:
+            return self._client is not None or bool(os.getenv("OPENAI_API_KEY"))
+        except Exception:
+            return False
+
+# Global instance
+optimized_openai_client = OptimizedOpenAIClient()
+
+
+# BGE Reranker with NLTK-style lazy loading
+import asyncio
+from sentence_transformers import CrossEncoder
+import torch
+
+# Global BGE reranker instance (NLTK-style)
+_bge_reranker_instance = None
+_bge_loading_lock = asyncio.Lock()
+_bge_loading_in_progress = False
+
+class BGEReranker:
+    def __init__(self, model_name: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"):
+        """Load model immediately (called only once like NLTK)"""
+        logger.info(f"Loading BGE reranker model: {model_name}")
+        
+        # Use optimized model with device detection
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        logger.info(f"Using device for BGE reranker: {device}")
+        
+        self.model = CrossEncoder(
+            model_name, 
+            max_length=512,
+            device=device
+        )
+        
+        logger.info(f"✅ BGE reranker model loaded and cached: {model_name}")
+    
+    def rerank(self, query: str, tools: List[Dict], top_k: Optional[int] = None) -> List[Dict]:
+        """Rerank tools using BGE model"""
+        if not tools:
+            return tools
+        
+        # Prepare query-document pairs for reranking
+        pairs = []
+        for tool in tools:
+            # Create document text from tool metadata
+            doc_text = f"{tool.get('name', '')} {tool.get('description', '')} {tool.get('category_subcat', '')}"
+            pairs.append([query, doc_text])
+        
+        # Get reranking scores
+        scores = self.model.predict(pairs)
+        
+        # Add scores to tools and sort
+        scored_tools = []
+        for i, tool in enumerate(tools):
+            tool_copy = tool.copy()
+            tool_copy['rerank_score'] = float(scores[i])
+            scored_tools.append(tool_copy)
+        
+        # Sort by rerank score (descending)
+        scored_tools.sort(key=lambda x: x['rerank_score'], reverse=True)
+        
+        # Return top_k if specified
+        if top_k:
+            scored_tools = scored_tools[:top_k]
+        
+        logger.info(f"Reranked {len(tools)} tools, returning top {len(scored_tools)}")
+        return scored_tools
+
+async def get_bge_reranker():
+    """Get BGE reranker, load if needed"""
+    global _bge_reranker_instance, _bge_loading_in_progress
+    
+    if _bge_reranker_instance is not None:
+        return _bge_reranker_instance
+    
+    if _bge_loading_in_progress:
+        return None  # Still loading, return None
+    
+    _bge_loading_in_progress = True
+    try:
+        logger.info("🔧 Loading BGE reranker model...")
+        _bge_reranker_instance = BGEReranker(model_name="cross-encoder/ms-marco-MiniLM-L-6-v2")
+        # _bge_reranker_instance = BGEReranker(model_name="BAAI/bge-reranker-large")
+        # _bge_reranker_instance = BGEReranker(model_name="BAAI/bge-reranker-base")
+        logger.info("✅ BGE reranker loaded")
+        return _bge_reranker_instance
+    except Exception as e:
+        logger.error(f"❌ BGE loading failed: {str(e)}")
+        return None
+    finally:
+        _bge_loading_in_progress = False
+
+# Initialize global BGE reranker
+# bge_reranker = BGEReranker()
+
+
+class LLMFilter:
+    """LLM-based relevance filter for tools."""
+    
+    @staticmethod
+    async def filter_tools_batch(query: str, tools_data: List[Dict], batch_size: int = 50) -> List[Dict]:
+        """Filter tools using LLM in batches."""
+        if not tools_data:
+            return []
+        
+        logger.info(f"Starting LLM filtering for {len(tools_data)} tools with batch size {batch_size}")
+        
+        filtered_tools = []
+        total_batches = (len(tools_data) - 1) // batch_size + 1
+        
+        for batch_num in range(total_batches):
+            start_idx = batch_num * batch_size
+            end_idx = min((batch_num + 1) * batch_size, len(tools_data))
+            batch_tools = tools_data[start_idx:end_idx]
+            
+            logger.info(f"Processing batch {batch_num + 1}/{total_batches} ({len(batch_tools)} tools)")
+            
+            try:
+                batch_filtered = await LLMFilter._filter_single_batch(query, batch_tools)
+                filtered_tools.extend(batch_filtered)
+                
+                # Small delay between batches to avoid rate limits
+                if batch_num < total_batches - 1:
+                    await asyncio.sleep(0.5)
+                    
+            except Exception as e:
+                logger.error(f"Error filtering batch {batch_num + 1}: {str(e)}")
+                # On error, include all tools from this batch (safer than losing them)
+                filtered_tools.extend(batch_tools)
+        
+        logger.info(f"LLM filtering complete: {len(filtered_tools)}/{len(tools_data)} tools passed filter")
+        return filtered_tools
+    
+    @staticmethod
+    async def _filter_single_batch(query: str, batch_tools: List[Dict]) -> List[Dict]:
+        """Filter a single batch of tools."""
+        # Prepare tools summary for LLM
+        tools_summary = []
+        for i, tool in enumerate(batch_tools):
+            tool_summary = {
+                "index": i,
+                "tool_id": tool.get("tool_id", ""),
+                "name": tool.get("name", ""),
+                "description": tool.get("description", "")[:200],  # Truncate for token efficiency
+                "category": tool.get("category_subcat", "")
+            }
+            tools_summary.append(tool_summary)
+        
+        system_prompt = f"""You are an expert tool relevance filter. Your task is to identify which tools should be INCLUDED for the user's query: "{query}"
+**INCLUSIVE APPROACH**: Include tools that meet ANY ONE of these criteria:
+- Have core functionality addressing the query or related needs 
+- Have same keywords in the description, metadata or name of the tool
+- Have semantic similarity to the query
+**Query-Specific Conditions**:
+- If query specifies a number ("top 3", "best 5"): return exactly that count
+- If query mentions specific tool name: prioritize and return that tool in 1st position
+**EXCLUSION Criteria** - Exclude tools that:
+- Are from completely different domains without functional overlap
+- Cannot solve the user's use case at all
+- Have no shared keywords, concepts, or use cases with the query
+Return ONLY a JSON object with this exact format:
+{{
+  "relevant_indices": [0, 2, 5, 7, 9, 12, 15]
+}}
+**Edge Cases**: If no tools match the query, return: {{"relevant_indices": []}}
+Where relevant_indices contains the index numbers of tools that are relevant to the query.
+
+Be inclusive - if a tool could potentially help with the query or is related to the use case, include it.
+Only exclude tools that are completely unrelated or from different domains."""
+
+        user_prompt = f"""Query: "{query}"
+
+Tools to evaluate:
+{json.dumps(tools_summary, indent=2)}
+
+Return the indices of relevant tools in the specified JSON format."""
+
+        try:
+            # Use llama-3.3-70b-versatile for accuracy
+            llm = ChatGroq(
+                groq_api_key=env.groq_api_key,
+                model_name="llama-3.1-8b-instant",
+                temperature=0.1,
+                model_kwargs={
+                    "top_p": 0.9,
+                    "response_format": {"type": "json_object"}
+                }
+            )
+            
+            response = llm.invoke([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ])
+            
+            # Parse response
+            response_data = json.loads(response.content)
+            relevant_indices = response_data.get("relevant_indices", [])
+            
+            # Filter tools based on LLM response
+            filtered_tools = []
+            for idx in relevant_indices:
+                if 0 <= idx < len(batch_tools):
+                    filtered_tools.append(batch_tools[idx])
+            
+            logger.info(f"Batch filter: {len(filtered_tools)}/{len(batch_tools)} tools marked as relevant")
+            return filtered_tools
+            
+        except Exception as e:
+            logger.error(f"Error in LLM filter batch: {str(e)}")
+            # On error, return all tools (safer than losing potentially relevant ones)
+            return batch_tools
 # ============================================================================
 # CACHE MANAGEMENT
 # ============================================================================
@@ -1701,6 +1994,79 @@ class QueryProcessor:
         
         return templates[:5]
 
+
+def extract_metadata_for_tools(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
+    """Extract metadata for specific tool_ids from llm_tools"""
+    metadata = []
+    for tool_id in tool_ids:
+        for tool_data in llm_tools_data:
+            if tool_data.get("tool_id") == tool_id:
+                metadata.append(tool_data)
+                break
+    return metadata
+
+def process_tools_from_database(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
+    """Process remaining tools using database metadata - OPTIMIZED"""
+    # Step 1: Create O(1) lookup index (instead of O(n) nested loops)
+    tool_lookup = {tool["tool_id"]: tool for tool in llm_tools_data if tool.get("tool_id")}
+    
+    database_tools = []
+    
+    # Step 2: Process tools with O(1) lookups
+    for tool_id in tool_ids:
+        tool_data = tool_lookup.get(tool_id)
+        
+        if tool_data:
+            # Step 3: Fast bullet extraction
+            bullets = optimized_extract_bullets(tool_data)
+            
+            database_tools.append({
+                "id": tool_id,
+                "name": tool_data.get("name", ""),
+                "description": tool_data.get("description", ""),
+                "bullets": bullets
+            })
+    
+    return database_tools
+
+async def process_tools_from_database_async(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
+    """Async version of process_tools_from_database for parallel processing"""
+    try:
+        # Use the same optimized logic, but wrapped in async
+        result = await asyncio.get_event_loop().run_in_executor(
+            None,  # Use default thread pool
+            process_tools_from_database,
+            tool_ids,
+            llm_tools_data
+        )
+        return result
+    except Exception as e:
+        logger.error(f"Error in async database processing: {str(e)}")
+        return []
+
+def generate_fallback_descriptions(tool_ids: List[str], tools_metadata: List[Dict]) -> List[Dict]:
+    """Generate descriptions from database when LLM fails - OPTIMIZED"""
+    # Create O(1) lookup index
+    tool_lookup = {tool["tool_id"]: tool for tool in tools_metadata if tool.get("tool_id")}
+    
+    fallback_tools = []
+    
+    for tool_id in tool_ids:
+        tool_data = tool_lookup.get(tool_id)
+        
+        if tool_data:
+            # Fast bullet extraction
+            bullets = optimized_extract_bullets(tool_data)
+            
+            fallback_tools.append({
+                "id": tool_id,
+                "name": tool_data.get("name", ""),
+                "description": tool_data.get("description", ""),
+                "bullets": bullets
+            })
+    
+    return fallback_tools
+
 # ============================================================================
 # VECTOR STORE MANAGEMENT
 # ============================================================================
@@ -2198,6 +2564,7 @@ async def startup_event():
         
         app_state.initialization_started = True
         asyncio.create_task(initialize_indexes())
+        asyncio.create_task(get_bge_reranker())
         
         logger.info("Basic startup complete - API ready for requests")
     except Exception as e:
@@ -2642,9 +3009,39 @@ async def test_connection(request: Request):
     
 #     return bullets[:2]
 
-def extract_tool_bullets(result):
-    """Return empty bullets array - no fabricated bullet points."""
-    return []
+def optimized_extract_bullets(tool_data: Dict) -> List[str]:
+    """Fast bullet extraction using features_pros and details_usage"""
+    bullets = []
+    
+    # Priority 1: features_pros (split by comma, take first 2)
+    features_pros = tool_data.get("features_pros", "")
+    if features_pros:
+        pros_list = [pro.strip() for pro in features_pros.split(",") if pro.strip()]
+        bullets.extend(pros_list[:2])
+    
+    # Priority 2: details_usage if we need more bullets
+    if len(bullets) < 2:
+        details_usage = tool_data.get("details_usage", "")
+        if details_usage:
+            # Take first sentence or first 100 characters
+            usage_text = details_usage.split(".")[0].strip()
+            if usage_text and len(usage_text) > 10:
+                usage_bullet = f"Usage: {usage_text[:100]}"
+                bullets.append(usage_bullet)
+    
+    # Priority 3: Simple category fallback
+    if len(bullets) < 2:
+        category = tool_data.get("category_subcat", "")
+        if category:
+            first_category = category.split(",")[0].strip()
+            if first_category:
+                bullets.append(f"Category: {first_category}")
+    
+    # Ensure exactly 2 bullets
+    while len(bullets) < 2:
+        bullets.append("Feature available")
+    
+    return bullets[:2]
 
 def validate_and_fix_tool_ids(response_data: dict, llm_tools: List[Dict]) -> dict:
     """Validate and fix tool IDs in LLM response - ensure actual tool_id values are used."""
@@ -2693,9 +3090,92 @@ def validate_and_fix_tool_ids(response_data: dict, llm_tools: List[Dict]) -> dic
     
     return response_data
 
+async def generate_descriptions_internal(tool_ids: List[str], query: str, tools_metadata: List[Dict], headers=None) -> List[Dict]:
+    """Internal function to generate descriptions for tools"""
+    try:
+        logger.info(f"Generating descriptions for {len(tool_ids)} tools")
+        
+        # Format tools for LLM
+        formatted_docs = []
+        for tool_data in tools_metadata:
+            essential_data = {
+                "tool_id": tool_data.get("tool_id", ""),
+                "name": tool_data.get("name", ""),
+                "description": tool_data.get("description", ""),
+                "category_subcat": tool_data.get("category_subcat", ""),
+                "pricingType": tool_data.get("pricingType", ""),
+                "details_speciality": tool_data.get("details_speciality", "") if tool_data.get("details_speciality") else ""
+            }
+            formatted_doc = json.dumps(essential_data, ensure_ascii=False)
+            formatted_docs.append(formatted_doc)
+        
+        context = "\n\n---\n\n".join(formatted_docs)
+        cleaned_context = TextCleaner.clean_text(context)
+        
+        # Create prompts for description generation
+        description_system_prompt = f"""You are an expert AI tool recommendation assistant specialized in generating query-specific descriptions and bullet points.
+
+Your task is to generate descriptions and bullets for the provided tools based on the user query: "{query}"
+
+For each tool, provide:
+- A description that explains how this tool specifically helps with the user's query
+- 2 bullet points highlighting key features relevant to the query
+
+Return ONLY valid JSON in this exact format:
+{{
+  "tools": [
+    {{
+      "id": "exact_tool_id_from_data",
+      "name": "tool_name",
+      "description": "Query-specific description explaining relevance",
+      "bullets": ["Relevant feature 1", "Relevant feature 2"]
+    }}
+  ]
+}}"""
+        
+        description_user_prompt = f"""Query: "{query}"
+
+Tools Data:
+{cleaned_context}
+
+Generate descriptions and bullets for these tools that specifically address how they help with the query."""
+        
+        # LLM Call #2 (Descriptions) with fallback
+        description_result = await ModelUtils.call_llm_with_fallback(
+            system_prompt=description_system_prompt,
+            user_prompt=description_user_prompt,
+            call_type="description",
+            headers=headers
+        )
+        
+        if description_result["success"]:
+            description_data = json.loads(description_result["content"])
+            tools = description_data.get("tools", [])
+            
+            logger.info(f"Description generation successful with {description_result['provider']}: {len(tools)} tools processed")
+            return tools
+        else:
+            # Both providers failed - use database fallback
+            logger.warning("Both OpenAI and Groq failed for descriptions, using database fallback")
+            return generate_fallback_descriptions(tool_ids, tools_metadata)
+            
+    except Exception as e:
+            logger.error(f"Error in generate_descriptions: {str(e)}")
+            # Fallback to database extraction - make it async compatible
+            try:
+                return await asyncio.get_event_loop().run_in_executor(
+                    None,
+                    generate_fallback_descriptions,
+                    tool_ids,
+                    tools_metadata
+                )
+            except Exception as fallback_error:
+                logger.error(f"Fallback also failed: {str(fallback_error)}")
+                return []
+
 @app.post("/query", response_model=QueryResponse)
 async def query_tools(request: QueryRequest, request_headers: Request):
-    """Query tools using hybrid search with LLM processing."""
+    """Query tools using hybrid search with four different flow types."""
     start_time = time.time()
     
     if not request.query or not request.query.strip():
@@ -2724,6 +3204,18 @@ async def query_tools(request: QueryRequest, request_headers: Request):
 
         if request.searchFrom:
             logger.info(f"Searching within {len(request.searchFrom)} specified tools")
+
+        # Flow type processing
+        flow_type = request.flow_type or "current"
+        logger.info(f"Processing query with flow_type: {flow_type}")
+        
+        # Validate flow_type
+        valid_flows = ["current", "reranker", "groq", "openai", "structured"]
+        if flow_type not in valid_flows:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid flow_type. Must be one of: {valid_flows}"
+            )
 
         # Check cache for non-filtered searches
         cached_response = None
@@ -2821,21 +3313,6 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             )
             logger.info(f"Hybrid search returned {len(hybrid_results)} results")
             
-            # LOG ALL HYBRID RESULTS WITH SCORES
-            # logger.info("=== HYBRID SEARCH RESULTS (ALL TOOLS) ===")
-            # for i, result in enumerate(hybrid_results[:20]):  # Log top 20 to see the full picture
-            #     tool_name = result.get("name", "Unknown")
-            #     tool_id = result.get("tool_id", "Unknown")
-            #     score = result.get("score", 0)
-            #     vector_score = result.get("vector_score", 0)
-            #     bm25_score = result.get("bm25_score", 0)
-            #     description = result.get("description", "")[:100]  # First 100 chars
-                
-            #     logger.info(f"Rank {i+1:2d}: '{tool_name}' (ID: {tool_id})")
-            #     logger.info(f"         Score: {score:.3f} (V:{vector_score:.3f} + B:{bm25_score:.3f})")
-            #     logger.info(f"         Desc: {description}...")
-            #     logger.info("-" * 50)
-            
             # Handle no results with filter
             if not hybrid_results and request.searchFrom:
                 filter_response = json.dumps({
@@ -2848,22 +3325,86 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 })
                 return QueryResponse(response=filter_response)
             
-            # Use score-based selection and split into LLM vs database processing
+            # Adjust max_tools based on flow type
+            if flow_type == "reranker":
+                max_tools_for_flow = 300
+                logger.info(f"Flow 1 (reranker): Using max_tools = {max_tools_for_flow}")
+            else:
+                max_tools_for_flow = Config.HYBRID_MAX_TOOLS
+                logger.info(f"Flow {flow_type}: Using max_tools = {max_tools_for_flow}")
+            
+            # Use score-based selection
             all_selected_results = SearchUtils.select_tools_by_score(
-    hybrid_results, 
-    min_score=Config.HYBRID_MIN_SCORE,
-    max_tools=Config.HYBRID_MAX_TOOLS,
-    fallback_count=Config.HYBRID_FALLBACK_COUNT,
-    high_individual_threshold=0.9
-)
+                hybrid_results, 
+                min_score=Config.HYBRID_MIN_SCORE,
+                max_tools=max_tools_for_flow,
+                fallback_count=Config.HYBRID_FALLBACK_COUNT,
+                high_individual_threshold=0.9
+            )
 
-            # Split into LLM and database processing groups
-            llm_tools = all_selected_results[:40]  # Top 20 for LLM
-            # db_tools = all_selected_results[30:]   # Remaining for database processing
-
-            # logger.info(f"Split results: {len(llm_tools)} tools for LLM, {len(db_tools)} tools for database processing")
-            logger.info(f"Using {len(llm_tools)} tools for LLM processing only")
-            logger.info(f"Total tools to process: {len(all_selected_results)}")
+            # Flow-specific processing
+            if flow_type == "reranker":
+                # Flow 1: Reranker + LLM Filter
+                logger.info(f"=== FLOW 1: RERANKER + LLM FILTER ===")
+                logger.info(f"Step 1: Starting with {len(all_selected_results)} tools")
+                
+                # Step 1: BGE Reranking
+                logger.info("Step 2: Applying BGE reranking...")
+                bge_reranker = await get_bge_reranker()
+                if bge_reranker is not None:
+                    reranked_tools = bge_reranker.rerank(request.query, all_selected_results)
+                    logger.info(f"Step 2 complete: {len(reranked_tools)} tools reranked")
+                else:
+                    reranked_tools = all_selected_results  # Skip reranking
+                    logger.info(f"Step 2 complete: {len(reranked_tools)} tools (BGE not ready)")
+                
+                # Step 2: LLM Filtering
+                logger.info("Step 3: Applying LLM filtering...")
+                filtered_tools = await LLMFilter.filter_tools_batch(request.query, reranked_tools)
+                logger.info(f"Step 3 complete: {len(filtered_tools)} tools passed filter")
+                
+                # Step 3: Generate descriptions from database
+                logger.info("Step 4: Generating descriptions from database...")
+                final_tools = process_tools_from_database(
+                    [tool.get("tool_id", "") for tool in filtered_tools], 
+                    filtered_tools
+                )
+                logger.info(f"Step 4 complete: {len(final_tools)} tools with descriptions")
+                
+                # Create response for Flow 1
+                response_data = {
+                    "tool_id": [tool.get("tool_id", "") for tool in filtered_tools],
+                    "tools": final_tools,
+                    "flow_type": flow_type,
+                    "processing_stats": {
+                        "initial_tools": len(all_selected_results),
+                        "after_rerank": len(reranked_tools),
+                        "after_filter": len(filtered_tools),
+                        "final_tools": len(final_tools)
+                    },
+                    "timestamp": datetime.now().isoformat()
+                }
+                
+                if request.searchFrom:
+                    response_data["search_filter_applied"] = True
+                    response_data["searched_within_tool_ids"] = request.searchFrom
+                
+                final_response = json.dumps(response_data)
+                
+                # Cache result for non-filtered searches
+                if not request.searchFrom:
+                    tool_search_cache.set(request.query, final_response)
+                
+                # Log processing time
+                elapsed_time = time.time() - start_time
+                logger.info(f"Flow 1 processing time: {elapsed_time:.2f}s")
+                
+                return QueryResponse(response=final_response)
+            
+            else:
+                # Flows 2, 3, 4, current: Standard LLM processing
+                llm_tools = all_selected_results
+                logger.info(f"Using {len(llm_tools)} tools for LLM processing (Flow: {flow_type})")
 
             # LOG TOOLS SENT TO LLM (basic info for logs)
             logger.info("=== TOOLS SENT TO LLM ===")
@@ -2876,33 +3417,22 @@ async def query_tools(request: QueryRequest, request_headers: Request):
 
             logger.info(f"Sending {len(llm_tools)} tools to LLM for processing (score-based selection)")
             
-            # Format documents for LLM - UPDATED TO PASS ALL METADATA AS JSON
-            # formatted_docs = []
-            # for result in llm_tools:  # Only process top 20
-            #     # Pass ALL metadata as JSON to LLM - let LLM decide what's relevant
-            #     formatted_doc = json.dumps(result, indent=2, ensure_ascii=False)
-            #     formatted_docs.append(formatted_doc)
+            # Format documents for LLM
             formatted_docs = []
             for result in llm_tools:
-                essential_data = {"tool_id": result.get("tool_id", ""),
-                                  "name": result.get("name", ""),
-                                  "description": result.get("description", ""),
-                                  "category_subcat": result.get("category_subcat", ""),
-                                  "pricingType": result.get("pricingType", ""),
-                                  "details_speciality": result.get("details_speciality", "") if result.get("details_speciality") else ""
-                                  }
+                essential_data = {
+                    "tool_id": result.get("tool_id", ""),
+                    "name": result.get("name", ""),
+                    "description": result.get("description", ""),
+                    "category_subcat": result.get("category_subcat", ""),
+                    "pricingType": result.get("pricingType", ""),
+                    "details_speciality": result.get("details_speciality", "") if result.get("details_speciality") else ""
+                }
                 formatted_doc = json.dumps(essential_data, ensure_ascii=False)
                 formatted_docs.append(formatted_doc)
             
             logger.info(f"📊 DEBUG: Formatted {len(formatted_docs)} tools for LLM")
             logger.info(f"📊 DEBUG: Sample tool data: {formatted_docs[0] if formatted_docs else 'None'}")
-            
-            # # LOG ACTUAL DATA SENT TO LLM (first 2 tools for verification)
-            # logger.info("=== ACTUAL DATA SENT TO LLM ===")
-            # for i, formatted_doc in enumerate(formatted_docs[:2]):  # Log first 2 tools
-            #     logger.info(f"Tool {i+1} Complete Data to LLM:")
-            #     logger.info(formatted_doc[:500] + "..." if len(formatted_doc) > 500 else formatted_doc)
-            #     logger.info("-" * 80)
             
             # Handle no tools case
             if not llm_tools:
@@ -2917,93 +3447,11 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 return QueryResponse(response=empty_response)
             
             # Prepare LLM processing
-            headers = request_headers.headers
-            logger.info(f"DEBUG: /query called with headers: {dict(headers)}")
-            current_model = ModelUtils.get_current_model(headers)
-            logger.info(f"DEBUG: /query using model: {current_model}")
-            
-            try:
-                encoder = tiktoken.encoding_for_model(current_model)
-            except Exception:
-                encoder = tiktoken.get_encoding("cl100k_base")
-            
             context = "\n\n---\n\n".join(formatted_docs)
             cleaned_context = TextCleaner.clean_text(context)
 
-            # Calculate token budget for output management
-            tool_count = len(llm_tools)
-            tokens_per_tool = min(150, 3000 // max(tool_count, 1)) 
-            
-            system_text = f"""You are an expert AI tool recommendation assistant who is specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to *select and rank all the relevant tools* from a given Available Tools Data if they **match or related** to Query which is: "{request.query}".
-
-##Selection Criteria OR Rules:
-- Include all the Query related tools without restricting or limiting to fewer tools following below INCLUSIVE APPROACH.
-- **INCLUSIVE APPROACH**: Analyze each tool data and INCLUDE all tools that:
-  - Have core functionality addressing the query or related needs
-  - Have same or related keywords in the description, metadata or name of the tool.
-  - Have semantic similarity to the query.
-  - Contain related concepts, or purposes or could be adapted for the use case of the query.
-  - Would be useful or helpful for someone with this specific need
-  - Are from the same general domain or category
-  - Are in related categories that users might consider
-- **Ranking Requirements**: Rank them from most to least relevant (1st = most relevant)
-- **Query-Specific Conditions**:
-  - If query specifies a number ("top 3", "best 5"): return exactly that count
-  - If query mentions specific tool name: prioritize and return that tool in 1st position  
-- ** EXCLUSION**: Only exclude tools that:
-  - Are from completely different domains with zero functional overlap
-  - Cannot solve any aspect of the user's problem
-  - Would never be considered by someone with this need
-  - Have no shared keywords, concepts, or use cases with the query
-- **INCLUSION PREFERENCE**: 
-  - *Do not duplicate tools - each tool should appear exactly once in the response*
-  - *Include all tools that have any relevance to the query*
-- **Edge Cases**: If no tools match the query, return: {{ "tool_id": [], "tools": [] }}
-- **Count Limits**: *Return all the tools up to 40 tools based on relevance* (prefer more options over fewer)
-- **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
-- **Output Specifications**:
-  - *Description: Should contain specific relevance by using keywords from Query: "{request.query}"*
-  - *Bullets: List features applicable to Query in 2 bullet points*
-
-##JSON FORMAT:
-{{
-  "tool_id": ["most_relevant_exact_tool_id", "second_most_relevant_exact_tool_id"],
-  "tools": [
-    {{
-      "id": "exact_tool_id_from_data",
-      "name": "tool_name",
-      "description": "Explain how this tool is relevant to the user query using keywords and intent from the query.",
-      "bullets":[
-        "Feature that directly solves the task described in the query",
-        "Specific capability aligned with the user's intent"
-      ]
-    }}
-  ]
-}}
-
-- The "tool_id" array should mirror the ranking order of tools returned in the "tools" list.
-- The "id" field inside each object must match its corresponding entry in "tool_id".
-
-##*Important Rules*:
-- Return *ONLY valid JSON* in the below given JSON FORMAT *without any PREAMBLE or EXPLANATION.*
-- Ensure all brackets and quotes are properly closed."""
-            
-            prompt_text = f"""Query: "{request.query}"
-
-Available Tools Data:
-{cleaned_context}
-
-## Task
-Your task is to select and rank all tools that are relevant to the above Query, using the provided Available Tools Data.
-
-## Requirements:
-- Apply the Selection Criteria OR Rules as defined above
-- Analyze query intent first, then evaluate each tool against that intent
-- NO DUPLICATES but include all relevant tools
-- Focus on semantic relevance.
-- Return only the final JSON result — no extra text or explanations"""
-
-            tier1_system = f"""You are an expert AI tool recommendation assistant specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to select and rank all the relevant tools from a given Available Tools Data if they match or related to Query which is: "{request.query}".
+            # Create common prompts
+            selection_system_prompt = f"""You are an expert AI tool recommendation assistant specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to select and rank all the relevant tools from a given Available Tools Data if they match or related to Query which is: "{request.query}".
 
 #Selection Criteria:
 - Include all the Query related tools without restricting or limiting to fewer tools following below INCLUSIVE APPROACH.
@@ -3011,7 +3459,7 @@ Your task is to select and rank all tools that are relevant to the above Query, 
   - Have core functionality addressing the query or related needs 
   - Have same keywords in the description, metadata or name of the tool of the tool data.
   - Have semantic similarity to the query.
-IMPORTANT: A tool only needs to satisfy ONE criteria to be included.
+IMPORTANT: A tool only needs to satisfy ONE criteria to be included from above *INCLUSIVE APPROACH*.
 - **Ranking Requirements**: Rank them from most to least relevant (1st = most relevant)
 - **Query-Specific Conditions**:
   - If query specifies a number ("top 3", "best 5"): return exactly that count
@@ -3022,55 +3470,48 @@ IMPORTANT: A tool only needs to satisfy ONE criteria to be included.
   - Have no shared keywords, concepts, or use cases with the query
 - **INCLUSION PREFERENCE**: 
   - Do not duplicate tools - each tool should appear exactly once in the response
-  - Do NOT be selective - Include all tools that have any relevance to the query unless it's completely unrelated.
-- **Edge Cases**: If no tools match the query, return: {{ "tool_id": [], "tools": [] }}
-- **Count Limits**: *Return all the tools up to 40 tools based on relevance* (prefer more options over fewer)
-  - **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
-- **Output Specifications**:
-  - Description: Should contain specific relevance using keywords from Query: "{request.query}" WITHOUT bullet points
-  - Bullets: Separate array with 2 bullet points listing key features for this query"""
+- **Edge Cases**: If no tools match the query, return: {{ "tool_id": [] }}
+- **No Count Limits**: *Return all the tools that satisfies *INCLUSIVE APPROACH* criteria (prefer more options over fewer).
+- **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
+
+Return ONLY a JSON object with tool_ids in ranked order:
+{{"tool_id": ["most_relevant_tool_id", "second_most_relevant_tool_id", ...]}}"""
             
-            tier1_user = f"""Query: "{request.query}"
+            selection_user_prompt = f"""Query: "{request.query}"
 Available Tools Data:
 {cleaned_context}
-Your task is to select and rank up to 40 tools that are relevant to the above query based on the provided Selection Criteria, using the Available Tools Data."""
+Your task is to select and rank all the tools that are relevant to the above query based on the provided Selection Criteria, using the Available Tools Data.
 
+Return only the tool_id array in JSON format."""
 
-# Use OpenAI for query tools, fallback to Groq if needed
-            openai_api_key = os.getenv("OPENAI_API_KEY")
+            description_system_prompt = f"""You are an expert AI tool recommendation assistant specialized in generating query-specific descriptions and bullet points.
 
-            if openai_api_key:
-                logger.info("🚀 Using OpenAI for query tools processing")
-                
-                # Call OpenAI
-                openai_result = ModelUtils.call_openai_for_query_tools(
-                    system_prompt=system_text,
-                    user_prompt=prompt_text,
-                    tier1_system=tier1_system,
-                    tier1_user=tier1_user
-                )
-                
-                if openai_result["success"]:
-                    llm_response = openai_result["content"]
-                    
-                    if openai_result.get("cache_hit"):
-                        cache_tokens = openai_result.get("cached_tokens", 0)
-                        logger.info(f"✅ OpenAI response received (CACHE HIT - {cache_tokens} tokens cached)")
-                    else:
-                        logger.info("✅ OpenAI response received (cache miss - building cache)")
+Your task is to generate descriptions and bullets for the provided tools based on the user query: "{request.query}"
 
-                    if openai_result.get("structured"):
-                        logger.info("🎯 Using Structured Outputs format")
-                    else:
-                        logger.info("🎯 Using JSON mode format")
-                else:
-                    logger.error(f"❌ OpenAI failed: {openai_result['error']}")
-                    # Fallback to Groq
-                    logger.info("🔄 Falling back to Groq...")
-                    
+For each tool, provide:
+- A description that explains how this tool specifically helps with the user's query
+- 2 bullet points highlighting key features relevant to the query
+
+Return ONLY valid JSON in this exact format:
+{{
+  "tools": [
+    {{
+      "id": "exact_tool_id_from_data",
+      "name": "tool_name",
+      "description": "Query-specific description explaining relevance",
+      "bullets": ["Relevant feature 1", "Relevant feature 2"]
+    }}
+  ]
+}}"""
+
+            # Flow-specific LLM selection
+            if flow_type == "groq":
+                # Flow 2: Groq Only
+                logger.info(f"=== FLOW 2: GROQ ONLY ===")
+                try:
                     llm = ChatGroq(
                         groq_api_key=env.groq_api_key,
-                        model_name=current_model,
+                        model_name="llama-3.3-70b-versatile",
                         temperature=0.05,
                         model_kwargs={
                             "top_p": 0.5,
@@ -3080,180 +3521,273 @@ Your task is to select and rank up to 40 tools that are relevant to the above qu
                         }
                     )
                     
-                    # Add token counting for fallback consistency
-                    total_input_text = system_text + prompt_text
-                    input_tokens = len(encoder.encode(total_input_text))
-                    logger.info(f"🔢 GROQ FALLBACK INPUT TOKENS: {input_tokens}")
-                    
                     response = llm.invoke([
-                        {"role": "system", "content": system_text},
-                        {"role": "user", "content": prompt_text}
+                        {"role": "system", "content": selection_system_prompt},
+                        {"role": "user", "content": selection_user_prompt}
                     ])
                     
-                    llm_response = response.content
-                    
-                    # Count output tokens for fallback
-                    output_tokens = len(encoder.encode(llm_response))
-                    total_tokens = input_tokens + output_tokens
-                    
-                    logger.info(f"🔢 GROQ FALLBACK OUTPUT TOKENS: {output_tokens}")
-                    logger.info(f"🔢 GROQ FALLBACK TOTAL TOKENS: {total_tokens}")
-                    logger.info("🔢 GROQ FALLBACK TOKEN BREAKDOWN - Input: %d, Output: %d, Total: %d", input_tokens, output_tokens, total_tokens)
-                    logger.info("✅ Groq fallback response received")
-
-            else:
-                # No OpenAI key, use Groq directly
-                logger.info("🤖 Using Groq for query tools processing (no OpenAI key)")
-                
-                llm = ChatGroq(
-                    groq_api_key=env.groq_api_key,
-                    model_name=current_model,
-                    temperature=0.05,
-                    model_kwargs={
-                        "top_p": 0.5,
-                        "frequency_penalty": 0.2,
-                        "presence_penalty": 0.0,
-                        "response_format": {"type": "json_object"}
+                    selection_result = {
+                        "content": response.content,
+                        "success": True,
+                        "provider": "groq"
                     }
-                )
+                except Exception as e:
+                    logger.error(f"Groq selection failed: {str(e)}")
+                    selection_result = {
+                        "content": None,
+                        "success": False,
+                        "provider": "groq",
+                        "error": str(e)
+                    }
                 
-                # Count input tokens for Groq
-                total_input_text = system_text + prompt_text
-                input_tokens = len(encoder.encode(total_input_text))
-                logger.info(f"🔢 GROQ INPUT TOKENS: {input_tokens}")
-                
-                response = llm.invoke([
-                    {"role": "system", "content": system_text},
-                    {"role": "user", "content": prompt_text}
-                ])
-                
-                llm_response = response.content
-                
-                # Count output tokens for Groq
-                output_tokens = len(encoder.encode(llm_response))
-                total_tokens = input_tokens + output_tokens
-                
-                logger.info(f"🔢 GROQ OUTPUT TOKENS: {output_tokens}")
-                logger.info(f"🔢 GROQ TOTAL TOKENS: {total_tokens}")
-                logger.info("🔢 GROQ TOKEN BREAKDOWN - Input: %d, Output: %d, Total: %d", input_tokens, output_tokens, total_tokens)
-
-            logger.info("✅ LLM response received and processed")
-            
-            try:
-                # Post-process response
-                processed_response = QueryProcessor.post_process_llm_response(llm_response)
-                logger.info("DEBUG: Raw LLM response before JSON parsing: %s...", str(processed_response[:500]))
-                
-                # Parse and validate JSON response
+            elif flow_type == "openai":
+                # Flow 3: OpenAI JSON Object Mode Only
+                logger.info(f"=== FLOW 3: OPENAI JSON OBJECT MODE ===")
                 try:
-                    response_data = json.loads(processed_response)
-                    response_data = validate_and_fix_tool_ids(response_data, llm_tools)
+                    openai_api_key = os.getenv("OPENAI_API_KEY")
+                    openai_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+                    
+                    if not openai_api_key:
+                        raise ValueError("OPENAI_API_KEY not found")
+                    
+                    client = optimized_openai_client.get_client()
+                    
+                    response = client.chat.completions.create(
+                        model=openai_model,
+                        messages=[
+                            {"role": "system", "content": selection_system_prompt},
+                            {"role": "user", "content": selection_user_prompt}
+                        ],
+                        temperature=0.05,
+                        response_format={"type": "json_object"},
+                        max_tokens=4000,
+                        timeout=30
+                    )
+                    
+                    selection_result = {
+                        "content": response.choices[0].message.content,
+                        "success": True,
+                        "provider": "openai"
+                    }
+                except Exception as e:
+                    logger.error(f"OpenAI selection failed: {str(e)}")
+                    selection_result = {
+                        "content": None,
+                        "success": False,
+                        "provider": "openai",
+                        "error": str(e)
+                    }
+                
+            elif flow_type == "structured":
+                # Flow 4: Groq Structured Outputs
+                logger.info(f"=== FLOW 4: GROQ STRUCTURED OUTPUTS ===")
+                try:
+                    from groq import Groq
+                    client = Groq(api_key=env.groq_api_key)
+                    
+                    response = client.chat.completions.create(
+                        model="moonshotai/kimi-k2-instruct",
+                        messages=[
+                            {"role": "system", "content": selection_system_prompt},
+                            {"role": "user", "content": selection_user_prompt}
+                        ],
+                        response_format={
+                            "type": "json_schema",
+                            "json_schema": {
+                                "name": "tool_selection_response",
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tool_id": {
+                                            "type": "array",
+                                            "items": {"type": "string"},
+                                            "description": "Array of selected tool IDs in ranked order"
+                                        }
+                                    },
+                                    "required": ["tool_id"],
+                                    "additionalProperties": False
+                                }
+                            }
+                        }
+                    )
+                    
+                    selection_result = {
+                        "content": response.choices[0].message.content,
+                        "success": True,
+                        "provider": "structured"
+                    }
+                except Exception as e:
+                    logger.error(f"Structured outputs selection failed: {str(e)}")
+                    selection_result = {
+                        "content": None,
+                        "success": False,
+                        "provider": "structured",
+                        "error": str(e)
+                    }
+                
+            else:
+                # Current flow: Original logic with fallbacks
+                logger.info(f"=== CURRENT FLOW: ORIGINAL LOGIC ===")
+                selection_result = await ModelUtils.call_llm_with_fallback(
+                    system_prompt=selection_system_prompt,
+                    user_prompt=selection_user_prompt,
+                    call_type="selection",
+                    headers=headers
+                )
+            
+            # Process selection result
+            if selection_result["success"]:
+                try:
+                    selection_data = json.loads(selection_result["content"])
+                    selected_tool_ids = selection_data.get("tool_id", [])
+                    
+                    logger.info(f"Selection successful with {selection_result['provider']}: {len(selected_tool_ids)} tools selected")
+                    
+                    # Split processing
+                    top_10_ids = selected_tool_ids[:10]
+                    remaining_ids = selected_tool_ids[10:]
+                    
+                    # Extract metadata for top 10
+                    top_10_metadata = extract_metadata_for_tools(top_10_ids, llm_tools)
+                    
+                    # PARALLEL PROCESSING: Run description generation and database processing simultaneously
+                    logger.info(f"Starting parallel processing: {len(top_10_ids)} tools for LLM, {len(remaining_ids)} tools for database")
+                    
+                    # Create parallel tasks
+                    description_task = None
+                    if top_10_ids:
+                        # Flow-specific description generation
+                        if flow_type == "groq":
+                            description_task = asyncio.create_task(
+                                generate_groq_descriptions(top_10_ids, request.query, top_10_metadata, description_system_prompt)
+                            )
+                        elif flow_type == "openai":
+                            description_task = asyncio.create_task(
+                                generate_openai_descriptions(top_10_ids, request.query, top_10_metadata, description_system_prompt)
+                            )
+                        elif flow_type == "structured":
+                            description_task = asyncio.create_task(
+                                generate_structured_descriptions(top_10_ids, request.query, top_10_metadata, description_system_prompt)
+                            )
+                        else:
+                            # Current flow
+                            description_task = asyncio.create_task(
+                                generate_descriptions_internal(
+                                    tool_ids=top_10_ids,
+                                    query=request.query,
+                                    tools_metadata=top_10_metadata,
+                                    headers=headers
+                                )
+                            )
+                    
+                    database_task = asyncio.create_task(
+                        process_tools_from_database_async(remaining_ids, llm_tools)
+                    )
+                    
+                    # Wait for both tasks to complete
+                    if description_task:
+                        try:
+                            top_10_tools, remaining_tools = await asyncio.gather(
+                                description_task,
+                                database_task,
+                                return_exceptions=True
+                            )
+                            
+                            # Handle exceptions
+                            if isinstance(top_10_tools, Exception):
+                                logger.error(f"Description generation failed: {str(top_10_tools)}")
+                                # Fallback: use database processing for top 10 as well
+                                top_10_tools = await process_tools_from_database_async(top_10_ids, llm_tools)
+                            
+                            if isinstance(remaining_tools, Exception):
+                                logger.error(f"Database processing failed: {str(remaining_tools)}")
+                                remaining_tools = []
+                                
+                        except Exception as e:
+                            logger.error(f"Parallel processing failed: {str(e)}")
+                            # Complete fallback
+                            top_10_tools = await process_tools_from_database_async(top_10_ids, llm_tools)
+                            remaining_tools = await process_tools_from_database_async(remaining_ids, llm_tools)
+                            
+                    else:
+                        top_10_tools = []
+                        try:
+                            remaining_tools = await database_task
+                            
+                            if isinstance(remaining_tools, Exception):
+                                logger.error(f"Database processing failed: {str(remaining_tools)}")
+                                remaining_tools = []
+                        except Exception as e:
+                            logger.error(f"Database processing failed: {str(e)}")
+                            remaining_tools = []
+                    
+                    logger.info(f"Parallel processing completed: {len(top_10_tools) if isinstance(top_10_tools, list) else 0} LLM tools, {len(remaining_tools) if isinstance(remaining_tools, list) else 0} database tools")
+                    
+                    # Merge results
+                    all_tools = (top_10_tools if isinstance(top_10_tools, list) else []) + (remaining_tools if isinstance(remaining_tools, list) else [])
                     
                     # Add search filter info if applied
+                    response_data = {
+                        "tool_id": selected_tool_ids,
+                        "tools": all_tools,
+                        "flow_type": flow_type,
+                        "timestamp": datetime.now().isoformat()
+                    }
+                    
                     if request.searchFrom:
                         response_data["search_filter_applied"] = True
                         response_data["searched_within_tool_ids"] = request.searchFrom
-
-                    # # Ensure proper tool data structure
-                    # if "tools" not in response_data or not response_data["tools"]:
-                    #     response_data["tools"] = []
-                    #     response_data["tool_id"] = []
-                        
-                    #     for result in llm_tools:
-                    #         bullets = extract_tool_bullets(result)
-                    #         tool_data = {
-                    #             "id": result.get("tool_id", ""),
-                    #             "name": result.get("name", ""),
-                    #             "description": result.get("description", ""),
-                    #             "bullets": []
-                    #         }
-                    #         response_data["tools"].append(tool_data)
-                    #         response_data["tool_id"].append(result.get("tool_id", ""))
-                            
-                    #     response_data["message"] = "Structured response incomplete, showing raw search results."
                     
-                    # clean_response = json.dumps(response_data, indent=2)
-                    # logger.info("Successfully processed valid JSON response")
-
-                    # Ensure proper tool data structure - NO FALLBACKS
-                    if "tools" not in response_data or not response_data["tools"]:
-                        response_data["tools"] = []
-                        response_data["tool_id"] = []
-                        response_data["message"] = "No relevant tools found for this query."
+                    final_response = json.dumps(response_data)
                     
-                    clean_response = json.dumps(response_data, indent=2)
-                    logger.info("Successfully processed valid JSON response")
+                    # Cache result for non-filtered searches
+                    if not request.searchFrom:
+                        tool_search_cache.set(request.query, final_response)
                     
-                    # Process remaining tools from database
-                    # if db_tools:
-                    #     logger.info(f"Processing {len(db_tools)} additional tools from database")
-                        
-                    #     for result in db_tools:
-                    #         # Extract meaningful bullets from metadata
-                    #         bullets = extract_tool_bullets(result)
-                            
-                    #         tool_data = {
-                    #             "id": result.get("tool_id", ""),
-                    #             "name": result.get("name", ""),
-                    #             "description": result.get("description", ""),
-                    #             "bullets": []
-                    #         }
-                            
-                    #         response_data["tools"].append(tool_data)
-                    #         response_data["tool_id"].append(result.get("tool_id", ""))
-                            
-                    #         logger.debug(f"Tool {result.get('name', 'Unknown')}: extracted {len(bullets)} bullets from metadata")
-                        
-                    #     # Update the JSON response with all tools
-                    #     clean_response = json.dumps(response_data, indent=2)
-                    #     logger.info(f"Added {len(db_tools)} database-processed tools to LLM results")
-                    #     logger.info(f"Final response contains {len(response_data['tools'])} total tools")
-                    logger.info(f"Final response contains {len(response_data.get('tools', []))} LLM-only tools")
+                    # Log processing time
+                    elapsed_time = time.time() - start_time
+                    logger.info(f"Total processing time: {elapsed_time:.2f}s")
                     
-                except json.JSONDecodeError:
-                    fallback_data = {
-                        "tool_id": [result.get("tool_id", "") for result in llm_tools],  # Only LLM tools"tools": [],
-                        "message": "LLM JSON parsing failed - returning basic LLM tools without processing",
+                    return QueryResponse(response=final_response)
+                    
+                except json.JSONDecodeError as e:
+                    logger.error(f"Failed to parse LLM selection response: {str(e)}")
+                    # Fall back to using all tools with database processing
+                    fallback_tool_ids = [tool.get("tool_id", "") for tool in llm_tools[:30]]
+                    fallback_tools = process_tools_from_database(fallback_tool_ids, llm_tools)
+                    
+                    fallback_response = json.dumps({
+                        "tool_id": fallback_tool_ids,
+                        "tools": fallback_tools,
+                        "flow_type": flow_type,
+                        "message": "LLM selection parsing failed - using database fallback",
                         "timestamp": datetime.now().isoformat()
-                        }
-                    logger.warning("LLM JSON parsing failed - using basic LLM tools only")
-
-                    for result in llm_tools:  # Only process LLM tools
-                        tool_data = {
-                            "id": result.get("tool_id", ""),
-                            "name": result.get("name", ""),
-                            "description": result.get("description", ""),
-                            "bullets": []
-                            }
-                        fallback_data["tools"].append(tool_data)
-                    logger.info(f"Fallback: Created response with {len(fallback_data['tools'])} LLM-only tools")
+                    })
                     
-                    if request.searchFrom:
-                        fallback_data["search_filter_applied"] = True
-                        fallback_data["searched_within_tool_ids"] = request.searchFrom
+                    return QueryResponse(response=fallback_response)
                     
-                    clean_response = json.dumps(fallback_data, indent=2)
-                    logger.warning("Created fallback JSON response")
-                
-                # Cache result for non-filtered searches
-                if not request.searchFrom:
-                    tool_search_cache.set(request.query, clean_response)
-                
-                # Log processing time
-                elapsed_time = time.time() - start_time
-                logger.info(f"Total processing time: {elapsed_time:.2f}s")
-                
-                return QueryResponse(response=clean_response)
-                
-            except Exception as e:
-                logger.error(f"Error in LLM call: {str(e)}")
-                error_response = json.dumps({
-                    "error": "llm_error",
-                    "message": f"Error processing query with language model: {str(e)}",
-                    "tools": [],
-                    "timestamp": datetime.now().isoformat()
-                })
-                return QueryResponse(response=error_response)
+            else:
+                # LLM selection failed
+                logger.error(f"LLM selection failed for flow {flow_type}")
+                if flow_type == "structured":
+                    # Return specific error for structured outputs
+                    error_response = json.dumps({
+                        "error": "structured_outputs_failed",
+                        "message": "Structured outputs failed - model may not be available",
+                        "tools": [],
+                        "flow_type": flow_type,
+                        "timestamp": datetime.now().isoformat()
+                    })
+                    return QueryResponse(response=error_response)
+                else:
+                    error_response = json.dumps({
+                        "error": f"llm_selection_failed_{flow_type}",
+                        "message": f"Failed to select tools with {flow_type} flow",
+                        "tools": [],
+                        "flow_type": flow_type,
+                        "timestamp": datetime.now().isoformat()
+                    })
+                    return QueryResponse(response=error_response)
                 
         except Exception as e:
             error_msg = str(e)
@@ -3263,6 +3797,7 @@ Your task is to select and rank up to 40 tools that are relevant to the above qu
                 "error": "search_error",
                 "message": f"Failed to process search: {error_msg}",
                 "tools": [],
+                "flow_type": flow_type,
                 "timestamp": datetime.now().isoformat()
             })
             
@@ -3278,10 +3813,274 @@ Your task is to select and rank up to 40 tools that are relevant to the above qu
             "error": "api_error",
             "message": f"An unexpected error occurred: {str(e)}",
             "tools": [],
+            "flow_type": getattr(request, 'flow_type', 'unknown'),
             "timestamp": datetime.now().isoformat()
         })
         return QueryResponse(response=error_response)
+
+
+# Helper functions for flow-specific description generation
+async def generate_groq_descriptions(tool_ids: List[str], query: str, tools_metadata: List[Dict], system_prompt: str) -> List[Dict]:
+    """Generate descriptions using Groq only."""
+    try:
+        # Format tools for LLM
+        formatted_docs = []
+        for tool_data in tools_metadata:
+            essential_data = {
+                "tool_id": tool_data.get("tool_id", ""),
+                "name": tool_data.get("name", ""),
+                "description": tool_data.get("description", ""),
+                "category_subcat": tool_data.get("category_subcat", ""),
+                "pricingType": tool_data.get("pricingType", ""),
+                "details_speciality": tool_data.get("details_speciality", "") if tool_data.get("details_speciality") else ""
+            }
+            formatted_doc = json.dumps(essential_data, ensure_ascii=False)
+            formatted_docs.append(formatted_doc)
+        
+        context = "\n\n---\n\n".join(formatted_docs)
+        cleaned_context = TextCleaner.clean_text(context)
+        
+        user_prompt = f"""Query: "{query}"
+
+Tools Data:
+{cleaned_context}
+
+Generate descriptions and bullets for these tools that specifically address how they help with the query."""
+        
+        llm = ChatGroq(
+            groq_api_key=env.groq_api_key,
+            model_name="llama-3.3-70b-versatile",
+            temperature=0.05,
+            model_kwargs={
+                "top_p": 0.5,
+                "frequency_penalty": 0.2,
+                "presence_penalty": 0.0,
+                "response_format": {"type": "json_object"}
+            }
+        )
+        
+        response = llm.invoke([
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ])
+        
+        description_data = json.loads(response.content)
+        tools = description_data.get("tools", [])
+        
+        logger.info(f"Groq description generation successful: {len(tools)} tools processed")
+        return tools
+        
+    except Exception as e:
+        logger.error(f"Error in Groq descriptions: {str(e)}")
+        return generate_fallback_descriptions(tool_ids, tools_metadata)
+
+
+async def generate_openai_descriptions(tool_ids: List[str], query: str, tools_metadata: List[Dict], system_prompt: str) -> List[Dict]:
+    """Generate descriptions using OpenAI JSON Object Mode only."""
+    try:
+        # Format tools for LLM
+        formatted_docs = []
+        for tool_data in tools_metadata:
+            essential_data = {
+                "tool_id": tool_data.get("tool_id", ""),
+                "name": tool_data.get("name", ""),
+                "description": tool_data.get("description", ""),
+                "category_subcat": tool_data.get("category_subcat", ""),
+                "pricingType": tool_data.get("pricingType", ""),
+                "details_speciality": tool_data.get("details_speciality", "") if tool_data.get("details_speciality") else ""
+            }
+            formatted_doc = json.dumps(essential_data, ensure_ascii=False)
+            formatted_docs.append(formatted_doc)
+        
+        context = "\n\n---\n\n".join(formatted_docs)
+        cleaned_context = TextCleaner.clean_text(context)
+        
+        user_prompt = f"""Query: "{query}"
+
+Tools Data:
+{cleaned_context}
+
+Generate descriptions and bullets for these tools that specifically address how they help with the query."""
+        
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        openai_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        
+        if not openai_api_key:
+            raise ValueError("OPENAI_API_KEY not found")
+        
+        client = optimized_openai_client.get_client()
+        
+        response = client.chat.completions.create(
+            model=openai_model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.05,
+            response_format={"type": "json_object"},
+            max_tokens=4000,
+            timeout=30
+        )
+        
+        description_data = json.loads(response.choices[0].message.content)
+        tools = description_data.get("tools", [])
+        
+        logger.info(f"OpenAI description generation successful: {len(tools)} tools processed")
+        return tools
+        
+    except Exception as e:
+        logger.error(f"Error in OpenAI descriptions: {str(e)}")
+        return generate_fallback_descriptions(tool_ids, tools_metadata)
+
+
+async def generate_structured_descriptions(tool_ids: List[str], query: str, tools_metadata: List[Dict], system_prompt: str) -> List[Dict]:
+    """Generate descriptions using Groq structured outputs."""
+    try:
+        # Format tools for LLM
+        formatted_docs = []
+        for tool_data in tools_metadata:
+            essential_data = {
+                "tool_id": tool_data.get("tool_id", ""),
+                "name": tool_data.get("name", ""),
+                "description": tool_data.get("description", ""),
+                "category_subcat": tool_data.get("category_subcat", ""),
+                "pricingType": tool_data.get("pricingType", ""),
+                "details_speciality": tool_data.get("details_speciality", "") if tool_data.get("details_speciality") else ""
+            }
+            formatted_doc = json.dumps(essential_data, ensure_ascii=False)
+            formatted_docs.append(formatted_doc)
+        
+        context = "\n\n---\n\n".join(formatted_docs)
+        cleaned_context = TextCleaner.clean_text(context)
+        
+        user_prompt = f"""Query: "{query}"
+
+Tools Data:
+{cleaned_context}
+
+Generate descriptions and bullets for these tools that specifically address how they help with the query."""
+        
+        from groq import Groq
+        client = Groq(api_key=env.groq_api_key)
+        
+        response = client.chat.completions.create(
+            model="moonshotai/kimi-k2-instruct",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "tool_descriptions_response",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "tools": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "Tool ID"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Tool name"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "description": "Query-specific description"
+                                        },
+                                        "bullets": {
+                                            "type": "array",
+                                            "items": {"type": "string"},
+                                            "description": "Array of bullet points"
+                                        }
+                                    },
+                                    "required": ["id", "name", "description", "bullets"],
+                                    "additionalProperties": False
+                                }
+                            }
+                        },
+                        "required": ["tools"],
+                        "additionalProperties": False
+                    }
+                }
+            }
+        )
+        
+        description_data = json.loads(response.choices[0].message.content)
+        tools = description_data.get("tools", [])
+        
+        logger.info(f"Structured description generation successful: {len(tools)} tools processed")
+        return tools
+        
+    except Exception as e:
+        logger.error(f"Error in structured descriptions: {str(e)}")
+        return generate_fallback_descriptions(tool_ids, tools_metadata)
+
+# Additional helper functions that are referenced in the query endpoint
+
+def extract_metadata_for_tools(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
+    """Extract metadata for specific tool_ids from llm_tools"""
+    metadata = []
+    for tool_id in tool_ids:
+        for tool_data in llm_tools_data:
+            if tool_data.get("tool_id") == tool_id:
+                metadata.append(tool_data)
+                break
+    return metadata
+
+def generate_fallback_descriptions(tool_ids: List[str], tools_metadata: List[Dict]) -> List[Dict]:
+    """Generate descriptions from database when LLM fails - OPTIMIZED"""
+    # Create O(1) lookup index
+    tool_lookup = {tool["tool_id"]: tool for tool in tools_metadata if tool.get("tool_id")}
     
+    fallback_tools = []
+    
+    for tool_id in tool_ids:
+        tool_data = tool_lookup.get(tool_id)
+        
+        if tool_data:
+            # Fast bullet extraction
+            bullets = optimized_extract_bullets(tool_data)
+            
+            fallback_tools.append({
+                "id": tool_id,
+                "name": tool_data.get("name", ""),
+                "description": tool_data.get("description", ""),
+                "bullets": bullets
+            })
+    
+    return fallback_tools
+    
+class GenerateDescriptionsRequest(BaseModel):
+    """Generate descriptions request model."""
+    tool_ids: List[str]
+    query: str
+    tools_metadata: List[Dict[str, Any]]
+
+@app.post("/generate-descriptions")
+async def generate_descriptions(request: GenerateDescriptionsRequest, request_headers: Request):
+    """Generate descriptions for specific tools."""
+    try:
+        tools = await generate_descriptions_internal(
+            tool_ids=request.tool_ids,
+            query=request.query,
+            tools_metadata=request.tools_metadata,
+            headers=request_headers.headers
+        )
+        
+        return {"tools": tools}
+        
+    except Exception as e:
+        logger.error(f"Error in generate_descriptions endpoint: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to generate descriptions: {str(e)}"
+        )
 
 @app.post("/add-tools", response_model=BulkToolResponse)
 async def add_tools(bulk_request: BulkToolRequest):

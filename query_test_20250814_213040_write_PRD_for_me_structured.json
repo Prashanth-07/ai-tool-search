@@ -1,0 +1,209 @@
+{
+  "timestamp": "2025-08-14T21:30:40.296629",
+  "input_query": "write PRD for me",
+  "flow_type": "structured",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/2.0"
+    },
+    "flow_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 8,
+    "tool_ids": [
+      "6863632c015bd4929b37d359",
+      "68635e5e015bd4929b37d18a",
+      "68636b0c015bd4929b37d7a4",
+      "6863673d015bd4929b37d69d",
+      "6863599c015bd4929b37d01d",
+      "68666360ef7018fbfef69bc7",
+      "685e9c4b1c16582699a7b791",
+      "685004e1afca082a9fc4178b"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "Instantly produces a full Product Requirements Document from a few bullet points\u2014ideal when you need to \u201cwrite my PRD\u201d without staring at a blank page.",
+        "bullets": [
+          "AI auto-suggests complete feature sets and user stories",
+          "Turns raw ideas into a polished, professional PRD in minutes"
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "Purpose-built to let you type a sentence like \u201cwrite PRD for me\u201d and receive a structured, ready-to-share Product Requirements Document in seconds.",
+        "bullets": [
+          "GPT-powered prompts auto-fill every PRD section for you",
+          "Clean UI walks you from idea to finished spec in one sitting"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "description": "One prompt is all it takes\u2014Signlz writes your PRD, tech specs, and even the Jira tasks so you can move from idea to execution instantly.",
+        "bullets": [
+          "Single prompt generates complete PRD + linked tasks",
+          "Auto-syncs every deliverable to your task manager"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generator",
+        "description": "Drop any raw material\u2014competitor URLs, meeting notes, or audio recordings\u2014and GetBash writes the PRD for you, no manual drafting required.",
+        "bullets": [
+          "Accepts any input format and auto-builds a PRD",
+          "Includes AI chat editor for on-the-fly tweaks"
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "Converse with an AI copilot that literally \u201cwrites my PRD\u201d for you while coaching you like a virtual CPO.",
+        "bullets": [
+          "Chat interface drafts full PRDs from simple prompts",
+          "Built-in feedback loop refines the doc until it\u2019s perfect"
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "A dedicated AI agent that takes your brief and autonomously produces a market-ready PRD, saving you hours of manual work.",
+        "bullets": [
+          "Agent auto-researches and writes the entire PRD",
+          "No setup\u2014just enter your idea and get the finished doc"
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Embedded in Confluence, Wisary asks you clarifying questions and then writes the PRD so you never have to leave your workspace.",
+        "bullets": [
+          "AI prompts you for missing details and auto-creates the PRD",
+          "Transforms the spec into ready-to-use user stories and test plans"
+        ]
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "CoPilot listens to your high-level vision and instantly drafts the PRD, ensuring every requirement is tied to strategy and outcomes.",
+        "bullets": [
+          "Generative AI writes PRDs from simple voice or text input",
+          "Auto-links every requirement to OKRs and roadmap items"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6863632c015bd4929b37d359",
+      "68635e5e015bd4929b37d18a",
+      "68636b0c015bd4929b37d7a4",
+      "6863673d015bd4929b37d69d",
+      "6863599c015bd4929b37d01d",
+      "68666360ef7018fbfef69bc7",
+      "685e9c4b1c16582699a7b791",
+      "685004e1afca082a9fc4178b"
+    ],
+    "tools": [
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "Instantly produces a full Product Requirements Document from a few bullet points\u2014ideal when you need to \u201cwrite my PRD\u201d without staring at a blank page.",
+        "bullets": [
+          "AI auto-suggests complete feature sets and user stories",
+          "Turns raw ideas into a polished, professional PRD in minutes"
+        ]
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "Purpose-built to let you type a sentence like \u201cwrite PRD for me\u201d and receive a structured, ready-to-share Product Requirements Document in seconds.",
+        "bullets": [
+          "GPT-powered prompts auto-fill every PRD section for you",
+          "Clean UI walks you from idea to finished spec in one sitting"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "description": "One prompt is all it takes\u2014Signlz writes your PRD, tech specs, and even the Jira tasks so you can move from idea to execution instantly.",
+        "bullets": [
+          "Single prompt generates complete PRD + linked tasks",
+          "Auto-syncs every deliverable to your task manager"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generator",
+        "description": "Drop any raw material\u2014competitor URLs, meeting notes, or audio recordings\u2014and GetBash writes the PRD for you, no manual drafting required.",
+        "bullets": [
+          "Accepts any input format and auto-builds a PRD",
+          "Includes AI chat editor for on-the-fly tweaks"
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "Converse with an AI copilot that literally \u201cwrites my PRD\u201d for you while coaching you like a virtual CPO.",
+        "bullets": [
+          "Chat interface drafts full PRDs from simple prompts",
+          "Built-in feedback loop refines the doc until it\u2019s perfect"
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "A dedicated AI agent that takes your brief and autonomously produces a market-ready PRD, saving you hours of manual work.",
+        "bullets": [
+          "Agent auto-researches and writes the entire PRD",
+          "No setup\u2014just enter your idea and get the finished doc"
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Embedded in Confluence, Wisary asks you clarifying questions and then writes the PRD so you never have to leave your workspace.",
+        "bullets": [
+          "AI prompts you for missing details and auto-creates the PRD",
+          "Transforms the spec into ready-to-use user stories and test plans"
+        ]
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "CoPilot listens to your high-level vision and instantly drafts the PRD, ensuring every requirement is tied to strategy and outcomes.",
+        "bullets": [
+          "Generative AI writes PRDs from simple voice or text input",
+          "Auto-links every requirement to OKRs and roadmap items"
+        ]
+      }
+    ],
+    "flow_type": "structured",
+    "timestamp": "2025-08-14T16:00:50.984334"
+  },
+  "processing_time_seconds": 10.7,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"tool_id\": [\"6863632c015bd4929b37d359\", \"68635e5e015bd4929b37d18a\", \"68636b0c015bd4929b37d7a4\", \"6863673d015bd4929b37d69d\", \"6863599c015bd4929b37d01d\", \"68666360ef7018fbfef69bc7\", \"685e9c4b1c16582699a7b791\", \"685004e1afca082a9fc4178b\"], \"tools\": [{\"id\": \"6863632c015bd4929b37d359\", \"name\": \"Brilworks PRD Generator\", \"description\": \"Instantly produces a full Product Requirements Document from a few bullet points\\u2014ideal when you need to \\u201cwrite my PRD\\u201d without staring at a blank page.\", \"bullets\": [\"AI auto-suggests complete feature sets and user stories\", \"Turns raw ideas into a polished, professional PRD in minutes\"]}, {\"id\": \"68635e5e015bd4929b37d18a\", \"name\": \"Write My PRD\", \"description\": \"Purpose-built to let you type a sentence like \\u201cwrite PRD for me\\u201d and receive a structured, ready-to-share Product Requirements Document in seconds.\", \"bullets\": [\"GPT-powered prompts auto-fill every PRD section for you\", \"Clean UI walks you from idea to finished spec in one sitting\"]}, {\"id\": \"68636b0c015bd4929b37d7a4\", \"description\": \"One prompt is all it takes\\u2014Signlz writes your PRD, tech specs, and even the Jira tasks so you can move from idea to execution instantly.\", \"bullets\": [\"Single prompt generates complete PRD + linked tasks\", \"Auto-syncs every deliverable to your task manager\"]}, {\"id\": \"6863673d015bd4929b37d69d\", \"name\": \"GetBash PRD Generator\", \"description\": \"Drop any raw material\\u2014competitor URLs, meeting notes, or audio recordings\\u2014and GetBash writes the PRD for you, no manual drafting required.\", \"bullets\": [\"Accepts any input format and auto-builds a PRD\", \"Includes AI chat editor for on-the-fly tweaks\"]}, {\"id\": \"6863599c015bd4929b37d01d\", \"name\": \"ChatPRD\", \"description\": \"Converse with an AI copilot that literally \\u201cwrites my PRD\\u201d for you while coaching you like a virtual CPO.\", \"bullets\": [\"Chat interface drafts full PRDs from simple prompts\", \"Built-in feedback loop refines the doc until it\\u2019s perfect\"]}, {\"id\": \"68666360ef7018fbfef69bc7\", \"name\": \"Aigents\", \"description\": \"A dedicated AI agent that takes your brief and autonomously produces a market-ready PRD, saving you hours of manual work.\", \"bullets\": [\"Agent auto-researches and writes the entire PRD\", \"No setup\\u2014just enter your idea and get the finished doc\"]}, {\"id\": \"685e9c4b1c16582699a7b791\", \"name\": \"Wisary\", \"description\": \"Embedded in Confluence, Wisary asks you clarifying questions and then writes the PRD so you never have to leave your workspace.\", \"bullets\": [\"AI prompts you for missing details and auto-creates the PRD\", \"Transforms the spec into ready-to-use user stories and test plans\"]}, {\"id\": \"685004e1afca082a9fc4178b\", \"name\": \"ProdPad CoPilot\", \"description\": \"CoPilot listens to your high-level vision and instantly drafts the PRD, ensuring every requirement is tied to strategy and outcomes.\", \"bullets\": [\"Generative AI writes PRDs from simple voice or text input\", \"Auto-links every requirement to OKRs and roadmap items\"]}], \"flow_type\": \"structured\", \"timestamp\": \"2025-08-14T16:00:50.984334\"}"
+  },
+  "actual_flow_type": "structured",
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

@@ -44,3 +44,6 @@ pytest>=7.0.0
 pytest-asyncio>=0.21.0
 
 openai>=1.52.0
+sentence-transformers>=2.2.2
+torch>=1.9.0
+transformers>=4.21.0
