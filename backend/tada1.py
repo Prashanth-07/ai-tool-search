@@ -3586,7 +3586,8 @@ Return ONLY valid JSON in this exact format:
                     client = Groq(api_key=env.groq_api_key)
                     
                     response = client.chat.completions.create(
-                        model="moonshotai/kimi-k2-instruct",
+                        # model="moonshotai/kimi-k2-instruct",
+                        model="openai/gpt-oss-120b",
                         messages=[
                             {"role": "system", "content": selection_system_prompt},
                             {"role": "user", "content": selection_user_prompt}
@@ -3964,7 +3965,8 @@ Generate descriptions and bullets for these tools that specifically address how 
         client = Groq(api_key=env.groq_api_key)
         
         response = client.chat.completions.create(
-            model="moonshotai/kimi-k2-instruct",
+            model="openai/gpt-oss-120b",
+            # model="moonshotai/kimi-k2-instruct",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}

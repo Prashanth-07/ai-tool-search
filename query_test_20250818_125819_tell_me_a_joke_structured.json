@@ -1,0 +1,351 @@
+{
+  "timestamp": "2025-08-18T12:58:19.468557",
+  "input_query": "tell me a joke",
+  "flow_type": "structured",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/2.0"
+    },
+    "flow_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 15,
+    "tool_ids": [
+      "6855593427c6eba075dcb829",
+      "68555bfe27c6eba075dcb900",
+      "6845a885b32d4d019ceb39b7",
+      "686bdcfae1d0bbc07e32b9b0",
+      "686286fc062604ba9bec89f6",
+      "686a7b00e1d0bbc07e323a2a",
+      "681cef7763aef50052daa893",
+      "6877d9db05cf1574825252d9",
+      "682f67ddbcf558ef8c314cc1",
+      "6877aeff05cf1574825228f1",
+      "68441d2db32d4d019cb9889d",
+      "68452caab32d4d019cd3a219",
+      "68441980b32d4d019cb8fc9d",
+      "681da33663aef50052db4147",
+      "68983825cc6937f85277a261"
+    ],
+    "tools": [
+      {
+        "id": "6855593427c6eba075dcb829",
+        "name": "Grok 3",
+        "description": "Grok\u202f3\u2019s lively conversational style and powerful reasoning modes let you ask for a joke and receive witty, context\u2011rich humor instantly, whether you need a quick one\u2011liner or a more elaborate punchline.",
+        "bullets": [
+          "Lively chat personality generates natural\u2011sounding jokes on demand",
+          "Big\u202fBrain mode can craft complex, multi\u2011step jokes or funny stories"
+        ]
+      },
+      {
+        "id": "68555bfe27c6eba075dcb900",
+        "name": "Grok 2",
+        "description": "Grok\u202f2 includes a dedicated Fun interaction mode and real\u2011time web access, making it perfect for requesting current\u2011trending jokes or meme\u2011style humor directly in the chat.",
+        "bullets": [
+          "Fun mode tailors responses to be casual and jokey",
+          "Live web retrieval pulls up\u2011to\u2011date humor trends for fresh jokes"
+        ]
+      },
+      {
+        "id": "6845a885b32d4d019ceb39b7",
+        "name": "Poe AI",
+        "description": "Poe AI aggregates dozens of top\u2011tier models, so you can pick the one that tells jokes best\u2014whether you prefer a witty GPT\u20114 style or a dry Claude humor\u2014right from a single interface.",
+        "bullets": [
+          "Switch between multiple AI models to find the funniest style",
+          "One\u2011click model selection lets you compare joke outputs instantly"
+        ]
+      },
+      {
+        "id": "686bdcfae1d0bbc07e32b9b0",
+        "name": "Mfuniko",
+        "description": "Mfuniko gives you a unified hub to query any of the leading LLMs for jokes, letting you choose the model that matches your humor preference while only paying for the tokens you use.",
+        "bullets": [
+          "Centralized access to ChatGPT, Claude, Gemini, etc., for joke generation",
+          "Pay\u2011as\u2011you\u2011go pricing means you only spend on the jokes you actually request"
+        ]
+      },
+      {
+        "id": "686286fc062604ba9bec89f6",
+        "name": "Hoody AI",
+        "description": "Hoody AI\u2019s privacy\u2011first dashboard lets you ask for a joke via text or voice and instantly hear it back, while also letting you compare how different models phrase the same joke.",
+        "bullets": [
+          "Voice input returns spoken jokes for hands\u2011free humor",
+          "Side\u2011by\u2011side model comparison shows varied comedic takes"
+        ]
+      },
+      {
+        "id": "686a7b00e1d0bbc07e323a2a",
+        "name": "Blue",
+        "description": "Blue\u2019s Mac\u2011native integration and AppVision technology can generate a joke about whatever content is on your screen, all triggered by a simple keyboard shortcut.",
+        "bullets": [
+          "Hotkey activation inserts a joke without leaving your current app",
+          "Screen\u2011aware AI creates context\u2011specific jokes based on on\u2011screen information"
+        ]
+      },
+      {
+        "id": "681cef7763aef50052daa893",
+        "name": "BoltAI",
+        "description": "BoltAI embeds AI directly into any macOS text field, so you can request a joke while drafting an email or document and have the punchline inserted instantly.",
+        "bullets": [
+          "Shortcut inserts a joke directly into any Mac text field",
+          "Customizable assistant can be tuned for a specific comedic tone"
+        ]
+      },
+      {
+        "id": "6877d9db05cf1574825252d9",
+        "name": "HeyPat",
+        "description": "HeyPat lives in your favorite messaging apps, allowing you to text \u201cTell me a joke\u201d and receive a quick, witty reply without opening a separate AI platform.",
+        "bullets": [
+          "Works within WhatsApp, Telegram, SMS for instant joke delivery",
+          "No app switching\u2014just send a message and get a humorous response"
+        ]
+      },
+      {
+        "id": "682f67ddbcf558ef8c314cc1",
+        "name": "Moveo.AI",
+        "description": "Moveo.AI lets businesses create a friendly chatbot persona that can sprinkle light\u2011hearted jokes into customer conversations, adding a human touch to automated support.",
+        "bullets": [
+          "No\u2011code bot builder can add a joke\u2011telling module to your support flow",
+          "Deploys across web, mobile and social channels for consistent humor"
+        ]
+      },
+      {
+        "id": "6877aeff05cf1574825228f1",
+        "name": "AskLeaf",
+        "description": "By uploading a FAQ or knowledge base of jokes, AskLeaf transforms static humor content into an interactive chatbot that serves jokes on demand, even in multiple languages.",
+        "bullets": [
+          "Upload a joke knowledge base to enable instant, conversational joke retrieval",
+          "Multilingual support delivers jokes to a global audience"
+        ]
+      },
+      {
+        "id": "68441d2db32d4d019cb9889d",
+        "name": "Juicy Chat AI",
+        "description": "JuicyChat.ai is an NSFW\u2011focused AI character chat platform designed for immersive, spicy, role\u2011play interactions. Featuring AI\u2011generated visuals, voice synthesis, deep memory, and persona customization, it creates personalized virtual companions for storytelling and adult-themed conversations",
+        "bullets": [
+          "Multimodal interaction: Visuals",
+          "voice"
+        ]
+      },
+      {
+        "id": "68452caab32d4d019cd3a219",
+        "name": "HeyHoney",
+        "description": "HeyHoney.ai is an AI-powered NSFW (Not Safe For Work) chatbot and virtual companion platform. It is specifically designed to provide users with an uncensored, intimate, and interactive chat experience with a virtual \"sexy companion,\" offering everything from flirty banter to deeper connections and explicit conversations, all within a confidential and anonymous environment.",
+        "bullets": [
+          "Uncensored Conversation: Provides a space for adult-themed interactions without typical content filters.",
+          "High Availability: The AI companion is accessible 24/7 for immediate interaction."
+        ]
+      },
+      {
+        "id": "68441980b32d4d019cb8fc9d",
+        "name": "Crush On AI",
+        "description": "CrushOn.AI is an AI-powered conversational platform primarily known for its unfiltered NSFW (Not Safe For Work) character AI chat experiences. It allows users to create and interact with a vast array of AI characters, from diverse categories like anime, gaming, and celebrities, to completely custom-designed companions. The platform emphasizes user freedom, emotional plausibility, and contextual richness in conversations, aiming to provide immersive and personalized AI companionship.",
+        "bullets": [
+          "Unrestricted Content: The freedom from filters for NSFW content is a significant draw for users seeking uncensored interactions.",
+          "Deep Character Customization: Extensive options to define personality"
+        ]
+      },
+      {
+        "id": "681da33663aef50052db4147",
+        "name": "Memedesk",
+        "description": "MemeDeck is an innovative platform designed to turn communities into viral content creators. By leveraging AI-powered meme creation, MemeDeck allows users to generate engaging and shareable memes, particularly for crypto projects. It aims to amplify the reach and impact of memes within the digital ecosystem, making it easier for communities to participate in the memecoin revolution.",
+        "bullets": [
+          "Ease of Use: AI assistance makes meme creation accessible to everyone",
+          "regardless of design skills."
+        ]
+      },
+      {
+        "id": "68983825cc6937f85277a261",
+        "name": "AI RoastBot",
+        "description": "AI RoastBot is an AI-powered platform that lets you upload images and receive personalized, humorous roasts from a variety of AI \"personalities.\" From selfies to memes, you\u2019ll get quick, witty, and shareable roast images featuring your picture and the AI\u2019s burn\u2014all delivered in a fun and respectful style.",
+        "bullets": [
+          "Delivers truly fast comedic content that\u2019s perfect for social sharing.",
+          "Varied roast styles let users choose personality or tone they enjoy."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6855593427c6eba075dcb829",
+      "68555bfe27c6eba075dcb900",
+      "6845a885b32d4d019ceb39b7",
+      "686bdcfae1d0bbc07e32b9b0",
+      "686286fc062604ba9bec89f6",
+      "686a7b00e1d0bbc07e323a2a",
+      "681cef7763aef50052daa893",
+      "6877d9db05cf1574825252d9",
+      "682f67ddbcf558ef8c314cc1",
+      "6877aeff05cf1574825228f1",
+      "68441d2db32d4d019cb9889d",
+      "68452caab32d4d019cd3a219",
+      "68441980b32d4d019cb8fc9d",
+      "681da33663aef50052db4147",
+      "68983825cc6937f85277a261"
+    ],
+    "tools": [
+      {
+        "id": "6855593427c6eba075dcb829",
+        "name": "Grok 3",
+        "description": "Grok\u202f3\u2019s lively conversational style and powerful reasoning modes let you ask for a joke and receive witty, context\u2011rich humor instantly, whether you need a quick one\u2011liner or a more elaborate punchline.",
+        "bullets": [
+          "Lively chat personality generates natural\u2011sounding jokes on demand",
+          "Big\u202fBrain mode can craft complex, multi\u2011step jokes or funny stories"
+        ]
+      },
+      {
+        "id": "68555bfe27c6eba075dcb900",
+        "name": "Grok 2",
+        "description": "Grok\u202f2 includes a dedicated Fun interaction mode and real\u2011time web access, making it perfect for requesting current\u2011trending jokes or meme\u2011style humor directly in the chat.",
+        "bullets": [
+          "Fun mode tailors responses to be casual and jokey",
+          "Live web retrieval pulls up\u2011to\u2011date humor trends for fresh jokes"
+        ]
+      },
+      {
+        "id": "6845a885b32d4d019ceb39b7",
+        "name": "Poe AI",
+        "description": "Poe AI aggregates dozens of top\u2011tier models, so you can pick the one that tells jokes best\u2014whether you prefer a witty GPT\u20114 style or a dry Claude humor\u2014right from a single interface.",
+        "bullets": [
+          "Switch between multiple AI models to find the funniest style",
+          "One\u2011click model selection lets you compare joke outputs instantly"
+        ]
+      },
+      {
+        "id": "686bdcfae1d0bbc07e32b9b0",
+        "name": "Mfuniko",
+        "description": "Mfuniko gives you a unified hub to query any of the leading LLMs for jokes, letting you choose the model that matches your humor preference while only paying for the tokens you use.",
+        "bullets": [
+          "Centralized access to ChatGPT, Claude, Gemini, etc., for joke generation",
+          "Pay\u2011as\u2011you\u2011go pricing means you only spend on the jokes you actually request"
+        ]
+      },
+      {
+        "id": "686286fc062604ba9bec89f6",
+        "name": "Hoody AI",
+        "description": "Hoody AI\u2019s privacy\u2011first dashboard lets you ask for a joke via text or voice and instantly hear it back, while also letting you compare how different models phrase the same joke.",
+        "bullets": [
+          "Voice input returns spoken jokes for hands\u2011free humor",
+          "Side\u2011by\u2011side model comparison shows varied comedic takes"
+        ]
+      },
+      {
+        "id": "686a7b00e1d0bbc07e323a2a",
+        "name": "Blue",
+        "description": "Blue\u2019s Mac\u2011native integration and AppVision technology can generate a joke about whatever content is on your screen, all triggered by a simple keyboard shortcut.",
+        "bullets": [
+          "Hotkey activation inserts a joke without leaving your current app",
+          "Screen\u2011aware AI creates context\u2011specific jokes based on on\u2011screen information"
+        ]
+      },
+      {
+        "id": "681cef7763aef50052daa893",
+        "name": "BoltAI",
+        "description": "BoltAI embeds AI directly into any macOS text field, so you can request a joke while drafting an email or document and have the punchline inserted instantly.",
+        "bullets": [
+          "Shortcut inserts a joke directly into any Mac text field",
+          "Customizable assistant can be tuned for a specific comedic tone"
+        ]
+      },
+      {
+        "id": "6877d9db05cf1574825252d9",
+        "name": "HeyPat",
+        "description": "HeyPat lives in your favorite messaging apps, allowing you to text \u201cTell me a joke\u201d and receive a quick, witty reply without opening a separate AI platform.",
+        "bullets": [
+          "Works within WhatsApp, Telegram, SMS for instant joke delivery",
+          "No app switching\u2014just send a message and get a humorous response"
+        ]
+      },
+      {
+        "id": "682f67ddbcf558ef8c314cc1",
+        "name": "Moveo.AI",
+        "description": "Moveo.AI lets businesses create a friendly chatbot persona that can sprinkle light\u2011hearted jokes into customer conversations, adding a human touch to automated support.",
+        "bullets": [
+          "No\u2011code bot builder can add a joke\u2011telling module to your support flow",
+          "Deploys across web, mobile and social channels for consistent humor"
+        ]
+      },
+      {
+        "id": "6877aeff05cf1574825228f1",
+        "name": "AskLeaf",
+        "description": "By uploading a FAQ or knowledge base of jokes, AskLeaf transforms static humor content into an interactive chatbot that serves jokes on demand, even in multiple languages.",
+        "bullets": [
+          "Upload a joke knowledge base to enable instant, conversational joke retrieval",
+          "Multilingual support delivers jokes to a global audience"
+        ]
+      },
+      {
+        "id": "68441d2db32d4d019cb9889d",
+        "name": "Juicy Chat AI",
+        "description": "JuicyChat.ai is an NSFW\u2011focused AI character chat platform designed for immersive, spicy, role\u2011play interactions. Featuring AI\u2011generated visuals, voice synthesis, deep memory, and persona customization, it creates personalized virtual companions for storytelling and adult-themed conversations",
+        "bullets": [
+          "Multimodal interaction: Visuals",
+          "voice"
+        ]
+      },
+      {
+        "id": "68452caab32d4d019cd3a219",
+        "name": "HeyHoney",
+        "description": "HeyHoney.ai is an AI-powered NSFW (Not Safe For Work) chatbot and virtual companion platform. It is specifically designed to provide users with an uncensored, intimate, and interactive chat experience with a virtual \"sexy companion,\" offering everything from flirty banter to deeper connections and explicit conversations, all within a confidential and anonymous environment.",
+        "bullets": [
+          "Uncensored Conversation: Provides a space for adult-themed interactions without typical content filters.",
+          "High Availability: The AI companion is accessible 24/7 for immediate interaction."
+        ]
+      },
+      {
+        "id": "68441980b32d4d019cb8fc9d",
+        "name": "Crush On AI",
+        "description": "CrushOn.AI is an AI-powered conversational platform primarily known for its unfiltered NSFW (Not Safe For Work) character AI chat experiences. It allows users to create and interact with a vast array of AI characters, from diverse categories like anime, gaming, and celebrities, to completely custom-designed companions. The platform emphasizes user freedom, emotional plausibility, and contextual richness in conversations, aiming to provide immersive and personalized AI companionship.",
+        "bullets": [
+          "Unrestricted Content: The freedom from filters for NSFW content is a significant draw for users seeking uncensored interactions.",
+          "Deep Character Customization: Extensive options to define personality"
+        ]
+      },
+      {
+        "id": "681da33663aef50052db4147",
+        "name": "Memedesk",
+        "description": "MemeDeck is an innovative platform designed to turn communities into viral content creators. By leveraging AI-powered meme creation, MemeDeck allows users to generate engaging and shareable memes, particularly for crypto projects. It aims to amplify the reach and impact of memes within the digital ecosystem, making it easier for communities to participate in the memecoin revolution.",
+        "bullets": [
+          "Ease of Use: AI assistance makes meme creation accessible to everyone",
+          "regardless of design skills."
+        ]
+      },
+      {
+        "id": "68983825cc6937f85277a261",
+        "name": "AI RoastBot",
+        "description": "AI RoastBot is an AI-powered platform that lets you upload images and receive personalized, humorous roasts from a variety of AI \"personalities.\" From selfies to memes, you\u2019ll get quick, witty, and shareable roast images featuring your picture and the AI\u2019s burn\u2014all delivered in a fun and respectful style.",
+        "bullets": [
+          "Delivers truly fast comedic content that\u2019s perfect for social sharing.",
+          "Varied roast styles let users choose personality or tone they enjoy."
+        ]
+      }
+    ],
+    "flow_type": "structured",
+    "timestamp": "2025-08-18T07:28:34.317609"
+  },
+  "processing_time_seconds": 14.858,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"tool_id\": [\"6855593427c6eba075dcb829\", \"68555bfe27c6eba075dcb900\", \"6845a885b32d4d019ceb39b7\", \"686bdcfae1d0bbc07e32b9b0\", \"686286fc062604ba9bec89f6\", \"686a7b00e1d0bbc07e323a2a\", \"681cef7763aef50052daa893\", \"6877d9db05cf1574825252d9\", \"682f67ddbcf558ef8c314cc1\", \"6877aeff05cf1574825228f1\", \"68441d2db32d4d019cb9889d\", \"68452caab32d4d019cd3a219\", \"68441980b32d4d019cb8fc9d\", \"681da33663aef50052db4147\", \"68983825cc6937f85277a261\"], \"tools\": [{\"id\": \"6855593427c6eba075dcb829\", \"name\": \"Grok 3\", \"description\": \"Grok\\u202f3\\u2019s lively conversational style and powerful reasoning modes let you ask for a joke and receive witty, context\\u2011rich humor instantly, whether you need a quick one\\u2011liner or a more elaborate punchline.\", \"bullets\": [\"Lively chat personality generates natural\\u2011sounding jokes on demand\", \"Big\\u202fBrain mode can craft complex, multi\\u2011step jokes or funny stories\"]}, {\"id\": \"68555bfe27c6eba075dcb900\", \"name\": \"Grok 2\", \"description\": \"Grok\\u202f2 includes a dedicated Fun interaction mode and real\\u2011time web access, making it perfect for requesting current\\u2011trending jokes or meme\\u2011style humor directly in the chat.\", \"bullets\": [\"Fun mode tailors responses to be casual and jokey\", \"Live web retrieval pulls up\\u2011to\\u2011date humor trends for fresh jokes\"]}, {\"id\": \"6845a885b32d4d019ceb39b7\", \"name\": \"Poe AI\", \"description\": \"Poe AI aggregates dozens of top\\u2011tier models, so you can pick the one that tells jokes best\\u2014whether you prefer a witty GPT\\u20114 style or a dry Claude humor\\u2014right from a single interface.\", \"bullets\": [\"Switch between multiple AI models to find the funniest style\", \"One\\u2011click model selection lets you compare joke outputs instantly\"]}, {\"id\": \"686bdcfae1d0bbc07e32b9b0\", \"name\": \"Mfuniko\", \"description\": \"Mfuniko gives you a unified hub to query any of the leading LLMs for jokes, letting you choose the model that matches your humor preference while only paying for the tokens you use.\", \"bullets\": [\"Centralized access to ChatGPT, Claude, Gemini, etc., for joke generation\", \"Pay\\u2011as\\u2011you\\u2011go pricing means you only spend on the jokes you actually request\"]}, {\"id\": \"686286fc062604ba9bec89f6\", \"name\": \"Hoody AI\", \"description\": \"Hoody AI\\u2019s privacy\\u2011first dashboard lets you ask for a joke via text or voice and instantly hear it back, while also letting you compare how different models phrase the same joke.\", \"bullets\": [\"Voice input returns spoken jokes for hands\\u2011free humor\", \"Side\\u2011by\\u2011side model comparison shows varied comedic takes\"]}, {\"id\": \"686a7b00e1d0bbc07e323a2a\", \"name\": \"Blue\", \"description\": \"Blue\\u2019s Mac\\u2011native integration and AppVision technology can generate a joke about whatever content is on your screen, all triggered by a simple keyboard shortcut.\", \"bullets\": [\"Hotkey activation inserts a joke without leaving your current app\", \"Screen\\u2011aware AI creates context\\u2011specific jokes based on on\\u2011screen information\"]}, {\"id\": \"681cef7763aef50052daa893\", \"name\": \"BoltAI\", \"description\": \"BoltAI embeds AI directly into any macOS text field, so you can request a joke while drafting an email or document and have the punchline inserted instantly.\", \"bullets\": [\"Shortcut inserts a joke directly into any Mac text field\", \"Customizable assistant can be tuned for a specific comedic tone\"]}, {\"id\": \"6877d9db05cf1574825252d9\", \"name\": \"HeyPat\", \"description\": \"HeyPat lives in your favorite messaging apps, allowing you to text \\u201cTell me a joke\\u201d and receive a quick, witty reply without opening a separate AI platform.\", \"bullets\": [\"Works within WhatsApp, Telegram, SMS for instant joke delivery\", \"No app switching\\u2014just send a message and get a humorous response\"]}, {\"id\": \"682f67ddbcf558ef8c314cc1\", \"name\": \"Moveo.AI\", \"description\": \"Moveo.AI lets businesses create a friendly chatbot persona that can sprinkle light\\u2011hearted jokes into customer conversations, adding a human touch to automated support.\", \"bullets\": [\"No\\u2011code bot builder can add a joke\\u2011telling module to your support flow\", \"Deploys across web, mobile and social channels for consistent humor\"]}, {\"id\": \"6877aeff05cf1574825228f1\", \"name\": \"AskLeaf\", \"description\": \"By uploading a FAQ or knowledge base of jokes, AskLeaf transforms static humor content into an interactive chatbot that serves jokes on demand, even in multiple languages.\", \"bullets\": [\"Upload a joke knowledge base to enable instant, conversational joke retrieval\", \"Multilingual support delivers jokes to a global audience\"]}, {\"id\": \"68441d2db32d4d019cb9889d\", \"name\": \"Juicy Chat AI\", \"description\": \"JuicyChat.ai is an NSFW\\u2011focused AI character chat platform designed for immersive, spicy, role\\u2011play interactions. Featuring AI\\u2011generated visuals, voice synthesis, deep memory, and persona customization, it creates personalized virtual companions for storytelling and adult-themed conversations\", \"bullets\": [\"Multimodal interaction: Visuals\", \"voice\"]}, {\"id\": \"68452caab32d4d019cd3a219\", \"name\": \"HeyHoney\", \"description\": \"HeyHoney.ai is an AI-powered NSFW (Not Safe For Work) chatbot and virtual companion platform. It is specifically designed to provide users with an uncensored, intimate, and interactive chat experience with a virtual \\\"sexy companion,\\\" offering everything from flirty banter to deeper connections and explicit conversations, all within a confidential and anonymous environment.\", \"bullets\": [\"Uncensored Conversation: Provides a space for adult-themed interactions without typical content filters.\", \"High Availability: The AI companion is accessible 24/7 for immediate interaction.\"]}, {\"id\": \"68441980b32d4d019cb8fc9d\", \"name\": \"Crush On AI\", \"description\": \"CrushOn.AI is an AI-powered conversational platform primarily known for its unfiltered NSFW (Not Safe For Work) character AI chat experiences. It allows users to create and interact with a vast array of AI characters, from diverse categories like anime, gaming, and celebrities, to completely custom-designed companions. The platform emphasizes user freedom, emotional plausibility, and contextual richness in conversations, aiming to provide immersive and personalized AI companionship.\", \"bullets\": [\"Unrestricted Content: The freedom from filters for NSFW content is a significant draw for users seeking uncensored interactions.\", \"Deep Character Customization: Extensive options to define personality\"]}, {\"id\": \"681da33663aef50052db4147\", \"name\": \"Memedesk\", \"description\": \"MemeDeck is an innovative platform designed to turn communities into viral content creators. By leveraging AI-powered meme creation, MemeDeck allows users to generate engaging and shareable memes, particularly for crypto projects. It aims to amplify the reach and impact of memes within the digital ecosystem, making it easier for communities to participate in the memecoin revolution.\", \"bullets\": [\"Ease of Use: AI assistance makes meme creation accessible to everyone\", \"regardless of design skills.\"]}, {\"id\": \"68983825cc6937f85277a261\", \"name\": \"AI RoastBot\", \"description\": \"AI RoastBot is an AI-powered platform that lets you upload images and receive personalized, humorous roasts from a variety of AI \\\"personalities.\\\" From selfies to memes, you\\u2019ll get quick, witty, and shareable roast images featuring your picture and the AI\\u2019s burn\\u2014all delivered in a fun and respectful style.\", \"bullets\": [\"Delivers truly fast comedic content that\\u2019s perfect for social sharing.\", \"Varied roast styles let users choose personality or tone they enjoy.\"]}], \"flow_type\": \"structured\", \"timestamp\": \"2025-08-18T07:28:34.317609\"}"
+  },
+  "actual_flow_type": "structured",
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

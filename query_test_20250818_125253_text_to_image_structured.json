@@ -1,0 +1,591 @@
+{
+  "timestamp": "2025-08-18T12:52:53.626268",
+  "input_query": "text to image",
+  "flow_type": "structured",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/2.0"
+    },
+    "flow_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 27,
+    "tool_ids": [
+      "68445543b32d4d019cbe07bd",
+      "688412548f91ef875c1ac10a",
+      "68596cdd1c16582699a650c9",
+      "6894d784cc6937f852761cdb",
+      "684422a2b32d4d019cba490e",
+      "68a1f42c20d1e32c6f61d4ad",
+      "68983e91cc6937f85277aa0c",
+      "6855690127c6eba075dcc746",
+      "68303f27bcf558ef8c31d658",
+      "689e23db20d1e32c6f5e8356",
+      "6877656005cf15748251f24b",
+      "689ea97f20d1e32c6f5fa546",
+      "6855640a27c6eba075dcc244",
+      "6861680c3482c3b263fa6a75",
+      "686a3516e1d0bbc07e321a8b",
+      "688889978f91ef875c1f12bb",
+      "68a1e71320d1e32c6f61b247",
+      "6856abb8ee78f2aff0d16d36",
+      "6856ac96ee78f2aff0d16df0",
+      "6856addcee78f2aff0d16f6f",
+      "6856aaecee78f2aff0d16c6a",
+      "685e989b1c16582699a7b350",
+      "6856afecee78f2aff0d170f5",
+      "6856aefeee78f2aff0d17032",
+      "6876017805cf157482501768",
+      "687755ad05cf15748251d8ab",
+      "68963a43cc6937f85276d786"
+    ],
+    "tools": [
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio uses the Flux.1 models to turn any textual prompt into high\u2011resolution images, letting creators generate photorealistic or stylized visuals directly from words.",
+        "bullets": [
+          "Supports multiple Flux.1 variants for varied artistic styles",
+          "Generates up to 4\u202fMP images with custom aspect ratios for versatile use"
+        ]
+      },
+      {
+        "id": "688412548f91ef875c1ac10a",
+        "name": "Diffusion Bee",
+        "description": "Diffusion Bee runs Stable Diffusion locally on macOS, enabling offline text\u2011to\u2011image generation without any cloud service, perfect for privacy\u2011focused creators.",
+        "bullets": [
+          "Full offline operation preserves prompt and output privacy",
+          "Includes text\u2011to\u2011image, image\u2011to\u2011image and upscaling in one Mac\u2011native app"
+        ]
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon",
+        "description": "Craiyon offers a free web interface that quickly converts short text prompts into a set of nine AI\u2011generated images, ideal for casual experimentation.",
+        "bullets": [
+          "Unlimited free usage without registration",
+          "Provides quick, nine\u2011image grids for rapid idea exploration"
+        ]
+      },
+      {
+        "id": "6894d784cc6937f852761cdb",
+        "name": "Pixa",
+        "description": "Pixa delivers instant, free text\u2011to\u2011image generation with a minimalist UI, letting users type a description and receive high\u2011quality outputs in seconds.",
+        "bullets": [
+          "No sign\u2011up or paywall \u2013 generate images instantly",
+          "Multiple resolution options to fit social, web, or print needs"
+        ]
+      },
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FLUX AI leverages a cutting\u2011edge 4o image generator to produce detailed visuals from text, with special support for embedding accurate typography within the artwork.",
+        "bullets": [
+          "Creates images with integrated, stylized text for branding or graphics",
+          "Offers both text\u2011to\u2011image and image\u2011to\u2011image workflows for refinement"
+        ]
+      },
+      {
+        "id": "68a1f42c20d1e32c6f61d4ad",
+        "name": "Image-Ai",
+        "description": "Image\u2011AI.pro provides a browser\u2011based, GPT\u20114o\u2011enhanced text\u2011to\u2011image engine that yields studio\u2011quality pictures while offering granular style and lighting controls.",
+        "bullets": [
+          "Granular controls for style, lighting, composition, and color via intuitive sliders",
+          "VIP option unlocks faster generation and higher\u2011resolution exports"
+        ]
+      },
+      {
+        "id": "68983e91cc6937f85277aa0c",
+        "name": "OmniGen",
+        "description": "OmniGen unifies text\u2011to\u2011image generation, editing, and conditional visual tasks in a single model, allowing creators to generate and refine images without switching tools.",
+        "bullets": [
+          "Supports direct text prompts and reference images for iterative editing",
+          "API access enables integration of text\u2011to\u2011image capabilities into external apps"
+        ]
+      },
+      {
+        "id": "6855690127c6eba075dcc746",
+        "name": "Imagen 3",
+        "description": "Imagen\u202f3 from Google DeepMind translates natural\u2011language prompts into photorealistic or stylized images with exceptional detail and accurate text rendering.",
+        "bullets": [
+          "High\u2011fidelity photorealism with advanced lighting and texture handling",
+          "Built\u2011in inpainting/outpainting tools for selective image edits"
+        ]
+      },
+      {
+        "id": "68303f27bcf558ef8c31d658",
+        "name": "Ideogram",
+        "description": "Ideogram specializes in generating images that include precise, aesthetically pleasing typography, making it ideal for marketing graphics and social media posts created from text prompts.",
+        "bullets": [
+          "Accurate text embedding with customizable fonts and styles",
+          "Simple prompt\u2011only interface removes the need for design expertise"
+        ]
+      },
+      {
+        "id": "689e23db20d1e32c6f5e8356",
+        "name": "Bing Image Creator",
+        "description": "Bing Image Creator uses GPT\u20114o and DALL\u00b7E\u202f3 to instantly turn user\u2011provided text into diverse images, accessible directly via Bing or Microsoft Edge.",
+        "bullets": [
+          "Free, web\u2011based generation with instant results across devices",
+          "Leverages powerful GPT\u20114o/DALL\u00b7E\u202f3 models for both photorealistic and artistic outputs"
+        ]
+      },
+      {
+        "id": "6877656005cf15748251f24b",
+        "name": "PromptImage",
+        "description": "PromptImage is an AI-powered tool that enables users to create stunning images simply by providing text descriptions. It aims to overcome common hurdles in visual content creation, such as the time-consuming nature of traditional editing, the high costs of professional design software or stock photos, and the necessity of artistic skill.",
+        "bullets": [
+          "Ease of Use: The simple text-to-image prompt makes it accessible to anyone",
+          "regardless of design experience."
+        ]
+      },
+      {
+        "id": "689ea97f20d1e32c6f5fa546",
+        "name": "CGDream",
+        "description": "CGDream is an AI-powered image generator and creative toolkit that allows users to create, edit, and customize stunning visuals using text, existing images, or 3D models. With features like text-to-image, image-to-image, AI photo editing, 3D rendering, upscaling, inpainting, and 300+ unique filters and styles, CGDream empowers everyone from beginners to professionals to generate original art, commercial visuals, or digital collectibles\u2014all in one intuitive online platform.",
+        "bullets": [
+          "Category: AI Photo & Image Generator",
+          "Feature available"
+        ]
+      },
+      {
+        "id": "6855640a27c6eba075dcc244",
+        "name": "Gemini 2.0 Flash Preview Image",
+        "description": "Gemini\u202f2.0\u202fFlash Preview Image Generation is Google\u2019s experimental vision feature built into the Flash model. It enables developers to generate and edit images alongside text in a conversational manner and supports multi-turn, context-aware visual workflows via the Gemini API or Vertex AI.",
+        "bullets": [
+          "Category: Text to Image",
+          "Feature available"
+        ]
+      },
+      {
+        "id": "6861680c3482c3b263fa6a75",
+        "name": "GenColor AI",
+        "description": "GenColor.ai is a free, web-based AI tool that converts your photos or text prompts into clean, printable coloring pages. Designed for art enthusiasts of all ages, it supports both photo-to-line-art conversions and imaginative scene generation from text\u2014all without requiring signup or payment.",
+        "bullets": [
+          "Instant Creativity: Upload or describe",
+          "and AI delivers results in seconds."
+        ]
+      },
+      {
+        "id": "686a3516e1d0bbc07e321a8b",
+        "name": "StoryArtAI",
+        "description": "StoryArt.ai is an AI-powered tool specifically designed to help users create unique and stunning illustrations, primarily for children's books. Its main purpose is to bring stories to life by generating custom illustrations from simple text prompts, allowing imaginations to soar without the need for traditional drawing skills.",
+        "bullets": [
+          "Specifically tailored for children's book illustrations.",
+          "Offers a wide and appealing range of illustration styles."
+        ]
+      },
+      {
+        "id": "688889978f91ef875c1f12bb",
+        "name": "Image Pig",
+        "description": "ImagePig is a REST API that provides fast, affordable AI-powered image generation and editing tools. It supports tasks such as photo creation from text prompts, background removal, upscaling, face swapping, and outpainting. \nDesigned for developers and content teams, ImagePig delivers API-based image generation across 30+ languages and includes SDKs in Python, Node.js, Rust, and more. Its simple pricing and flexible integration make it ideal for embedding AI imaging capabilities into apps or pipelines.",
+        "bullets": [
+          "Developer-focused API simplifies integration.",
+          "Diverse capabilities\u2014generation"
+        ]
+      },
+      {
+        "id": "68a1e71320d1e32c6f61b247",
+        "name": "Style Art AI",
+        "description": "Style Art AI is an advanced AI image generation platform that allows users to transform text or photos into artworks across more than 30 artistic styles, including anime, cartoons, Disney\u2011inspired imagery, and more. It uses the cutting\u2011edge ChatGPT 4o visual model to create detailed, style\u2011rich images from simple prompts or uploaded images. Whether you're converting wedding photos into Disney\u2011style animations, enhancing travel snapshots into stylish magazine covers, or generating new artwork from scratch.\n Style Art AI makes it easy to produce creative visuals\u2014even without artistic expertise. The platform supports both text\u2011to\u2011image and image\u2011to\u2011image transformation, enabling a broad range of customization and creative expression. Credit usage is flexible, with free daily credits available and paid plans offering increased quotas and enhanced capabilities.",
+        "bullets": [
+          "Extensive style options enable dynamic creativity",
+          "Both text\u2011to\u2011image and image\u2011to\u2011image workflows supported"
+        ]
+      },
+      {
+        "id": "6856abb8ee78f2aff0d16d36",
+        "name": "grok-2-vision-latest",
+        "description": "Grok\u202f2 Vision is xAI\u2019s advanced vision-enabled variant of Grok\u202f2, launched in December\u202f2024. It supports joint text\u202f+\u202fimage inputs with a 32K-token context window, combining image understanding, document QA, visual math reasoning (e.g., MathVista, DocVQA), and photorealistic image generation via FLUX.1 (later complemented by Aurora). It scores state-of-the-art on multimodal tasks.",
+        "bullets": [
+          "State-of-the-art visual math and document Q&A performance",
+          "Combines image analysis and generation via FLUX.1"
+        ]
+      },
+      {
+        "id": "6856ac96ee78f2aff0d16df0",
+        "name": "grok-2-vision-1212",
+        "description": "Grok\u202f2 Vision \u2013 1212 is a December 2024 release of xAI\u2019s multimodal large language model, fine-tuned specifically for image understanding and generation. It supports combined text and image inputs (up to 32,768 tokens) and excels in document question answering, visual math reasoning, object recognition, and photorealistic image generation powered by FLUX.1. It also supports API deployment for developers and enterprises.",
+        "bullets": [
+          "Strong performance in visual math and document-based QA",
+          "Combines image input + generation in a single call"
+        ]
+      },
+      {
+        "id": "6856addcee78f2aff0d16f6f",
+        "name": "grok-2-image",
+        "description": "Grok\u202f2 Image is xAI\u2019s image-generation model integrated into the Grok\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\u2014allowing users to generate, edit, and chat using images\u2014with a 32K-token visual-text context and produces photorealistic outputs.",
+        "bullets": [
+          "Generates high-quality",
+          "realistic images promptly"
+        ]
+      },
+      {
+        "id": "6856aaecee78f2aff0d16c6a",
+        "name": "grok-2-vision",
+        "description": "Grok\u202f2 Vision (also known as Grok\u20112\u2011Vision\u20111212 or grok\u20112\u2011vision\u2011latest) is xAI\u2019s multimodal variant of Grok\u202f2, designed specifically for advanced image understanding and generation. Launched in December\u202f2024, it supports joint text+image inputs up to 32,768 tokens, excelling in visual math reasoning (MathVista), document question answering (DocVQA), object recognition, and style analysis\u2014while also offering photorealistic image creation via the FLUX.1 model.",
+        "bullets": [
+          "Excellent at visual math and doc QA tasks",
+          "Integrated photorealistic image generation via FLUX.1"
+        ]
+      },
+      {
+        "id": "685e989b1c16582699a7b350",
+        "name": "Mistral Pixtral Large",
+        "description": "Pixtral Large is Mistral\u202fAI\u2019s latest multimodal powerhouse, launched November\u202f18,\u202f2024. Built atop the 123B\u2011parameter Mistral Large\u202f2, it features a 124B\u2011parameter multimodal decoder paired with a 1B\u2011parameter vision encoder, and supports a massive 128K\u2011token context window\u2014enabling it to process up to 30 high-resolution images or ~300-page documents.",
+        "bullets": [
+          "SOTA performance across multimodal vision benchmarks",
+          "Massive 128K-token capacity for expansive context"
+        ]
+      },
+      {
+        "id": "6856afecee78f2aff0d170f5",
+        "name": "grok-2-image-1212",
+        "description": "Grok\u202f2 Image 1212 (also known as grok-2-image-1212) is xAI\u2019s December\u202f2024 release of their unified image generation and understanding model. Built on Grok\u202f2, it combines Aurora-powered photorealistic image creation with strong multimodal comprehension\u2014handling image editing, vision QA, chart interpretation, and document analysis\u2014within a single API and 32,768-token context.",
+        "bullets": [
+          "All-in-one vision model for generation and understanding",
+          "Photorealism with Aurora and editing capabilities"
+        ]
+      },
+      {
+        "id": "6856aefeee78f2aff0d17032",
+        "name": "grok-2-image-latest",
+        "description": "Grok\u202f2 Image (a.k.a. Grok\u202f2\u2011image\u2011latest) is xAI\u2019s vision-forward extension of its Grok\u202f2 model. Released in December\u202f2024, it merges photorealistic image generation via Aurora with strong image understanding capabilities\u2014supporting object detection, chart analysis, OCR, and visual reasoning tasks. Operates in a unified multimodal pipeline using text+image inputs up to 32K-token context.",
+        "bullets": [
+          "Fusion of visual reasoning and generation in one model",
+          "Powerful photorealistic Aurora engine"
+        ]
+      },
+      {
+        "id": "6876017805cf157482501768",
+        "name": "Illustration Generator",
+        "description": "Icon 8 Illustration Generator is an AI-powered art maker that creates series of consistent, high-quality illustrations and vector icons in professional art styles crafted by Icons8\u2019s in-house artists. It\u2019s ideal for designers, marketers, and creators who need cohesive visuals without legal concerns.",
+        "bullets": [
+          "Structurally consistent art across multiple images for coherent visual experiences.",
+          "Fully licensed commercial use eliminates legal risk."
+        ]
+      },
+      {
+        "id": "687755ad05cf15748251d8ab",
+        "name": "IllustraAI",
+        "description": "illustration.app (also referred to as Illustra AI based on the URL) is an AI-powered vector illustration generator that allows users to create custom, scalable vector illustrations quickly and easily using simple text prompts. It aims to solve the challenges of generic stock images and expensive custom illustrations by providing a cost-effective and efficient solution for generating unique visuals.",
+        "bullets": [
+          "Fast & Easy Creation: Generates unique illustrations quickly from text prompts",
+          "saving significant time."
+        ]
+      },
+      {
+        "id": "68963a43cc6937f85276d786",
+        "name": "RastAI",
+        "description": "Rast.AI is an innovative AI-powered graphic design platform that offers easy-to-use AI Logo Maker and AI Poster Maker apps, empowering users to create stunning visual designs effortlessly. By leveraging cutting-edge artificial intelligence, Rast.AI transforms simple text inputs and brand details into customizable logos, posters, and graphic designs without the need for complex software or design skills.",
+        "bullets": [
+          "Fast & User-Friendly Design Generation: Create professional-quality logos and posters quickly with AI.",
+          "Extensive Customization Options: Full control over design elements ensures unique outputs."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68445543b32d4d019cbe07bd",
+      "688412548f91ef875c1ac10a",
+      "68596cdd1c16582699a650c9",
+      "6894d784cc6937f852761cdb",
+      "684422a2b32d4d019cba490e",
+      "68a1f42c20d1e32c6f61d4ad",
+      "68983e91cc6937f85277aa0c",
+      "6855690127c6eba075dcc746",
+      "68303f27bcf558ef8c31d658",
+      "689e23db20d1e32c6f5e8356",
+      "6877656005cf15748251f24b",
+      "689ea97f20d1e32c6f5fa546",
+      "6855640a27c6eba075dcc244",
+      "6861680c3482c3b263fa6a75",
+      "686a3516e1d0bbc07e321a8b",
+      "688889978f91ef875c1f12bb",
+      "68a1e71320d1e32c6f61b247",
+      "6856abb8ee78f2aff0d16d36",
+      "6856ac96ee78f2aff0d16df0",
+      "6856addcee78f2aff0d16f6f",
+      "6856aaecee78f2aff0d16c6a",
+      "685e989b1c16582699a7b350",
+      "6856afecee78f2aff0d170f5",
+      "6856aefeee78f2aff0d17032",
+      "6876017805cf157482501768",
+      "687755ad05cf15748251d8ab",
+      "68963a43cc6937f85276d786"
+    ],
+    "tools": [
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen",
+        "description": "Vidu Studio uses the Flux.1 models to turn any textual prompt into high\u2011resolution images, letting creators generate photorealistic or stylized visuals directly from words.",
+        "bullets": [
+          "Supports multiple Flux.1 variants for varied artistic styles",
+          "Generates up to 4\u202fMP images with custom aspect ratios for versatile use"
+        ]
+      },
+      {
+        "id": "688412548f91ef875c1ac10a",
+        "name": "Diffusion Bee",
+        "description": "Diffusion Bee runs Stable Diffusion locally on macOS, enabling offline text\u2011to\u2011image generation without any cloud service, perfect for privacy\u2011focused creators.",
+        "bullets": [
+          "Full offline operation preserves prompt and output privacy",
+          "Includes text\u2011to\u2011image, image\u2011to\u2011image and upscaling in one Mac\u2011native app"
+        ]
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon",
+        "description": "Craiyon offers a free web interface that quickly converts short text prompts into a set of nine AI\u2011generated images, ideal for casual experimentation.",
+        "bullets": [
+          "Unlimited free usage without registration",
+          "Provides quick, nine\u2011image grids for rapid idea exploration"
+        ]
+      },
+      {
+        "id": "6894d784cc6937f852761cdb",
+        "name": "Pixa",
+        "description": "Pixa delivers instant, free text\u2011to\u2011image generation with a minimalist UI, letting users type a description and receive high\u2011quality outputs in seconds.",
+        "bullets": [
+          "No sign\u2011up or paywall \u2013 generate images instantly",
+          "Multiple resolution options to fit social, web, or print needs"
+        ]
+      },
+      {
+        "id": "684422a2b32d4d019cba490e",
+        "name": "FLUX AI",
+        "description": "FLUX AI leverages a cutting\u2011edge 4o image generator to produce detailed visuals from text, with special support for embedding accurate typography within the artwork.",
+        "bullets": [
+          "Creates images with integrated, stylized text for branding or graphics",
+          "Offers both text\u2011to\u2011image and image\u2011to\u2011image workflows for refinement"
+        ]
+      },
+      {
+        "id": "68a1f42c20d1e32c6f61d4ad",
+        "name": "Image-Ai",
+        "description": "Image\u2011AI.pro provides a browser\u2011based, GPT\u20114o\u2011enhanced text\u2011to\u2011image engine that yields studio\u2011quality pictures while offering granular style and lighting controls.",
+        "bullets": [
+          "Granular controls for style, lighting, composition, and color via intuitive sliders",
+          "VIP option unlocks faster generation and higher\u2011resolution exports"
+        ]
+      },
+      {
+        "id": "68983e91cc6937f85277aa0c",
+        "name": "OmniGen",
+        "description": "OmniGen unifies text\u2011to\u2011image generation, editing, and conditional visual tasks in a single model, allowing creators to generate and refine images without switching tools.",
+        "bullets": [
+          "Supports direct text prompts and reference images for iterative editing",
+          "API access enables integration of text\u2011to\u2011image capabilities into external apps"
+        ]
+      },
+      {
+        "id": "6855690127c6eba075dcc746",
+        "name": "Imagen 3",
+        "description": "Imagen\u202f3 from Google DeepMind translates natural\u2011language prompts into photorealistic or stylized images with exceptional detail and accurate text rendering.",
+        "bullets": [
+          "High\u2011fidelity photorealism with advanced lighting and texture handling",
+          "Built\u2011in inpainting/outpainting tools for selective image edits"
+        ]
+      },
+      {
+        "id": "68303f27bcf558ef8c31d658",
+        "name": "Ideogram",
+        "description": "Ideogram specializes in generating images that include precise, aesthetically pleasing typography, making it ideal for marketing graphics and social media posts created from text prompts.",
+        "bullets": [
+          "Accurate text embedding with customizable fonts and styles",
+          "Simple prompt\u2011only interface removes the need for design expertise"
+        ]
+      },
+      {
+        "id": "689e23db20d1e32c6f5e8356",
+        "name": "Bing Image Creator",
+        "description": "Bing Image Creator uses GPT\u20114o and DALL\u00b7E\u202f3 to instantly turn user\u2011provided text into diverse images, accessible directly via Bing or Microsoft Edge.",
+        "bullets": [
+          "Free, web\u2011based generation with instant results across devices",
+          "Leverages powerful GPT\u20114o/DALL\u00b7E\u202f3 models for both photorealistic and artistic outputs"
+        ]
+      },
+      {
+        "id": "6877656005cf15748251f24b",
+        "name": "PromptImage",
+        "description": "PromptImage is an AI-powered tool that enables users to create stunning images simply by providing text descriptions. It aims to overcome common hurdles in visual content creation, such as the time-consuming nature of traditional editing, the high costs of professional design software or stock photos, and the necessity of artistic skill.",
+        "bullets": [
+          "Ease of Use: The simple text-to-image prompt makes it accessible to anyone",
+          "regardless of design experience."
+        ]
+      },
+      {
+        "id": "689ea97f20d1e32c6f5fa546",
+        "name": "CGDream",
+        "description": "CGDream is an AI-powered image generator and creative toolkit that allows users to create, edit, and customize stunning visuals using text, existing images, or 3D models. With features like text-to-image, image-to-image, AI photo editing, 3D rendering, upscaling, inpainting, and 300+ unique filters and styles, CGDream empowers everyone from beginners to professionals to generate original art, commercial visuals, or digital collectibles\u2014all in one intuitive online platform.",
+        "bullets": [
+          "Category: AI Photo & Image Generator",
+          "Feature available"
+        ]
+      },
+      {
+        "id": "6855640a27c6eba075dcc244",
+        "name": "Gemini 2.0 Flash Preview Image",
+        "description": "Gemini\u202f2.0\u202fFlash Preview Image Generation is Google\u2019s experimental vision feature built into the Flash model. It enables developers to generate and edit images alongside text in a conversational manner and supports multi-turn, context-aware visual workflows via the Gemini API or Vertex AI.",
+        "bullets": [
+          "Category: Text to Image",
+          "Feature available"
+        ]
+      },
+      {
+        "id": "6861680c3482c3b263fa6a75",
+        "name": "GenColor AI",
+        "description": "GenColor.ai is a free, web-based AI tool that converts your photos or text prompts into clean, printable coloring pages. Designed for art enthusiasts of all ages, it supports both photo-to-line-art conversions and imaginative scene generation from text\u2014all without requiring signup or payment.",
+        "bullets": [
+          "Instant Creativity: Upload or describe",
+          "and AI delivers results in seconds."
+        ]
+      },
+      {
+        "id": "686a3516e1d0bbc07e321a8b",
+        "name": "StoryArtAI",
+        "description": "StoryArt.ai is an AI-powered tool specifically designed to help users create unique and stunning illustrations, primarily for children's books. Its main purpose is to bring stories to life by generating custom illustrations from simple text prompts, allowing imaginations to soar without the need for traditional drawing skills.",
+        "bullets": [
+          "Specifically tailored for children's book illustrations.",
+          "Offers a wide and appealing range of illustration styles."
+        ]
+      },
+      {
+        "id": "688889978f91ef875c1f12bb",
+        "name": "Image Pig",
+        "description": "ImagePig is a REST API that provides fast, affordable AI-powered image generation and editing tools. It supports tasks such as photo creation from text prompts, background removal, upscaling, face swapping, and outpainting. \nDesigned for developers and content teams, ImagePig delivers API-based image generation across 30+ languages and includes SDKs in Python, Node.js, Rust, and more. Its simple pricing and flexible integration make it ideal for embedding AI imaging capabilities into apps or pipelines.",
+        "bullets": [
+          "Developer-focused API simplifies integration.",
+          "Diverse capabilities\u2014generation"
+        ]
+      },
+      {
+        "id": "68a1e71320d1e32c6f61b247",
+        "name": "Style Art AI",
+        "description": "Style Art AI is an advanced AI image generation platform that allows users to transform text or photos into artworks across more than 30 artistic styles, including anime, cartoons, Disney\u2011inspired imagery, and more. It uses the cutting\u2011edge ChatGPT 4o visual model to create detailed, style\u2011rich images from simple prompts or uploaded images. Whether you're converting wedding photos into Disney\u2011style animations, enhancing travel snapshots into stylish magazine covers, or generating new artwork from scratch.\n Style Art AI makes it easy to produce creative visuals\u2014even without artistic expertise. The platform supports both text\u2011to\u2011image and image\u2011to\u2011image transformation, enabling a broad range of customization and creative expression. Credit usage is flexible, with free daily credits available and paid plans offering increased quotas and enhanced capabilities.",
+        "bullets": [
+          "Extensive style options enable dynamic creativity",
+          "Both text\u2011to\u2011image and image\u2011to\u2011image workflows supported"
+        ]
+      },
+      {
+        "id": "6856abb8ee78f2aff0d16d36",
+        "name": "grok-2-vision-latest",
+        "description": "Grok\u202f2 Vision is xAI\u2019s advanced vision-enabled variant of Grok\u202f2, launched in December\u202f2024. It supports joint text\u202f+\u202fimage inputs with a 32K-token context window, combining image understanding, document QA, visual math reasoning (e.g., MathVista, DocVQA), and photorealistic image generation via FLUX.1 (later complemented by Aurora). It scores state-of-the-art on multimodal tasks.",
+        "bullets": [
+          "State-of-the-art visual math and document Q&A performance",
+          "Combines image analysis and generation via FLUX.1"
+        ]
+      },
+      {
+        "id": "6856ac96ee78f2aff0d16df0",
+        "name": "grok-2-vision-1212",
+        "description": "Grok\u202f2 Vision \u2013 1212 is a December 2024 release of xAI\u2019s multimodal large language model, fine-tuned specifically for image understanding and generation. It supports combined text and image inputs (up to 32,768 tokens) and excels in document question answering, visual math reasoning, object recognition, and photorealistic image generation powered by FLUX.1. It also supports API deployment for developers and enterprises.",
+        "bullets": [
+          "Strong performance in visual math and document-based QA",
+          "Combines image input + generation in a single call"
+        ]
+      },
+      {
+        "id": "6856addcee78f2aff0d16f6f",
+        "name": "grok-2-image",
+        "description": "Grok\u202f2 Image is xAI\u2019s image-generation model integrated into the Grok\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\u2014allowing users to generate, edit, and chat using images\u2014with a 32K-token visual-text context and produces photorealistic outputs.",
+        "bullets": [
+          "Generates high-quality",
+          "realistic images promptly"
+        ]
+      },
+      {
+        "id": "6856aaecee78f2aff0d16c6a",
+        "name": "grok-2-vision",
+        "description": "Grok\u202f2 Vision (also known as Grok\u20112\u2011Vision\u20111212 or grok\u20112\u2011vision\u2011latest) is xAI\u2019s multimodal variant of Grok\u202f2, designed specifically for advanced image understanding and generation. Launched in December\u202f2024, it supports joint text+image inputs up to 32,768 tokens, excelling in visual math reasoning (MathVista), document question answering (DocVQA), object recognition, and style analysis\u2014while also offering photorealistic image creation via the FLUX.1 model.",
+        "bullets": [
+          "Excellent at visual math and doc QA tasks",
+          "Integrated photorealistic image generation via FLUX.1"
+        ]
+      },
+      {
+        "id": "685e989b1c16582699a7b350",
+        "name": "Mistral Pixtral Large",
+        "description": "Pixtral Large is Mistral\u202fAI\u2019s latest multimodal powerhouse, launched November\u202f18,\u202f2024. Built atop the 123B\u2011parameter Mistral Large\u202f2, it features a 124B\u2011parameter multimodal decoder paired with a 1B\u2011parameter vision encoder, and supports a massive 128K\u2011token context window\u2014enabling it to process up to 30 high-resolution images or ~300-page documents.",
+        "bullets": [
+          "SOTA performance across multimodal vision benchmarks",
+          "Massive 128K-token capacity for expansive context"
+        ]
+      },
+      {
+        "id": "6856afecee78f2aff0d170f5",
+        "name": "grok-2-image-1212",
+        "description": "Grok\u202f2 Image 1212 (also known as grok-2-image-1212) is xAI\u2019s December\u202f2024 release of their unified image generation and understanding model. Built on Grok\u202f2, it combines Aurora-powered photorealistic image creation with strong multimodal comprehension\u2014handling image editing, vision QA, chart interpretation, and document analysis\u2014within a single API and 32,768-token context.",
+        "bullets": [
+          "All-in-one vision model for generation and understanding",
+          "Photorealism with Aurora and editing capabilities"
+        ]
+      },
+      {
+        "id": "6856aefeee78f2aff0d17032",
+        "name": "grok-2-image-latest",
+        "description": "Grok\u202f2 Image (a.k.a. Grok\u202f2\u2011image\u2011latest) is xAI\u2019s vision-forward extension of its Grok\u202f2 model. Released in December\u202f2024, it merges photorealistic image generation via Aurora with strong image understanding capabilities\u2014supporting object detection, chart analysis, OCR, and visual reasoning tasks. Operates in a unified multimodal pipeline using text+image inputs up to 32K-token context.",
+        "bullets": [
+          "Fusion of visual reasoning and generation in one model",
+          "Powerful photorealistic Aurora engine"
+        ]
+      },
+      {
+        "id": "6876017805cf157482501768",
+        "name": "Illustration Generator",
+        "description": "Icon 8 Illustration Generator is an AI-powered art maker that creates series of consistent, high-quality illustrations and vector icons in professional art styles crafted by Icons8\u2019s in-house artists. It\u2019s ideal for designers, marketers, and creators who need cohesive visuals without legal concerns.",
+        "bullets": [
+          "Structurally consistent art across multiple images for coherent visual experiences.",
+          "Fully licensed commercial use eliminates legal risk."
+        ]
+      },
+      {
+        "id": "687755ad05cf15748251d8ab",
+        "name": "IllustraAI",
+        "description": "illustration.app (also referred to as Illustra AI based on the URL) is an AI-powered vector illustration generator that allows users to create custom, scalable vector illustrations quickly and easily using simple text prompts. It aims to solve the challenges of generic stock images and expensive custom illustrations by providing a cost-effective and efficient solution for generating unique visuals.",
+        "bullets": [
+          "Fast & Easy Creation: Generates unique illustrations quickly from text prompts",
+          "saving significant time."
+        ]
+      },
+      {
+        "id": "68963a43cc6937f85276d786",
+        "name": "RastAI",
+        "description": "Rast.AI is an innovative AI-powered graphic design platform that offers easy-to-use AI Logo Maker and AI Poster Maker apps, empowering users to create stunning visual designs effortlessly. By leveraging cutting-edge artificial intelligence, Rast.AI transforms simple text inputs and brand details into customizable logos, posters, and graphic designs without the need for complex software or design skills.",
+        "bullets": [
+          "Fast & User-Friendly Design Generation: Create professional-quality logos and posters quickly with AI.",
+          "Extensive Customization Options: Full control over design elements ensures unique outputs."
+        ]
+      }
+    ],
+    "flow_type": "structured",
+    "timestamp": "2025-08-18T07:23:07.911917"
+  },
+  "processing_time_seconds": 14.296,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"tool_id\": [\"68445543b32d4d019cbe07bd\", \"688412548f91ef875c1ac10a\", \"68596cdd1c16582699a650c9\", \"6894d784cc6937f852761cdb\", \"684422a2b32d4d019cba490e\", \"68a1f42c20d1e32c6f61d4ad\", \"68983e91cc6937f85277aa0c\", \"6855690127c6eba075dcc746\", \"68303f27bcf558ef8c31d658\", \"689e23db20d1e32c6f5e8356\", \"6877656005cf15748251f24b\", \"689ea97f20d1e32c6f5fa546\", \"6855640a27c6eba075dcc244\", \"6861680c3482c3b263fa6a75\", \"686a3516e1d0bbc07e321a8b\", \"688889978f91ef875c1f12bb\", \"68a1e71320d1e32c6f61b247\", \"6856abb8ee78f2aff0d16d36\", \"6856ac96ee78f2aff0d16df0\", \"6856addcee78f2aff0d16f6f\", \"6856aaecee78f2aff0d16c6a\", \"685e989b1c16582699a7b350\", \"6856afecee78f2aff0d170f5\", \"6856aefeee78f2aff0d17032\", \"6876017805cf157482501768\", \"687755ad05cf15748251d8ab\", \"68963a43cc6937f85276d786\"], \"tools\": [{\"id\": \"68445543b32d4d019cbe07bd\", \"name\": \"Vidu Studio Flux AI Image Gen\", \"description\": \"Vidu Studio uses the Flux.1 models to turn any textual prompt into high\\u2011resolution images, letting creators generate photorealistic or stylized visuals directly from words.\", \"bullets\": [\"Supports multiple Flux.1 variants for varied artistic styles\", \"Generates up to 4\\u202fMP images with custom aspect ratios for versatile use\"]}, {\"id\": \"688412548f91ef875c1ac10a\", \"name\": \"Diffusion Bee\", \"description\": \"Diffusion Bee runs Stable Diffusion locally on macOS, enabling offline text\\u2011to\\u2011image generation without any cloud service, perfect for privacy\\u2011focused creators.\", \"bullets\": [\"Full offline operation preserves prompt and output privacy\", \"Includes text\\u2011to\\u2011image, image\\u2011to\\u2011image and upscaling in one Mac\\u2011native app\"]}, {\"id\": \"68596cdd1c16582699a650c9\", \"name\": \"Craiyon\", \"description\": \"Craiyon offers a free web interface that quickly converts short text prompts into a set of nine AI\\u2011generated images, ideal for casual experimentation.\", \"bullets\": [\"Unlimited free usage without registration\", \"Provides quick, nine\\u2011image grids for rapid idea exploration\"]}, {\"id\": \"6894d784cc6937f852761cdb\", \"name\": \"Pixa\", \"description\": \"Pixa delivers instant, free text\\u2011to\\u2011image generation with a minimalist UI, letting users type a description and receive high\\u2011quality outputs in seconds.\", \"bullets\": [\"No sign\\u2011up or paywall \\u2013 generate images instantly\", \"Multiple resolution options to fit social, web, or print needs\"]}, {\"id\": \"684422a2b32d4d019cba490e\", \"name\": \"FLUX AI\", \"description\": \"FLUX AI leverages a cutting\\u2011edge 4o image generator to produce detailed visuals from text, with special support for embedding accurate typography within the artwork.\", \"bullets\": [\"Creates images with integrated, stylized text for branding or graphics\", \"Offers both text\\u2011to\\u2011image and image\\u2011to\\u2011image workflows for refinement\"]}, {\"id\": \"68a1f42c20d1e32c6f61d4ad\", \"name\": \"Image-Ai\", \"description\": \"Image\\u2011AI.pro provides a browser\\u2011based, GPT\\u20114o\\u2011enhanced text\\u2011to\\u2011image engine that yields studio\\u2011quality pictures while offering granular style and lighting controls.\", \"bullets\": [\"Granular controls for style, lighting, composition, and color via intuitive sliders\", \"VIP option unlocks faster generation and higher\\u2011resolution exports\"]}, {\"id\": \"68983e91cc6937f85277aa0c\", \"name\": \"OmniGen\", \"description\": \"OmniGen unifies text\\u2011to\\u2011image generation, editing, and conditional visual tasks in a single model, allowing creators to generate and refine images without switching tools.\", \"bullets\": [\"Supports direct text prompts and reference images for iterative editing\", \"API access enables integration of text\\u2011to\\u2011image capabilities into external apps\"]}, {\"id\": \"6855690127c6eba075dcc746\", \"name\": \"Imagen 3\", \"description\": \"Imagen\\u202f3 from Google DeepMind translates natural\\u2011language prompts into photorealistic or stylized images with exceptional detail and accurate text rendering.\", \"bullets\": [\"High\\u2011fidelity photorealism with advanced lighting and texture handling\", \"Built\\u2011in inpainting/outpainting tools for selective image edits\"]}, {\"id\": \"68303f27bcf558ef8c31d658\", \"name\": \"Ideogram\", \"description\": \"Ideogram specializes in generating images that include precise, aesthetically pleasing typography, making it ideal for marketing graphics and social media posts created from text prompts.\", \"bullets\": [\"Accurate text embedding with customizable fonts and styles\", \"Simple prompt\\u2011only interface removes the need for design expertise\"]}, {\"id\": \"689e23db20d1e32c6f5e8356\", \"name\": \"Bing Image Creator\", \"description\": \"Bing Image Creator uses GPT\\u20114o and DALL\\u00b7E\\u202f3 to instantly turn user\\u2011provided text into diverse images, accessible directly via Bing or Microsoft Edge.\", \"bullets\": [\"Free, web\\u2011based generation with instant results across devices\", \"Leverages powerful GPT\\u20114o/DALL\\u00b7E\\u202f3 models for both photorealistic and artistic outputs\"]}, {\"id\": \"6877656005cf15748251f24b\", \"name\": \"PromptImage\", \"description\": \"PromptImage is an AI-powered tool that enables users to create stunning images simply by providing text descriptions. It aims to overcome common hurdles in visual content creation, such as the time-consuming nature of traditional editing, the high costs of professional design software or stock photos, and the necessity of artistic skill.\", \"bullets\": [\"Ease of Use: The simple text-to-image prompt makes it accessible to anyone\", \"regardless of design experience.\"]}, {\"id\": \"689ea97f20d1e32c6f5fa546\", \"name\": \"CGDream\", \"description\": \"CGDream is an AI-powered image generator and creative toolkit that allows users to create, edit, and customize stunning visuals using text, existing images, or 3D models. With features like text-to-image, image-to-image, AI photo editing, 3D rendering, upscaling, inpainting, and 300+ unique filters and styles, CGDream empowers everyone from beginners to professionals to generate original art, commercial visuals, or digital collectibles\\u2014all in one intuitive online platform.\", \"bullets\": [\"Category: AI Photo & Image Generator\", \"Feature available\"]}, {\"id\": \"6855640a27c6eba075dcc244\", \"name\": \"Gemini 2.0 Flash Preview Image\", \"description\": \"Gemini\\u202f2.0\\u202fFlash Preview Image Generation is Google\\u2019s experimental vision feature built into the Flash model. It enables developers to generate and edit images alongside text in a conversational manner and supports multi-turn, context-aware visual workflows via the Gemini API or Vertex AI.\", \"bullets\": [\"Category: Text to Image\", \"Feature available\"]}, {\"id\": \"6861680c3482c3b263fa6a75\", \"name\": \"GenColor AI\", \"description\": \"GenColor.ai is a free, web-based AI tool that converts your photos or text prompts into clean, printable coloring pages. Designed for art enthusiasts of all ages, it supports both photo-to-line-art conversions and imaginative scene generation from text\\u2014all without requiring signup or payment.\", \"bullets\": [\"Instant Creativity: Upload or describe\", \"and AI delivers results in seconds.\"]}, {\"id\": \"686a3516e1d0bbc07e321a8b\", \"name\": \"StoryArtAI\", \"description\": \"StoryArt.ai is an AI-powered tool specifically designed to help users create unique and stunning illustrations, primarily for children's books. Its main purpose is to bring stories to life by generating custom illustrations from simple text prompts, allowing imaginations to soar without the need for traditional drawing skills.\", \"bullets\": [\"Specifically tailored for children's book illustrations.\", \"Offers a wide and appealing range of illustration styles.\"]}, {\"id\": \"688889978f91ef875c1f12bb\", \"name\": \"Image Pig\", \"description\": \"ImagePig is a REST API that provides fast, affordable AI-powered image generation and editing tools. It supports tasks such as photo creation from text prompts, background removal, upscaling, face swapping, and outpainting. \\nDesigned for developers and content teams, ImagePig delivers API-based image generation across 30+ languages and includes SDKs in Python, Node.js, Rust, and more. Its simple pricing and flexible integration make it ideal for embedding AI imaging capabilities into apps or pipelines.\", \"bullets\": [\"Developer-focused API simplifies integration.\", \"Diverse capabilities\\u2014generation\"]}, {\"id\": \"68a1e71320d1e32c6f61b247\", \"name\": \"Style Art AI\", \"description\": \"Style Art AI is an advanced AI image generation platform that allows users to transform text or photos into artworks across more than 30 artistic styles, including anime, cartoons, Disney\\u2011inspired imagery, and more. It uses the cutting\\u2011edge ChatGPT 4o visual model to create detailed, style\\u2011rich images from simple prompts or uploaded images. Whether you're converting wedding photos into Disney\\u2011style animations, enhancing travel snapshots into stylish magazine covers, or generating new artwork from scratch.\\n Style Art AI makes it easy to produce creative visuals\\u2014even without artistic expertise. The platform supports both text\\u2011to\\u2011image and image\\u2011to\\u2011image transformation, enabling a broad range of customization and creative expression. Credit usage is flexible, with free daily credits available and paid plans offering increased quotas and enhanced capabilities.\", \"bullets\": [\"Extensive style options enable dynamic creativity\", \"Both text\\u2011to\\u2011image and image\\u2011to\\u2011image workflows supported\"]}, {\"id\": \"6856abb8ee78f2aff0d16d36\", \"name\": \"grok-2-vision-latest\", \"description\": \"Grok\\u202f2 Vision is xAI\\u2019s advanced vision-enabled variant of Grok\\u202f2, launched in December\\u202f2024. It supports joint text\\u202f+\\u202fimage inputs with a 32K-token context window, combining image understanding, document QA, visual math reasoning (e.g., MathVista, DocVQA), and photorealistic image generation via FLUX.1 (later complemented by Aurora). It scores state-of-the-art on multimodal tasks.\", \"bullets\": [\"State-of-the-art visual math and document Q&A performance\", \"Combines image analysis and generation via FLUX.1\"]}, {\"id\": \"6856ac96ee78f2aff0d16df0\", \"name\": \"grok-2-vision-1212\", \"description\": \"Grok\\u202f2 Vision \\u2013 1212 is a December 2024 release of xAI\\u2019s multimodal large language model, fine-tuned specifically for image understanding and generation. It supports combined text and image inputs (up to 32,768 tokens) and excels in document question answering, visual math reasoning, object recognition, and photorealistic image generation powered by FLUX.1. It also supports API deployment for developers and enterprises.\", \"bullets\": [\"Strong performance in visual math and document-based QA\", \"Combines image input + generation in a single call\"]}, {\"id\": \"6856addcee78f2aff0d16f6f\", \"name\": \"grok-2-image\", \"description\": \"Grok\\u202f2 Image is xAI\\u2019s image-generation model integrated into the Grok\\u202f2 family, first added in August 2024. Initially powered by FLUX.1 developed by Black Forest Labs, it later shifted to xAI's own Aurora model in December 2024. It supports multimodal input\\u2014allowing users to generate, edit, and chat using images\\u2014with a 32K-token visual-text context and produces photorealistic outputs.\", \"bullets\": [\"Generates high-quality\", \"realistic images promptly\"]}, {\"id\": \"6856aaecee78f2aff0d16c6a\", \"name\": \"grok-2-vision\", \"description\": \"Grok\\u202f2 Vision (also known as Grok\\u20112\\u2011Vision\\u20111212 or grok\\u20112\\u2011vision\\u2011latest) is xAI\\u2019s multimodal variant of Grok\\u202f2, designed specifically for advanced image understanding and generation. Launched in December\\u202f2024, it supports joint text+image inputs up to 32,768 tokens, excelling in visual math reasoning (MathVista), document question answering (DocVQA), object recognition, and style analysis\\u2014while also offering photorealistic image creation via the FLUX.1 model.\", \"bullets\": [\"Excellent at visual math and doc QA tasks\", \"Integrated photorealistic image generation via FLUX.1\"]}, {\"id\": \"685e989b1c16582699a7b350\", \"name\": \"Mistral Pixtral Large\", \"description\": \"Pixtral Large is Mistral\\u202fAI\\u2019s latest multimodal powerhouse, launched November\\u202f18,\\u202f2024. Built atop the 123B\\u2011parameter Mistral Large\\u202f2, it features a 124B\\u2011parameter multimodal decoder paired with a 1B\\u2011parameter vision encoder, and supports a massive 128K\\u2011token context window\\u2014enabling it to process up to 30 high-resolution images or ~300-page documents.\", \"bullets\": [\"SOTA performance across multimodal vision benchmarks\", \"Massive 128K-token capacity for expansive context\"]}, {\"id\": \"6856afecee78f2aff0d170f5\", \"name\": \"grok-2-image-1212\", \"description\": \"Grok\\u202f2 Image 1212 (also known as grok-2-image-1212) is xAI\\u2019s December\\u202f2024 release of their unified image generation and understanding model. Built on Grok\\u202f2, it combines Aurora-powered photorealistic image creation with strong multimodal comprehension\\u2014handling image editing, vision QA, chart interpretation, and document analysis\\u2014within a single API and 32,768-token context.\", \"bullets\": [\"All-in-one vision model for generation and understanding\", \"Photorealism with Aurora and editing capabilities\"]}, {\"id\": \"6856aefeee78f2aff0d17032\", \"name\": \"grok-2-image-latest\", \"description\": \"Grok\\u202f2 Image (a.k.a. Grok\\u202f2\\u2011image\\u2011latest) is xAI\\u2019s vision-forward extension of its Grok\\u202f2 model. Released in December\\u202f2024, it merges photorealistic image generation via Aurora with strong image understanding capabilities\\u2014supporting object detection, chart analysis, OCR, and visual reasoning tasks. Operates in a unified multimodal pipeline using text+image inputs up to 32K-token context.\", \"bullets\": [\"Fusion of visual reasoning and generation in one model\", \"Powerful photorealistic Aurora engine\"]}, {\"id\": \"6876017805cf157482501768\", \"name\": \"Illustration Generator\", \"description\": \"Icon 8 Illustration Generator is an AI-powered art maker that creates series of consistent, high-quality illustrations and vector icons in professional art styles crafted by Icons8\\u2019s in-house artists. It\\u2019s ideal for designers, marketers, and creators who need cohesive visuals without legal concerns.\", \"bullets\": [\"Structurally consistent art across multiple images for coherent visual experiences.\", \"Fully licensed commercial use eliminates legal risk.\"]}, {\"id\": \"687755ad05cf15748251d8ab\", \"name\": \"IllustraAI\", \"description\": \"illustration.app (also referred to as Illustra AI based on the URL) is an AI-powered vector illustration generator that allows users to create custom, scalable vector illustrations quickly and easily using simple text prompts. It aims to solve the challenges of generic stock images and expensive custom illustrations by providing a cost-effective and efficient solution for generating unique visuals.\", \"bullets\": [\"Fast & Easy Creation: Generates unique illustrations quickly from text prompts\", \"saving significant time.\"]}, {\"id\": \"68963a43cc6937f85276d786\", \"name\": \"RastAI\", \"description\": \"Rast.AI is an innovative AI-powered graphic design platform that offers easy-to-use AI Logo Maker and AI Poster Maker apps, empowering users to create stunning visual designs effortlessly. By leveraging cutting-edge artificial intelligence, Rast.AI transforms simple text inputs and brand details into customizable logos, posters, and graphic designs without the need for complex software or design skills.\", \"bullets\": [\"Fast & User-Friendly Design Generation: Create professional-quality logos and posters quickly with AI.\", \"Extensive Customization Options: Full control over design elements ensures unique outputs.\"]}], \"flow_type\": \"structured\", \"timestamp\": \"2025-08-18T07:23:07.911917\"}"
+  },
+  "actual_flow_type": "structured",
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

@@ -1,0 +1,771 @@
+{
+  "timestamp": "2025-08-18T12:53:41.549467",
+  "input_query": "coding tools",
+  "flow_type": "structured",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/2.0"
+    },
+    "flow_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 36,
+    "tool_ids": [
+      "6846a816b32d4d019c036ec3",
+      "684c70bbb939200515463884",
+      "68486dbbb939200515091245",
+      "684c82d4b9392005154a3270",
+      "6850720810a1e47b57c93923",
+      "6848556fb93920051506efa4",
+      "684c5bf3b93920051544ef60",
+      "68472210b939200515f4bc44",
+      "684867d8b93920051508d781",
+      "6818ec34606258b6c075cf5a",
+      "68161b3c65f8e50d48e683e4",
+      "684c8158b939200515499cbc",
+      "684c7bb6b93920051547d675",
+      "6877bd3f05cf157482523290",
+      "6846ae87b32d4d019c045617",
+      "68485ca5b939200515078c03",
+      "6843618eac33a46e0beebe30",
+      "68495092b9392005150bad29",
+      "68775b4b05cf15748251df5e",
+      "68498bf0b9392005151b0653",
+      "684c7f6cb93920051549350a",
+      "686a831ae1d0bbc07e323f89",
+      "684c7442b93920051546767c",
+      "68470ffab939200515f30546",
+      "686560c1015bd4929b397235",
+      "684c769db93920051546b4a7",
+      "684874ccb939200515094d57",
+      "685574c627c6eba075dcd6ea",
+      "685e84c01c16582699a7a886",
+      "68486109b939200515082770",
+      "687687c005cf15748250fed9",
+      "6894966acc6937f85276113a",
+      "6877c72405cf157482523cd3",
+      "684c7a24b939200515475a11",
+      "6876921305cf1574825116f8",
+      "686246a3062604ba9bec8142"
+    ],
+    "tools": [
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot",
+        "description": "GitHub Copilot acts as an AI pair\u2011programmer, delivering context\u2011aware code completions and whole\u2011function suggestions directly in your editor, so you can write code faster and with fewer errors.",
+        "bullets": [
+          "Real\u2011time line\u2011and\u2011block completions across dozens of languages",
+          "Integrated with VS\u202fCode, JetBrains, and Neovim for seamless workflow"
+        ]
+      },
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI",
+        "description": "PearAI provides a local\u2011first, VS\u202fCode\u2011based workspace that unifies multiple LLMs and agents, giving you AI\u2011driven code generation, project scaffolding, and deep code\u2011base awareness for faster development.",
+        "bullets": [
+          "Unified access to GPT\u20114, Claude, LLaMA and more via an AI router",
+          "Local repository context enables accurate, whole\u2011project suggestions"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm AI enhances the Python\u2011focused PyCharm IDE with intelligent completions, refactoring, and AI plug\u2011ins, helping Python developers write, debug, and test code more efficiently.",
+        "bullets": [
+          "Smart Python\u2011specific code assistance and refactoring",
+          "Supports AI plugins like JetBrains AI Assistant for on\u2011demand suggestions"
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed combines ultra\u2011fast, open\u2011source editing with built\u2011in AI assistance and real\u2011time collaboration, letting developers edit large codebases quickly while receiving AI\u2011powered suggestions.",
+        "bullets": [
+          "Native performance for instant opening of massive projects",
+          "Embedded AI and collaborative editing without extra plugins"
+        ]
+      },
+      {
+        "id": "6850720810a1e47b57c93923",
+        "name": "JetBrains IDEs",
+        "description": "JetBrains IDEs deliver language\u2011specific smart editors, robust refactoring, and optional AI assistants, streamlining coding across many languages and frameworks.",
+        "bullets": [
+          "Context\u2011aware code completion and automated refactoring in each JetBrains IDE",
+          "AI assistant plugins available for on\u2011demand code generation"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer offers AI\u2011driven code suggestions and real\u2011time security scans directly inside popular IDEs, especially optimizing code that interacts with AWS services.",
+        "bullets": [
+          "AWS\u2011aware completions and automatic secret detection",
+          "Works in VS\u202fCode, JetBrains IDEs, and Cloud9 with multi\u2011language support"
+        ]
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Sourcegraph Cody",
+        "description": "Sourcegraph Cody provides AI\u2011assisted code completion, chat, and whole\u2011repository awareness, helping developers navigate and modify large codebases efficiently.",
+        "bullets": [
+          "Full\u2011repo context enables accurate suggestions across multiple files",
+          "In\u2011editor chat for instant explanations and code queries"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter integrates AI code completion, debugging help, and natural\u2011language explanations into the browser\u2011based Replit IDE, boosting productivity without leaving the web environment.",
+        "bullets": [
+          "Context\u2011aware suggestions within the Replit web IDE",
+          "Natural\u2011language prompts for debugging and code explanations"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "IntelliCode adds AI\u2011enhanced completions and refactoring recommendations to Visual Studio and VS\u202fCode, learning from millions of open\u2011source projects to suggest best\u2011practice code.",
+        "bullets": [
+          "Personalized models adapt to your team\u2019s coding style",
+          "Multi\u2011language support with deep IDE integration"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "Augment Code delivers real\u2011time AI suggestions, error detection, and smart refactoring inside your editor, helping you write, understand, and optimize code across languages.",
+        "bullets": [
+          "Instant bug highlights with one\u2011click fixes",
+          "AI\u2011driven explanations and refactoring for clearer code"
+        ]
+      },
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks. With tools like Code Generator, Code Assistant, Code Converter, and Unit Test Generator, CodingFleet streamlines the coding process, enabling developers to focus on solving problems rather than writing boilerplate code.",
+        "bullets": [
+          "Fast and easy-to-use tools that work without login.",
+          "Covers 90+ programming languages and frameworks."
+        ]
+      },
+      {
+        "id": "684c8158b939200515499cbc",
+        "name": "trae",
+        "description": "Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process. By leveraging advanced AI capabilities, Trae AI offers adaptive collaboration, smart autocomplete, and real-time code generation features. This tool is tailored to enhance developer productivity by automating tasks, providing intelligent code suggestions, and facilitating better team communication. With support for multiple programming languages and seamless integration with popular development environments, Trae AI is a comprehensive solution for developers of all levels, aiming to boost efficiency and reduce project completion times.",
+        "bullets": [
+          "Reduces manual work in issue triage and PR management.",
+          "Summarizes code changes for faster reviews."
+        ]
+      },
+      {
+        "id": "684c7bb6b93920051547d675",
+        "name": "GitWit",
+        "description": "Gitwit is an open-source, browser-based AI coding platform that combines in-browser development with AI-powered autocomplete, instant deployment, and community collaboration. It brings together code writing, testing, and deployment in one smart, accessible environment.",
+        "bullets": [
+          "Open-source transparency with no vendor lock-in.",
+          "One-click deployment makes testing and demos frictionless."
+        ]
+      },
+      {
+        "id": "6877bd3f05cf157482523290",
+        "name": "Cline - Claude Dev",
+        "description": "Cline is an open\u2011source AI coding agent for VS\u202fCode and compatible editors that automates file creation, code editing, debugging, and CLI commands via natural language instructions. Built using Anthropic\u2019s Claude and the Model Context Protocol (MCP), Cline can perform complex tasks\u2014such as generating new components, fixing errors, running dev servers, and even using the local browser for end-to-end testing\u2014while maintaining safety through user approval and workspace checkpoints",
+        "bullets": [
+          "Supercharges dev workflows with language-level automation.",
+          "Safe and reversible through checkpoint mechanism."
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line. It integrates seamlessly with Git, enabling conversational programming, code editing, and refactoring within your existing development workflow. With Aider, you can modify multiple files at once, get code explanations, and maintain clean version history\u2014all from your terminal.",
+        "bullets": [
+          "Seamless Git Integration: Tracks all changes",
+          "commits automatically"
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "OpenAI Codex",
+        "description": "OpenAI Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code. Built on top of GPT-3, Codex understands and generates code in over a dozen programming languages, including JavaScript, Python, and more. It's the underlying model behind GitHub Copilot and is designed to help developers write code faster, learn new APIs, and prototype projects with simple language commands.",
+        "bullets": [
+          "Intuitive Natural Language Coding: Write functional code using plain English instructions.",
+          "Wide Language Coverage: Supports Python"
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "codex-mini-latest is OpenAI\u2019s lightweight, high-speed AI coding model, fine-tuned from the o4-mini architecture. Designed specifically for use with the Codex CLI, it brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation, debugging, and editing tasks. Despite its compact size, codex-mini-latest delivers impressive performance, making it ideal for developers seeking a fast, cost-effective coding assistant.",
+        "bullets": [
+          "Fast and Responsive: Provides quick feedback",
+          "enhancing productivity during development."
+        ]
+      },
+      {
+        "id": "68495092b9392005150bad29",
+        "name": "Ask Codi",
+        "description": "AskCodi.com is an AI-powered coding assistant designed to simplify and accelerate the software development process. It provides developers with a comprehensive suite of AI tools to generate, refactor, fix, explain, and test code across multiple programming languages and frameworks. AskCodi aims to streamline workflows, enhance productivity, and improve code quality from prototyping to deployment.",
+        "bullets": [
+          "Wide range of specialized AI coding tools in one platform.",
+          "Seamless integration with major IDEs enhances workflow."
+        ]
+      },
+      {
+        "id": "68775b4b05cf15748251df5e",
+        "name": "Aide Dev",
+        "description": "Aide is an AI-powered agent designed to enhance software development workflows, particularly for codebases and Pull Requests (PRs). It claims to outperform competitors like D*vin and holds the #1 ranking on SWE-Bench for codebases, offering automated PR workflows, smart suggestions, and continuous improvements.",
+        "bullets": [
+          "High Performance Claims: The #1 ranking on SWE-Bench suggests a powerful and effective AI agent for coding tasks.",
+          "Effortless Setup: The \"zero setup\" and \"one-click GitHub native integration\" are highly attractive for quick adoption."
+        ]
+      },
+      {
+        "id": "68498bf0b9392005151b0653",
+        "name": "Amazon CodeGuru",
+        "description": "Amazon CodeGuru is a machine learning-powered developer tool from AWS that helps you automate code reviews and optimize application performance. By integrating seamlessly into your development workflow, CodeGuru analyzes your codebase for potential issues, security vulnerabilities, and performance bottlenecks\u2014providing intelligent suggestions to improve code quality and reduce technical debt.",
+        "bullets": [
+          "Automated Code Reviews: Saves time by catching common bugs",
+          "anti-patterns"
+        ]
+      },
+      {
+        "id": "684c7f6cb93920051549350a",
+        "name": "OneCompiler",
+        "description": "OneCompiler is a free, browser-based platform that lets developers write, compile, run, and debug code across 70+ programming languages instantly. It offers a collaborative coding experience, built-in examples, and an easy-to-use interface\u2014ideal for testing snippets, learning, and sharing code.",
+        "bullets": [
+          "Fast",
+          "installation-free coding environment for immediate results."
+        ]
+      },
+      {
+        "id": "686a831ae1d0bbc07e323f89",
+        "name": "CodeSnaps",
+        "description": "Codesnaps.io is a React and Tailwind CSS UI Library primarily designed to help developers build websites and Minimum Viable Products (MVPs) faster and design more efficiently. Its main purpose is to provide instant access to a vast collection of production-ready React and Tailwind CSS components, alongside an AI site generator, eliminating the need for tedious package installations and accelerating the development workflow.",
+        "bullets": [
+          "Significantly speeds up the process of building websites and MVPs.",
+          "Provides direct access to production-ready React and Tailwind CSS components."
+        ]
+      },
+      {
+        "id": "684c7442b93920051546767c",
+        "name": "Replit",
+        "description": "Replit is an all-in-one, browser-based development platform that allows users to write, run, debug, and host code entirely online. It supports instant project creation, real-time collaboration, and deployment without any local setup, making it ideal for learners, teams, and creators looking to build software and applications quickly.",
+        "bullets": [
+          "Instant Setup: Get coding right away in any supported language with no local dependencies.",
+          "Collaborative Editing: Ideal for pair programming"
+        ]
+      },
+      {
+        "id": "68470ffab939200515f30546",
+        "name": "CodeSandbox AI",
+        "description": "CodeSandbox is a powerful cloud-based development platform that enables developers to build, share, and collaborate on web applications entirely in the browser. With instant dev environments, GitHub integration, and real-time collaboration, CodeSandbox streamlines the entire software development workflow\u2014from idea to deployment\u2014without needing to install anything locally.",
+        "bullets": [
+          "Zero Setup Development: Code starts running instantly with no local configuration.",
+          "Live GitHub Integration: Open PRs and branches as live"
+        ]
+      },
+      {
+        "id": "686560c1015bd4929b397235",
+        "name": "JDoodle",
+        "description": "JDoodle is an online compiler and IDE (Integrated Development Environment) that allows developers to write, compile, execute, and share code across more than 70 programming languages\u2014all from the browser. It\u2019s designed for speed, convenience, and accessibility, making it a go-to tool for developers, students, educators, and interviewers who want to run code quickly without setting up a local environment.\nJDoodle offers real-time execution, input/output handling, and collaboration features, including shared sessions and embeddable code snippets for websites or blogs. It\u2019s especially useful for competitive programmers, online coding tests, and educational demos. With its API integration, even companies can use JDoodle to embed live compiler capabilities into their platforms.",
+        "bullets": [
+          "Quick & Lightweight: No installations or logins\u2014code runs instantly in-browser.",
+          "Wide Language Support: Covers all major languages and even some niche ones."
+        ]
+      },
+      {
+        "id": "684c769db93920051546b4a7",
+        "name": "CodeStory",
+        "description": "CodeStory is an AI-native, privacy-focused IDE (a fork of VS Code) that lets humans and AI pair-program together. It supports multi-file editing, proactive error fixing, intelligent code completion, and deep context awareness\u2014all running locally with advanced AI agents to streamline complex development tasks.",
+        "bullets": [
+          "AI-First IDE: Designed specifically for developer + AI collaboration",
+          "not an add\u2011on."
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters. It streamlines C#, VB.NET, ASP.NET, and other .NET language development by offering intelligent suggestions, quick fixes, and deep code navigation features\u2014all designed to help developers write cleaner, faster, and more maintainable code.",
+        "bullets": [
+          "Excellent Refactoring Tools: Apply complex refactors in seconds without risk.",
+          "Intelligent Code Suggestions: Provides real-time inspections and context-specific recommendations."
+        ]
+      },
+      {
+        "id": "685574c627c6eba075dcd6ea",
+        "name": "DeepSeek-Coder-V2",
+        "description": "DeepSeek\u2011Coder\u202fV2 is an open-source, Mixture\u2011of\u2011Experts (MoE) code-focused variant of DeepSeek\u2011V2, purpose-built for code generation, completion, debugging, and mathematical reasoning. Trained with an additional 6\u202ftrillion tokens of code and text, it supports up to 338 programming languages and a massive 128K\u2011token context window, rivaling or exceeding commercial code models in performance.",
+        "bullets": [
+          "Best\u2011in\u2011class open-source code generation",
+          "Huge multi-language support"
+        ]
+      },
+      {
+        "id": "685e84c01c16582699a7a886",
+        "name": "Mistral Codestral 2501",
+        "description": "Codestral\u202f25.01 is Mistral AI\u2019s upgraded code-generation model, released January\u202f13,\u202f2025. Featuring a more efficient architecture and improved tokenizer, it delivers code completion and intelligence about 2\u00d7 faster than its predecessor, with support for fill-in-the-middle (FIM), code correction, test generation, and proficiency in over 80 programming languages, all within a 256K-token context window.",
+        "bullets": [
+          "Industry-leading FIM performance with high pass@1 scores",
+          "Blazingly fast\u2014twice the speed of previous version"
+        ]
+      },
+      {
+        "id": "68486109b939200515082770",
+        "name": "Polycoder",
+        "description": "PolyCoder is an open-source AI code generation model focused on C programming, developed by researchers at Carnegie Mellon University. It is a GPT-2-based model trained on a curated dataset of open-source C code, offering a high-performing, transparent alternative to proprietary code generation tools. PolyCoder is designed to generate syntactically correct and contextually relevant C code, supporting research, educational use, and more privacy-conscious development environments.",
+        "bullets": [
+          "Focused on C: Tailored training allows better performance for C than many general models.",
+          "Open and Free: Available under MIT license with full access to code and data."
+        ]
+      },
+      {
+        "id": "687687c005cf15748250fed9",
+        "name": "Starclouds",
+        "description": "Starclouds is a crowdsourced, open-source collection of machine learning and AI code snippets, templates, and educational resources aimed at helping developers quickly integrate tools like Flask, Django, TensorFlow, NumPy, and OpenAI into their projects. \nIt offers a growing library of practical examples\u2014from basic ML model loading to integrating AI into live apps\u2014simplifying learning and accelerating prototyping for Python developers.",
+        "bullets": [
+          "Great for jumpstarting AI projects.",
+          "Open-source and free."
+        ]
+      },
+      {
+        "id": "6894966acc6937f85276113a",
+        "name": "CRUDERRA",
+        "description": "Cruderra.ai is an AI-driven platform engineered to automate the creation and maintenance of technical documentation for software development teams. It transforms architecture and code into comprehensive, code-backed documentation\u2014including design diagrams, UML, and OpenAPI specs\u2014especially valuable for legacy systems and microservices. The platform supports real-time code scanning, architecture reverse engineering, and keeps documentation aligned with ongoing development changes, helping streamline onboarding, reduce technical debt, and enhance team collaboration.",
+        "bullets": [
+          "Automated architecture tracking tied to the codebase",
+          "Streamlines documentation updates and reduces duplication"
+        ]
+      },
+      {
+        "id": "6877c72405cf157482523cd3",
+        "name": "Nuanced",
+        "description": "Nuanced.dev is a browser extension that brings AI-powered explainability and documentation directly into your code environment. It analyzes blocks of code and auto-generates contextual comments\u2014lining them with plain-English explanations, suggestions for optimization, and potential bug flags. \nDesigned for developers, it supports JavaScript, Python, TypeScript, and more. With integrated GitHub compatibility, Nuanced.dev helps maintain cleaner, more understandable, and peer-review-ready codebases.",
+        "bullets": [
+          "Simplifies documentation; developers stay in flow.",
+          "Identifies potential bugs before runtime."
+        ]
+      },
+      {
+        "id": "684c7a24b939200515475a11",
+        "name": "UI Pilot",
+        "description": "uiPilot is an AI-driven tool that converts natural-language design descriptions into pixel-perfect UI components instantly. It helps developers and designers create modern front-end elements\u2014like badges, hero sections, and navbars\u2014quickly and efficiently.",
+        "bullets": [
+          "Accelerates front-end development through AI-generated UI components.",
+          "Combines creativity and code with a simple natural-language interface."
+        ]
+      },
+      {
+        "id": "6876921305cf1574825116f8",
+        "name": "Text To Flowchart Converter",
+        "description": "TextToFlowchart is an AI-based, no-code diagram tool that instantly transforms text input into flowcharts, BPMN diagrams, org charts, and visual processes. Users simply paste plain text or structured bullet points, and the AI interprets steps, decisions, and sequences into polished visual diagrams. \nThese diagrams are fully editable, letting you adjust node placement, flow arrows, labels, and styles. The platform supports download in PNG or SVG and offers direct embedding capabilities for documentation, presentations, training materials, or planning tools\u2014making diagram creation fast, intuitive, and collaborative.",
+        "bullets": [
+          "Saves hours over manual diagramming.",
+          "Easy to use for non-technical users."
+        ]
+      },
+      {
+        "id": "686246a3062604ba9bec8142",
+        "name": "TopDev",
+        "description": "TopDev.online is an AI-powered developer toolkit and resource hub designed to streamline coding, debugging, and learning for programmers of all levels. It offers AI-assisted code generation, real-time error fixing, and curated learning paths to help developers build projects faster and more efficiently.",
+        "bullets": [
+          "Ease of Use: Clean interface with minimal setup required.",
+          "Multi-Language Support: Covers Python"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6846a816b32d4d019c036ec3",
+      "684c70bbb939200515463884",
+      "68486dbbb939200515091245",
+      "684c82d4b9392005154a3270",
+      "6850720810a1e47b57c93923",
+      "6848556fb93920051506efa4",
+      "684c5bf3b93920051544ef60",
+      "68472210b939200515f4bc44",
+      "684867d8b93920051508d781",
+      "6818ec34606258b6c075cf5a",
+      "68161b3c65f8e50d48e683e4",
+      "684c8158b939200515499cbc",
+      "684c7bb6b93920051547d675",
+      "6877bd3f05cf157482523290",
+      "6846ae87b32d4d019c045617",
+      "68485ca5b939200515078c03",
+      "6843618eac33a46e0beebe30",
+      "68495092b9392005150bad29",
+      "68775b4b05cf15748251df5e",
+      "68498bf0b9392005151b0653",
+      "684c7f6cb93920051549350a",
+      "686a831ae1d0bbc07e323f89",
+      "684c7442b93920051546767c",
+      "68470ffab939200515f30546",
+      "686560c1015bd4929b397235",
+      "684c769db93920051546b4a7",
+      "684874ccb939200515094d57",
+      "685574c627c6eba075dcd6ea",
+      "685e84c01c16582699a7a886",
+      "68486109b939200515082770",
+      "687687c005cf15748250fed9",
+      "6894966acc6937f85276113a",
+      "6877c72405cf157482523cd3",
+      "684c7a24b939200515475a11",
+      "6876921305cf1574825116f8",
+      "686246a3062604ba9bec8142"
+    ],
+    "tools": [
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot",
+        "description": "GitHub Copilot acts as an AI pair\u2011programmer, delivering context\u2011aware code completions and whole\u2011function suggestions directly in your editor, so you can write code faster and with fewer errors.",
+        "bullets": [
+          "Real\u2011time line\u2011and\u2011block completions across dozens of languages",
+          "Integrated with VS\u202fCode, JetBrains, and Neovim for seamless workflow"
+        ]
+      },
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI",
+        "description": "PearAI provides a local\u2011first, VS\u202fCode\u2011based workspace that unifies multiple LLMs and agents, giving you AI\u2011driven code generation, project scaffolding, and deep code\u2011base awareness for faster development.",
+        "bullets": [
+          "Unified access to GPT\u20114, Claude, LLaMA and more via an AI router",
+          "Local repository context enables accurate, whole\u2011project suggestions"
+        ]
+      },
+      {
+        "id": "68486dbbb939200515091245",
+        "name": "PyCharm AI",
+        "description": "PyCharm AI enhances the Python\u2011focused PyCharm IDE with intelligent completions, refactoring, and AI plug\u2011ins, helping Python developers write, debug, and test code more efficiently.",
+        "bullets": [
+          "Smart Python\u2011specific code assistance and refactoring",
+          "Supports AI plugins like JetBrains AI Assistant for on\u2011demand suggestions"
+        ]
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed",
+        "description": "Zed combines ultra\u2011fast, open\u2011source editing with built\u2011in AI assistance and real\u2011time collaboration, letting developers edit large codebases quickly while receiving AI\u2011powered suggestions.",
+        "bullets": [
+          "Native performance for instant opening of massive projects",
+          "Embedded AI and collaborative editing without extra plugins"
+        ]
+      },
+      {
+        "id": "6850720810a1e47b57c93923",
+        "name": "JetBrains IDEs",
+        "description": "JetBrains IDEs deliver language\u2011specific smart editors, robust refactoring, and optional AI assistants, streamlining coding across many languages and frameworks.",
+        "bullets": [
+          "Context\u2011aware code completion and automated refactoring in each JetBrains IDE",
+          "AI assistant plugins available for on\u2011demand code generation"
+        ]
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer",
+        "description": "Amazon CodeWhisperer offers AI\u2011driven code suggestions and real\u2011time security scans directly inside popular IDEs, especially optimizing code that interacts with AWS services.",
+        "bullets": [
+          "AWS\u2011aware completions and automatic secret detection",
+          "Works in VS\u202fCode, JetBrains IDEs, and Cloud9 with multi\u2011language support"
+        ]
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Sourcegraph Cody",
+        "description": "Sourcegraph Cody provides AI\u2011assisted code completion, chat, and whole\u2011repository awareness, helping developers navigate and modify large codebases efficiently.",
+        "bullets": [
+          "Full\u2011repo context enables accurate suggestions across multiple files",
+          "In\u2011editor chat for instant explanations and code queries"
+        ]
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter",
+        "description": "Replit Ghostwriter integrates AI code completion, debugging help, and natural\u2011language explanations into the browser\u2011based Replit IDE, boosting productivity without leaving the web environment.",
+        "bullets": [
+          "Context\u2011aware suggestions within the Replit web IDE",
+          "Natural\u2011language prompts for debugging and code explanations"
+        ]
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode",
+        "description": "IntelliCode adds AI\u2011enhanced completions and refactoring recommendations to Visual Studio and VS\u202fCode, learning from millions of open\u2011source projects to suggest best\u2011practice code.",
+        "bullets": [
+          "Personalized models adapt to your team\u2019s coding style",
+          "Multi\u2011language support with deep IDE integration"
+        ]
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code",
+        "description": "Augment Code delivers real\u2011time AI suggestions, error detection, and smart refactoring inside your editor, helping you write, understand, and optimize code across languages.",
+        "bullets": [
+          "Instant bug highlights with one\u2011click fixes",
+          "AI\u2011driven explanations and refactoring for clearer code"
+        ]
+      },
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet",
+        "description": "CodingFleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks. With tools like Code Generator, Code Assistant, Code Converter, and Unit Test Generator, CodingFleet streamlines the coding process, enabling developers to focus on solving problems rather than writing boilerplate code.",
+        "bullets": [
+          "Fast and easy-to-use tools that work without login.",
+          "Covers 90+ programming languages and frameworks."
+        ]
+      },
+      {
+        "id": "684c8158b939200515499cbc",
+        "name": "trae",
+        "description": "Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process. By leveraging advanced AI capabilities, Trae AI offers adaptive collaboration, smart autocomplete, and real-time code generation features. This tool is tailored to enhance developer productivity by automating tasks, providing intelligent code suggestions, and facilitating better team communication. With support for multiple programming languages and seamless integration with popular development environments, Trae AI is a comprehensive solution for developers of all levels, aiming to boost efficiency and reduce project completion times.",
+        "bullets": [
+          "Reduces manual work in issue triage and PR management.",
+          "Summarizes code changes for faster reviews."
+        ]
+      },
+      {
+        "id": "684c7bb6b93920051547d675",
+        "name": "GitWit",
+        "description": "Gitwit is an open-source, browser-based AI coding platform that combines in-browser development with AI-powered autocomplete, instant deployment, and community collaboration. It brings together code writing, testing, and deployment in one smart, accessible environment.",
+        "bullets": [
+          "Open-source transparency with no vendor lock-in.",
+          "One-click deployment makes testing and demos frictionless."
+        ]
+      },
+      {
+        "id": "6877bd3f05cf157482523290",
+        "name": "Cline - Claude Dev",
+        "description": "Cline is an open\u2011source AI coding agent for VS\u202fCode and compatible editors that automates file creation, code editing, debugging, and CLI commands via natural language instructions. Built using Anthropic\u2019s Claude and the Model Context Protocol (MCP), Cline can perform complex tasks\u2014such as generating new components, fixing errors, running dev servers, and even using the local browser for end-to-end testing\u2014while maintaining safety through user approval and workspace checkpoints",
+        "bullets": [
+          "Supercharges dev workflows with language-level automation.",
+          "Safe and reversible through checkpoint mechanism."
+        ]
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider",
+        "description": "Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line. It integrates seamlessly with Git, enabling conversational programming, code editing, and refactoring within your existing development workflow. With Aider, you can modify multiple files at once, get code explanations, and maintain clean version history\u2014all from your terminal.",
+        "bullets": [
+          "Seamless Git Integration: Tracks all changes",
+          "commits automatically"
+        ]
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "OpenAI Codex",
+        "description": "OpenAI Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code. Built on top of GPT-3, Codex understands and generates code in over a dozen programming languages, including JavaScript, Python, and more. It's the underlying model behind GitHub Copilot and is designed to help developers write code faster, learn new APIs, and prototype projects with simple language commands.",
+        "bullets": [
+          "Intuitive Natural Language Coding: Write functional code using plain English instructions.",
+          "Wide Language Coverage: Supports Python"
+        ]
+      },
+      {
+        "id": "6843618eac33a46e0beebe30",
+        "name": "OpenAI Codex mini Latest",
+        "description": "codex-mini-latest is OpenAI\u2019s lightweight, high-speed AI coding model, fine-tuned from the o4-mini architecture. Designed specifically for use with the Codex CLI, it brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation, debugging, and editing tasks. Despite its compact size, codex-mini-latest delivers impressive performance, making it ideal for developers seeking a fast, cost-effective coding assistant.",
+        "bullets": [
+          "Fast and Responsive: Provides quick feedback",
+          "enhancing productivity during development."
+        ]
+      },
+      {
+        "id": "68495092b9392005150bad29",
+        "name": "Ask Codi",
+        "description": "AskCodi.com is an AI-powered coding assistant designed to simplify and accelerate the software development process. It provides developers with a comprehensive suite of AI tools to generate, refactor, fix, explain, and test code across multiple programming languages and frameworks. AskCodi aims to streamline workflows, enhance productivity, and improve code quality from prototyping to deployment.",
+        "bullets": [
+          "Wide range of specialized AI coding tools in one platform.",
+          "Seamless integration with major IDEs enhances workflow."
+        ]
+      },
+      {
+        "id": "68775b4b05cf15748251df5e",
+        "name": "Aide Dev",
+        "description": "Aide is an AI-powered agent designed to enhance software development workflows, particularly for codebases and Pull Requests (PRs). It claims to outperform competitors like D*vin and holds the #1 ranking on SWE-Bench for codebases, offering automated PR workflows, smart suggestions, and continuous improvements.",
+        "bullets": [
+          "High Performance Claims: The #1 ranking on SWE-Bench suggests a powerful and effective AI agent for coding tasks.",
+          "Effortless Setup: The \"zero setup\" and \"one-click GitHub native integration\" are highly attractive for quick adoption."
+        ]
+      },
+      {
+        "id": "68498bf0b9392005151b0653",
+        "name": "Amazon CodeGuru",
+        "description": "Amazon CodeGuru is a machine learning-powered developer tool from AWS that helps you automate code reviews and optimize application performance. By integrating seamlessly into your development workflow, CodeGuru analyzes your codebase for potential issues, security vulnerabilities, and performance bottlenecks\u2014providing intelligent suggestions to improve code quality and reduce technical debt.",
+        "bullets": [
+          "Automated Code Reviews: Saves time by catching common bugs",
+          "anti-patterns"
+        ]
+      },
+      {
+        "id": "684c7f6cb93920051549350a",
+        "name": "OneCompiler",
+        "description": "OneCompiler is a free, browser-based platform that lets developers write, compile, run, and debug code across 70+ programming languages instantly. It offers a collaborative coding experience, built-in examples, and an easy-to-use interface\u2014ideal for testing snippets, learning, and sharing code.",
+        "bullets": [
+          "Fast",
+          "installation-free coding environment for immediate results."
+        ]
+      },
+      {
+        "id": "686a831ae1d0bbc07e323f89",
+        "name": "CodeSnaps",
+        "description": "Codesnaps.io is a React and Tailwind CSS UI Library primarily designed to help developers build websites and Minimum Viable Products (MVPs) faster and design more efficiently. Its main purpose is to provide instant access to a vast collection of production-ready React and Tailwind CSS components, alongside an AI site generator, eliminating the need for tedious package installations and accelerating the development workflow.",
+        "bullets": [
+          "Significantly speeds up the process of building websites and MVPs.",
+          "Provides direct access to production-ready React and Tailwind CSS components."
+        ]
+      },
+      {
+        "id": "684c7442b93920051546767c",
+        "name": "Replit",
+        "description": "Replit is an all-in-one, browser-based development platform that allows users to write, run, debug, and host code entirely online. It supports instant project creation, real-time collaboration, and deployment without any local setup, making it ideal for learners, teams, and creators looking to build software and applications quickly.",
+        "bullets": [
+          "Instant Setup: Get coding right away in any supported language with no local dependencies.",
+          "Collaborative Editing: Ideal for pair programming"
+        ]
+      },
+      {
+        "id": "68470ffab939200515f30546",
+        "name": "CodeSandbox AI",
+        "description": "CodeSandbox is a powerful cloud-based development platform that enables developers to build, share, and collaborate on web applications entirely in the browser. With instant dev environments, GitHub integration, and real-time collaboration, CodeSandbox streamlines the entire software development workflow\u2014from idea to deployment\u2014without needing to install anything locally.",
+        "bullets": [
+          "Zero Setup Development: Code starts running instantly with no local configuration.",
+          "Live GitHub Integration: Open PRs and branches as live"
+        ]
+      },
+      {
+        "id": "686560c1015bd4929b397235",
+        "name": "JDoodle",
+        "description": "JDoodle is an online compiler and IDE (Integrated Development Environment) that allows developers to write, compile, execute, and share code across more than 70 programming languages\u2014all from the browser. It\u2019s designed for speed, convenience, and accessibility, making it a go-to tool for developers, students, educators, and interviewers who want to run code quickly without setting up a local environment.\nJDoodle offers real-time execution, input/output handling, and collaboration features, including shared sessions and embeddable code snippets for websites or blogs. It\u2019s especially useful for competitive programmers, online coding tests, and educational demos. With its API integration, even companies can use JDoodle to embed live compiler capabilities into their platforms.",
+        "bullets": [
+          "Quick & Lightweight: No installations or logins\u2014code runs instantly in-browser.",
+          "Wide Language Support: Covers all major languages and even some niche ones."
+        ]
+      },
+      {
+        "id": "684c769db93920051546b4a7",
+        "name": "CodeStory",
+        "description": "CodeStory is an AI-native, privacy-focused IDE (a fork of VS Code) that lets humans and AI pair-program together. It supports multi-file editing, proactive error fixing, intelligent code completion, and deep context awareness\u2014all running locally with advanced AI agents to streamline complex development tasks.",
+        "bullets": [
+          "AI-First IDE: Designed specifically for developer + AI collaboration",
+          "not an add\u2011on."
+        ]
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper",
+        "description": "ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters. It streamlines C#, VB.NET, ASP.NET, and other .NET language development by offering intelligent suggestions, quick fixes, and deep code navigation features\u2014all designed to help developers write cleaner, faster, and more maintainable code.",
+        "bullets": [
+          "Excellent Refactoring Tools: Apply complex refactors in seconds without risk.",
+          "Intelligent Code Suggestions: Provides real-time inspections and context-specific recommendations."
+        ]
+      },
+      {
+        "id": "685574c627c6eba075dcd6ea",
+        "name": "DeepSeek-Coder-V2",
+        "description": "DeepSeek\u2011Coder\u202fV2 is an open-source, Mixture\u2011of\u2011Experts (MoE) code-focused variant of DeepSeek\u2011V2, purpose-built for code generation, completion, debugging, and mathematical reasoning. Trained with an additional 6\u202ftrillion tokens of code and text, it supports up to 338 programming languages and a massive 128K\u2011token context window, rivaling or exceeding commercial code models in performance.",
+        "bullets": [
+          "Best\u2011in\u2011class open-source code generation",
+          "Huge multi-language support"
+        ]
+      },
+      {
+        "id": "685e84c01c16582699a7a886",
+        "name": "Mistral Codestral 2501",
+        "description": "Codestral\u202f25.01 is Mistral AI\u2019s upgraded code-generation model, released January\u202f13,\u202f2025. Featuring a more efficient architecture and improved tokenizer, it delivers code completion and intelligence about 2\u00d7 faster than its predecessor, with support for fill-in-the-middle (FIM), code correction, test generation, and proficiency in over 80 programming languages, all within a 256K-token context window.",
+        "bullets": [
+          "Industry-leading FIM performance with high pass@1 scores",
+          "Blazingly fast\u2014twice the speed of previous version"
+        ]
+      },
+      {
+        "id": "68486109b939200515082770",
+        "name": "Polycoder",
+        "description": "PolyCoder is an open-source AI code generation model focused on C programming, developed by researchers at Carnegie Mellon University. It is a GPT-2-based model trained on a curated dataset of open-source C code, offering a high-performing, transparent alternative to proprietary code generation tools. PolyCoder is designed to generate syntactically correct and contextually relevant C code, supporting research, educational use, and more privacy-conscious development environments.",
+        "bullets": [
+          "Focused on C: Tailored training allows better performance for C than many general models.",
+          "Open and Free: Available under MIT license with full access to code and data."
+        ]
+      },
+      {
+        "id": "687687c005cf15748250fed9",
+        "name": "Starclouds",
+        "description": "Starclouds is a crowdsourced, open-source collection of machine learning and AI code snippets, templates, and educational resources aimed at helping developers quickly integrate tools like Flask, Django, TensorFlow, NumPy, and OpenAI into their projects. \nIt offers a growing library of practical examples\u2014from basic ML model loading to integrating AI into live apps\u2014simplifying learning and accelerating prototyping for Python developers.",
+        "bullets": [
+          "Great for jumpstarting AI projects.",
+          "Open-source and free."
+        ]
+      },
+      {
+        "id": "6894966acc6937f85276113a",
+        "name": "CRUDERRA",
+        "description": "Cruderra.ai is an AI-driven platform engineered to automate the creation and maintenance of technical documentation for software development teams. It transforms architecture and code into comprehensive, code-backed documentation\u2014including design diagrams, UML, and OpenAPI specs\u2014especially valuable for legacy systems and microservices. The platform supports real-time code scanning, architecture reverse engineering, and keeps documentation aligned with ongoing development changes, helping streamline onboarding, reduce technical debt, and enhance team collaboration.",
+        "bullets": [
+          "Automated architecture tracking tied to the codebase",
+          "Streamlines documentation updates and reduces duplication"
+        ]
+      },
+      {
+        "id": "6877c72405cf157482523cd3",
+        "name": "Nuanced",
+        "description": "Nuanced.dev is a browser extension that brings AI-powered explainability and documentation directly into your code environment. It analyzes blocks of code and auto-generates contextual comments\u2014lining them with plain-English explanations, suggestions for optimization, and potential bug flags. \nDesigned for developers, it supports JavaScript, Python, TypeScript, and more. With integrated GitHub compatibility, Nuanced.dev helps maintain cleaner, more understandable, and peer-review-ready codebases.",
+        "bullets": [
+          "Simplifies documentation; developers stay in flow.",
+          "Identifies potential bugs before runtime."
+        ]
+      },
+      {
+        "id": "684c7a24b939200515475a11",
+        "name": "UI Pilot",
+        "description": "uiPilot is an AI-driven tool that converts natural-language design descriptions into pixel-perfect UI components instantly. It helps developers and designers create modern front-end elements\u2014like badges, hero sections, and navbars\u2014quickly and efficiently.",
+        "bullets": [
+          "Accelerates front-end development through AI-generated UI components.",
+          "Combines creativity and code with a simple natural-language interface."
+        ]
+      },
+      {
+        "id": "6876921305cf1574825116f8",
+        "name": "Text To Flowchart Converter",
+        "description": "TextToFlowchart is an AI-based, no-code diagram tool that instantly transforms text input into flowcharts, BPMN diagrams, org charts, and visual processes. Users simply paste plain text or structured bullet points, and the AI interprets steps, decisions, and sequences into polished visual diagrams. \nThese diagrams are fully editable, letting you adjust node placement, flow arrows, labels, and styles. The platform supports download in PNG or SVG and offers direct embedding capabilities for documentation, presentations, training materials, or planning tools\u2014making diagram creation fast, intuitive, and collaborative.",
+        "bullets": [
+          "Saves hours over manual diagramming.",
+          "Easy to use for non-technical users."
+        ]
+      },
+      {
+        "id": "686246a3062604ba9bec8142",
+        "name": "TopDev",
+        "description": "TopDev.online is an AI-powered developer toolkit and resource hub designed to streamline coding, debugging, and learning for programmers of all levels. It offers AI-assisted code generation, real-time error fixing, and curated learning paths to help developers build projects faster and more efficiently.",
+        "bullets": [
+          "Ease of Use: Clean interface with minimal setup required.",
+          "Multi-Language Support: Covers Python"
+        ]
+      }
+    ],
+    "flow_type": "structured",
+    "timestamp": "2025-08-18T07:23:53.828154"
+  },
+  "processing_time_seconds": 12.289,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"tool_id\": [\"6846a816b32d4d019c036ec3\", \"684c70bbb939200515463884\", \"68486dbbb939200515091245\", \"684c82d4b9392005154a3270\", \"6850720810a1e47b57c93923\", \"6848556fb93920051506efa4\", \"684c5bf3b93920051544ef60\", \"68472210b939200515f4bc44\", \"684867d8b93920051508d781\", \"6818ec34606258b6c075cf5a\", \"68161b3c65f8e50d48e683e4\", \"684c8158b939200515499cbc\", \"684c7bb6b93920051547d675\", \"6877bd3f05cf157482523290\", \"6846ae87b32d4d019c045617\", \"68485ca5b939200515078c03\", \"6843618eac33a46e0beebe30\", \"68495092b9392005150bad29\", \"68775b4b05cf15748251df5e\", \"68498bf0b9392005151b0653\", \"684c7f6cb93920051549350a\", \"686a831ae1d0bbc07e323f89\", \"684c7442b93920051546767c\", \"68470ffab939200515f30546\", \"686560c1015bd4929b397235\", \"684c769db93920051546b4a7\", \"684874ccb939200515094d57\", \"685574c627c6eba075dcd6ea\", \"685e84c01c16582699a7a886\", \"68486109b939200515082770\", \"687687c005cf15748250fed9\", \"6894966acc6937f85276113a\", \"6877c72405cf157482523cd3\", \"684c7a24b939200515475a11\", \"6876921305cf1574825116f8\", \"686246a3062604ba9bec8142\"], \"tools\": [{\"id\": \"6846a816b32d4d019c036ec3\", \"name\": \"GitHub Copilot\", \"description\": \"GitHub Copilot acts as an AI pair\\u2011programmer, delivering context\\u2011aware code completions and whole\\u2011function suggestions directly in your editor, so you can write code faster and with fewer errors.\", \"bullets\": [\"Real\\u2011time line\\u2011and\\u2011block completions across dozens of languages\", \"Integrated with VS\\u202fCode, JetBrains, and Neovim for seamless workflow\"]}, {\"id\": \"684c70bbb939200515463884\", \"name\": \"PearAI\", \"description\": \"PearAI provides a local\\u2011first, VS\\u202fCode\\u2011based workspace that unifies multiple LLMs and agents, giving you AI\\u2011driven code generation, project scaffolding, and deep code\\u2011base awareness for faster development.\", \"bullets\": [\"Unified access to GPT\\u20114, Claude, LLaMA and more via an AI router\", \"Local repository context enables accurate, whole\\u2011project suggestions\"]}, {\"id\": \"68486dbbb939200515091245\", \"name\": \"PyCharm AI\", \"description\": \"PyCharm AI enhances the Python\\u2011focused PyCharm IDE with intelligent completions, refactoring, and AI plug\\u2011ins, helping Python developers write, debug, and test code more efficiently.\", \"bullets\": [\"Smart Python\\u2011specific code assistance and refactoring\", \"Supports AI plugins like JetBrains AI Assistant for on\\u2011demand suggestions\"]}, {\"id\": \"684c82d4b9392005154a3270\", \"name\": \"Zed\", \"description\": \"Zed combines ultra\\u2011fast, open\\u2011source editing with built\\u2011in AI assistance and real\\u2011time collaboration, letting developers edit large codebases quickly while receiving AI\\u2011powered suggestions.\", \"bullets\": [\"Native performance for instant opening of massive projects\", \"Embedded AI and collaborative editing without extra plugins\"]}, {\"id\": \"6850720810a1e47b57c93923\", \"name\": \"JetBrains IDEs\", \"description\": \"JetBrains IDEs deliver language\\u2011specific smart editors, robust refactoring, and optional AI assistants, streamlining coding across many languages and frameworks.\", \"bullets\": [\"Context\\u2011aware code completion and automated refactoring in each JetBrains IDE\", \"AI assistant plugins available for on\\u2011demand code generation\"]}, {\"id\": \"6848556fb93920051506efa4\", \"name\": \"Amazon CodeWhisperer\", \"description\": \"Amazon CodeWhisperer offers AI\\u2011driven code suggestions and real\\u2011time security scans directly inside popular IDEs, especially optimizing code that interacts with AWS services.\", \"bullets\": [\"AWS\\u2011aware completions and automatic secret detection\", \"Works in VS\\u202fCode, JetBrains IDEs, and Cloud9 with multi\\u2011language support\"]}, {\"id\": \"684c5bf3b93920051544ef60\", \"name\": \"Sourcegraph Cody\", \"description\": \"Sourcegraph Cody provides AI\\u2011assisted code completion, chat, and whole\\u2011repository awareness, helping developers navigate and modify large codebases efficiently.\", \"bullets\": [\"Full\\u2011repo context enables accurate suggestions across multiple files\", \"In\\u2011editor chat for instant explanations and code queries\"]}, {\"id\": \"68472210b939200515f4bc44\", \"name\": \"Replit Ghostwriter\", \"description\": \"Replit Ghostwriter integrates AI code completion, debugging help, and natural\\u2011language explanations into the browser\\u2011based Replit IDE, boosting productivity without leaving the web environment.\", \"bullets\": [\"Context\\u2011aware suggestions within the Replit web IDE\", \"Natural\\u2011language prompts for debugging and code explanations\"]}, {\"id\": \"684867d8b93920051508d781\", \"name\": \"Microsoft - IntelliCode\", \"description\": \"IntelliCode adds AI\\u2011enhanced completions and refactoring recommendations to Visual Studio and VS\\u202fCode, learning from millions of open\\u2011source projects to suggest best\\u2011practice code.\", \"bullets\": [\"Personalized models adapt to your team\\u2019s coding style\", \"Multi\\u2011language support with deep IDE integration\"]}, {\"id\": \"6818ec34606258b6c075cf5a\", \"name\": \"Augment Code\", \"description\": \"Augment Code delivers real\\u2011time AI suggestions, error detection, and smart refactoring inside your editor, helping you write, understand, and optimize code across languages.\", \"bullets\": [\"Instant bug highlights with one\\u2011click fixes\", \"AI\\u2011driven explanations and refactoring for clearer code\"]}, {\"id\": \"68161b3c65f8e50d48e683e4\", \"name\": \"Coding Fleet\", \"description\": \"CodingFleet is an AI-powered coding assistant platform designed to help developers write, understand, convert, and improve code across 90+ programming languages and frameworks. With tools like Code Generator, Code Assistant, Code Converter, and Unit Test Generator, CodingFleet streamlines the coding process, enabling developers to focus on solving problems rather than writing boilerplate code.\", \"bullets\": [\"Fast and easy-to-use tools that work without login.\", \"Covers 90+ programming languages and frameworks.\"]}, {\"id\": \"684c8158b939200515499cbc\", \"name\": \"trae\", \"description\": \"Trae AI is an innovative AI-powered Integrated Development Environment (IDE) designed to transform and streamline the coding process. By leveraging advanced AI capabilities, Trae AI offers adaptive collaboration, smart autocomplete, and real-time code generation features. This tool is tailored to enhance developer productivity by automating tasks, providing intelligent code suggestions, and facilitating better team communication. With support for multiple programming languages and seamless integration with popular development environments, Trae AI is a comprehensive solution for developers of all levels, aiming to boost efficiency and reduce project completion times.\", \"bullets\": [\"Reduces manual work in issue triage and PR management.\", \"Summarizes code changes for faster reviews.\"]}, {\"id\": \"684c7bb6b93920051547d675\", \"name\": \"GitWit\", \"description\": \"Gitwit is an open-source, browser-based AI coding platform that combines in-browser development with AI-powered autocomplete, instant deployment, and community collaboration. It brings together code writing, testing, and deployment in one smart, accessible environment.\", \"bullets\": [\"Open-source transparency with no vendor lock-in.\", \"One-click deployment makes testing and demos frictionless.\"]}, {\"id\": \"6877bd3f05cf157482523290\", \"name\": \"Cline - Claude Dev\", \"description\": \"Cline is an open\\u2011source AI coding agent for VS\\u202fCode and compatible editors that automates file creation, code editing, debugging, and CLI commands via natural language instructions. Built using Anthropic\\u2019s Claude and the Model Context Protocol (MCP), Cline can perform complex tasks\\u2014such as generating new components, fixing errors, running dev servers, and even using the local browser for end-to-end testing\\u2014while maintaining safety through user approval and workspace checkpoints\", \"bullets\": [\"Supercharges dev workflows with language-level automation.\", \"Safe and reversible through checkpoint mechanism.\"]}, {\"id\": \"6846ae87b32d4d019c045617\", \"name\": \"Aider\", \"description\": \"Aider.ai is an open-source AI-powered coding assistant that allows developers to collaborate with large language models like GPT-4 directly from the command line. It integrates seamlessly with Git, enabling conversational programming, code editing, and refactoring within your existing development workflow. With Aider, you can modify multiple files at once, get code explanations, and maintain clean version history\\u2014all from your terminal.\", \"bullets\": [\"Seamless Git Integration: Tracks all changes\", \"commits automatically\"]}, {\"id\": \"68485ca5b939200515078c03\", \"name\": \"OpenAI Codex\", \"description\": \"OpenAI Codex is a powerful AI coding engine developed by OpenAI that translates natural language into code. Built on top of GPT-3, Codex understands and generates code in over a dozen programming languages, including JavaScript, Python, and more. It's the underlying model behind GitHub Copilot and is designed to help developers write code faster, learn new APIs, and prototype projects with simple language commands.\", \"bullets\": [\"Intuitive Natural Language Coding: Write functional code using plain English instructions.\", \"Wide Language Coverage: Supports Python\"]}, {\"id\": \"6843618eac33a46e0beebe30\", \"name\": \"OpenAI Codex mini Latest\", \"description\": \"codex-mini-latest is OpenAI\\u2019s lightweight, high-speed AI coding model, fine-tuned from the o4-mini architecture. Designed specifically for use with the Codex CLI, it brings ChatGPT-level reasoning directly to your terminal, enabling efficient code generation, debugging, and editing tasks. Despite its compact size, codex-mini-latest delivers impressive performance, making it ideal for developers seeking a fast, cost-effective coding assistant.\", \"bullets\": [\"Fast and Responsive: Provides quick feedback\", \"enhancing productivity during development.\"]}, {\"id\": \"68495092b9392005150bad29\", \"name\": \"Ask Codi\", \"description\": \"AskCodi.com is an AI-powered coding assistant designed to simplify and accelerate the software development process. It provides developers with a comprehensive suite of AI tools to generate, refactor, fix, explain, and test code across multiple programming languages and frameworks. AskCodi aims to streamline workflows, enhance productivity, and improve code quality from prototyping to deployment.\", \"bullets\": [\"Wide range of specialized AI coding tools in one platform.\", \"Seamless integration with major IDEs enhances workflow.\"]}, {\"id\": \"68775b4b05cf15748251df5e\", \"name\": \"Aide Dev\", \"description\": \"Aide is an AI-powered agent designed to enhance software development workflows, particularly for codebases and Pull Requests (PRs). It claims to outperform competitors like D*vin and holds the #1 ranking on SWE-Bench for codebases, offering automated PR workflows, smart suggestions, and continuous improvements.\", \"bullets\": [\"High Performance Claims: The #1 ranking on SWE-Bench suggests a powerful and effective AI agent for coding tasks.\", \"Effortless Setup: The \\\"zero setup\\\" and \\\"one-click GitHub native integration\\\" are highly attractive for quick adoption.\"]}, {\"id\": \"68498bf0b9392005151b0653\", \"name\": \"Amazon CodeGuru\", \"description\": \"Amazon CodeGuru is a machine learning-powered developer tool from AWS that helps you automate code reviews and optimize application performance. By integrating seamlessly into your development workflow, CodeGuru analyzes your codebase for potential issues, security vulnerabilities, and performance bottlenecks\\u2014providing intelligent suggestions to improve code quality and reduce technical debt.\", \"bullets\": [\"Automated Code Reviews: Saves time by catching common bugs\", \"anti-patterns\"]}, {\"id\": \"684c7f6cb93920051549350a\", \"name\": \"OneCompiler\", \"description\": \"OneCompiler is a free, browser-based platform that lets developers write, compile, run, and debug code across 70+ programming languages instantly. It offers a collaborative coding experience, built-in examples, and an easy-to-use interface\\u2014ideal for testing snippets, learning, and sharing code.\", \"bullets\": [\"Fast\", \"installation-free coding environment for immediate results.\"]}, {\"id\": \"686a831ae1d0bbc07e323f89\", \"name\": \"CodeSnaps\", \"description\": \"Codesnaps.io is a React and Tailwind CSS UI Library primarily designed to help developers build websites and Minimum Viable Products (MVPs) faster and design more efficiently. Its main purpose is to provide instant access to a vast collection of production-ready React and Tailwind CSS components, alongside an AI site generator, eliminating the need for tedious package installations and accelerating the development workflow.\", \"bullets\": [\"Significantly speeds up the process of building websites and MVPs.\", \"Provides direct access to production-ready React and Tailwind CSS components.\"]}, {\"id\": \"684c7442b93920051546767c\", \"name\": \"Replit\", \"description\": \"Replit is an all-in-one, browser-based development platform that allows users to write, run, debug, and host code entirely online. It supports instant project creation, real-time collaboration, and deployment without any local setup, making it ideal for learners, teams, and creators looking to build software and applications quickly.\", \"bullets\": [\"Instant Setup: Get coding right away in any supported language with no local dependencies.\", \"Collaborative Editing: Ideal for pair programming\"]}, {\"id\": \"68470ffab939200515f30546\", \"name\": \"CodeSandbox AI\", \"description\": \"CodeSandbox is a powerful cloud-based development platform that enables developers to build, share, and collaborate on web applications entirely in the browser. With instant dev environments, GitHub integration, and real-time collaboration, CodeSandbox streamlines the entire software development workflow\\u2014from idea to deployment\\u2014without needing to install anything locally.\", \"bullets\": [\"Zero Setup Development: Code starts running instantly with no local configuration.\", \"Live GitHub Integration: Open PRs and branches as live\"]}, {\"id\": \"686560c1015bd4929b397235\", \"name\": \"JDoodle\", \"description\": \"JDoodle is an online compiler and IDE (Integrated Development Environment) that allows developers to write, compile, execute, and share code across more than 70 programming languages\\u2014all from the browser. It\\u2019s designed for speed, convenience, and accessibility, making it a go-to tool for developers, students, educators, and interviewers who want to run code quickly without setting up a local environment.\\nJDoodle offers real-time execution, input/output handling, and collaboration features, including shared sessions and embeddable code snippets for websites or blogs. It\\u2019s especially useful for competitive programmers, online coding tests, and educational demos. With its API integration, even companies can use JDoodle to embed live compiler capabilities into their platforms.\", \"bullets\": [\"Quick & Lightweight: No installations or logins\\u2014code runs instantly in-browser.\", \"Wide Language Support: Covers all major languages and even some niche ones.\"]}, {\"id\": \"684c769db93920051546b4a7\", \"name\": \"CodeStory\", \"description\": \"CodeStory is an AI-native, privacy-focused IDE (a fork of VS Code) that lets humans and AI pair-program together. It supports multi-file editing, proactive error fixing, intelligent code completion, and deep context awareness\\u2014all running locally with advanced AI agents to streamline complex development tasks.\", \"bullets\": [\"AI-First IDE: Designed specifically for developer + AI collaboration\", \"not an add\\u2011on.\"]}, {\"id\": \"684874ccb939200515094d57\", \"name\": \"ReSharper\", \"description\": \"ReSharper is a powerful Visual Studio extension developed by JetBrains that enhances .NET development with advanced code analysis, refactoring tools, and productivity boosters. It streamlines C#, VB.NET, ASP.NET, and other .NET language development by offering intelligent suggestions, quick fixes, and deep code navigation features\\u2014all designed to help developers write cleaner, faster, and more maintainable code.\", \"bullets\": [\"Excellent Refactoring Tools: Apply complex refactors in seconds without risk.\", \"Intelligent Code Suggestions: Provides real-time inspections and context-specific recommendations.\"]}, {\"id\": \"685574c627c6eba075dcd6ea\", \"name\": \"DeepSeek-Coder-V2\", \"description\": \"DeepSeek\\u2011Coder\\u202fV2 is an open-source, Mixture\\u2011of\\u2011Experts (MoE) code-focused variant of DeepSeek\\u2011V2, purpose-built for code generation, completion, debugging, and mathematical reasoning. Trained with an additional 6\\u202ftrillion tokens of code and text, it supports up to 338 programming languages and a massive 128K\\u2011token context window, rivaling or exceeding commercial code models in performance.\", \"bullets\": [\"Best\\u2011in\\u2011class open-source code generation\", \"Huge multi-language support\"]}, {\"id\": \"685e84c01c16582699a7a886\", \"name\": \"Mistral Codestral 2501\", \"description\": \"Codestral\\u202f25.01 is Mistral AI\\u2019s upgraded code-generation model, released January\\u202f13,\\u202f2025. Featuring a more efficient architecture and improved tokenizer, it delivers code completion and intelligence about 2\\u00d7 faster than its predecessor, with support for fill-in-the-middle (FIM), code correction, test generation, and proficiency in over 80 programming languages, all within a 256K-token context window.\", \"bullets\": [\"Industry-leading FIM performance with high pass@1 scores\", \"Blazingly fast\\u2014twice the speed of previous version\"]}, {\"id\": \"68486109b939200515082770\", \"name\": \"Polycoder\", \"description\": \"PolyCoder is an open-source AI code generation model focused on C programming, developed by researchers at Carnegie Mellon University. It is a GPT-2-based model trained on a curated dataset of open-source C code, offering a high-performing, transparent alternative to proprietary code generation tools. PolyCoder is designed to generate syntactically correct and contextually relevant C code, supporting research, educational use, and more privacy-conscious development environments.\", \"bullets\": [\"Focused on C: Tailored training allows better performance for C than many general models.\", \"Open and Free: Available under MIT license with full access to code and data.\"]}, {\"id\": \"687687c005cf15748250fed9\", \"name\": \"Starclouds\", \"description\": \"Starclouds is a crowdsourced, open-source collection of machine learning and AI code snippets, templates, and educational resources aimed at helping developers quickly integrate tools like Flask, Django, TensorFlow, NumPy, and OpenAI into their projects. \\nIt offers a growing library of practical examples\\u2014from basic ML model loading to integrating AI into live apps\\u2014simplifying learning and accelerating prototyping for Python developers.\", \"bullets\": [\"Great for jumpstarting AI projects.\", \"Open-source and free.\"]}, {\"id\": \"6894966acc6937f85276113a\", \"name\": \"CRUDERRA\", \"description\": \"Cruderra.ai is an AI-driven platform engineered to automate the creation and maintenance of technical documentation for software development teams. It transforms architecture and code into comprehensive, code-backed documentation\\u2014including design diagrams, UML, and OpenAPI specs\\u2014especially valuable for legacy systems and microservices. The platform supports real-time code scanning, architecture reverse engineering, and keeps documentation aligned with ongoing development changes, helping streamline onboarding, reduce technical debt, and enhance team collaboration.\", \"bullets\": [\"Automated architecture tracking tied to the codebase\", \"Streamlines documentation updates and reduces duplication\"]}, {\"id\": \"6877c72405cf157482523cd3\", \"name\": \"Nuanced\", \"description\": \"Nuanced.dev is a browser extension that brings AI-powered explainability and documentation directly into your code environment. It analyzes blocks of code and auto-generates contextual comments\\u2014lining them with plain-English explanations, suggestions for optimization, and potential bug flags. \\nDesigned for developers, it supports JavaScript, Python, TypeScript, and more. With integrated GitHub compatibility, Nuanced.dev helps maintain cleaner, more understandable, and peer-review-ready codebases.\", \"bullets\": [\"Simplifies documentation; developers stay in flow.\", \"Identifies potential bugs before runtime.\"]}, {\"id\": \"684c7a24b939200515475a11\", \"name\": \"UI Pilot\", \"description\": \"uiPilot is an AI-driven tool that converts natural-language design descriptions into pixel-perfect UI components instantly. It helps developers and designers create modern front-end elements\\u2014like badges, hero sections, and navbars\\u2014quickly and efficiently.\", \"bullets\": [\"Accelerates front-end development through AI-generated UI components.\", \"Combines creativity and code with a simple natural-language interface.\"]}, {\"id\": \"6876921305cf1574825116f8\", \"name\": \"Text To Flowchart Converter\", \"description\": \"TextToFlowchart is an AI-based, no-code diagram tool that instantly transforms text input into flowcharts, BPMN diagrams, org charts, and visual processes. Users simply paste plain text or structured bullet points, and the AI interprets steps, decisions, and sequences into polished visual diagrams. \\nThese diagrams are fully editable, letting you adjust node placement, flow arrows, labels, and styles. The platform supports download in PNG or SVG and offers direct embedding capabilities for documentation, presentations, training materials, or planning tools\\u2014making diagram creation fast, intuitive, and collaborative.\", \"bullets\": [\"Saves hours over manual diagramming.\", \"Easy to use for non-technical users.\"]}, {\"id\": \"686246a3062604ba9bec8142\", \"name\": \"TopDev\", \"description\": \"TopDev.online is an AI-powered developer toolkit and resource hub designed to streamline coding, debugging, and learning for programmers of all levels. It offers AI-assisted code generation, real-time error fixing, and curated learning paths to help developers build projects faster and more efficiently.\", \"bullets\": [\"Ease of Use: Clean interface with minimal setup required.\", \"Multi-Language Support: Covers Python\"]}], \"flow_type\": \"structured\", \"timestamp\": \"2025-08-18T07:23:53.828154\"}"
+  },
+  "actual_flow_type": "structured",
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

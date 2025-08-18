@@ -1,0 +1,491 @@
+{
+  "timestamp": "2025-08-18T12:57:09.557713",
+  "input_query": "voice clone",
+  "flow_type": "structured",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/2.0"
+    },
+    "flow_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 22,
+    "tool_ids": [
+      "687779dc05cf157482520ac9",
+      "689ae317cc6937f85279e57c",
+      "68a19b0e20d1e32c6f619359",
+      "688346ae8f91ef875c1a7f98",
+      "683030a1bcf558ef8c31c07c",
+      "68739e0acc23a952f76cd7f3",
+      "684bf201b9392005153e3677",
+      "689aebe3cc6937f85279ebea",
+      "686699c4ef7018fbfef6b446",
+      "6841e61cac33a46e0baa0b03",
+      "6841ee0cac33a46e0baa7e5f",
+      "68974718cc6937f852770e93",
+      "689ae852cc6937f85279e865",
+      "6894df89cc6937f85276226f",
+      "6895d47ecc6937f8527688ac",
+      "689aefcdcc6937f85279ed27",
+      "6863d9ed015bd4929b380588",
+      "689f720f20d1e32c6f60bc96",
+      "6866a612ef7018fbfef6c011",
+      "682f23a923aaf1a750abc439",
+      "683047a7bcf558ef8c31d71a",
+      "6862caa2062604ba9becdc1b"
+    ],
+    "tools": [
+      {
+        "id": "687779dc05cf157482520ac9",
+        "name": "VoiceClone-AI",
+        "description": "VoiceClone-AI lets you create a highly realistic digital replica of any speaker from just 30\u201160 seconds of audio, making it perfect for generating new speech, dubbing, or content without re\u2011recording the original voice.",
+        "bullets": [
+          "Creates lifelike clones from a short sample (30\u201160\u202fs)",
+          "Supports multiple languages and fine\u2011grained emotional control"
+        ]
+      },
+      {
+        "id": "689ae317cc6937f85279e57c",
+        "name": "Musicfy",
+        "description": "Musicfy\u2019s voice\u2011cloning feature enables you to record your own voice, train a personal vocal model, and instantly generate singing or spoken lines for songs, parodies, and AI\u2011driven music projects.",
+        "bullets": [
+          "Simple in\u2011browser voice model training for music creation",
+          "Allows custom vocal tracks without any technical setup"
+        ]
+      },
+      {
+        "id": "68a19b0e20d1e32c6f619359",
+        "name": "Revocalize AI",
+        "description": "Revocalize AI provides a studio\u2011grade voice clone that preserves timbre and emotion, letting you generate harmonies, covers, or genre\u2011shifts using your own cloned voice in a single click.",
+        "bullets": [
+          "One\u2011click cloning with high timbre fidelity",
+          "Integrated VST plugin for real\u2011time voice transformation"
+        ]
+      },
+      {
+        "id": "688346ae8f91ef875c1a7f98",
+        "name": "Parrot Talk",
+        "description": "Parrot Talk clones your voice from a brief recording and lets you generate realistic speech or lip\u2011synced videos, ideal for quick, entertaining audio\u2011visual content.",
+        "bullets": [
+          "Fast voice cloning for text\u2011to\u2011speech and video lip\u2011sync",
+          "Library of 100+ celebrity\u2011style AI voices for style mixing"
+        ]
+      },
+      {
+        "id": "683030a1bcf558ef8c31c07c",
+        "name": "IIElevenLabs",
+        "description": "ElevenLabs offers ultra\u2011realistic voice cloning that turns a short audio sample into a custom TTS voice, useful for podcasts, audiobooks, or any application needing a personal synthetic narrator.",
+        "bullets": [
+          "Create a custom voice from a short sample (seconds)",
+          "Adjust tone, pacing, and emotion for tailored speech output"
+        ]
+      },
+      {
+        "id": "68739e0acc23a952f76cd7f3",
+        "name": "XSAudio",
+        "description": "XSAudio\u2019s cloning module lets you upload a brief voice sample and receive a usable clone within minutes, then use it for any TTS or audio\u2011generation workflow.",
+        "bullets": [
+          "Minute\u2011fast clone generation from uploaded sample",
+          "All\u2011in\u2011one suite: TTS, sound effects, and cloning in one platform"
+        ]
+      },
+      {
+        "id": "684bf201b9392005153e3677",
+        "name": "Speechify",
+        "description": "Speechify\u2019s AI suite includes personal voice cloning, allowing you to convert your own voice into a natural\u2011sounding TTS engine for reading, dubbing, or content creation.",
+        "bullets": [
+          "Personal voice cloning for seamless reading or dubbing",
+          "Cross\u2011platform playback on mobile, desktop, and browsers"
+        ]
+      },
+      {
+        "id": "689aebe3cc6937f85279ebea",
+        "name": "Kits AI",
+        "description": "Kits AI provides a browser\u2011based studio where you can clone your voice and immediately apply effects, pitch correction, and AI mastering, streamlining music production with your own vocal model.",
+        "bullets": [
+          "Browser studio for instant voice cloning and editing",
+          "Ethically sourced voice models with full licensing clarity"
+        ]
+      },
+      {
+        "id": "686699c4ef7018fbfef6b446",
+        "name": "Sesame AI",
+        "description": "Sesame AI focuses on emotionally expressive voice cloning, enabling developers to generate synthetic speech that sounds like a real person with personality and nuanced intonation.",
+        "bullets": [
+          "Emotion\u2011rich cloned voices with personality traits",
+          "API\u2011ready for integration into games, assistants, and media"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "OpenAI\u2019s TTS\u20111 model supports voice cloning via its API, allowing you to create custom voices that can be streamed in real time for conversational agents or narration.",
+        "bullets": [
+          "API\u2011based cloning for rapid deployment in apps",
+          "Low\u2011latency streaming with multiple high\u2011fidelity voice options"
+        ]
+      },
+      {
+        "id": "6841ee0cac33a46e0baa7e5f",
+        "name": "OpenAI TTS1-HD",
+        "description": "TTS-1-HD is OpenAI\u2019s high-definition, low-latency streaming voice model designed to bring human-like speech to real-time applications. Building on the capabilities of the original TTS-1 model, TTS-1-HD enables developers to generate speech as the words are being produced\u2014perfect for voice assistants, interactive bots, or live narration tools.\nIt delivers smoother, faster, and more conversational speech experiences, making it an ideal choice for developers building next-gen voice-driven products.",
+        "bullets": [
+          "Incredible Real-Time Voice Generation: Streams high-quality speech instantly as the text flows.",
+          "Optimized for Conversations: Feels like you're talking to a person"
+        ]
+      },
+      {
+        "id": "68974718cc6937f852770e93",
+        "name": "Audimee",
+        "description": "Audimee is a next-gen AI vocal platform that empowers creators to convert their vocals using royalty-free AI voices, train custom voice models, isolate and mix vocals, and produce harmonies\u2014all with commercial-ready, copyright-free flexibility.",
+        "bullets": [
+          "Vocal Creativity on Demand: Instantly remix your voice or design entirely new vocals with minimal friction.",
+          "Genre-versatile Voice Library: Pop-airy to gritty rock to ethereal falsetto\u2014all at your fingertips."
+        ]
+      },
+      {
+        "id": "689ae852cc6937f85279e865",
+        "name": "Controlla Voice",
+        "description": "Controlla Voice is a next-level AI singing voice platform that lets creators transform lyrics and vocal layers into cinematic choirs, rich harmonies, and immersive vocal experiences\u2014all from your browser. Upload just a few seconds of your own voice or lyrics, choose from creative presets or design custom vocal styles, and instantly generate professional-sounding choir arrangements or voice blends. Streamlined, ethically trained, and royalty-free, it\u2019s built for singers, producers, and podcasters who want to craft cinematic vocal magic without a studio. From voice swapping to AI-enhanced choir generation, Controlla puts advanced vocal manipulation tools right at your fingertips, optimized for creativity and control.",
+        "bullets": [
+          "Instant choir creation\u2014levels up vocal projects fast with just a few clicks.",
+          "Creative freedom\u2014blend voices"
+        ]
+      },
+      {
+        "id": "6894df89cc6937f85276226f",
+        "name": "Vapify",
+        "description": "Vapify Agency is a white-label platform that empowers agencies to offer Vapi-powered voice AI solutions to their clients under their own brand. It provides a complete business infrastructure, simplifying the complexities of setting up, managing, and billing for voice AI services. With Vapify, agencies can create custom voice agents, handle client accounts, and establish a new, profitable revenue stream without needing to build the technology from the ground up.",
+        "bullets": [
+          "Effortless White-Labeling: The platform makes it easy to brand the service as your own and offer it to clients.",
+          "Automated Billing: The rebilling feature is a game-changer for agencies"
+        ]
+      },
+      {
+        "id": "6895d47ecc6937f8527688ac",
+        "name": "NotebookAI Podcast",
+        "description": "AIdeaFlow Podcast is an AI-powered platform that automates the process of transforming text\u2014like articles, PDFs, or scripts\u2014into polished, human-like podcast audio. It leverages advanced Triton TTS models (including Gemini, WorldSpeak, and others) to produce natural-sounding voiceovers in over 31 languages using more than 120 unique voices. You can input content via text, file upload, or URL, and let the AI handle pacing, tone, and voice selection. \nWith support for single speakers, interactive dialogues, and voice cloning, it suits a wide range of creators\u2014from educators turning lecture notes into spoken content to marketers producing audio campaigns. AIdeaFlow features intelligent editing tools to remove errors, manage silence, and add music or effects.",
+        "bullets": [
+          "Natural and expressive AI voices that feel human.",
+          "Easy-to-use tool that requires no audio expertise."
+        ]
+      },
+      {
+        "id": "689aefcdcc6937f85279ed27",
+        "name": "ACE Studio",
+        "description": "ACE Studio is a studio-grade AI vocal workstation that transforms MIDI, lyrics, or your own voice into lifelike singing vocals, complete with harmonies, choir arrangements, and emotion-rich synth edits\u2014all without the need for real singers or physical gear. Laden with over 80 multilingual, royalty-free AI voices spanning genres from pop to cinematic, opera to R&B, it brings vocal realism into your browser or desktop. Built on ethically licensed training data, ACE Studio delivers nuanced controls like pitch, vibrato, breath, and tone, empowering creators to sculpt expressive vocal performances that feel human. Best yet\u2014it runs on Windows or macOS and integrates into your music setup with a seamless DAW plugin (ACE Bridge).",
+        "bullets": [
+          "Ultra-authentic vocals from MIDI",
+          "lyrics"
+        ]
+      },
+      {
+        "id": "6863d9ed015bd4929b380588",
+        "name": "Outspeed",
+        "description": "Outspeed is a powerful platform and SDK for building and deploying real-time AI voice and video companions\u2014complete with emotional intelligence and memory. It offers low-latency streaming APIs, multi-modal processing for voice and visuals, and infrastructure to scale intelligent agents event\u2011driven at $1/hr billing. Ideal for deploying voice AI assistants that feel human and responsive in real time.",
+        "bullets": [
+          "Seamless support for streaming audio/video with low latency.",
+          "Emotion and memory enrich real-time assistant experiences."
+        ]
+      },
+      {
+        "id": "689f720f20d1e32c6f60bc96",
+        "name": "Veo3 AI Video",
+        "description": "UseVoe is an AI-powered voice cloning and speech synthesis platform that enables users to create realistic voiceovers using customized synthetic voices. Designed for content creators, marketers, educators, and developers, UseVoe offers a fast and efficient way to generate human-like speech from text without needing professional voice actors or recording studios. The platform supports multiple languages and voice styles, allowing users to select or train voices that match their brand or project tone. \nIts intuitive interface allows easy input of text scripts, adjustment of speech parameters such as speed and pitch, and immediate generation of audio outputs. Additionally, UseVoe provides API access for seamless integration into applications, games, or multimedia projects. It is useful for producing podcasts, audiobooks, instructional content, advertisements, and more.",
+        "bullets": [
+          "Produces natural-sounding",
+          "high-quality voiceovers."
+        ]
+      },
+      {
+        "id": "6866a612ef7018fbfef6c011",
+        "name": "Animate AI",
+        "description": "AnimateAI is a creative AI video tool that allows users to generate realistic animated avatars from simple selfies and text prompts. It uses advanced generative AI models to transform static images into expressive, dynamic video animations with voiceovers and lip-sync capabilities. The platform is built for creators, influencers, businesses, and anyone who wants to produce engaging video content without the need for cameras, actors, or complicated editing software. AnimateAI simplifies the content creation process, making it possible to tell visual stories with just a few clicks. Whether you're building personal content, digital marketing videos, or entertainment reels, AnimateAI turns imagination into lifelike animations in seconds.",
+        "bullets": [
+          "Highly Engaging Avatars: Great for attention-grabbing content across platforms.",
+          "No Design Skills Required: Extremely easy for non-editors or video beginners."
+        ]
+      },
+      {
+        "id": "682f23a923aaf1a750abc439",
+        "name": "descript",
+        "description": "Descript is an all-in-one audio and video editing tool that makes content creation as easy as editing text. It uses AI-powered transcription, screen recording, and video editing features to simplify the process for creators.",
+        "bullets": [
+          "Intuitive text-based editing simplifies audio and video production",
+          "Highly accurate AI transcription with multiple language support"
+        ]
+      },
+      {
+        "id": "683047a7bcf558ef8c31d71a",
+        "name": "Tavus",
+        "description": "Tavus IO is an AI-powered video personalization platform that allows users to create hyper-personalized videos at scale. By leveraging deep learning and AI-driven voice cloning, it enables businesses to produce customized video content tailored to individual recipients, enhancing engagement and conversion rates.",
+        "bullets": [
+          "Easy-to-use interface with powerful automation",
+          "High-quality AI-driven personalization"
+        ]
+      },
+      {
+        "id": "6862caa2062604ba9becdc1b",
+        "name": "AI Luvio",
+        "description": "AiLuvio is an AI-powered video communication platform that enables real-time dubbing and translation during video calls. Supporting over 30 languages, it provides voice conversion so all participants can speak in their native tongue while understanding each other seamlessly\u2014removing language barriers in global meetings, customer support, and social calls",
+        "bullets": [
+          "Breaks Language Barriers: Empowers fluent conversation across languages in real time.",
+          "All-in-One Communication: Voice"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "687779dc05cf157482520ac9",
+      "689ae317cc6937f85279e57c",
+      "68a19b0e20d1e32c6f619359",
+      "688346ae8f91ef875c1a7f98",
+      "683030a1bcf558ef8c31c07c",
+      "68739e0acc23a952f76cd7f3",
+      "684bf201b9392005153e3677",
+      "689aebe3cc6937f85279ebea",
+      "686699c4ef7018fbfef6b446",
+      "6841e61cac33a46e0baa0b03",
+      "6841ee0cac33a46e0baa7e5f",
+      "68974718cc6937f852770e93",
+      "689ae852cc6937f85279e865",
+      "6894df89cc6937f85276226f",
+      "6895d47ecc6937f8527688ac",
+      "689aefcdcc6937f85279ed27",
+      "6863d9ed015bd4929b380588",
+      "689f720f20d1e32c6f60bc96",
+      "6866a612ef7018fbfef6c011",
+      "682f23a923aaf1a750abc439",
+      "683047a7bcf558ef8c31d71a",
+      "6862caa2062604ba9becdc1b"
+    ],
+    "tools": [
+      {
+        "id": "687779dc05cf157482520ac9",
+        "name": "VoiceClone-AI",
+        "description": "VoiceClone-AI lets you create a highly realistic digital replica of any speaker from just 30\u201160 seconds of audio, making it perfect for generating new speech, dubbing, or content without re\u2011recording the original voice.",
+        "bullets": [
+          "Creates lifelike clones from a short sample (30\u201160\u202fs)",
+          "Supports multiple languages and fine\u2011grained emotional control"
+        ]
+      },
+      {
+        "id": "689ae317cc6937f85279e57c",
+        "name": "Musicfy",
+        "description": "Musicfy\u2019s voice\u2011cloning feature enables you to record your own voice, train a personal vocal model, and instantly generate singing or spoken lines for songs, parodies, and AI\u2011driven music projects.",
+        "bullets": [
+          "Simple in\u2011browser voice model training for music creation",
+          "Allows custom vocal tracks without any technical setup"
+        ]
+      },
+      {
+        "id": "68a19b0e20d1e32c6f619359",
+        "name": "Revocalize AI",
+        "description": "Revocalize AI provides a studio\u2011grade voice clone that preserves timbre and emotion, letting you generate harmonies, covers, or genre\u2011shifts using your own cloned voice in a single click.",
+        "bullets": [
+          "One\u2011click cloning with high timbre fidelity",
+          "Integrated VST plugin for real\u2011time voice transformation"
+        ]
+      },
+      {
+        "id": "688346ae8f91ef875c1a7f98",
+        "name": "Parrot Talk",
+        "description": "Parrot Talk clones your voice from a brief recording and lets you generate realistic speech or lip\u2011synced videos, ideal for quick, entertaining audio\u2011visual content.",
+        "bullets": [
+          "Fast voice cloning for text\u2011to\u2011speech and video lip\u2011sync",
+          "Library of 100+ celebrity\u2011style AI voices for style mixing"
+        ]
+      },
+      {
+        "id": "683030a1bcf558ef8c31c07c",
+        "name": "IIElevenLabs",
+        "description": "ElevenLabs offers ultra\u2011realistic voice cloning that turns a short audio sample into a custom TTS voice, useful for podcasts, audiobooks, or any application needing a personal synthetic narrator.",
+        "bullets": [
+          "Create a custom voice from a short sample (seconds)",
+          "Adjust tone, pacing, and emotion for tailored speech output"
+        ]
+      },
+      {
+        "id": "68739e0acc23a952f76cd7f3",
+        "name": "XSAudio",
+        "description": "XSAudio\u2019s cloning module lets you upload a brief voice sample and receive a usable clone within minutes, then use it for any TTS or audio\u2011generation workflow.",
+        "bullets": [
+          "Minute\u2011fast clone generation from uploaded sample",
+          "All\u2011in\u2011one suite: TTS, sound effects, and cloning in one platform"
+        ]
+      },
+      {
+        "id": "684bf201b9392005153e3677",
+        "name": "Speechify",
+        "description": "Speechify\u2019s AI suite includes personal voice cloning, allowing you to convert your own voice into a natural\u2011sounding TTS engine for reading, dubbing, or content creation.",
+        "bullets": [
+          "Personal voice cloning for seamless reading or dubbing",
+          "Cross\u2011platform playback on mobile, desktop, and browsers"
+        ]
+      },
+      {
+        "id": "689aebe3cc6937f85279ebea",
+        "name": "Kits AI",
+        "description": "Kits AI provides a browser\u2011based studio where you can clone your voice and immediately apply effects, pitch correction, and AI mastering, streamlining music production with your own vocal model.",
+        "bullets": [
+          "Browser studio for instant voice cloning and editing",
+          "Ethically sourced voice models with full licensing clarity"
+        ]
+      },
+      {
+        "id": "686699c4ef7018fbfef6b446",
+        "name": "Sesame AI",
+        "description": "Sesame AI focuses on emotionally expressive voice cloning, enabling developers to generate synthetic speech that sounds like a real person with personality and nuanced intonation.",
+        "bullets": [
+          "Emotion\u2011rich cloned voices with personality traits",
+          "API\u2011ready for integration into games, assistants, and media"
+        ]
+      },
+      {
+        "id": "6841e61cac33a46e0baa0b03",
+        "name": "OpenAI TTS1",
+        "description": "OpenAI\u2019s TTS\u20111 model supports voice cloning via its API, allowing you to create custom voices that can be streamed in real time for conversational agents or narration.",
+        "bullets": [
+          "API\u2011based cloning for rapid deployment in apps",
+          "Low\u2011latency streaming with multiple high\u2011fidelity voice options"
+        ]
+      },
+      {
+        "id": "6841ee0cac33a46e0baa7e5f",
+        "name": "OpenAI TTS1-HD",
+        "description": "TTS-1-HD is OpenAI\u2019s high-definition, low-latency streaming voice model designed to bring human-like speech to real-time applications. Building on the capabilities of the original TTS-1 model, TTS-1-HD enables developers to generate speech as the words are being produced\u2014perfect for voice assistants, interactive bots, or live narration tools.\nIt delivers smoother, faster, and more conversational speech experiences, making it an ideal choice for developers building next-gen voice-driven products.",
+        "bullets": [
+          "Incredible Real-Time Voice Generation: Streams high-quality speech instantly as the text flows.",
+          "Optimized for Conversations: Feels like you're talking to a person"
+        ]
+      },
+      {
+        "id": "68974718cc6937f852770e93",
+        "name": "Audimee",
+        "description": "Audimee is a next-gen AI vocal platform that empowers creators to convert their vocals using royalty-free AI voices, train custom voice models, isolate and mix vocals, and produce harmonies\u2014all with commercial-ready, copyright-free flexibility.",
+        "bullets": [
+          "Vocal Creativity on Demand: Instantly remix your voice or design entirely new vocals with minimal friction.",
+          "Genre-versatile Voice Library: Pop-airy to gritty rock to ethereal falsetto\u2014all at your fingertips."
+        ]
+      },
+      {
+        "id": "689ae852cc6937f85279e865",
+        "name": "Controlla Voice",
+        "description": "Controlla Voice is a next-level AI singing voice platform that lets creators transform lyrics and vocal layers into cinematic choirs, rich harmonies, and immersive vocal experiences\u2014all from your browser. Upload just a few seconds of your own voice or lyrics, choose from creative presets or design custom vocal styles, and instantly generate professional-sounding choir arrangements or voice blends. Streamlined, ethically trained, and royalty-free, it\u2019s built for singers, producers, and podcasters who want to craft cinematic vocal magic without a studio. From voice swapping to AI-enhanced choir generation, Controlla puts advanced vocal manipulation tools right at your fingertips, optimized for creativity and control.",
+        "bullets": [
+          "Instant choir creation\u2014levels up vocal projects fast with just a few clicks.",
+          "Creative freedom\u2014blend voices"
+        ]
+      },
+      {
+        "id": "6894df89cc6937f85276226f",
+        "name": "Vapify",
+        "description": "Vapify Agency is a white-label platform that empowers agencies to offer Vapi-powered voice AI solutions to their clients under their own brand. It provides a complete business infrastructure, simplifying the complexities of setting up, managing, and billing for voice AI services. With Vapify, agencies can create custom voice agents, handle client accounts, and establish a new, profitable revenue stream without needing to build the technology from the ground up.",
+        "bullets": [
+          "Effortless White-Labeling: The platform makes it easy to brand the service as your own and offer it to clients.",
+          "Automated Billing: The rebilling feature is a game-changer for agencies"
+        ]
+      },
+      {
+        "id": "6895d47ecc6937f8527688ac",
+        "name": "NotebookAI Podcast",
+        "description": "AIdeaFlow Podcast is an AI-powered platform that automates the process of transforming text\u2014like articles, PDFs, or scripts\u2014into polished, human-like podcast audio. It leverages advanced Triton TTS models (including Gemini, WorldSpeak, and others) to produce natural-sounding voiceovers in over 31 languages using more than 120 unique voices. You can input content via text, file upload, or URL, and let the AI handle pacing, tone, and voice selection. \nWith support for single speakers, interactive dialogues, and voice cloning, it suits a wide range of creators\u2014from educators turning lecture notes into spoken content to marketers producing audio campaigns. AIdeaFlow features intelligent editing tools to remove errors, manage silence, and add music or effects.",
+        "bullets": [
+          "Natural and expressive AI voices that feel human.",
+          "Easy-to-use tool that requires no audio expertise."
+        ]
+      },
+      {
+        "id": "689aefcdcc6937f85279ed27",
+        "name": "ACE Studio",
+        "description": "ACE Studio is a studio-grade AI vocal workstation that transforms MIDI, lyrics, or your own voice into lifelike singing vocals, complete with harmonies, choir arrangements, and emotion-rich synth edits\u2014all without the need for real singers or physical gear. Laden with over 80 multilingual, royalty-free AI voices spanning genres from pop to cinematic, opera to R&B, it brings vocal realism into your browser or desktop. Built on ethically licensed training data, ACE Studio delivers nuanced controls like pitch, vibrato, breath, and tone, empowering creators to sculpt expressive vocal performances that feel human. Best yet\u2014it runs on Windows or macOS and integrates into your music setup with a seamless DAW plugin (ACE Bridge).",
+        "bullets": [
+          "Ultra-authentic vocals from MIDI",
+          "lyrics"
+        ]
+      },
+      {
+        "id": "6863d9ed015bd4929b380588",
+        "name": "Outspeed",
+        "description": "Outspeed is a powerful platform and SDK for building and deploying real-time AI voice and video companions\u2014complete with emotional intelligence and memory. It offers low-latency streaming APIs, multi-modal processing for voice and visuals, and infrastructure to scale intelligent agents event\u2011driven at $1/hr billing. Ideal for deploying voice AI assistants that feel human and responsive in real time.",
+        "bullets": [
+          "Seamless support for streaming audio/video with low latency.",
+          "Emotion and memory enrich real-time assistant experiences."
+        ]
+      },
+      {
+        "id": "689f720f20d1e32c6f60bc96",
+        "name": "Veo3 AI Video",
+        "description": "UseVoe is an AI-powered voice cloning and speech synthesis platform that enables users to create realistic voiceovers using customized synthetic voices. Designed for content creators, marketers, educators, and developers, UseVoe offers a fast and efficient way to generate human-like speech from text without needing professional voice actors or recording studios. The platform supports multiple languages and voice styles, allowing users to select or train voices that match their brand or project tone. \nIts intuitive interface allows easy input of text scripts, adjustment of speech parameters such as speed and pitch, and immediate generation of audio outputs. Additionally, UseVoe provides API access for seamless integration into applications, games, or multimedia projects. It is useful for producing podcasts, audiobooks, instructional content, advertisements, and more.",
+        "bullets": [
+          "Produces natural-sounding",
+          "high-quality voiceovers."
+        ]
+      },
+      {
+        "id": "6866a612ef7018fbfef6c011",
+        "name": "Animate AI",
+        "description": "AnimateAI is a creative AI video tool that allows users to generate realistic animated avatars from simple selfies and text prompts. It uses advanced generative AI models to transform static images into expressive, dynamic video animations with voiceovers and lip-sync capabilities. The platform is built for creators, influencers, businesses, and anyone who wants to produce engaging video content without the need for cameras, actors, or complicated editing software. AnimateAI simplifies the content creation process, making it possible to tell visual stories with just a few clicks. Whether you're building personal content, digital marketing videos, or entertainment reels, AnimateAI turns imagination into lifelike animations in seconds.",
+        "bullets": [
+          "Highly Engaging Avatars: Great for attention-grabbing content across platforms.",
+          "No Design Skills Required: Extremely easy for non-editors or video beginners."
+        ]
+      },
+      {
+        "id": "682f23a923aaf1a750abc439",
+        "name": "descript",
+        "description": "Descript is an all-in-one audio and video editing tool that makes content creation as easy as editing text. It uses AI-powered transcription, screen recording, and video editing features to simplify the process for creators.",
+        "bullets": [
+          "Intuitive text-based editing simplifies audio and video production",
+          "Highly accurate AI transcription with multiple language support"
+        ]
+      },
+      {
+        "id": "683047a7bcf558ef8c31d71a",
+        "name": "Tavus",
+        "description": "Tavus IO is an AI-powered video personalization platform that allows users to create hyper-personalized videos at scale. By leveraging deep learning and AI-driven voice cloning, it enables businesses to produce customized video content tailored to individual recipients, enhancing engagement and conversion rates.",
+        "bullets": [
+          "Easy-to-use interface with powerful automation",
+          "High-quality AI-driven personalization"
+        ]
+      },
+      {
+        "id": "6862caa2062604ba9becdc1b",
+        "name": "AI Luvio",
+        "description": "AiLuvio is an AI-powered video communication platform that enables real-time dubbing and translation during video calls. Supporting over 30 languages, it provides voice conversion so all participants can speak in their native tongue while understanding each other seamlessly\u2014removing language barriers in global meetings, customer support, and social calls",
+        "bullets": [
+          "Breaks Language Barriers: Empowers fluent conversation across languages in real time.",
+          "All-in-One Communication: Voice"
+        ]
+      }
+    ],
+    "flow_type": "structured",
+    "timestamp": "2025-08-18T07:27:22.944803"
+  },
+  "processing_time_seconds": 13.397,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"tool_id\": [\"687779dc05cf157482520ac9\", \"689ae317cc6937f85279e57c\", \"68a19b0e20d1e32c6f619359\", \"688346ae8f91ef875c1a7f98\", \"683030a1bcf558ef8c31c07c\", \"68739e0acc23a952f76cd7f3\", \"684bf201b9392005153e3677\", \"689aebe3cc6937f85279ebea\", \"686699c4ef7018fbfef6b446\", \"6841e61cac33a46e0baa0b03\", \"6841ee0cac33a46e0baa7e5f\", \"68974718cc6937f852770e93\", \"689ae852cc6937f85279e865\", \"6894df89cc6937f85276226f\", \"6895d47ecc6937f8527688ac\", \"689aefcdcc6937f85279ed27\", \"6863d9ed015bd4929b380588\", \"689f720f20d1e32c6f60bc96\", \"6866a612ef7018fbfef6c011\", \"682f23a923aaf1a750abc439\", \"683047a7bcf558ef8c31d71a\", \"6862caa2062604ba9becdc1b\"], \"tools\": [{\"id\": \"687779dc05cf157482520ac9\", \"name\": \"VoiceClone-AI\", \"description\": \"VoiceClone-AI lets you create a highly realistic digital replica of any speaker from just 30\\u201160 seconds of audio, making it perfect for generating new speech, dubbing, or content without re\\u2011recording the original voice.\", \"bullets\": [\"Creates lifelike clones from a short sample (30\\u201160\\u202fs)\", \"Supports multiple languages and fine\\u2011grained emotional control\"]}, {\"id\": \"689ae317cc6937f85279e57c\", \"name\": \"Musicfy\", \"description\": \"Musicfy\\u2019s voice\\u2011cloning feature enables you to record your own voice, train a personal vocal model, and instantly generate singing or spoken lines for songs, parodies, and AI\\u2011driven music projects.\", \"bullets\": [\"Simple in\\u2011browser voice model training for music creation\", \"Allows custom vocal tracks without any technical setup\"]}, {\"id\": \"68a19b0e20d1e32c6f619359\", \"name\": \"Revocalize AI\", \"description\": \"Revocalize AI provides a studio\\u2011grade voice clone that preserves timbre and emotion, letting you generate harmonies, covers, or genre\\u2011shifts using your own cloned voice in a single click.\", \"bullets\": [\"One\\u2011click cloning with high timbre fidelity\", \"Integrated VST plugin for real\\u2011time voice transformation\"]}, {\"id\": \"688346ae8f91ef875c1a7f98\", \"name\": \"Parrot Talk\", \"description\": \"Parrot Talk clones your voice from a brief recording and lets you generate realistic speech or lip\\u2011synced videos, ideal for quick, entertaining audio\\u2011visual content.\", \"bullets\": [\"Fast voice cloning for text\\u2011to\\u2011speech and video lip\\u2011sync\", \"Library of 100+ celebrity\\u2011style AI voices for style mixing\"]}, {\"id\": \"683030a1bcf558ef8c31c07c\", \"name\": \"IIElevenLabs\", \"description\": \"ElevenLabs offers ultra\\u2011realistic voice cloning that turns a short audio sample into a custom TTS voice, useful for podcasts, audiobooks, or any application needing a personal synthetic narrator.\", \"bullets\": [\"Create a custom voice from a short sample (seconds)\", \"Adjust tone, pacing, and emotion for tailored speech output\"]}, {\"id\": \"68739e0acc23a952f76cd7f3\", \"name\": \"XSAudio\", \"description\": \"XSAudio\\u2019s cloning module lets you upload a brief voice sample and receive a usable clone within minutes, then use it for any TTS or audio\\u2011generation workflow.\", \"bullets\": [\"Minute\\u2011fast clone generation from uploaded sample\", \"All\\u2011in\\u2011one suite: TTS, sound effects, and cloning in one platform\"]}, {\"id\": \"684bf201b9392005153e3677\", \"name\": \"Speechify\", \"description\": \"Speechify\\u2019s AI suite includes personal voice cloning, allowing you to convert your own voice into a natural\\u2011sounding TTS engine for reading, dubbing, or content creation.\", \"bullets\": [\"Personal voice cloning for seamless reading or dubbing\", \"Cross\\u2011platform playback on mobile, desktop, and browsers\"]}, {\"id\": \"689aebe3cc6937f85279ebea\", \"name\": \"Kits AI\", \"description\": \"Kits AI provides a browser\\u2011based studio where you can clone your voice and immediately apply effects, pitch correction, and AI mastering, streamlining music production with your own vocal model.\", \"bullets\": [\"Browser studio for instant voice cloning and editing\", \"Ethically sourced voice models with full licensing clarity\"]}, {\"id\": \"686699c4ef7018fbfef6b446\", \"name\": \"Sesame AI\", \"description\": \"Sesame AI focuses on emotionally expressive voice cloning, enabling developers to generate synthetic speech that sounds like a real person with personality and nuanced intonation.\", \"bullets\": [\"Emotion\\u2011rich cloned voices with personality traits\", \"API\\u2011ready for integration into games, assistants, and media\"]}, {\"id\": \"6841e61cac33a46e0baa0b03\", \"name\": \"OpenAI TTS1\", \"description\": \"OpenAI\\u2019s TTS\\u20111 model supports voice cloning via its API, allowing you to create custom voices that can be streamed in real time for conversational agents or narration.\", \"bullets\": [\"API\\u2011based cloning for rapid deployment in apps\", \"Low\\u2011latency streaming with multiple high\\u2011fidelity voice options\"]}, {\"id\": \"6841ee0cac33a46e0baa7e5f\", \"name\": \"OpenAI TTS1-HD\", \"description\": \"TTS-1-HD is OpenAI\\u2019s high-definition, low-latency streaming voice model designed to bring human-like speech to real-time applications. Building on the capabilities of the original TTS-1 model, TTS-1-HD enables developers to generate speech as the words are being produced\\u2014perfect for voice assistants, interactive bots, or live narration tools.\\nIt delivers smoother, faster, and more conversational speech experiences, making it an ideal choice for developers building next-gen voice-driven products.\", \"bullets\": [\"Incredible Real-Time Voice Generation: Streams high-quality speech instantly as the text flows.\", \"Optimized for Conversations: Feels like you're talking to a person\"]}, {\"id\": \"68974718cc6937f852770e93\", \"name\": \"Audimee\", \"description\": \"Audimee is a next-gen AI vocal platform that empowers creators to convert their vocals using royalty-free AI voices, train custom voice models, isolate and mix vocals, and produce harmonies\\u2014all with commercial-ready, copyright-free flexibility.\", \"bullets\": [\"Vocal Creativity on Demand: Instantly remix your voice or design entirely new vocals with minimal friction.\", \"Genre-versatile Voice Library: Pop-airy to gritty rock to ethereal falsetto\\u2014all at your fingertips.\"]}, {\"id\": \"689ae852cc6937f85279e865\", \"name\": \"Controlla Voice\", \"description\": \"Controlla Voice is a next-level AI singing voice platform that lets creators transform lyrics and vocal layers into cinematic choirs, rich harmonies, and immersive vocal experiences\\u2014all from your browser. Upload just a few seconds of your own voice or lyrics, choose from creative presets or design custom vocal styles, and instantly generate professional-sounding choir arrangements or voice blends. Streamlined, ethically trained, and royalty-free, it\\u2019s built for singers, producers, and podcasters who want to craft cinematic vocal magic without a studio. From voice swapping to AI-enhanced choir generation, Controlla puts advanced vocal manipulation tools right at your fingertips, optimized for creativity and control.\", \"bullets\": [\"Instant choir creation\\u2014levels up vocal projects fast with just a few clicks.\", \"Creative freedom\\u2014blend voices\"]}, {\"id\": \"6894df89cc6937f85276226f\", \"name\": \"Vapify\", \"description\": \"Vapify Agency is a white-label platform that empowers agencies to offer Vapi-powered voice AI solutions to their clients under their own brand. It provides a complete business infrastructure, simplifying the complexities of setting up, managing, and billing for voice AI services. With Vapify, agencies can create custom voice agents, handle client accounts, and establish a new, profitable revenue stream without needing to build the technology from the ground up.\", \"bullets\": [\"Effortless White-Labeling: The platform makes it easy to brand the service as your own and offer it to clients.\", \"Automated Billing: The rebilling feature is a game-changer for agencies\"]}, {\"id\": \"6895d47ecc6937f8527688ac\", \"name\": \"NotebookAI Podcast\", \"description\": \"AIdeaFlow Podcast is an AI-powered platform that automates the process of transforming text\\u2014like articles, PDFs, or scripts\\u2014into polished, human-like podcast audio. It leverages advanced Triton TTS models (including Gemini, WorldSpeak, and others) to produce natural-sounding voiceovers in over 31 languages using more than 120 unique voices. You can input content via text, file upload, or URL, and let the AI handle pacing, tone, and voice selection. \\nWith support for single speakers, interactive dialogues, and voice cloning, it suits a wide range of creators\\u2014from educators turning lecture notes into spoken content to marketers producing audio campaigns. AIdeaFlow features intelligent editing tools to remove errors, manage silence, and add music or effects.\", \"bullets\": [\"Natural and expressive AI voices that feel human.\", \"Easy-to-use tool that requires no audio expertise.\"]}, {\"id\": \"689aefcdcc6937f85279ed27\", \"name\": \"ACE Studio\", \"description\": \"ACE Studio is a studio-grade AI vocal workstation that transforms MIDI, lyrics, or your own voice into lifelike singing vocals, complete with harmonies, choir arrangements, and emotion-rich synth edits\\u2014all without the need for real singers or physical gear. Laden with over 80 multilingual, royalty-free AI voices spanning genres from pop to cinematic, opera to R&B, it brings vocal realism into your browser or desktop. Built on ethically licensed training data, ACE Studio delivers nuanced controls like pitch, vibrato, breath, and tone, empowering creators to sculpt expressive vocal performances that feel human. Best yet\\u2014it runs on Windows or macOS and integrates into your music setup with a seamless DAW plugin (ACE Bridge).\", \"bullets\": [\"Ultra-authentic vocals from MIDI\", \"lyrics\"]}, {\"id\": \"6863d9ed015bd4929b380588\", \"name\": \"Outspeed\", \"description\": \"Outspeed is a powerful platform and SDK for building and deploying real-time AI voice and video companions\\u2014complete with emotional intelligence and memory. It offers low-latency streaming APIs, multi-modal processing for voice and visuals, and infrastructure to scale intelligent agents event\\u2011driven at $1/hr billing. Ideal for deploying voice AI assistants that feel human and responsive in real time.\", \"bullets\": [\"Seamless support for streaming audio/video with low latency.\", \"Emotion and memory enrich real-time assistant experiences.\"]}, {\"id\": \"689f720f20d1e32c6f60bc96\", \"name\": \"Veo3 AI Video\", \"description\": \"UseVoe is an AI-powered voice cloning and speech synthesis platform that enables users to create realistic voiceovers using customized synthetic voices. Designed for content creators, marketers, educators, and developers, UseVoe offers a fast and efficient way to generate human-like speech from text without needing professional voice actors or recording studios. The platform supports multiple languages and voice styles, allowing users to select or train voices that match their brand or project tone. \\nIts intuitive interface allows easy input of text scripts, adjustment of speech parameters such as speed and pitch, and immediate generation of audio outputs. Additionally, UseVoe provides API access for seamless integration into applications, games, or multimedia projects. It is useful for producing podcasts, audiobooks, instructional content, advertisements, and more.\", \"bullets\": [\"Produces natural-sounding\", \"high-quality voiceovers.\"]}, {\"id\": \"6866a612ef7018fbfef6c011\", \"name\": \"Animate AI\", \"description\": \"AnimateAI is a creative AI video tool that allows users to generate realistic animated avatars from simple selfies and text prompts. It uses advanced generative AI models to transform static images into expressive, dynamic video animations with voiceovers and lip-sync capabilities. The platform is built for creators, influencers, businesses, and anyone who wants to produce engaging video content without the need for cameras, actors, or complicated editing software. AnimateAI simplifies the content creation process, making it possible to tell visual stories with just a few clicks. Whether you're building personal content, digital marketing videos, or entertainment reels, AnimateAI turns imagination into lifelike animations in seconds.\", \"bullets\": [\"Highly Engaging Avatars: Great for attention-grabbing content across platforms.\", \"No Design Skills Required: Extremely easy for non-editors or video beginners.\"]}, {\"id\": \"682f23a923aaf1a750abc439\", \"name\": \"descript\", \"description\": \"Descript is an all-in-one audio and video editing tool that makes content creation as easy as editing text. It uses AI-powered transcription, screen recording, and video editing features to simplify the process for creators.\", \"bullets\": [\"Intuitive text-based editing simplifies audio and video production\", \"Highly accurate AI transcription with multiple language support\"]}, {\"id\": \"683047a7bcf558ef8c31d71a\", \"name\": \"Tavus\", \"description\": \"Tavus IO is an AI-powered video personalization platform that allows users to create hyper-personalized videos at scale. By leveraging deep learning and AI-driven voice cloning, it enables businesses to produce customized video content tailored to individual recipients, enhancing engagement and conversion rates.\", \"bullets\": [\"Easy-to-use interface with powerful automation\", \"High-quality AI-driven personalization\"]}, {\"id\": \"6862caa2062604ba9becdc1b\", \"name\": \"AI Luvio\", \"description\": \"AiLuvio is an AI-powered video communication platform that enables real-time dubbing and translation during video calls. Supporting over 30 languages, it provides voice conversion so all participants can speak in their native tongue while understanding each other seamlessly\\u2014removing language barriers in global meetings, customer support, and social calls\", \"bullets\": [\"Breaks Language Barriers: Empowers fluent conversation across languages in real time.\", \"All-in-One Communication: Voice\"]}], \"flow_type\": \"structured\", \"timestamp\": \"2025-08-18T07:27:22.944803\"}"
+  },
+  "actual_flow_type": "structured",
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

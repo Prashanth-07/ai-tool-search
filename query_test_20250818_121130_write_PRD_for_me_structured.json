@@ -1,0 +1,375 @@
+{
+  "timestamp": "2025-08-18T12:11:30.604878",
+  "input_query": "write PRD for me",
+  "flow_type": "structured",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/2.0"
+    },
+    "flow_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 16,
+    "tool_ids": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68636b0c015bd4929b37d7a4",
+      "685e9c4b1c16582699a7b791",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d",
+      "68666360ef7018fbfef69bc7",
+      "689c7f4dcc6937f8527a423b",
+      "68668e1bef7018fbfef6ae79",
+      "68736660cc23a952f76cc66f",
+      "681ed8f853d3e454a4b9e18b",
+      "68945eb1cc6937f85275e0f5",
+      "68737b7bcc23a952f76cd2e7",
+      "681f265153d3e454a4bb7207",
+      "682d6b7e23aaf1a750a9e896",
+      "6893aec9cc6937f85275c67b",
+      "686be492e1d0bbc07e32c35d"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "Instantly convert your high-level feature ideas into a complete, professional PRD\u2014just plug in goals, user needs, and scope, and receive a ready-to-review draft covering user stories, requirements, and success metrics.",
+        "bullets": [
+          "AI-guided prompts auto-fill every PRD section",
+          "Professional formatting exports in minutes instead of hours"
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "Turn product vision or market context into a full PRD in minutes\u2014AI suggests features, writes user stories, and formats the document so you can skip the blank-page struggle.",
+        "bullets": [
+          "Auto-extracts features from raw input and turns them into structured stories",
+          "Industry-aware suggestions ensure your PRD reflects market best practices"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Build a PRD from anything\u2014paste competitor URLs, meeting notes, or even audio recordings, and Bash will structure the content into a complete, editable PRD in seconds.",
+        "bullets": [
+          "Accepts any input format (web, text, audio) for zero-friction drafting",
+          "AI chat editor lets you refine and expand sections on the fly"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "From one prompt, Signlz writes your PRD, technical specs, and linked tasks\u2014then syncs everything to your task manager so the doc is instantly actionable.",
+        "bullets": [
+          "Single prompt generates PRD + specs + tasks in one workflow",
+          "Direct integrations push requirements into Jira, Trello, or Notion"
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Collaboratively craft PRDs inside Confluence\u2014AI asks clarifying questions, fills gaps, and converts your spec into user stories and test plans without leaving the page.",
+        "bullets": [
+          "Inline AI guidance prevents missing requirements before engineering sees the PRD",
+          "One-click transforms PRD into ready-to-use user stories and QA test cases"
+        ]
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "Leverage an AI product coach that drafts PRDs, specs, and summaries while linking every requirement back to your strategy and OKRs for end-to-end alignment.",
+        "bullets": [
+          "AI CoPilot writes specs directly from your backlog and strategic goals",
+          "Automatically surfaces duplicate ideas and links related requirements to keep PRDs coherent"
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "Chat with an AI that thinks like a CPO\u2014generate full PRDs, one-pagers, or roadmaps in under 30 minutes and get on-demand feedback to sharpen scope and clarity.",
+        "bullets": [
+          "Role-based coaching gives VP-level critique as you write",
+          "Library of PM-specific templates slashes drafting time"
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Spin up a dedicated AI agent that researches your market and auto-generates a tailored PRD based on competitive insights and product strategy best practices.",
+        "bullets": [
+          "One-click agent writes PRDs after auto-gathering market data",
+          "100 % web-based\u2014no setup, ideal for quick PRD turnaround"
+        ]
+      },
+      {
+        "id": "68736660cc23a952f76cc66f",
+        "name": "QuickPR",
+        "description": "QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.",
+        "bullets": [
+          "Cost-Effectiveness: The fixed-price model makes PR affordable and predictable for budget-conscious companies.",
+          "Comprehensive Services: The platform provides an integrated solution for all aspects of digital PR"
+        ]
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite",
+        "description": "HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.",
+        "bullets": [
+          "High-Quality Writing Assistance: Enhances content with well-structured and polished writing.",
+          "Efficient & Time-Saving: Helps users draft"
+        ]
+      },
+      {
+        "id": "68945eb1cc6937f85275e0f5",
+        "name": "NoteMD",
+        "description": "NoteMD is an AI-powered medical scribe platform designed to automate and streamline the documentation process for healthcare professionals. By using ambient AI, NoteMD listens to patient-provider conversations, transcribes the details, and generates comprehensive medical notes in real-time, allowing clinicians to focus on patient care rather than administrative tasks. It helps reduce charting time and improves the accuracy of clinical documentation.",
+        "bullets": [
+          "Reduces Documentation Time: Saves clinicians up to two hours a day on charting",
+          "significantly reducing burnout."
+        ]
+      },
+      {
+        "id": "68737b7bcc23a952f76cd2e7",
+        "name": "Paparazzi Docs",
+        "description": "The Paparazzi Docs AI Writer is a suite of AI-powered writing tools integrated into the Paparazzi Docs document management platform. It's designed to assist writers of all skill levels with their content creation workflow. The AI writer provides a variety of features, including text generation, paraphrasing, summarization, and grammar correction, all accessible from a single application.",
+        "bullets": [
+          "Convenience: The combination of an AI writer and a document manager in one platform is a significant advantage for writers who value a clean and efficient workflow.",
+          "Versatility: The wide range of features makes it a multi-purpose tool that can be used for a variety of personal"
+        ]
+      },
+      {
+        "id": "681f265153d3e454a4bb7207",
+        "name": "Writer",
+        "description": "Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.",
+        "bullets": [
+          "Accurate AI Models: Writer uses top-ranked language models (Palmyra LLMs) for highly accurate outputs.",
+          "Cost-Effective: With a 67% lower cost than leading alternatives"
+        ]
+      },
+      {
+        "id": "682d6b7e23aaf1a750a9e896",
+        "name": "Rytr",
+        "description": "Rytr is an AI-powered writing assistant designed to help users generate high-quality content quickly and efficiently. Whether you need blog posts, marketing copy, emails, or social media content, Rytr uses advanced natural language processing (NLP) to create engaging and relevant text with minimal effort.",
+        "bullets": [
+          "Ease of Use: Simple and intuitive interface",
+          "making it accessible for beginners."
+        ]
+      },
+      {
+        "id": "6893aec9cc6937f85275c67b",
+        "name": "the100kPrompts",
+        "description": "The100kPrompts.com is an extensive, ever-evolving database of over 100,000 expertly curated AI prompts designed for tools like ChatGPT, Midjourney, Stable Diffusion, and more. By offering prompts across 500+ niches\u2014including copywriting, productivity, art, and business\u2014The100kPrompts empowers creators, professionals, and AI users to accelerate ideation, enhance quality, and boost productivity. With a one-time purchase, users gain lifetime access and updates, ensuring their creative work stays ahead with the latest industry trends.",
+        "bullets": [
+          "Extensive Prompt Library: Access one of the largest prompt databases\u2014no more searching across fragmented sources.",
+          "Lifetime Value: Buy once"
+        ]
+      },
+      {
+        "id": "686be492e1d0bbc07e32c35d",
+        "name": "Inkrify",
+        "description": "Inkrify.com is an AI-powered book writing platform designed to help users transform their ideas into professional, publish-ready books for Kindle Direct Publishing (KDP). Its primary purpose is to streamline the book creation process, enabling users to generate complete, full-length books (50,000+ words) with coherent chapters and engaging content in minutes, rather than months.",
+        "bullets": [
+          "AI-powered generation of full-length (50",
+          "000+ words) and structured books in minutes."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "6863673d015bd4929b37d69d",
+      "68636b0c015bd4929b37d7a4",
+      "685e9c4b1c16582699a7b791",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d",
+      "68666360ef7018fbfef69bc7",
+      "689c7f4dcc6937f8527a423b",
+      "68668e1bef7018fbfef6ae79",
+      "68736660cc23a952f76cc66f",
+      "681ed8f853d3e454a4b9e18b",
+      "68945eb1cc6937f85275e0f5",
+      "68737b7bcc23a952f76cd2e7",
+      "681f265153d3e454a4bb7207",
+      "682d6b7e23aaf1a750a9e896",
+      "6893aec9cc6937f85275c67b",
+      "686be492e1d0bbc07e32c35d"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD",
+        "description": "Instantly convert your high-level feature ideas into a complete, professional PRD\u2014just plug in goals, user needs, and scope, and receive a ready-to-review draft covering user stories, requirements, and success metrics.",
+        "bullets": [
+          "AI-guided prompts auto-fill every PRD section",
+          "Professional formatting exports in minutes instead of hours"
+        ]
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator",
+        "description": "Turn product vision or market context into a full PRD in minutes\u2014AI suggests features, writes user stories, and formats the document so you can skip the blank-page struggle.",
+        "bullets": [
+          "Auto-extracts features from raw input and turns them into structured stories",
+          "Industry-aware suggestions ensure your PRD reflects market best practices"
+        ]
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot",
+        "description": "Build a PRD from anything\u2014paste competitor URLs, meeting notes, or even audio recordings, and Bash will structure the content into a complete, editable PRD in seconds.",
+        "bullets": [
+          "Accepts any input format (web, text, audio) for zero-friction drafting",
+          "AI chat editor lets you refine and expand sections on the fly"
+        ]
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz",
+        "description": "From one prompt, Signlz writes your PRD, technical specs, and linked tasks\u2014then syncs everything to your task manager so the doc is instantly actionable.",
+        "bullets": [
+          "Single prompt generates PRD + specs + tasks in one workflow",
+          "Direct integrations push requirements into Jira, Trello, or Notion"
+        ]
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary",
+        "description": "Collaboratively craft PRDs inside Confluence\u2014AI asks clarifying questions, fills gaps, and converts your spec into user stories and test plans without leaving the page.",
+        "bullets": [
+          "Inline AI guidance prevents missing requirements before engineering sees the PRD",
+          "One-click transforms PRD into ready-to-use user stories and QA test cases"
+        ]
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot",
+        "description": "Leverage an AI product coach that drafts PRDs, specs, and summaries while linking every requirement back to your strategy and OKRs for end-to-end alignment.",
+        "bullets": [
+          "AI CoPilot writes specs directly from your backlog and strategic goals",
+          "Automatically surfaces duplicate ideas and links related requirements to keep PRDs coherent"
+        ]
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD",
+        "description": "Chat with an AI that thinks like a CPO\u2014generate full PRDs, one-pagers, or roadmaps in under 30 minutes and get on-demand feedback to sharpen scope and clarity.",
+        "bullets": [
+          "Role-based coaching gives VP-level critique as you write",
+          "Library of PM-specific templates slashes drafting time"
+        ]
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents",
+        "description": "Spin up a dedicated AI agent that researches your market and auto-generates a tailored PRD based on competitive insights and product strategy best practices.",
+        "bullets": [
+          "One-click agent writes PRDs after auto-gathering market data",
+          "100 % web-based\u2014no setup, ideal for quick PRD turnaround"
+        ]
+      },
+      {
+        "id": "68736660cc23a952f76cc66f",
+        "name": "QuickPR",
+        "description": "QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.",
+        "bullets": [
+          "Cost-Effectiveness: The fixed-price model makes PR affordable and predictable for budget-conscious companies.",
+          "Comprehensive Services: The platform provides an integrated solution for all aspects of digital PR"
+        ]
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite",
+        "description": "HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.",
+        "bullets": [
+          "High-Quality Writing Assistance: Enhances content with well-structured and polished writing.",
+          "Efficient & Time-Saving: Helps users draft"
+        ]
+      },
+      {
+        "id": "68945eb1cc6937f85275e0f5",
+        "name": "NoteMD",
+        "description": "NoteMD is an AI-powered medical scribe platform designed to automate and streamline the documentation process for healthcare professionals. By using ambient AI, NoteMD listens to patient-provider conversations, transcribes the details, and generates comprehensive medical notes in real-time, allowing clinicians to focus on patient care rather than administrative tasks. It helps reduce charting time and improves the accuracy of clinical documentation.",
+        "bullets": [
+          "Reduces Documentation Time: Saves clinicians up to two hours a day on charting",
+          "significantly reducing burnout."
+        ]
+      },
+      {
+        "id": "68737b7bcc23a952f76cd2e7",
+        "name": "Paparazzi Docs",
+        "description": "The Paparazzi Docs AI Writer is a suite of AI-powered writing tools integrated into the Paparazzi Docs document management platform. It's designed to assist writers of all skill levels with their content creation workflow. The AI writer provides a variety of features, including text generation, paraphrasing, summarization, and grammar correction, all accessible from a single application.",
+        "bullets": [
+          "Convenience: The combination of an AI writer and a document manager in one platform is a significant advantage for writers who value a clean and efficient workflow.",
+          "Versatility: The wide range of features makes it a multi-purpose tool that can be used for a variety of personal"
+        ]
+      },
+      {
+        "id": "681f265153d3e454a4bb7207",
+        "name": "Writer",
+        "description": "Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.",
+        "bullets": [
+          "Accurate AI Models: Writer uses top-ranked language models (Palmyra LLMs) for highly accurate outputs.",
+          "Cost-Effective: With a 67% lower cost than leading alternatives"
+        ]
+      },
+      {
+        "id": "682d6b7e23aaf1a750a9e896",
+        "name": "Rytr",
+        "description": "Rytr is an AI-powered writing assistant designed to help users generate high-quality content quickly and efficiently. Whether you need blog posts, marketing copy, emails, or social media content, Rytr uses advanced natural language processing (NLP) to create engaging and relevant text with minimal effort.",
+        "bullets": [
+          "Ease of Use: Simple and intuitive interface",
+          "making it accessible for beginners."
+        ]
+      },
+      {
+        "id": "6893aec9cc6937f85275c67b",
+        "name": "the100kPrompts",
+        "description": "The100kPrompts.com is an extensive, ever-evolving database of over 100,000 expertly curated AI prompts designed for tools like ChatGPT, Midjourney, Stable Diffusion, and more. By offering prompts across 500+ niches\u2014including copywriting, productivity, art, and business\u2014The100kPrompts empowers creators, professionals, and AI users to accelerate ideation, enhance quality, and boost productivity. With a one-time purchase, users gain lifetime access and updates, ensuring their creative work stays ahead with the latest industry trends.",
+        "bullets": [
+          "Extensive Prompt Library: Access one of the largest prompt databases\u2014no more searching across fragmented sources.",
+          "Lifetime Value: Buy once"
+        ]
+      },
+      {
+        "id": "686be492e1d0bbc07e32c35d",
+        "name": "Inkrify",
+        "description": "Inkrify.com is an AI-powered book writing platform designed to help users transform their ideas into professional, publish-ready books for Kindle Direct Publishing (KDP). Its primary purpose is to streamline the book creation process, enabling users to generate complete, full-length books (50,000+ words) with coherent chapters and engaging content in minutes, rather than months.",
+        "bullets": [
+          "AI-powered generation of full-length (50",
+          "000+ words) and structured books in minutes."
+        ]
+      }
+    ],
+    "flow_type": "structured",
+    "timestamp": "2025-08-18T06:41:43.065926"
+  },
+  "processing_time_seconds": 12.485,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\"tool_id\": [\"68635e5e015bd4929b37d18a\", \"6863632c015bd4929b37d359\", \"6863673d015bd4929b37d69d\", \"68636b0c015bd4929b37d7a4\", \"685e9c4b1c16582699a7b791\", \"685004e1afca082a9fc4178b\", \"6863599c015bd4929b37d01d\", \"68666360ef7018fbfef69bc7\", \"689c7f4dcc6937f8527a423b\", \"68668e1bef7018fbfef6ae79\", \"68736660cc23a952f76cc66f\", \"681ed8f853d3e454a4b9e18b\", \"68945eb1cc6937f85275e0f5\", \"68737b7bcc23a952f76cd2e7\", \"681f265153d3e454a4bb7207\", \"682d6b7e23aaf1a750a9e896\", \"6893aec9cc6937f85275c67b\", \"686be492e1d0bbc07e32c35d\"], \"tools\": [{\"id\": \"68635e5e015bd4929b37d18a\", \"name\": \"Write My PRD\", \"description\": \"Instantly convert your high-level feature ideas into a complete, professional PRD\\u2014just plug in goals, user needs, and scope, and receive a ready-to-review draft covering user stories, requirements, and success metrics.\", \"bullets\": [\"AI-guided prompts auto-fill every PRD section\", \"Professional formatting exports in minutes instead of hours\"]}, {\"id\": \"6863632c015bd4929b37d359\", \"name\": \"Brilworks PRD Generator\", \"description\": \"Turn product vision or market context into a full PRD in minutes\\u2014AI suggests features, writes user stories, and formats the document so you can skip the blank-page struggle.\", \"bullets\": [\"Auto-extracts features from raw input and turns them into structured stories\", \"Industry-aware suggestions ensure your PRD reflects market best practices\"]}, {\"id\": \"6863673d015bd4929b37d69d\", \"name\": \"GetBash PRD Generarot\", \"description\": \"Build a PRD from anything\\u2014paste competitor URLs, meeting notes, or even audio recordings, and Bash will structure the content into a complete, editable PRD in seconds.\", \"bullets\": [\"Accepts any input format (web, text, audio) for zero-friction drafting\", \"AI chat editor lets you refine and expand sections on the fly\"]}, {\"id\": \"68636b0c015bd4929b37d7a4\", \"name\": \"Signlz\", \"description\": \"From one prompt, Signlz writes your PRD, technical specs, and linked tasks\\u2014then syncs everything to your task manager so the doc is instantly actionable.\", \"bullets\": [\"Single prompt generates PRD + specs + tasks in one workflow\", \"Direct integrations push requirements into Jira, Trello, or Notion\"]}, {\"id\": \"685e9c4b1c16582699a7b791\", \"name\": \"Wisary\", \"description\": \"Collaboratively craft PRDs inside Confluence\\u2014AI asks clarifying questions, fills gaps, and converts your spec into user stories and test plans without leaving the page.\", \"bullets\": [\"Inline AI guidance prevents missing requirements before engineering sees the PRD\", \"One-click transforms PRD into ready-to-use user stories and QA test cases\"]}, {\"id\": \"685004e1afca082a9fc4178b\", \"name\": \"ProdPad CoPilot\", \"description\": \"Leverage an AI product coach that drafts PRDs, specs, and summaries while linking every requirement back to your strategy and OKRs for end-to-end alignment.\", \"bullets\": [\"AI CoPilot writes specs directly from your backlog and strategic goals\", \"Automatically surfaces duplicate ideas and links related requirements to keep PRDs coherent\"]}, {\"id\": \"6863599c015bd4929b37d01d\", \"name\": \"ChatPRD\", \"description\": \"Chat with an AI that thinks like a CPO\\u2014generate full PRDs, one-pagers, or roadmaps in under 30 minutes and get on-demand feedback to sharpen scope and clarity.\", \"bullets\": [\"Role-based coaching gives VP-level critique as you write\", \"Library of PM-specific templates slashes drafting time\"]}, {\"id\": \"68666360ef7018fbfef69bc7\", \"name\": \"Aigents\", \"description\": \"Spin up a dedicated AI agent that researches your market and auto-generates a tailored PRD based on competitive insights and product strategy best practices.\", \"bullets\": [\"One-click agent writes PRDs after auto-gathering market data\", \"100 % web-based\\u2014no setup, ideal for quick PRD turnaround\"]}, {\"id\": \"68736660cc23a952f76cc66f\", \"name\": \"QuickPR\", \"description\": \"QuickPR is a digital public relations (PR) company that operates a one-stop PR portal designed to help businesses, particularly startups and SMEs, manage their public relations efforts. The platform offers a range of services, including press release writing and distribution, media outreach, and content creation. A key feature that sets it apart is its transparent and fixed pricing for publications, making professional PR more accessible to companies with limited budgets.\", \"bullets\": [\"Cost-Effectiveness: The fixed-price model makes PR affordable and predictable for budget-conscious companies.\", \"Comprehensive Services: The platform provides an integrated solution for all aspects of digital PR\"]}, {\"id\": \"681ed8f853d3e454a4b9e18b\", \"name\": \"HyperWrite\", \"description\": \"HyperWrite AI Assistant is an advanced AI-powered writing tool designed to enhance productivity by providing intelligent writing suggestions, content generation, and editing assistance. Built for professionals, students, and content creators, it leverages machine learning to refine writing style, improve clarity, and generate high-quality text efficiently. Whether drafting emails, reports, or creative content, HyperWrite AI Assistant adapts to user preferences to deliver personalized and contextually relevant outputs.\", \"bullets\": [\"High-Quality Writing Assistance: Enhances content with well-structured and polished writing.\", \"Efficient & Time-Saving: Helps users draft\"]}, {\"id\": \"68945eb1cc6937f85275e0f5\", \"name\": \"NoteMD\", \"description\": \"NoteMD is an AI-powered medical scribe platform designed to automate and streamline the documentation process for healthcare professionals. By using ambient AI, NoteMD listens to patient-provider conversations, transcribes the details, and generates comprehensive medical notes in real-time, allowing clinicians to focus on patient care rather than administrative tasks. It helps reduce charting time and improves the accuracy of clinical documentation.\", \"bullets\": [\"Reduces Documentation Time: Saves clinicians up to two hours a day on charting\", \"significantly reducing burnout.\"]}, {\"id\": \"68737b7bcc23a952f76cd2e7\", \"name\": \"Paparazzi Docs\", \"description\": \"The Paparazzi Docs AI Writer is a suite of AI-powered writing tools integrated into the Paparazzi Docs document management platform. It's designed to assist writers of all skill levels with their content creation workflow. The AI writer provides a variety of features, including text generation, paraphrasing, summarization, and grammar correction, all accessible from a single application.\", \"bullets\": [\"Convenience: The combination of an AI writer and a document manager in one platform is a significant advantage for writers who value a clean and efficient workflow.\", \"Versatility: The wide range of features makes it a multi-purpose tool that can be used for a variety of personal\"]}, {\"id\": \"681f265153d3e454a4bb7207\", \"name\": \"Writer\", \"description\": \"Writer is an advanced enterprise platform designed to help businesses quickly build and deploy AI applications and workflows. By integrating generative AI into any business process, Writer enables businesses to create accurate, cost-effective AI solutions that are scalable, customizable, and secure. Writer allows companies to leverage cutting-edge technology, including top-ranked language models and secure platforms, to meet their specific AI requirements.\", \"bullets\": [\"Accurate AI Models: Writer uses top-ranked language models (Palmyra LLMs) for highly accurate outputs.\", \"Cost-Effective: With a 67% lower cost than leading alternatives\"]}, {\"id\": \"682d6b7e23aaf1a750a9e896\", \"name\": \"Rytr\", \"description\": \"Rytr is an AI-powered writing assistant designed to help users generate high-quality content quickly and efficiently. Whether you need blog posts, marketing copy, emails, or social media content, Rytr uses advanced natural language processing (NLP) to create engaging and relevant text with minimal effort.\", \"bullets\": [\"Ease of Use: Simple and intuitive interface\", \"making it accessible for beginners.\"]}, {\"id\": \"6893aec9cc6937f85275c67b\", \"name\": \"the100kPrompts\", \"description\": \"The100kPrompts.com is an extensive, ever-evolving database of over 100,000 expertly curated AI prompts designed for tools like ChatGPT, Midjourney, Stable Diffusion, and more. By offering prompts across 500+ niches\\u2014including copywriting, productivity, art, and business\\u2014The100kPrompts empowers creators, professionals, and AI users to accelerate ideation, enhance quality, and boost productivity. With a one-time purchase, users gain lifetime access and updates, ensuring their creative work stays ahead with the latest industry trends.\", \"bullets\": [\"Extensive Prompt Library: Access one of the largest prompt databases\\u2014no more searching across fragmented sources.\", \"Lifetime Value: Buy once\"]}, {\"id\": \"686be492e1d0bbc07e32c35d\", \"name\": \"Inkrify\", \"description\": \"Inkrify.com is an AI-powered book writing platform designed to help users transform their ideas into professional, publish-ready books for Kindle Direct Publishing (KDP). Its primary purpose is to streamline the book creation process, enabling users to generate complete, full-length books (50,000+ words) with coherent chapters and engaging content in minutes, rather than months.\", \"bullets\": [\"AI-powered generation of full-length (50\", \"000+ words) and structured books in minutes.\"]}], \"flow_type\": \"structured\", \"timestamp\": \"2025-08-18T06:41:43.065926\"}"
+  },
+  "actual_flow_type": "structured",
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-70b-versatile",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
