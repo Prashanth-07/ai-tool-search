@@ -44,7 +44,9 @@ from pinecone import Pinecone
 from pydantic import BaseModel, Field, HttpUrl
 from rank_bm25 import BM25Okapi
 from openai import OpenAI
-
+# MongoDB imports
+from motor.motor_asyncio import AsyncIOMotorClient
+from bson import ObjectId
 # ============================================================================
 # CONFIGURATION AND CONSTANTS
 # ============================================================================
@@ -86,6 +88,11 @@ class Config:
     LOADING_COVERAGE_TARGET = 0.95      # Stop multi-term search at 95% coverage
     LOADING_MULTI_TERM_BATCH_SIZE = 100 # Batch size for multi-term strategy
     LOADING_TERM_DELAY_SECONDS = 0.1    # Delay between search terms
+# MongoDB settings
+    MONGO_DB_NAME = "aitoolbook"
+    MONGO_COLLECTION_TOOLS = "aitools"
+    MONGO_COLLECTION_CATEGORIES = "categories"
+    MONGO_COLLECTION_USECASES = "usecases"
 
 # System Validation
 if sys.version_info < Config.MIN_PYTHON_VERSION:
@@ -184,6 +191,10 @@ class Environment:
     @property
     def openai_model(self) -> str:
         return os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+
+    @property
+    def mongo_uri(self) -> str:
+        return os.getenv("MONGO_URI", "mongodb+srv://techatb01:v0cshOyjd3axvxMa@cluster0.wuyqyki.mongodb.net/aitoolbook?retryWrites=true&w=majority&appName=Cluster0")
 
 env = Environment()
 
@@ -333,6 +344,38 @@ class KeywordItem(BaseModel):
 class ExtractKeywordsResponse(BaseModel):
     """Extract keywords response."""
     keywords: List[KeywordItem]
+
+# Tool Categorization Models
+class ToolCategorizationRequest(BaseModel):
+    """Tool categorization request - tool_id will come from path parameter."""
+    pass
+
+class CategoryMatch(BaseModel):
+    """Individual category match."""
+    id: str
+    name: str
+
+
+class ToolCategorizationResponse(BaseModel):
+    """Tool categorization response."""
+    tool_id: str
+    tool_name: str
+    matched_categories: List[CategoryMatch]
+    total_available_categories: int
+
+# Tool Use Case Categorization Models
+
+class UseCaseMatch(BaseModel):
+    """Individual use case match."""
+    id: str
+    name: str
+
+class ToolUseCaseCategorizationResponse(BaseModel):
+    """Tool use case categorization response."""
+    tool_id: str
+    tool_name: str
+    matched_usecases: List[UseCaseMatch]
+    total_available_usecases: int
 
 class ToolResponse(BaseModel):
     """Tool operation response."""
@@ -1701,6 +1744,120 @@ class QueryProcessor:
         
         return templates[:5]
 
+
+# ============================================================================
+# MONGODB MANAGER
+# ============================================================================
+
+class MongoDBManager:
+    """MongoDB connection and operations manager."""
+    
+    def __init__(self):
+        self.client: AsyncIOMotorClient = None
+        self.database = None
+    
+    async def connect(self):
+        """Connect to MongoDB."""
+        try:
+            self.client = AsyncIOMotorClient(env.mongo_uri)
+            self.database = self.client[Config.MONGO_DB_NAME]
+            
+            # Test connection
+            await self.client.admin.command('ping')
+            logger.info("✅ MongoDB connected successfully")
+            
+        except Exception as e:
+            logger.error(f"❌ MongoDB connection failed: {str(e)}")
+            raise
+    
+    async def disconnect(self):
+        """Disconnect from MongoDB."""
+        if self.client:
+            self.client.close()
+            logger.info("MongoDB connection closed")
+    
+    def _convert_objectids_to_strings(self, data):
+        """Recursively convert ObjectIds to strings for JSON serialization."""
+        if isinstance(data, ObjectId):
+            return str(data)
+        elif isinstance(data, dict):
+            return {key: self._convert_objectids_to_strings(value) for key, value in data.items()}
+        elif isinstance(data, list):
+            return [self._convert_objectids_to_strings(item) for item in data]
+        else:
+            return data
+    
+    async def get_tool_by_id(self, tool_id: str) -> Optional[Dict]:
+        """Get tool by _id from MongoDB."""
+        try:
+            collection = self.database[Config.MONGO_COLLECTION_TOOLS]
+            
+            # Convert string to ObjectId
+            object_id = ObjectId(tool_id)
+            tool = await collection.find_one({"_id": object_id})
+            
+            if tool:
+                # Convert all ObjectIds to strings recursively
+                tool = self._convert_objectids_to_strings(tool)
+                logger.info(f"Found tool: {tool.get('name', 'Unknown')}")
+                return tool
+            else:
+                logger.warning(f"Tool not found with ID: {tool_id}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error fetching tool {tool_id}: {str(e)}")
+            return None
+    
+    async def get_all_categories(self) -> List[Dict]:
+        """Get all categories from MongoDB."""
+        try:
+            collection = self.database[Config.MONGO_COLLECTION_CATEGORIES]
+            categories = []
+            
+            async for category in collection.find({}):
+                # Convert ObjectIds to strings
+                category = self._convert_objectids_to_strings(category)
+                categories.append(category)
+            
+            logger.info(f"Fetched {len(categories)} categories")
+            return categories
+            
+        except Exception as e:
+            logger.error(f"Error fetching categories: {str(e)}")
+            return []
+    
+    async def get_all_usecases(self) -> List[Dict]:
+        """Get all use cases from MongoDB."""
+        try:
+            collection = self.database[Config.MONGO_COLLECTION_USECASES]
+            usecases = []
+            
+            async for usecase in collection.find({}):
+                # Convert ObjectIds to strings
+                usecase = self._convert_objectids_to_strings(usecase)
+                usecases.append(usecase)
+            
+            logger.info(f"Fetched {len(usecases)} use cases")
+            return usecases
+            
+        except Exception as e:
+            logger.error(f"Error fetching use cases: {str(e)}")
+            return []
+
+def deduplicate_results(results: List[Dict], id_field: str) -> List[Dict]:
+    """Remove duplicate results based on ID field."""
+    seen_ids = set()
+    deduplicated = []
+    
+    for result in results:
+        result_id = result.get(id_field, "")
+        if result_id and result_id not in seen_ids:
+            seen_ids.add(result_id)
+            deduplicated.append(result)
+    
+    return deduplicated
+
 # ============================================================================
 # VECTOR STORE MANAGEMENT
 # ============================================================================
@@ -1807,6 +1964,7 @@ app_state = ApplicationState()
 tool_search_cache = ToolSearchCache()
 bm25_index = BM25IndexManager()
 vector_store_manager = VectorStoreManager()
+mongodb_manager = MongoDBManager()
 
 # ============================================================================
 # FASTAPI APPLICATION SETUP
@@ -2196,12 +2354,20 @@ async def startup_event():
         # Validate environment
         env._validate_required_vars()
         
+        # Connect to MongoDB
+        await mongodb_manager.connect()
+        
         app_state.initialization_started = True
         asyncio.create_task(initialize_indexes())
         
         logger.info("Basic startup complete - API ready for requests")
     except Exception as e:
         logger.error(f"Error during startup initialization: {str(e)}")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up resources on shutdown."""
+    await mongodb_manager.disconnect()
 
 # ============================================================================
 # UTILITY FUNCTIONS FOR ENDPOINTS
@@ -4092,6 +4258,395 @@ async def get_related_tools(tool_id: str):
         raise HTTPException(
             status_code=500,
             detail=f"Internal server error: {str(e)}"
+        )
+
+
+@app.post("/categorize-tool/{tool_id}", response_model=ToolCategorizationResponse)
+async def categorize_tool(tool_id: str, request_headers: Request):
+    """Categorize a tool based on its metadata using LLM analysis."""
+    start_time = time.time()
+    
+    try:
+        logger.info(f"Categorizing tool with ID: {tool_id}")
+        
+        # Step 1: Fetch tool from MongoDB
+        tool_data = await mongodb_manager.get_tool_by_id(tool_id)
+        if not tool_data:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Tool with ID '{tool_id}' not found"
+            )
+        
+        tool_name = tool_data.get('name', 'Unknown Tool')
+        logger.info(f"Found tool: {tool_name}")
+        
+        # Step 2: Fetch all categories from MongoDB
+        categories = await mongodb_manager.get_all_categories()
+        if not categories:
+            raise HTTPException(
+                status_code=500,
+                detail="No categories found in database"
+            )
+        
+        logger.info(f"Fetched {len(categories)} categories for analysis")
+        
+        # Step 3: Prepare tool metadata for LLM (OPTIMIZED)
+        tool_metadata = {
+            "name": tool_data.get('name', ''),
+            "description": tool_data.get('details', {}).get('introduction', ''),
+            "speciality": tool_data.get('details', {}).get('speciality', ''),
+            "usage": tool_data.get('details', {}).get('usage', ''),
+            "features_pros": tool_data.get('features', {}).get('pros', []),
+            "pricingType": tool_data.get('pricingType', '')
+        }
+        
+        # Step 4: Create simple category list for LLM (OPTIMIZED)
+        category_names = [cat.get('Category', '') for cat in categories if cat.get('Category', '').strip()]
+        category_names = [name for name in category_names if name]  # Remove empty strings
+        
+        # Step 5: PRINT STATEMENTS - Data sent to LLM
+        print("\n" + "="*80)
+        print("🔍 TOOL METADATA SENT TO LLM:")
+        print("="*80)
+        print(json.dumps(tool_metadata, indent=2, ensure_ascii=False))
+        
+        print("\n" + "="*80)
+        print(f"📋 CATEGORY LIST SENT TO LLM ({len(category_names)} categories):")
+        print("="*80)
+        for i, cat_name in enumerate(category_names, 1):
+            print(f"{i:2d}. {cat_name}")
+        print("="*80 + "\n")
+        
+        # Step 6: Prepare LLM prompts (SIMPLIFIED FOR ARRAY RESPONSE)
+        system_prompt = """You are an expert AI tool categorization assistant. Your task is to analyze tool metadata and select the most relevant categories from a provided list.
+
+Instructions:
+1. Analyze the tool's functionality, features, and use cases
+2. Select ONLY the most relevant categories (maximum 25 categories)
+3. Be SELECTIVE and PRECISE - only include categories that clearly match
+4. Focus on what the tool primarily does, not tangential features
+5. Return ONLY a simple JSON array of selected category names: ["Category1", "Category2", "Category3"]
+6. NO DUPLICATES - each category should appear exactly once
+7. Use exact category names from the provided list
+
+IMPORTANT: Return only a JSON array, nothing else. Be selective, not inclusive."""
+
+        user_prompt = f"""Tool to Categorize:
+{json.dumps(tool_metadata, indent=2)}
+
+Available Categories:
+{json.dumps(category_names, indent=1)}
+
+Task: Select the most relevant categories for this tool. Return ONLY a JSON array like: ["Category1", "Category2"]"""
+
+        # Step 7: Call LLM with regular Groq model
+        try:
+            llm = ChatGroq(
+                groq_api_key=env.groq_api_key,
+                model_name="llama-3.1-8b-instant",  # Reliable model
+                temperature=0.1
+            )
+            
+            response = llm.invoke([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ])
+            
+            llm_response = response.content.strip()
+            logger.info(f"✅ Groq response received")
+            
+            # Step 8: PRINT STATEMENT - LLM Response
+            print("\n" + "="*80)
+            print("🤖 LLM RESPONSE:")
+            print("="*80)
+            print(llm_response)
+            print("="*80 + "\n")
+            
+            # Step 9: Parse simple JSON array response
+            try:
+                # Clean response if it has code blocks
+                if llm_response.startswith("```"):
+                    llm_response = llm_response.strip("```json").strip("```").strip()
+                
+                selected_category_names = json.loads(llm_response)
+                
+                # Ensure it's a list
+                if not isinstance(selected_category_names, list):
+                    print(f"❌ Expected list, got {type(selected_category_names)}")
+                    selected_category_names = []
+                
+                # Step 10: PRINT STATEMENT - Parsed Selection
+                print("\n" + "="*60)
+                print(f"✅ PARSED SELECTED CATEGORIES ({len(selected_category_names)}):")
+                print("="*60)
+                for i, cat_name in enumerate(selected_category_names, 1):
+                    print(f"{i}. {cat_name}")
+                print("="*60 + "\n")
+                
+                # Step 11: Map selected names back to full category data with IDs
+                category_matches = []
+                category_lookup = {cat.get('Category', ''): cat for cat in categories}
+                
+                for selected_name in selected_category_names:
+                    if selected_name in category_lookup:
+                        cat_data = category_lookup[selected_name]
+                        category_match = CategoryMatch(
+                            id=str(cat_data.get('_id', '')),
+                            name=str(cat_data.get('Category', ''))
+                        )
+                        category_matches.append(category_match)
+                        print(f"✓ Matched: '{selected_name}' → ID: {cat_data.get('_id', '')}")
+                    else:
+                        print(f"✗ No match found for: '{selected_name}'")
+                        # Try partial matching as fallback
+                        partial_matches = [cat for cat in categories if selected_name.lower() in cat.get('Category', '').lower()]
+                        if partial_matches:
+                            cat_data = partial_matches[0]  # Take first partial match
+                            category_match = CategoryMatch(
+                                id=str(cat_data.get('_id', '')),
+                                name=str(cat_data.get('Category', ''))
+                            )
+                            category_matches.append(category_match)
+                            print(f"✓ Partial match: '{selected_name}' → '{cat_data.get('Category', '')}' (ID: {cat_data.get('_id', '')})")
+                
+                elapsed_time = time.time() - start_time
+                logger.info(f"Tool categorization completed in {elapsed_time:.2f}s - found {len(category_matches)} matches")
+                
+                # Step 12: PRINT STATEMENT - Final Results
+                print("\n" + "="*70)
+                print(f"🎯 FINAL CATEGORIZATION RESULTS:")
+                print("="*70)
+                print(f"Tool: {tool_name}")
+                print(f"Selected Categories: {len(category_matches)}")
+                for i, match in enumerate(category_matches, 1):
+                    print(f"  {i}. {match.name} (ID: {match.id})")
+                print("="*70 + "\n")
+                
+                return ToolCategorizationResponse(
+                    tool_id=tool_id,
+                    tool_name=tool_name,
+                    matched_categories=category_matches,
+                    total_available_categories=len(categories)
+                )
+                
+            except json.JSONDecodeError as e:
+                print(f"\n❌ JSON PARSE ERROR: {str(e)}")
+                print(f"Raw response was: '{llm_response}'")
+                logger.error(f"Failed to parse LLM response: {str(e)}")
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"Failed to parse categorization results: {str(e)}"
+                )
+        
+        except Exception as e:
+            print(f"\n❌ LLM CALL ERROR: {str(e)}")
+            logger.error(f"LLM call failed: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Categorization processing failed: {str(e)}"
+            )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in categorize_tool: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Tool categorization failed: {str(e)}"
+        )
+        
+@app.post("/categorize-tool-usecase/{tool_id}", response_model=ToolUseCaseCategorizationResponse)
+async def categorize_tool_usecase(tool_id: str, request_headers: Request):
+    """Categorize a tool into use cases based on its metadata using LLM analysis."""
+    start_time = time.time()
+    
+    try:
+        logger.info(f"Categorizing tool use cases for ID: {tool_id}")
+        
+        # Step 1: Fetch tool from MongoDB
+        tool_data = await mongodb_manager.get_tool_by_id(tool_id)
+        if not tool_data:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Tool with ID '{tool_id}' not found"
+            )
+        
+        tool_name = tool_data.get('name', 'Unknown Tool')
+        logger.info(f"Found tool: {tool_name}")
+        
+        # Step 2: Fetch all use cases from MongoDB
+        usecases = await mongodb_manager.get_all_usecases()
+        if not usecases:
+            raise HTTPException(
+                status_code=500,
+                detail="No use cases found in database"
+            )
+        
+        logger.info(f"Fetched {len(usecases)} use cases for analysis")
+        
+        # Step 3: Prepare tool metadata for LLM (OPTIMIZED)
+        tool_metadata = {
+            "name": tool_data.get('name', ''),
+            "description": tool_data.get('details', {}).get('introduction', ''),
+            "speciality": tool_data.get('details', {}).get('speciality', ''),
+            "usage": tool_data.get('details', {}).get('usage', ''),
+            "features_pros": tool_data.get('features', {}).get('pros', []),
+            "pricingType": tool_data.get('pricingType', '')
+        }
+        
+        # Step 4: Create simple use case list for LLM (OPTIMIZED)
+        usecase_names = [uc.get('UseCase', '') for uc in usecases if uc.get('UseCase', '').strip()]
+        usecase_names = [name for name in usecase_names if name]  # Remove empty strings
+        
+        # Step 5: PRINT STATEMENTS - Data sent to LLM
+        print("\n" + "="*80)
+        print("🔍 TOOL METADATA SENT TO LLM:")
+        print("="*80)
+        print(json.dumps(tool_metadata, indent=2, ensure_ascii=False))
+        
+        print("\n" + "="*80)
+        print(f"📋 USE CASE LIST SENT TO LLM ({len(usecase_names)} use cases):")
+        print("="*80)
+        for i, uc_name in enumerate(usecase_names, 1):
+            print(f"{i:2d}. {uc_name}")
+        print("="*80 + "\n")
+        
+        # Step 6: Prepare LLM prompts (SIMPLIFIED FOR ARRAY RESPONSE)
+        system_prompt = """You are an expert AI tool use case categorization assistant. Your task is to analyze tool metadata and select the most relevant use cases from a provided list.
+
+Instructions:
+1. Analyze the tool's functionality, target audience, and practical applications
+2. Select ONLY the most relevant use cases (maximum 10 use cases)
+3. Be SELECTIVE and PRECISE - only include use cases where this tool would be genuinely useful
+4. Focus on the tool's PRIMARY use cases, not every possible tangential use
+5. Return ONLY a simple JSON array of selected use case names: ["Use Case 1", "Use Case 2"]
+6. NO DUPLICATES - each use case should appear exactly once
+7. Use exact use case names from the provided list
+
+IMPORTANT: Return only a JSON array, nothing else. Be highly selective - focus on primary use cases only."""
+
+        user_prompt = f"""Tool to Categorize:
+{json.dumps(tool_metadata, indent=2)}
+
+Available Use Cases:
+{json.dumps(usecase_names, indent=1)}
+
+Task: Select the most relevant use cases for this tool. Return ONLY a JSON array like: ["Use Case 1", "Use Case 2"]"""
+
+        # Step 7: Call LLM with regular Groq model
+        try:
+            llm = ChatGroq(
+                groq_api_key=env.groq_api_key,
+                model_name="llama-3.1-8b-instant",  # Reliable model
+                temperature=0.1
+            )
+            
+            response = llm.invoke([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ])
+            
+            llm_response = response.content.strip()
+            logger.info(f"✅ Groq response received")
+            
+            # Step 8: PRINT STATEMENT - LLM Response
+            print("\n" + "="*80)
+            print("🤖 LLM RESPONSE:")
+            print("="*80)
+            print(llm_response)
+            print("="*80 + "\n")
+            
+            # Step 9: Parse simple JSON array response
+            try:
+                # Clean response if it has code blocks
+                if llm_response.startswith("```"):
+                    llm_response = llm_response.strip("```json").strip("```").strip()
+                
+                selected_usecase_names = json.loads(llm_response)
+                
+                # Ensure it's a list
+                if not isinstance(selected_usecase_names, list):
+                    print(f"❌ Expected list, got {type(selected_usecase_names)}")
+                    selected_usecase_names = []
+                
+                # Step 10: PRINT STATEMENT - Parsed Selection
+                print("\n" + "="*60)
+                print(f"✅ PARSED SELECTED USE CASES ({len(selected_usecase_names)}):")
+                print("="*60)
+                for i, uc_name in enumerate(selected_usecase_names, 1):
+                    print(f"{i}. {uc_name}")
+                print("="*60 + "\n")
+                
+                # Step 11: Map selected names back to full use case data with IDs
+                usecase_matches = []
+                usecase_lookup = {uc.get('UseCase', ''): uc for uc in usecases}
+                
+                for selected_name in selected_usecase_names:
+                    if selected_name in usecase_lookup:
+                        uc_data = usecase_lookup[selected_name]
+                        usecase_match = UseCaseMatch(
+                            id=str(uc_data.get('_id', '')),
+                            name=str(uc_data.get('UseCase', ''))
+                        )
+                        usecase_matches.append(usecase_match)
+                        print(f"✓ Matched: '{selected_name}' → ID: {uc_data.get('_id', '')}")
+                    else:
+                        print(f"✗ No match found for: '{selected_name}'")
+                        # Try partial matching as fallback
+                        partial_matches = [uc for uc in usecases if selected_name.lower() in uc.get('UseCase', '').lower()]
+                        if partial_matches:
+                            uc_data = partial_matches[0]  # Take first partial match
+                            usecase_match = UseCaseMatch(
+                                id=str(uc_data.get('_id', '')),
+                                name=str(uc_data.get('UseCase', ''))
+                            )
+                            usecase_matches.append(usecase_match)
+                            print(f"✓ Partial match: '{selected_name}' → '{uc_data.get('UseCase', '')}' (ID: {uc_data.get('_id', '')})")
+                
+                elapsed_time = time.time() - start_time
+                logger.info(f"Tool use case categorization completed in {elapsed_time:.2f}s - found {len(usecase_matches)} matches")
+                
+                # Step 12: PRINT STATEMENT - Final Results
+                print("\n" + "="*70)
+                print(f"🎯 FINAL USE CASE CATEGORIZATION RESULTS:")
+                print("="*70)
+                print(f"Tool: {tool_name}")
+                print(f"Selected Use Cases: {len(usecase_matches)}")
+                for i, match in enumerate(usecase_matches, 1):
+                    print(f"  {i}. {match.name} (ID: {match.id})")
+                print("="*70 + "\n")
+                
+                return ToolUseCaseCategorizationResponse(
+                    tool_id=tool_id,
+                    tool_name=tool_name,
+                    matched_usecases=usecase_matches,
+                    total_available_usecases=len(usecases)
+                )
+                
+            except json.JSONDecodeError as e:
+                print(f"\n❌ JSON PARSE ERROR: {str(e)}")
+                print(f"Raw response was: '{llm_response}'")
+                logger.error(f"Failed to parse LLM response: {str(e)}")
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"Failed to parse use case categorization results: {str(e)}"
+                )
+        
+        except Exception as e:
+            print(f"\n❌ LLM CALL ERROR: {str(e)}")
+            logger.error(f"LLM call failed: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Use case categorization processing failed: {str(e)}"
+            )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in categorize_tool_usecase: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Tool use case categorization failed: {str(e)}"
         )
 
 @app.get("/debug-env")

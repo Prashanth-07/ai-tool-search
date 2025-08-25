@@ -20,6 +20,7 @@ services:
       # Add OpenAI (only for query tools)
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENAI_MODEL=${OPENAI_MODEL}
+      - MONGO_URI=${MONGO_URI}
     volumes:
       - ./backend:/app
     extra_hosts:
