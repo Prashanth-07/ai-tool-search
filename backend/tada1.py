@@ -4321,14 +4321,16 @@ async def categorize_tool(tool_id: str, request_headers: Request):
         system_prompt = """You are an expert AI tool categorization assistant. Your task is to analyze tool metadata and select the most relevant categories from a provided list.
 
 Instructions:
-1. Analyze the tool's functionality, features, and use cases
+1. Analyze the tool's functionality, target audience, and practical applications
 2. Select ONLY the most relevant categories (maximum 25 categories)
-3. Be SELECTIVE and PRECISE - only include categories that clearly match
-4. Focus on what the tool primarily does, not tangential features
+3. Be SELECTIVE and PRECISE - only include categories that would be genuinely matching.
+4. Focus on the tool's PRIMARY use case and functionality, not every possible tangential use
 5. Return ONLY a simple JSON array of selected category names: ["Category1", "Category2", "Category3"]
 6. NO DUPLICATES - each category should appear exactly once
-7. Use exact category names from the provided list
+7. Use exact category names from the provided list.
+8. Dont go out of the list.
 
+Important:  Be SELECTIVE and PRECISE
 IMPORTANT: Return only a JSON array, nothing else. Be selective, not inclusive."""
 
         user_prompt = f"""Tool to Categorize:
@@ -4516,14 +4518,15 @@ async def categorize_tool_usecase(tool_id: str, request_headers: Request):
 
 Instructions:
 1. Analyze the tool's functionality, target audience, and practical applications
-2. Select the relevant use cases (maximum 25 use cases) only from the give Available Use Cases.
-3. Include use cases where this tool would be useful
-4. Focus on the tool's use cases.
+2. Select ONLY the most relevant use cases (maximum 25 use cases)
+3. Be SELECTIVE and PRECISE - only include use cases where this tool would be genuinely useful
+4. Focus on the tool's PRIMARY use cases, not every possible tangential use
 5. Return ONLY a simple JSON array of selected use case names: ["Use Case 1", "Use Case 2"]
 6. NO DUPLICATES - each use case should appear exactly once
 7. Use exact use case names from the provided list
+8. Dont go out of the list.
 
-IMPORTANT: Return only a JSON array, nothing else."""
+IMPORTANT: Return only a JSON array, nothing else. Be highly selective - focus on primary use cases only."""
 
         user_prompt = f"""Tool to Categorize:
 {json.dumps(tool_metadata, indent=2)}
@@ -4531,7 +4534,7 @@ IMPORTANT: Return only a JSON array, nothing else."""
 Available Use Cases:
 {json.dumps(usecase_names, indent=1)}
 
-Task: Select the relevant use cases for this tool. Return ONLY a JSON array like: ["Use Case 1", "Use Case 2"]"""
+Task: Select the most relevant use cases for this tool. Return ONLY a JSON array like: ["Use Case 1", "Use Case 2"]"""
 
         # Step 7: Call LLM with regular Groq model
         try:
