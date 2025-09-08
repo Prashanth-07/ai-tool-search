@@ -4317,36 +4317,56 @@ async def categorize_tool(tool_id: str, request_headers: Request):
             print(f"{i:2d}. {cat_name}")
         print("="*80 + "\n")
         
-        # Step 6: Prepare LLM prompts (SIMPLIFIED FOR ARRAY RESPONSE)
+        # Step 6: Prepare optimized LLM prompts
         system_prompt = """You are an expert AI tool categorization assistant. Your task is to analyze tool metadata and select the most relevant categories from a provided list.
 
-Instructions:
-1. Analyze the tool's functionality, target audience, and practical applications
-2. Select ONLY the most relevant categories (maximum 25 categories)
-3. Be SELECTIVE and PRECISE - only include categories that would be genuinely matching.
-4. Focus on the tool's PRIMARY use case and functionality, not every possible tangential use
-5. Return ONLY a simple JSON array of selected category names: ["Category1", "Category2", "Category3"]
-6. NO DUPLICATES - each category should appear exactly once
-7. Use exact category names from the provided list.
-8. Dont go out of the list.
+ANALYSIS PROCESS:
+1. Examine the tool's core functionality and technical capabilities
+2. Identify the primary target audience and use cases
+3. Map functionality to appropriate categories from the provided list
+4. Apply selection criteria to filter the most relevant matches
 
-Important:  Be SELECTIVE and PRECISE
-IMPORTANT: Return only a JSON array, nothing else. Be selective, not inclusive."""
+SELECTION CRITERIA:
+- Focus on PRIMARY use cases, not peripheral features
+- Select categories where the tool provides significant value
+- Consider genuine user search intent and discovery patterns
+- Ensure categories reflect the tool's main value proposition
 
-        user_prompt = f"""Tool to Categorize:
+CONSTRAINTS:
+- Maximum: 25 categories
+- Use only exact category names from the provided list
+- Be selective and precise, not comprehensive
+- No duplicates allowed
+- Focus on quality over quantity
+
+OUTPUT REQUIREMENTS:
+- Return only a JSON array of selected category names
+- Format: ["Category1", "Category2", "Category3"]  
+- No explanations, reasoning, or additional text
+- Use exact spelling and capitalization from the provided list"""
+
+        user_prompt = f"""TOOL TO CATEGORIZE:
 {json.dumps(tool_metadata, indent=2)}
 
-Available Categories:
+AVAILABLE CATEGORIES:
 {json.dumps(category_names, indent=1)}
 
-Task: Select the most relevant categories for this tool. Return ONLY a JSON array like: ["Category1", "Category2"]"""
+TASK:
+Analyze the tool metadata above and select the most relevant categories using the process and criteria defined in the system prompt.
+
+Remember: 
+- Maximum: 25 categories
+- Return only JSON array format: ["Category1", "Category2"]"""
 
         # Step 7: Call LLM with regular Groq model
         try:
             llm = ChatGroq(
                 groq_api_key=env.groq_api_key,
-                model_name="llama-3.1-8b-instant",  # Reliable model
-                temperature=0.1
+                model_name="openai/gpt-oss-20b",  # Reliable model
+                temperature=0.1,
+                top_p=0.95,
+                frequency_penalty=0.5,
+                presence_penalty=0.2
             )
             
             response = llm.invoke([
@@ -4376,6 +4396,29 @@ Task: Select the most relevant categories for this tool. Return ONLY a JSON arra
                 if not isinstance(selected_category_names, list):
                     print(f"❌ Expected list, got {type(selected_category_names)}")
                     selected_category_names = []
+                
+                # NEW FUNCTIONALITY 1: Remove redundancy (duplicates)
+                original_count = len(selected_category_names)
+                # Convert to list of strings and remove duplicates while preserving order
+                selected_category_names = [str(name).strip() for name in selected_category_names if str(name).strip()]
+                seen = set()
+                deduplicated_categories = []
+                for category in selected_category_names:
+                    if category not in seen:
+                        seen.add(category)
+                        deduplicated_categories.append(category)
+                
+                selected_category_names = deduplicated_categories
+                
+                if original_count != len(selected_category_names):
+                    print(f"🔄 Removed {original_count - len(selected_category_names)} duplicate categories")
+                    logger.info(f"Removed duplicates: {original_count} → {len(selected_category_names)} categories")
+                
+                # NEW FUNCTIONALITY 2: Enforce 25-category limit
+                if len(selected_category_names) > 25:
+                    logger.warning(f"LLM returned {len(selected_category_names)} categories, truncating to 25")
+                    print(f"⚠️ Truncating from {len(selected_category_names)} to 25 categories")
+                    selected_category_names = selected_category_names[:25]
                 
                 # Step 10: PRINT STATEMENT - Parsed Selection
                 print("\n" + "="*60)
@@ -4513,35 +4556,56 @@ async def categorize_tool_usecase(tool_id: str, request_headers: Request):
             print(f"{i:2d}. {uc_name}")
         print("="*80 + "\n")
         
-        # Step 6: Prepare LLM prompts (SIMPLIFIED FOR ARRAY RESPONSE)
-        system_prompt = """You are an expert AI tool use case categorization assistant. Your task is to analyze tool metadata and select the relevant use cases only from a provided Available Use Cases.
+        # Step 6: Prepare optimized LLM prompts
+        system_prompt = """You are an expert AI tool use case categorization assistant. Your task is to analyze tool metadata and select the most relevant use cases from a provided list.
 
-Instructions:
-1. Analyze the tool's functionality, target audience, and practical applications
-2. Select ONLY the most relevant use cases (maximum 25 use cases)
-3. Be SELECTIVE and PRECISE - only include use cases where this tool would be genuinely useful
-4. Focus on the tool's PRIMARY use cases, not every possible tangential use
-5. Return ONLY a simple JSON array of selected use case names: ["Use Case 1", "Use Case 2"]
-6. NO DUPLICATES - each use case should appear exactly once
-7. Use exact use case names from the provided list
-8. Dont go out of the list.
+ANALYSIS PROCESS:
+1. Examine the tool's core functionality and technical capabilities
+2. Identify the primary target audience and practical applications
+3. Map functionality to appropriate use cases from the provided list
+4. Apply selection criteria to filter the most relevant matches
 
-IMPORTANT: Return only a JSON array, nothing else. Be highly selective - focus on primary use cases only."""
+SELECTION CRITERIA:
+- Focus on PRIMARY use cases, not peripheral applications
+- Select use cases where the tool provides significant value
+- Consider genuine user workflows and problem-solving scenarios
+- Ensure use cases reflect the tool's main practical applications
 
-        user_prompt = f"""Tool to Categorize:
+CONSTRAINTS:
+- Maximum: 25 use cases
+- Use only exact use case names from the provided list
+- Be selective and precise, not comprehensive
+- No duplicates allowed
+- Focus on quality over quantity
+
+OUTPUT REQUIREMENTS:
+- Return only a JSON array of selected use case names
+- Format: ["Use Case 1", "Use Case 2", "Use Case 3"]  
+- No explanations, reasoning, or additional text
+- Use exact spelling and capitalization from the provided list"""
+
+        user_prompt = f"""TOOL TO CATEGORIZE:
 {json.dumps(tool_metadata, indent=2)}
 
-Available Use Cases:
+AVAILABLE USE CASES:
 {json.dumps(usecase_names, indent=1)}
 
-Task: Select the most relevant use cases for this tool. Return ONLY a JSON array like: ["Use Case 1", "Use Case 2"]"""
+TASK:
+Analyze the tool metadata above and select the most relevant use cases using the process and criteria defined in the system prompt.
+
+Remember: 
+- Maximum: 25 use cases
+- Return only JSON array format: ["Use Case 1", "Use Case 2"]"""
 
         # Step 7: Call LLM with regular Groq model
         try:
             llm = ChatGroq(
                 groq_api_key=env.groq_api_key,
-                model_name="llama-3.1-8b-instant",  # Reliable model
-                temperature=0.1
+                model_name="openai/gpt-oss-20b",  # Reliable model
+                temperature=0.1,
+                top_p=0.95,
+                frequency_penalty=0.5,
+                presence_penalty=0.2
             )
             
             response = llm.invoke([
@@ -4571,6 +4635,29 @@ Task: Select the most relevant use cases for this tool. Return ONLY a JSON array
                 if not isinstance(selected_usecase_names, list):
                     print(f"❌ Expected list, got {type(selected_usecase_names)}")
                     selected_usecase_names = []
+                
+                # NEW FUNCTIONALITY 1: Remove redundancy (duplicates)
+                original_count = len(selected_usecase_names)
+                # Convert to list of strings and remove duplicates while preserving order
+                selected_usecase_names = [str(name).strip() for name in selected_usecase_names if str(name).strip()]
+                seen = set()
+                deduplicated_usecases = []
+                for usecase in selected_usecase_names:
+                    if usecase not in seen:
+                        seen.add(usecase)
+                        deduplicated_usecases.append(usecase)
+                
+                selected_usecase_names = deduplicated_usecases
+                
+                if original_count != len(selected_usecase_names):
+                    print(f"🔄 Removed {original_count - len(selected_usecase_names)} duplicate use cases")
+                    logger.info(f"Removed duplicates: {original_count} → {len(selected_usecase_names)} use cases")
+                
+                # NEW FUNCTIONALITY 2: Enforce 25-use case limit
+                if len(selected_usecase_names) > 25:
+                    logger.warning(f"LLM returned {len(selected_usecase_names)} use cases, truncating to 25")
+                    print(f"⚠️ Truncating from {len(selected_usecase_names)} to 25 use cases")
+                    selected_usecase_names = selected_usecase_names[:25]
                 
                 # Step 10: PRINT STATEMENT - Parsed Selection
                 print("\n" + "="*60)
