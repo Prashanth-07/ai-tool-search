@@ -1,0 +1,227 @@
+{
+  "timestamp": "2025-10-06T13:55:47.972129",
+  "input_query": "free video generator",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 18,
+    "tool_ids": [
+      "68a6d77420d1e32c6f63c8b8",
+      "681cc1c4477018e3479584e9",
+      "68445055b32d4d019cbd5381",
+      "68d5719114ec3aabf832b504",
+      "68d284e814ec3aabf830e70f",
+      "68cc023314ec3aabf82cba49",
+      "686786faef7018fbfef78a1a",
+      "682f778bbcf558ef8c314def",
+      "68979972cc6937f852778426",
+      "686df8384d688acbd3c406d0",
+      "682d53fa23aaf1a750a99d0e",
+      "68a7017820d1e32c6f640f41",
+      "682e0b0823aaf1a750aa8074",
+      "68459f1fb32d4d019ceab644",
+      "68b3489227f52b6ba7a8926f",
+      "68678af5ef7018fbfef79658",
+      "682d4a7d23aaf1a750a9939a",
+      "68736836cc23a952f76cc74c"
+    ],
+    "tools": [
+      {
+        "id": "68a6d77420d1e32c6f63c8b8",
+        "name": "MAGI-1 AI Video Generator"
+      },
+      {
+        "id": "681cc1c4477018e3479584e9",
+        "name": "Video Fusion"
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create"
+      },
+      {
+        "id": "68d5719114ec3aabf832b504",
+        "name": "SuperMaker AI"
+      },
+      {
+        "id": "68d284e814ec3aabf830e70f",
+        "name": "LipSync.video"
+      },
+      {
+        "id": "68cc023314ec3aabf82cba49",
+        "name": "Faceless Video"
+      },
+      {
+        "id": "686786faef7018fbfef78a1a",
+        "name": "Media.io AI Video Generator"
+      },
+      {
+        "id": "682f778bbcf558ef8c314def",
+        "name": "Synthesys"
+      },
+      {
+        "id": "68979972cc6937f852778426",
+        "name": "Prism"
+      },
+      {
+        "id": "686df8384d688acbd3c406d0",
+        "name": "AI Media Studio"
+      },
+      {
+        "id": "682d53fa23aaf1a750a99d0e",
+        "name": "Clipfly"
+      },
+      {
+        "id": "68a7017820d1e32c6f640f41",
+        "name": "FlickifyAI"
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine"
+      },
+      {
+        "id": "68459f1fb32d4d019ceab644",
+        "name": "Pika Labs AI"
+      },
+      {
+        "id": "68b3489227f52b6ba7a8926f",
+        "name": "FlyAgt"
+      },
+      {
+        "id": "68678af5ef7018fbfef79658",
+        "name": "Vidu AI"
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI"
+      },
+      {
+        "id": "68736836cc23a952f76cc74c",
+        "name": "Hunyuan Video"
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68a6d77420d1e32c6f63c8b8",
+      "681cc1c4477018e3479584e9",
+      "68445055b32d4d019cbd5381",
+      "68d5719114ec3aabf832b504",
+      "68d284e814ec3aabf830e70f",
+      "68cc023314ec3aabf82cba49",
+      "686786faef7018fbfef78a1a",
+      "682f778bbcf558ef8c314def",
+      "68979972cc6937f852778426",
+      "686df8384d688acbd3c406d0",
+      "682d53fa23aaf1a750a99d0e",
+      "68a7017820d1e32c6f640f41",
+      "682e0b0823aaf1a750aa8074",
+      "68459f1fb32d4d019ceab644",
+      "68b3489227f52b6ba7a8926f",
+      "68678af5ef7018fbfef79658",
+      "682d4a7d23aaf1a750a9939a",
+      "68736836cc23a952f76cc74c"
+    ],
+    "tools": [
+      {
+        "id": "68a6d77420d1e32c6f63c8b8",
+        "name": "MAGI-1 AI Video Generator"
+      },
+      {
+        "id": "681cc1c4477018e3479584e9",
+        "name": "Video Fusion"
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create"
+      },
+      {
+        "id": "68d5719114ec3aabf832b504",
+        "name": "SuperMaker AI"
+      },
+      {
+        "id": "68d284e814ec3aabf830e70f",
+        "name": "LipSync.video"
+      },
+      {
+        "id": "68cc023314ec3aabf82cba49",
+        "name": "Faceless Video"
+      },
+      {
+        "id": "686786faef7018fbfef78a1a",
+        "name": "Media.io AI Video Generator"
+      },
+      {
+        "id": "682f778bbcf558ef8c314def",
+        "name": "Synthesys"
+      },
+      {
+        "id": "68979972cc6937f852778426",
+        "name": "Prism"
+      },
+      {
+        "id": "686df8384d688acbd3c406d0",
+        "name": "AI Media Studio"
+      },
+      {
+        "id": "682d53fa23aaf1a750a99d0e",
+        "name": "Clipfly"
+      },
+      {
+        "id": "68a7017820d1e32c6f640f41",
+        "name": "FlickifyAI"
+      },
+      {
+        "id": "682e0b0823aaf1a750aa8074",
+        "name": "powtoon imagine"
+      },
+      {
+        "id": "68459f1fb32d4d019ceab644",
+        "name": "Pika Labs AI"
+      },
+      {
+        "id": "68b3489227f52b6ba7a8926f",
+        "name": "FlyAgt"
+      },
+      {
+        "id": "68678af5ef7018fbfef79658",
+        "name": "Vidu AI"
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI"
+      },
+      {
+        "id": "68736836cc23a952f76cc74c",
+        "name": "Hunyuan Video"
+      }
+    ]
+  },
+  "processing_time_seconds": 8.245,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68a6d77420d1e32c6f63c8b8\",\n    \"681cc1c4477018e3479584e9\",\n    \"68445055b32d4d019cbd5381\",\n    \"68d5719114ec3aabf832b504\",\n    \"68d284e814ec3aabf830e70f\",\n    \"68cc023314ec3aabf82cba49\",\n    \"686786faef7018fbfef78a1a\",\n    \"682f778bbcf558ef8c314def\",\n    \"68979972cc6937f852778426\",\n    \"686df8384d688acbd3c406d0\",\n    \"682d53fa23aaf1a750a99d0e\",\n    \"68a7017820d1e32c6f640f41\",\n    \"682e0b0823aaf1a750aa8074\",\n    \"68459f1fb32d4d019ceab644\",\n    \"68b3489227f52b6ba7a8926f\",\n    \"68678af5ef7018fbfef79658\",\n    \"682d4a7d23aaf1a750a9939a\",\n    \"68736836cc23a952f76cc74c\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68a6d77420d1e32c6f63c8b8\",\n      \"name\": \"MAGI-1 AI Video Generator\"\n    },\n    {\n      \"id\": \"681cc1c4477018e3479584e9\",\n      \"name\": \"Video Fusion\"\n    },\n    {\n      \"id\": \"68445055b32d4d019cbd5381\",\n      \"name\": \"Vidu Studio - AI Video Create\"\n    },\n    {\n      \"id\": \"68d5719114ec3aabf832b504\",\n      \"name\": \"SuperMaker AI\"\n    },\n    {\n      \"id\": \"68d284e814ec3aabf830e70f\",\n      \"name\": \"LipSync.video\"\n    },\n    {\n      \"id\": \"68cc023314ec3aabf82cba49\",\n      \"name\": \"Faceless Video\"\n    },\n    {\n      \"id\": \"686786faef7018fbfef78a1a\",\n      \"name\": \"Media.io AI Video Generator\"\n    },\n    {\n      \"id\": \"682f778bbcf558ef8c314def\",\n      \"name\": \"Synthesys\"\n    },\n    {\n      \"id\": \"68979972cc6937f852778426\",\n      \"name\": \"Prism\"\n    },\n    {\n      \"id\": \"686df8384d688acbd3c406d0\",\n      \"name\": \"AI Media Studio\"\n    },\n    {\n      \"id\": \"682d53fa23aaf1a750a99d0e\",\n      \"name\": \"Clipfly\"\n    },\n    {\n      \"id\": \"68a7017820d1e32c6f640f41\",\n      \"name\": \"FlickifyAI\"\n    },\n    {\n      \"id\": \"682e0b0823aaf1a750aa8074\",\n      \"name\": \"powtoon imagine\"\n    },\n    {\n      \"id\": \"68459f1fb32d4d019ceab644\",\n      \"name\": \"Pika Labs AI\"\n    },\n    {\n      \"id\": \"68b3489227f52b6ba7a8926f\",\n      \"name\": \"FlyAgt\"\n    },\n    {\n      \"id\": \"68678af5ef7018fbfef79658\",\n      \"name\": \"Vidu AI\"\n    },\n    {\n      \"id\": \"682d4a7d23aaf1a750a9939a\",\n      \"name\": \"invideoAI\"\n    },\n    {\n      \"id\": \"68736836cc23a952f76cc74c\",\n      \"name\": \"Hunyuan Video\"\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

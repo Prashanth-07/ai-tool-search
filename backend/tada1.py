@@ -288,11 +288,9 @@ class StructuredToolResult(BaseModel):
     """Individual tool result for structured outputs."""
     id: str
     name: str
-    description: str
-    bullets: List[str] = []
     
     class Config:
-        extra = "forbid"  # This generates "additionalProperties": false
+        extra = "forbid"
 
 class StructuredQueryResponse(BaseModel):
     """Structured query response for OpenAI structured outputs."""
@@ -754,6 +752,288 @@ class OptimizedOpenAIClient:
 optimized_openai_client = OptimizedOpenAIClient()
 
 
+<<<<<<< Updated upstream
+=======
+               logger.info(f"📏 System prompt: {len(final_system)} chars, User prompt: {len(final_user)} chars")
+               logger.info("🎯 TIER 1: Using Structured Outputs with optimized prompts")
+               
+               # Log prompt lengths for caching analysis
+               logger.info(f"📏 System prompt: {len(system_prompt)} chars, User prompt: {len(user_prompt)} chars")
+               
+               # ✅ STRUCTURED OUTPUTS (Caching happens automatically)
+               response = client.responses.create(
+                   model=openai_model,
+                   input=[
+                       {"role": "system", "content": final_system},
+                       {"role": "user", "content": final_user}
+                   ],
+                   text={
+                       "format": {
+                           "type": "json_schema",
+                           "name": "structured_query_response", 
+                           "strict": True,
+                           "schema": {
+                               "type": "object",
+                               "properties": {
+                                   "tool_id": {
+                                       "type": "array",
+                                       "items": {"type": "string"}
+                                   },
+                                   "tools": {
+                                       "type": "array",
+                                       "items": {
+                                           "type": "object",
+                                           "properties": {
+                                               "id": {"type": "string"},
+                                               "name": {"type": "string"}
+                                           },
+                                           "required": ["id", "name"],
+                                           "additionalProperties": False
+                                       }
+                                   }
+                               },
+                               "required": ["tool_id", "tools"],
+                               "additionalProperties": False
+                           }
+                       }
+                   }
+               )
+               
+               # ✅ ANALYZE TOKENS & CACHING
+               cached_tokens = 0
+               cache_hit = False
+               cache_percentage = 0.0
+               
+               try:
+                   import tiktoken
+                   encoder = tiktoken.encoding_for_model(openai_model)
+                   input_text = system_prompt + user_prompt
+                   output_text = response.output_text or ""
+                   input_tokens = len(encoder.encode(input_text))
+                   output_tokens = len(encoder.encode(output_text))
+                   total_tokens = input_tokens + output_tokens
+                   
+                   # Extract cache information from API response
+                   usage = response.usage
+                   if hasattr(usage, 'prompt_tokens_details') and usage.prompt_tokens_details:
+                       cached_tokens = getattr(usage.prompt_tokens_details, 'cached_tokens', 0)
+                       cache_hit = cached_tokens > 0
+                       cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
+                   
+                   # ✅ COMPREHENSIVE TOKEN LOGGING
+                   logger.info(f"🔢 TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
+                   
+                   if cache_hit:
+                       logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
+                       logger.info(f"💰 Savings: ~{cache_percentage:.1f}% cost reduction + significant speed boost")
+                   else:
+                       logger.info(f"💾 CACHE MISS - Building cache for next request")
+                       if input_tokens >= 1024:
+                           logger.info(f"✅ Qualifies for caching ({input_tokens} ≥ 1024 tokens)")
+                       else:
+                           logger.info(f"❌ Too short for caching ({input_tokens} < 1024 tokens)")
+                   
+               except Exception as e:
+                   logger.warning(f"Token analysis failed: {str(e)}")
+               
+               logger.info("✅ OpenAI Structured Outputs successful")
+               
+               return {
+                   "content": response.output_text,
+                   "model": openai_model,
+                   "success": True,
+                   "structured": True,
+                   "cached_tokens": cached_tokens,
+                   "cache_hit": cache_hit,
+                   "usage": response.usage.model_dump() if hasattr(response.usage, 'model_dump') else str(response.usage)
+               }
+               
+           except Exception as structured_error:
+               logger.warning(f"Structured Outputs failed: {str(structured_error)}")
+               logger.info("Falling back to Chat Completions...")
+               
+               # ✅ TRY 2: Chat Completions Fallback (also has caching)
+               import requests
+               
+               headers = {
+                   "Authorization": f"Bearer {openai_api_key}",
+                   "Content-Type": "application/json"
+               }
+               
+               data = {
+                   "model": openai_model,
+                   "messages": [
+                       {"role": "system", "content": system_prompt},
+                       {"role": "user", "content": user_prompt}
+                   ],
+                   "temperature": 0.05,
+                   "response_format": {"type": "json_object"},
+                   "max_tokens": 4000
+               }
+               
+               response = requests.post(
+                   "https://api.openai.com/v1/chat/completions",
+                   headers=headers,
+                   json=data,
+                   timeout=60
+               )
+               
+               if response.status_code == 200:
+                   response_data = response.json()
+                   content = response_data["choices"][0]["message"]["content"]
+                   usage = response_data.get("usage", {})
+                   
+                   # ✅ ANALYZE TOKENS & CACHING FOR FALLBACK TOO
+                   cached_tokens = 0
+                   cache_hit = False
+                   cache_percentage = 0.0
+                   
+                   try:
+                       import tiktoken
+                       encoder = tiktoken.encoding_for_model(openai_model)
+                       input_text = system_prompt + user_prompt
+                       input_tokens = len(encoder.encode(input_text))
+                       output_tokens = len(encoder.encode(content))
+                       total_tokens = input_tokens + output_tokens
+                       
+                       # Extract cache information from Chat Completions response
+                       if 'prompt_tokens_details' in usage and usage['prompt_tokens_details']:
+                           cached_tokens = usage['prompt_tokens_details'].get('cached_tokens', 0)
+                           cache_hit = cached_tokens > 0
+                           cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
+                       
+                       # ✅ COMPREHENSIVE TOKEN LOGGING
+                       logger.info(f"🔢 TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
+                       
+                       if cache_hit:
+                           logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
+                       else:
+                           logger.info(f"💾 CACHE MISS - Building cache for next request")
+                           
+                   except Exception as e:
+                       logger.warning(f"Token analysis failed: {str(e)}")
+                   
+                   logger.info("✅ Chat Completions fallback successful")
+                   
+                   return {
+                       "content": content,
+                       "model": openai_model,
+                       "success": True,
+                       "structured": False,
+                       "cached_tokens": cached_tokens,
+                       "cache_hit": cache_hit,
+                       "usage": usage
+                   }
+               else:
+                   raise Exception(f"Chat Completions failed: {response.status_code}: {response.text}")
+                   
+       except Exception as e:
+           logger.error(f"❌ OpenAI API call failed: {str(e)}")
+           return {
+               "content": None,
+               "error": str(e),
+               "success": False,
+               "cached_tokens": 0,
+               "cache_hit": False
+           }
+
+   @staticmethod
+   def call_groq_structured_outputs(system_prompt: str, user_prompt: str, tier1_system: str=None, tier1_user: str=None) -> dict:
+       """Call Groq with Structured Outputs using openai/gpt-oss-20b."""
+       try:
+           from groq import Groq
+           
+           groq_api_key = os.getenv("GROQ_API_KEY")
+           groq_model = "openai/gpt-oss-20b"  # Hardcoded model
+           
+           if not groq_api_key:
+               raise ValueError("GROQ_API_KEY not found in environment variables")
+           
+           logger.info(f"Using Groq Structured Outputs with model: {groq_model}")
+           
+           client = Groq(api_key=groq_api_key)
+           
+           # Use tier1 prompts if provided, otherwise use regular prompts
+           final_system = tier1_system if tier1_system else system_prompt
+           final_user = tier1_user if tier1_user else user_prompt
+           
+           logger.info(f"System prompt: {len(final_system)} chars, User prompt: {len(final_user)} chars")
+           
+           # Define schema - matches your updated structure (only id and name)
+           json_schema = {
+               "name": "tool_recommendation_response",
+               "schema": {
+                   "type": "object",
+                   "properties": {
+                       "tool_id": {
+                           "type": "array",
+                           "items": {"type": "string"}
+                       },
+                       "tools": {
+                           "type": "array",
+                           "items": {
+                               "type": "object",
+                               "properties": {
+                                   "id": {"type": "string"},
+                                   "name": {"type": "string"}
+                               },
+                               "required": ["id", "name"],
+                               "additionalProperties": False
+                           }
+                       }
+                   },
+                   "required": ["tool_id", "tools"],
+                   "additionalProperties": False
+               }
+           }
+           
+           # Call Groq API
+           response = client.chat.completions.create(
+               model=groq_model,
+               messages=[
+                   {"role": "system", "content": final_system},
+                   {"role": "user", "content": final_user}
+               ],
+               response_format={
+                   "type": "json_schema",
+                   "json_schema": json_schema
+               },
+               temperature=0.05
+           )
+           
+           content = response.choices[0].message.content
+           
+           # Token counting
+           try:
+               import tiktoken
+               encoder = tiktoken.get_encoding("cl100k_base")
+               input_text = final_system + final_user
+               input_tokens = len(encoder.encode(input_text))
+               output_tokens = len(encoder.encode(content))
+               total_tokens = input_tokens + output_tokens
+               
+               logger.info(f"TOKENS → Input: {input_tokens} | Output: {output_tokens} | Total: {total_tokens}")
+           except Exception as e:
+               logger.warning(f"Token counting failed: {str(e)}")
+           
+           logger.info("Groq Structured Outputs successful")
+           
+           return {
+               "content": content,
+               "model": groq_model,
+               "success": True,
+               "structured": True,
+               "usage": response.usage.model_dump() if hasattr(response.usage, 'model_dump') else {}
+           }
+           
+       except Exception as e:
+           logger.error(f"Groq Structured Outputs failed: {str(e)}")
+           return {
+               "content": None,
+               "error": str(e),
+               "success": False
+           }
+>>>>>>> Stashed changes
 # ============================================================================
 # CACHE MANAGEMENT
 # ============================================================================
@@ -3029,6 +3309,7 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 })
                 return QueryResponse(response=filter_response)
             
+<<<<<<< Updated upstream
             # Use score-based selection
             llm_tools = SearchUtils.select_tools_by_score(
                 hybrid_results, 
@@ -3040,6 +3321,65 @@ async def query_tools(request: QueryRequest, request_headers: Request):
 
             logger.info(f"Using {len(llm_tools)} tools for structured LLM processing")
 
+=======
+            # Use score-based selection and split into LLM vs database processing
+            all_selected_results = SearchUtils.select_tools_by_score(
+                hybrid_results, 
+                min_score=Config.HYBRID_MIN_SCORE,
+                max_tools=Config.HYBRID_MAX_TOOLS,
+                fallback_count=Config.HYBRID_FALLBACK_COUNT,
+                high_individual_threshold=0.9
+            )
+
+            # Split into LLM and database processing groups
+            llm_tools = all_selected_results[:40]  # Top 40 for LLM
+            # db_tools = all_selected_results[30:]   # Remaining for database processing
+
+            # logger.info(f"Split results: {len(llm_tools)} tools for LLM, {len(db_tools)} tools for database processing")
+            logger.info(f"Using {len(llm_tools)} tools for LLM processing only")
+            logger.info(f"Total tools to process: {len(all_selected_results)}")
+
+            # LOG TOOLS SENT TO LLM (basic info for logs)
+            logger.info("=== TOOLS SENT TO LLM ===")
+            for i, result in enumerate(llm_tools):
+                tool_name = result.get("name", "Unknown")
+                tool_id = result.get("tool_id", "Unknown")
+                score = result.get("score", 0)
+                logger.info(f"LLM Tool {i+1}: '{tool_name}' (ID: {tool_id}) - Score: {score:.3f}")
+                logger.info("-" * 40)
+
+            logger.info(f"Sending {len(llm_tools)} tools to LLM for processing (score-based selection)")
+            
+            # Format documents for LLM - UPDATED TO PASS ALL METADATA AS JSON
+            # formatted_docs = []
+            # for result in llm_tools:  # Only process top 40
+            #     # Pass ALL metadata as JSON to LLM - let LLM decide what's relevant
+            #     formatted_doc = json.dumps(result, indent=2, ensure_ascii=False)
+            #     formatted_docs.append(formatted_doc)
+            formatted_docs = []
+            for result in llm_tools:
+                essential_data = {
+                    "tool_id": result.get("tool_id", ""),
+                    "name": result.get("name", ""),
+                    "description": result.get("description", ""),
+                    "category_subcat": result.get("category_subcat", ""),
+                    "pricingType": result.get("pricingType", ""),
+                    "details_speciality": result.get("details_speciality", "") if result.get("details_speciality") else ""
+                }
+                formatted_doc = json.dumps(essential_data, ensure_ascii=False)
+                formatted_docs.append(formatted_doc)
+            
+            logger.info(f"📊 DEBUG: Formatted {len(formatted_docs)} tools for LLM")
+            logger.info(f"📊 DEBUG: Sample tool data: {formatted_docs[0] if formatted_docs else 'None'}")
+            
+            # # LOG ACTUAL DATA SENT TO LLM (first 2 tools for verification)
+            # logger.info("=== ACTUAL DATA SENT TO LLM ===")
+            # for i, formatted_doc in enumerate(formatted_docs[:2]):  # Log first 2 tools
+            #     logger.info(f"Tool {i+1} Complete Data to LLM:")
+            #     logger.info(formatted_doc[:500] + "..." if len(formatted_doc) > 500 else formatted_doc)
+            #     logger.info("-" * 80)
+            
+>>>>>>> Stashed changes
             # Handle no tools case
             if not llm_tools:
                 empty_response = json.dumps({
@@ -3071,8 +3411,78 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             context = "\n\n---\n\n".join(formatted_docs)
             cleaned_context = TextCleaner.clean_text(context)
 
+<<<<<<< Updated upstream
             # Create prompts for structured outputs
             selection_system_prompt = f"""You are an expert AI tool recommendation assistant specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to select and rank all the relevant tools from a given Available Tools Data if they match or related to Query which is: "{request.query}".
+=======
+            # Calculate token budget for output management
+            tool_count = len(llm_tools)
+            tokens_per_tool = min(150, 3000 // max(tool_count, 1)) 
+            
+            system_text = f"""You are an expert AI tool recommendation assistant who is specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to *select and rank all the relevant tools* from a given Available Tools Data if they **match or related** to Query which is: "{request.query}".
+
+##Selection Criteria OR Rules:
+- Include all the Query related tools without restricting or limiting to fewer tools following below INCLUSIVE APPROACH.
+- **INCLUSIVE APPROACH**: Analyze each tool data and INCLUDE all tools that:
+  - Have core functionality addressing the query or related needs
+  - Have same or related keywords in the description, metadata or name of the tool.
+  - Have semantic similarity to the query.
+  - Contain related concepts, or purposes or could be adapted for the use case of the query.
+  - Would be useful or helpful for someone with this specific need
+  - Are from the same general domain or category
+  - Are in related categories that users might consider
+- **Ranking Requirements**: Rank them from most to least relevant (1st = most relevant)
+- **Query-Specific Conditions**:
+  - If query specifies a number ("top 3", "best 5"): return exactly that count
+  - If query mentions specific tool name: prioritize and return that tool in 1st position  
+- ** EXCLUSION**: Only exclude tools that:
+  - Are from completely different domains with zero functional overlap
+  - Cannot solve any aspect of the user's problem
+  - Would never be considered by someone with this need
+  - Have no shared keywords, concepts, or use cases with the query
+- **INCLUSION PREFERENCE**: 
+  - *Do not duplicate tools - each tool should appear exactly once in the response*
+  - *Include all tools that have any relevance to the query*
+- **Edge Cases**: If no tools match the query, return: {{ "tool_id": [], "tools": [] }}
+- **Count Limits**: *Return all the tools up to 40 tools based on relevance* (prefer more options over fewer)
+- **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
+
+##JSON FORMAT:
+{{
+  "tool_id": ["most_relevant_exact_tool_id", "second_most_relevant_exact_tool_id"],
+  "tools": [
+    {{
+      "id": "exact_tool_id_from_data",
+      "name": "tool_name"
+    }}
+  ]
+}}
+
+- The "tool_id" array should mirror the ranking order of tools returned in the "tools" list.
+- The "id" field inside each object must match its corresponding entry in "tool_id".
+
+##*Important Rules*:
+- Return *ONLY valid JSON* in the below given JSON FORMAT *without any PREAMBLE or EXPLANATION.*
+- Return ONLY id and name for each tool
+- Ensure all brackets and quotes are properly closed."""
+            
+            prompt_text = f"""Query: "{request.query}"
+
+Available Tools Data:
+{cleaned_context}
+
+## Task
+Your task is to select and rank all tools that are relevant to the above Query, using the provided Available Tools Data.
+
+## Requirements:
+- Apply the Selection Criteria OR Rules as defined above
+- Analyze query intent first, then evaluate each tool against that intent
+- NO DUPLICATES but include all relevant tools
+- Focus on semantic relevance.
+- Return only the final JSON result — no extra text or explanations"""
+
+            tier1_system = f"""You are an expert AI tool recommendation assistant specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to select and rank all the relevant tools from a given Available Tools Data if they match or related to Query which is: "{request.query}".
+>>>>>>> Stashed changes
 
 #Selection Criteria:
 - Include all the Query related tools without restricting or limiting to fewer tools following below INCLUSIVE APPROACH.
@@ -3091,18 +3501,27 @@ IMPORTANT: A tool only needs to satisfy ONE criteria to be included from above *
   - Have no shared keywords, concepts, or use cases with the query
 - **INCLUSION PREFERENCE**: 
   - Do not duplicate tools - each tool should appear exactly once in the response
+<<<<<<< Updated upstream
 - **Edge Cases**: If no tools match the query, return: {{ "tool_id": [] }}
 - **No Count Limits**: *Return all the tools that satisfies *INCLUSIVE APPROACH* criteria (prefer more options over fewer).
 - **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
 
 Return ONLY a JSON object with tool_ids in ranked order:
 {{"tool_id": ["most_relevant_tool_id", "second_most_relevant_tool_id", ...]}}"""
+=======
+  - Do NOT be selective - Include all tools that have any relevance to the query unless it's completely unrelated.
+- **Edge Cases**: If no tools match the query, return: {{ "tool_id": [], "tools": [] }}
+- **Count Limits**: *Return all the tools up to 40 tools based on relevance* (prefer more options over fewer)
+- **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
+- **Output Format**: Return ONLY id and name for each tool (no description or bullets)"""
+>>>>>>> Stashed changes
             
             selection_user_prompt = f"""Query: "{request.query}"
 Available Tools Data:
 {cleaned_context}
 Your task is to select and rank all the tools that are relevant to the above query based on the provided Selection Criteria, using the Available Tools Data.
 
+<<<<<<< Updated upstream
 Return only the tool_id array in JSON format."""
 
             description_system_prompt = f"""You are an expert AI tool recommendation assistant specialized in generating query-specific descriptions and bullet points.
@@ -3161,6 +3580,51 @@ Return ONLY valid JSON in this exact format:
                 
                 selection_data = json.loads(response.choices[0].message.content)
                 selected_tool_ids = selection_data.get("tool_id", [])
+=======
+            # Use Groq Structured Outputs for query tools processing
+            logger.info("Using Groq Structured Outputs for query tools processing")
+            openai_result = ModelUtils.call_groq_structured_outputs(
+                system_prompt=system_text,
+                user_prompt=prompt_text,
+                tier1_system=tier1_system,
+                tier1_user=tier1_user
+            )
+            
+            if openai_result["success"]:
+                llm_response = openai_result["content"]
+                
+                if openai_result.get("cache_hit"):
+                    cache_tokens = openai_result.get("cached_tokens", 0)
+                    logger.info(f"✅ Groq response received (CACHE HIT - {cache_tokens} tokens cached)")
+                else:
+                    logger.info("✅ Groq response received (cache miss - building cache)")
+
+                if openai_result.get("structured"):
+                    logger.info("🎯 Using Structured Outputs format")
+                else:
+                    logger.info("🎯 Using JSON mode format")
+            else:
+                logger.error(f"❌ Groq Structured Outputs failed: {openai_result['error']}")
+                # Fallback to regular Groq
+                logger.info("🔄 Falling back to regular Groq...")
+                
+                llm = ChatGroq(
+                    groq_api_key=env.groq_api_key,
+                    model_name=current_model,
+                    temperature=0.05,
+                    model_kwargs={
+                        "top_p": 0.5,
+                        "frequency_penalty": 0.2,
+                        "presence_penalty": 0.0,
+                        "response_format": {"type": "json_object"}
+                    }
+                )
+                
+                # Add token counting for fallback consistency
+                total_input_text = system_text + prompt_text
+                input_tokens = len(encoder.encode(total_input_text))
+                logger.info(f"🔢 GROQ FALLBACK INPUT TOKENS: {input_tokens}")
+>>>>>>> Stashed changes
                 
                 logger.info(f"Structured selection successful: {len(selected_tool_ids)} tools selected")
                 
@@ -3168,10 +3632,28 @@ Return ONLY valid JSON in this exact format:
                 top_10_ids = selected_tool_ids[:10]
                 remaining_ids = selected_tool_ids[10:]
                 
+<<<<<<< Updated upstream
                 # Extract metadata for top 10
                 top_10_metadata = extract_metadata_for_tools(top_10_ids, llm_tools)
                 
                 logger.info(f"Starting parallel processing: {len(top_10_ids)} tools for structured LLM, {len(remaining_ids)} tools for database")
+=======
+                # Count output tokens for fallback
+                output_tokens = len(encoder.encode(llm_response))
+                total_tokens = input_tokens + output_tokens
+                
+                logger.info(f"🔢 GROQ FALLBACK OUTPUT TOKENS: {output_tokens}")
+                logger.info(f"🔢 GROQ FALLBACK TOTAL TOKENS: {total_tokens}")
+                logger.info("🔢 GROQ FALLBACK TOKEN BREAKDOWN - Input: %d, Output: %d, Total: %d", input_tokens, output_tokens, total_tokens)
+                logger.info("✅ Groq fallback response received")
+
+            logger.info("✅ LLM response received and processed")
+            
+            try:
+                # Post-process response
+                processed_response = QueryProcessor.post_process_llm_response(llm_response)
+                logger.info("DEBUG: Raw LLM response before JSON parsing: %s...", str(processed_response[:500]))
+>>>>>>> Stashed changes
                 
                 # Create parallel tasks
                 description_task = None
@@ -3209,6 +3691,7 @@ Return ONLY valid JSON in this exact format:
                         top_10_tools = await process_tools_from_database_async(top_10_ids, llm_tools)
                         remaining_tools = await process_tools_from_database_async(remaining_ids, llm_tools)
                         
+<<<<<<< Updated upstream
                 else:
                     top_10_tools = []
                     try:
@@ -3240,6 +3723,37 @@ Return ONLY valid JSON in this exact format:
                     response_data["searched_within_tool_ids"] = request.searchFrom
                 
                 final_response = json.dumps(response_data)
+=======
+                    #     # Update the JSON response with all tools
+                    #     clean_response = json.dumps(response_data, indent=2)
+                    #     logger.info(f"Added {len(db_tools)} database-processed tools to LLM results")
+                    #     logger.info(f"Final response contains {len(response_data['tools'])} total tools")
+                    logger.info(f"Final response contains {len(response_data.get('tools', []))} LLM-only tools")
+                    
+                except json.JSONDecodeError:
+                    fallback_data = {
+                        "tool_id": [result.get("tool_id", "") for result in llm_tools],  # Only LLM tools
+                        "tools": [],
+                        "message": "LLM JSON parsing failed - returning basic LLM tools without processing",
+                        "timestamp": datetime.now().isoformat()
+                    }
+                    logger.warning("LLM JSON parsing failed - using basic LLM tools only")
+
+                    for result in llm_tools:  # Only process LLM tools
+                        tool_data = {
+                            "id": result.get("tool_id", ""),
+                            "name": result.get("name", "")
+                        }
+                        fallback_data["tools"].append(tool_data)
+                    logger.info(f"Fallback: Created response with {len(fallback_data['tools'])} LLM-only tools")
+                    
+                    if request.searchFrom:
+                        fallback_data["search_filter_applied"] = True
+                        fallback_data["searched_within_tool_ids"] = request.searchFrom
+                    
+                    clean_response = json.dumps(fallback_data, indent=2)
+                    logger.warning("Created fallback JSON response")
+>>>>>>> Stashed changes
                 
                 # Cache result for non-filtered searches
                 if not request.searchFrom:
@@ -4259,7 +4773,7 @@ async def get_related_tools(tool_id: str):
             hybrid_results=hybrid_results,
             original_tool_id=tool_id,
             min_score=0.5,  # Adjustable quality threshold
-            max_results=6   # Maximum 6 tools
+            max_results=12   # Maximum 6 tools
         )
         
         logger.info(f"Returning {len(related_tool_ids)} related tools for {tool_id}")

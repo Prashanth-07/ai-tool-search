@@ -1,0 +1,147 @@
+{
+  "timestamp": "2025-10-06T13:16:34.400575",
+  "input_query": "PRD generator",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 10,
+    "tool_ids": [
+      "68636b0c015bd4929b37d7a4",
+      "68635e5e015bd4929b37d18a",
+      "6863673d015bd4929b37d69d",
+      "6863632c015bd4929b37d359",
+      "686a2c32e1d0bbc07e32112c",
+      "68666360ef7018fbfef69bc7",
+      "68d1411f14ec3aabf8303a75",
+      "688b57f9bd7a0f67e5524206",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz"
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD"
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot"
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator"
+      },
+      {
+        "id": "686a2c32e1d0bbc07e32112c",
+        "name": "AutoPPT"
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents"
+      },
+      {
+        "id": "68d1411f14ec3aabf8303a75",
+        "name": "BestPhoto"
+      },
+      {
+        "id": "688b57f9bd7a0f67e5524206",
+        "name": "GenAds"
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot"
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD"
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68636b0c015bd4929b37d7a4",
+      "68635e5e015bd4929b37d18a",
+      "6863673d015bd4929b37d69d",
+      "6863632c015bd4929b37d359",
+      "686a2c32e1d0bbc07e32112c",
+      "68666360ef7018fbfef69bc7",
+      "68d1411f14ec3aabf8303a75",
+      "688b57f9bd7a0f67e5524206",
+      "685004e1afca082a9fc4178b",
+      "6863599c015bd4929b37d01d"
+    ],
+    "tools": [
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz"
+      },
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD"
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot"
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator"
+      },
+      {
+        "id": "686a2c32e1d0bbc07e32112c",
+        "name": "AutoPPT"
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents"
+      },
+      {
+        "id": "68d1411f14ec3aabf8303a75",
+        "name": "BestPhoto"
+      },
+      {
+        "id": "688b57f9bd7a0f67e5524206",
+        "name": "GenAds"
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot"
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD"
+      }
+    ]
+  },
+  "processing_time_seconds": 9.785,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68636b0c015bd4929b37d7a4\",\n    \"68635e5e015bd4929b37d18a\",\n    \"6863673d015bd4929b37d69d\",\n    \"6863632c015bd4929b37d359\",\n    \"686a2c32e1d0bbc07e32112c\",\n    \"68666360ef7018fbfef69bc7\",\n    \"68d1411f14ec3aabf8303a75\",\n    \"688b57f9bd7a0f67e5524206\",\n    \"685004e1afca082a9fc4178b\",\n    \"6863599c015bd4929b37d01d\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\"\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\"\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\"\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\"\n    },\n    {\n      \"id\": \"686a2c32e1d0bbc07e32112c\",\n      \"name\": \"AutoPPT\"\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\"\n    },\n    {\n      \"id\": \"68d1411f14ec3aabf8303a75\",\n      \"name\": \"BestPhoto\"\n    },\n    {\n      \"id\": \"688b57f9bd7a0f67e5524206\",\n      \"name\": \"GenAds\"\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\"\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\"\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

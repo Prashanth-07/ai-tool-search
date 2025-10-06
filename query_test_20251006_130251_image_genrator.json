@@ -1,0 +1,355 @@
+{
+  "timestamp": "2025-10-06T13:02:51.182993",
+  "input_query": "image genrator",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 15,
+    "tool_ids": [
+      "68ca822614ec3aabf82b2364",
+      "68b092f5aa98c5e93e722a14",
+      "68a1f42c20d1e32c6f61d4ad",
+      "68a1ea4520d1e32c6f61bb5b",
+      "68c51d3814ec3aabf826b5ae",
+      "6865711082d927397ea26188",
+      "688a4ce28f91ef875c1fe799",
+      "688889978f91ef875c1f12bb",
+      "686d173a3a087b487359f050",
+      "6856afecee78f2aff0d170f5",
+      "68c9522714ec3aabf8295206",
+      "68cd246114ec3aabf82ced40",
+      "68a0a15e20d1e32c6f614f4a",
+      "6856aefeee78f2aff0d17032",
+      "6881ccab8f91ef875c1a5728",
+      "68cbfa8914ec3aabf82cb20d",
+      "688b3221bd7a0f67e5523130",
+      "682846e523aaf1a750a63648",
+      "6874d5e5587ef1d08c7cee51"
+    ],
+    "tools": [
+      {
+        "id": "68ca822614ec3aabf82b2364",
+        "name": "Image To Image AI",
+        "description": "imgtoimg.ai is an AI-powered image generation platform that allows users to transform images into various artistic styles and formats. It utilizes advanced AI models to upscale, enhance, and modify images based on user-provided prompts and parameters, offering a range of creative possibilities for both personal and professional use.",
+        "bullets": [
+          "Utilizes cutting-edge AI models to deliver high-quality results.",
+          "Easily transform images into various artistic styles with a wide range of options."
+        ]
+      },
+      {
+        "id": "68b092f5aa98c5e93e722a14",
+        "name": "Ghibli AI Image Generator",
+        "description": "Ghibli Magic Maker is a browser-based AI image generation tool that brings the signature art style of Studio Ghibli to life. Powered by the GPT\u202f4o model, it allows users to transform photographs\u2014such as life photos, selfies, and pets\u2014into enchanting Ghibli-style artwork with soft watercolor gradients, ethereal lighting, and whimsical character and environment design.",
+        "bullets": [
+          "Captures magical lighting, soft hues, and whimsical details.",
+          "Supports both image-based input and text prompt creativity."
+        ]
+      },
+      {
+        "id": "68a1f42c20d1e32c6f61d4ad",
+        "name": "Image-Ai",
+        "description": "Image\u2011AI.pro is a powerful, browser\u2011based AI image generation platform that offers unlimited professional-grade visual creation no registration required. Powered by the advanced img\u2011v2 Pro engine and GPT\u20114o model, the tool delivers studio-quality outputs with high semantic understanding.",
+        "bullets": [
+          "Utilizes deep semantic understanding for studio-quality results.",
+          "Offers flexible input settings for various image styles and compositions."
+        ]
+      },
+      {
+        "id": "68a1ea4520d1e32c6f61bb5b",
+        "name": "ImgEdify",
+        "description": "ImgEdify is an all\u2011in\u2011one AI image creation and editing platform that enables users to generate, transform, and enhance visuals with ease. It provides features like text\u2011to\u2011image generation, image\u2011to\u2011image transformation, style conversion, and virtual try\u2011on all powered by advanced AI.",
+        "bullets": [
+          "Combines generation, editing, style transfer, and virtual try-on in one platform.",
+          "Includes real-time previews and high-resolution outputs."
+        ]
+      },
+      {
+        "id": "68c51d3814ec3aabf826b5ae",
+        "name": "AIVector",
+        "description": "AIVector is a lightning-fast, browser-based AI tool that converts raster images like PNG, JPG, or WEBP into clean, scalable vector graphics (SVG) with professional quality\u2014all without requiring sign-ups, watermarks, or fees.",
+        "bullets": [
+          "Preserves visual fidelity and offers clean, editable vector outputs.",
+          "Perfect for logos, branding, and high-quality graphics."
+        ]
+      },
+      {
+        "id": "6865711082d927397ea26188",
+        "name": "GenYou",
+        "description": "GenYou by Generated Photos is an innovative AI tool that allows users to create hyper-realistic, AI-generated selfies of fictional characters or yourself \u2014 all without a camera. Built with powerful generative AI technology, GenYou enables users to customize digital faces by selecting age, gender, hairstyle, skin tone, expression, and more.",
+        "bullets": [
+          "Fully customizable faces for creating realistic avatars.",
+          "Ethical and licensed-safe AI-generated images, ensuring privacy."
+        ]
+      },
+      {
+        "id": "688a4ce28f91ef875c1fe799",
+        "name": "Image AI",
+        "description": "ImgAI.ai (also branded as Image AI) is an all-in-one AI-powered visual creation platform offering text-to-image generation, face swap, video face swap, image upscaling, background removal, portrait restoration, sticker creation, and more\u2014all within a single intuitive interface.",
+        "bullets": [
+          "Covers creative and editing workflows including text-to-image and face swap.",
+          "User-friendly interface designed for both power users and beginners."
+        ]
+      },
+      {
+        "id": "688889978f91ef875c1f12bb",
+        "name": "IMGUpscaler",
+        "description": "Imgupscaler.ai is a free, powerful AI photo enhancement platform that lets users upscale, sharpen, and restore image quality online in seconds. The tool is designed for both casual users and professionals.",
+        "bullets": [
+          "Uses AI to enhance resolution up to four times original size.",
+          "Ensures privacy and security for every upload."
+        ]
+      },
+      {
+        "id": "686d173a3a087b487359f050",
+        "name": "Heurist Imagine",
+        "description": "Heurist Imagine is an AI-powered platform designed for creating images using a distributed GPU network. Its primary purpose is to provide seamless access to generative AI technologies for image creation, allowing users to leverage various AI models to produce visual content.",
+        "bullets": [
+          "Primarily designed for API access with a wide array of generative AI models.",
+          "Seamless access to cutting-edge generative AI for image creation."
+        ]
+      },
+      {
+        "id": "6856afecee78f2aff0d170f5",
+        "name": "grok-2-image-1212",
+        "description": "Grok\u202f2 Image 1212 (also known as grok-2-image-1212) is xAI\u2019s December\u202f2024 release of their unified image generation and understanding model. Built on Grok\u202f2, it combines Aurora-powered photorealistic image creation with strong multimodal comprehension.",
+        "bullets": [
+          "Handles image editing alongside image generation.",
+          "Delivers photorealistic visuals with instruction-driven precision."
+        ]
+      },
+      {
+        "id": "68c9522714ec3aabf8295206",
+        "name": "Caricature Maker",
+        "description": "CaricatureMaker.net is an online platform that allows users to easily create personalized caricature drawings from uploaded photos, using advanced AI technology.",
+        "bullets": [
+          "Offers various customization options for unique caricature styles.",
+          "Generates high-resolution digital downloads for various applications."
+        ]
+      },
+      {
+        "id": "68cd246114ec3aabf82ced40",
+        "name": "Genbaz",
+        "description": "Genbaz.io is an all-in-one creative hub offering access to thousands of specialized AI-powered generators that enable anyone to quickly turn ideas into visual or written content.",
+        "bullets": [
+          "Over 15,000 different generators for endless creative applications.",
+          "Immediate, high-quality content delivery from prompt to download."
+        ]
+      },
+      {
+        "id": "682846e523aaf1a750a63648",
+        "name": "PhotoEditor AI",
+        "description": "PhotoEditor AI is a cutting-edge AI-powered photo editing tool that provides an advanced suite of creative and professional-grade features for enhancing, generating, and transforming images.",
+        "bullets": [
+          "AIPowered image editing for seamless photo enhancement and transformation.",
+          "Features include background removal, upscaling, and restoration of old photos."
+        ]
+      },
+      {
+        "id": "6856aefeee78f2aff0d17032",
+        "name": "grok-2-image-latest",
+        "description": "Grok\u202f2 Image (a.k.a. Grok\u202f2-image-latest) is xAI\u2019s vision-forward extension of its Grok\u202f2 model.",
+        "bullets": [
+          "Combines image creation and multimodal comprehension in one model.",
+          "Supports extensive creative and analytical tasks."
+        ]
+      },
+      {
+        "id": "6865711082d927397ea26188",
+        "name": "GenYou",
+        "description": "GenYou enables users to customize digital faces, offering hyper-realistic avatars tailored to specific needs without a camera.",
+        "bullets": [
+          "Customizable features for tailored digital faces.",
+          "Ethical AI-generated images ensuring privacy."
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68ca822614ec3aabf82b2364",
+      "68b092f5aa98c5e93e722a14",
+      "68a1f42c20d1e32c6f61d4ad",
+      "68a1ea4520d1e32c6f61bb5b",
+      "68c51d3814ec3aabf826b5ae",
+      "6865711082d927397ea26188",
+      "688a4ce28f91ef875c1fe799",
+      "688889978f91ef875c1f12bb",
+      "686d173a3a087b487359f050",
+      "6856afecee78f2aff0d170f5",
+      "68c9522714ec3aabf8295206",
+      "68cd246114ec3aabf82ced40",
+      "68a0a15e20d1e32c6f614f4a",
+      "6856aefeee78f2aff0d17032",
+      "6881ccab8f91ef875c1a5728",
+      "68cbfa8914ec3aabf82cb20d",
+      "688b3221bd7a0f67e5523130",
+      "682846e523aaf1a750a63648",
+      "6874d5e5587ef1d08c7cee51"
+    ],
+    "tools": [
+      {
+        "id": "68ca822614ec3aabf82b2364",
+        "name": "Image To Image AI",
+        "description": "imgtoimg.ai is an AI-powered image generation platform that allows users to transform images into various artistic styles and formats. It utilizes advanced AI models to upscale, enhance, and modify images based on user-provided prompts and parameters, offering a range of creative possibilities for both personal and professional use.",
+        "bullets": [
+          "Utilizes cutting-edge AI models to deliver high-quality results.",
+          "Easily transform images into various artistic styles with a wide range of options."
+        ]
+      },
+      {
+        "id": "68b092f5aa98c5e93e722a14",
+        "name": "Ghibli AI Image Generator",
+        "description": "Ghibli Magic Maker is a browser-based AI image generation tool that brings the signature art style of Studio Ghibli to life. Powered by the GPT\u202f4o model, it allows users to transform photographs\u2014such as life photos, selfies, and pets\u2014into enchanting Ghibli-style artwork with soft watercolor gradients, ethereal lighting, and whimsical character and environment design.",
+        "bullets": [
+          "Captures magical lighting, soft hues, and whimsical details.",
+          "Supports both image-based input and text prompt creativity."
+        ]
+      },
+      {
+        "id": "68a1f42c20d1e32c6f61d4ad",
+        "name": "Image-Ai",
+        "description": "Image\u2011AI.pro is a powerful, browser\u2011based AI image generation platform that offers unlimited professional-grade visual creation no registration required. Powered by the advanced img\u2011v2 Pro engine and GPT\u20114o model, the tool delivers studio-quality outputs with high semantic understanding.",
+        "bullets": [
+          "Utilizes deep semantic understanding for studio-quality results.",
+          "Offers flexible input settings for various image styles and compositions."
+        ]
+      },
+      {
+        "id": "68a1ea4520d1e32c6f61bb5b",
+        "name": "ImgEdify",
+        "description": "ImgEdify is an all\u2011in\u2011one AI image creation and editing platform that enables users to generate, transform, and enhance visuals with ease. It provides features like text\u2011to\u2011image generation, image\u2011to\u2011image transformation, style conversion, and virtual try\u2011on all powered by advanced AI.",
+        "bullets": [
+          "Combines generation, editing, style transfer, and virtual try-on in one platform.",
+          "Includes real-time previews and high-resolution outputs."
+        ]
+      },
+      {
+        "id": "68c51d3814ec3aabf826b5ae",
+        "name": "AIVector",
+        "description": "AIVector is a lightning-fast, browser-based AI tool that converts raster images like PNG, JPG, or WEBP into clean, scalable vector graphics (SVG) with professional quality\u2014all without requiring sign-ups, watermarks, or fees.",
+        "bullets": [
+          "Preserves visual fidelity and offers clean, editable vector outputs.",
+          "Perfect for logos, branding, and high-quality graphics."
+        ]
+      },
+      {
+        "id": "6865711082d927397ea26188",
+        "name": "GenYou",
+        "description": "GenYou by Generated Photos is an innovative AI tool that allows users to create hyper-realistic, AI-generated selfies of fictional characters or yourself \u2014 all without a camera. Built with powerful generative AI technology, GenYou enables users to customize digital faces by selecting age, gender, hairstyle, skin tone, expression, and more.",
+        "bullets": [
+          "Fully customizable faces for creating realistic avatars.",
+          "Ethical and licensed-safe AI-generated images, ensuring privacy."
+        ]
+      },
+      {
+        "id": "688a4ce28f91ef875c1fe799",
+        "name": "Image AI",
+        "description": "ImgAI.ai (also branded as Image AI) is an all-in-one AI-powered visual creation platform offering text-to-image generation, face swap, video face swap, image upscaling, background removal, portrait restoration, sticker creation, and more\u2014all within a single intuitive interface.",
+        "bullets": [
+          "Covers creative and editing workflows including text-to-image and face swap.",
+          "User-friendly interface designed for both power users and beginners."
+        ]
+      },
+      {
+        "id": "688889978f91ef875c1f12bb",
+        "name": "IMGUpscaler",
+        "description": "Imgupscaler.ai is a free, powerful AI photo enhancement platform that lets users upscale, sharpen, and restore image quality online in seconds. The tool is designed for both casual users and professionals.",
+        "bullets": [
+          "Uses AI to enhance resolution up to four times original size.",
+          "Ensures privacy and security for every upload."
+        ]
+      },
+      {
+        "id": "686d173a3a087b487359f050",
+        "name": "Heurist Imagine",
+        "description": "Heurist Imagine is an AI-powered platform designed for creating images using a distributed GPU network. Its primary purpose is to provide seamless access to generative AI technologies for image creation, allowing users to leverage various AI models to produce visual content.",
+        "bullets": [
+          "Primarily designed for API access with a wide array of generative AI models.",
+          "Seamless access to cutting-edge generative AI for image creation."
+        ]
+      },
+      {
+        "id": "6856afecee78f2aff0d170f5",
+        "name": "grok-2-image-1212",
+        "description": "Grok\u202f2 Image 1212 (also known as grok-2-image-1212) is xAI\u2019s December\u202f2024 release of their unified image generation and understanding model. Built on Grok\u202f2, it combines Aurora-powered photorealistic image creation with strong multimodal comprehension.",
+        "bullets": [
+          "Handles image editing alongside image generation.",
+          "Delivers photorealistic visuals with instruction-driven precision."
+        ]
+      },
+      {
+        "id": "68c9522714ec3aabf8295206",
+        "name": "Caricature Maker",
+        "description": "CaricatureMaker.net is an online platform that allows users to easily create personalized caricature drawings from uploaded photos, using advanced AI technology.",
+        "bullets": [
+          "Offers various customization options for unique caricature styles.",
+          "Generates high-resolution digital downloads for various applications."
+        ]
+      },
+      {
+        "id": "68cd246114ec3aabf82ced40",
+        "name": "Genbaz",
+        "description": "Genbaz.io is an all-in-one creative hub offering access to thousands of specialized AI-powered generators that enable anyone to quickly turn ideas into visual or written content.",
+        "bullets": [
+          "Over 15,000 different generators for endless creative applications.",
+          "Immediate, high-quality content delivery from prompt to download."
+        ]
+      },
+      {
+        "id": "682846e523aaf1a750a63648",
+        "name": "PhotoEditor AI",
+        "description": "PhotoEditor AI is a cutting-edge AI-powered photo editing tool that provides an advanced suite of creative and professional-grade features for enhancing, generating, and transforming images.",
+        "bullets": [
+          "AIPowered image editing for seamless photo enhancement and transformation.",
+          "Features include background removal, upscaling, and restoration of old photos."
+        ]
+      },
+      {
+        "id": "6856aefeee78f2aff0d17032",
+        "name": "grok-2-image-latest",
+        "description": "Grok\u202f2 Image (a.k.a. Grok\u202f2-image-latest) is xAI\u2019s vision-forward extension of its Grok\u202f2 model.",
+        "bullets": [
+          "Combines image creation and multimodal comprehension in one model.",
+          "Supports extensive creative and analytical tasks."
+        ]
+      },
+      {
+        "id": "6865711082d927397ea26188",
+        "name": "GenYou",
+        "description": "GenYou enables users to customize digital faces, offering hyper-realistic avatars tailored to specific needs without a camera.",
+        "bullets": [
+          "Customizable features for tailored digital faces.",
+          "Ethical AI-generated images ensuring privacy."
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 48.261,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68ca822614ec3aabf82b2364\",\n    \"68b092f5aa98c5e93e722a14\",\n    \"68a1f42c20d1e32c6f61d4ad\",\n    \"68a1ea4520d1e32c6f61bb5b\",\n    \"68c51d3814ec3aabf826b5ae\",\n    \"6865711082d927397ea26188\",\n    \"688a4ce28f91ef875c1fe799\",\n    \"688889978f91ef875c1f12bb\",\n    \"686d173a3a087b487359f050\",\n    \"6856afecee78f2aff0d170f5\",\n    \"68c9522714ec3aabf8295206\",\n    \"68cd246114ec3aabf82ced40\",\n    \"68a0a15e20d1e32c6f614f4a\",\n    \"6856aefeee78f2aff0d17032\",\n    \"6881ccab8f91ef875c1a5728\",\n    \"68cbfa8914ec3aabf82cb20d\",\n    \"688b3221bd7a0f67e5523130\",\n    \"682846e523aaf1a750a63648\",\n    \"6874d5e5587ef1d08c7cee51\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68ca822614ec3aabf82b2364\",\n      \"name\": \"Image To Image AI\",\n      \"description\": \"imgtoimg.ai is an AI-powered image generation platform that allows users to transform images into various artistic styles and formats. It utilizes advanced AI models to upscale, enhance, and modify images based on user-provided prompts and parameters, offering a range of creative possibilities for both personal and professional use.\",\n      \"bullets\": [\n        \"Utilizes cutting-edge AI models to deliver high-quality results.\",\n        \"Easily transform images into various artistic styles with a wide range of options.\"\n      ]\n    },\n    {\n      \"id\": \"68b092f5aa98c5e93e722a14\",\n      \"name\": \"Ghibli AI Image Generator\",\n      \"description\": \"Ghibli Magic Maker is a browser-based AI image generation tool that brings the signature art style of Studio Ghibli to life. Powered by the GPT\\u202f4o model, it allows users to transform photographs\\u2014such as life photos, selfies, and pets\\u2014into enchanting Ghibli-style artwork with soft watercolor gradients, ethereal lighting, and whimsical character and environment design.\",\n      \"bullets\": [\n        \"Captures magical lighting, soft hues, and whimsical details.\",\n        \"Supports both image-based input and text prompt creativity.\"\n      ]\n    },\n    {\n      \"id\": \"68a1f42c20d1e32c6f61d4ad\",\n      \"name\": \"Image-Ai\",\n      \"description\": \"Image\\u2011AI.pro is a powerful, browser\\u2011based AI image generation platform that offers unlimited professional-grade visual creation no registration required. Powered by the advanced img\\u2011v2 Pro engine and GPT\\u20114o model, the tool delivers studio-quality outputs with high semantic understanding.\",\n      \"bullets\": [\n        \"Utilizes deep semantic understanding for studio-quality results.\",\n        \"Offers flexible input settings for various image styles and compositions.\"\n      ]\n    },\n    {\n      \"id\": \"68a1ea4520d1e32c6f61bb5b\",\n      \"name\": \"ImgEdify\",\n      \"description\": \"ImgEdify is an all\\u2011in\\u2011one AI image creation and editing platform that enables users to generate, transform, and enhance visuals with ease. It provides features like text\\u2011to\\u2011image generation, image\\u2011to\\u2011image transformation, style conversion, and virtual try\\u2011on all powered by advanced AI.\",\n      \"bullets\": [\n        \"Combines generation, editing, style transfer, and virtual try-on in one platform.\",\n        \"Includes real-time previews and high-resolution outputs.\"\n      ]\n    },\n    {\n      \"id\": \"68c51d3814ec3aabf826b5ae\",\n      \"name\": \"AIVector\",\n      \"description\": \"AIVector is a lightning-fast, browser-based AI tool that converts raster images like PNG, JPG, or WEBP into clean, scalable vector graphics (SVG) with professional quality\\u2014all without requiring sign-ups, watermarks, or fees.\",\n      \"bullets\": [\n        \"Preserves visual fidelity and offers clean, editable vector outputs.\",\n        \"Perfect for logos, branding, and high-quality graphics.\"\n      ]\n    },\n    {\n      \"id\": \"6865711082d927397ea26188\",\n      \"name\": \"GenYou\",\n      \"description\": \"GenYou by Generated Photos is an innovative AI tool that allows users to create hyper-realistic, AI-generated selfies of fictional characters or yourself \\u2014 all without a camera. Built with powerful generative AI technology, GenYou enables users to customize digital faces by selecting age, gender, hairstyle, skin tone, expression, and more.\",\n      \"bullets\": [\n        \"Fully customizable faces for creating realistic avatars.\",\n        \"Ethical and licensed-safe AI-generated images, ensuring privacy.\"\n      ]\n    },\n    {\n      \"id\": \"688a4ce28f91ef875c1fe799\",\n      \"name\": \"Image AI\",\n      \"description\": \"ImgAI.ai (also branded as Image AI) is an all-in-one AI-powered visual creation platform offering text-to-image generation, face swap, video face swap, image upscaling, background removal, portrait restoration, sticker creation, and more\\u2014all within a single intuitive interface.\",\n      \"bullets\": [\n        \"Covers creative and editing workflows including text-to-image and face swap.\",\n        \"User-friendly interface designed for both power users and beginners.\"\n      ]\n    },\n    {\n      \"id\": \"688889978f91ef875c1f12bb\",\n      \"name\": \"IMGUpscaler\",\n      \"description\": \"Imgupscaler.ai is a free, powerful AI photo enhancement platform that lets users upscale, sharpen, and restore image quality online in seconds. The tool is designed for both casual users and professionals.\",\n      \"bullets\": [\n        \"Uses AI to enhance resolution up to four times original size.\",\n        \"Ensures privacy and security for every upload.\"\n      ]\n    },\n    {\n      \"id\": \"686d173a3a087b487359f050\",\n      \"name\": \"Heurist Imagine\",\n      \"description\": \"Heurist Imagine is an AI-powered platform designed for creating images using a distributed GPU network. Its primary purpose is to provide seamless access to generative AI technologies for image creation, allowing users to leverage various AI models to produce visual content.\",\n      \"bullets\": [\n        \"Primarily designed for API access with a wide array of generative AI models.\",\n        \"Seamless access to cutting-edge generative AI for image creation.\"\n      ]\n    },\n    {\n      \"id\": \"6856afecee78f2aff0d170f5\",\n      \"name\": \"grok-2-image-1212\",\n      \"description\": \"Grok\\u202f2 Image 1212 (also known as grok-2-image-1212) is xAI\\u2019s December\\u202f2024 release of their unified image generation and understanding model. Built on Grok\\u202f2, it combines Aurora-powered photorealistic image creation with strong multimodal comprehension.\",\n      \"bullets\": [\n        \"Handles image editing alongside image generation.\",\n        \"Delivers photorealistic visuals with instruction-driven precision.\"\n      ]\n    },\n    {\n      \"id\": \"68c9522714ec3aabf8295206\",\n      \"name\": \"Caricature Maker\",\n      \"description\": \"CaricatureMaker.net is an online platform that allows users to easily create personalized caricature drawings from uploaded photos, using advanced AI technology.\",\n      \"bullets\": [\n        \"Offers various customization options for unique caricature styles.\",\n        \"Generates high-resolution digital downloads for various applications.\"\n      ]\n    },\n    {\n      \"id\": \"68cd246114ec3aabf82ced40\",\n      \"name\": \"Genbaz\",\n      \"description\": \"Genbaz.io is an all-in-one creative hub offering access to thousands of specialized AI-powered generators that enable anyone to quickly turn ideas into visual or written content.\",\n      \"bullets\": [\n        \"Over 15,000 different generators for endless creative applications.\",\n        \"Immediate, high-quality content delivery from prompt to download.\"\n      ]\n    },\n    {\n      \"id\": \"682846e523aaf1a750a63648\",\n      \"name\": \"PhotoEditor AI\",\n      \"description\": \"PhotoEditor AI is a cutting-edge AI-powered photo editing tool that provides an advanced suite of creative and professional-grade features for enhancing, generating, and transforming images.\",\n      \"bullets\": [\n        \"AIPowered image editing for seamless photo enhancement and transformation.\",\n        \"Features include background removal, upscaling, and restoration of old photos.\"\n      ]\n    },\n    {\n      \"id\": \"6856aefeee78f2aff0d17032\",\n      \"name\": \"grok-2-image-latest\",\n      \"description\": \"Grok\\u202f2 Image (a.k.a. Grok\\u202f2-image-latest) is xAI\\u2019s vision-forward extension of its Grok\\u202f2 model.\",\n      \"bullets\": [\n        \"Combines image creation and multimodal comprehension in one model.\",\n        \"Supports extensive creative and analytical tasks.\"\n      ]\n    },\n    {\n      \"id\": \"6865711082d927397ea26188\",\n      \"name\": \"GenYou\",\n      \"description\": \"GenYou enables users to customize digital faces, offering hyper-realistic avatars tailored to specific needs without a camera.\",\n      \"bullets\": [\n        \"Customizable features for tailored digital faces.\",\n        \"Ethical AI-generated images ensuring privacy.\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

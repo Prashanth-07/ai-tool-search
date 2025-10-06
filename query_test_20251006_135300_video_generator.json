@@ -1,0 +1,357 @@
+{
+  "timestamp": "2025-10-06T13:53:00.233942",
+  "input_query": "video generator",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 31,
+    "tool_ids": [
+      "686cf0ed3a087b487359e4f0",
+      "68678af5ef7018fbfef79658",
+      "68438a46ac33a46e0bf38e24",
+      "68447010b32d4d019cc01bd0",
+      "68c5a76014ec3aabf8270bf2",
+      "68c959a214ec3aabf82964bd",
+      "68c952f714ec3aabf8295621",
+      "68d0201d14ec3aabf82f690a",
+      "689f6d2020d1e32c6f60ae1f",
+      "688c9e56fa5db35ff2c4fe9f",
+      "682d4a7d23aaf1a750a9939a",
+      "682e0d2823aaf1a750aa8096",
+      "686ce2dd3a087b487359db94",
+      "6877463d05cf15748251c419",
+      "6898954dcc6937f852783288",
+      "68cc023314ec3aabf82cba49",
+      "682d4e3d23aaf1a750a993e1",
+      "68c3093114ec3aabf824e62a",
+      "68736836cc23a952f76cc74c",
+      "68a3410e20d1e32c6f6231d1",
+      "6856c137ee78f2aff0d1a3ea",
+      "682e0eb223aaf1a750aa80b5",
+      "68b0171aaa98c5e93e71e595",
+      "68a589c320d1e32c6f634e83",
+      "68c9a59c14ec3aabf82a0398",
+      "684120bbbce3a3d64c6fe4c5",
+      "68c6e85914ec3aabf827a731",
+      "681cc1c4477018e3479584e9",
+      "68c94e2514ec3aabf829446a",
+      "685569f527c6eba075dcc7e1",
+      "68445055b32d4d019cbd5381"
+    ],
+    "tools": [
+      {
+        "id": "686cf0ed3a087b487359e4f0",
+        "name": "Virbo AI Video Generator"
+      },
+      {
+        "id": "68678af5ef7018fbfef79658",
+        "name": "Vidu AI"
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video"
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen"
+      },
+      {
+        "id": "68c5a76014ec3aabf8270bf2",
+        "name": "Viddo AI - Image to Video"
+      },
+      {
+        "id": "68c959a214ec3aabf82964bd",
+        "name": "Veo3.bot"
+      },
+      {
+        "id": "68c952f714ec3aabf8295621",
+        "name": "Veo3 AI"
+      },
+      {
+        "id": "68d0201d14ec3aabf82f690a",
+        "name": "Veo 3 Video Generator"
+      },
+      {
+        "id": "689f6d2020d1e32c6f60ae1f",
+        "name": "Veo3Video App"
+      },
+      {
+        "id": "688c9e56fa5db35ff2c4fe9f",
+        "name": "Dreamlux AI"
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI"
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT"
+      },
+      {
+        "id": "686ce2dd3a087b487359db94",
+        "name": "VideoTube"
+      },
+      {
+        "id": "6877463d05cf15748251c419",
+        "name": "Galiads"
+      },
+      {
+        "id": "6898954dcc6937f852783288",
+        "name": "ViralVideo"
+      },
+      {
+        "id": "68cc023314ec3aabf82cba49",
+        "name": "Faceless Video"
+      },
+      {
+        "id": "682d4e3d23aaf1a750a993e1",
+        "name": "Freepik AI Video Generator"
+      },
+      {
+        "id": "68c3093114ec3aabf824e62a",
+        "name": "iMyFone DreamVid"
+      },
+      {
+        "id": "68736836cc23a952f76cc74c",
+        "name": "iMyFone Novi AI"
+      },
+      {
+        "id": "68a3410e20d1e32c6f6231d1",
+        "name": "Vidme"
+      },
+      {
+        "id": "6856c137ee78f2aff0d1a3ea",
+        "name": "Vidboard"
+      },
+      {
+        "id": "682e0eb223aaf1a750aa80b5",
+        "name": "Leonardo.Ai"
+      },
+      {
+        "id": "68b0171aaa98c5e93e71e595",
+        "name": "VO3 AI"
+      },
+      {
+        "id": "68a589c320d1e32c6f634e83",
+        "name": "AI ASMR"
+      },
+      {
+        "id": "68c9a59c14ec3aabf82a0398",
+        "name": "VEO3 API"
+      },
+      {
+        "id": "684120bbbce3a3d64c6fe4c5",
+        "name": "DeeVid AI"
+      },
+      {
+        "id": "68c6e85914ec3aabf827a731",
+        "name": "UpscaleMy.Video"
+      },
+      {
+        "id": "681cc1c4477018e3479584e9",
+        "name": "Video Fusion"
+      },
+      {
+        "id": "68c94e2514ec3aabf829446a",
+        "name": "VUBO"
+      },
+      {
+        "id": "685569f527c6eba075dcc7e1",
+        "name": "Veo 2"
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create"
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "686cf0ed3a087b487359e4f0",
+      "68678af5ef7018fbfef79658",
+      "68438a46ac33a46e0bf38e24",
+      "68447010b32d4d019cc01bd0",
+      "68c5a76014ec3aabf8270bf2",
+      "68c959a214ec3aabf82964bd",
+      "68c952f714ec3aabf8295621",
+      "68d0201d14ec3aabf82f690a",
+      "689f6d2020d1e32c6f60ae1f",
+      "688c9e56fa5db35ff2c4fe9f",
+      "682d4a7d23aaf1a750a9939a",
+      "682e0d2823aaf1a750aa8096",
+      "686ce2dd3a087b487359db94",
+      "6877463d05cf15748251c419",
+      "6898954dcc6937f852783288",
+      "68cc023314ec3aabf82cba49",
+      "682d4e3d23aaf1a750a993e1",
+      "68c3093114ec3aabf824e62a",
+      "68736836cc23a952f76cc74c",
+      "68a3410e20d1e32c6f6231d1",
+      "6856c137ee78f2aff0d1a3ea",
+      "682e0eb223aaf1a750aa80b5",
+      "68b0171aaa98c5e93e71e595",
+      "68a589c320d1e32c6f634e83",
+      "68c9a59c14ec3aabf82a0398",
+      "684120bbbce3a3d64c6fe4c5",
+      "68c6e85914ec3aabf827a731",
+      "681cc1c4477018e3479584e9",
+      "68c94e2514ec3aabf829446a",
+      "685569f527c6eba075dcc7e1",
+      "68445055b32d4d019cbd5381"
+    ],
+    "tools": [
+      {
+        "id": "686cf0ed3a087b487359e4f0",
+        "name": "Virbo AI Video Generator"
+      },
+      {
+        "id": "68678af5ef7018fbfef79658",
+        "name": "Vidu AI"
+      },
+      {
+        "id": "68438a46ac33a46e0bf38e24",
+        "name": "ViduStudio Image to Video"
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen"
+      },
+      {
+        "id": "68c5a76014ec3aabf8270bf2",
+        "name": "Viddo AI - Image to Video"
+      },
+      {
+        "id": "68c959a214ec3aabf82964bd",
+        "name": "Veo3.bot"
+      },
+      {
+        "id": "68c952f714ec3aabf8295621",
+        "name": "Veo3 AI"
+      },
+      {
+        "id": "68d0201d14ec3aabf82f690a",
+        "name": "Veo 3 Video Generator"
+      },
+      {
+        "id": "689f6d2020d1e32c6f60ae1f",
+        "name": "Veo3Video App"
+      },
+      {
+        "id": "688c9e56fa5db35ff2c4fe9f",
+        "name": "Dreamlux AI"
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "invideoAI"
+      },
+      {
+        "id": "682e0d2823aaf1a750aa8096",
+        "name": "VideoGPT"
+      },
+      {
+        "id": "686ce2dd3a087b487359db94",
+        "name": "VideoTube"
+      },
+      {
+        "id": "6877463d05cf15748251c419",
+        "name": "Galiads"
+      },
+      {
+        "id": "6898954dcc6937f852783288",
+        "name": "ViralVideo"
+      },
+      {
+        "id": "68cc023314ec3aabf82cba49",
+        "name": "Faceless Video"
+      },
+      {
+        "id": "682d4e3d23aaf1a750a993e1",
+        "name": "Freepik AI Video Generator"
+      },
+      {
+        "id": "68c3093114ec3aabf824e62a",
+        "name": "iMyFone DreamVid"
+      },
+      {
+        "id": "68736836cc23a952f76cc74c",
+        "name": "iMyFone Novi AI"
+      },
+      {
+        "id": "68a3410e20d1e32c6f6231d1",
+        "name": "Vidme"
+      },
+      {
+        "id": "6856c137ee78f2aff0d1a3ea",
+        "name": "Vidboard"
+      },
+      {
+        "id": "682e0eb223aaf1a750aa80b5",
+        "name": "Leonardo.Ai"
+      },
+      {
+        "id": "68b0171aaa98c5e93e71e595",
+        "name": "VO3 AI"
+      },
+      {
+        "id": "68a589c320d1e32c6f634e83",
+        "name": "AI ASMR"
+      },
+      {
+        "id": "68c9a59c14ec3aabf82a0398",
+        "name": "VEO3 API"
+      },
+      {
+        "id": "684120bbbce3a3d64c6fe4c5",
+        "name": "DeeVid AI"
+      },
+      {
+        "id": "68c6e85914ec3aabf827a731",
+        "name": "UpscaleMy.Video"
+      },
+      {
+        "id": "681cc1c4477018e3479584e9",
+        "name": "Video Fusion"
+      },
+      {
+        "id": "68c94e2514ec3aabf829446a",
+        "name": "VUBO"
+      },
+      {
+        "id": "685569f527c6eba075dcc7e1",
+        "name": "Veo 2"
+      },
+      {
+        "id": "68445055b32d4d019cbd5381",
+        "name": "Vidu Studio - AI Video Create"
+      }
+    ]
+  },
+  "processing_time_seconds": 20.453,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"686cf0ed3a087b487359e4f0\",\n    \"68678af5ef7018fbfef79658\",\n    \"68438a46ac33a46e0bf38e24\",\n    \"68447010b32d4d019cc01bd0\",\n    \"68c5a76014ec3aabf8270bf2\",\n    \"68c959a214ec3aabf82964bd\",\n    \"68c952f714ec3aabf8295621\",\n    \"68d0201d14ec3aabf82f690a\",\n    \"689f6d2020d1e32c6f60ae1f\",\n    \"688c9e56fa5db35ff2c4fe9f\",\n    \"682d4a7d23aaf1a750a9939a\",\n    \"682e0d2823aaf1a750aa8096\",\n    \"686ce2dd3a087b487359db94\",\n    \"6877463d05cf15748251c419\",\n    \"6898954dcc6937f852783288\",\n    \"68cc023314ec3aabf82cba49\",\n    \"682d4e3d23aaf1a750a993e1\",\n    \"68c3093114ec3aabf824e62a\",\n    \"68736836cc23a952f76cc74c\",\n    \"68a3410e20d1e32c6f6231d1\",\n    \"6856c137ee78f2aff0d1a3ea\",\n    \"682e0eb223aaf1a750aa80b5\",\n    \"68b0171aaa98c5e93e71e595\",\n    \"68a589c320d1e32c6f634e83\",\n    \"68c9a59c14ec3aabf82a0398\",\n    \"684120bbbce3a3d64c6fe4c5\",\n    \"68c6e85914ec3aabf827a731\",\n    \"681cc1c4477018e3479584e9\",\n    \"68c94e2514ec3aabf829446a\",\n    \"685569f527c6eba075dcc7e1\",\n    \"68445055b32d4d019cbd5381\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"686cf0ed3a087b487359e4f0\",\n      \"name\": \"Virbo AI Video Generator\"\n    },\n    {\n      \"id\": \"68678af5ef7018fbfef79658\",\n      \"name\": \"Vidu AI\"\n    },\n    {\n      \"id\": \"68438a46ac33a46e0bf38e24\",\n      \"name\": \"ViduStudio Image to Video\"\n    },\n    {\n      \"id\": \"68447010b32d4d019cc01bd0\",\n      \"name\": \"Vidu Studio AI Girl Video Gen\"\n    },\n    {\n      \"id\": \"68c5a76014ec3aabf8270bf2\",\n      \"name\": \"Viddo AI - Image to Video\"\n    },\n    {\n      \"id\": \"68c959a214ec3aabf82964bd\",\n      \"name\": \"Veo3.bot\"\n    },\n    {\n      \"id\": \"68c952f714ec3aabf8295621\",\n      \"name\": \"Veo3 AI\"\n    },\n    {\n      \"id\": \"68d0201d14ec3aabf82f690a\",\n      \"name\": \"Veo 3 Video Generator\"\n    },\n    {\n      \"id\": \"689f6d2020d1e32c6f60ae1f\",\n      \"name\": \"Veo3Video App\"\n    },\n    {\n      \"id\": \"688c9e56fa5db35ff2c4fe9f\",\n      \"name\": \"Dreamlux AI\"\n    },\n    {\n      \"id\": \"682d4a7d23aaf1a750a9939a\",\n      \"name\": \"invideoAI\"\n    },\n    {\n      \"id\": \"682e0d2823aaf1a750aa8096\",\n      \"name\": \"VideoGPT\"\n    },\n    {\n      \"id\": \"686ce2dd3a087b487359db94\",\n      \"name\": \"VideoTube\"\n    },\n    {\n      \"id\": \"6877463d05cf15748251c419\",\n      \"name\": \"Galiads\"\n    },\n    {\n      \"id\": \"6898954dcc6937f852783288\",\n      \"name\": \"ViralVideo\"\n    },\n    {\n      \"id\": \"68cc023314ec3aabf82cba49\",\n      \"name\": \"Faceless Video\"\n    },\n    {\n      \"id\": \"682d4e3d23aaf1a750a993e1\",\n      \"name\": \"Freepik AI Video Generator\"\n    },\n    {\n      \"id\": \"68c3093114ec3aabf824e62a\",\n      \"name\": \"iMyFone DreamVid\"\n    },\n    {\n      \"id\": \"68736836cc23a952f76cc74c\",\n      \"name\": \"iMyFone Novi AI\"\n    },\n    {\n      \"id\": \"68a3410e20d1e32c6f6231d1\",\n      \"name\": \"Vidme\"\n    },\n    {\n      \"id\": \"6856c137ee78f2aff0d1a3ea\",\n      \"name\": \"Vidboard\"\n    },\n    {\n      \"id\": \"682e0eb223aaf1a750aa80b5\",\n      \"name\": \"Leonardo.Ai\"\n    },\n    {\n      \"id\": \"68b0171aaa98c5e93e71e595\",\n      \"name\": \"VO3 AI\"\n    },\n    {\n      \"id\": \"68a589c320d1e32c6f634e83\",\n      \"name\": \"AI ASMR\"\n    },\n    {\n      \"id\": \"68c9a59c14ec3aabf82a0398\",\n      \"name\": \"VEO3 API\"\n    },\n    {\n      \"id\": \"684120bbbce3a3d64c6fe4c5\",\n      \"name\": \"DeeVid AI\"\n    },\n    {\n      \"id\": \"68c6e85914ec3aabf827a731\",\n      \"name\": \"UpscaleMy.Video\"\n    },\n    {\n      \"id\": \"681cc1c4477018e3479584e9\",\n      \"name\": \"Video Fusion\"\n    },\n    {\n      \"id\": \"68c94e2514ec3aabf829446a\",\n      \"name\": \"VUBO\"\n    },\n    {\n      \"id\": \"685569f527c6eba075dcc7e1\",\n      \"name\": \"Veo 2\"\n    },\n    {\n      \"id\": \"68445055b32d4d019cbd5381\",\n      \"name\": \"Vidu Studio - AI Video Create\"\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

@@ -1,0 +1,407 @@
+{
+  "timestamp": "2025-10-06T14:01:17.042123",
+  "input_query": "image generator",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 36,
+    "tool_ids": [
+      "6894d784cc6937f852761cdb",
+      "68596cdd1c16582699a650c9",
+      "689ea97f20d1e32c6f5fa546",
+      "68445543b32d4d019cbe07bd",
+      "68ca822614ec3aabf82b2364",
+      "688889978f91ef875c1f12bb",
+      "68b974f4f7d129afc8b693ac",
+      "687755ad05cf15748251d8ab",
+      "68737c9fcc23a952f76cd3de",
+      "68c55ec614ec3aabf826dc8b",
+      "68c0687ccd13975a5d63d8c0",
+      "68a3613420d1e32c6f62711a",
+      "686407a5015bd4929b3826e3",
+      "68c7c27014ec3aabf82865ce",
+      "68b3489227f52b6ba7a8926f",
+      "68a3430d20d1e32c6f62357a",
+      "6838795955e948f01b997a24",
+      "689f631d20d1e32c6f60460e",
+      "6894931bcc6937f852760c19",
+      "68a58bee20d1e32c6f635452",
+      "68a4673f20d1e32c6f630057",
+      "68c6e7f114ec3aabf827a1e8",
+      "68c959c414ec3aabf8296617",
+      "68a2112520d1e32c6f61eca5",
+      "6877656005cf15748251f24b",
+      "68c93f7914ec3aabf8292b54",
+      "6867507bef7018fbfef773e1",
+      "68a1f42c20d1e32c6f61d4ad",
+      "68c9522714ec3aabf8295206",
+      "688a4ce28f91ef875c1fe799",
+      "68d1411f14ec3aabf8303a75",
+      "68a45e9f20d1e32c6f62f04c",
+      "6881ccab8f91ef875c1a5728",
+      "68a1e71320d1e32c6f61b247",
+      "6876017805cf157482501768",
+      "68c93c7214ec3aabf8292720"
+    ],
+    "tools": [
+      {
+        "id": "6894d784cc6937f852761cdb",
+        "name": "Pixa"
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon"
+      },
+      {
+        "id": "689ea97f20d1e32c6f5fa546",
+        "name": "CGDream"
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen"
+      },
+      {
+        "id": "68ca822614ec3aabf82b2364",
+        "name": "Image To Image AI"
+      },
+      {
+        "id": "688889978f91ef875c1f12bb",
+        "name": "Image Pig"
+      },
+      {
+        "id": "68b974f4f7d129afc8b693ac",
+        "name": "Image to Image Generator"
+      },
+      {
+        "id": "687755ad05cf15748251d8ab",
+        "name": "IllustraAI"
+      },
+      {
+        "id": "68737c9fcc23a952f76cd3de",
+        "name": "AI Coloring Page Generator"
+      },
+      {
+        "id": "68c55ec614ec3aabf826dc8b",
+        "name": "Colorings"
+      },
+      {
+        "id": "68c0687ccd13975a5d63d8c0",
+        "name": "AI Baby Generator"
+      },
+      {
+        "id": "68a3613420d1e32c6f62711a",
+        "name": "ImageGPT io"
+      },
+      {
+        "id": "686407a5015bd4929b3826e3",
+        "name": "Pixvify"
+      },
+      {
+        "id": "68c7c27014ec3aabf82865ce",
+        "name": "Imagen MIA"
+      },
+      {
+        "id": "68b3489227f52b6ba7a8926f",
+        "name": "FlyAgt"
+      },
+      {
+        "id": "68a3430d20d1e32c6f62357a",
+        "name": "PolaToons"
+      },
+      {
+        "id": "6838795955e948f01b997a24",
+        "name": "pixelgenie"
+      },
+      {
+        "id": "689f631d20d1e32c6f60460e",
+        "name": "Ai-Doll"
+      },
+      {
+        "id": "6894931bcc6937f852760c19",
+        "name": "IGen AI"
+      },
+      {
+        "id": "68a58bee20d1e32c6f635452",
+        "name": "AI SVG Generator"
+      },
+      {
+        "id": "68a4673f20d1e32c6f630057",
+        "name": "ImagesArt Ai"
+      },
+      {
+        "id": "68c6e7f114ec3aabf827a1e8",
+        "name": "PrintGen"
+      },
+      {
+        "id": "68c959c414ec3aabf8296617",
+        "name": "FeetGen"
+      },
+      {
+        "id": "68a2112520d1e32c6f61eca5",
+        "name": "Ghibli AI Image Generator"
+      },
+      {
+        "id": "6877656005cf15748251f24b",
+        "name": "PromptImage"
+      },
+      {
+        "id": "68c93f7914ec3aabf8292b54",
+        "name": "Imagine IO"
+      },
+      {
+        "id": "6867507bef7018fbfef773e1",
+        "name": "Photo Arts"
+      },
+      {
+        "id": "68a1f42c20d1e32c6f61d4ad",
+        "name": "Image-Ai"
+      },
+      {
+        "id": "68c9522714ec3aabf8295206",
+        "name": "Caricature Maker"
+      },
+      {
+        "id": "688a4ce28f91ef875c1fe799",
+        "name": "Image AI"
+      },
+      {
+        "id": "68d1411f14ec3aabf8303a75",
+        "name": "BestPhoto"
+      },
+      {
+        "id": "68a45e9f20d1e32c6f62f04c",
+        "name": "Toy Image AI"
+      },
+      {
+        "id": "6881ccab8f91ef875c1a5728",
+        "name": "Genimg AI"
+      },
+      {
+        "id": "68a1e71320d1e32c6f61b247",
+        "name": "Style Art AI"
+      },
+      {
+        "id": "6876017805cf157482501768",
+        "name": "Illustration Generator"
+      },
+      {
+        "id": "68c93c7214ec3aabf8292720",
+        "name": "Photopea"
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6894d784cc6937f852761cdb",
+      "68596cdd1c16582699a650c9",
+      "689ea97f20d1e32c6f5fa546",
+      "68445543b32d4d019cbe07bd",
+      "68ca822614ec3aabf82b2364",
+      "688889978f91ef875c1f12bb",
+      "68b974f4f7d129afc8b693ac",
+      "687755ad05cf15748251d8ab",
+      "68737c9fcc23a952f76cd3de",
+      "68c55ec614ec3aabf826dc8b",
+      "68c0687ccd13975a5d63d8c0",
+      "68a3613420d1e32c6f62711a",
+      "686407a5015bd4929b3826e3",
+      "68c7c27014ec3aabf82865ce",
+      "68b3489227f52b6ba7a8926f",
+      "68a3430d20d1e32c6f62357a",
+      "6838795955e948f01b997a24",
+      "689f631d20d1e32c6f60460e",
+      "6894931bcc6937f852760c19",
+      "68a58bee20d1e32c6f635452",
+      "68a4673f20d1e32c6f630057",
+      "68c6e7f114ec3aabf827a1e8",
+      "68c959c414ec3aabf8296617",
+      "68a2112520d1e32c6f61eca5",
+      "6877656005cf15748251f24b",
+      "68c93f7914ec3aabf8292b54",
+      "6867507bef7018fbfef773e1",
+      "68a1f42c20d1e32c6f61d4ad",
+      "68c9522714ec3aabf8295206",
+      "688a4ce28f91ef875c1fe799",
+      "68d1411f14ec3aabf8303a75",
+      "68a45e9f20d1e32c6f62f04c",
+      "6881ccab8f91ef875c1a5728",
+      "68a1e71320d1e32c6f61b247",
+      "6876017805cf157482501768",
+      "68c93c7214ec3aabf8292720"
+    ],
+    "tools": [
+      {
+        "id": "6894d784cc6937f852761cdb",
+        "name": "Pixa"
+      },
+      {
+        "id": "68596cdd1c16582699a650c9",
+        "name": "Craiyon"
+      },
+      {
+        "id": "689ea97f20d1e32c6f5fa546",
+        "name": "CGDream"
+      },
+      {
+        "id": "68445543b32d4d019cbe07bd",
+        "name": "Vidu Studio Flux AI Image Gen"
+      },
+      {
+        "id": "68ca822614ec3aabf82b2364",
+        "name": "Image To Image AI"
+      },
+      {
+        "id": "688889978f91ef875c1f12bb",
+        "name": "Image Pig"
+      },
+      {
+        "id": "68b974f4f7d129afc8b693ac",
+        "name": "Image to Image Generator"
+      },
+      {
+        "id": "687755ad05cf15748251d8ab",
+        "name": "IllustraAI"
+      },
+      {
+        "id": "68737c9fcc23a952f76cd3de",
+        "name": "AI Coloring Page Generator"
+      },
+      {
+        "id": "68c55ec614ec3aabf826dc8b",
+        "name": "Colorings"
+      },
+      {
+        "id": "68c0687ccd13975a5d63d8c0",
+        "name": "AI Baby Generator"
+      },
+      {
+        "id": "68a3613420d1e32c6f62711a",
+        "name": "ImageGPT io"
+      },
+      {
+        "id": "686407a5015bd4929b3826e3",
+        "name": "Pixvify"
+      },
+      {
+        "id": "68c7c27014ec3aabf82865ce",
+        "name": "Imagen MIA"
+      },
+      {
+        "id": "68b3489227f52b6ba7a8926f",
+        "name": "FlyAgt"
+      },
+      {
+        "id": "68a3430d20d1e32c6f62357a",
+        "name": "PolaToons"
+      },
+      {
+        "id": "6838795955e948f01b997a24",
+        "name": "pixelgenie"
+      },
+      {
+        "id": "689f631d20d1e32c6f60460e",
+        "name": "Ai-Doll"
+      },
+      {
+        "id": "6894931bcc6937f852760c19",
+        "name": "IGen AI"
+      },
+      {
+        "id": "68a58bee20d1e32c6f635452",
+        "name": "AI SVG Generator"
+      },
+      {
+        "id": "68a4673f20d1e32c6f630057",
+        "name": "ImagesArt Ai"
+      },
+      {
+        "id": "68c6e7f114ec3aabf827a1e8",
+        "name": "PrintGen"
+      },
+      {
+        "id": "68c959c414ec3aabf8296617",
+        "name": "FeetGen"
+      },
+      {
+        "id": "68a2112520d1e32c6f61eca5",
+        "name": "Ghibli AI Image Generator"
+      },
+      {
+        "id": "6877656005cf15748251f24b",
+        "name": "PromptImage"
+      },
+      {
+        "id": "68c93f7914ec3aabf8292b54",
+        "name": "Imagine IO"
+      },
+      {
+        "id": "6867507bef7018fbfef773e1",
+        "name": "Photo Arts"
+      },
+      {
+        "id": "68a1f42c20d1e32c6f61d4ad",
+        "name": "Image-Ai"
+      },
+      {
+        "id": "68c9522714ec3aabf8295206",
+        "name": "Caricature Maker"
+      },
+      {
+        "id": "688a4ce28f91ef875c1fe799",
+        "name": "Image AI"
+      },
+      {
+        "id": "68d1411f14ec3aabf8303a75",
+        "name": "BestPhoto"
+      },
+      {
+        "id": "68a45e9f20d1e32c6f62f04c",
+        "name": "Toy Image AI"
+      },
+      {
+        "id": "6881ccab8f91ef875c1a5728",
+        "name": "Genimg AI"
+      },
+      {
+        "id": "68a1e71320d1e32c6f61b247",
+        "name": "Style Art AI"
+      },
+      {
+        "id": "6876017805cf157482501768",
+        "name": "Illustration Generator"
+      },
+      {
+        "id": "68c93c7214ec3aabf8292720",
+        "name": "Photopea"
+      }
+    ]
+  },
+  "processing_time_seconds": 9.089,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6894d784cc6937f852761cdb\",\n    \"68596cdd1c16582699a650c9\",\n    \"689ea97f20d1e32c6f5fa546\",\n    \"68445543b32d4d019cbe07bd\",\n    \"68ca822614ec3aabf82b2364\",\n    \"688889978f91ef875c1f12bb\",\n    \"68b974f4f7d129afc8b693ac\",\n    \"687755ad05cf15748251d8ab\",\n    \"68737c9fcc23a952f76cd3de\",\n    \"68c55ec614ec3aabf826dc8b\",\n    \"68c0687ccd13975a5d63d8c0\",\n    \"68a3613420d1e32c6f62711a\",\n    \"686407a5015bd4929b3826e3\",\n    \"68c7c27014ec3aabf82865ce\",\n    \"68b3489227f52b6ba7a8926f\",\n    \"68a3430d20d1e32c6f62357a\",\n    \"6838795955e948f01b997a24\",\n    \"689f631d20d1e32c6f60460e\",\n    \"6894931bcc6937f852760c19\",\n    \"68a58bee20d1e32c6f635452\",\n    \"68a4673f20d1e32c6f630057\",\n    \"68c6e7f114ec3aabf827a1e8\",\n    \"68c959c414ec3aabf8296617\",\n    \"68a2112520d1e32c6f61eca5\",\n    \"6877656005cf15748251f24b\",\n    \"68c93f7914ec3aabf8292b54\",\n    \"6867507bef7018fbfef773e1\",\n    \"68a1f42c20d1e32c6f61d4ad\",\n    \"68c9522714ec3aabf8295206\",\n    \"688a4ce28f91ef875c1fe799\",\n    \"68d1411f14ec3aabf8303a75\",\n    \"68a45e9f20d1e32c6f62f04c\",\n    \"6881ccab8f91ef875c1a5728\",\n    \"68a1e71320d1e32c6f61b247\",\n    \"6876017805cf157482501768\",\n    \"68c93c7214ec3aabf8292720\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6894d784cc6937f852761cdb\",\n      \"name\": \"Pixa\"\n    },\n    {\n      \"id\": \"68596cdd1c16582699a650c9\",\n      \"name\": \"Craiyon\"\n    },\n    {\n      \"id\": \"689ea97f20d1e32c6f5fa546\",\n      \"name\": \"CGDream\"\n    },\n    {\n      \"id\": \"68445543b32d4d019cbe07bd\",\n      \"name\": \"Vidu Studio Flux AI Image Gen\"\n    },\n    {\n      \"id\": \"68ca822614ec3aabf82b2364\",\n      \"name\": \"Image To Image AI\"\n    },\n    {\n      \"id\": \"688889978f91ef875c1f12bb\",\n      \"name\": \"Image Pig\"\n    },\n    {\n      \"id\": \"68b974f4f7d129afc8b693ac\",\n      \"name\": \"Image to Image Generator\"\n    },\n    {\n      \"id\": \"687755ad05cf15748251d8ab\",\n      \"name\": \"IllustraAI\"\n    },\n    {\n      \"id\": \"68737c9fcc23a952f76cd3de\",\n      \"name\": \"AI Coloring Page Generator\"\n    },\n    {\n      \"id\": \"68c55ec614ec3aabf826dc8b\",\n      \"name\": \"Colorings\"\n    },\n    {\n      \"id\": \"68c0687ccd13975a5d63d8c0\",\n      \"name\": \"AI Baby Generator\"\n    },\n    {\n      \"id\": \"68a3613420d1e32c6f62711a\",\n      \"name\": \"ImageGPT io\"\n    },\n    {\n      \"id\": \"686407a5015bd4929b3826e3\",\n      \"name\": \"Pixvify\"\n    },\n    {\n      \"id\": \"68c7c27014ec3aabf82865ce\",\n      \"name\": \"Imagen MIA\"\n    },\n    {\n      \"id\": \"68b3489227f52b6ba7a8926f\",\n      \"name\": \"FlyAgt\"\n    },\n    {\n      \"id\": \"68a3430d20d1e32c6f62357a\",\n      \"name\": \"PolaToons\"\n    },\n    {\n      \"id\": \"6838795955e948f01b997a24\",\n      \"name\": \"pixelgenie\"\n    },\n    {\n      \"id\": \"689f631d20d1e32c6f60460e\",\n      \"name\": \"Ai-Doll\"\n    },\n    {\n      \"id\": \"6894931bcc6937f852760c19\",\n      \"name\": \"IGen AI\"\n    },\n    {\n      \"id\": \"68a58bee20d1e32c6f635452\",\n      \"name\": \"AI SVG Generator\"\n    },\n    {\n      \"id\": \"68a4673f20d1e32c6f630057\",\n      \"name\": \"ImagesArt Ai\"\n    },\n    {\n      \"id\": \"68c6e7f114ec3aabf827a1e8\",\n      \"name\": \"PrintGen\"\n    },\n    {\n      \"id\": \"68c959c414ec3aabf8296617\",\n      \"name\": \"FeetGen\"\n    },\n    {\n      \"id\": \"68a2112520d1e32c6f61eca5\",\n      \"name\": \"Ghibli AI Image Generator\"\n    },\n    {\n      \"id\": \"6877656005cf15748251f24b\",\n      \"name\": \"PromptImage\"\n    },\n    {\n      \"id\": \"68c93f7914ec3aabf8292b54\",\n      \"name\": \"Imagine IO\"\n    },\n    {\n      \"id\": \"6867507bef7018fbfef773e1\",\n      \"name\": \"Photo Arts\"\n    },\n    {\n      \"id\": \"68a1f42c20d1e32c6f61d4ad\",\n      \"name\": \"Image-Ai\"\n    },\n    {\n      \"id\": \"68c9522714ec3aabf8295206\",\n      \"name\": \"Caricature Maker\"\n    },\n    {\n      \"id\": \"688a4ce28f91ef875c1fe799\",\n      \"name\": \"Image AI\"\n    },\n    {\n      \"id\": \"68d1411f14ec3aabf8303a75\",\n      \"name\": \"BestPhoto\"\n    },\n    {\n      \"id\": \"68a45e9f20d1e32c6f62f04c\",\n      \"name\": \"Toy Image AI\"\n    },\n    {\n      \"id\": \"6881ccab8f91ef875c1a5728\",\n      \"name\": \"Genimg AI\"\n    },\n    {\n      \"id\": \"68a1e71320d1e32c6f61b247\",\n      \"name\": \"Style Art AI\"\n    },\n    {\n      \"id\": \"6876017805cf157482501768\",\n      \"name\": \"Illustration Generator\"\n    },\n    {\n      \"id\": \"68c93c7214ec3aabf8292720\",\n      \"name\": \"Photopea\"\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

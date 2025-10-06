@@ -1,0 +1,425 @@
+{
+  "timestamp": "2025-10-06T12:27:02.878357",
+  "input_query": "video generator",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 17,
+    "tool_ids": [
+      "68cc023314ec3aabf82cba49",
+      "686cf0ed3a087b487359e4f0",
+      "68447010b32d4d019cc01bd0",
+      "685569f527c6eba075dcc7e1",
+      "68c6e85914ec3aabf827a731",
+      "682d4e3d23aaf1a750a993e1",
+      "68c5a76014ec3aabf8270bf2",
+      "682d4a7d23aaf1a750a9939a",
+      "68c952f714ec3aabf8295621",
+      "6856c137ee78f2aff0d1a3ea",
+      "68c94e2514ec3aabf829446a",
+      "684120bbbce3a3d64c6fe4c5",
+      "68675ec4ef7018fbfef776aa",
+      "68a4abd820d1e32c6f632f33",
+      "68445055b32d4d019cbd5381",
+      "68c30be414ec3aabf824e754",
+      "68a589c320d1e32c6f634e83",
+      "68bfedf4cd13975a5d639726",
+      "68678af5ef7018fbfef79658",
+      "68aa820f151fdf43de60fff1",
+      "689f4d8920d1e32c6f5fff53",
+      "688c9e56fa5db35ff2c4fe9f",
+      "686ce2dd3a087b487359db94",
+      "68d0201d14ec3aabf82f690a",
+      "68a3410e20d1e32c6f6231d1",
+      "68736836cc23a952f76cc74c",
+      "68d0201d14ec3aabf82f690a",
+      "6877472e05cf15748251c5e1",
+      "6877463d05cf15748251c419",
+      "6898954dcc6937f852783288",
+      "68bfedf4cd13975a5d639726",
+      "689f6d2020d1e32c6f60ae1f",
+      "686786faef7018fbfef78a1a",
+      "689f4d8920d1e32c6f5fff53",
+      "682e0d2823aaf1a750aa8096",
+      "688c9e56fa5db35ff2c4fe9f"
+    ],
+    "tools": [
+      {
+        "id": "68cc023314ec3aabf82cba49",
+        "name": "Faceless Video",
+        "description": "Faceless Video is an AI-powered tool for creating engaging, faceless short videos for social media, automating video generation to maintain a consistent posting schedule. This tool is highly relevant for users looking to easily generate content and can rapidly produce video without requiring advanced technical skills or on-camera presence.",
+        "bullets": [
+          "Automates video generation from prompts for seamless content creation",
+          "Ideal for social media platforms, ensuring quick and engaging outputs"
+        ]
+      },
+      {
+        "id": "686cf0ed3a087b487359e4f0",
+        "name": "Virbo AI Video Generator",
+        "description": "Virbo is an AI-powered video creation platform that enables users to transform text and images into fully-realized videos. It combines a robust selection of realistic avatars and voice options, making it suitable for those wishing to create diverse video content quickly and efficiently with little technical skill needed.",
+        "bullets": [
+          "Transforms text and images into lifelike videos with ease",
+          "Offers over 350 realistic avatars and 400 voices for versatile content"
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator transforms static images of women into dynamic, animated videos, making this tool highly suitable for users wanting to animate portraits or create engaging visual content effortlessly. Its advanced AI capabilities provide high-quality video outputs without requiring deep technical skills.",
+        "bullets": [
+          "Easily animates images into videos delivering smooth transitions",
+          "User-friendly design ensures accessibility for all skill levels"
+        ]
+      },
+      {
+        "id": "685569f527c6eba075dcc7e1",
+        "name": "Veo 2",
+        "description": "Veo 2 is an advanced text-to-video generator by Google DeepMind, enabling users to create cinematic video clips from text or images. Its realistic visual outputs make it ideal for professional and high-quality short content generation rapidly, serving content creators who need reliable tools for diverse projects.",
+        "bullets": [
+          "Creates cinematic videos using text and image prompts",
+          "High-quality 720p to 4K outputs for professional use"
+        ]
+      },
+      {
+        "id": "686ce2dd3a087b487359db94",
+        "name": "VideoTube",
+        "description": "VideoTube.ai helps users create YouTube-style videos from scripts and prompts, ideal for marketers and educators seeking to streamline video production. Its built-in editing tools add convenience, enabling seamless conversion of written content into engaging video formats.",
+        "bullets": [
+          "Instantly creates videos from text and script inputs",
+          "Includes stock footage and AI voiceovers for professional-quality results"
+        ]
+      },
+      {
+        "id": "68c6e85914ec3aabf827a731",
+        "name": "UpscaleMy.Video",
+        "description": "UpscaleMy.video focuses on enhancing video quality through AI upscaling. While primarily a video improvement platform, its technology could complement video creation tools for users seeking to elevate their existing video content's visual quality, particularly in social media and professional settings.",
+        "bullets": [
+          "Enhances resolution and quality of existing videos",
+          "Utilizes advanced AI algorithms for superior upscaling results"
+        ]
+      },
+      {
+        "id": "682d4e3d23aaf1a750a993e1",
+        "name": "Freepik AI Video Generator",
+        "description": "Freepik's AI Video Generator takes user-inputted text and creates dynamic videos quickly\u2014perfect for anyone looking to generate rapid video content for marketing or social media purposes without any prior video production experience.",
+        "bullets": [
+          "Instantly generates high-quality videos from simple text prompts",
+          "Part of Freepik's extensive ecosystem for rich visual content"
+        ]
+      },
+      {
+        "id": "6856c137ee78f2aff0d1a3ea",
+        "name": "Vidi Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page allows straightforward AI video generation by combining text and image prompts. It's designed for easy accessibility, making video creation intuitive and comprehensive for users with varying expertise.",
+        "bullets": [
+          "Easy prompt-based video generation using text and images",
+          "Rapid processing ensures quick turnarounds in content production"
+        ]
+      },
+      {
+        "id": "68c952f714ec3aabf8295621",
+        "name": "Veo3 AI",
+        "description": "Aiveo3.ai enables users to craft high-quality videos from text or images, embracing features like realistic lip-syncing and motion effects. This tool is tailored for those needing advanced, dynamic video content generated quickly and without extensive editing skills.",
+        "bullets": [
+          "Generates videos with realistic lip-sync and smooth motion effects",
+          "User-friendly design for efficient content production without tech expertise"
+        ]
+      },
+      {
+        "id": "68c30be414ec3aabf824e754",
+        "name": "ViralVideo",
+        "description": "The ViralVideo AI engine automates the process of generating short, attention-grabbing videos based on text. It's specifically designed to cater to social media platforms, making it an excellent choice for marketers and content creators focused on streamlined video creation.",
+        "bullets": [
+          "Creates videos in minutes from text prompts with ease",
+          "Optimized for social media sharing, ensuring vibrant and engaging outputs"
+        ]
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "DeeVid AI",
+        "description": "DeeVid AI specializes in enabling users to create high-quality videos from multiple input forms including text, images, or video prompts. It focuses on accessibility, making advanced video production seamless for users lacking technical skills.",
+        "bullets": [
+          "Fast video generation speed of one minute per video",
+          "No technical skills required for producing high-quality videos"
+        ]
+      },
+      {
+        "id": "68675ec4ef7018fbfef776aa",
+        "name": "Veo3Video App",
+        "description": "Veo3Video.app allows users to generate high-quality videos based on simple prompts. The platform's advanced models enable quick and effective video storytelling with various visual styles, making it ideal for content creators and marketers alike.",
+        "bullets": [
+          "Generates stunning videos with cinematic effects in minutes",
+          "Accessible for users without video editing experience"
+        ]
+      },
+      {
+        "id": "68c94e2514ec3aabf829446a",
+        "name": "Vido Generator",
+        "description": "Vido Generator offers users the ability to create engaging video content easily, focusing on user accessibility and quality output. Aimed at mobile and desktop users, this tool empowers content creators with automated processes for swift video generation.",
+        "bullets": [
+          "Simple, intuitive interface for rapid video production",
+          "Creates engaging content without the need for prior editing knowledge"
+        ]
+      },
+      {
+        "id": "6867785c81d1b56fb65bb892",
+        "name": "Vidboard",
+        "description": "VidBoard.ai transforms documents and URLs into engaging videos, focusing on simplicity and accessibility. Its native voiceover capabilities allow quick adaptations of written content into audiovisual formats.",
+        "bullets": [
+          "Converts text documents into dynamic video stories",
+          "Supports video production without prior editing experience"
+        ]
+      },
+      {
+        "id": "68d0201d14ec3aabf82f690a",
+        "name": "VideoGPT",
+        "description": "VideoGPT leverages deep learning to create high-quality videos, allowing users to transform text prompts into engaging video content effortlessly. This service caters to content creators and marketers seeking to simplify the video production process.",
+        "bullets": [
+          "Generates dynamic video content from simple text descriptions",
+          "User-friendly interface designed for efficiency and productivity"
+        ]
+      },
+      {
+        "id": "68736836cc23a952f76cc74c",
+        "name": "Leonardo.Ai",
+        "description": "Leonardo's AI Video Generator simplifies the process of generating stunning videos, utilizing advanced AI to produce high-quality animations and cinematic sequences swiftly.",
+        "bullets": [
+          "Efficiently generates professional-quality video content",
+          "Designed for quick workflows to suit any creator's needs"
+        ]
+      },
+      {
+        "id": "688c9e56fa5db35ff2c4fe9f",
+        "name": "Dreamlux AI",
+        "description": "Dreamlux.ai enables fast conversion of text prompts or images into high-quality video content using advanced multimodal architecture, ensuring ultra-fast rendering and quality outputs, suitable for quick creation and editing workflows.",
+        "bullets": [
+          "Generates HD videos within seconds for immediate use",
+          "No watermark on paid plans allows for professional presentation"
+        ]
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68cc023314ec3aabf82cba49",
+      "686cf0ed3a087b487359e4f0",
+      "68447010b32d4d019cc01bd0",
+      "685569f527c6eba075dcc7e1",
+      "68c6e85914ec3aabf827a731",
+      "682d4e3d23aaf1a750a993e1",
+      "68c5a76014ec3aabf8270bf2",
+      "682d4a7d23aaf1a750a9939a",
+      "68c952f714ec3aabf8295621",
+      "6856c137ee78f2aff0d1a3ea",
+      "68c94e2514ec3aabf829446a",
+      "684120bbbce3a3d64c6fe4c5",
+      "68675ec4ef7018fbfef776aa",
+      "68a4abd820d1e32c6f632f33",
+      "68445055b32d4d019cbd5381",
+      "68c30be414ec3aabf824e754",
+      "68a589c320d1e32c6f634e83",
+      "68bfedf4cd13975a5d639726",
+      "68678af5ef7018fbfef79658",
+      "68aa820f151fdf43de60fff1",
+      "689f4d8920d1e32c6f5fff53",
+      "688c9e56fa5db35ff2c4fe9f",
+      "686ce2dd3a087b487359db94",
+      "68d0201d14ec3aabf82f690a",
+      "68a3410e20d1e32c6f6231d1",
+      "68736836cc23a952f76cc74c",
+      "68d0201d14ec3aabf82f690a",
+      "6877472e05cf15748251c5e1",
+      "6877463d05cf15748251c419",
+      "6898954dcc6937f852783288",
+      "68bfedf4cd13975a5d639726",
+      "689f6d2020d1e32c6f60ae1f",
+      "686786faef7018fbfef78a1a",
+      "689f4d8920d1e32c6f5fff53",
+      "682e0d2823aaf1a750aa8096",
+      "688c9e56fa5db35ff2c4fe9f"
+    ],
+    "tools": [
+      {
+        "id": "68cc023314ec3aabf82cba49",
+        "name": "Faceless Video",
+        "description": "Faceless Video is an AI-powered tool for creating engaging, faceless short videos for social media, automating video generation to maintain a consistent posting schedule. This tool is highly relevant for users looking to easily generate content and can rapidly produce video without requiring advanced technical skills or on-camera presence.",
+        "bullets": [
+          "Automates video generation from prompts for seamless content creation",
+          "Ideal for social media platforms, ensuring quick and engaging outputs"
+        ]
+      },
+      {
+        "id": "686cf0ed3a087b487359e4f0",
+        "name": "Virbo AI Video Generator",
+        "description": "Virbo is an AI-powered video creation platform that enables users to transform text and images into fully-realized videos. It combines a robust selection of realistic avatars and voice options, making it suitable for those wishing to create diverse video content quickly and efficiently with little technical skill needed.",
+        "bullets": [
+          "Transforms text and images into lifelike videos with ease",
+          "Offers over 350 realistic avatars and 400 voices for versatile content"
+        ]
+      },
+      {
+        "id": "68447010b32d4d019cc01bd0",
+        "name": "Vidu Studio AI Girl Video Gen",
+        "description": "Vidu Studio's AI Girl Video Generator transforms static images of women into dynamic, animated videos, making this tool highly suitable for users wanting to animate portraits or create engaging visual content effortlessly. Its advanced AI capabilities provide high-quality video outputs without requiring deep technical skills.",
+        "bullets": [
+          "Easily animates images into videos delivering smooth transitions",
+          "User-friendly design ensures accessibility for all skill levels"
+        ]
+      },
+      {
+        "id": "685569f527c6eba075dcc7e1",
+        "name": "Veo 2",
+        "description": "Veo 2 is an advanced text-to-video generator by Google DeepMind, enabling users to create cinematic video clips from text or images. Its realistic visual outputs make it ideal for professional and high-quality short content generation rapidly, serving content creators who need reliable tools for diverse projects.",
+        "bullets": [
+          "Creates cinematic videos using text and image prompts",
+          "High-quality 720p to 4K outputs for professional use"
+        ]
+      },
+      {
+        "id": "686ce2dd3a087b487359db94",
+        "name": "VideoTube",
+        "description": "VideoTube.ai helps users create YouTube-style videos from scripts and prompts, ideal for marketers and educators seeking to streamline video production. Its built-in editing tools add convenience, enabling seamless conversion of written content into engaging video formats.",
+        "bullets": [
+          "Instantly creates videos from text and script inputs",
+          "Includes stock footage and AI voiceovers for professional-quality results"
+        ]
+      },
+      {
+        "id": "68c6e85914ec3aabf827a731",
+        "name": "UpscaleMy.Video",
+        "description": "UpscaleMy.video focuses on enhancing video quality through AI upscaling. While primarily a video improvement platform, its technology could complement video creation tools for users seeking to elevate their existing video content's visual quality, particularly in social media and professional settings.",
+        "bullets": [
+          "Enhances resolution and quality of existing videos",
+          "Utilizes advanced AI algorithms for superior upscaling results"
+        ]
+      },
+      {
+        "id": "682d4e3d23aaf1a750a993e1",
+        "name": "Freepik AI Video Generator",
+        "description": "Freepik's AI Video Generator takes user-inputted text and creates dynamic videos quickly\u2014perfect for anyone looking to generate rapid video content for marketing or social media purposes without any prior video production experience.",
+        "bullets": [
+          "Instantly generates high-quality videos from simple text prompts",
+          "Part of Freepik's extensive ecosystem for rich visual content"
+        ]
+      },
+      {
+        "id": "6856c137ee78f2aff0d1a3ea",
+        "name": "Vidi Studio - AI Video Create",
+        "description": "Vidu Studio's Create Page allows straightforward AI video generation by combining text and image prompts. It's designed for easy accessibility, making video creation intuitive and comprehensive for users with varying expertise.",
+        "bullets": [
+          "Easy prompt-based video generation using text and images",
+          "Rapid processing ensures quick turnarounds in content production"
+        ]
+      },
+      {
+        "id": "68c952f714ec3aabf8295621",
+        "name": "Veo3 AI",
+        "description": "Aiveo3.ai enables users to craft high-quality videos from text or images, embracing features like realistic lip-syncing and motion effects. This tool is tailored for those needing advanced, dynamic video content generated quickly and without extensive editing skills.",
+        "bullets": [
+          "Generates videos with realistic lip-sync and smooth motion effects",
+          "User-friendly design for efficient content production without tech expertise"
+        ]
+      },
+      {
+        "id": "68c30be414ec3aabf824e754",
+        "name": "ViralVideo",
+        "description": "The ViralVideo AI engine automates the process of generating short, attention-grabbing videos based on text. It's specifically designed to cater to social media platforms, making it an excellent choice for marketers and content creators focused on streamlined video creation.",
+        "bullets": [
+          "Creates videos in minutes from text prompts with ease",
+          "Optimized for social media sharing, ensuring vibrant and engaging outputs"
+        ]
+      },
+      {
+        "id": "682d4a7d23aaf1a750a9939a",
+        "name": "DeeVid AI",
+        "description": "DeeVid AI specializes in enabling users to create high-quality videos from multiple input forms including text, images, or video prompts. It focuses on accessibility, making advanced video production seamless for users lacking technical skills.",
+        "bullets": [
+          "Fast video generation speed of one minute per video",
+          "No technical skills required for producing high-quality videos"
+        ]
+      },
+      {
+        "id": "68675ec4ef7018fbfef776aa",
+        "name": "Veo3Video App",
+        "description": "Veo3Video.app allows users to generate high-quality videos based on simple prompts. The platform's advanced models enable quick and effective video storytelling with various visual styles, making it ideal for content creators and marketers alike.",
+        "bullets": [
+          "Generates stunning videos with cinematic effects in minutes",
+          "Accessible for users without video editing experience"
+        ]
+      },
+      {
+        "id": "68c94e2514ec3aabf829446a",
+        "name": "Vido Generator",
+        "description": "Vido Generator offers users the ability to create engaging video content easily, focusing on user accessibility and quality output. Aimed at mobile and desktop users, this tool empowers content creators with automated processes for swift video generation.",
+        "bullets": [
+          "Simple, intuitive interface for rapid video production",
+          "Creates engaging content without the need for prior editing knowledge"
+        ]
+      },
+      {
+        "id": "6867785c81d1b56fb65bb892",
+        "name": "Vidboard",
+        "description": "VidBoard.ai transforms documents and URLs into engaging videos, focusing on simplicity and accessibility. Its native voiceover capabilities allow quick adaptations of written content into audiovisual formats.",
+        "bullets": [
+          "Converts text documents into dynamic video stories",
+          "Supports video production without prior editing experience"
+        ]
+      },
+      {
+        "id": "68d0201d14ec3aabf82f690a",
+        "name": "VideoGPT",
+        "description": "VideoGPT leverages deep learning to create high-quality videos, allowing users to transform text prompts into engaging video content effortlessly. This service caters to content creators and marketers seeking to simplify the video production process.",
+        "bullets": [
+          "Generates dynamic video content from simple text descriptions",
+          "User-friendly interface designed for efficiency and productivity"
+        ]
+      },
+      {
+        "id": "68736836cc23a952f76cc74c",
+        "name": "Leonardo.Ai",
+        "description": "Leonardo's AI Video Generator simplifies the process of generating stunning videos, utilizing advanced AI to produce high-quality animations and cinematic sequences swiftly.",
+        "bullets": [
+          "Efficiently generates professional-quality video content",
+          "Designed for quick workflows to suit any creator's needs"
+        ]
+      },
+      {
+        "id": "688c9e56fa5db35ff2c4fe9f",
+        "name": "Dreamlux AI",
+        "description": "Dreamlux.ai enables fast conversion of text prompts or images into high-quality video content using advanced multimodal architecture, ensuring ultra-fast rendering and quality outputs, suitable for quick creation and editing workflows.",
+        "bullets": [
+          "Generates HD videos within seconds for immediate use",
+          "No watermark on paid plans allows for professional presentation"
+        ]
+      }
+    ]
+  },
+  "processing_time_seconds": 72.268,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68cc023314ec3aabf82cba49\",\n    \"686cf0ed3a087b487359e4f0\",\n    \"68447010b32d4d019cc01bd0\",\n    \"685569f527c6eba075dcc7e1\",\n    \"68c6e85914ec3aabf827a731\",\n    \"682d4e3d23aaf1a750a993e1\",\n    \"68c5a76014ec3aabf8270bf2\",\n    \"682d4a7d23aaf1a750a9939a\",\n    \"68c952f714ec3aabf8295621\",\n    \"6856c137ee78f2aff0d1a3ea\",\n    \"68c94e2514ec3aabf829446a\",\n    \"684120bbbce3a3d64c6fe4c5\",\n    \"68675ec4ef7018fbfef776aa\",\n    \"68a4abd820d1e32c6f632f33\",\n    \"68445055b32d4d019cbd5381\",\n    \"68c30be414ec3aabf824e754\",\n    \"68a589c320d1e32c6f634e83\",\n    \"68bfedf4cd13975a5d639726\",\n    \"68678af5ef7018fbfef79658\",\n    \"68aa820f151fdf43de60fff1\",\n    \"689f4d8920d1e32c6f5fff53\",\n    \"688c9e56fa5db35ff2c4fe9f\",\n    \"686ce2dd3a087b487359db94\",\n    \"68d0201d14ec3aabf82f690a\",\n    \"68a3410e20d1e32c6f6231d1\",\n    \"68736836cc23a952f76cc74c\",\n    \"68d0201d14ec3aabf82f690a\",\n    \"6877472e05cf15748251c5e1\",\n    \"6877463d05cf15748251c419\",\n    \"6898954dcc6937f852783288\",\n    \"68bfedf4cd13975a5d639726\",\n    \"689f6d2020d1e32c6f60ae1f\",\n    \"686786faef7018fbfef78a1a\",\n    \"689f4d8920d1e32c6f5fff53\",\n    \"682e0d2823aaf1a750aa8096\",\n    \"688c9e56fa5db35ff2c4fe9f\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68cc023314ec3aabf82cba49\",\n      \"name\": \"Faceless Video\",\n      \"description\": \"Faceless Video is an AI-powered tool for creating engaging, faceless short videos for social media, automating video generation to maintain a consistent posting schedule. This tool is highly relevant for users looking to easily generate content and can rapidly produce video without requiring advanced technical skills or on-camera presence.\",\n      \"bullets\": [\n        \"Automates video generation from prompts for seamless content creation\",\n        \"Ideal for social media platforms, ensuring quick and engaging outputs\"\n      ]\n    },\n    {\n      \"id\": \"686cf0ed3a087b487359e4f0\",\n      \"name\": \"Virbo AI Video Generator\",\n      \"description\": \"Virbo is an AI-powered video creation platform that enables users to transform text and images into fully-realized videos. It combines a robust selection of realistic avatars and voice options, making it suitable for those wishing to create diverse video content quickly and efficiently with little technical skill needed.\",\n      \"bullets\": [\n        \"Transforms text and images into lifelike videos with ease\",\n        \"Offers over 350 realistic avatars and 400 voices for versatile content\"\n      ]\n    },\n    {\n      \"id\": \"68447010b32d4d019cc01bd0\",\n      \"name\": \"Vidu Studio AI Girl Video Gen\",\n      \"description\": \"Vidu Studio's AI Girl Video Generator transforms static images of women into dynamic, animated videos, making this tool highly suitable for users wanting to animate portraits or create engaging visual content effortlessly. Its advanced AI capabilities provide high-quality video outputs without requiring deep technical skills.\",\n      \"bullets\": [\n        \"Easily animates images into videos delivering smooth transitions\",\n        \"User-friendly design ensures accessibility for all skill levels\"\n      ]\n    },\n    {\n      \"id\": \"685569f527c6eba075dcc7e1\",\n      \"name\": \"Veo 2\",\n      \"description\": \"Veo 2 is an advanced text-to-video generator by Google DeepMind, enabling users to create cinematic video clips from text or images. Its realistic visual outputs make it ideal for professional and high-quality short content generation rapidly, serving content creators who need reliable tools for diverse projects.\",\n      \"bullets\": [\n        \"Creates cinematic videos using text and image prompts\",\n        \"High-quality 720p to 4K outputs for professional use\"\n      ]\n    },\n    {\n      \"id\": \"686ce2dd3a087b487359db94\",\n      \"name\": \"VideoTube\",\n      \"description\": \"VideoTube.ai helps users create YouTube-style videos from scripts and prompts, ideal for marketers and educators seeking to streamline video production. Its built-in editing tools add convenience, enabling seamless conversion of written content into engaging video formats.\",\n      \"bullets\": [\n        \"Instantly creates videos from text and script inputs\",\n        \"Includes stock footage and AI voiceovers for professional-quality results\"\n      ]\n    },\n    {\n      \"id\": \"68c6e85914ec3aabf827a731\",\n      \"name\": \"UpscaleMy.Video\",\n      \"description\": \"UpscaleMy.video focuses on enhancing video quality through AI upscaling. While primarily a video improvement platform, its technology could complement video creation tools for users seeking to elevate their existing video content's visual quality, particularly in social media and professional settings.\",\n      \"bullets\": [\n        \"Enhances resolution and quality of existing videos\",\n        \"Utilizes advanced AI algorithms for superior upscaling results\"\n      ]\n    },\n    {\n      \"id\": \"682d4e3d23aaf1a750a993e1\",\n      \"name\": \"Freepik AI Video Generator\",\n      \"description\": \"Freepik's AI Video Generator takes user-inputted text and creates dynamic videos quickly\\u2014perfect for anyone looking to generate rapid video content for marketing or social media purposes without any prior video production experience.\",\n      \"bullets\": [\n        \"Instantly generates high-quality videos from simple text prompts\",\n        \"Part of Freepik's extensive ecosystem for rich visual content\"\n      ]\n    },\n    {\n      \"id\": \"6856c137ee78f2aff0d1a3ea\",\n      \"name\": \"Vidi Studio - AI Video Create\",\n      \"description\": \"Vidu Studio's Create Page allows straightforward AI video generation by combining text and image prompts. It's designed for easy accessibility, making video creation intuitive and comprehensive for users with varying expertise.\",\n      \"bullets\": [\n        \"Easy prompt-based video generation using text and images\",\n        \"Rapid processing ensures quick turnarounds in content production\"\n      ]\n    },\n    {\n      \"id\": \"68c952f714ec3aabf8295621\",\n      \"name\": \"Veo3 AI\",\n      \"description\": \"Aiveo3.ai enables users to craft high-quality videos from text or images, embracing features like realistic lip-syncing and motion effects. This tool is tailored for those needing advanced, dynamic video content generated quickly and without extensive editing skills.\",\n      \"bullets\": [\n        \"Generates videos with realistic lip-sync and smooth motion effects\",\n        \"User-friendly design for efficient content production without tech expertise\"\n      ]\n    },\n    {\n      \"id\": \"68c30be414ec3aabf824e754\",\n      \"name\": \"ViralVideo\",\n      \"description\": \"The ViralVideo AI engine automates the process of generating short, attention-grabbing videos based on text. It's specifically designed to cater to social media platforms, making it an excellent choice for marketers and content creators focused on streamlined video creation.\",\n      \"bullets\": [\n        \"Creates videos in minutes from text prompts with ease\",\n        \"Optimized for social media sharing, ensuring vibrant and engaging outputs\"\n      ]\n    },\n    {\n      \"id\": \"682d4a7d23aaf1a750a9939a\",\n      \"name\": \"DeeVid AI\",\n      \"description\": \"DeeVid AI specializes in enabling users to create high-quality videos from multiple input forms including text, images, or video prompts. It focuses on accessibility, making advanced video production seamless for users lacking technical skills.\",\n      \"bullets\": [\n        \"Fast video generation speed of one minute per video\",\n        \"No technical skills required for producing high-quality videos\"\n      ]\n    },\n    {\n      \"id\": \"68675ec4ef7018fbfef776aa\",\n      \"name\": \"Veo3Video App\",\n      \"description\": \"Veo3Video.app allows users to generate high-quality videos based on simple prompts. The platform's advanced models enable quick and effective video storytelling with various visual styles, making it ideal for content creators and marketers alike.\",\n      \"bullets\": [\n        \"Generates stunning videos with cinematic effects in minutes\",\n        \"Accessible for users without video editing experience\"\n      ]\n    },\n    {\n      \"id\": \"68c94e2514ec3aabf829446a\",\n      \"name\": \"Vido Generator\",\n      \"description\": \"Vido Generator offers users the ability to create engaging video content easily, focusing on user accessibility and quality output. Aimed at mobile and desktop users, this tool empowers content creators with automated processes for swift video generation.\",\n      \"bullets\": [\n        \"Simple, intuitive interface for rapid video production\",\n        \"Creates engaging content without the need for prior editing knowledge\"\n      ]\n    },\n    {\n      \"id\": \"6867785c81d1b56fb65bb892\",\n      \"name\": \"Vidboard\",\n      \"description\": \"VidBoard.ai transforms documents and URLs into engaging videos, focusing on simplicity and accessibility. Its native voiceover capabilities allow quick adaptations of written content into audiovisual formats.\",\n      \"bullets\": [\n        \"Converts text documents into dynamic video stories\",\n        \"Supports video production without prior editing experience\"\n      ]\n    },\n    {\n      \"id\": \"68d0201d14ec3aabf82f690a\",\n      \"name\": \"VideoGPT\",\n      \"description\": \"VideoGPT leverages deep learning to create high-quality videos, allowing users to transform text prompts into engaging video content effortlessly. This service caters to content creators and marketers seeking to simplify the video production process.\",\n      \"bullets\": [\n        \"Generates dynamic video content from simple text descriptions\",\n        \"User-friendly interface designed for efficiency and productivity\"\n      ]\n    },\n    {\n      \"id\": \"68736836cc23a952f76cc74c\",\n      \"name\": \"Leonardo.Ai\",\n      \"description\": \"Leonardo's AI Video Generator simplifies the process of generating stunning videos, utilizing advanced AI to produce high-quality animations and cinematic sequences swiftly.\",\n      \"bullets\": [\n        \"Efficiently generates professional-quality video content\",\n        \"Designed for quick workflows to suit any creator's needs\"\n      ]\n    },\n    {\n      \"id\": \"688c9e56fa5db35ff2c4fe9f\",\n      \"name\": \"Dreamlux AI\",\n      \"description\": \"Dreamlux.ai enables fast conversion of text prompts or images into high-quality video content using advanced multimodal architecture, ensuring ultra-fast rendering and quality outputs, suitable for quick creation and editing workflows.\",\n      \"bullets\": [\n        \"Generates HD videos within seconds for immediate use\",\n        \"No watermark on paid plans allows for professional presentation\"\n      ]\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
