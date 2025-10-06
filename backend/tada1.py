@@ -4287,7 +4287,7 @@ async def get_related_tools(tool_id: str):
             hybrid_results=hybrid_results,
             original_tool_id=tool_id,
             min_score=0.5,  # Adjustable quality threshold
-            max_results=6   # Maximum 6 tools
+            max_results=12   # Maximum 6 tools
         )
         
         logger.info(f"Returning {len(related_tool_ids)} related tools for {tool_id}")
