@@ -296,8 +296,6 @@ class StructuredToolResult(BaseModel):
     """Individual tool result for structured outputs."""
     id: str
     name: str
-    description: str
-    bullets: List[str] = []
     
     class Config:
         extra = "forbid"  # This generates "additionalProperties": false
