@@ -44,7 +44,9 @@ from pinecone import Pinecone
 from pydantic import BaseModel, Field, HttpUrl
 from rank_bm25 import BM25Okapi
 from openai import OpenAI
-
+# MongoDB imports
+from motor.motor_asyncio import AsyncIOMotorClient
+from bson import ObjectId
 # ============================================================================
 # CONFIGURATION AND CONSTANTS
 # ============================================================================
@@ -86,6 +88,11 @@ class Config:
     LOADING_COVERAGE_TARGET = 0.95      # Stop multi-term search at 95% coverage
     LOADING_MULTI_TERM_BATCH_SIZE = 100 # Batch size for multi-term strategy
     LOADING_TERM_DELAY_SECONDS = 0.1    # Delay between search terms
+# MongoDB settings
+    MONGO_DB_NAME = "aitoolbook"
+    MONGO_COLLECTION_TOOLS = "aitools"
+    MONGO_COLLECTION_CATEGORIES = "categories"
+    MONGO_COLLECTION_USECASES = "usecases"
 
 # System Validation
 if sys.version_info < Config.MIN_PYTHON_VERSION:
@@ -184,10 +191,10 @@ class Environment:
     @property
     def openai_model(self) -> str:
         return os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-    
+
     @property
-    def structured_model(self) -> str:
-        return os.getenv("STRUCTURED_MODEL", "openai/gpt-oss-120b")
+    def mongo_uri(self) -> str:
+        return os.getenv("MONGO_URI", "mongodb+srv://techatb01:v0cshOyjd3axvxMa@cluster0.wuyqyki.mongodb.net/aitoolbook?retryWrites=true&w=majority&appName=Cluster0")
 
 env = Environment()
 
@@ -276,6 +283,7 @@ class Tool(BaseModel):
 
 # Request/Response Models
 class QueryRequest(BaseModel):
+    """Query request model."""
     query: str
     searchFrom: Optional[List[str]] = None
     limit: Optional[int] = Field(default=5, gt=0, le=50)
@@ -288,9 +296,11 @@ class StructuredToolResult(BaseModel):
     """Individual tool result for structured outputs."""
     id: str
     name: str
+    description: str
+    bullets: List[str] = []
     
     class Config:
-        extra = "forbid"
+        extra = "forbid"  # This generates "additionalProperties": false
 
 class StructuredQueryResponse(BaseModel):
     """Structured query response for OpenAI structured outputs."""
@@ -334,6 +344,38 @@ class KeywordItem(BaseModel):
 class ExtractKeywordsResponse(BaseModel):
     """Extract keywords response."""
     keywords: List[KeywordItem]
+
+# Tool Categorization Models
+class ToolCategorizationRequest(BaseModel):
+    """Tool categorization request - tool_id will come from path parameter."""
+    pass
+
+class CategoryMatch(BaseModel):
+    """Individual category match."""
+    id: str
+    name: str
+
+
+class ToolCategorizationResponse(BaseModel):
+    """Tool categorization response."""
+    tool_id: str
+    tool_name: str
+    matched_categories: List[CategoryMatch]
+    total_available_categories: int
+
+# Tool Use Case Categorization Models
+
+class UseCaseMatch(BaseModel):
+    """Individual use case match."""
+    id: str
+    name: str
+
+class ToolUseCaseCategorizationResponse(BaseModel):
+    """Tool use case categorization response."""
+    tool_id: str
+    tool_name: str
+    matched_usecases: List[UseCaseMatch]
+    total_available_usecases: int
 
 class ToolResponse(BaseModel):
     """Tool operation response."""
@@ -396,364 +438,88 @@ class TextCleaner:
         return single_space.strip()
 
 class ModelUtils:
-    """Model and header utilities."""
-    
-    @staticmethod
-    def get_ollama_url(headers=None) -> str:
-        """Get Ollama URL from headers or environment."""
-        if headers and "OLLAMA_URL" in headers:
-            url = headers.get("OLLAMA_URL")
-            if url and url.strip():
-                logger.info(f"Using custom Ollama URL from headers: {url}")
-                return url
-        
-        logger.info(f"Using default Ollama URL from environment: {env.ollama_base_url}")
-        return env.ollama_base_url
-    
-    @staticmethod
-    def should_verify_ssl(headers=None) -> bool:
-        """Determine if SSL verification should be enabled."""
-        if headers and "OLLAMA_VERIFY_SSL" in headers:
-            verify_ssl = headers.get("OLLAMA_VERIFY_SSL", "true").lower() == "true"
-            logger.info(f"SSL verification setting from headers: {verify_ssl}")
-            return verify_ssl
-        
-        logger.info(f"SSL verification setting from environment: {env.ollama_verify_ssl}")
-        return env.ollama_verify_ssl
-    
-    @staticmethod
-    def get_current_model(headers=None) -> str:
-        """Get current model based on headers or environment."""
-        current_env = env.environment
-        dev_model = env.dev_model
-        prod_model = env.prod_model
-        
-        logger.info(f"DEBUG: get_current_model called - env={current_env}, dev={dev_model}, prod={prod_model}")
-        logger.info(f"DEBUG: headers type: {type(headers)}, headers present: {headers is not None}")
-        
-        if not headers:
-            result = dev_model if current_env == "DEV" else prod_model
-            logger.info(f"DEBUG: No headers - env={current_env}, returning {result}")
-            return result
-        
-        # Check if MODEL_CHOICE is explicitly set in headers
-        model_choice = headers.get("MODEL_CHOICE")  # No default!
-        logger.info(f"DEBUG: MODEL_CHOICE from headers: {model_choice}")
-        
-        if model_choice == "PROD_MODEL":
-            logger.info(f"DEBUG: Explicit PROD_MODEL requested, returning {prod_model}")
-            return prod_model
-        elif model_choice == "DEV_MODEL":
-            logger.info(f"DEBUG: Explicit DEV_MODEL requested, returning {dev_model}")
-            return dev_model
-        else:
-            # No MODEL_CHOICE specified, use environment setting
-            result = dev_model if current_env == "DEV" else prod_model
-            logger.info(f"DEBUG: No MODEL_CHOICE specified, using environment {current_env}, returning {result}")
-            return result
-    
-    @staticmethod
-    def call_openai_for_query_tools(system_prompt: str, user_prompt: str, tier1_system: str=None, tier1_user: str=None) -> dict:
-        """Call OpenAI with JSON Mode and Connection Pooling - OPTIMIZED FOR SPEED."""
-        import os
-        
-        try:
-            openai_api_key = os.getenv("OPENAI_API_KEY")
-            openai_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-            
-            if not openai_api_key:
-                raise ValueError("OPENAI_API_KEY not found in environment variables")
-            
-            logger.info(f"🚀 Using OpenAI model: {openai_model} with JSON MODE + CONNECTION POOLING")
-            
-            # ✅ TRY 1: JSON Mode with Connection Pooling (Faster than Structured Outputs)
-            try:
-                # Use optimized client with connection pooling
-                client = optimized_openai_client.get_client()
-                
-                final_system = tier1_system if tier1_system else system_prompt
-                final_user = tier1_user if tier1_user else user_prompt
+   """Model and header utilities."""
+   
+   @staticmethod
+   def get_ollama_url(headers=None) -> str:
+       """Get Ollama URL from headers or environment."""
+       if headers and "OLLAMA_URL" in headers:
+           url = headers.get("OLLAMA_URL")
+           if url and url.strip():
+               logger.info(f"Using custom Ollama URL from headers: {url}")
+               return url
+       
+       logger.info(f"Using default Ollama URL from environment: {env.ollama_base_url}")
+       return env.ollama_base_url
+   
+   @staticmethod
+   def should_verify_ssl(headers=None) -> bool:
+       """Determine if SSL verification should be enabled."""
+       if headers and "OLLAMA_VERIFY_SSL" in headers:
+           verify_ssl = headers.get("OLLAMA_VERIFY_SSL", "true").lower() == "true"
+           logger.info(f"SSL verification setting from headers: {verify_ssl}")
+           return verify_ssl
+       
+       logger.info(f"SSL verification setting from environment: {env.ollama_verify_ssl}")
+       return env.ollama_verify_ssl
+   
+   @staticmethod
+   def get_current_model(headers=None) -> str:
+       """Get current model based on headers or environment."""
+       current_env = env.environment
+       dev_model = env.dev_model
+       prod_model = env.prod_model
+       
+       logger.info(f"DEBUG: get_current_model called - env={current_env}, dev={dev_model}, prod={prod_model}")
+       logger.info(f"DEBUG: headers type: {type(headers)}, headers present: {headers is not None}")
+       
+       if not headers:
+           result = dev_model if current_env == "DEV" else prod_model
+           logger.info(f"DEBUG: No headers - env={current_env}, returning {result}")
+           return result
+       
+       # Check if MODEL_CHOICE is explicitly set in headers
+       model_choice = headers.get("MODEL_CHOICE")  # No default!
+       logger.info(f"DEBUG: MODEL_CHOICE from headers: {model_choice}")
+       
+       if model_choice == "PROD_MODEL":
+           logger.info(f"DEBUG: Explicit PROD_MODEL requested, returning {prod_model}")
+           return prod_model
+       elif model_choice == "DEV_MODEL":
+           logger.info(f"DEBUG: Explicit DEV_MODEL requested, returning {dev_model}")
+           return dev_model
+       else:
+           # No MODEL_CHOICE specified, use environment setting
+           result = dev_model if current_env == "DEV" else prod_model
+           logger.info(f"DEBUG: No MODEL_CHOICE specified, using environment {current_env}, returning {result}")
+           return result
+   
+   @staticmethod
+   def call_openai_for_query_tools(system_prompt: str, user_prompt: str, tier1_system: str=None, tier1_user: str=None) -> dict:
+       """Call OpenAI with Structured Outputs - AUTOMATIC CACHING ENABLED."""
+       import os
+       
+       try:
+           openai_api_key = os.getenv("OPENAI_API_KEY")
+           openai_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+           
+           if not openai_api_key:
+               raise ValueError("OPENAI_API_KEY not found in environment variables")
+           
+           logger.info(f"🚀 Using OpenAI model: {openai_model} with AUTOMATIC PROMPT CACHING")
+           
+           # ✅ TRY 1: Structured Outputs with Automatic Caching
+           try:
+               from openai import OpenAI
+               
+               client = OpenAI(
+                   api_key=openai_api_key,
+                   timeout=60.0,
+                   max_retries=3
+               )
+               final_system = tier1_system if tier1_system else system_prompt
+               final_user = tier1_user if tier1_user else user_prompt
 
-                logger.info(f"📏 System prompt: {len(final_system)} chars, User prompt: {len(final_user)} chars")
-                logger.info("🎯 OPTIMIZED: Using JSON Mode with connection pooling")
-                
-                # ✅ JSON MODE (3-5x faster than Structured Outputs)
-                response = client.chat.completions.create(
-                    model=openai_model,
-                    messages=[
-                        {"role": "system", "content": final_system},
-                        {"role": "user", "content": final_user}
-                    ],
-                    temperature=0.05,
-                    response_format={"type": "json_object"},
-                    max_tokens=4000,
-                    timeout=30
-                )
-                
-                content = response.choices[0].message.content
-                usage = response.usage
-                
-                # ✅ ANALYZE TOKENS & CACHING FOR JSON MODE
-                cached_tokens = 0
-                cache_hit = False
-                cache_percentage = 0.0
-                
-                try:
-                    import tiktoken
-                    encoder = tiktoken.encoding_for_model(openai_model)
-                    input_text = final_system + final_user
-                    input_tokens = len(encoder.encode(input_text))
-                    output_tokens = len(encoder.encode(content))
-                    total_tokens = input_tokens + output_tokens
-                    
-                    # Extract cache information from Chat Completions response
-                    if hasattr(usage, 'prompt_tokens_details') and usage.prompt_tokens_details:
-                        cached_tokens = getattr(usage.prompt_tokens_details, 'cached_tokens', 0)
-                        cache_hit = cached_tokens > 0
-                        cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
-                    
-                    # ✅ COMPREHENSIVE TOKEN LOGGING
-                    logger.info(f"🔢 JSON MODE TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
-                    
-                    if cache_hit:
-                        logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
-                        logger.info(f"💰 Savings: ~{cache_percentage:.1f}% cost reduction + significant speed boost")
-                    else:
-                        logger.info(f"💾 CACHE MISS - Building cache for next request")
-                        if input_tokens >= 1024:
-                            logger.info(f"✅ Qualifies for caching ({input_tokens} ≥ 1024 tokens)")
-                        else:
-                            logger.info(f"❌ Too short for caching ({input_tokens} < 1024 tokens)")
-                    
-                except Exception as e:
-                    logger.warning(f"Token analysis failed: {str(e)}")
-                
-                logger.info("✅ OpenAI JSON Mode with connection pooling successful")
-                
-                return {
-                    "content": content,
-                    "model": openai_model,
-                    "success": True,
-                    "structured": False,
-                    "cached_tokens": cached_tokens,
-                    "cache_hit": cache_hit,
-                    "usage": usage.model_dump() if hasattr(usage, 'model_dump') else str(usage)
-                }
-                
-            except Exception as json_error:
-                logger.warning(f"JSON Mode failed: {str(json_error)}")
-                logger.info("Falling back to direct HTTP request...")
-                
-                # ✅ TRY 2: Direct HTTP Fallback
-                import requests
-                
-                headers = {
-                    "Authorization": f"Bearer {openai_api_key}",
-                    "Content-Type": "application/json"
-                }
-                
-                data = {
-                    "model": openai_model,
-                    "messages": [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt}
-                    ],
-                    "temperature": 0.05,
-                    "response_format": {"type": "json_object"},
-                    "max_tokens": 4000
-                }
-                
-                response = requests.post(
-                    "https://api.openai.com/v1/chat/completions",
-                    headers=headers,
-                    json=data,
-                    timeout=30
-                )
-                
-                if response.status_code == 200:
-                    response_data = response.json()
-                    content = response_data["choices"][0]["message"]["content"]
-                    usage = response_data.get("usage", {})
-                    
-                    # ✅ ANALYZE TOKENS & CACHING FOR FALLBACK TOO
-                    cached_tokens = 0
-                    cache_hit = False
-                    cache_percentage = 0.0
-                    
-                    try:
-                        import tiktoken
-                        encoder = tiktoken.encoding_for_model(openai_model)
-                        input_text = system_prompt + user_prompt
-                        input_tokens = len(encoder.encode(input_text))
-                        output_tokens = len(encoder.encode(content))
-                        total_tokens = input_tokens + output_tokens
-                        
-                        # Extract cache information from Chat Completions response
-                        if 'prompt_tokens_details' in usage and usage['prompt_tokens_details']:
-                            cached_tokens = usage['prompt_tokens_details'].get('cached_tokens', 0)
-                            cache_hit = cached_tokens > 0
-                            cache_percentage = (cached_tokens / max(input_tokens, 1)) * 100
-                        
-                        # ✅ COMPREHENSIVE TOKEN LOGGING
-                        logger.info(f"🔢 FALLBACK TOKENS → Input: {input_tokens} | Output: {output_tokens} | Cached: {cached_tokens} | Total: {total_tokens}")
-                        
-                        if cache_hit:
-                            logger.info(f"⚡ CACHE HIT! {cached_tokens} tokens ({cache_percentage:.1f}%) from cache")
-                        else:
-                            logger.info(f"💾 CACHE MISS - Building cache for next request")
-                            
-                    except Exception as e:
-                        logger.warning(f"Token analysis failed: {str(e)}")
-                    
-                    logger.info("✅ Direct HTTP fallback successful")
-                    
-                    return {
-                        "content": content,
-                        "model": openai_model,
-                        "success": True,
-                        "structured": False,
-                        "cached_tokens": cached_tokens,
-                        "cache_hit": cache_hit,
-                        "usage": usage
-                    }
-                else:
-                    raise Exception(f"HTTP fallback failed: {response.status_code}: {response.text}")
-                    
-        except Exception as e:
-            logger.error(f"❌ OpenAI API call failed: {str(e)}")
-            return {
-                "content": None,
-                "error": str(e),
-                "success": False,
-                "cached_tokens": 0,
-                "cache_hit": False
-            }
-    
-    @staticmethod
-    async def call_llm_with_fallback(
-        system_prompt: str,
-        user_prompt: str,
-        call_type: str = "selection",  # "selection" or "description"
-        headers = None
-    ):
-        """
-        Try OpenAI first, fallback to Groq if it fails
-        Returns same schema format for both providers
-        """
-        
-        openai_api_key = os.getenv("OPENAI_API_KEY")
-        
-        # TRY OPENAI FIRST
-        if openai_api_key:
-            try:
-                logger.info(f"🚀 Trying OpenAI for {call_type}")
-                
-                openai_result = ModelUtils.call_openai_for_query_tools(
-                    system_prompt=system_prompt,
-                    user_prompt=user_prompt
-                )
-                
-                if openai_result["success"]:
-                    logger.info(f"✅ OpenAI {call_type} successful")
-                    return {
-                        "content": openai_result["content"],
-                        "success": True,
-                        "provider": "openai",
-                        "cache_hit": openai_result.get("cache_hit", False)
-                    }
-                else:
-                    logger.warning(f"❌ OpenAI {call_type} failed: {openai_result['error']}")
-                    raise Exception(f"OpenAI failed: {openai_result['error']}")
-                    
-            except Exception as e:
-                logger.warning(f"OpenAI {call_type} failed: {str(e)}, falling back to Groq")
-        
-        # FALLBACK TO GROQ
-        try:
-            logger.info(f"🔄 Using Groq fallback for {call_type}")
-            
-            current_model = ModelUtils.get_current_model(headers)
-            
-            llm = ChatGroq(
-                groq_api_key=env.groq_api_key,
-                model_name=current_model,
-                temperature=0.05,
-                model_kwargs={
-                    "top_p": 0.5,
-                    "frequency_penalty": 0.2,
-                    "presence_penalty": 0.0,
-                    "response_format": {"type": "json_object"}
-                }
-            )
-            
-            response = llm.invoke([
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ])
-            
-            logger.info(f"✅ Groq {call_type} successful")
-            
-            return {
-                "content": response.content,
-                "success": True,
-                "provider": "groq",
-                "cache_hit": False
-            }
-            
-        except Exception as e:
-            logger.error(f"❌ Both OpenAI and Groq failed for {call_type}: {str(e)}")
-            return {
-                "content": None,
-                "success": False,
-                "provider": "none",
-                "error": str(e)
-            }
-        
-class OptimizedOpenAIClient:
-    """Singleton OpenAI client with connection pooling optimization"""
-    _instance = None
-    _client = None
-    
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._client = None
-        return cls._instance
-    
-    def get_client(self):
-        """Get or create optimized OpenAI client"""
-        if self._client is None:
-            try:
-                openai_api_key = os.getenv("OPENAI_API_KEY")
-                if not openai_api_key:
-                    raise ValueError("OPENAI_API_KEY not found")
-                
-                self._client = OpenAI(
-                    api_key=openai_api_key,
-                    timeout=30.0,  # Shorter timeout for faster failure detection
-                    max_retries=2  # Fewer retries for faster processing
-                )
-                logger.info("✅ Optimized OpenAI client created with connection pooling")
-                
-            except Exception as e:
-                logger.error(f"❌ Failed to create OpenAI client: {str(e)}")
-                raise
-        
-        return self._client
-    
-    def is_available(self):
-        """Check if OpenAI client is available"""
-        try:
-            return self._client is not None or bool(os.getenv("OPENAI_API_KEY"))
-        except Exception:
-            return False
-
-# Global instance
-optimized_openai_client = OptimizedOpenAIClient()
-
-
-<<<<<<< Updated upstream
-=======
                logger.info(f"📏 System prompt: {len(final_system)} chars, User prompt: {len(final_user)} chars")
                logger.info("🎯 TIER 1: Using Structured Outputs with optimized prompts")
                
@@ -936,7 +702,7 @@ optimized_openai_client = OptimizedOpenAIClient()
                "cached_tokens": 0,
                "cache_hit": False
            }
-
+   
    @staticmethod
    def call_groq_structured_outputs(system_prompt: str, user_prompt: str, tier1_system: str=None, tier1_user: str=None) -> dict:
        """Call Groq with Structured Outputs using openai/gpt-oss-20b."""
@@ -1033,7 +799,6 @@ optimized_openai_client = OptimizedOpenAIClient()
                "error": str(e),
                "success": False
            }
->>>>>>> Stashed changes
 # ============================================================================
 # CACHE MANAGEMENT
 # ============================================================================
@@ -1989,7 +1754,7 @@ class RelatedToolsUtils:
     def filter_and_rank_results(hybrid_results: List[Dict], 
                                original_tool_id: str, 
                                min_score: float = 0.4,
-                               max_results: int = 6) -> List[str]:
+                               max_results: int = 12) -> List[str]:
         """Filter hybrid search results and return tool IDs."""
         
         # Filter out original tool and low-quality results
@@ -2075,77 +1840,118 @@ class QueryProcessor:
         return templates[:5]
 
 
-def extract_metadata_for_tools(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
-    """Extract metadata for specific tool_ids from llm_tools"""
-    metadata = []
-    for tool_id in tool_ids:
-        for tool_data in llm_tools_data:
-            if tool_data.get("tool_id") == tool_id:
-                metadata.append(tool_data)
-                break
-    return metadata
+# ============================================================================
+# MONGODB MANAGER
+# ============================================================================
 
-def process_tools_from_database(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
-    """Process remaining tools using database metadata - OPTIMIZED"""
-    # Step 1: Create O(1) lookup index (instead of O(n) nested loops)
-    tool_lookup = {tool["tool_id"]: tool for tool in llm_tools_data if tool.get("tool_id")}
+class MongoDBManager:
+    """MongoDB connection and operations manager."""
     
-    database_tools = []
+    def __init__(self):
+        self.client: AsyncIOMotorClient = None
+        self.database = None
     
-    # Step 2: Process tools with O(1) lookups
-    for tool_id in tool_ids:
-        tool_data = tool_lookup.get(tool_id)
-        
-        if tool_data:
-            # Step 3: Fast bullet extraction
-            bullets = optimized_extract_bullets(tool_data)
+    async def connect(self):
+        """Connect to MongoDB."""
+        try:
+            self.client = AsyncIOMotorClient(env.mongo_uri)
+            self.database = self.client[Config.MONGO_DB_NAME]
             
-            database_tools.append({
-                "id": tool_id,
-                "name": tool_data.get("name", ""),
-                "description": tool_data.get("description", ""),
-                "bullets": bullets
-            })
-    
-    return database_tools
-
-async def process_tools_from_database_async(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
-    """Async version of process_tools_from_database for parallel processing"""
-    try:
-        # Use the same optimized logic, but wrapped in async
-        result = await asyncio.get_event_loop().run_in_executor(
-            None,  # Use default thread pool
-            process_tools_from_database,
-            tool_ids,
-            llm_tools_data
-        )
-        return result
-    except Exception as e:
-        logger.error(f"Error in async database processing: {str(e)}")
-        return []
-
-def generate_fallback_descriptions(tool_ids: List[str], tools_metadata: List[Dict]) -> List[Dict]:
-    """Generate descriptions from database when LLM fails - OPTIMIZED"""
-    # Create O(1) lookup index
-    tool_lookup = {tool["tool_id"]: tool for tool in tools_metadata if tool.get("tool_id")}
-    
-    fallback_tools = []
-    
-    for tool_id in tool_ids:
-        tool_data = tool_lookup.get(tool_id)
-        
-        if tool_data:
-            # Fast bullet extraction
-            bullets = optimized_extract_bullets(tool_data)
+            # Test connection
+            await self.client.admin.command('ping')
+            logger.info("✅ MongoDB connected successfully")
             
-            fallback_tools.append({
-                "id": tool_id,
-                "name": tool_data.get("name", ""),
-                "description": tool_data.get("description", ""),
-                "bullets": bullets
-            })
+        except Exception as e:
+            logger.error(f"❌ MongoDB connection failed: {str(e)}")
+            raise
     
-    return fallback_tools
+    async def disconnect(self):
+        """Disconnect from MongoDB."""
+        if self.client:
+            self.client.close()
+            logger.info("MongoDB connection closed")
+    
+    def _convert_objectids_to_strings(self, data):
+        """Recursively convert ObjectIds to strings for JSON serialization."""
+        if isinstance(data, ObjectId):
+            return str(data)
+        elif isinstance(data, dict):
+            return {key: self._convert_objectids_to_strings(value) for key, value in data.items()}
+        elif isinstance(data, list):
+            return [self._convert_objectids_to_strings(item) for item in data]
+        else:
+            return data
+    
+    async def get_tool_by_id(self, tool_id: str) -> Optional[Dict]:
+        """Get tool by _id from MongoDB."""
+        try:
+            collection = self.database[Config.MONGO_COLLECTION_TOOLS]
+            
+            # Convert string to ObjectId
+            object_id = ObjectId(tool_id)
+            tool = await collection.find_one({"_id": object_id})
+            
+            if tool:
+                # Convert all ObjectIds to strings recursively
+                tool = self._convert_objectids_to_strings(tool)
+                logger.info(f"Found tool: {tool.get('name', 'Unknown')}")
+                return tool
+            else:
+                logger.warning(f"Tool not found with ID: {tool_id}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error fetching tool {tool_id}: {str(e)}")
+            return None
+    
+    async def get_all_categories(self) -> List[Dict]:
+        """Get all categories from MongoDB."""
+        try:
+            collection = self.database[Config.MONGO_COLLECTION_CATEGORIES]
+            categories = []
+            
+            async for category in collection.find({}):
+                # Convert ObjectIds to strings
+                category = self._convert_objectids_to_strings(category)
+                categories.append(category)
+            
+            logger.info(f"Fetched {len(categories)} categories")
+            return categories
+            
+        except Exception as e:
+            logger.error(f"Error fetching categories: {str(e)}")
+            return []
+    
+    async def get_all_usecases(self) -> List[Dict]:
+        """Get all use cases from MongoDB."""
+        try:
+            collection = self.database[Config.MONGO_COLLECTION_USECASES]
+            usecases = []
+            
+            async for usecase in collection.find({}):
+                # Convert ObjectIds to strings
+                usecase = self._convert_objectids_to_strings(usecase)
+                usecases.append(usecase)
+            
+            logger.info(f"Fetched {len(usecases)} use cases")
+            return usecases
+            
+        except Exception as e:
+            logger.error(f"Error fetching use cases: {str(e)}")
+            return []
+
+def deduplicate_results(results: List[Dict], id_field: str) -> List[Dict]:
+    """Remove duplicate results based on ID field."""
+    seen_ids = set()
+    deduplicated = []
+    
+    for result in results:
+        result_id = result.get(id_field, "")
+        if result_id and result_id not in seen_ids:
+            seen_ids.add(result_id)
+            deduplicated.append(result)
+    
+    return deduplicated
 
 # ============================================================================
 # VECTOR STORE MANAGEMENT
@@ -2253,6 +2059,7 @@ app_state = ApplicationState()
 tool_search_cache = ToolSearchCache()
 bm25_index = BM25IndexManager()
 vector_store_manager = VectorStoreManager()
+mongodb_manager = MongoDBManager()
 
 # ============================================================================
 # FASTAPI APPLICATION SETUP
@@ -2642,13 +2449,20 @@ async def startup_event():
         # Validate environment
         env._validate_required_vars()
         
+        # Connect to MongoDB
+        await mongodb_manager.connect()
+        
         app_state.initialization_started = True
         asyncio.create_task(initialize_indexes())
-        asyncio.create_task(get_bge_reranker())
         
         logger.info("Basic startup complete - API ready for requests")
     except Exception as e:
         logger.error(f"Error during startup initialization: {str(e)}")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up resources on shutdown."""
+    await mongodb_manager.disconnect()
 
 # ============================================================================
 # UTILITY FUNCTIONS FOR ENDPOINTS
@@ -3089,39 +2903,9 @@ async def test_connection(request: Request):
     
 #     return bullets[:2]
 
-def optimized_extract_bullets(tool_data: Dict) -> List[str]:
-    """Fast bullet extraction using features_pros and details_usage"""
-    bullets = []
-    
-    # Priority 1: features_pros (split by comma, take first 2)
-    features_pros = tool_data.get("features_pros", "")
-    if features_pros:
-        pros_list = [pro.strip() for pro in features_pros.split(",") if pro.strip()]
-        bullets.extend(pros_list[:2])
-    
-    # Priority 2: details_usage if we need more bullets
-    if len(bullets) < 2:
-        details_usage = tool_data.get("details_usage", "")
-        if details_usage:
-            # Take first sentence or first 100 characters
-            usage_text = details_usage.split(".")[0].strip()
-            if usage_text and len(usage_text) > 10:
-                usage_bullet = f"Usage: {usage_text[:100]}"
-                bullets.append(usage_bullet)
-    
-    # Priority 3: Simple category fallback
-    if len(bullets) < 2:
-        category = tool_data.get("category_subcat", "")
-        if category:
-            first_category = category.split(",")[0].strip()
-            if first_category:
-                bullets.append(f"Category: {first_category}")
-    
-    # Ensure exactly 2 bullets
-    while len(bullets) < 2:
-        bullets.append("Feature available")
-    
-    return bullets[:2]
+def extract_tool_bullets(result):
+    """Return empty bullets array - no fabricated bullet points."""
+    return []
 
 def validate_and_fix_tool_ids(response_data: dict, llm_tools: List[Dict]) -> dict:
     """Validate and fix tool IDs in LLM response - ensure actual tool_id values are used."""
@@ -3172,7 +2956,7 @@ def validate_and_fix_tool_ids(response_data: dict, llm_tools: List[Dict]) -> dic
 
 @app.post("/query", response_model=QueryResponse)
 async def query_tools(request: QueryRequest, request_headers: Request):
-    """Query tools using structured outputs with openai/gpt-oss-120b model."""
+    """Query tools using hybrid search with LLM processing."""
     start_time = time.time()
     
     if not request.query or not request.query.strip():
@@ -3202,8 +2986,6 @@ async def query_tools(request: QueryRequest, request_headers: Request):
         if request.searchFrom:
             logger.info(f"Searching within {len(request.searchFrom)} specified tools")
 
-        logger.info("Processing query with structured outputs flow")
-        
         # Check cache for non-filtered searches
         cached_response = None
         if not request.searchFrom:
@@ -3262,10 +3044,11 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 logger.error(f"Error in vector search: {str(e)}")
                 vector_results_with_scores = []
             
-            # Process vector results - pass all metadata
+            # Process vector results - UPDATED TO PASS ALL METADATA
             processed_vector_results = []
             for doc, score in vector_results_with_scores:
                 metadata = doc.metadata
+                # Pass ALL metadata without filtering
                 result = dict(metadata)  # Copy all metadata fields
                 result["score"] = float(1.0 - score)  # Add relevance score
                 processed_vector_results.append(result)
@@ -3275,6 +3058,8 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             # BM25 search
             try:
                 bm25_results = bm25_index.search(request.query, top_k=Config.BM25_SEARCH_K)
+                logger.info(f"DEBUG: BM25 index status - initialized: {bm25_index.is_initialized}, doc_count: {len(bm25_index.tool_data)}")
+                logger.info(f"DEBUG: BM25 tokenized query: {bm25_index.preprocess_text(request.query)}")
                 logger.info(f"BM25 search returned {len(bm25_results)} results")
                 
                 # Filter BM25 results if searchFrom is provided
@@ -3293,9 +3078,24 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             hybrid_results = SearchUtils.fuse_search_results(
                 processed_vector_results, 
                 bm25_results,
-                alpha=0.7  # Use default alpha value
+                alpha=Config.HYBRID_ALPHA
             )
             logger.info(f"Hybrid search returned {len(hybrid_results)} results")
+            
+            # LOG ALL HYBRID RESULTS WITH SCORES
+            # logger.info("=== HYBRID SEARCH RESULTS (ALL TOOLS) ===")
+            # for i, result in enumerate(hybrid_results[:20]):  # Log top 20 to see the full picture
+            #     tool_name = result.get("name", "Unknown")
+            #     tool_id = result.get("tool_id", "Unknown")
+            #     score = result.get("score", 0)
+            #     vector_score = result.get("vector_score", 0)
+            #     bm25_score = result.get("bm25_score", 0)
+            #     description = result.get("description", "")[:100]  # First 100 chars
+                
+            #     logger.info(f"Rank {i+1:2d}: '{tool_name}' (ID: {tool_id})")
+            #     logger.info(f"         Score: {score:.3f} (V:{vector_score:.3f} + B:{bm25_score:.3f})")
+            #     logger.info(f"         Desc: {description}...")
+            #     logger.info("-" * 50)
             
             # Handle no results with filter
             if not hybrid_results and request.searchFrom:
@@ -3309,19 +3109,6 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 })
                 return QueryResponse(response=filter_response)
             
-<<<<<<< Updated upstream
-            # Use score-based selection
-            llm_tools = SearchUtils.select_tools_by_score(
-                hybrid_results, 
-                min_score=0.5,  # Default min score
-                max_tools=50,   # Default max tools
-                fallback_count=1,
-                high_individual_threshold=0.9
-            )
-
-            logger.info(f"Using {len(llm_tools)} tools for structured LLM processing")
-
-=======
             # Use score-based selection and split into LLM vs database processing
             all_selected_results = SearchUtils.select_tools_by_score(
                 hybrid_results, 
@@ -3379,7 +3166,6 @@ async def query_tools(request: QueryRequest, request_headers: Request):
             #     logger.info(formatted_doc[:500] + "..." if len(formatted_doc) > 500 else formatted_doc)
             #     logger.info("-" * 80)
             
->>>>>>> Stashed changes
             # Handle no tools case
             if not llm_tools:
                 empty_response = json.dumps({
@@ -3392,29 +3178,20 @@ async def query_tools(request: QueryRequest, request_headers: Request):
                 })
                 return QueryResponse(response=empty_response)
             
-            # Format documents for LLM
-            formatted_docs = []
-            for result in llm_tools:
-                essential_data = {
-                    "tool_id": result.get("tool_id", ""),
-                    "name": result.get("name", ""),
-                    "description": result.get("description", ""),
-                    "category_subcat": result.get("category_subcat", ""),
-                    "pricingType": result.get("pricingType", ""),
-                    "details_speciality": result.get("details_speciality", "") if result.get("details_speciality") else ""
-                }
-                formatted_doc = json.dumps(essential_data, ensure_ascii=False)
-                formatted_docs.append(formatted_doc)
+            # Prepare LLM processing
+            headers = request_headers.headers
+            logger.info(f"DEBUG: /query called with headers: {dict(headers)}")
+            current_model = ModelUtils.get_current_model(headers)
+            logger.info(f"DEBUG: /query using model: {current_model}")
             
-            logger.info(f"Formatted {len(formatted_docs)} tools for structured LLM processing")
+            try:
+                encoder = tiktoken.encoding_for_model(current_model)
+            except Exception:
+                encoder = tiktoken.get_encoding("cl100k_base")
             
             context = "\n\n---\n\n".join(formatted_docs)
             cleaned_context = TextCleaner.clean_text(context)
 
-<<<<<<< Updated upstream
-            # Create prompts for structured outputs
-            selection_system_prompt = f"""You are an expert AI tool recommendation assistant specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to select and rank all the relevant tools from a given Available Tools Data if they match or related to Query which is: "{request.query}".
-=======
             # Calculate token budget for output management
             tool_count = len(llm_tools)
             tokens_per_tool = min(150, 3000 // max(tool_count, 1)) 
@@ -3482,7 +3259,6 @@ Your task is to select and rank all tools that are relevant to the above Query, 
 - Return only the final JSON result — no extra text or explanations"""
 
             tier1_system = f"""You are an expert AI tool recommendation assistant specialized in keyword overlap, semantic similarity, functional matching, and domain filtering. Your job is to select and rank all the relevant tools from a given Available Tools Data if they match or related to Query which is: "{request.query}".
->>>>>>> Stashed changes
 
 #Selection Criteria:
 - Include all the Query related tools without restricting or limiting to fewer tools following below INCLUSIVE APPROACH.
@@ -3490,7 +3266,7 @@ Your task is to select and rank all tools that are relevant to the above Query, 
   - Have core functionality addressing the query or related needs 
   - Have same keywords in the description, metadata or name of the tool of the tool data.
   - Have semantic similarity to the query.
-IMPORTANT: A tool only needs to satisfy ONE criteria to be included from above *INCLUSIVE APPROACH*.
+IMPORTANT: A tool only needs to satisfy ONE criteria to be included.
 - **Ranking Requirements**: Rank them from most to least relevant (1st = most relevant)
 - **Query-Specific Conditions**:
   - If query specifies a number ("top 3", "best 5"): return exactly that count
@@ -3501,86 +3277,17 @@ IMPORTANT: A tool only needs to satisfy ONE criteria to be included from above *
   - Have no shared keywords, concepts, or use cases with the query
 - **INCLUSION PREFERENCE**: 
   - Do not duplicate tools - each tool should appear exactly once in the response
-<<<<<<< Updated upstream
-- **Edge Cases**: If no tools match the query, return: {{ "tool_id": [] }}
-- **No Count Limits**: *Return all the tools that satisfies *INCLUSIVE APPROACH* criteria (prefer more options over fewer).
-- **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
-
-Return ONLY a JSON object with tool_ids in ranked order:
-{{"tool_id": ["most_relevant_tool_id", "second_most_relevant_tool_id", ...]}}"""
-=======
   - Do NOT be selective - Include all tools that have any relevance to the query unless it's completely unrelated.
 - **Edge Cases**: If no tools match the query, return: {{ "tool_id": [], "tools": [] }}
 - **Count Limits**: *Return all the tools up to 40 tools based on relevance* (prefer more options over fewer)
 - **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
 - **Output Format**: Return ONLY id and name for each tool (no description or bullets)"""
->>>>>>> Stashed changes
             
-            selection_user_prompt = f"""Query: "{request.query}"
+            tier1_user = f"""Query: "{request.query}"
 Available Tools Data:
 {cleaned_context}
-Your task is to select and rank all the tools that are relevant to the above query based on the provided Selection Criteria, using the Available Tools Data.
+Your task is to select and rank up to 40 tools that are relevant to the above query based on the provided Selection Criteria, using the Available Tools Data."""
 
-<<<<<<< Updated upstream
-Return only the tool_id array in JSON format."""
-
-            description_system_prompt = f"""You are an expert AI tool recommendation assistant specialized in generating query-specific descriptions and bullet points.
-
-Your task is to generate descriptions and bullets for the provided tools based on the user query: "{request.query}"
-
-For each tool, provide:
-- A description that explains how this tool specifically helps with the user's query
-- 2 bullet points highlighting key features relevant to the query
-
-Return ONLY valid JSON in this exact format:
-{{
-  "tools": [
-    {{
-      "id": "exact_tool_id_from_data",
-      "name": "tool_name",
-      "description": "Query-specific description explaining relevance",
-      "bullets": ["Relevant feature 1", "Relevant feature 2"]
-    }}
-  ]
-}}"""
-
-            # === STRUCTURED OUTPUTS FLOW ===
-            logger.info("=== STRUCTURED OUTPUTS FLOW ===")
-            
-            # LLM Call #1 (Selection) using Structured Outputs
-            try:
-                from groq import Groq
-                client = Groq(api_key=env.groq_api_key)
-                
-                response = client.chat.completions.create(
-                    model=env.structured_model,  # openai/gpt-oss-120b
-                    messages=[
-                        {"role": "system", "content": selection_system_prompt},
-                        {"role": "user", "content": selection_user_prompt}
-                    ],
-                    response_format={
-                        "type": "json_schema",
-                        "json_schema": {
-                            "name": "tool_selection_response",
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "tool_id": {
-                                        "type": "array",
-                                        "items": {"type": "string"},
-                                        "description": "Array of selected tool IDs in ranked order"
-                                    }
-                                },
-                                "required": ["tool_id"],
-                                "additionalProperties": False
-                            }
-                        }
-                    }
-                )
-                
-                selection_data = json.loads(response.choices[0].message.content)
-                selected_tool_ids = selection_data.get("tool_id", [])
-=======
             # Use Groq Structured Outputs for query tools processing
             logger.info("Using Groq Structured Outputs for query tools processing")
             openai_result = ModelUtils.call_groq_structured_outputs(
@@ -3624,20 +3331,14 @@ Return ONLY valid JSON in this exact format:
                 total_input_text = system_text + prompt_text
                 input_tokens = len(encoder.encode(total_input_text))
                 logger.info(f"🔢 GROQ FALLBACK INPUT TOKENS: {input_tokens}")
->>>>>>> Stashed changes
                 
-                logger.info(f"Structured selection successful: {len(selected_tool_ids)} tools selected")
+                response = llm.invoke([
+                    {"role": "system", "content": system_text},
+                    {"role": "user", "content": prompt_text}
+                ])
                 
-                # Split processing - top 10 for LLM descriptions, rest for database
-                top_10_ids = selected_tool_ids[:10]
-                remaining_ids = selected_tool_ids[10:]
+                llm_response = response.content
                 
-<<<<<<< Updated upstream
-                # Extract metadata for top 10
-                top_10_metadata = extract_metadata_for_tools(top_10_ids, llm_tools)
-                
-                logger.info(f"Starting parallel processing: {len(top_10_ids)} tools for structured LLM, {len(remaining_ids)} tools for database")
-=======
                 # Count output tokens for fallback
                 output_tokens = len(encoder.encode(llm_response))
                 total_tokens = input_tokens + output_tokens
@@ -3653,77 +3354,67 @@ Return ONLY valid JSON in this exact format:
                 # Post-process response
                 processed_response = QueryProcessor.post_process_llm_response(llm_response)
                 logger.info("DEBUG: Raw LLM response before JSON parsing: %s...", str(processed_response[:500]))
->>>>>>> Stashed changes
                 
-                # Create parallel tasks
-                description_task = None
-                if top_10_ids:
-                    description_task = asyncio.create_task(
-                        generate_structured_descriptions(top_10_ids, request.query, top_10_metadata, description_system_prompt)
-                    )
-                
-                database_task = asyncio.create_task(
-                    process_tools_from_database_async(remaining_ids, llm_tools)
-                )
-                
-                # Wait for both tasks to complete
-                if description_task:
-                    try:
-                        top_10_tools, remaining_tools = await asyncio.gather(
-                            description_task,
-                            database_task,
-                            return_exceptions=True
-                        )
+                # Parse and validate JSON response
+                try:
+                    response_data = json.loads(processed_response)
+                    response_data = validate_and_fix_tool_ids(response_data, llm_tools)
+                    
+                    # Add search filter info if applied
+                    if request.searchFrom:
+                        response_data["search_filter_applied"] = True
+                        response_data["searched_within_tool_ids"] = request.searchFrom
+
+                    # # Ensure proper tool data structure
+                    # if "tools" not in response_data or not response_data["tools"]:
+                    #     response_data["tools"] = []
+                    #     response_data["tool_id"] = []
                         
-                        # Handle exceptions
-                        if isinstance(top_10_tools, Exception):
-                            logger.error(f"Structured description generation failed: {str(top_10_tools)}")
-                            # Fallback: use database processing for top 10 as well
-                            top_10_tools = await process_tools_from_database_async(top_10_ids, llm_tools)
-                        
-                        if isinstance(remaining_tools, Exception):
-                            logger.error(f"Database processing failed: {str(remaining_tools)}")
-                            remaining_tools = []
+                    #     for result in llm_tools:
+                    #         bullets = extract_tool_bullets(result)
+                    #         tool_data = {
+                    #             "id": result.get("tool_id", ""),
+                    #             "name": result.get("name", ""),
+                    #             "description": result.get("description", ""),
+                    #             "bullets": []
+                    #         }
+                    #         response_data["tools"].append(tool_data)
+                    #         response_data["tool_id"].append(result.get("tool_id", ""))
                             
-                    except Exception as e:
-                        logger.error(f"Parallel processing failed: {str(e)}")
-                        # Complete fallback
-                        top_10_tools = await process_tools_from_database_async(top_10_ids, llm_tools)
-                        remaining_tools = await process_tools_from_database_async(remaining_ids, llm_tools)
+                    #     response_data["message"] = "Structured response incomplete, showing raw search results."
+                    
+                    # clean_response = json.dumps(response_data, indent=2)
+                    # logger.info("Successfully processed valid JSON response")
+
+                    # Ensure proper tool data structure - NO FALLBACKS
+                    if "tools" not in response_data or not response_data["tools"]:
+                        response_data["tools"] = []
+                        response_data["tool_id"] = []
+                        response_data["message"] = "No relevant tools found for this query."
+                    
+                    clean_response = json.dumps(response_data, indent=2)
+                    logger.info("Successfully processed valid JSON response")
+                    
+                    # Process remaining tools from database
+                    # if db_tools:
+                    #     logger.info(f"Processing {len(db_tools)} additional tools from database")
                         
-<<<<<<< Updated upstream
-                else:
-                    top_10_tools = []
-                    try:
-                        remaining_tools = await database_task
+                    #     for result in db_tools:
+                    #         # Extract meaningful bullets from metadata
+                    #         bullets = extract_tool_bullets(result)
+                            
+                    #         tool_data = {
+                    #             "id": result.get("tool_id", ""),
+                    #             "name": result.get("name", ""),
+                    #             "description": result.get("description", ""),
+                    #             "bullets": []
+                    #         }
+                            
+                    #         response_data["tools"].append(tool_data)
+                    #         response_data["tool_id"].append(result.get("tool_id", ""))
+                            
+                    #         logger.debug(f"Tool {result.get('name', 'Unknown')}: extracted {len(bullets)} bullets from metadata")
                         
-                        if isinstance(remaining_tools, Exception):
-                            logger.error(f"Database processing failed: {str(remaining_tools)}")
-                            remaining_tools = []
-                    except Exception as e:
-                        logger.error(f"Database processing failed: {str(e)}")
-                        remaining_tools = []
-                
-                logger.info(f"Parallel processing completed: {len(top_10_tools) if isinstance(top_10_tools, list) else 0} structured tools, {len(remaining_tools) if isinstance(remaining_tools, list) else 0} database tools")
-                
-                # Merge results
-                all_tools = (top_10_tools if isinstance(top_10_tools, list) else []) + (remaining_tools if isinstance(remaining_tools, list) else [])
-                
-                # Create response
-                response_data = {
-                    "tool_id": selected_tool_ids,
-                    "tools": all_tools,
-                    "flow_type": "structured",
-                    "model_used": env.structured_model,
-                    "timestamp": datetime.now().isoformat()
-                }
-                
-                if request.searchFrom:
-                    response_data["search_filter_applied"] = True
-                    response_data["searched_within_tool_ids"] = request.searchFrom
-                
-                final_response = json.dumps(response_data)
-=======
                     #     # Update the JSON response with all tools
                     #     clean_response = json.dumps(response_data, indent=2)
                     #     logger.info(f"Added {len(db_tools)} database-processed tools to LLM results")
@@ -3753,43 +3444,23 @@ Return ONLY valid JSON in this exact format:
                     
                     clean_response = json.dumps(fallback_data, indent=2)
                     logger.warning("Created fallback JSON response")
->>>>>>> Stashed changes
                 
                 # Cache result for non-filtered searches
                 if not request.searchFrom:
-                    tool_search_cache.set(request.query, final_response)
+                    tool_search_cache.set(request.query, clean_response)
                 
                 # Log processing time
                 elapsed_time = time.time() - start_time
-                logger.info(f"Structured outputs processing time: {elapsed_time:.2f}s")
+                logger.info(f"Total processing time: {elapsed_time:.2f}s")
                 
-                return QueryResponse(response=final_response)
-                
-            except json.JSONDecodeError as e:
-                logger.error(f"Failed to parse structured selection response: {str(e)}")
-                # Fall back to using all tools with database processing
-                fallback_tool_ids = [tool.get("tool_id", "") for tool in llm_tools[:30]]
-                fallback_tools = process_tools_from_database(fallback_tool_ids, llm_tools)
-                
-                fallback_response = json.dumps({
-                    "tool_id": fallback_tool_ids,
-                    "tools": fallback_tools,
-                    "flow_type": "structured",
-                    "model_used": env.structured_model,
-                    "message": "Structured selection parsing failed - using database fallback",
-                    "timestamp": datetime.now().isoformat()
-                })
-                
-                return QueryResponse(response=fallback_response)
+                return QueryResponse(response=clean_response)
                 
             except Exception as e:
-                logger.error(f"Structured outputs failed: {str(e)}")
+                logger.error(f"Error in LLM call: {str(e)}")
                 error_response = json.dumps({
-                    "error": "structured_outputs_failed",
-                    "message": f"Structured outputs failed: {str(e)}",
+                    "error": "llm_error",
+                    "message": f"Error processing query with language model: {str(e)}",
                     "tools": [],
-                    "flow_type": "structured",
-                    "model_used": env.structured_model,
                     "timestamp": datetime.now().isoformat()
                 })
                 return QueryResponse(response=error_response)
@@ -3802,8 +3473,6 @@ Return ONLY valid JSON in this exact format:
                 "error": "search_error",
                 "message": f"Failed to process search: {error_msg}",
                 "tools": [],
-                "flow_type": "structured",
-                "model_used": env.structured_model,
                 "timestamp": datetime.now().isoformat()
             })
             
@@ -3819,163 +3488,10 @@ Return ONLY valid JSON in this exact format:
             "error": "api_error",
             "message": f"An unexpected error occurred: {str(e)}",
             "tools": [],
-            "flow_type": "structured",
-            "model_used": getattr(env, 'structured_model', 'openai/gpt-oss-120b'),
             "timestamp": datetime.now().isoformat()
         })
         return QueryResponse(response=error_response)
-
-
-async def generate_structured_descriptions(tool_ids: List[str], query: str, tools_metadata: List[Dict], system_prompt: str) -> List[Dict]:
-    """Generate descriptions using Groq structured outputs."""
-    try:
-        # Format tools for LLM
-        formatted_docs = []
-        for tool_data in tools_metadata:
-            essential_data = {
-                "tool_id": tool_data.get("tool_id", ""),
-                "name": tool_data.get("name", ""),
-                "description": tool_data.get("description", ""),
-                "category_subcat": tool_data.get("category_subcat", ""),
-                "pricingType": tool_data.get("pricingType", ""),
-                "details_speciality": tool_data.get("details_speciality", "") if tool_data.get("details_speciality") else ""
-            }
-            formatted_doc = json.dumps(essential_data, ensure_ascii=False)
-            formatted_docs.append(formatted_doc)
-        
-        context = "\n\n---\n\n".join(formatted_docs)
-        cleaned_context = TextCleaner.clean_text(context)
-        
-        user_prompt = f"""Query: "{query}"
-
-Tools Data:
-{cleaned_context}
-
-Generate descriptions and bullets for these tools that specifically address how they help with the query."""
-        
-        from groq import Groq
-        client = Groq(api_key=env.groq_api_key)
-        
-        response = client.chat.completions.create(
-            model="meta-llama/llama-4-scout-17b-16e-instruct",
-            # model="openai/gpt-oss-120b",
-            # model="moonshotai/kimi-k2-instruct",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            response_format={
-                "type": "json_schema",
-                "json_schema": {
-                    "name": "tool_descriptions_response",
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "tools": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "description": "Tool ID"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Tool name"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "description": "Query-specific description"
-                                        },
-                                        "bullets": {
-                                            "type": "array",
-                                            "items": {"type": "string"},
-                                            "description": "Array of bullet points"
-                                        }
-                                    },
-                                    "required": ["id", "name", "description", "bullets"],
-                                    "additionalProperties": False
-                                }
-                            }
-                        },
-                        "required": ["tools"],
-                        "additionalProperties": False
-                    }
-                }
-            }
-        )
-        
-        description_data = json.loads(response.choices[0].message.content)
-        tools = description_data.get("tools", [])
-        
-        logger.info(f"Structured description generation successful: {len(tools)} tools processed")
-        return tools
-        
-    except Exception as e:
-        logger.error(f"Error in structured descriptions: {str(e)}")
-        return generate_fallback_descriptions(tool_ids, tools_metadata)
-
-# Additional helper functions that are referenced in the query endpoint
-
-def extract_metadata_for_tools(tool_ids: List[str], llm_tools_data: List[Dict]) -> List[Dict]:
-    """Extract metadata for specific tool_ids from llm_tools"""
-    metadata = []
-    for tool_id in tool_ids:
-        for tool_data in llm_tools_data:
-            if tool_data.get("tool_id") == tool_id:
-                metadata.append(tool_data)
-                break
-    return metadata
-
-def generate_fallback_descriptions(tool_ids: List[str], tools_metadata: List[Dict]) -> List[Dict]:
-    """Generate descriptions from database when LLM fails - OPTIMIZED"""
-    # Create O(1) lookup index
-    tool_lookup = {tool["tool_id"]: tool for tool in tools_metadata if tool.get("tool_id")}
     
-    fallback_tools = []
-    
-    for tool_id in tool_ids:
-        tool_data = tool_lookup.get(tool_id)
-        
-        if tool_data:
-            # Fast bullet extraction
-            bullets = optimized_extract_bullets(tool_data)
-            
-            fallback_tools.append({
-                "id": tool_id,
-                "name": tool_data.get("name", ""),
-                "description": tool_data.get("description", ""),
-                "bullets": bullets
-            })
-    
-    return fallback_tools
-    
-class GenerateDescriptionsRequest(BaseModel):
-    """Generate descriptions request model."""
-    tool_ids: List[str]
-    query: str
-    tools_metadata: List[Dict[str, Any]]
-
-@app.post("/generate-descriptions")
-async def generate_descriptions(request: GenerateDescriptionsRequest, request_headers: Request):
-    """Generate descriptions for specific tools."""
-    try:
-        tools = await generate_descriptions_internal(
-            tool_ids=request.tool_ids,
-            query=request.query,
-            tools_metadata=request.tools_metadata,
-            headers=request_headers.headers
-        )
-        
-        return {"tools": tools}
-        
-    except Exception as e:
-        logger.error(f"Error in generate_descriptions endpoint: {str(e)}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to generate descriptions: {str(e)}"
-        )
 
 @app.post("/add-tools", response_model=BulkToolResponse)
 async def add_tools(bulk_request: BulkToolRequest):
@@ -4773,7 +4289,7 @@ async def get_related_tools(tool_id: str):
             hybrid_results=hybrid_results,
             original_tool_id=tool_id,
             min_score=0.5,  # Adjustable quality threshold
-            max_results=12   # Maximum 6 tools
+            max_results=6   # Maximum 6 tools
         )
         
         logger.info(f"Returning {len(related_tool_ids)} related tools for {tool_id}")
@@ -4786,6 +4302,485 @@ async def get_related_tools(tool_id: str):
         raise HTTPException(
             status_code=500,
             detail=f"Internal server error: {str(e)}"
+        )
+
+
+@app.post("/categorize-tool/{tool_id}", response_model=ToolCategorizationResponse)
+async def categorize_tool(tool_id: str, request_headers: Request):
+    """Categorize a tool based on its metadata using LLM analysis."""
+    start_time = time.time()
+    
+    try:
+        logger.info(f"Categorizing tool with ID: {tool_id}")
+        
+        # Step 1: Fetch tool from MongoDB
+        tool_data = await mongodb_manager.get_tool_by_id(tool_id)
+        if not tool_data:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Tool with ID '{tool_id}' not found"
+            )
+        
+        tool_name = tool_data.get('name', 'Unknown Tool')
+        logger.info(f"Found tool: {tool_name}")
+        
+        # Step 2: Fetch all categories from MongoDB
+        categories = await mongodb_manager.get_all_categories()
+        if not categories:
+            raise HTTPException(
+                status_code=500,
+                detail="No categories found in database"
+            )
+        
+        logger.info(f"Fetched {len(categories)} categories for analysis")
+        
+        # Step 3: Prepare tool metadata for LLM (OPTIMIZED)
+        tool_metadata = {
+            "name": tool_data.get('name', ''),
+            "description": tool_data.get('details', {}).get('introduction', ''),
+            "speciality": tool_data.get('details', {}).get('speciality', ''),
+            "usage": tool_data.get('details', {}).get('usage', ''),
+            "features_pros": tool_data.get('features', {}).get('pros', []),
+            "pricingType": tool_data.get('pricingType', '')
+        }
+        
+        # Step 4: Create simple category list for LLM (OPTIMIZED)
+        category_names = [cat.get('Category', '') for cat in categories if cat.get('Category', '').strip()]
+        category_names = [name for name in category_names if name]  # Remove empty strings
+        
+        # Step 5: PRINT STATEMENTS - Data sent to LLM
+        print("\n" + "="*80)
+        print("🔍 TOOL METADATA SENT TO LLM:")
+        print("="*80)
+        print(json.dumps(tool_metadata, indent=2, ensure_ascii=False))
+        
+        print("\n" + "="*80)
+        print(f"📋 CATEGORY LIST SENT TO LLM ({len(category_names)} categories):")
+        print("="*80)
+        for i, cat_name in enumerate(category_names, 1):
+            print(f"{i:2d}. {cat_name}")
+        print("="*80 + "\n")
+        
+        # Step 6: Prepare optimized LLM prompts
+        system_prompt = """You are an expert AI tool categorization assistant. Your task is to analyze tool metadata and select the most relevant categories from a provided list.
+
+ANALYSIS PROCESS:
+1. Examine the tool's core functionality and technical capabilities
+2. Identify the primary target audience and use cases
+3. Map functionality to appropriate categories from the provided list
+4. Apply selection criteria to filter the most relevant matches
+
+SELECTION CRITERIA:
+- Focus on PRIMARY use cases, not peripheral features
+- Select categories where the tool provides significant value
+- Consider genuine user search intent and discovery patterns
+- Ensure categories reflect the tool's main value proposition
+
+CONSTRAINTS:
+- Maximum: 25 categories
+- Use only exact category names from the provided list
+- Be selective and precise, not comprehensive
+- No duplicates allowed
+- Focus on quality over quantity
+
+OUTPUT REQUIREMENTS:
+- Return only a JSON array of selected category names
+- Format: ["Category1", "Category2", "Category3"]  
+- No explanations, reasoning, or additional text
+- Use exact spelling and capitalization from the provided list"""
+
+        user_prompt = f"""TOOL TO CATEGORIZE:
+{json.dumps(tool_metadata, indent=2)}
+
+AVAILABLE CATEGORIES:
+{json.dumps(category_names, indent=1)}
+
+TASK:
+Analyze the tool metadata above and select the most relevant categories using the process and criteria defined in the system prompt.
+
+Remember: 
+- Maximum: 25 categories
+- Return only JSON array format: ["Category1", "Category2"]"""
+
+        # Step 7: Call LLM with regular Groq model
+        try:
+            llm = ChatGroq(
+                groq_api_key=env.groq_api_key,
+                model_name="openai/gpt-oss-20b",  # Reliable model
+                temperature=0.1,
+                top_p=0.95,
+                frequency_penalty=0.5,
+                presence_penalty=0.2
+            )
+            
+            response = llm.invoke([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ])
+            
+            llm_response = response.content.strip()
+            logger.info(f"✅ Groq response received")
+            
+            # Step 8: PRINT STATEMENT - LLM Response
+            print("\n" + "="*80)
+            print("🤖 LLM RESPONSE:")
+            print("="*80)
+            print(llm_response)
+            print("="*80 + "\n")
+            
+            # Step 9: Parse simple JSON array response
+            try:
+                # Clean response if it has code blocks
+                if llm_response.startswith("```"):
+                    llm_response = llm_response.strip("```json").strip("```").strip()
+                
+                selected_category_names = json.loads(llm_response)
+                
+                # Ensure it's a list
+                if not isinstance(selected_category_names, list):
+                    print(f"❌ Expected list, got {type(selected_category_names)}")
+                    selected_category_names = []
+                
+                # NEW FUNCTIONALITY 1: Remove redundancy (duplicates)
+                original_count = len(selected_category_names)
+                # Convert to list of strings and remove duplicates while preserving order
+                selected_category_names = [str(name).strip() for name in selected_category_names if str(name).strip()]
+                seen = set()
+                deduplicated_categories = []
+                for category in selected_category_names:
+                    if category not in seen:
+                        seen.add(category)
+                        deduplicated_categories.append(category)
+                
+                selected_category_names = deduplicated_categories
+                
+                if original_count != len(selected_category_names):
+                    print(f"🔄 Removed {original_count - len(selected_category_names)} duplicate categories")
+                    logger.info(f"Removed duplicates: {original_count} → {len(selected_category_names)} categories")
+                
+                # NEW FUNCTIONALITY 2: Enforce 25-category limit
+                if len(selected_category_names) > 25:
+                    logger.warning(f"LLM returned {len(selected_category_names)} categories, truncating to 25")
+                    print(f"⚠️ Truncating from {len(selected_category_names)} to 25 categories")
+                    selected_category_names = selected_category_names[:25]
+                
+                # Step 10: PRINT STATEMENT - Parsed Selection
+                print("\n" + "="*60)
+                print(f"✅ PARSED SELECTED CATEGORIES ({len(selected_category_names)}):")
+                print("="*60)
+                for i, cat_name in enumerate(selected_category_names, 1):
+                    print(f"{i}. {cat_name}")
+                print("="*60 + "\n")
+                
+                # Step 11: Map selected names back to full category data with IDs
+                category_matches = []
+                category_lookup = {cat.get('Category', ''): cat for cat in categories}
+                
+                for selected_name in selected_category_names:
+                    if selected_name in category_lookup:
+                        cat_data = category_lookup[selected_name]
+                        category_match = CategoryMatch(
+                            id=str(cat_data.get('_id', '')),
+                            name=str(cat_data.get('Category', ''))
+                        )
+                        category_matches.append(category_match)
+                        print(f"✓ Matched: '{selected_name}' → ID: {cat_data.get('_id', '')}")
+                    else:
+                        print(f"✗ No match found for: '{selected_name}'")
+                        # Try partial matching as fallback
+                        partial_matches = [cat for cat in categories if selected_name.lower() in cat.get('Category', '').lower()]
+                        if partial_matches:
+                            cat_data = partial_matches[0]  # Take first partial match
+                            category_match = CategoryMatch(
+                                id=str(cat_data.get('_id', '')),
+                                name=str(cat_data.get('Category', ''))
+                            )
+                            category_matches.append(category_match)
+                            print(f"✓ Partial match: '{selected_name}' → '{cat_data.get('Category', '')}' (ID: {cat_data.get('_id', '')})")
+                
+                elapsed_time = time.time() - start_time
+                logger.info(f"Tool categorization completed in {elapsed_time:.2f}s - found {len(category_matches)} matches")
+                
+                # Step 12: PRINT STATEMENT - Final Results
+                print("\n" + "="*70)
+                print(f"🎯 FINAL CATEGORIZATION RESULTS:")
+                print("="*70)
+                print(f"Tool: {tool_name}")
+                print(f"Selected Categories: {len(category_matches)}")
+                for i, match in enumerate(category_matches, 1):
+                    print(f"  {i}. {match.name} (ID: {match.id})")
+                print("="*70 + "\n")
+                
+                return ToolCategorizationResponse(
+                    tool_id=tool_id,
+                    tool_name=tool_name,
+                    matched_categories=category_matches,
+                    total_available_categories=len(categories)
+                )
+                
+            except json.JSONDecodeError as e:
+                print(f"\n❌ JSON PARSE ERROR: {str(e)}")
+                print(f"Raw response was: '{llm_response}'")
+                logger.error(f"Failed to parse LLM response: {str(e)}")
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"Failed to parse categorization results: {str(e)}"
+                )
+        
+        except Exception as e:
+            print(f"\n❌ LLM CALL ERROR: {str(e)}")
+            logger.error(f"LLM call failed: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Categorization processing failed: {str(e)}"
+            )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in categorize_tool: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Tool categorization failed: {str(e)}"
+        )
+        
+@app.post("/categorize-tool-usecase/{tool_id}", response_model=ToolUseCaseCategorizationResponse)
+async def categorize_tool_usecase(tool_id: str, request_headers: Request):
+    """Categorize a tool into use cases based on its metadata using LLM analysis."""
+    start_time = time.time()
+    
+    try:
+        logger.info(f"Categorizing tool use cases for ID: {tool_id}")
+        
+        # Step 1: Fetch tool from MongoDB
+        tool_data = await mongodb_manager.get_tool_by_id(tool_id)
+        if not tool_data:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Tool with ID '{tool_id}' not found"
+            )
+        
+        tool_name = tool_data.get('name', 'Unknown Tool')
+        logger.info(f"Found tool: {tool_name}")
+        
+        # Step 2: Fetch all use cases from MongoDB
+        usecases = await mongodb_manager.get_all_usecases()
+        if not usecases:
+            raise HTTPException(
+                status_code=500,
+                detail="No use cases found in database"
+            )
+        
+        logger.info(f"Fetched {len(usecases)} use cases for analysis")
+        
+        # Step 3: Prepare tool metadata for LLM (OPTIMIZED)
+        tool_metadata = {
+            "name": tool_data.get('name', ''),
+            "description": tool_data.get('details', {}).get('introduction', ''),
+            "speciality": tool_data.get('details', {}).get('speciality', ''),
+            "usage": tool_data.get('details', {}).get('usage', ''),
+            "features_pros": tool_data.get('features', {}).get('pros', []),
+            "pricingType": tool_data.get('pricingType', '')
+        }
+        
+        # Step 4: Create simple use case list for LLM (OPTIMIZED)
+        usecase_names = [uc.get('UseCase', '') for uc in usecases if uc.get('UseCase', '').strip()]
+        usecase_names = [name for name in usecase_names if name]  # Remove empty strings
+        
+        # Step 5: PRINT STATEMENTS - Data sent to LLM
+        print("\n" + "="*80)
+        print("🔍 TOOL METADATA SENT TO LLM:")
+        print("="*80)
+        print(json.dumps(tool_metadata, indent=2, ensure_ascii=False))
+        
+        print("\n" + "="*80)
+        print(f"📋 USE CASE LIST SENT TO LLM ({len(usecase_names)} use cases):")
+        print("="*80)
+        for i, uc_name in enumerate(usecase_names, 1):
+            print(f"{i:2d}. {uc_name}")
+        print("="*80 + "\n")
+        
+        # Step 6: Prepare optimized LLM prompts
+        system_prompt = """You are an expert AI tool use case categorization assistant. Your task is to analyze tool metadata and select the most relevant use cases from a provided list.
+
+ANALYSIS PROCESS:
+1. Examine the tool's core functionality and technical capabilities
+2. Identify the primary target audience and practical applications
+3. Map functionality to appropriate use cases from the provided list
+4. Apply selection criteria to filter the most relevant matches
+
+SELECTION CRITERIA:
+- Focus on PRIMARY use cases, not peripheral applications
+- Select use cases where the tool provides significant value
+- Consider genuine user workflows and problem-solving scenarios
+- Ensure use cases reflect the tool's main practical applications
+
+CONSTRAINTS:
+- Maximum: 25 use cases
+- Use only exact use case names from the provided list
+- Be selective and precise, not comprehensive
+- No duplicates allowed
+- Focus on quality over quantity
+
+OUTPUT REQUIREMENTS:
+- Return only a JSON array of selected use case names
+- Format: ["Use Case 1", "Use Case 2", "Use Case 3"]  
+- No explanations, reasoning, or additional text
+- Use exact spelling and capitalization from the provided list"""
+
+        user_prompt = f"""TOOL TO CATEGORIZE:
+{json.dumps(tool_metadata, indent=2)}
+
+AVAILABLE USE CASES:
+{json.dumps(usecase_names, indent=1)}
+
+TASK:
+Analyze the tool metadata above and select the most relevant use cases using the process and criteria defined in the system prompt.
+
+Remember: 
+- Maximum: 25 use cases
+- Return only JSON array format: ["Use Case 1", "Use Case 2"]"""
+
+        # Step 7: Call LLM with regular Groq model
+        try:
+            llm = ChatGroq(
+                groq_api_key=env.groq_api_key,
+                model_name="openai/gpt-oss-20b",  # Reliable model
+                temperature=0.1,
+                top_p=0.95,
+                frequency_penalty=0.5,
+                presence_penalty=0.2
+            )
+            
+            response = llm.invoke([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ])
+            
+            llm_response = response.content.strip()
+            logger.info(f"✅ Groq response received")
+            
+            # Step 8: PRINT STATEMENT - LLM Response
+            print("\n" + "="*80)
+            print("🤖 LLM RESPONSE:")
+            print("="*80)
+            print(llm_response)
+            print("="*80 + "\n")
+            
+            # Step 9: Parse simple JSON array response
+            try:
+                # Clean response if it has code blocks
+                if llm_response.startswith("```"):
+                    llm_response = llm_response.strip("```json").strip("```").strip()
+                
+                selected_usecase_names = json.loads(llm_response)
+                
+                # Ensure it's a list
+                if not isinstance(selected_usecase_names, list):
+                    print(f"❌ Expected list, got {type(selected_usecase_names)}")
+                    selected_usecase_names = []
+                
+                # NEW FUNCTIONALITY 1: Remove redundancy (duplicates)
+                original_count = len(selected_usecase_names)
+                # Convert to list of strings and remove duplicates while preserving order
+                selected_usecase_names = [str(name).strip() for name in selected_usecase_names if str(name).strip()]
+                seen = set()
+                deduplicated_usecases = []
+                for usecase in selected_usecase_names:
+                    if usecase not in seen:
+                        seen.add(usecase)
+                        deduplicated_usecases.append(usecase)
+                
+                selected_usecase_names = deduplicated_usecases
+                
+                if original_count != len(selected_usecase_names):
+                    print(f"🔄 Removed {original_count - len(selected_usecase_names)} duplicate use cases")
+                    logger.info(f"Removed duplicates: {original_count} → {len(selected_usecase_names)} use cases")
+                
+                # NEW FUNCTIONALITY 2: Enforce 25-use case limit
+                if len(selected_usecase_names) > 25:
+                    logger.warning(f"LLM returned {len(selected_usecase_names)} use cases, truncating to 25")
+                    print(f"⚠️ Truncating from {len(selected_usecase_names)} to 25 use cases")
+                    selected_usecase_names = selected_usecase_names[:25]
+                
+                # Step 10: PRINT STATEMENT - Parsed Selection
+                print("\n" + "="*60)
+                print(f"✅ PARSED SELECTED USE CASES ({len(selected_usecase_names)}):")
+                print("="*60)
+                for i, uc_name in enumerate(selected_usecase_names, 1):
+                    print(f"{i}. {uc_name}")
+                print("="*60 + "\n")
+                
+                # Step 11: Map selected names back to full use case data with IDs
+                usecase_matches = []
+                usecase_lookup = {uc.get('UseCase', ''): uc for uc in usecases}
+                
+                for selected_name in selected_usecase_names:
+                    if selected_name in usecase_lookup:
+                        uc_data = usecase_lookup[selected_name]
+                        usecase_match = UseCaseMatch(
+                            id=str(uc_data.get('_id', '')),
+                            name=str(uc_data.get('UseCase', ''))
+                        )
+                        usecase_matches.append(usecase_match)
+                        print(f"✓ Matched: '{selected_name}' → ID: {uc_data.get('_id', '')}")
+                    else:
+                        print(f"✗ No match found for: '{selected_name}'")
+                        # Try partial matching as fallback
+                        partial_matches = [uc for uc in usecases if selected_name.lower() in uc.get('UseCase', '').lower()]
+                        if partial_matches:
+                            uc_data = partial_matches[0]  # Take first partial match
+                            usecase_match = UseCaseMatch(
+                                id=str(uc_data.get('_id', '')),
+                                name=str(uc_data.get('UseCase', ''))
+                            )
+                            usecase_matches.append(usecase_match)
+                            print(f"✓ Partial match: '{selected_name}' → '{uc_data.get('UseCase', '')}' (ID: {uc_data.get('_id', '')})")
+                
+                elapsed_time = time.time() - start_time
+                logger.info(f"Tool use case categorization completed in {elapsed_time:.2f}s - found {len(usecase_matches)} matches")
+                
+                # Step 12: PRINT STATEMENT - Final Results
+                print("\n" + "="*70)
+                print(f"🎯 FINAL USE CASE CATEGORIZATION RESULTS:")
+                print("="*70)
+                print(f"Tool: {tool_name}")
+                print(f"Selected Use Cases: {len(usecase_matches)}")
+                for i, match in enumerate(usecase_matches, 1):
+                    print(f"  {i}. {match.name} (ID: {match.id})")
+                print("="*70 + "\n")
+                
+                return ToolUseCaseCategorizationResponse(
+                    tool_id=tool_id,
+                    tool_name=tool_name,
+                    matched_usecases=usecase_matches,
+                    total_available_usecases=len(usecases)
+                )
+                
+            except json.JSONDecodeError as e:
+                print(f"\n❌ JSON PARSE ERROR: {str(e)}")
+                print(f"Raw response was: '{llm_response}'")
+                logger.error(f"Failed to parse LLM response: {str(e)}")
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"Failed to parse use case categorization results: {str(e)}"
+                )
+        
+        except Exception as e:
+            print(f"\n❌ LLM CALL ERROR: {str(e)}")
+            logger.error(f"LLM call failed: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Use case categorization processing failed: {str(e)}"
+            )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in categorize_tool_usecase: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Tool use case categorization failed: {str(e)}"
         )
 
 @app.get("/debug-env")
