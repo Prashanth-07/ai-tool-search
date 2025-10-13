@@ -703,12 +703,12 @@ class ModelUtils:
    
    @staticmethod
    def call_groq_structured_outputs(system_prompt: str, user_prompt: str, tier1_system: str=None, tier1_user: str=None) -> dict:
-       """Call Groq with Structured Outputs using openai/gpt-oss-20b."""
+       """Call Groq with Structured Outputs using openai/gpt-oss-120b."""
        try:
            from groq import Groq
            
            groq_api_key = os.getenv("GROQ_API_KEY")
-           groq_model = "openai/gpt-oss-20b"  # Hardcoded model
+           groq_model = "openai/gpt-oss-120b"  # Hardcoded model
            
            if not groq_api_key:
                raise ValueError("GROQ_API_KEY not found in environment variables")
@@ -3279,7 +3279,7 @@ IMPORTANT: A tool only needs to satisfy ONE criteria to be included.
 - **Edge Cases**: If no tools match the query, return: {{ "tool_id": [], "tools": [] }}
 - **Count Limits**: *Return all the tools up to 40 tools based on relevance* (prefer more options over fewer)
 - **Technical Requirements**: Use the exact "tool_id" field from metadata of each tool
-- **Output Format**: Return ONLY id and name for each tool (no description or bullets)"""
+- **Output Format**: Return ONLY id and name for each tool."""
             
             tier1_user = f"""Query: "{request.query}"
 Available Tools Data:

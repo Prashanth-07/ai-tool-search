@@ -1,0 +1,447 @@
+{
+  "timestamp": "2025-10-13T11:53:18.877626",
+  "input_query": "help me to code",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 40,
+    "tool_ids": [
+      "6846a816b32d4d019c036ec3",
+      "68472210b939200515f4bc44",
+      "68485ca5b939200515078c03",
+      "6846ab17b32d4d019c03e243",
+      "68c95bba14ec3aabf8296d0b",
+      "684c5bf3b93920051544ef60",
+      "684731b4b939200515f530cd",
+      "684867d8b93920051508d781",
+      "6848556fb93920051506efa4",
+      "686797feef7018fbfef79f55",
+      "6846ae87b32d4d019c045617",
+      "6874d92c587ef1d08c7cf21b",
+      "684874ccb939200515094d57",
+      "68c95ccf14ec3aabf8296ea4",
+      "684c70bbb939200515463884",
+      "684c769db93920051546b4a7",
+      "684c82d4b9392005154a3270",
+      "685574c627c6eba075dcd6ea",
+      "685e84c01c16582699a7a886",
+      "68486109b939200515082770",
+      "68161b3c65f8e50d48e683e4",
+      "686246a3062604ba9bec8142",
+      "68495092b9392005150bad29",
+      "6818ec34606258b6c075cf5a",
+      "6877c72405cf157482523cd3",
+      "68775b4b05cf15748251df5e",
+      "688a34ae8f91ef875c1fe14a",
+      "684c7442b93920051546767c",
+      "684c7f6cb93920051549350a",
+      "686560c1015bd4929b397235",
+      "686a831ae1d0bbc07e323f89",
+      "68485950b9392005150750a2",
+      "68498bf0b9392005151b0653",
+      "68c8525f14ec3aabf828eb9e",
+      "68c6d0b914ec3aabf82776de",
+      "689840dfcc6937f85277acc0",
+      "68cc494e14ec3aabf82cd851",
+      "68bd9f68cd13975a5d632c9c",
+      "684c7bb6b93920051547d675",
+      "6833ce978f07ab07a7df8cf7"
+    ],
+    "tools": [
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot"
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter"
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "OpenAI Codex"
+      },
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf"
+      },
+      {
+        "id": "68c95bba14ec3aabf8296d0b",
+        "name": "Kiro AI"
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Sourcegraph Cody"
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine"
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode"
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer"
+      },
+      {
+        "id": "686797feef7018fbfef79f55",
+        "name": "Claude Code"
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider"
+      },
+      {
+        "id": "6874d92c587ef1d08c7cf21b",
+        "name": "Aider.chat"
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper"
+      },
+      {
+        "id": "68c95ccf14ec3aabf8296ea4",
+        "name": "Kilo Code"
+      },
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI"
+      },
+      {
+        "id": "684c769db93920051546b4a7",
+        "name": "CodeStory"
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed"
+      },
+      {
+        "id": "685574c627c6eba075dcd6ea",
+        "name": "DeepSeek-Coder-V2"
+      },
+      {
+        "id": "685e84c01c16582699a7a886",
+        "name": "Mistral Codestral 2501"
+      },
+      {
+        "id": "68486109b939200515082770",
+        "name": "PolyCoder"
+      },
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet"
+      },
+      {
+        "id": "686246a3062604ba9bec8142",
+        "name": "TopDev"
+      },
+      {
+        "id": "68495092b9392005150bad29",
+        "name": "Ask Codi"
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code"
+      },
+      {
+        "id": "6877c72405cf157482523cd3",
+        "name": "Nuanced"
+      },
+      {
+        "id": "68775b4b05cf15748251df5e",
+        "name": "Aide Dev"
+      },
+      {
+        "id": "688a34ae8f91ef875c1fe14a",
+        "name": "Manus AI"
+      },
+      {
+        "id": "684c7442b93920051546767c",
+        "name": "Replit"
+      },
+      {
+        "id": "684c7f6cb93920051549350a",
+        "name": "OneCompiler"
+      },
+      {
+        "id": "686560c1015bd4929b397235",
+        "name": "JDoodle"
+      },
+      {
+        "id": "686a831ae1d0bbc07e323f89",
+        "name": "CodeSnaps"
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery"
+      },
+      {
+        "id": "68498bf0b9392005151b0653",
+        "name": "Amazon CodeGuru"
+      },
+      {
+        "id": "68c8525f14ec3aabf828eb9e",
+        "name": "AppIsUp"
+      },
+      {
+        "id": "68c6d0b914ec3aabf82776de",
+        "name": "Loveable.dev"
+      },
+      {
+        "id": "689840dfcc6937f85277acc0",
+        "name": "ContribHub"
+      },
+      {
+        "id": "68cc494e14ec3aabf82cd851",
+        "name": "Coding Interview"
+      },
+      {
+        "id": "68bd9f68cd13975a5d632c9c",
+        "name": "CodeFriends"
+      },
+      {
+        "id": "684c7bb6b93920051547d675",
+        "name": "GitWit"
+      },
+      {
+        "id": "6833ce978f07ab07a7df8cf7",
+        "name": "lyzr- skott"
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "6846a816b32d4d019c036ec3",
+      "68472210b939200515f4bc44",
+      "68485ca5b939200515078c03",
+      "6846ab17b32d4d019c03e243",
+      "68c95bba14ec3aabf8296d0b",
+      "684c5bf3b93920051544ef60",
+      "684731b4b939200515f530cd",
+      "684867d8b93920051508d781",
+      "6848556fb93920051506efa4",
+      "686797feef7018fbfef79f55",
+      "6846ae87b32d4d019c045617",
+      "6874d92c587ef1d08c7cf21b",
+      "684874ccb939200515094d57",
+      "68c95ccf14ec3aabf8296ea4",
+      "684c70bbb939200515463884",
+      "684c769db93920051546b4a7",
+      "684c82d4b9392005154a3270",
+      "685574c627c6eba075dcd6ea",
+      "685e84c01c16582699a7a886",
+      "68486109b939200515082770",
+      "68161b3c65f8e50d48e683e4",
+      "686246a3062604ba9bec8142",
+      "68495092b9392005150bad29",
+      "6818ec34606258b6c075cf5a",
+      "6877c72405cf157482523cd3",
+      "68775b4b05cf15748251df5e",
+      "688a34ae8f91ef875c1fe14a",
+      "684c7442b93920051546767c",
+      "684c7f6cb93920051549350a",
+      "686560c1015bd4929b397235",
+      "686a831ae1d0bbc07e323f89",
+      "68485950b9392005150750a2",
+      "68498bf0b9392005151b0653",
+      "68c8525f14ec3aabf828eb9e",
+      "68c6d0b914ec3aabf82776de",
+      "689840dfcc6937f85277acc0",
+      "68cc494e14ec3aabf82cd851",
+      "68bd9f68cd13975a5d632c9c",
+      "684c7bb6b93920051547d675",
+      "6833ce978f07ab07a7df8cf7"
+    ],
+    "tools": [
+      {
+        "id": "6846a816b32d4d019c036ec3",
+        "name": "GitHub Copilot"
+      },
+      {
+        "id": "68472210b939200515f4bc44",
+        "name": "Replit Ghostwriter"
+      },
+      {
+        "id": "68485ca5b939200515078c03",
+        "name": "OpenAI Codex"
+      },
+      {
+        "id": "6846ab17b32d4d019c03e243",
+        "name": "Windsurf"
+      },
+      {
+        "id": "68c95bba14ec3aabf8296d0b",
+        "name": "Kiro AI"
+      },
+      {
+        "id": "684c5bf3b93920051544ef60",
+        "name": "Sourcegraph Cody"
+      },
+      {
+        "id": "684731b4b939200515f530cd",
+        "name": "Tabnine"
+      },
+      {
+        "id": "684867d8b93920051508d781",
+        "name": "Microsoft - IntelliCode"
+      },
+      {
+        "id": "6848556fb93920051506efa4",
+        "name": "Amazon CodeWhisperer"
+      },
+      {
+        "id": "686797feef7018fbfef79f55",
+        "name": "Claude Code"
+      },
+      {
+        "id": "6846ae87b32d4d019c045617",
+        "name": "Aider"
+      },
+      {
+        "id": "6874d92c587ef1d08c7cf21b",
+        "name": "Aider.chat"
+      },
+      {
+        "id": "684874ccb939200515094d57",
+        "name": "ReSharper"
+      },
+      {
+        "id": "68c95ccf14ec3aabf8296ea4",
+        "name": "Kilo Code"
+      },
+      {
+        "id": "684c70bbb939200515463884",
+        "name": "PearAI"
+      },
+      {
+        "id": "684c769db93920051546b4a7",
+        "name": "CodeStory"
+      },
+      {
+        "id": "684c82d4b9392005154a3270",
+        "name": "Zed"
+      },
+      {
+        "id": "685574c627c6eba075dcd6ea",
+        "name": "DeepSeek-Coder-V2"
+      },
+      {
+        "id": "685e84c01c16582699a7a886",
+        "name": "Mistral Codestral 2501"
+      },
+      {
+        "id": "68486109b939200515082770",
+        "name": "PolyCoder"
+      },
+      {
+        "id": "68161b3c65f8e50d48e683e4",
+        "name": "Coding Fleet"
+      },
+      {
+        "id": "686246a3062604ba9bec8142",
+        "name": "TopDev"
+      },
+      {
+        "id": "68495092b9392005150bad29",
+        "name": "Ask Codi"
+      },
+      {
+        "id": "6818ec34606258b6c075cf5a",
+        "name": "Augment Code"
+      },
+      {
+        "id": "6877c72405cf157482523cd3",
+        "name": "Nuanced"
+      },
+      {
+        "id": "68775b4b05cf15748251df5e",
+        "name": "Aide Dev"
+      },
+      {
+        "id": "688a34ae8f91ef875c1fe14a",
+        "name": "Manus AI"
+      },
+      {
+        "id": "684c7442b93920051546767c",
+        "name": "Replit"
+      },
+      {
+        "id": "684c7f6cb93920051549350a",
+        "name": "OneCompiler"
+      },
+      {
+        "id": "686560c1015bd4929b397235",
+        "name": "JDoodle"
+      },
+      {
+        "id": "686a831ae1d0bbc07e323f89",
+        "name": "CodeSnaps"
+      },
+      {
+        "id": "68485950b9392005150750a2",
+        "name": "Sourcery"
+      },
+      {
+        "id": "68498bf0b9392005151b0653",
+        "name": "Amazon CodeGuru"
+      },
+      {
+        "id": "68c8525f14ec3aabf828eb9e",
+        "name": "AppIsUp"
+      },
+      {
+        "id": "68c6d0b914ec3aabf82776de",
+        "name": "Loveable.dev"
+      },
+      {
+        "id": "689840dfcc6937f85277acc0",
+        "name": "ContribHub"
+      },
+      {
+        "id": "68cc494e14ec3aabf82cd851",
+        "name": "Coding Interview"
+      },
+      {
+        "id": "68bd9f68cd13975a5d632c9c",
+        "name": "CodeFriends"
+      },
+      {
+        "id": "684c7bb6b93920051547d675",
+        "name": "GitWit"
+      },
+      {
+        "id": "6833ce978f07ab07a7df8cf7",
+        "name": "lyzr- skott"
+      }
+    ]
+  },
+  "processing_time_seconds": 11.181,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"6846a816b32d4d019c036ec3\",\n    \"68472210b939200515f4bc44\",\n    \"68485ca5b939200515078c03\",\n    \"6846ab17b32d4d019c03e243\",\n    \"68c95bba14ec3aabf8296d0b\",\n    \"684c5bf3b93920051544ef60\",\n    \"684731b4b939200515f530cd\",\n    \"684867d8b93920051508d781\",\n    \"6848556fb93920051506efa4\",\n    \"686797feef7018fbfef79f55\",\n    \"6846ae87b32d4d019c045617\",\n    \"6874d92c587ef1d08c7cf21b\",\n    \"684874ccb939200515094d57\",\n    \"68c95ccf14ec3aabf8296ea4\",\n    \"684c70bbb939200515463884\",\n    \"684c769db93920051546b4a7\",\n    \"684c82d4b9392005154a3270\",\n    \"685574c627c6eba075dcd6ea\",\n    \"685e84c01c16582699a7a886\",\n    \"68486109b939200515082770\",\n    \"68161b3c65f8e50d48e683e4\",\n    \"686246a3062604ba9bec8142\",\n    \"68495092b9392005150bad29\",\n    \"6818ec34606258b6c075cf5a\",\n    \"6877c72405cf157482523cd3\",\n    \"68775b4b05cf15748251df5e\",\n    \"688a34ae8f91ef875c1fe14a\",\n    \"684c7442b93920051546767c\",\n    \"684c7f6cb93920051549350a\",\n    \"686560c1015bd4929b397235\",\n    \"686a831ae1d0bbc07e323f89\",\n    \"68485950b9392005150750a2\",\n    \"68498bf0b9392005151b0653\",\n    \"68c8525f14ec3aabf828eb9e\",\n    \"68c6d0b914ec3aabf82776de\",\n    \"689840dfcc6937f85277acc0\",\n    \"68cc494e14ec3aabf82cd851\",\n    \"68bd9f68cd13975a5d632c9c\",\n    \"684c7bb6b93920051547d675\",\n    \"6833ce978f07ab07a7df8cf7\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6846a816b32d4d019c036ec3\",\n      \"name\": \"GitHub Copilot\"\n    },\n    {\n      \"id\": \"68472210b939200515f4bc44\",\n      \"name\": \"Replit Ghostwriter\"\n    },\n    {\n      \"id\": \"68485ca5b939200515078c03\",\n      \"name\": \"OpenAI Codex\"\n    },\n    {\n      \"id\": \"6846ab17b32d4d019c03e243\",\n      \"name\": \"Windsurf\"\n    },\n    {\n      \"id\": \"68c95bba14ec3aabf8296d0b\",\n      \"name\": \"Kiro AI\"\n    },\n    {\n      \"id\": \"684c5bf3b93920051544ef60\",\n      \"name\": \"Sourcegraph Cody\"\n    },\n    {\n      \"id\": \"684731b4b939200515f530cd\",\n      \"name\": \"Tabnine\"\n    },\n    {\n      \"id\": \"684867d8b93920051508d781\",\n      \"name\": \"Microsoft - IntelliCode\"\n    },\n    {\n      \"id\": \"6848556fb93920051506efa4\",\n      \"name\": \"Amazon CodeWhisperer\"\n    },\n    {\n      \"id\": \"686797feef7018fbfef79f55\",\n      \"name\": \"Claude Code\"\n    },\n    {\n      \"id\": \"6846ae87b32d4d019c045617\",\n      \"name\": \"Aider\"\n    },\n    {\n      \"id\": \"6874d92c587ef1d08c7cf21b\",\n      \"name\": \"Aider.chat\"\n    },\n    {\n      \"id\": \"684874ccb939200515094d57\",\n      \"name\": \"ReSharper\"\n    },\n    {\n      \"id\": \"68c95ccf14ec3aabf8296ea4\",\n      \"name\": \"Kilo Code\"\n    },\n    {\n      \"id\": \"684c70bbb939200515463884\",\n      \"name\": \"PearAI\"\n    },\n    {\n      \"id\": \"684c769db93920051546b4a7\",\n      \"name\": \"CodeStory\"\n    },\n    {\n      \"id\": \"684c82d4b9392005154a3270\",\n      \"name\": \"Zed\"\n    },\n    {\n      \"id\": \"685574c627c6eba075dcd6ea\",\n      \"name\": \"DeepSeek-Coder-V2\"\n    },\n    {\n      \"id\": \"685e84c01c16582699a7a886\",\n      \"name\": \"Mistral Codestral 2501\"\n    },\n    {\n      \"id\": \"68486109b939200515082770\",\n      \"name\": \"PolyCoder\"\n    },\n    {\n      \"id\": \"68161b3c65f8e50d48e683e4\",\n      \"name\": \"Coding Fleet\"\n    },\n    {\n      \"id\": \"686246a3062604ba9bec8142\",\n      \"name\": \"TopDev\"\n    },\n    {\n      \"id\": \"68495092b9392005150bad29\",\n      \"name\": \"Ask Codi\"\n    },\n    {\n      \"id\": \"6818ec34606258b6c075cf5a\",\n      \"name\": \"Augment Code\"\n    },\n    {\n      \"id\": \"6877c72405cf157482523cd3\",\n      \"name\": \"Nuanced\"\n    },\n    {\n      \"id\": \"68775b4b05cf15748251df5e\",\n      \"name\": \"Aide Dev\"\n    },\n    {\n      \"id\": \"688a34ae8f91ef875c1fe14a\",\n      \"name\": \"Manus AI\"\n    },\n    {\n      \"id\": \"684c7442b93920051546767c\",\n      \"name\": \"Replit\"\n    },\n    {\n      \"id\": \"684c7f6cb93920051549350a\",\n      \"name\": \"OneCompiler\"\n    },\n    {\n      \"id\": \"686560c1015bd4929b397235\",\n      \"name\": \"JDoodle\"\n    },\n    {\n      \"id\": \"686a831ae1d0bbc07e323f89\",\n      \"name\": \"CodeSnaps\"\n    },\n    {\n      \"id\": \"68485950b9392005150750a2\",\n      \"name\": \"Sourcery\"\n    },\n    {\n      \"id\": \"68498bf0b9392005151b0653\",\n      \"name\": \"Amazon CodeGuru\"\n    },\n    {\n      \"id\": \"68c8525f14ec3aabf828eb9e\",\n      \"name\": \"AppIsUp\"\n    },\n    {\n      \"id\": \"68c6d0b914ec3aabf82776de\",\n      \"name\": \"Loveable.dev\"\n    },\n    {\n      \"id\": \"689840dfcc6937f85277acc0\",\n      \"name\": \"ContribHub\"\n    },\n    {\n      \"id\": \"68cc494e14ec3aabf82cd851\",\n      \"name\": \"Coding Interview\"\n    },\n    {\n      \"id\": \"68bd9f68cd13975a5d632c9c\",\n      \"name\": \"CodeFriends\"\n    },\n    {\n      \"id\": \"684c7bb6b93920051547d675\",\n      \"name\": \"GitWit\"\n    },\n    {\n      \"id\": \"6833ce978f07ab07a7df8cf7\",\n      \"name\": \"lyzr- skott\"\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}

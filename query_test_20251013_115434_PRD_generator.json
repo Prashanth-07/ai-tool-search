@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-06T15:05:01.370649",
+  "timestamp": "2025-10-13T11:54:34.803147",
   "input_query": "PRD generator",
   "model_info_before_query": {
     "current_groq_model": "llama-3.1-8b-instant",
@@ -20,19 +20,15 @@
   "tools_sent_to_llm": {
     "count": 7,
     "tool_ids": [
-      "6863599c015bd4929b37d01d",
       "68636b0c015bd4929b37d7a4",
       "68635e5e015bd4929b37d18a",
       "6863673d015bd4929b37d69d",
       "6863632c015bd4929b37d359",
+      "6863599c015bd4929b37d01d",
       "68666360ef7018fbfef69bc7",
       "685004e1afca082a9fc4178b"
     ],
     "tools": [
-      {
-        "id": "6863599c015bd4929b37d01d",
-        "name": "ChatPRD"
-      },
       {
         "id": "68636b0c015bd4929b37d7a4",
         "name": "Signlz"
@@ -48,6 +44,10 @@
       {
         "id": "6863632c015bd4929b37d359",
         "name": "Brilworks PRD Generator"
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD"
       },
       {
         "id": "68666360ef7018fbfef69bc7",
@@ -61,19 +61,15 @@
   },
   "llm_answer": {
     "tool_id": [
-      "6863599c015bd4929b37d01d",
       "68636b0c015bd4929b37d7a4",
       "68635e5e015bd4929b37d18a",
       "6863673d015bd4929b37d69d",
       "6863632c015bd4929b37d359",
+      "6863599c015bd4929b37d01d",
       "68666360ef7018fbfef69bc7",
       "685004e1afca082a9fc4178b"
     ],
     "tools": [
-      {
-        "id": "6863599c015bd4929b37d01d",
-        "name": "ChatPRD"
-      },
       {
         "id": "68636b0c015bd4929b37d7a4",
         "name": "Signlz"
@@ -91,6 +87,10 @@
         "name": "Brilworks PRD Generator"
       },
       {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD"
+      },
+      {
         "id": "68666360ef7018fbfef69bc7",
         "name": "Aigents"
       },
@@ -100,11 +100,11 @@
       }
     ]
   },
-  "processing_time_seconds": 6.054,
+  "processing_time_seconds": 6.238,
   "status": "success",
   "error": null,
   "raw_api_response": {
-    "response": "{\n  \"tool_id\": [\n    \"6863599c015bd4929b37d01d\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"68635e5e015bd4929b37d18a\",\n    \"6863673d015bd4929b37d69d\",\n    \"6863632c015bd4929b37d359\",\n    \"68666360ef7018fbfef69bc7\",\n    \"685004e1afca082a9fc4178b\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\"\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\"\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\"\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\"\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\"\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\"\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\"\n    }\n  ]\n}"
+    "response": "{\n  \"tool_id\": [\n    \"68636b0c015bd4929b37d7a4\",\n    \"68635e5e015bd4929b37d18a\",\n    \"6863673d015bd4929b37d69d\",\n    \"6863632c015bd4929b37d359\",\n    \"6863599c015bd4929b37d01d\",\n    \"68666360ef7018fbfef69bc7\",\n    \"685004e1afca082a9fc4178b\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\"\n    },\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\"\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\"\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\"\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\"\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\"\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\"\n    }\n  ]\n}"
   },
   "model_info_after_query": {
     "current_groq_model": "llama-3.1-8b-instant",

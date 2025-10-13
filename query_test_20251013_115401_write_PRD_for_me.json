@@ -1,0 +1,267 @@
+{
+  "timestamp": "2025-10-13T11:54:01.248429",
+  "input_query": "write PRD for me",
+  "model_info_before_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  },
+  "debug_info": {
+    "headers_sent": {
+      "Content-Type": "application/json",
+      "User-Agent": "test-query-script/1.0"
+    },
+    "model_selection_debug": {},
+    "api_call_details": {}
+  },
+  "tools_sent_to_llm": {
+    "count": 22,
+    "tool_ids": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "68636b0c015bd4929b37d7a4",
+      "6863673d015bd4929b37d69d",
+      "6863599c015bd4929b37d01d",
+      "685e9c4b1c16582699a7b791",
+      "68666360ef7018fbfef69bc7",
+      "685004e1afca082a9fc4178b",
+      "689c7f4dcc6937f8527a423b",
+      "681ed8f853d3e454a4b9e18b",
+      "68668e1bef7018fbfef6ae79",
+      "68737b7bcc23a952f76cd2e7",
+      "68406f75bce3a3d64c6acc92",
+      "6889310f8f91ef875c1f75a6",
+      "68da699d8e709e2b2eac439f",
+      "68977208cc6937f85277492e",
+      "68a6eba320d1e32c6f63d869",
+      "681f21d253d3e454a4bb61b9",
+      "6832c345dc5f9153e5a98ca9",
+      "682d6b7e23aaf1a750a9e896",
+      "685318d727c6eba075db6c95",
+      "686cdeef3a087b487359d845"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD"
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator"
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz"
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot"
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD"
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary"
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents"
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot"
+      },
+      {
+        "id": "689c7f4dcc6937f8527a423b",
+        "name": "Write Easy"
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite"
+      },
+      {
+        "id": "68668e1bef7018fbfef6ae79",
+        "name": "Manus AI"
+      },
+      {
+        "id": "68737b7bcc23a952f76cd2e7",
+        "name": "Paparazzi Docs"
+      },
+      {
+        "id": "68406f75bce3a3d64c6acc92",
+        "name": "Humanizer.Pro"
+      },
+      {
+        "id": "6889310f8f91ef875c1f75a6",
+        "name": "Rewritely"
+      },
+      {
+        "id": "68da699d8e709e2b2eac439f",
+        "name": "Human Tone"
+      },
+      {
+        "id": "68977208cc6937f85277492e",
+        "name": "PassMe ai"
+      },
+      {
+        "id": "68a6eba320d1e32c6f63d869",
+        "name": "Toolsmart Paraphrasing Tool"
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid"
+      },
+      {
+        "id": "6832c345dc5f9153e5a98ca9",
+        "name": "WriteHuman"
+      },
+      {
+        "id": "682d6b7e23aaf1a750a9e896",
+        "name": "Rytr"
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado"
+      },
+      {
+        "id": "686cdeef3a087b487359d845",
+        "name": "HumanizeAI.tools"
+      }
+    ]
+  },
+  "llm_answer": {
+    "tool_id": [
+      "68635e5e015bd4929b37d18a",
+      "6863632c015bd4929b37d359",
+      "68636b0c015bd4929b37d7a4",
+      "6863673d015bd4929b37d69d",
+      "6863599c015bd4929b37d01d",
+      "685e9c4b1c16582699a7b791",
+      "68666360ef7018fbfef69bc7",
+      "685004e1afca082a9fc4178b",
+      "689c7f4dcc6937f8527a423b",
+      "681ed8f853d3e454a4b9e18b",
+      "68668e1bef7018fbfef6ae79",
+      "68737b7bcc23a952f76cd2e7",
+      "68406f75bce3a3d64c6acc92",
+      "6889310f8f91ef875c1f75a6",
+      "68da699d8e709e2b2eac439f",
+      "68977208cc6937f85277492e",
+      "68a6eba320d1e32c6f63d869",
+      "681f21d253d3e454a4bb61b9",
+      "6832c345dc5f9153e5a98ca9",
+      "682d6b7e23aaf1a750a9e896",
+      "685318d727c6eba075db6c95",
+      "686cdeef3a087b487359d845"
+    ],
+    "tools": [
+      {
+        "id": "68635e5e015bd4929b37d18a",
+        "name": "Write My PRD"
+      },
+      {
+        "id": "6863632c015bd4929b37d359",
+        "name": "Brilworks PRD Generator"
+      },
+      {
+        "id": "68636b0c015bd4929b37d7a4",
+        "name": "Signlz"
+      },
+      {
+        "id": "6863673d015bd4929b37d69d",
+        "name": "GetBash PRD Generarot"
+      },
+      {
+        "id": "6863599c015bd4929b37d01d",
+        "name": "ChatPRD"
+      },
+      {
+        "id": "685e9c4b1c16582699a7b791",
+        "name": "Wisary"
+      },
+      {
+        "id": "68666360ef7018fbfef69bc7",
+        "name": "Aigents"
+      },
+      {
+        "id": "685004e1afca082a9fc4178b",
+        "name": "ProdPad CoPilot"
+      },
+      {
+        "id": "689c7f4dcc6937f8527a423b",
+        "name": "Write Easy"
+      },
+      {
+        "id": "681ed8f853d3e454a4b9e18b",
+        "name": "HyperWrite"
+      },
+      {
+        "id": "68668e1bef7018fbfef6ae79",
+        "name": "Manus AI"
+      },
+      {
+        "id": "68737b7bcc23a952f76cd2e7",
+        "name": "Paparazzi Docs"
+      },
+      {
+        "id": "68406f75bce3a3d64c6acc92",
+        "name": "Humanizer.Pro"
+      },
+      {
+        "id": "6889310f8f91ef875c1f75a6",
+        "name": "Rewritely"
+      },
+      {
+        "id": "68da699d8e709e2b2eac439f",
+        "name": "Human Tone"
+      },
+      {
+        "id": "68977208cc6937f85277492e",
+        "name": "PassMe ai"
+      },
+      {
+        "id": "68a6eba320d1e32c6f63d869",
+        "name": "Toolsmart Paraphrasing Tool"
+      },
+      {
+        "id": "681f21d253d3e454a4bb61b9",
+        "name": "ProWritingAid"
+      },
+      {
+        "id": "6832c345dc5f9153e5a98ca9",
+        "name": "WriteHuman"
+      },
+      {
+        "id": "682d6b7e23aaf1a750a9e896",
+        "name": "Rytr"
+      },
+      {
+        "id": "685318d727c6eba075db6c95",
+        "name": "Persado"
+      },
+      {
+        "id": "686cdeef3a087b487359d845",
+        "name": "HumanizeAI.tools"
+      }
+    ]
+  },
+  "processing_time_seconds": 9.063,
+  "status": "success",
+  "error": null,
+  "raw_api_response": {
+    "response": "{\n  \"tool_id\": [\n    \"68635e5e015bd4929b37d18a\",\n    \"6863632c015bd4929b37d359\",\n    \"68636b0c015bd4929b37d7a4\",\n    \"6863673d015bd4929b37d69d\",\n    \"6863599c015bd4929b37d01d\",\n    \"685e9c4b1c16582699a7b791\",\n    \"68666360ef7018fbfef69bc7\",\n    \"685004e1afca082a9fc4178b\",\n    \"689c7f4dcc6937f8527a423b\",\n    \"681ed8f853d3e454a4b9e18b\",\n    \"68668e1bef7018fbfef6ae79\",\n    \"68737b7bcc23a952f76cd2e7\",\n    \"68406f75bce3a3d64c6acc92\",\n    \"6889310f8f91ef875c1f75a6\",\n    \"68da699d8e709e2b2eac439f\",\n    \"68977208cc6937f85277492e\",\n    \"68a6eba320d1e32c6f63d869\",\n    \"681f21d253d3e454a4bb61b9\",\n    \"6832c345dc5f9153e5a98ca9\",\n    \"682d6b7e23aaf1a750a9e896\",\n    \"685318d727c6eba075db6c95\",\n    \"686cdeef3a087b487359d845\"\n  ],\n  \"tools\": [\n    {\n      \"id\": \"68635e5e015bd4929b37d18a\",\n      \"name\": \"Write My PRD\"\n    },\n    {\n      \"id\": \"6863632c015bd4929b37d359\",\n      \"name\": \"Brilworks PRD Generator\"\n    },\n    {\n      \"id\": \"68636b0c015bd4929b37d7a4\",\n      \"name\": \"Signlz\"\n    },\n    {\n      \"id\": \"6863673d015bd4929b37d69d\",\n      \"name\": \"GetBash PRD Generarot\"\n    },\n    {\n      \"id\": \"6863599c015bd4929b37d01d\",\n      \"name\": \"ChatPRD\"\n    },\n    {\n      \"id\": \"685e9c4b1c16582699a7b791\",\n      \"name\": \"Wisary\"\n    },\n    {\n      \"id\": \"68666360ef7018fbfef69bc7\",\n      \"name\": \"Aigents\"\n    },\n    {\n      \"id\": \"685004e1afca082a9fc4178b\",\n      \"name\": \"ProdPad CoPilot\"\n    },\n    {\n      \"id\": \"689c7f4dcc6937f8527a423b\",\n      \"name\": \"Write Easy\"\n    },\n    {\n      \"id\": \"681ed8f853d3e454a4b9e18b\",\n      \"name\": \"HyperWrite\"\n    },\n    {\n      \"id\": \"68668e1bef7018fbfef6ae79\",\n      \"name\": \"Manus AI\"\n    },\n    {\n      \"id\": \"68737b7bcc23a952f76cd2e7\",\n      \"name\": \"Paparazzi Docs\"\n    },\n    {\n      \"id\": \"68406f75bce3a3d64c6acc92\",\n      \"name\": \"Humanizer.Pro\"\n    },\n    {\n      \"id\": \"6889310f8f91ef875c1f75a6\",\n      \"name\": \"Rewritely\"\n    },\n    {\n      \"id\": \"68da699d8e709e2b2eac439f\",\n      \"name\": \"Human Tone\"\n    },\n    {\n      \"id\": \"68977208cc6937f85277492e\",\n      \"name\": \"PassMe ai\"\n    },\n    {\n      \"id\": \"68a6eba320d1e32c6f63d869\",\n      \"name\": \"Toolsmart Paraphrasing Tool\"\n    },\n    {\n      \"id\": \"681f21d253d3e454a4bb61b9\",\n      \"name\": \"ProWritingAid\"\n    },\n    {\n      \"id\": \"6832c345dc5f9153e5a98ca9\",\n      \"name\": \"WriteHuman\"\n    },\n    {\n      \"id\": \"682d6b7e23aaf1a750a9e896\",\n      \"name\": \"Rytr\"\n    },\n    {\n      \"id\": \"685318d727c6eba075db6c95\",\n      \"name\": \"Persado\"\n    },\n    {\n      \"id\": \"686cdeef3a087b487359d845\",\n      \"name\": \"HumanizeAI.tools\"\n    }\n  ]\n}"
+  },
+  "model_info_after_query": {
+    "current_groq_model": "llama-3.1-8b-instant",
+    "query_tools_llm": "OpenAI",
+    "openai_model": "gpt-4o-mini",
+    "provider": "OpenAI (Query Tools) / Groq (Other Endpoints) / Nomic Atlas (Embeddings)",
+    "environment": "PROD",
+    "api_version": "2.0.0"
+  }
+}
